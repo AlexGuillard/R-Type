@@ -1,9 +1,12 @@
 name: chocoltine
 
-on: [push]
+on:
+  pull_request:
+    branches-ignores:
+      - 'ga-ignore-*'
 
 env:
-  MIRROR_URL: "git@github.com:AlexGuillard/R-Type.git"
+  MIRROR_URL: "git@github.com:EpitechPromo2026/B-CPP-500-NAN-5-1-rtype-alexandre.guillard.git"
 
 jobs:
   push_to_mirror:
