@@ -22,59 +22,61 @@ The ship is controlled with the directional arrows + specifier autre usage
 
 ## Authors 🐐
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-  <a href="https://github.com/AlexGuillard">
-    <img
-      src="https://avatars.githubusercontent.com/u/91674655?v=4"
-      style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
-    />
-  </a>
-    <br />
-    Alexandre
-</div>
+<div style="text-align: center;">
+  <div style="display: inline-block; margin: 10px; text-align: center;">
+    <a href="https://github.com/AlexGuillard">
+      <img
+        src="https://avatars.githubusercontent.com/u/91674655?v=4"
+        style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
+      />
+    </a>
+      <br />
+      Alexandre
+  </div>
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-  <a href="https://github.com/Pablodeibar">
-    <img
-      src="https://avatars.githubusercontent.com/u/91668926?v=4"
-      style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
-    />
-  </a>
-    <br />
-    Pablo
-</div>
+  <div style="display: inline-block; margin: 10px; text-align: center;">
+    <a href="https://github.com/Pablodeibar">
+      <img
+        src="https://avatars.githubusercontent.com/u/91668926?v=4"
+        style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
+      />
+    </a>
+      <br />
+      Pablo
+  </div>
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-  <a href="https://github.com/Benjicatch">
-    <img
-      src="https://avatars.githubusercontent.com/u/91670393?v=4"
-      style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
-    />
-  </a>
-    <br />
-    Benjamin
-</div>
+  <div style="display: inline-block; margin: 10px; text-align: center;">
+    <a href="https://github.com/Benjicatch">
+      <img
+        src="https://avatars.githubusercontent.com/u/91670393?v=4"
+        style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
+      />
+    </a>
+      <br />
+      Benjamin
+  </div>
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-  <a href="https://github.com/Kiya971">
-    <img
-      src="https://avatars.githubusercontent.com/u/91669051?v=4"
-      style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
-    />
-  </a>
-    <br />
-    Kiya
-</div>
+  <div style="display: inline-block; margin: 10px; text-align: center;">
+    <a href="https://github.com/Kiya971">
+      <img
+        src="https://avatars.githubusercontent.com/u/91669051?v=4"
+        style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
+      />
+    </a>
+      <br />
+      Kiya
+  </div>
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-  <a href="https://github.com/azeuio">
-    <img
-      src="https://avatars.githubusercontent.com/u/91672539?v=4"
-      style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
-    />
-  </a>
-    <br />
-    Nicolas
+  <div style="display: inline-block; margin: 10px; text-align: center;">
+    <a href="https://github.com/azeuio">
+      <img
+        src="https://avatars.githubusercontent.com/u/91672539?v=4"
+        style="border-radius: 50%; width: 100px; height: 100px; vertical-align: middle;"
+      />
+    </a>
+      <br />
+      Nicolas
+  </div>
 </div>
 
 ## Developer's Documentation 👷
