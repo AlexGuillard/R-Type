@@ -7,12 +7,12 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(std::size_t entity) : _entity(entity)
+ECS::Entity::Entity(std::size_t entity) : _entity(entity)
 {
 
 }
 
-Entity::operator std::size_t() const
+ECS::Entity::operator std::size_t() const
 {
     return this->_entity;
 }
