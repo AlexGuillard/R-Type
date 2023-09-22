@@ -8,13 +8,15 @@
 #ifndef DISPLAY_HPP_
     #define DISPLAY_HPP_
 
-class Display {
-    public:
-        Display();
-        ~Display();
+namespace Screen {
+    class Display {
+        public:
+            Display();
+            ~Display();
 
-    protected:
-    private:
-};
+        protected:
+        private:
+    };
+}
 
 #endif /* !DISPLAY_HPP_ */

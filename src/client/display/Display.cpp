@@ -7,10 +7,10 @@
 
 #include "Display.hpp"
 
-Display::Display()
+Screen::Display::Display()
 {
 }
 
-Display::~Display()
+Screen::Display::~Display()
 {
 }
