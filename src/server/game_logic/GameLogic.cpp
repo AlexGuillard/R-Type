@@ -7,10 +7,10 @@
 
 #include "GameLogic.hpp"
 
-GameLogic::GameLogic()
+Game::GameLogic::GameLogic()
 {
 }
 
-GameLogic::~GameLogic()
+Game::GameLogic::~GameLogic()
 {
 }
