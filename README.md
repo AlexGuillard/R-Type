@@ -44,6 +44,20 @@ The ship is controlled with the directional arrows + specifier autre usage
 
 [Documentation](https://linktodocumentation)
 
+<details>
+  <summary>Commit convention</summary>
+    We use the Conventional Commits, here is a link that shows the commit standard we use : https://www.conventionalcommits.org/en/v1.0.0-beta.4/ 
+      <summary>Here are few basic examples of commit message with a description.</summary>
+      <p>
+        <ul>
+          <li>fix: correct minor typos in code</li>
+          <li>feat: allow provided config object to extend other configs</li>
+          <li>feat(lang): add polish language</li>
+          <li>ci: run linters on pull requests</li>
+      </p>
+  <summary>You can install "Conventional Commits" extension on your editor to make it easier to understand</summary>
+
+</details>
 
 ## License
 
