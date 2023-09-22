@@ -8,12 +8,14 @@
 #ifndef INETWORK_HPP_
     #define INETWORK_HPP_
 
-class INetwork {
-    public:
-        virtual ~INetwork() = default;
+namespace Network {
+    class INetwork {
+        public:
+            virtual ~INetwork() = default;
 
-    protected:
-    private:
-};
+        protected:
+        private:
+    };
+}
 
 #endif /* !INETWORK_HPP_ */

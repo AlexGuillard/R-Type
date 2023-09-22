@@ -9,12 +9,14 @@
     #define ANETWORK_HPP_
     #include "INetwork.hpp"
 
-class ANetwork : public INetwork {
-    public:
-        virtual ~ANetwork() = default;
+namespace Network {
+    class ANetwork : public INetwork {
+        public:
+            virtual ~ANetwork() = default;
 
-    protected:
-    private:
-};
+        protected:
+        private:
+    };
+}
 
 #endif /* !ANETWORK_HPP_ */

@@ -7,10 +7,10 @@
 
 #include "ClientNetwork.hpp"
 
-ClientNetwork::ClientNetwork()
+Network::ClientNetwork::ClientNetwork()
 {
 }
 
-ClientNetwork::~ClientNetwork()
+Network::ClientNetwork::~ClientNetwork()
 {
 }

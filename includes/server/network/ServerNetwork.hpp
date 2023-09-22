@@ -9,13 +9,15 @@
     #define SERVERNETWORK_HPP_
     #include "ANetwork.hpp"
 
-class ServerNetwork : public ANetwork {
-    public:
-        ServerNetwork();
-        ~ServerNetwork();
+namespace Network {
+    class ServerNetwork : public ANetwork {
+        public:
+            ServerNetwork();
+            ~ServerNetwork();
 
-    protected:
-    private:
-};
+        protected:
+        private:
+    };
+}
 
 #endif /* !SERVERNETWORK_HPP_ */

@@ -9,13 +9,15 @@
     #define CLIENTNETWORK_HPP_
     #include "ANetwork.hpp"
 
-class ClientNetwork : public ANetwork  {
-    public:
-        ClientNetwork();
-        ~ClientNetwork();
+namespace Network {
+    class ClientNetwork : public ANetwork  {
+        public:
+            ClientNetwork();
+            ~ClientNetwork();
 
-    protected:
-    private:
-};
+        protected:
+        private:
+    };
+}
 
 #endif /* !CLIENTNETWORK_HPP_ */

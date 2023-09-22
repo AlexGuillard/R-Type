@@ -7,10 +7,10 @@
 
 #include "ServerNetwork.hpp"
 
-ServerNetwork::ServerNetwork()
+Network::ServerNetwork::ServerNetwork()
 {
 }
 
-ServerNetwork::~ServerNetwork()
+Network::ServerNetwork::~ServerNetwork()
 {
 }
