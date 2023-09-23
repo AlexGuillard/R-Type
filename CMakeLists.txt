@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.20.0)
 enable_testing()
+set(CMAKE_BUILD_TYPE Release)
 project(R-Type)
 set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(dependencies)
