@@ -8,8 +8,10 @@ R-Type is a horizontally scrolling shooter arcade video game developed and relea
 This version of the game is played in networks of up to 4 people.
 
 ## How to build 🛠️
-
-This is how you build
+On root of the project, execute:
+```bash
+./init.sh
+```
 ## How to use ❓
 The ship is controlled with the directional arrows + specifier autre usage
 ## Supported Platforms 🤝
