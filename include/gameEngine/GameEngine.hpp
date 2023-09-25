@@ -10,7 +10,6 @@
 #include <string>
 #include <vector>
 #include <utility> // std::pair
-#include <stdexcept> // std::runtime_error
 
 #include "ECS/containers/Registry.hpp"
 
@@ -47,12 +46,6 @@ namespace gameEngine {
 		 */
 		void run();
 
-		class RegistryNotFound : public std::runtime_error {
-		public:
-			RegistryNotFound(const std::string &type)
-				: std::runtime_error("Registry not found: " + type)
-			{}
-		};
 	private:
 		// Registry type and registry sorted by insertion order
 		std::vector<std::pair<std::string, Registry>> m_registries;
