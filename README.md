@@ -44,8 +44,9 @@ The ship is controlled with the directional arrows + specifier autre usage
 
 ## Developer's Documentation 👷
 
-[Documentation](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
-[UDP Protocol](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
+- [Documentation](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
+
+- [UDP Protocol](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
 
 <details>
   <summary>Commit convention</summary>
