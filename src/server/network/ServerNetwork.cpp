@@ -14,3 +14,14 @@ Network::ServerNetwork::ServerNetwork(std::string hostname, int port) : _socket(
 Network::ServerNetwork::~ServerNetwork()
 {
 }
+
+void Network::ServerNetwork::receive()
+{
+	_socket.async_receive_from(asio::buffer(_data, 1024), _endpoint, handle);
+	std::cout << _data << std::endl;
+}
+
+void Network::ServerNetwork::handle(const asio::error_code& error, std::size_t bytes_transferred)
+{
+    std::cout << "Received: '" << bytes_transferred << "bytes from server" << "'\n";
+}
