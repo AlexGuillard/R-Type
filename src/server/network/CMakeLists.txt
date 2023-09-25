@@ -1,4 +1,4 @@
-set(INCROOT ${CMAKE_SOURCE_DIR}/includes/server/network)
+set(INCROOT ${CMAKE_SOURCE_DIR}/includes)
 set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/ServerNetwork.cpp
 )
