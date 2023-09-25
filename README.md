@@ -46,7 +46,7 @@ The ship is controlled with the directional arrows + specifier autre usage
 
 - [Documentation](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
 
-- [UDP Protocol](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation)
+- [UDP Protocol](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation#udp-protocol-documentation)
 
 ## License
 
