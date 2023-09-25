@@ -18,6 +18,7 @@
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
 #include "ECS/systems/helper/SpriteSheetDrawer.hpp"
+#include "gameEngine/GameEngine.hpp"
 
 using namespace ECS;
 
@@ -37,9 +38,8 @@ Entity spawnShip(containers::Registry &registry)
 	return ship;
 }
 
-containers::Registry setupRegistry()
+containers::Registry &setupRegistry(containers::Registry &registry)
 {
-	containers::Registry registry;
 	registry.registerComponent<components::PositionComponent>();
 	registry.registerComponent<components::VelocityComponent>();
 	registry.registerComponent<components::DrawableComponent>();
@@ -53,16 +53,23 @@ containers::Registry setupRegistry()
 
 void initialiseWindow()
 {
-	InitWindow(800, 540, "R-Type");
-	SetTargetFPS(60);
-	SetExitKey(KEY_F4);
+	const std::size_t screenWidth = 800;
+	const std::size_t screenHeight = 540;
+	const std::size_t fps = 60;
+
+	InitWindow(screenWidth, screenHeight, "R-Type");
+	SetTargetFPS(fps);
+	// SetExitKey(KEY_NULL); // TODO: uncomment this line to have access to the escape key
 }
 
 int main()
 {
 	initialiseWindow();
 	const int ballRadius = 10;
-	containers::Registry registry = setupRegistry();
+	gameEngine::GameEngine engine;
+	engine.createRegistry("entities");
+	containers::Registry &registry = engine["entities"];
+	registry = setupRegistry(registry);
 
 	Entity player = spawnShip(registry);
 	registry.emplaceComponent<components::ControllableComponent>(player);
