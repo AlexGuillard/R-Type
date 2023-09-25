@@ -1,4 +1,4 @@
-set(INCROOT ${CMAKE_SOURCE_DIR}/includes)
+set(INCROOT ${CMAKE_SOURCE_DIR}/include)
 set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/GameLogic.cpp
 )

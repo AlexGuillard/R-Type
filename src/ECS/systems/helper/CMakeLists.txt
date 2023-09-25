@@ -1,4 +1,4 @@
-set(INCROOT ${PROJECT_SOURCE_DIR}/includes)
+set(INCROOT ${PROJECT_SOURCE_DIR}/include)
 set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/SpriteSheetDrawer.cpp
 )

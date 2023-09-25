@@ -6,7 +6,7 @@ target_link_libraries(r-type_client PRIVATE
     systems
 )
 target_include_directories(r-type_client PRIVATE
-    ${CMAKE_SOURCE_DIR}/includes
+    ${CMAKE_SOURCE_DIR}/include
 )
 install(TARGETS r-type_client RUNTIME DESTINATION bin)
 
