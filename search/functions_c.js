@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['valuenotfound_190',['ValueNotFound',['../classECS_1_1containers_1_1SparseArray_1_1ValueNotFound.html#a484e393215b5555c8e277047865f50d1',1,'ECS::containers::SparseArray::ValueNotFound']]]
+  ['zipper_185',['Zipper',['../classECS_1_1containers_1_1Zipper.html#a1c5601c10a72d32ad9d2fc30a21a7adc',1,'ECS::containers::Zipper']]],
+  ['zipperiterator_186',['ZipperIterator',['../classECS_1_1containers_1_1ZipperIterator.html#a935622ff69a98683ee66b728cfbc44a2',1,'ECS::containers::ZipperIterator']]]
 ];
