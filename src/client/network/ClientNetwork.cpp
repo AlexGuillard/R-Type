@@ -5,12 +5,8 @@
 ** ClientNetwork
 */
 
-#include "ClientNetwork.hpp"
+#include "client/network/ClientNetwork.hpp"
 
-Network::ClientNetwork::ClientNetwork()
-{
-}
+Network::ClientNetwork::ClientNetwork() {}
 
-Network::ClientNetwork::~ClientNetwork()
-{
-}
+Network::ClientNetwork::~ClientNetwork() {}
