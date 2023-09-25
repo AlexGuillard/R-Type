@@ -22,5 +22,7 @@ namespace ECS::components {
 		KeyboardKey down = KEY_DOWN;
 		KeyboardKey left = KEY_LEFT;
 		KeyboardKey right = KEY_RIGHT;
+		KeyboardKey fire = KEY_SPACE;
+		KeyboardKey force = KEY_LEFT_SHIFT;
 	};
 } // namespace ECS::components
