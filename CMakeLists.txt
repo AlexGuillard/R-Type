@@ -8,7 +8,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 include(InstallRequiredSystemLibraries)
-set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/License.txt)
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/LICENSE)
 set(CPACK_PACKAGE_VERSION_MAJOR ${R-Type_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${R-Type_VERSION_MINOR})
 set(CPACK_SOURCE_GENERATOR "TGZ")
