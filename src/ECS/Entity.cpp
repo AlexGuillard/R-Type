@@ -5,14 +5,11 @@
 ** Entity
 */
 
-#include "Entity.hpp"
+#include "ECS/Entity.hpp"
 
-ECS::Entity::Entity(std::size_t entity) : _entity(entity)
-{
-
-}
+ECS::Entity::Entity(std::size_t entity) : _entity(entity) {}
 
 ECS::Entity::operator std::size_t() const
 {
-    return this->_entity;
+	return this->_entity;
 }

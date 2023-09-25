@@ -5,12 +5,8 @@
 ** ServerNetwork
 */
 
-#include "ServerNetwork.hpp"
+#include "server/network/ServerNetwork.hpp"
 
-Network::ServerNetwork::ServerNetwork()
-{
-}
+Network::ServerNetwork::ServerNetwork() {}
 
-Network::ServerNetwork::~ServerNetwork()
-{
-}
+Network::ServerNetwork::~ServerNetwork() {}

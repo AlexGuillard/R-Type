@@ -5,12 +5,8 @@
 ** GameLogic
 */
 
-#include "GameLogic.hpp"
+#include "server/game_logic/GameLogic.hpp"
 
-Game::GameLogic::GameLogic()
-{
-}
+Game::GameLogic::GameLogic() {}
 
-Game::GameLogic::~GameLogic()
-{
-}
+Game::GameLogic::~GameLogic() {}

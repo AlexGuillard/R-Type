@@ -5,12 +5,8 @@
 ** Display
 */
 
-#include "Display.hpp"
+#include "client/display/Display.hpp"
 
-Screen::Display::Display()
-{
-}
+Screen::Display::Display() {}
 
-Screen::Display::~Display()
-{
-}
+Screen::Display::~Display() {}
