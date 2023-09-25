@@ -1,3 +1,6 @@
+add_library(GTest::GTest INTERFACE IMPORTED)
+target_link_libraries(GTest::GTest INTERFACE gtest_main)
+
 # Copy the lines below to add unit tests. Replace text that looks like this:
 # [REPLACE] with the appropriate values.
 # [TEXT]... means that the text can be reapeted as many times as needed.
@@ -9,3 +12,4 @@
 # [LIBRARY1]?...
 # )
 # add_test([TEST_NAME] [TEST_NAME])
+add_subdirectory(ECS)

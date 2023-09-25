@@ -31,8 +31,6 @@ FetchContent_Declare(
     GIT_TAG v1.14.0
 )
 FetchContent_MakeAvailable(googletest)
-add_library(GTest::GTest INTERFACE IMPORTED)
-target_link_libraries(GTest::GTest INTERFACE gtest_main)
 
 # asio dependency
 # Force the script to use FetchContent and not CPM internally to fetch asio
