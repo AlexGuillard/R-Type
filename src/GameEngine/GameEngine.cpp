@@ -10,7 +10,7 @@
 #include "gameEngine/GameEngine.hpp"
 #include "Errors/RegistryNotFound.hpp"
 
-namespace gameEngine {
+namespace GameEngine {
 
 	using Registry = ECS::containers::Registry;
 

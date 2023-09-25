@@ -13,7 +13,7 @@
 
 #include "ECS/containers/Registry.hpp"
 
-namespace gameEngine {
+namespace GameEngine {
 	class GameEngine {
 		using Registry = ECS::containers::Registry;
 	public:
