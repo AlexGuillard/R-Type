@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-#include "gameEngine/GameEngine.hpp"
+#include "GameEngine/GameEngine.hpp"
 #include "Errors/RegistryNotFound.hpp"
 
 namespace GameEngine {
@@ -58,4 +58,4 @@ namespace GameEngine {
 		}
 	}
 
-}; // namespace gameEngine
+}; // namespace GameEngine

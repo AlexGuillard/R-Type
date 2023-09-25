@@ -7,30 +7,28 @@
 
 #include <gtest/gtest.h>
 
-#include "gameEngine/GameEngine.hpp"
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/containers/SparseArray.hpp"
 #include "Errors/RegistryNotFound.hpp"
 
-using namespace gameEngine;
-
-TEST(GameEngine, creatingRegistry)
+TEST(GameEngineT, creatingRegistry)
 {
-	GameEngine engine;
+	GameEngine::GameEngine engine;
 
 	engine.createRegistry("test");
 	ASSERT_NO_THROW(engine["test"]);
 }
 
-TEST(GameEngine, gettingNonExistingRegistry)
+TEST(GameEngineT, gettingNonExistingRegistry)
 {
-	GameEngine engine;
+	GameEngine::GameEngine engine;
 
 	ASSERT_THROW(engine["test"], Errors::RegistryNotFound);
 }
 
-TEST(GameEngine, RegistriesAreEditable)
+TEST(GameEngineT, RegistriesAreEditable)
 {
-	GameEngine engine;
+	GameEngine::GameEngine engine;
 
 	engine.createRegistry("test");
 	auto &registry = engine["test"];
@@ -61,9 +59,9 @@ void testSystem2(
 	}
 }
 
-TEST(GameEngine, RegistriesCanBeRun)
+TEST(GameEngineT, RegistriesCanBeRun)
 {
-	GameEngine engine;
+	GameEngine::GameEngine engine;
 
 	engine.createRegistry("test");
 	auto &registry = engine["test"];

@@ -18,7 +18,7 @@
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
 #include "ECS/systems/helper/SpriteSheetDrawer.hpp"
-#include "gameEngine/GameEngine.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 using namespace ECS;
 
@@ -66,7 +66,7 @@ int main()
 {
 	initialiseWindow();
 	const int ballRadius = 10;
-	gameEngine::GameEngine engine;
+	GameEngine::GameEngine engine;
 	engine.createRegistry("entities");
 	containers::Registry &registry = engine["entities"];
 	registry = setupRegistry(registry);

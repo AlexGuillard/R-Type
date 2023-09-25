@@ -50,4 +50,4 @@ namespace GameEngine {
 		// Registry type and registry sorted by insertion order
 		std::vector<std::pair<std::string, Registry>> m_registries;
 	};
-}; // namespace ECS::gameEngine
+}; // namespace ECS::GameEngine
