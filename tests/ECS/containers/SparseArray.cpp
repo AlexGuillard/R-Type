@@ -9,6 +9,7 @@
 #include <stdexcept>
 
 #include "ECS/containers/SparseArray.hpp"
+#include "Errors/ValueNotFound.hpp"
 
 using namespace ECS::containers;
 
@@ -165,7 +166,7 @@ TEST(SparseArray, getIndexNonExistingValue)
 	arr.insertAt(0, { 1, 2, 3 });
 	arr.insertAt(1, { 4, 5, 6 });
 
-	ASSERT_THROW(arr.getIndex(arr.at(2)), SparseArray<std::vector<int>>::ValueNotFound);
+	ASSERT_THROW(arr.getIndex(arr.at(2)), Errors::ValueNotFound);
 }
 
 TEST(SparseArray, constructedWithBaseSize)
