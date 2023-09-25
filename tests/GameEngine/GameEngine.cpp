@@ -9,6 +9,7 @@
 
 #include "gameEngine/GameEngine.hpp"
 #include "ECS/containers/SparseArray.hpp"
+#include "Errors/RegistryNotFound.hpp"
 
 using namespace gameEngine;
 
@@ -24,7 +25,7 @@ TEST(GameEngine, gettingNonExistingRegistry)
 {
 	GameEngine engine;
 
-	ASSERT_THROW(engine["test"], GameEngine::RegistryNotFound);
+	ASSERT_THROW(engine["test"], Errors::RegistryNotFound);
 }
 
 TEST(GameEngine, RegistriesAreEditable)

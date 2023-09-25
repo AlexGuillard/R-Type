@@ -8,6 +8,7 @@
 #include <algorithm>
 
 #include "gameEngine/GameEngine.hpp"
+#include "Errors/RegistryNotFound.hpp"
 
 namespace gameEngine {
 
@@ -35,7 +36,7 @@ namespace gameEngine {
 				return pair.first == type;
 			});
 		if (it == m_registries.end())
-			throw RegistryNotFound(type);
+			throw Errors::RegistryNotFound(type);
 		return it->second;
 	}
 
@@ -46,7 +47,7 @@ namespace gameEngine {
 				return pair.first == type;
 			});
 		if (it == m_registries.end())
-			throw RegistryNotFound(type);
+			throw Errors::RegistryNotFound(type);
 		return it->second;
 	}
 

@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "ECS/containers/Registry.hpp"
+#include "Errors/ComponentNotRegisteredException.hpp"
 
 using namespace ECS::containers;
 
@@ -28,9 +29,9 @@ TEST(Registry, throwsWhenGettingUnregisteredComponents)
 {
 	Registry registry;
 
-	ASSERT_THROW(registry.getComponents<int>(), Registry::ComponentNotRegisteredException);
-	ASSERT_THROW(registry.getComponents<std::string>(), Registry::ComponentNotRegisteredException);
-	ASSERT_THROW(registry.getComponents<float>(), Registry::ComponentNotRegisteredException);
+	ASSERT_THROW(registry.getComponents<int>(), Errors::ComponentNotRegisteredException);
+	ASSERT_THROW(registry.getComponents<std::string>(), Errors::ComponentNotRegisteredException);
+	ASSERT_THROW(registry.getComponents<float>(), Errors::ComponentNotRegisteredException);
 }
 
 TEST(Registry, isComponentTheSameAfterMultipleGet)
@@ -270,5 +271,5 @@ TEST(Registry, throwsWhenRemovingUnregisteredComponent)
 
 	ECS::Entity entity = registry.spawnEntity();
 
-	ASSERT_THROW(registry.removeComponent<std::string>(entity), Registry::ComponentNotRegisteredException);
+	ASSERT_THROW(registry.removeComponent<std::string>(entity), Errors::ComponentNotRegisteredException);
 }
