@@ -12,10 +12,11 @@
 namespace Network {
     class ServerNetwork : public ANetwork {
         public:
-            ServerNetwork();
+            ServerNetwork(std::string hostname, int port);
             ~ServerNetwork();
-
         protected:
+			asio::io_context io_context;
+			asio::ip::udp::socket _socket;
         private:
     };
 }

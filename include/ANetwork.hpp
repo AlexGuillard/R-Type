@@ -8,6 +8,7 @@
 #ifndef ANETWORK_HPP_
     #define ANETWORK_HPP_
     #include "INetwork.hpp"
+	#include <asio.hpp>
 
 namespace Network {
     class ANetwork : public INetwork {
