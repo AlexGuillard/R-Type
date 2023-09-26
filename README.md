@@ -48,6 +48,8 @@ The ship is controlled with the directional arrows + specifier autre usage
 
 - [UDP Protocol](https://github.com/AlexGuillard/R-Type/wiki/Developer's-Documentation#udp-protocol-documentation)
 
+- [Doxygen Documentation](https://alexguillard.github.io/R-Type/)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -5,13 +5,25 @@
 ** drawable
 */
 
+#include <unordered_map>
+
 #include "ECS/components/PositionComponent.hpp"
 #include "ECS/components/DrawableComponent.hpp"
 #include "ECS/containers/Registry.hpp"
+#include "ECS/containers/zipper/Zipper.hpp"
 #include "ECS/systems/drawable.hpp"
 #include "ECS/systems/helper/SpriteSheetDrawer.hpp"
 
 namespace ECS::systems {
+	std::unordered_map<std::string, Texture2D> textures;
+
+	static Texture2D loadTexture(const std::string &path)
+	{
+		if (textures.find(path) == textures.end()) {
+			textures[path] = LoadTexture(path.c_str());
+		}
+		return textures[path];
+	}
 
 	void drawable(
 		[[maybe_unused]] containers::Registry &registry,
@@ -19,13 +31,9 @@ namespace ECS::systems {
 		containers::SparseArray<components::DrawableComponent> &drawables
 	)
 	{
-		for (std::size_t entityId = 0; entityId < registry.size(); entityId++) {
-			if (!positions.at(entityId).has_value() || !drawables.at(entityId).has_value())
-				continue;
-			auto &position = positions.at(entityId);
-			auto &drawable = drawables.at(entityId);
+		for (auto &&[position, drawable] : containers::Zipper(positions, drawables)) {
 			helper::SpriteSheetDrawer drawer(
-				drawable->texture,
+				loadTexture(drawable->texture),
 				drawable->frameRatio,
 				drawable->start,
 				drawable->end,
