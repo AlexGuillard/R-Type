@@ -29,12 +29,13 @@ namespace ECS::systems::helper {
 	{
 		this->m_start = start.x + start.y * m_columns;
 		this->m_end = end.x + end.y * m_columns;
-		if (this->m_start > this->m_end)
+		if (this->m_start > this->m_end) {
 			std::swap(this->m_start, this->m_end);
+		}
 		this->m_nbFrames = this->m_end - this->m_start;
 	}
 
-	void SpriteSheetDrawer::draw(int row, int column, int x, int y)
+	void SpriteSheetDrawer::draw(int row, int column, int posX, int posY)
 	{
 		Rectangle source = {
 			(float)column * m_frameSize.x,
@@ -43,8 +44,8 @@ namespace ECS::systems::helper {
 			m_frameSize.y
 		};
 		Rectangle dest = {
-			(float)x,
-			(float)y,
+			(float)posX,
+			(float)posY,
 			m_frameSize.x,
 			m_frameSize.y
 		};
@@ -62,12 +63,17 @@ namespace ECS::systems::helper {
 
 	int SpriteSheetDrawer::next()
 	{
-		if (m_forward)
+		if (m_nbFrames == 0) {
+			return m_currentFrame;
+		}
+		if (m_forward) {
 			m_currentFrame = (m_currentFrame + 1) % m_nbFrames;
-		else
+		} else {
 			m_currentFrame = (m_currentFrame - 1) % m_nbFrames;
-		if (m_boomerang && (m_currentFrame == 0 || m_currentFrame == (m_nbFrames - 1)))
+		}
+		if (m_boomerang && (m_currentFrame == 0 || m_currentFrame == (m_nbFrames - 1))) {
 			m_forward = !m_forward;
+		}
 		return m_currentFrame;
 	}
 
