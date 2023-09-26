@@ -10,6 +10,7 @@
 #include <cstddef>
 
 namespace ECS::components {
+	const std::size_t waveBeamBaseDamage = 2;
 	/**
 	 * @brief Component for entities that request to spawn a wave beam
 	 * @param x Position on the x axis
@@ -18,6 +19,6 @@ namespace ECS::components {
 	struct WaveBeamComponent {
 		float x;
 		float y;
-		std::size_t damage = 2;
+		std::size_t damage = waveBeamBaseDamage;
 	};
 }; // namespace ECS::components
