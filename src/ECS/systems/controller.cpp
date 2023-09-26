@@ -89,24 +89,26 @@ namespace ECS::systems {
 			return;
 		}
 		if (controllable.timeFireButtonHeld > 0) {
+			u_char strength = clamp(
+				static_cast<u_char>(controllable.timeFireButtonHeld / systems::timeNeededForWaveBeam * components::maxWaveBeamStrength),
+				static_cast<u_char>(1),
+				components::maxWaveBeamStrength
+			);
 			auto missileEntity = registry.spawnEntity();
-			if (controllable.timeFireButtonHeld > systems::timeNeededForWaveBeam) {
+			if (strength > 1) {
 				registry.emplaceComponent<ECS::components::WaveBeamComponent>(
 					missileEntity,
 					position.x,
 					position.y,
-					static_cast<std::size_t>(
-						controllable.timeFireButtonHeld * components::waveBeamBaseDamage
-						)
+					static_cast<std::size_t>(strength * components::waveBeamBaseDamage),
+					strength
 				);
 			} else {
 				registry.emplaceComponent<ECS::components::MissileComponent>(
 					missileEntity,
 					position.x,
 					position.y,
-					static_cast<std::size_t>(
-						controllable.timeFireButtonHeld * components::missileBaseDamage
-						)
+					static_cast<std::size_t>(strength * components::missileBaseDamage)
 				);
 			}
 			controllable.timeFireButtonHeld = 0;
