@@ -10,36 +10,35 @@
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
 	: _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port))
 {
-	receive();
+	receive(_socket);
 }
 
 Network::ServerNetwork::~ServerNetwork()
 {
 }
 
-void Network::ServerNetwork::receive()
+void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-	_socket.async_receive_from(boost::asio::buffer(_data, 1024), _endpoint,
-    [this] (boost::system::error_code error, std::size_t recvd_bytes) {
-        if ( !error && recvd_bytes > 0 ) {
-            std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
-            send();
-        }
-        else {
-            receive();
-        }
-    });
+	std::string actualClient;
+
+    if ( !error && recvd_bytes > 0 ) {
+		std::cout << clients.size() << std::endl;
+		if (clients.size() < 5) {
+			actualClient = _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
+			clients[actualClient] = _endpoint;
+		}
+        std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
+        send(_socket, "receive data\n");
+		for (int i = 0; i < MAX_SIZE_BUFF; i++) {
+			_data[i] = '\0';
+		}
+    }
+    else {
+        receive(_socket);
+    }
 }
 
-void Network::ServerNetwork::send()
+void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-	std::string str = "endpoint: ";
-
-	str += _endpoint.address().to_string();
-	str += " port ";
-	str += std::to_string((int)_endpoint.port());
-    _socket.async_send_to(boost::asio::buffer(str.c_str(), str.length()), _endpoint,
-	[this] (boost::system::error_code error, std::size_t recvd_bytes) {
-	    receive();
-	});
+	receive(_socket);
 }
