@@ -115,6 +115,22 @@ namespace ECS::systems {
 		}
 	}
 
+	/**
+	 * @brief If a Force is attached release it, otherwise, try to attach one
+	 * @param registry Registry in which the force and the controllable are stored
+	 * @param controllable Controllable component of the entity
+	 */
+	static void useForce(
+		ECS::containers::Registry &registry,
+		ECS::components::ControllableComponent &controllable)
+	{
+		if (!IsKeyPressed(controllable.force)) {
+			return;
+		}
+		// TODO: add force implementation here
+	}
+
+
 	void controller(
 		ECS::containers::Registry &registry,
 		ECS::containers::SparseArray<ECS::components::PositionComponent> &positions,
@@ -128,6 +144,7 @@ namespace ECS::systems {
 		for (auto &&[position, velocity, controllable] : ECS::containers::Zipper(positions, velocities, controllables)) {
 			changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
 			handleShooting(registry, *controllable, *position);
+			useForce(registry, *controllable);
 		}
 	}
 
