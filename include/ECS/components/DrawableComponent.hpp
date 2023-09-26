@@ -12,6 +12,7 @@
 #include <raylib.h>
 
 namespace ECS::components {
+	// size of the texture path
 	const std::size_t maxTexturePathSize = 256;
 	/**
 	 * @brief Component that contains the data needed to draw a sprite
@@ -30,14 +31,14 @@ namespace ECS::components {
 	 * @see SpriteSheetDrawer
 	 */
 	typedef struct {
-		char texturePath[maxTexturePathSize];
+		char texture[maxTexturePathSize];
 		Vector2 frameRatio;
 		Vector2 start = { 0, 0 };
 		Vector2 end = { 0, 0 };
 		bool boomerang = false;
 		std::size_t fps = 1;
 		std::size_t frame = 0;
-		float timeAtLastFrameChange = 0.0f;
+		float timeAtLastFrameChange = 0.0F;
 		bool forward = true;
 	} DrawableComponent;
 } // namespace ECS::components

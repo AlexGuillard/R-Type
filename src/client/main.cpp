@@ -44,8 +44,7 @@ Entity spawnShip(containers::Registry &registry)
 		true, // boomerang
 		nbFrameInAnimation // fps
 	};
-	registry.addComponent<components::DrawableComponent>(
-		ship, std::move(drawableComponent));
+	registry.addComponent<components::DrawableComponent>(ship, std::move(drawableComponent));
 	return ship;
 }
 
