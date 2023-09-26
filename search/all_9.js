@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['left_58',['left',['../structECS_1_1components_1_1ControllableComponent.html#a8c06c2595d6899b2ab120b8ac2d8816d',1,'ECS::components::ControllableComponent']]]
+  ['killentity_68',['killEntity',['../classECS_1_1containers_1_1Registry.html#ab28cbfc5996bf74cb8d101a9049ea400',1,'ECS::containers::Registry']]]
 ];

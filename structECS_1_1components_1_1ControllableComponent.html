@@ -91,6 +91,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8c06c2595d6899b2ab120b8ac2d8816d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1e9101a2c1a10888a857bcbf62d87aa"><td class="memItemLeft" align="right" valign="top">KeyboardKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1components_1_1ControllableComponent.html#ac1e9101a2c1a10888a857bcbf62d87aa">right</a> = KEY_RIGHT</td></tr>
 <tr class="separator:ac1e9101a2c1a10888a857bcbf62d87aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea14ddd9f8e8fdc37f7aa1405a7c7b21"><td class="memItemLeft" align="right" valign="top">KeyboardKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1components_1_1ControllableComponent.html#aea14ddd9f8e8fdc37f7aa1405a7c7b21">fire</a> = KEY_SPACE</td></tr>
+<tr class="separator:aea14ddd9f8e8fdc37f7aa1405a7c7b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9f148ee4034e51d8553a796b8c36fc"><td class="memItemLeft" align="right" valign="top">KeyboardKey&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1components_1_1ControllableComponent.html#a8b9f148ee4034e51d8553a796b8c36fc">force</a> = KEY_LEFT_SHIFT</td></tr>
+<tr class="separator:a8b9f148ee4034e51d8553a796b8c36fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb1d012dc97555dcad075f1e6e7f6d1d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1components_1_1ControllableComponent.html#adb1d012dc97555dcad075f1e6e7f6d1d">timeFireButtonHeld</a> = 0.0</td></tr>
+<tr class="separator:adb1d012dc97555dcad075f1e6e7f6d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Component that contains the data needed to control an entity. </p>
@@ -100,6 +106,9 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">down</td><td>Key to go down </td></tr>
     <tr><td class="paramname">left</td><td>Key to go left </td></tr>
     <tr><td class="paramname">right</td><td>Key to go right </td></tr>
+    <tr><td class="paramname">fire</td><td>Key to fire </td></tr>
+    <tr><td class="paramname">force</td><td>Key to use force </td></tr>
+    <tr><td class="paramname">timeFireButtonHeld</td><td>Time (in sec) since the fire button is held </td></tr>
   </table>
   </dd>
 </dl>
@@ -112,6 +121,34 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">KeyboardKey ECS::components::ControllableComponent::down = KEY_DOWN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea14ddd9f8e8fdc37f7aa1405a7c7b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea14ddd9f8e8fdc37f7aa1405a7c7b21">&#9670;&nbsp;</a></span>fire</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KeyboardKey ECS::components::ControllableComponent::fire = KEY_SPACE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b9f148ee4034e51d8553a796b8c36fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9f148ee4034e51d8553a796b8c36fc">&#9670;&nbsp;</a></span>force</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KeyboardKey ECS::components::ControllableComponent::force = KEY_LEFT_SHIFT</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -140,6 +177,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">KeyboardKey ECS::components::ControllableComponent::right = KEY_RIGHT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb1d012dc97555dcad075f1e6e7f6d1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb1d012dc97555dcad075f1e6e7f6d1d">&#9670;&nbsp;</a></span>timeFireButtonHeld</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ECS::components::ControllableComponent::timeFireButtonHeld = 0.0</td>
         </tr>
       </table>
 </div><div class="memdoc">

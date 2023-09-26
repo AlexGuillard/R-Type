@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['screen_78',['Screen',['../namespaceScreen.html',1,'']]],
-  ['servernetwork_79',['ServerNetwork',['../classNetwork_1_1ServerNetwork.html',1,'Network::ServerNetwork'],['../classNetwork_1_1ServerNetwork.html#aee8e0db98b48ee1bbc7a52cf2fa42b82',1,'Network::ServerNetwork::ServerNetwork()']]],
-  ['servernetwork_2ehpp_80',['ServerNetwork.hpp',['../ServerNetwork_8hpp.html',1,'']]],
-  ['size_81',['size',['../classECS_1_1containers_1_1Registry.html#af4731e2330017d5c7e5f73ee3871250e',1,'ECS::containers::Registry::size()'],['../classECS_1_1containers_1_1IndexedZipper.html#aee1098bf4ef7a160d474bcfd8bff18eb',1,'ECS::containers::IndexedZipper::size()'],['../classECS_1_1containers_1_1Zipper.html#a770be5b0771abe5e2237e8fd3dd0bf62',1,'ECS::containers::Zipper::size()']]],
-  ['size_5ftype_82',['size_type',['../classECS_1_1containers_1_1SparseArray.html#a5c5ee32ee7176675f6fa7aee277ddc9c',1,'ECS::containers::SparseArray']]],
-  ['sparsearray_83',['SparseArray',['../classECS_1_1containers_1_1SparseArray.html',1,'ECS::containers::SparseArray&lt; T &gt;'],['../classECS_1_1containers_1_1SparseArray.html#a5c82870b36b92e88e9b689f7cfab21a4',1,'ECS::containers::SparseArray::SparseArray()=default'],['../classECS_1_1containers_1_1SparseArray.html#ae2c9f4c85d6719ceb65d0527940769c3',1,'ECS::containers::SparseArray::SparseArray(SparseArray const &amp;)=default'],['../classECS_1_1containers_1_1SparseArray.html#ae196d173c1beea54f2aa655b1d83c02e',1,'ECS::containers::SparseArray::SparseArray(SparseArray &amp;&amp;) noexcept=default'],['../classECS_1_1containers_1_1SparseArray.html#ac59d299270b2f1fe710a149623c17d78',1,'ECS::containers::SparseArray::SparseArray(std::size_t n)']]],
-  ['sparsearray_2ehpp_84',['SparseArray.hpp',['../SparseArray_8hpp.html',1,'']]],
-  ['spawnentity_85',['spawnEntity',['../classECS_1_1containers_1_1Registry.html#add0b517e02767b85e02cfe206e43b2b0',1,'ECS::containers::Registry']]],
-  ['start_86',['start',['../structECS_1_1components_1_1DrawableComponent.html#a3f32fac5556d2ea1ee060cbcd8190618',1,'ECS::components::DrawableComponent']]]
+  ['reference_5ftype_85',['reference_type',['../classECS_1_1containers_1_1SparseArray.html#ade9dcb7249b39260e118b884b963cc80',1,'ECS::containers::SparseArray']]],
+  ['registercomponent_86',['registerComponent',['../classECS_1_1containers_1_1Registry.html#a203678b7493f74063965997978d1cbae',1,'ECS::containers::Registry']]],
+  ['registry_87',['Registry',['../classECS_1_1containers_1_1Registry.html',1,'ECS::containers::Registry'],['../classECS_1_1containers_1_1Registry.html#af6a06640f3c6d156ea0782401a583afc',1,'ECS::containers::Registry::Registry()']]],
+  ['registry_2ehpp_88',['Registry.hpp',['../Registry_8hpp.html',1,'']]],
+  ['removecomponent_89',['removeComponent',['../classECS_1_1containers_1_1Registry.html#ace45208ab4de8012c8de2ea1758cc5af',1,'ECS::containers::Registry']]],
+  ['right_90',['right',['../structECS_1_1components_1_1ControllableComponent.html#ac1e9101a2c1a10888a857bcbf62d87aa',1,'ECS::components::ControllableComponent']]],
+  ['runsystems_91',['runSystems',['../classECS_1_1containers_1_1Registry.html#a6a30dd5867b0a61368d8b61b31f3cf76',1,'ECS::containers::Registry']]]
 ];

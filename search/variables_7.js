@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['texture_203',['texture',['../structECS_1_1components_1_1DrawableComponent.html#a6f08955f378cb1be50f95018c540d97b',1,'ECS::components::DrawableComponent']]],
-  ['timeatlastframechange_204',['timeAtLastFrameChange',['../structECS_1_1components_1_1DrawableComponent.html#aa5dc3890d6c65a75af2140c338bf6d6f',1,'ECS::components::DrawableComponent']]]
+  ['right_235',['right',['../structECS_1_1components_1_1ControllableComponent.html#ac1e9101a2c1a10888a857bcbf62d87aa',1,'ECS::components::ControllableComponent']]]
 ];
