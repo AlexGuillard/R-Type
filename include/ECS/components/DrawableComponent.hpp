@@ -12,9 +12,10 @@
 #include <raylib.h>
 
 namespace ECS::components {
+	const std::size_t maxTexturePathSize = 256;
 	/**
 	 * @brief Component that contains the data needed to draw a sprite
-	 * @param texture Texture to draw
+	 * @param texturePath Path to the texture
 	 * @param frameRatio Ratio of the frame in the texture
 	 * ex: { 16, 1 } for a sprite sheet with 16 columns and 1 row
 	 * @param start First frame of the animation
@@ -29,7 +30,7 @@ namespace ECS::components {
 	 * @see SpriteSheetDrawer
 	 */
 	typedef struct {
-		Texture2D texture;
+		char texturePath[maxTexturePathSize];
 		Vector2 frameRatio;
 		Vector2 start = { 0, 0 };
 		Vector2 end = { 0, 0 };
