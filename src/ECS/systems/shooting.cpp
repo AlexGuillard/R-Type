@@ -23,7 +23,7 @@ namespace ECS::systems {
 		const u_char nbFrameInSpriteSheet = 6;
 		const Vector2 missileFramePos = Vector2(2, 0);
 		components::DrawableComponent drawable = {
-				"assets/missile.png",
+				"assets/missiles/missile.png",
 				Vector2(nbFrameInSpriteSheet, 1), // frameRatio
 				missileFramePos, // start
 				missileFramePos // end
