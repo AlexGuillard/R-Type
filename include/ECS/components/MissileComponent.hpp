@@ -10,6 +10,7 @@
 #include <cstddef>
 
 namespace ECS::components {
+	// X velocity in pixels per second for the missile that will be spawned
 	static const float missileSpeed = 500;
 	/**
 	 * @brief Component for entities that request to spawn a missile

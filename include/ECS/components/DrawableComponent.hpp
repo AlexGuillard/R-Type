@@ -12,6 +12,7 @@
 #include <raylib.h>
 
 namespace ECS::components {
+	// size of the texture path
 	const std::size_t maxTexturePathSize = 256;
 	/**
 	 * @brief Component that contains the data needed to draw a sprite
