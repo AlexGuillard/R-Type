@@ -14,6 +14,7 @@
 #include "ECS/components/VelocityComponent.hpp"
 #include "ECS/components/DrawableComponent.hpp"
 #include "ECS/components/ControllableComponent.hpp"
+#include "ECS/components/HPComponent.hpp"
 #include "ECS/systems/controller.hpp"
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
@@ -44,6 +45,7 @@ containers::Registry &setupRegistry(containers::Registry &registry)
 	registry.registerComponent<components::VelocityComponent>();
 	registry.registerComponent<components::DrawableComponent>();
 	registry.registerComponent<components::ControllableComponent>();
+	registry.registerComponent<components::HPComponent>();
 
 	registry.addSystem<components::VelocityComponent, components::ControllableComponent>(systems::controller);
 	registry.addSystem<components::PositionComponent, components::VelocityComponent>(systems::movement);
