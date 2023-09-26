@@ -18,6 +18,7 @@
 #include "ECS/components/DamageComponent.hpp"
 #include "ECS/components/HitBoxComponent.hpp"
 #include "ECS/components/MissileComponent.hpp"
+#include "ECS/components/WaveBeamComponent.hpp"
 #include "ECS/systems/controller.hpp"
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
@@ -52,6 +53,7 @@ containers::Registry &setupRegistry(containers::Registry &registry)
 	registry.registerComponent<components::DamageComponent>();
 	registry.registerComponent<components::HitBoxComponent>();
 	registry.registerComponent<components::MissileComponent>();
+	registry.registerComponent<components::WaveBeamComponent>();
 
 	registry.addSystem<components::VelocityComponent, components::ControllableComponent>(systems::controller);
 	registry.addSystem<components::PositionComponent, components::VelocityComponent>(systems::movement);
