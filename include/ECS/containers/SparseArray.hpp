@@ -9,7 +9,8 @@
 
 #include <vector>
 #include <optional>
-#include <stdexcept>
+
+#include "Errors/ValueNotFound.hpp"
 
 namespace ECS::containers {
 
@@ -145,13 +146,8 @@ namespace ECS::containers {
 				if (std::addressof(this->at(i).value()) == std::addressof(value.value()))
 					return i;
 			}
-			throw ValueNotFound("Value not found");
+			throw Errors::ValueNotFound("Value not found in SparseArray");
 		}
-
-		class ValueNotFound : public std::runtime_error {
-		public:
-			explicit ValueNotFound(const std::string &what) : std::runtime_error(what) {}
-		};
 	};
 
 } // namespace ECS::containers

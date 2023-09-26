@@ -10,7 +10,6 @@
 #include <unordered_map>
 #include <string>
 #include <any>
-#include <stdexcept>
 #include <typeindex>
 #include <functional>
 #include <utility>
@@ -18,9 +17,9 @@
 
 #include "ECS/containers/SparseArray.hpp"
 #include "ECS/Entity.hpp"
+#include "Errors/ComponentNotRegisteredException.hpp"
 
 namespace ECS::containers {
-
 	class Registry {
 	public:
 		Registry() = default;
@@ -54,13 +53,13 @@ namespace ECS::containers {
 			const auto index = std::type_index(typeid(Component));
 
 			if (m_componentsArrays.contains(index) == false) {
-				throw ComponentNotRegisteredException(index.name());
+				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 			try {
 				return std::any_cast<SparseArray<Component> &>(
 					m_componentsArrays[index].first);
 			} catch (const std::bad_any_cast &e) {
-				throw ComponentNotRegisteredException(index.name());
+				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 		}
 		/**
@@ -74,13 +73,13 @@ namespace ECS::containers {
 			const auto index = std::type_index(typeid(Component));
 
 			if (m_componentsArrays.contains(index) == false) {
-				throw ComponentNotRegisteredException(index.name());
+				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 			try {
 				return std::any_cast<SparseArray<Component> const &>(
 					m_componentsArrays.at(index).first);
 			} catch (const std::bad_any_cast &e) {
-				throw ComponentNotRegisteredException(index.name());
+				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 		}
 
@@ -95,12 +94,6 @@ namespace ECS::containers {
 			return std::tuple<SparseArray<Component> &...>(
 				this->getComponents<Component>()...);
 		}
-
-		class ComponentNotRegisteredException : public std::runtime_error {
-		public:
-			explicit ComponentNotRegisteredException(const std::string &componentName)
-				: std::runtime_error(std::string("ComponentNotRegisteredException: '") + componentName + "' is not registered") {};
-		};
 
 		// ENTITY MANAGER
 		Entity spawnEntity()
