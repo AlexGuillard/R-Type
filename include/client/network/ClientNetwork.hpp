@@ -11,14 +11,13 @@
 	#include <iostream>
 
 namespace Network {
-
     class ClientNetwork : public ANetwork  {
-
         public:
-            ClientNetwork(int port, std::string machine);
-            ~ClientNetwork() override;
-			void send(const std::string& message) override;
-
+            ClientNetwork();
+            ~ClientNetwork();
+			void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
+			void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+        protected:
         private:
 			int _port;
 			std::string _host;
