@@ -8,8 +8,11 @@
 #include <raylib.h>
 
 #include "ECS/systems/controller.hpp"
+#include "ECS/components/PositionComponent.hpp"
 #include "ECS/components/VelocityComponent.hpp"
 #include "ECS/components/ControllableComponent.hpp"
+#include "ECS/components/WaveBeamComponent.hpp"
+#include "ECS/components/MissileComponent.hpp"
 #include "ECS/containers/zipper/Zipper.hpp"
 
 namespace ECS::systems {
@@ -76,8 +79,43 @@ namespace ECS::systems {
 		velocity.y = clamp(velocity.y, -maxSpeed, maxSpeed);
 	}
 
+	static void handleShooting(
+		ECS::containers::Registry &registry,
+		ECS::components::ControllableComponent &controllable,
+		ECS::components::PositionComponent &position)
+	{
+		if (IsKeyDown(controllable.fire)) {
+			controllable.timeFireButtonHeld += GetFrameTime();
+			return;
+		}
+		if (controllable.timeFireButtonHeld > 0) {
+			auto missileEntity = registry.spawnEntity();
+			if (controllable.timeFireButtonHeld > systems::timeNeededForWaveBeam) {
+				registry.emplaceComponent<ECS::components::WaveBeamComponent>(
+					missileEntity,
+					position.x,
+					position.y,
+					static_cast<std::size_t>(
+						controllable.timeFireButtonHeld * components::waveBeamBaseDamage
+						)
+				);
+			} else {
+				registry.emplaceComponent<ECS::components::MissileComponent>(
+					missileEntity,
+					position.x,
+					position.y,
+					static_cast<std::size_t>(
+						controllable.timeFireButtonHeld * components::missileBaseDamage
+						)
+				);
+			}
+			controllable.timeFireButtonHeld = 0;
+		}
+	}
+
 	void controller(
-		[[maybe_unused]] ECS::containers::Registry &registry,
+		ECS::containers::Registry &registry,
+		ECS::containers::SparseArray<ECS::components::PositionComponent> &positions,
 		ECS::containers::SparseArray<ECS::components::VelocityComponent> &velocities,
 		ECS::containers::SparseArray<ECS::components::ControllableComponent> &controllables)
 	{
@@ -85,8 +123,9 @@ namespace ECS::systems {
 		const float nbFrameToMaxSpeed = 5;
 		const float nbFrameToStop = 5;
 
-		for (auto &&[velocity, controllable] : ECS::containers::Zipper(velocities, controllables)) {
+		for (auto &&[position, velocity, controllable] : ECS::containers::Zipper(positions, velocities, controllables)) {
 			changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
+			handleShooting(registry, *controllable, *position);
 		}
 	}
 
