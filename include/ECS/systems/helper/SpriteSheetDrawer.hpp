@@ -49,7 +49,7 @@ namespace ECS::systems::helper {
 		 * @param y Position of where to draw the frame (ie 100 for the 100th pixel)
 		 * @note This function is not recommended for animations, use the other overload instead
 		 */
-		void draw(int row, int column, int x, int y);
+		void draw(int row, int column, int posX, int posY);
 		/**
 		 * @brief Draws the current frame at the given position
 		 * @param position Position on the screen where to draw the frame

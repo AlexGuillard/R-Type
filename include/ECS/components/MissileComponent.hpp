@@ -12,6 +12,7 @@
 namespace ECS::components {
 	// X velocity in pixels per second for the missile that will be spawned
 	static const float missileSpeed = 500;
+	static const std::size_t missileBaseDamage = 1;
 	/**
 	 * @brief Component for entities that request to spawn a missile
 	 * @param x Position on the x axis
@@ -21,6 +22,6 @@ namespace ECS::components {
 	struct MissileComponent {
 		float x;
 		float y;
-		std::size_t damage = 1;
+		std::size_t damage = missileBaseDamage;
 	};
 }; // namespace ECS::components

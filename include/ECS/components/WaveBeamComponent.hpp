@@ -10,6 +10,9 @@
 #include <cstddef>
 
 namespace ECS::components {
+	const u_char maxWaveBeamStrength = 5;
+	const float waveBeamSpeed = 500;
+	const std::size_t waveBeamBaseDamage = 2;
 	/**
 	 * @brief Component for entities that request to spawn a wave beam
 	 * @param x Position on the x axis
@@ -18,6 +21,7 @@ namespace ECS::components {
 	struct WaveBeamComponent {
 		float x;
 		float y;
-		std::size_t damage = 2;
+		std::size_t damage = waveBeamBaseDamage;
+		u_char strength = 1;
 	};
 }; // namespace ECS::components

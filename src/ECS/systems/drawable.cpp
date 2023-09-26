@@ -15,11 +15,11 @@
 #include "ECS/systems/helper/SpriteSheetDrawer.hpp"
 
 namespace ECS::systems {
-	std::unordered_map<std::string, Texture2D> textures;
+	static std::unordered_map<std::string, Texture2D> textures;
 
 	static Texture2D loadTexture(const std::string &path)
 	{
-		if (textures.find(path) == textures.end()) {
+		if (!textures.contains(path)) {
 			textures[path] = LoadTexture(path.c_str());
 		}
 		return textures[path];
