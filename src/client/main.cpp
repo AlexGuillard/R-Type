@@ -32,14 +32,17 @@ Entity spawnShip(containers::Registry &registry)
 	Entity ship = registry.spawnEntity();
 	registry.emplaceComponent<components::PositionComponent>(ship, 0, 0);
 	registry.emplaceComponent<components::VelocityComponent>(ship, 0, 0);
-	registry.emplaceComponent<components::DrawableComponent>(ship,
-		LoadTexture("assets/r-typesheet42.gif"), // texture
-		Vector2(5, 5), // frameRatio
+	const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
+	const std::size_t nbFrameInAnimation = 5;
+	components::DrawableComponent drawable = {
+		"assets/r-typesheet42.gif", // texture
+		nbFrameInSpriteSheet, // frameRatio
 		Vector2(0, 0), // start
-		Vector2(5, 0), // end
+		Vector2(nbFrameInAnimation, 0), // end
 		true, // boomerang
-		5 // fps
-	);
+		nbFrameInAnimation // fps
+	};
+	registry.addComponent<components::DrawableComponent>(ship, std::move(drawable));
 	return ship;
 }
 
