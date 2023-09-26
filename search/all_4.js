@@ -1,14 +1,13 @@
 var searchData=
 [
-  ['components_28',['components',['../namespaceECS_1_1components.html',1,'ECS']]],
-  ['containers_29',['containers',['../namespaceECS_1_1containers.html',1,'ECS']]],
-  ['ecs_30',['ECS',['../namespaceECS.html',1,'']]],
-  ['emplaceat_31',['emplaceAt',['../classECS_1_1containers_1_1SparseArray.html#a03870ea1b515977fb7e83fa694794591',1,'ECS::containers::SparseArray']]],
-  ['emplacecomponent_32',['emplaceComponent',['../classECS_1_1containers_1_1Registry.html#a8e854bc0ecd2bf919be4a56a1b6906ca',1,'ECS::containers::Registry']]],
-  ['end_33',['end',['../structECS_1_1components_1_1DrawableComponent.html#aee488556c2dac45cd6b8ba8314f9da7f',1,'ECS::components::DrawableComponent::end()'],['../classECS_1_1containers_1_1IndexedZipper.html#a39033fb68cb8cb8ad6d810c9fe3cdc42',1,'ECS::containers::IndexedZipper::end()'],['../classECS_1_1containers_1_1Zipper.html#a17908310774d22617afefcac9c095306',1,'ECS::containers::Zipper::end()']]],
-  ['entity_34',['Entity',['../classECS_1_1Entity.html',1,'ECS']]],
-  ['entity_2ehpp_35',['Entity.hpp',['../Entity_8hpp.html',1,'']]],
-  ['entityfromindex_36',['entityFromIndex',['../classECS_1_1containers_1_1Registry.html#a8190995e5f55df0cb4110f0d2c1e503e',1,'ECS::containers::Registry']]],
-  ['erase_37',['erase',['../classECS_1_1containers_1_1SparseArray.html#ad7df2ac993d81199c8954395e6c1a991',1,'ECS::containers::SparseArray']]],
-  ['systems_38',['systems',['../namespaceECS_1_1systems.html',1,'ECS']]]
+  ['damage_22',['damage',['../structECS_1_1components_1_1DamageComponent.html#a7d3635bee156349b9dc3e9b4b278426f',1,'ECS::components::DamageComponent::damage()'],['../structECS_1_1components_1_1MissileComponent.html#a33c90164c90c69767d30a66945cea967',1,'ECS::components::MissileComponent::damage()'],['../structECS_1_1components_1_1WaveBeamComponent.html#aa1b2dad9d1510f76c643c2e41a24c091',1,'ECS::components::WaveBeamComponent::damage()']]],
+  ['damagecomponent_23',['DamageComponent',['../structECS_1_1components_1_1DamageComponent.html',1,'ECS::components']]],
+  ['damagecomponent_2ehpp_24',['DamageComponent.hpp',['../DamageComponent_8hpp.html',1,'']]],
+  ['display_25',['Display',['../classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08',1,'Screen::Display::Display()'],['../classScreen_1_1Display.html',1,'Screen::Display']]],
+  ['display_2ehpp_26',['Display.hpp',['../Display_8hpp.html',1,'']]],
+  ['down_27',['down',['../structECS_1_1components_1_1ControllableComponent.html#a648a94a5165a232f8c54ddaf3f97a99c',1,'ECS::components::ControllableComponent']]],
+  ['drawable_28',['drawable',['../namespaceECS_1_1systems.html#a5c7dee2bbe3761bbd3e858e669ee06cb',1,'ECS::systems']]],
+  ['drawable_2ehpp_29',['drawable.hpp',['../drawable_8hpp.html',1,'']]],
+  ['drawablecomponent_30',['DrawableComponent',['../structECS_1_1components_1_1DrawableComponent.html',1,'ECS::components']]],
+  ['drawablecomponent_2ehpp_31',['DrawableComponent.hpp',['../DrawableComponent_8hpp.html',1,'']]]
 ];

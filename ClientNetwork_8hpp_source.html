@@ -88,18 +88,21 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d">   15</a></span>&#160;            <a class="code" href="classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d">ClientNetwork</a>();</div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">   16</a></span>&#160;            <a class="code" href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">~ClientNetwork</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    };</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !CLIENTNETWORK_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">   17</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">handleReceive</a>(boost::system::error_code error, std::size_t recvd_bytes);</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">   18</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">handleSend</a>(boost::system::error_code error, std::size_t recvd_bytes);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !CLIENTNETWORK_HPP_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aANetwork_8hpp_html"><div class="ttname"><a href="ANetwork_8hpp.html">ANetwork.hpp</a></div></div>
-<div class="ttc" id="aclassNetwork_1_1ANetwork_html"><div class="ttname"><a href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></div><div class="ttdef"><b>Definition:</b> ANetwork.hpp:13</div></div>
+<div class="ttc" id="aclassNetwork_1_1ANetwork_html"><div class="ttname"><a href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></div><div class="ttdoc">abstract class of INetwork</div><div class="ttdef"><b>Definition:</b> ANetwork.hpp:17</div></div>
 <div class="ttc" id="aclassNetwork_1_1ClientNetwork_html"><div class="ttname"><a href="classNetwork_1_1ClientNetwork.html">Network::ClientNetwork</a></div><div class="ttdef"><b>Definition:</b> ClientNetwork.hpp:13</div></div>
 <div class="ttc" id="aclassNetwork_1_1ClientNetwork_html_a8d5902a13547dfabd50b331c2eb85815"><div class="ttname"><a href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">Network::ClientNetwork::~ClientNetwork</a></div><div class="ttdeci">~ClientNetwork()</div></div>
 <div class="ttc" id="aclassNetwork_1_1ClientNetwork_html_a98fff34523115bfa0ac4c2e963fc3a3d"><div class="ttname"><a href="classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d">Network::ClientNetwork::ClientNetwork</a></div><div class="ttdeci">ClientNetwork()</div></div>
+<div class="ttc" id="aclassNetwork_1_1ClientNetwork_html_a9a2483a228a5f5d3beffd7cde0aa16d9"><div class="ttname"><a href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">Network::ClientNetwork::handleReceive</a></div><div class="ttdeci">void handleReceive(boost::system::error_code error, std::size_t recvd_bytes)</div><div class="ttdoc">function called after receiving data</div></div>
+<div class="ttc" id="aclassNetwork_1_1ClientNetwork_html_ad2c37d8bd96c0247865253971ee433f3"><div class="ttname"><a href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">Network::ClientNetwork::handleSend</a></div><div class="ttdeci">void handleSend(boost::system::error_code error, std::size_t recvd_bytes)</div><div class="ttdoc">function called after sending data</div></div>
 <div class="ttc" id="anamespaceNetwork_html"><div class="ttname"><a href="namespaceNetwork.html">Network</a></div><div class="ttdef"><b>Definition:</b> ANetwork.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

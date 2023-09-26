@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['movement_199',['movement',['../namespaceECS_1_1systems.html#ae6afd3774ff7b4f2e808d6dbb3a698d5',1,'ECS::systems']]]
+  ['killentity_211',['killEntity',['../classECS_1_1containers_1_1Registry.html#ab28cbfc5996bf74cb8d101a9049ea400',1,'ECS::containers::Registry']]]
 ];

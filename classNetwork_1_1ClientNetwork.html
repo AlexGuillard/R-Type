@@ -83,8 +83,8 @@ Inheritance diagram for Network::ClientNetwork:</div>
  <div class="center">
   <img src="classNetwork_1_1ClientNetwork.png" usemap="#Network::ClientNetwork_map" alt=""/>
   <map id="Network::ClientNetwork_map" name="Network::ClientNetwork_map">
-<area href="classNetwork_1_1ANetwork.html" alt="Network::ANetwork" shape="rect" coords="0,56,142,80"/>
-<area href="classNetwork_1_1INetwork.html" alt="Network::INetwork" shape="rect" coords="0,0,142,24"/>
+<area href="classNetwork_1_1ANetwork.html" title="abstract class of INetwork" alt="Network::ANetwork" shape="rect" coords="0,56,142,80"/>
+<area href="classNetwork_1_1INetwork.html" title="interface of the network" alt="Network::INetwork" shape="rect" coords="0,0,142,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -94,12 +94,34 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a98fff34523115bfa0ac4c2e963fc3a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d5902a13547dfabd50b331c2eb85815"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">~ClientNetwork</a> ()</td></tr>
 <tr class="separator:a8d5902a13547dfabd50b331c2eb85815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">handleReceive</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
+<tr class="memdesc:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after receiving data  <a href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">More...</a><br /></td></tr>
+<tr class="separator:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2c37d8bd96c0247865253971ee433f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">handleSend</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
+<tr class="memdesc:ad2c37d8bd96c0247865253971ee433f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after sending data  <a href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">More...</a><br /></td></tr>
+<tr class="separator:ad2c37d8bd96c0247865253971ee433f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdc5f937b5477aad673f9d0af03f4a8 inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a0fdc5f937b5477aad673f9d0af03f4a8">receive</a> (boost::asio::ip::udp::socket &amp;_socket)</td></tr>
+<tr class="memdesc:a0fdc5f937b5477aad673f9d0af03f4a8 inherit pub_methods_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to receive informations  <a href="classNetwork_1_1ANetwork.html#a0fdc5f937b5477aad673f9d0af03f4a8">More...</a><br /></td></tr>
+<tr class="separator:a0fdc5f937b5477aad673f9d0af03f4a8 inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add3b8b28d973a10129638eccc64234eb inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#add3b8b28d973a10129638eccc64234eb">send</a> (boost::asio::ip::udp::socket &amp;_socket, std::string str)</td></tr>
+<tr class="memdesc:add3b8b28d973a10129638eccc64234eb inherit pub_methods_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to send informations  <a href="classNetwork_1_1ANetwork.html#add3b8b28d973a10129638eccc64234eb">More...</a><br /></td></tr>
+<tr class="separator:add3b8b28d973a10129638eccc64234eb inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1INetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1INetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1INetwork.html">Network::INetwork</a></td></tr>
 <tr class="memitem:ae88c1a3764d9a078d5bf8ebc248d8d2e inherit pub_methods_classNetwork_1_1INetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#ae88c1a3764d9a078d5bf8ebc248d8d2e">~INetwork</a> ()=default</td></tr>
 <tr class="separator:ae88c1a3764d9a078d5bf8ebc248d8d2e inherit pub_methods_classNetwork_1_1INetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
+<tr class="memitem:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95">_data</a> [<a class="el" href="namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07">MAX_SIZE_BUFF</a>]</td></tr>
+<tr class="memdesc:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95">More...</a><br /></td></tr>
+<tr class="separator:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::endpoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324">_endpoint</a></td></tr>
+<tr class="memdesc:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">contain the IP address and a protocol port number  <a href="classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324">More...</a><br /></td></tr>
+<tr class="separator:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a98fff34523115bfa0ac4c2e963fc3a3d"></a>
@@ -133,6 +155,101 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9a2483a228a5f5d3beffd7cde0aa16d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a2483a228a5f5d3beffd7cde0aa16d9">&#9670;&nbsp;</a></span>handleReceive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::handleReceive </td>
+          <td>(</td>
+          <td class="paramtype">boost::system::error_code&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>recvd_bytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function called after receiving data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>empty if finish with no error </td></tr>
+    <tr><td class="paramname">recvd_bytes</td><td>number of bytes received </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classNetwork_1_1ANetwork.html#ab190fa807eecf0e9bbb404a2bb2a24b7">Network::ANetwork</a>.</p>
+
+</div>
+</div>
+<a id="ad2c37d8bd96c0247865253971ee433f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2c37d8bd96c0247865253971ee433f3">&#9670;&nbsp;</a></span>handleSend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::handleSend </td>
+          <td>(</td>
+          <td class="paramtype">boost::system::error_code&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>recvd_bytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function called after sending data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>empty if finish with no error </td></tr>
+    <tr><td class="paramname">recvd_bytes</td><td>number of bytes received </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classNetwork_1_1ANetwork.html#a4b34fcd6d6a27bced6067eabe8e85774">Network::ANetwork</a>.</p>
 
 </div>
 </div>

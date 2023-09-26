@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['fire_225',['fire',['../structECS_1_1components_1_1ControllableComponent.html#aea14ddd9f8e8fdc37f7aa1405a7c7b21',1,'ECS::components::ControllableComponent']]],
-  ['force_226',['force',['../structECS_1_1components_1_1ControllableComponent.html#a8b9f148ee4034e51d8553a796b8c36fc',1,'ECS::components::ControllableComponent']]],
-  ['forward_227',['forward',['../structECS_1_1components_1_1DrawableComponent.html#a53b8d1c0c04e58b24f0d87e391c8f2d3',1,'ECS::components::DrawableComponent']]],
-  ['fps_228',['fps',['../structECS_1_1components_1_1DrawableComponent.html#a6433574429e2ca6aa806af52ded46043',1,'ECS::components::DrawableComponent']]],
-  ['frame_229',['frame',['../structECS_1_1components_1_1DrawableComponent.html#ac994a7923a337b533c585e6cb9739cfb',1,'ECS::components::DrawableComponent']]],
-  ['frameratio_230',['frameRatio',['../structECS_1_1components_1_1DrawableComponent.html#af14d4e96dcc13bb63b7a2aaba217e035',1,'ECS::components::DrawableComponent']]]
+  ['damage_241',['damage',['../structECS_1_1components_1_1DamageComponent.html#a7d3635bee156349b9dc3e9b4b278426f',1,'ECS::components::DamageComponent::damage()'],['../structECS_1_1components_1_1MissileComponent.html#a33c90164c90c69767d30a66945cea967',1,'ECS::components::MissileComponent::damage()'],['../structECS_1_1components_1_1WaveBeamComponent.html#aa1b2dad9d1510f76c643c2e41a24c091',1,'ECS::components::WaveBeamComponent::damage()']]],
+  ['down_242',['down',['../structECS_1_1components_1_1ControllableComponent.html#a648a94a5165a232f8c54ddaf3f97a99c',1,'ECS::components::ControllableComponent']]]
 ];

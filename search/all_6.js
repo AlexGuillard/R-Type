@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['game_45',['Game',['../namespaceGame.html',1,'']]],
-  ['gamelogic_46',['GameLogic',['../classGame_1_1GameLogic.html',1,'Game::GameLogic'],['../classGame_1_1GameLogic.html#a02fead792c9b64134044653ff5c64aa0',1,'Game::GameLogic::GameLogic()']]],
-  ['gamelogic_2ehpp_47',['GameLogic.hpp',['../GameLogic_8hpp.html',1,'']]],
-  ['getcomponents_48',['getComponents',['../classECS_1_1containers_1_1Registry.html#a1618ca55a598914f5ba1f5ad571c972e',1,'ECS::containers::Registry::getComponents()'],['../classECS_1_1containers_1_1Registry.html#a00777f94d4dfd48ce635d97bbef5c8a0',1,'ECS::containers::Registry::getComponents() const']]],
-  ['getcomponentstuple_49',['getComponentsTuple',['../classECS_1_1containers_1_1Registry.html#ac70c8aa9329d17520ea30748cb59588d',1,'ECS::containers::Registry']]],
-  ['getindex_50',['getIndex',['../classECS_1_1containers_1_1SparseArray.html#a5684e1d285e63000fa245cf4957f65b0',1,'ECS::containers::SparseArray']]]
+  ['fire_43',['fire',['../structECS_1_1components_1_1ControllableComponent.html#aea14ddd9f8e8fdc37f7aa1405a7c7b21',1,'ECS::components::ControllableComponent']]],
+  ['force_44',['force',['../structECS_1_1components_1_1ControllableComponent.html#a8b9f148ee4034e51d8553a796b8c36fc',1,'ECS::components::ControllableComponent']]],
+  ['forward_45',['forward',['../structECS_1_1components_1_1DrawableComponent.html#a53b8d1c0c04e58b24f0d87e391c8f2d3',1,'ECS::components::DrawableComponent']]],
+  ['fps_46',['fps',['../structECS_1_1components_1_1DrawableComponent.html#a6433574429e2ca6aa806af52ded46043',1,'ECS::components::DrawableComponent']]],
+  ['frame_47',['frame',['../structECS_1_1components_1_1DrawableComponent.html#ac994a7923a337b533c585e6cb9739cfb',1,'ECS::components::DrawableComponent']]],
+  ['frameratio_48',['frameRatio',['../structECS_1_1components_1_1DrawableComponent.html#af14d4e96dcc13bb63b7a2aaba217e035',1,'ECS::components::DrawableComponent']]]
 ];

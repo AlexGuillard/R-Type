@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['height_51',['height',['../structECS_1_1components_1_1HitBoxComponent.html#a2711a67443d3cb8b0ddea985157f6097',1,'ECS::components::HitBoxComponent']]],
-  ['hitboxcomponent_52',['HitBoxComponent',['../structECS_1_1components_1_1HitBoxComponent.html',1,'ECS::components']]],
-  ['hitboxcomponent_2ehpp_53',['HitBoxComponent.hpp',['../HitBoxComponent_8hpp.html',1,'']]],
-  ['hp_54',['hp',['../structECS_1_1components_1_1HPComponent.html#a4567e356ec52d7a1e194935d0a78571e',1,'ECS::components::HPComponent']]],
-  ['hpcomponent_55',['HPComponent',['../structECS_1_1components_1_1HPComponent.html',1,'ECS::components']]],
-  ['hpcomponent_2ehpp_56',['HPComponent.hpp',['../HPComponent_8hpp.html',1,'']]]
+  ['game_49',['Game',['../namespaceGame.html',1,'']]],
+  ['gamelogic_50',['GameLogic',['../classGame_1_1GameLogic.html',1,'Game::GameLogic'],['../classGame_1_1GameLogic.html#a02fead792c9b64134044653ff5c64aa0',1,'Game::GameLogic::GameLogic()']]],
+  ['gamelogic_2ehpp_51',['GameLogic.hpp',['../GameLogic_8hpp.html',1,'']]],
+  ['getcomponents_52',['getComponents',['../classECS_1_1containers_1_1Registry.html#a1618ca55a598914f5ba1f5ad571c972e',1,'ECS::containers::Registry::getComponents()'],['../classECS_1_1containers_1_1Registry.html#a00777f94d4dfd48ce635d97bbef5c8a0',1,'ECS::containers::Registry::getComponents() const']]],
+  ['getcomponentstuple_53',['getComponentsTuple',['../classECS_1_1containers_1_1Registry.html#ac70c8aa9329d17520ea30748cb59588d',1,'ECS::containers::Registry']]],
+  ['getindex_54',['getIndex',['../classECS_1_1containers_1_1SparseArray.html#a5684e1d285e63000fa245cf4957f65b0',1,'ECS::containers::SparseArray']]]
 ];
