@@ -28,8 +28,16 @@ if(UNIX AND NOT APPLE)
 	execute_process(COMMAND lsb_release -si OUTPUT_VARIABLE LINUX_DISTRO)
 	string(STRIP ${LINUX_DISTRO} LINUX_DISTRO)
 
-	# on ubuntu (and debian)
-	if(${LINUX_DISTRO} STREQUAL "Ubuntu" OR ${LINUX_DISTRO} STREQUAL "Debian")
+	# on ubuntu
+	if(${LINUX_DISTRO} STREQUAL "Ubuntu")
+		# install boost
+		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
+
+		# install gtest
+		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
+
+	# on debian
+	elseif(${LINUX_DISTRO} STREQUAL "Debian")
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
 
