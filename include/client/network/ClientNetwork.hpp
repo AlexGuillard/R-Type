@@ -42,14 +42,26 @@ namespace Network {
 		 * @param recvd_bytes
 		 */
 		void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+		/**
+		 * @brief This function is used to send a hello to the server to connect to it
+		 *
+		 */
+		void sendHello();
+		/**
+		 * @brief Start the main loop of the client
+		 *
+		 */
+		void start();
 
 	private:
 		//Port of the server
 		int _port;
 		//Host of the server
 		std::string _host;
-		//Socket of the client
+		//Socket of the clientok but
 		boost::asio::ip::udp::socket _socket;
+		//Data received
+		std::string _data;
 	};
 }
 
