@@ -55,20 +55,19 @@ if(UNIX AND NOT APPLE)
 	# on arch
 	elseif(${LINUX_DISTRO} STREQUAL "Arch")
 		# install boost
-		execute_process(COMMAND sudo pacman -S boost)
+		execute_process(COMMAND sudo pacman -S boost --noconfirm)
 
 		# install gtest
-		execute_process(COMMAND sudo pacman -S gtest)
+		execute_process(COMMAND sudo pacman -S gtest --noconfirm)
 	endif()
 
 # on windows
 elseif(WIN32)
 	# install boost
-	execute_process(COMMAND choco install boost-msvc-14.2)
+	execute_process(COMMAND choco install boost-msvc-14.1 --yes)
 
 	# install gtest
 	include(FetchContent)
-
 	FetchContent_Declare(
 		googletest
 		GIT_REPOSITORY https://github.com/google/googletest.git
@@ -79,8 +78,8 @@ elseif(WIN32)
 # on macos
 elseif(APPLE)
 	# install boost
-	execute_process(COMMAND brew install boost)
+	execute_process(COMMAND yes | brew install boost)
 
 	# install gtest
-	execute_process(COMMAND brew install googletest)
+	execute_process(COMMAND yes | brew install googletest)
 endif()
