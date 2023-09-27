@@ -15,6 +15,7 @@
 #include "ECS/components/DrawableComponent.hpp"
 #include "ECS/components/ControllableComponent.hpp"
 #include "ECS/components/TeamComponent.hpp"
+#include "ECS/components/GravityComponent.hpp"
 #include "ECS/systems/controller.hpp"
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
@@ -37,6 +38,7 @@ Entity spawnShip(containers::Registry &registry)
 		5 // fps
 	);
 	registry.emplaceComponent<components::TeamComponent>(ship, components::TeamGroup::ALLY);
+		registry.emplaceComponent<components::GravityComponent>(ship, 0);
 	return ship;
 }
 
@@ -47,6 +49,7 @@ containers::Registry &setupRegistry(containers::Registry &registry)
 	registry.registerComponent<components::DrawableComponent>();
 	registry.registerComponent<components::ControllableComponent>();
 	registry.registerComponent<components::TeamComponent>();
+	registry.registerComponent<components::GravityComponent>();
 
 	registry.addSystem<components::VelocityComponent, components::ControllableComponent>(systems::controller);
 	registry.addSystem<components::PositionComponent, components::VelocityComponent>(systems::movement);
@@ -85,6 +88,7 @@ int main()
 		registry.emplaceComponent<components::VelocityComponent>(entity, GetRandomValue(-200, 200), GetRandomValue(-200, 200));
 		registry.getComponents<components::DrawableComponent>().at(entity)->frame = GetRandomValue(0, 6);
 		registry.emplaceComponent<components::TeamComponent>(entity, ECS::components::TeamGroup::ENEMY);
+		registry.emplaceComponent<components::GravityComponent>(entity, 0);
 	}
 	while (!WindowShouldClose()) {
 		BeginDrawing();
