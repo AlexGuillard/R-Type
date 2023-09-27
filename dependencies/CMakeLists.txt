@@ -25,11 +25,20 @@ endif()
 # on linux
 if(UNIX AND NOT APPLE)
 	# get linux distro
-	execute_process(COMMAND lsb_release -si OUTPUT_VARIABLE LINUX_DISTRO)
-	string(STRIP ${LINUX_DISTRO} LINUX_DISTRO)
+	if(EXISTS "/etc/os-release")
+		file(STRINGS "/etc/os-release" OS_RELEASE_CONTENTS)
+
+		foreach(line ${OS_RELEASE_CONTENTS})
+			if(line MATCHES "^ID=")
+				string(REGEX REPLACE "ID=(.*)" "\\1" LINUX_DISTRO "${line}")
+			endif()
+		endforeach()
+
+		message("Distribution Name: ${LINUX_DISTRO}")
+	endif()
 
 	# on ubuntu
-	if(${LINUX_DISTRO} STREQUAL "Ubuntu")
+	if("${LINUX_DISTRO}" STREQUAL "ubuntu")
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
 
@@ -37,7 +46,7 @@ if(UNIX AND NOT APPLE)
 		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
 
 	# on debian
-	elseif(${LINUX_DISTRO} STREQUAL "Debian")
+	elseif("${LINUX_DISTRO}" STREQUAL "debian")
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
 
@@ -45,7 +54,7 @@ if(UNIX AND NOT APPLE)
 		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
 
 	# on fedora
-	elseif(${LINUX_DISTRO} STREQUAL "Fedora")
+	elseif("${LINUX_DISTRO}" STREQUAL "fedora")
 		# install boost
 		execute_process(COMMAND sudo dnf -y install boost-devel)
 
@@ -53,7 +62,7 @@ if(UNIX AND NOT APPLE)
 		execute_process(COMMAND sudo dnf -y install gtest-devel)
 
 	# on arch
-	elseif(${LINUX_DISTRO} STREQUAL "Arch")
+	elseif("${LINUX_DISTRO}" STREQUAL "arch")
 		# install boost
 		execute_process(COMMAND sudo pacman -S boost --noconfirm)
 
