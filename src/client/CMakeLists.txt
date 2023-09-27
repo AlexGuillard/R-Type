@@ -5,6 +5,7 @@ target_link_libraries(r-type_client PRIVATE
     ECS
     systems
     GameEngine
+    Display
 )
 target_include_directories(r-type_client PRIVATE
     ${CMAKE_SOURCE_DIR}/include
