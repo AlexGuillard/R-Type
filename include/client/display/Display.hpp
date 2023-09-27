@@ -57,7 +57,7 @@ namespace Screen {
 			/**
 			 * @brief detect the key pressed for the input zone in menu
 			 *
-			 * @param KeyPressed
+			 * @param KeyPressed send the key pressed to function
 			 */
 			void keyPressededMenu(int KeyPressed);
 			/**
@@ -78,13 +78,20 @@ namespace Screen {
 
         protected:
         private:
-			std::string _HostName;
-			std::string _Port;
-			int _State = 0;
-			Rectangle _HostNameclickableZone;
-			Rectangle _PortclickableZone;
-			Rectangle _ConnectionclickableZone;
-			bool _GameState;
+			// Stock the Hostname in a string
+			std::string _hostName;
+			// Stock the Port in a string
+			std::string _port;
+			// Stock the state of the input in menu 0=none 1=hostname 2=port
+			int _state = 0;
+			// Set the rectangle clickable for hostname input
+			Rectangle _hostNameclickableZone;
+			// Set the rectangle clickable for port input
+			Rectangle _portclickableZone;
+			// Set the rectangle clickable for conection button
+			Rectangle _connectionclickableZone;
+			// Set game state 0=menu 1=game
+			bool _gameState;
     };
 }
 
