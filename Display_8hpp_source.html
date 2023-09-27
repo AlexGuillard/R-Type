@@ -82,22 +82,63 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DISPLAY_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">    #define DISPLAY_HPP_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceScreen.html">   11</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceScreen.html">Screen</a> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classScreen_1_1Display.html">Display</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">   14</a></span>&#160;            <a class="code" href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">Display</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">   15</a></span>&#160;            <a class="code" href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">~Display</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !DISPLAY_HPP_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclassScreen_1_1Display_html"><div class="ttname"><a href="classScreen_1_1Display.html">Screen::Display</a></div><div class="ttdef"><b>Definition:</b> Display.hpp:12</div></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">    #include &lt;raylib.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceScreen.html">   14</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceScreen.html">Screen</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classScreen_1_1Display.html">Display</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a9b4568a00da8bfcf52668477c26c5f45">   25</a></span>&#160;            <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a9b4568a00da8bfcf52668477c26c5f45">initWindow</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529">   30</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529">displayWindow</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">   36</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">displayHostNameInput</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4">   41</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4">displayPortInput</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a">   46</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a">displayConnectionButton</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a27acb7cd8548ddd74c562e2aa4e6d979">   51</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a27acb7cd8548ddd74c562e2aa4e6d979">detectActionMenu</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a409271f91984bd2d730ddbe9e08559b8">   56</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a409271f91984bd2d730ddbe9e08559b8">mouseClickedMenu</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a875ae4de0c1c9d6fb84077d5bd6f4f27">   62</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a875ae4de0c1c9d6fb84077d5bd6f4f27">keyPressededMenu</a>(<span class="keywordtype">int</span> KeyPressed);</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0">   67</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0">drawMenu</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">   73</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">drawGame</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">   76</a></span>&#160;            <a class="code" href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">Display</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">   77</a></span>&#160;            <a class="code" href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">~Display</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="comment">// Stock the Hostname in a string</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::string _hostName;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="comment">// Stock the Port in a string</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            std::string _port;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="comment">// Stock the state of the input in menu 0=none 1=hostname 2=port</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordtype">int</span> _state = 0;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="comment">// Set the rectangle clickable for hostname input</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            Rectangle _hostNameclickableZone;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="comment">// Set the rectangle clickable for port input</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            Rectangle _portclickableZone;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="comment">// Set the rectangle clickable for conection button</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            Rectangle _connectionclickableZone;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="comment">// Set game state 0=menu 1=game</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordtype">bool</span> _gameState;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    };</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !DISPLAY_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclassScreen_1_1Display_html"><div class="ttname"><a href="classScreen_1_1Display.html">Screen::Display</a></div><div class="ttdoc">Display contain fonction for the graphic of the client.</div><div class="ttdef"><b>Definition:</b> Display.hpp:19</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a0082605dd6c88d63888cbf491804b529"><div class="ttname"><a href="classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529">Screen::Display::displayWindow</a></div><div class="ttdeci">void displayWindow()</div><div class="ttdoc">loop display window with menu or game</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a27acb7cd8548ddd74c562e2aa4e6d979"><div class="ttname"><a href="classScreen_1_1Display.html#a27acb7cd8548ddd74c562e2aa4e6d979">Screen::Display::detectActionMenu</a></div><div class="ttdeci">void detectActionMenu()</div><div class="ttdoc">detect the action in menu</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a409271f91984bd2d730ddbe9e08559b8"><div class="ttname"><a href="classScreen_1_1Display.html#a409271f91984bd2d730ddbe9e08559b8">Screen::Display::mouseClickedMenu</a></div><div class="ttdeci">void mouseClickedMenu()</div><div class="ttdoc">do when action is mouse clicked in menu</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a875ae4de0c1c9d6fb84077d5bd6f4f27"><div class="ttname"><a href="classScreen_1_1Display.html#a875ae4de0c1c9d6fb84077d5bd6f4f27">Screen::Display::keyPressededMenu</a></div><div class="ttdeci">void keyPressededMenu(int KeyPressed)</div><div class="ttdoc">detect the key pressed for the input zone in menu</div></div>
 <div class="ttc" id="aclassScreen_1_1Display_html_a910e0be806bb6328f452840f1dfee19e"><div class="ttname"><a href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">Screen::Display::~Display</a></div><div class="ttdeci">~Display()</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a9997f0e1c4dd0c0b6e1b8cccc61a82f0"><div class="ttname"><a href="classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">Screen::Display::drawGame</a></div><div class="ttdeci">void drawGame()</div><div class="ttdoc">draw the game</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_a9b4568a00da8bfcf52668477c26c5f45"><div class="ttname"><a href="classScreen_1_1Display.html#a9b4568a00da8bfcf52668477c26c5f45">Screen::Display::initWindow</a></div><div class="ttdeci">static void initWindow()</div><div class="ttdoc">Init the window with raylib.</div></div>
 <div class="ttc" id="aclassScreen_1_1Display_html_ab6aeb34636b44af48fea6cdeaf3cda08"><div class="ttname"><a href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">Screen::Display::Display</a></div><div class="ttdeci">Display()</div></div>
-<div class="ttc" id="anamespaceScreen_html"><div class="ttname"><a href="namespaceScreen.html">Screen</a></div><div class="ttdef"><b>Definition:</b> Display.hpp:11</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_abece99144d353c4b7db937fd9b51131a"><div class="ttname"><a href="classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a">Screen::Display::displayConnectionButton</a></div><div class="ttdeci">void displayConnectionButton()</div><div class="ttdoc">display button for connection</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_ac34480ccb952935e929960f6ccf5b4a4"><div class="ttname"><a href="classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4">Screen::Display::displayPortInput</a></div><div class="ttdeci">void displayPortInput()</div><div class="ttdoc">display an input for port</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_ac42929166bf61b69b06791e02142ce15"><div class="ttname"><a href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">Screen::Display::displayHostNameInput</a></div><div class="ttdeci">void displayHostNameInput()</div><div class="ttdoc">display an input for hostname</div></div>
+<div class="ttc" id="aclassScreen_1_1Display_html_aca4c5f6b99d0f519977442f70661cdf0"><div class="ttname"><a href="classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0">Screen::Display::drawMenu</a></div><div class="ttdeci">void drawMenu()</div><div class="ttdoc">draw the menu</div></div>
+<div class="ttc" id="anamespaceScreen_html"><div class="ttname"><a href="namespaceScreen.html">Screen</a></div><div class="ttdef"><b>Definition:</b> Display.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

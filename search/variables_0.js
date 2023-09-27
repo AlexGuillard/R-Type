@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_5fdata_236',['_data',['../classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95',1,'Network::ANetwork']]],
-  ['_5fendpoint_237',['_endpoint',['../classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324',1,'Network::ANetwork']]],
-  ['_5fsocket_238',['_socket',['../classNetwork_1_1ServerNetwork.html#a4699a78007d8d52b18c8a5995fdf21a2',1,'Network::ServerNetwork']]]
+  ['_5fdata_256',['_data',['../classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95',1,'Network::ANetwork']]],
+  ['_5fendpoint_257',['_endpoint',['../classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324',1,'Network::ANetwork']]],
+  ['_5fsocket_258',['_socket',['../classNetwork_1_1ServerNetwork.html#a4699a78007d8d52b18c8a5995fdf21a2',1,'Network::ServerNetwork']]]
 ];

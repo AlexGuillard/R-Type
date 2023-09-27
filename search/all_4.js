@@ -1,13 +1,20 @@
 var searchData=
 [
-  ['damage_22',['damage',['../structECS_1_1components_1_1DamageComponent.html#a7d3635bee156349b9dc3e9b4b278426f',1,'ECS::components::DamageComponent::damage()'],['../structECS_1_1components_1_1MissileComponent.html#a33c90164c90c69767d30a66945cea967',1,'ECS::components::MissileComponent::damage()'],['../structECS_1_1components_1_1WaveBeamComponent.html#aa1b2dad9d1510f76c643c2e41a24c091',1,'ECS::components::WaveBeamComponent::damage()']]],
+  ['damage_22',['damage',['../structECS_1_1components_1_1WaveBeamComponent.html#aa1b2dad9d1510f76c643c2e41a24c091',1,'ECS::components::WaveBeamComponent::damage()'],['../structECS_1_1components_1_1MissileComponent.html#a33c90164c90c69767d30a66945cea967',1,'ECS::components::MissileComponent::damage()'],['../structECS_1_1components_1_1DamageComponent.html#a7d3635bee156349b9dc3e9b4b278426f',1,'ECS::components::DamageComponent::damage()']]],
   ['damagecomponent_23',['DamageComponent',['../structECS_1_1components_1_1DamageComponent.html',1,'ECS::components']]],
   ['damagecomponent_2ehpp_24',['DamageComponent.hpp',['../DamageComponent_8hpp.html',1,'']]],
-  ['display_25',['Display',['../classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08',1,'Screen::Display::Display()'],['../classScreen_1_1Display.html',1,'Screen::Display']]],
-  ['display_2ehpp_26',['Display.hpp',['../Display_8hpp.html',1,'']]],
-  ['down_27',['down',['../structECS_1_1components_1_1ControllableComponent.html#a648a94a5165a232f8c54ddaf3f97a99c',1,'ECS::components::ControllableComponent']]],
-  ['drawable_28',['drawable',['../namespaceECS_1_1systems.html#a5c7dee2bbe3761bbd3e858e669ee06cb',1,'ECS::systems']]],
-  ['drawable_2ehpp_29',['drawable.hpp',['../drawable_8hpp.html',1,'']]],
-  ['drawablecomponent_30',['DrawableComponent',['../structECS_1_1components_1_1DrawableComponent.html',1,'ECS::components']]],
-  ['drawablecomponent_2ehpp_31',['DrawableComponent.hpp',['../DrawableComponent_8hpp.html',1,'']]]
+  ['detectactionmenu_25',['detectActionMenu',['../classScreen_1_1Display.html#a27acb7cd8548ddd74c562e2aa4e6d979',1,'Screen::Display']]],
+  ['display_26',['Display',['../classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08',1,'Screen::Display::Display()'],['../classScreen_1_1Display.html',1,'Screen::Display']]],
+  ['display_2ehpp_27',['Display.hpp',['../Display_8hpp.html',1,'']]],
+  ['displayconnectionbutton_28',['displayConnectionButton',['../classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a',1,'Screen::Display']]],
+  ['displayhostnameinput_29',['displayHostNameInput',['../classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15',1,'Screen::Display']]],
+  ['displayportinput_30',['displayPortInput',['../classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4',1,'Screen::Display']]],
+  ['displaywindow_31',['displayWindow',['../classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529',1,'Screen::Display']]],
+  ['down_32',['down',['../structECS_1_1components_1_1ControllableComponent.html#a648a94a5165a232f8c54ddaf3f97a99c',1,'ECS::components::ControllableComponent']]],
+  ['drawable_33',['drawable',['../namespaceECS_1_1systems.html#a5c7dee2bbe3761bbd3e858e669ee06cb',1,'ECS::systems']]],
+  ['drawable_2ehpp_34',['drawable.hpp',['../drawable_8hpp.html',1,'']]],
+  ['drawablecomponent_35',['DrawableComponent',['../structECS_1_1components_1_1DrawableComponent.html',1,'ECS::components']]],
+  ['drawablecomponent_2ehpp_36',['DrawableComponent.hpp',['../DrawableComponent_8hpp.html',1,'']]],
+  ['drawgame_37',['drawGame',['../classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0',1,'Screen::Display']]],
+  ['drawmenu_38',['drawMenu',['../classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0',1,'Screen::Display']]]
 ];
