@@ -7,24 +7,24 @@
 
 #include "client/network/ClientNetwork.hpp"
 
-Network::ClientNetwork::ClientNetwork(int port, std::string machine) : _port(port), _host(machine), _fdClient(-1)
-{
-}
+Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port) : _port(port), _host(host), _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), 0))
+{}
 
 Network::ClientNetwork::~ClientNetwork()
+{}
+
+void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-	if (_fdClient == -1) {
-		close(_fdClient);
+	if (!error && recvd_bytes > 0) {
+		std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
+		receive(_socket);
 	}
 }
 
-void Network::ClientNetwork::send(const std::string& message)
+void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-	if (_fdClient == -1) {
-		throw Error("Error:client not connected");
-	}
-
-	if (::send(_fdClient, message.c_str(), message.size(), 0) == -1) {
-		throw Error("Error: failed to send message");
+	if (!error && recvd_bytes > 0) {
+		std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
+		receive(_socket);
 	}
 }
