@@ -14,7 +14,8 @@ namespace Network {
         public:
             ClientNetwork();
             ~ClientNetwork();
-
+			void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
+			void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
         protected:
         private:
     };

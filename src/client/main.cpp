@@ -6,8 +6,8 @@
 */
 
 #include <iostream>
-
 #include "client/display/Display.hpp"
+
 
 int main()
 {
