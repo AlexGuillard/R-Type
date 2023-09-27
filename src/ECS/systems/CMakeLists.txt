@@ -3,6 +3,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/controller.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drawable.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/movement.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/invincibleTimer.cpp
 )
 add_library(systems STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})

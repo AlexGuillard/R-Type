@@ -16,6 +16,7 @@
 #include "ECS/components/ControllableComponent.hpp"
 #include "ECS/components/TeamComponent.hpp"
 #include "ECS/components/GravityComponent.hpp"
+#include "ECS/components/InvincibleTimerComponent.hpp"
 #include "ECS/systems/controller.hpp"
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
@@ -38,7 +39,7 @@ Entity spawnShip(containers::Registry &registry)
 		5 // fps
 	);
 	registry.emplaceComponent<components::TeamComponent>(ship, components::TeamGroup::ALLY);
-		registry.emplaceComponent<components::GravityComponent>(ship, 0);
+	registry.emplaceComponent<components::GravityComponent>(ship, 0);
 	return ship;
 }
 
@@ -50,6 +51,7 @@ containers::Registry &setupRegistry(containers::Registry &registry)
 	registry.registerComponent<components::ControllableComponent>();
 	registry.registerComponent<components::TeamComponent>();
 	registry.registerComponent<components::GravityComponent>();
+	registry.registerComponent<components::InvincibleTimerComponent>();
 
 	registry.addSystem<components::VelocityComponent, components::ControllableComponent>(systems::controller);
 	registry.addSystem<components::PositionComponent, components::VelocityComponent>(systems::movement);
