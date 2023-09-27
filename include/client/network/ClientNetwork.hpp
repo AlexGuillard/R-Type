@@ -12,6 +12,25 @@
 #include "Error.hpp"
 
 namespace Network {
+
+	/**
+	 * @brief Enum used to know the movement of the player on the server
+	 *
+	 */
+	enum class Movement {
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	};
+	/**
+	 * @brief Enum used to know the action of the player on the server
+	 *
+	 */
+	enum class Action {
+		SHOOT,
+		DROP
+	};
 	/**
 	 *@brief ClientNetwork class use to communicate with the server
 	 *
@@ -52,6 +71,18 @@ namespace Network {
 		 *
 		 */
 		void start();
+		/**
+		 * @brief This function is used to send a movement from the player to the server
+		 *
+		 * @param movement
+		 */
+		void sendMovement(Movement movement);
+		/**
+		 * @brief This function is used to send an action from the player to the server
+		 *
+		 * @param action
+		 */
+		void sendAction(Action action);
 
 	private:
 		//Port of the server
