@@ -24,7 +24,7 @@ void Screen::Display::displayWindow()
     while (!WindowShouldClose()) {
         BeginDrawing();
             ClearBackground(RAYWHITE);
-			if (!_GameState) {
+			if (!_gameState) {
 				detectActionMenu();
 				drawMenu();
 			} else {
@@ -46,9 +46,9 @@ void Screen::Display::displayHostNameInput()
 	const int posYText = 105;
 	const int fontSizeText = 20;
 
-	_HostNameclickableZone = {posXRect, posYRect, widthRect, heightRect};
+	_hostNameclickableZone = {posXRect, posYRect, widthRect, heightRect};
 	DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
-	DrawText(_HostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
+	DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayPortInput()
@@ -62,9 +62,9 @@ void Screen::Display::displayPortInput()
 	const int posYText = 155;
 	const int fontSizeText = 20;
 
-	_PortclickableZone = {posXRect, posYRect, widthRect, heightRect};
+	_portclickableZone = {posXRect, posYRect, widthRect, heightRect};
 	DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
-	DrawText(_Port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
+	DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayConnectionButton()
@@ -74,8 +74,8 @@ void Screen::Display::displayConnectionButton()
 	const int posXText = 105;
 	const int posYText = 215;
 	const int fontSizeText = 20;
-	_ConnectionclickableZone = defaultClickableZone;
-	DrawRectangleRec(_ConnectionclickableZone, BLUE);
+	_connectionclickableZone = defaultClickableZone;
+	DrawRectangleRec(_connectionclickableZone, BLUE);
 	DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
 }
 
@@ -98,26 +98,26 @@ void Screen::Display::mouseClickedMenu()
 	float mouseY = GetMouseY();
 	const Vector2 mouse = {mouseX, mouseY};
 
-    if (CheckCollisionPointRec(mouse, _HostNameclickableZone)) {
-		_State = 1;
-	} else if (CheckCollisionPointRec(mouse, _PortclickableZone)) {
-		_State = 2;
+    if (CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
+		_state = 1;
+	} else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
+		_state = 2;
 	} else {
-		_State = 0;
+		_state = 0;
 	}
-	if (CheckCollisionPointRec(mouse, _ConnectionclickableZone)) {
-		std::cout << "\n Try Connexion\nwith:" << _HostName << " | " << _Port << "\n\n";
-		_GameState = true;
+	if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
+		std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
+		_gameState = true;
 	}
 }
 
 void Screen::Display::keyPressededMenu(int KeyPressed)
 {
-	if (_State == 1) {
-		_HostName += KeyPressed;
+	if (_state == 1) {
+		_hostName += KeyPressed;
 	}
-	if (_State == 2) {
-		_Port += KeyPressed;
+	if (_state == 2) {
+		_port += KeyPressed;
 	}
 }
 
@@ -135,7 +135,7 @@ void Screen::Display::drawGame()
 
 Screen::Display::Display()
 {
-	_GameState = false;
+	_gameState = false;
 }
 
 Screen::Display::~Display() {}
