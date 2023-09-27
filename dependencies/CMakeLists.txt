@@ -22,16 +22,6 @@ else()
 	message(STATUS "Found raylib ${RAYLIB_VERSION} in system.")
 endif()
 
-# gtest dependency
-include(FetchContent)
-
-FetchContent_Declare(
-	googletest
-	GIT_REPOSITORY https://github.com/google/googletest.git
-	GIT_TAG v1.14.0
-)
-FetchContent_MakeAvailable(googletest)
-
 # on linux
 if(UNIX AND NOT APPLE)
 	# get linux distro
@@ -43,15 +33,24 @@ if(UNIX AND NOT APPLE)
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
 
+		# install gtest
+		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
+
 	# on fedora
 	elseif(${LINUX_DISTRO} STREQUAL "Fedora")
 		# install boost
 		execute_process(COMMAND sudo dnf -y install boost-devel)
 
+		# install gtest
+		execute_process(COMMAND sudo dnf -y install gtest-devel)
+
 	# on arch
 	elseif(${LINUX_DISTRO} STREQUAL "Arch")
 		# install boost
 		execute_process(COMMAND sudo pacman -S boost)
+
+		# install gtest
+		execute_process(COMMAND sudo pacman -S gtest)
 	endif()
 
 # on windows
@@ -59,8 +58,21 @@ elseif(WIN32)
 	# install boost
 	execute_process(COMMAND choco install boost-msvc-14.2)
 
+	# install gtest
+	include(FetchContent)
+
+	FetchContent_Declare(
+		googletest
+		GIT_REPOSITORY https://github.com/google/googletest.git
+		GIT_TAG v1.14.0
+	)
+	FetchContent_MakeAvailable(googletest)
+
 # on macos
 elseif(APPLE)
 	# install boost
 	execute_process(COMMAND brew install boost)
+
+	# install gtest
+	execute_process(COMMAND brew install googletest)
 endif()
