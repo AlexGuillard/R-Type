@@ -31,24 +31,26 @@ namespace GameEngine {
 
 	Registry &GameEngine::getRegistry(const std::string &type)
 	{
-		auto it = std::find_if(m_registries.begin(), m_registries.end(),
+		auto registryIterator = std::find_if(m_registries.begin(), m_registries.end(),
 			[&type](const auto &pair) {
 				return pair.first == type;
 			});
-		if (it == m_registries.end())
+		if (registryIterator == m_registries.end()) {
 			throw Errors::RegistryNotFound(type);
-		return it->second;
+		}
+		return registryIterator->second;
 	}
 
 	const Registry &GameEngine::getRegistry(const std::string &type) const
 	{
-		auto it = std::find_if(m_registries.begin(), m_registries.end(),
+		auto registryIterator = std::find_if(m_registries.begin(), m_registries.end(),
 			[&type](const auto &pair) {
 				return pair.first == type;
 			});
-		if (it == m_registries.end())
+		if (registryIterator == m_registries.end()) {
 			throw Errors::RegistryNotFound(type);
-		return it->second;
+		}
+		return registryIterator->second;
 	}
 
 	void GameEngine::run()
