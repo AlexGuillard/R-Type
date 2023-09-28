@@ -60,8 +60,9 @@ namespace ECS::Containers {
 		 */
 		reference_type at(size_type index)
 		{
-			if (index >= this->size())
+			if (index >= this->size()) {
 				this->resize(index + 1);
+			}
 			return this->std::vector<value_type>::operator[](index);
 		}
 		/**
@@ -96,8 +97,9 @@ namespace ECS::Containers {
 		 */
 		reference_type insertAt(size_type index, T &&value)
 		{
-			if (this->size() <= index)
+			if (this->size() <= index) {
 				this->resize(index + 1);
+			}
 			this->at(index) = std::move(value);
 			return this->at(index);
 		}
@@ -114,8 +116,9 @@ namespace ECS::Containers {
 		template <typename... Args>
 		reference_type emplaceAt(size_type index, Args &&...args)
 		{
-			if (this->size() <= index)
+			if (this->size() <= index) {
 				this->resize(index + 1);
+			}
 			this->at(index) = T(std::forward<Args>(args)...);
 			return this->at(index);
 		}
@@ -127,8 +130,7 @@ namespace ECS::Containers {
 		 */
 		void erase(size_type index)
 		{
-			if (index >= this->size())
-				return;
+			if (index >= this->size()) { return; }
 			this->at(index).reset();
 		}
 
@@ -141,10 +143,12 @@ namespace ECS::Containers {
 		size_type getIndex(value_type const &value) const
 		{
 			for (SparseArray<T>::size_type i = 0; i < this->size(); i++) {
-				if (!(*this)[i].has_value() || !value.has_value())
+				if (!this->at(i).has_value() || !value.has_value()) {
 					continue;
-				if (std::addressof(this->at(i).value()) == std::addressof(value.value()))
+				}
+				if (std::addressof(this->at(i).value()) == std::addressof(value.value())) {
 					return i;
+				}
 			}
 			throw Errors::ValueNotFound("Value not found in SparseArray");
 		}
