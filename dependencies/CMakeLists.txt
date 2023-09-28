@@ -39,44 +39,22 @@ set_target_properties(gtest_main PROPERTIES
 	IMPORTED_LOCATION ${binary_dir}/libgtest_main.a
 )
 
-# on linux
-if(UNIX AND NOT APPLE)
-	# get linux distro
-	if(EXISTS "/etc/os-release")
-		file(STRINGS "/etc/os-release" OS_RELEASE_CONTENTS)
+set(BOOST_INCLUDE_LIBRARIES thread filesystem system)
+set(BOOST_ENABLE_CMAKE ON)
 
-		foreach(line ${OS_RELEASE_CONTENTS})
-			if(line MATCHES "^ID=")
-				string(REGEX REPLACE "ID=(.*)" "\\1" LINUX_DISTRO "${line}")
-			endif()
-		endforeach()
+include(FetchContent)
+Set(FETCHCONTENT_QUIET FALSE)
+FetchContent_Declare(
+    Boost
+    URL https://github.com/boostorg/boost/releases/download/boost-1.81.0/boost-1.81.0.7z # downloading a zip release speeds up the download
+    USES_TERMINAL_DOWNLOAD TRUE
+    GIT_PROGRESS TRUE
+    DOWNLOAD_NO_EXTRACT FALSE
+)
+FetchContent_MakeAvailable(Boost)
 
-		message("Distribution Name: ${LINUX_DISTRO}")
-	endif()
-
-	# on ubuntu
-	if("${LINUX_DISTRO}" STREQUAL "ubuntu")
-		# install boost
-		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
-
-	# on debian
-	elseif("${LINUX_DISTRO}" STREQUAL "debian")
-		# install boost
-		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
-
-	# on fedora
-	elseif("${LINUX_DISTRO}" STREQUAL "fedora")
-		# install boost
-		execute_process(COMMAND sudo dnf -y install boost-devel)
-
-	# on arch
-	elseif("${LINUX_DISTRO}" STREQUAL "arch")
-		# install boost
-		execute_process(COMMAND sudo pacman -S boost --noconfirm)
-	endif()
-
-# on windows
-elseif(WIN32)
-	# install boost
-	execute_process(COMMAND choco install boost-msvc-14.1 --yes)
-endif()
+# # on windows
+# elseif(WIN32)
+# 	# install boost
+# 	execute_process(COMMAND choco install boost-msvc-14.1 --yes)
+# endif()

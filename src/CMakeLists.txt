@@ -12,9 +12,13 @@ find_package(Threads REQUIRED)
 target_link_libraries(ANetwork PRIVATE Threads::Threads)
 
 # add boost.asio
-find_package(Boost REQUIRED COMPONENTS system)
-target_include_directories(ANetwork PRIVATE ${Boost_INCLUDE_DIRS})
-target_link_libraries(ANetwork PRIVATE ${Boost_LIBRARIES})
+find_package(Boost REQUIRED)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(ANetwork ${Boost_LIBRARIES})
+else()
+    message(FATAL_ERROR "Boost not found. Please install or specify the Boost libraries.")
+endif()
 
 add_subdirectory(client)
 add_subdirectory(ECS)
