@@ -22,6 +22,23 @@ else()
 	message(STATUS "Found raylib ${RAYLIB_VERSION} in system.")
 endif()
 
+# install gtest
+include(FetchContent)
+FetchContent_Declare(
+	googletest
+	URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+if(WIN32)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
+FetchContent_MakeAvailable(googletest)
+set_target_properties(gtest PROPERTIES
+	IMPORTED_LOCATION ${binary_dir}/libgtest.a
+)
+set_target_properties(gtest_main PROPERTIES
+	IMPORTED_LOCATION ${binary_dir}/libgtest_main.a
+)
+
 # on linux
 if(UNIX AND NOT APPLE)
 	# get linux distro
@@ -42,59 +59,24 @@ if(UNIX AND NOT APPLE)
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
 
-		# install gtest
-		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
-
 	# on debian
 	elseif("${LINUX_DISTRO}" STREQUAL "debian")
 		# install boost
 		execute_process(COMMAND sudo apt-get -y install libboost-all-dev)
-
-		# install gtest
-		execute_process(COMMAND sudo apt-get -y install libgtest-dev googletest)
 
 	# on fedora
 	elseif("${LINUX_DISTRO}" STREQUAL "fedora")
 		# install boost
 		execute_process(COMMAND sudo dnf -y install boost-devel)
 
-		# install gtest
-		execute_process(COMMAND sudo dnf -y install gtest-devel)
-
 	# on arch
 	elseif("${LINUX_DISTRO}" STREQUAL "arch")
 		# install boost
 		execute_process(COMMAND sudo pacman -S boost --noconfirm)
-
-		# install gtest
-		execute_process(COMMAND sudo pacman -S gtest --noconfirm)
 	endif()
 
 # on windows
 elseif(WIN32)
 	# install boost
 	execute_process(COMMAND choco install boost-msvc-14.1 --yes)
-
-	# install gtest
-	include(FetchContent)
-	FetchContent_Declare(
-		googletest
-		URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-	)
-	# For Windows: Prevent overriding the parent project's compiler/linker settings
-	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-	FetchContent_MakeAvailable(googletest)
-	set_target_properties(gtest PROPERTIES
-		IMPORTED_LOCATION ${binary_dir}/libgtest.a
-	)
-	set_target_properties(gtest_main PROPERTIES
-		IMPORTED_LOCATION ${binary_dir}/libgtest_main.a
-	)
-# on macos
-elseif(APPLE)
-	# install boost
-	execute_process(COMMAND yes | brew install boost)
-
-	# install gtest
-	execute_process(COMMAND yes | brew install googletest)
 endif()
