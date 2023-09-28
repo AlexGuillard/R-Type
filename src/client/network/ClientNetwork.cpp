@@ -16,6 +16,9 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
     sendHello();
 }
 
+Network::ClientNetwork::ClientNetwork() : _socket(_ioService)
+{}
+
 Network::ClientNetwork::~ClientNetwork()
 {}
 
@@ -87,4 +90,15 @@ void Network::ClientNetwork::sendAction(Action action)
 			break;
 	}
 	send(_socket, message);
+}
+
+void Network::ClientNetwork::connect(const std::string &host, int port)
+{
+	//TODO change return type to bool if true connect and false not
+	//TODO handle error
+    boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
+    _endpoint = endpoint;
+    _socket.open(endpoint.protocol());
+
+    sendHello();
 }

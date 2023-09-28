@@ -39,13 +39,22 @@ namespace Network {
 
 	public:
 		/**
-		 * @brief Construct a new Client Network object
+		 * @brief Construct a new Client Network object with parameters
 		 *
 		 * @param io_service
 		 * @param host
 		 * @param port
 		 */
 		ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
+		/**
+		 * @brief Construct a new Client Network object without parameters
+		 *
+		 */
+		ClientNetwork();
+		/**
+		 * @brief Destroy the Client Network object
+		 *
+		 */
 		~ClientNetwork();
 		/**
 		 * @brief This function is used to receive data from the server
@@ -83,6 +92,13 @@ namespace Network {
 		 * @param action
 		 */
 		void sendAction(Action action);
+		/**
+		 * @brief This function is used to connect to the server
+		 *
+		 * @param host
+		 * @param port
+		 */
+		void connect(const std::string &host, int port);
 
 	private:
 		//Port of the server
@@ -93,6 +109,8 @@ namespace Network {
 		boost::asio::ip::udp::socket _socket;
 		//Data received
 		std::string _data;
+		//Used to manage asynchrous services
+		boost::asio::io_service _ioService;
 	};
 }
 
