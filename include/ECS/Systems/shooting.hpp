@@ -11,7 +11,7 @@
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 	/**
 	 * @brief Handles the input of the player
 	 */
@@ -19,4 +19,4 @@ namespace ECS::systems {
 		Containers::Registry &registry,
 		Containers::SparseArray<Components::MissileComponent> &missileRequests,
 		Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests);
-}; // namespace ECS::systems
+}; // namespace ECS::Systems

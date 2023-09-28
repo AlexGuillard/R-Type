@@ -7,7 +7,7 @@
 
 #include <raylib.h>
 
-#include "ECS/systems/controller.hpp"
+#include "ECS/Systems/controller.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
@@ -15,7 +15,7 @@
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 
 	template <typename T>
 	static T clamp(T value, T min, T max)
@@ -90,7 +90,7 @@ namespace ECS::systems {
 		}
 		if (controllable.timeFireButtonHeld > 0) {
 			u_char strength = clamp(
-				static_cast<u_char>(controllable.timeFireButtonHeld / systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
+				static_cast<u_char>(controllable.timeFireButtonHeld / Systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
 				static_cast<u_char>(1),
 				Components::maxWaveBeamStrength
 			);
@@ -148,4 +148,4 @@ namespace ECS::systems {
 		}
 	}
 
-}; // namespace ECS::systems
+}; // namespace ECS::Systems

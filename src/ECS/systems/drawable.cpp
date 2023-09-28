@@ -11,10 +11,10 @@
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
-#include "ECS/systems/drawable.hpp"
-#include "ECS/systems/helper/SpriteSheetDrawer.hpp"
+#include "ECS/Systems/drawable.hpp"
+#include "ECS/Systems/helper/SpriteSheetDrawer.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 	static std::unordered_map<std::string, Texture2D> textures;
 
 	static Texture2D loadTexture(const std::string &path)
@@ -52,4 +52,4 @@ namespace ECS::systems {
 		}
 	}
 
-}; // namespace ECS::systems
+}; // namespace ECS::Systems

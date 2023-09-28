@@ -11,7 +11,7 @@
 
 #include <raylib.h>
 
-#include "ECS/systems/shooting.hpp"
+#include "ECS/Systems/shooting.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/DamageComponent.hpp"
@@ -19,7 +19,7 @@
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 
 	/**
 	 * @brief Get the Drawable For Missile object
@@ -143,4 +143,4 @@ namespace ECS::systems {
 		shootMissiles(registry, missileRequests);
 		shootWaveBeams(registry, waveBeamRequests);
 	}
-}; // namespace ECS::systems
+}; // namespace ECS::Systems

@@ -11,7 +11,7 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 	/** @brief Updates the position of the entities using their velocity */
 	void movement(
 		Containers::Registry &registry,

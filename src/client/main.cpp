@@ -20,11 +20,11 @@
 #include "ECS/Components/HitBoxComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
-#include "ECS/systems/controller.hpp"
-#include "ECS/systems/movement.hpp"
-#include "ECS/systems/drawable.hpp"
-#include "ECS/systems/shooting.hpp"
-#include "ECS/systems/helper/SpriteSheetDrawer.hpp"
+#include "ECS/Systems/controller.hpp"
+#include "ECS/Systems/movement.hpp"
+#include "ECS/Systems/drawable.hpp"
+#include "ECS/Systems/shooting.hpp"
+#include "ECS/Systems/helper/SpriteSheetDrawer.hpp"
 #include "GameEngine/GameEngine.hpp"
 
 using namespace ECS;
@@ -60,10 +60,10 @@ Containers::Registry &setupRegistry(Containers::Registry &registry)
 	registry.registerComponent<Components::MissileComponent>();
 	registry.registerComponent<Components::WaveBeamComponent>();
 
-	registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(systems::controller);
-	registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(systems::movement);
-	registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(systems::drawable);
-	registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(systems::shooting);
+	registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
+	registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
+	registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
+	registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
 	return registry;
 }
 

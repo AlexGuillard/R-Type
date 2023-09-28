@@ -7,11 +7,11 @@
 
 #include <raylib.h>
 
-#include "ECS/systems/movement.hpp"
+#include "ECS/Systems/movement.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 
 	void movement(
 		[[maybe_unused]] Containers::Registry &registry,
@@ -30,4 +30,4 @@ namespace ECS::systems {
 		}
 	}
 
-}; // namespace ECS::systems
+}; // namespace ECS::Systems

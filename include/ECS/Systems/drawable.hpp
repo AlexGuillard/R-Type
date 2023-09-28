@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace ECS::systems {
+namespace ECS::Systems {
 	/**
 	 * @brief Draws the entities with a position and a drawable component
 	 */
@@ -16,4 +16,4 @@ namespace ECS::systems {
 		Containers::SparseArray<Components::PositionComponent> &positions,
 		Containers::SparseArray<Components::DrawableComponent> &drawables);
 
-}; // namespace ECS::systems
+}; // namespace ECS::Systems
