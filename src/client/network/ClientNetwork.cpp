@@ -16,8 +16,9 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
     sendHello();
 }
 
-Network::ClientNetwork::ClientNetwork() : _socket(_ioService)
-{}
+Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
+{
+}
 
 Network::ClientNetwork::~ClientNetwork()
 {}
@@ -92,13 +93,28 @@ void Network::ClientNetwork::sendAction(Action action)
 	send(_socket, message);
 }
 
-void Network::ClientNetwork::connect(const std::string &host, int port)
+bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
-	//TODO change return type to bool if true connect and false not
-	//TODO handle error
-    boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
-    _endpoint = endpoint;
-    _socket.open(endpoint.protocol());
+	try {
+	    boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
+	    _endpoint = endpoint;
+	    _socket.open(endpoint.protocol());
 
-    sendHello();
+	    sendHello();
+
+		const int maxSizeBuffer = 1024;
+		char buffer[maxSizeBuffer];
+		size_t len = _socket.receive(boost::asio::buffer(buffer, maxSizeBuffer));
+
+		if (std::string(buffer, len) == "301") {
+			std::cout << "Connected to server" << std::endl;
+			return (true);
+		}
+	}
+
+	catch (std::exception &e) {
+		std::cerr << "Error connecting to server: " <<e.what() << std::endl;
+	}
+
+	return (false);
 }

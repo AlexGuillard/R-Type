@@ -93,24 +93,24 @@ namespace Network {
 		 */
 		void sendAction(Action action);
 		/**
-		 * @brief This function is used to connect to the server
+		 * @brief This function is used to connect to the server if the server return 301 then the connection and return true else false
 		 *
 		 * @param host
 		 * @param port
 		 */
-		void connect(const std::string &host, int port);
+		bool connect(const std::string &host, int port);
 
 	private:
 		//Port of the server
 		int _port;
 		//Host of the server
 		std::string _host;
+		//Used to manage asynchrous services
+		boost::asio::io_service _ioService;
 		//Socket of the clientok but
 		boost::asio::ip::udp::socket _socket;
 		//Data received
 		std::string _data;
-		//Used to manage asynchrous services
-		boost::asio::io_service _ioService;
 	};
 }
 
