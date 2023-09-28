@@ -12,7 +12,7 @@
 
 #include "Errors/ValueNotFound.hpp"
 
-namespace ECS::containers {
+namespace ECS::Containers {
 
 	/**
 	 * @brief SparseArray is a vector of std::optional<T>.
@@ -150,4 +150,4 @@ namespace ECS::containers {
 		}
 	};
 
-} // namespace ECS::containers
+} // namespace ECS::Containers

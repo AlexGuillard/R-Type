@@ -13,9 +13,9 @@
 #include <iterator>
 #include <optional>
 
-#include "ECS/containers/SparseArray.hpp"
+#include "ECS/Containers/SparseArray.hpp"
 
-namespace ECS::containers {
+namespace ECS::Containers {
 
 	/**
 	 * @brief The iterator for the IndexedZipper class.
@@ -106,4 +106,4 @@ namespace ECS::containers {
 		std::size_t _idx = 0;
 	};
 
-}; // namespace ECS::containers
+}; // namespace ECS::Containers

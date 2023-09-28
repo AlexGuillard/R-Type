@@ -14,9 +14,9 @@
 namespace ECS::systems {
 
 	void movement(
-		[[maybe_unused]] containers::Registry &registry,
-		containers::SparseArray<Components::PositionComponent> &positions,
-		containers::SparseArray<Components::VelocityComponent> &velocities)
+		[[maybe_unused]] Containers::Registry &registry,
+		Containers::SparseArray<Components::PositionComponent> &positions,
+		Containers::SparseArray<Components::VelocityComponent> &velocities)
 	{
 		for (std::size_t entityId = 0; entityId < registry.size(); entityId++) {
 			if (!positions.at(entityId).has_value() || !velocities.at(entityId).has_value())

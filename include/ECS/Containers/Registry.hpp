@@ -15,11 +15,11 @@
 #include <utility>
 #include <tuple>
 
-#include "ECS/containers/SparseArray.hpp"
+#include "ECS/Containers/SparseArray.hpp"
 #include "ECS/Entity.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
 
-namespace ECS::containers {
+namespace ECS::Containers {
 	class Registry {
 	public:
 		Registry() = default;
@@ -182,4 +182,4 @@ namespace ECS::containers {
 		std::vector<std::function<void()>> m_systems;
 	};
 
-}; // namespace ECS::containers
+}; // namespace ECS::Containers

@@ -17,7 +17,7 @@
 #include "ECS/Components/DamageComponent.hpp"
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
-#include "ECS/containers/zipper/IndexedZipper.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
 
 namespace ECS::systems {
 
@@ -44,10 +44,10 @@ namespace ECS::systems {
 	 * @param missileRequests SparseArray of missile requests
 	 */
 	static void shootMissiles(
-		containers::Registry &registry,
-		containers::SparseArray<Components::MissileComponent> &missileRequests)
+		Containers::Registry &registry,
+		Containers::SparseArray<Components::MissileComponent> &missileRequests)
 	{
-		for (auto &&[entityId, missileRequest] : containers::IndexedZipper(missileRequests)) {
+		for (auto &&[entityId, missileRequest] : Containers::IndexedZipper(missileRequests)) {
 			auto missileEntity = registry.spawnEntity();
 
 			registry.emplaceComponent<Components::PositionComponent>(
@@ -104,10 +104,10 @@ namespace ECS::systems {
 	 * @param waveBeamRequests SparseArray of wave beam requests
 	 */
 	static void shootWaveBeams(
-		containers::Registry &registry,
-		containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests)
+		Containers::Registry &registry,
+		Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests)
 	{
-		for (auto &&[entityId, waveBeamRequests] : containers::IndexedZipper(waveBeamRequests)) {
+		for (auto &&[entityId, waveBeamRequests] : Containers::IndexedZipper(waveBeamRequests)) {
 			auto waveBeamEntity = registry.spawnEntity();
 
 			registry.emplaceComponent<Components::PositionComponent>(
@@ -135,9 +135,9 @@ namespace ECS::systems {
 	}
 
 	void shooting(
-		containers::Registry &registry,
-		containers::SparseArray<Components::MissileComponent> &missileRequests,
-		containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests
+		Containers::Registry &registry,
+		Containers::SparseArray<Components::MissileComponent> &missileRequests,
+		Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests
 	)
 	{
 		shootMissiles(registry, missileRequests);

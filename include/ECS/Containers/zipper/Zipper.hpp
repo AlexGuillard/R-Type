@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include "ECS/containers/zipper/ZipperIterator.hpp"
+#include "ECS/Containers/zipper/ZipperIterator.hpp"
 
-namespace ECS::containers {
+namespace ECS::Containers {
 
 	/**
 	 * @brief A class that allows to iterate over multiple SparseArrays at once.
@@ -71,4 +71,4 @@ namespace ECS::containers {
 		iterator_tuple m_end;
 	};
 
-}; // namespace ECS::containers
+}; // namespace ECS::Containers

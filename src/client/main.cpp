@@ -10,7 +10,7 @@
 
 #include <raylib.h>
 
-#include "ECS/containers/Registry.hpp"
+#include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
@@ -29,7 +29,7 @@
 
 using namespace ECS;
 
-Entity spawnShip(containers::Registry &registry)
+Entity spawnShip(Containers::Registry &registry)
 {
 	const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
 	const u_char nbFrameInAnimation = 5;
@@ -48,7 +48,7 @@ Entity spawnShip(containers::Registry &registry)
 	return ship;
 }
 
-containers::Registry &setupRegistry(containers::Registry &registry)
+Containers::Registry &setupRegistry(Containers::Registry &registry)
 {
 	registry.registerComponent<Components::PositionComponent>();
 	registry.registerComponent<Components::VelocityComponent>();
@@ -84,7 +84,7 @@ int main()
 	const int ballRadius = 10;
 	GameEngine::GameEngine engine;
 	engine.createRegistry("entities");
-	containers::Registry &registry = engine["entities"];
+	Containers::Registry &registry = engine["entities"];
 	registry = setupRegistry(registry);
 
 	Entity player = spawnShip(registry);

@@ -10,7 +10,7 @@
 #include <cstddef>
 
 namespace ECS {
-	namespace containers {
+	namespace Containers {
 		class Registry;
 	}
 	class Entity {
@@ -18,7 +18,7 @@ namespace ECS {
 		operator std::size_t() const;
 
 	private:
-		friend class containers::Registry;
+		friend class Containers::Registry;
 		explicit Entity(std::size_t entity);
 		std::size_t _entity;
 	};

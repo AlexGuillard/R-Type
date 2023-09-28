@@ -12,7 +12,7 @@
 
 namespace GameEngine {
 
-	using Registry = ECS::containers::Registry;
+	using Registry = ECS::Containers::Registry;
 
 	Registry &GameEngine::operator[](const std::string &type)
 	{

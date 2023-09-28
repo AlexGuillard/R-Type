@@ -11,11 +11,11 @@
 #include <vector>
 #include <utility> // std::pair
 
-#include "ECS/containers/Registry.hpp"
+#include "ECS/Containers/Registry.hpp"
 
 namespace GameEngine {
 	class GameEngine {
-		using Registry = ECS::containers::Registry;
+		using Registry = ECS::Containers::Registry;
 	public:
 		GameEngine() = default;
 		~GameEngine() = default;

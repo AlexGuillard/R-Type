@@ -13,7 +13,7 @@
 #include "ECS/Components/ControllableComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
-#include "ECS/containers/zipper/Zipper.hpp"
+#include "ECS/Containers/zipper/Zipper.hpp"
 
 namespace ECS::systems {
 
@@ -80,7 +80,7 @@ namespace ECS::systems {
 	}
 
 	static void handleShooting(
-		ECS::containers::Registry &registry,
+		ECS::Containers::Registry &registry,
 		ECS::Components::ControllableComponent &controllable,
 		ECS::Components::PositionComponent &position)
 	{
@@ -121,7 +121,7 @@ namespace ECS::systems {
 	 * @param controllable Controllable component of the entity
 	 */
 	static void useForce(
-		ECS::containers::Registry &registry,
+		ECS::Containers::Registry &registry,
 		ECS::Components::ControllableComponent &controllable)
 	{
 		if (!IsKeyPressed(controllable.force)) {
@@ -132,16 +132,16 @@ namespace ECS::systems {
 
 
 	void controller(
-		ECS::containers::Registry &registry,
-		ECS::containers::SparseArray<ECS::Components::PositionComponent> &positions,
-		ECS::containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
-		ECS::containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
+		ECS::Containers::Registry &registry,
+		ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
+		ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+		ECS::Containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
 	{
 		const float maxSpeed = 500;
 		const float nbFrameToMaxSpeed = 5;
 		const float nbFrameToStop = 5;
 
-		for (auto &&[position, velocity, controllable] : ECS::containers::Zipper(positions, velocities, controllables)) {
+		for (auto &&[position, velocity, controllable] : ECS::Containers::Zipper(positions, velocities, controllables)) {
 			changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
 			handleShooting(registry, *controllable, *position);
 			useForce(registry, *controllable);

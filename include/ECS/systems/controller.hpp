@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "ECS/containers/Registry.hpp"
+#include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
@@ -19,8 +19,8 @@ namespace ECS::systems {
 	 * @brief Handles the input of the player
 	 */
 	void controller(
-		containers::Registry &registry,
-		ECS::containers::SparseArray<ECS::Components::PositionComponent> &positions,
-		containers::SparseArray<Components::VelocityComponent> &velocities,
-		containers::SparseArray<Components::ControllableComponent> &controllables);
+		Containers::Registry &registry,
+		ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
+		Containers::SparseArray<Components::VelocityComponent> &velocities,
+		Containers::SparseArray<Components::ControllableComponent> &controllables);
 }; // namespace ECS::systems

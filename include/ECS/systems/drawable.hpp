@@ -12,8 +12,8 @@ namespace ECS::systems {
 	 * @brief Draws the entities with a position and a drawable component
 	 */
 	void drawable(
-		containers::Registry &registry,
-		containers::SparseArray<Components::PositionComponent> &positions,
-		containers::SparseArray<Components::DrawableComponent> &drawables);
+		Containers::Registry &registry,
+		Containers::SparseArray<Components::PositionComponent> &positions,
+		Containers::SparseArray<Components::DrawableComponent> &drawables);
 
 }; // namespace ECS::systems
