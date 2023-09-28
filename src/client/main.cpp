@@ -24,7 +24,7 @@
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
-#include "ECS/Systems/helper/SpriteSheetDrawer.hpp"
+#include "ECS/Systems/Helper/SpriteSheetDrawer.hpp"
 #include "GameEngine/GameEngine.hpp"
 
 using namespace ECS;

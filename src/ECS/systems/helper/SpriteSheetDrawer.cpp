@@ -9,9 +9,9 @@
 
 #include <raylib.h>
 
-#include "ECS/Systems/helper/SpriteSheetDrawer.hpp"
+#include "ECS/Systems/Helper/SpriteSheetDrawer.hpp"
 
-namespace ECS::Systems::helper {
+namespace ECS::Systems::Helper {
 
 	SpriteSheetDrawer::SpriteSheetDrawer(Texture2D texture, Vector2 frameRatio,
 		Vector2 start, Vector2 end, bool boomerang, std::size_t frame, bool forward)
@@ -94,4 +94,4 @@ namespace ECS::Systems::helper {
 		m_currentFrame = m_start;
 	}
 
-}; // namespace ECS::Systems::helper
+}; // namespace ECS::Systems::Helper

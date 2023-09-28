@@ -11,7 +11,7 @@
 
 #include <raylib.h>
 
-namespace ECS::Systems::helper {
+namespace ECS::Systems::Helper {
 
 	class SpriteSheetDrawer {
 	public:
@@ -85,4 +85,4 @@ namespace ECS::Systems::helper {
 		bool m_forward;
 	};
 
-}; // namespace ECS::Systems::helper
+}; // namespace ECS::Systems::Helper

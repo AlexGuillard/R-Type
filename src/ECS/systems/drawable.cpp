@@ -12,7 +12,7 @@
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 #include "ECS/Systems/drawable.hpp"
-#include "ECS/Systems/helper/SpriteSheetDrawer.hpp"
+#include "ECS/Systems/Helper/SpriteSheetDrawer.hpp"
 
 namespace ECS::Systems {
 	static std::unordered_map<std::string, Texture2D> textures;
@@ -32,7 +32,7 @@ namespace ECS::Systems {
 	)
 	{
 		for (auto &&[position, drawable] : Containers::Zipper(positions, drawables)) {
-			helper::SpriteSheetDrawer drawer(
+			Helper::SpriteSheetDrawer drawer(
 				loadTexture(drawable->texture),
 				drawable->frameRatio,
 				drawable->start,
