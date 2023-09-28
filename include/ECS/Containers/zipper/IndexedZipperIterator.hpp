@@ -31,13 +31,14 @@ namespace ECS::Containers {
 		IndexedZipperIterator(iterator_tuple const &it_tuple, std::size_t size)
 			: _current(it_tuple), _size(size)
 		{
-			if (!allSet(_seq))
-				nextIndex(_seq);
+			if (!allSet(seq)) {
+				nextIndex(seq);
+			}
 		}
 		// prefix increment
 		IndexedZipperIterator operator++()
 		{
-			nextIndex(_seq);
+			nextIndex(seq);
 			return *this;
 		}
 		// postfix increment
@@ -47,7 +48,7 @@ namespace ECS::Containers {
 			++(*this);
 			return *tmp;
 		}
-		value_type operator*() { return toValue(_seq); }
+		value_type operator*() { return toValue(seq); }
 		value_type operator->() { return (*this); }
 		friend bool operator==(
 			IndexedZipperIterator const &lhs,
@@ -67,14 +68,13 @@ namespace ECS::Containers {
 		 * @brief Goes to the next index where all std::optional are set.
 		 */
 		template <size_t... Is>
-		void nextIndex(std::index_sequence<Is...>)
+		void nextIndex(std::index_sequence<Is...> /*unused*/)
 		{
-			if (_idx >= _size)
-				return;
+			if (_idx >= _size) { return; }
 			do {
 				++_idx;
 				(++(std::get<Is>(_current)), ...);
-			} while (!allSet(_seq) && _idx < _size);
+			} while (!allSet(seq) && _idx < _size);
 		}
 		/**
 		 * @brief Checks if all std::optional are set.
@@ -82,10 +82,9 @@ namespace ECS::Containers {
 		 * @return true if all std::optional are set
 		 */
 		template <size_t... Is>
-		bool allSet(std::index_sequence<Is...>)
+		bool allSet(std::index_sequence<Is...> /*unused*/)
 		{
-			if (_idx >= _size)
-				return true;
+			if (_idx >= _size) { return true; }
 			return ((std::get<Is>(_current)->has_value()) && ...);
 		}
 		/**
@@ -94,15 +93,14 @@ namespace ECS::Containers {
 		 * @return the value_type
 		 */
 		template <size_t... Is>
-		value_type toValue(std::index_sequence<Is...>)
+		value_type toValue(std::index_sequence<Is...> /*unused*/)
 		{
 			return std::tie(_idx, *std::get<Is>(_current)...);
 		}
 
-	private:
 		iterator_tuple _current;
 		std::size_t _size;
-		static constexpr std::index_sequence_for<SparseArrays...> _seq{};
+		static constexpr std::index_sequence_for<SparseArrays...> seq{};
 		std::size_t _idx = 0;
 	};
 

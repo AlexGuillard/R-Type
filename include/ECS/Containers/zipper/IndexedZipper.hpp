@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <algorithm> // std::min
+
 #include "ECS/Containers/zipper/IndexedZipperIterator.hpp"
 
 namespace ECS::Containers {
@@ -37,7 +39,6 @@ namespace ECS::Containers {
 		 */
 		iterator begin() noexcept
 		{
-			std::vector<int> v;
 			return iterator(m_begin, m_size);
 		}
 		/**
@@ -64,7 +65,6 @@ namespace ECS::Containers {
 				m_end);
 		}
 
-	private:
 		std::size_t m_size;
 		std::size_t m_idx;
 		iterator_tuple m_begin;
