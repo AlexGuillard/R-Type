@@ -8,8 +8,8 @@
 #pragma once
 
 #include "ECS/containers/Registry.hpp"
-#include "ECS/components/MissileComponent.hpp"
-#include "ECS/components/WaveBeamComponent.hpp"
+#include "ECS/Components/MissileComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
 
 namespace ECS::systems {
 	/**
@@ -17,6 +17,6 @@ namespace ECS::systems {
 	 */
 	void shooting(
 		containers::Registry &registry,
-		containers::SparseArray<components::MissileComponent> &missileRequests,
-		containers::SparseArray<components::WaveBeamComponent> &waveBeamRequests);
+		containers::SparseArray<Components::MissileComponent> &missileRequests,
+		containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests);
 }; // namespace ECS::systems

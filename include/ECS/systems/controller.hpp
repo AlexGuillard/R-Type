@@ -8,9 +8,9 @@
 #pragma once
 
 #include "ECS/containers/Registry.hpp"
-#include "ECS/components/PositionComponent.hpp"
-#include "ECS/components/VelocityComponent.hpp"
-#include "ECS/components/ControllableComponent.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/ControllableComponent.hpp"
 
 namespace ECS::systems {
 	// time (in s) player need to hold the fire button to shoot a wave beam
@@ -20,7 +20,7 @@ namespace ECS::systems {
 	 */
 	void controller(
 		containers::Registry &registry,
-		ECS::containers::SparseArray<ECS::components::PositionComponent> &positions,
-		containers::SparseArray<components::VelocityComponent> &velocities,
-		containers::SparseArray<components::ControllableComponent> &controllables);
+		ECS::containers::SparseArray<ECS::Components::PositionComponent> &positions,
+		containers::SparseArray<Components::VelocityComponent> &velocities,
+		containers::SparseArray<Components::ControllableComponent> &controllables);
 }; // namespace ECS::systems

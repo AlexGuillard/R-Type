@@ -7,8 +7,8 @@
 
 #include <unordered_map>
 
-#include "ECS/components/PositionComponent.hpp"
-#include "ECS/components/DrawableComponent.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/containers/Registry.hpp"
 #include "ECS/containers/zipper/Zipper.hpp"
 #include "ECS/systems/drawable.hpp"
@@ -27,8 +27,8 @@ namespace ECS::systems {
 
 	void drawable(
 		[[maybe_unused]] containers::Registry &registry,
-		containers::SparseArray<components::PositionComponent> &positions,
-		containers::SparseArray<components::DrawableComponent> &drawables
+		containers::SparseArray<Components::PositionComponent> &positions,
+		containers::SparseArray<Components::DrawableComponent> &drawables
 	)
 	{
 		for (auto &&[position, drawable] : containers::Zipper(positions, drawables)) {

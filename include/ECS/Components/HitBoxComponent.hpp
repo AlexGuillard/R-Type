@@ -9,7 +9,7 @@
 
 #include <cstddef>
 
-namespace ECS::components {
+namespace ECS::Components {
 	/**
 	 * @brief Component for entities that have a hitbox
 	 * @param width Width of the hitbox
@@ -19,4 +19,4 @@ namespace ECS::components {
 		std::size_t width;
 		std::size_t height;
 	};
-}; // namespace ECS::components
+}; // namespace ECS::Components

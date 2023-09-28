@@ -11,7 +11,7 @@
 
 #include <raylib.h>
 
-namespace ECS::components {
+namespace ECS::Components {
 	// size of the texture path
 	const std::size_t maxTexturePathSize = 256;
 	/**
@@ -41,4 +41,4 @@ namespace ECS::components {
 		float timeAtLastFrameChange = 0.0F;
 		bool forward = true;
 	} DrawableComponent;
-} // namespace ECS::components
+} // namespace ECS::Components

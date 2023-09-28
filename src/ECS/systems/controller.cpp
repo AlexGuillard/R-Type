@@ -8,11 +8,11 @@
 #include <raylib.h>
 
 #include "ECS/systems/controller.hpp"
-#include "ECS/components/PositionComponent.hpp"
-#include "ECS/components/VelocityComponent.hpp"
-#include "ECS/components/ControllableComponent.hpp"
-#include "ECS/components/WaveBeamComponent.hpp"
-#include "ECS/components/MissileComponent.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
+#include "ECS/Components/MissileComponent.hpp"
 #include "ECS/containers/zipper/Zipper.hpp"
 
 namespace ECS::systems {
@@ -43,8 +43,8 @@ namespace ECS::systems {
 	 * @param
 	 */
 	static void changeVelocity(
-		ECS::components::VelocityComponent &velocity,
-		ECS::components::ControllableComponent &controllable,
+		ECS::Components::VelocityComponent &velocity,
+		ECS::Components::ControllableComponent &controllable,
 		float nbFrameToMaxSpeed,
 		float nbFrameToStop,
 		float maxSpeed
@@ -81,8 +81,8 @@ namespace ECS::systems {
 
 	static void handleShooting(
 		ECS::containers::Registry &registry,
-		ECS::components::ControllableComponent &controllable,
-		ECS::components::PositionComponent &position)
+		ECS::Components::ControllableComponent &controllable,
+		ECS::Components::PositionComponent &position)
 	{
 		if (IsKeyDown(controllable.fire)) {
 			controllable.timeFireButtonHeld += GetFrameTime();
@@ -90,25 +90,25 @@ namespace ECS::systems {
 		}
 		if (controllable.timeFireButtonHeld > 0) {
 			u_char strength = clamp(
-				static_cast<u_char>(controllable.timeFireButtonHeld / systems::timeNeededForWaveBeam * components::maxWaveBeamStrength),
+				static_cast<u_char>(controllable.timeFireButtonHeld / systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
 				static_cast<u_char>(1),
-				components::maxWaveBeamStrength
+				Components::maxWaveBeamStrength
 			);
 			auto missileEntity = registry.spawnEntity();
 			if (strength > 1) {
-				registry.emplaceComponent<ECS::components::WaveBeamComponent>(
+				registry.emplaceComponent<ECS::Components::WaveBeamComponent>(
 					missileEntity,
 					position.x,
 					position.y,
-					static_cast<std::size_t>(strength * components::waveBeamBaseDamage),
+					static_cast<std::size_t>(strength * Components::waveBeamBaseDamage),
 					strength
 				);
 			} else {
-				registry.emplaceComponent<ECS::components::MissileComponent>(
+				registry.emplaceComponent<ECS::Components::MissileComponent>(
 					missileEntity,
 					position.x,
 					position.y,
-					static_cast<std::size_t>(strength * components::missileBaseDamage)
+					static_cast<std::size_t>(strength * Components::missileBaseDamage)
 				);
 			}
 			controllable.timeFireButtonHeld = 0;
@@ -122,7 +122,7 @@ namespace ECS::systems {
 	 */
 	static void useForce(
 		ECS::containers::Registry &registry,
-		ECS::components::ControllableComponent &controllable)
+		ECS::Components::ControllableComponent &controllable)
 	{
 		if (!IsKeyPressed(controllable.force)) {
 			return;
@@ -133,9 +133,9 @@ namespace ECS::systems {
 
 	void controller(
 		ECS::containers::Registry &registry,
-		ECS::containers::SparseArray<ECS::components::PositionComponent> &positions,
-		ECS::containers::SparseArray<ECS::components::VelocityComponent> &velocities,
-		ECS::containers::SparseArray<ECS::components::ControllableComponent> &controllables)
+		ECS::containers::SparseArray<ECS::Components::PositionComponent> &positions,
+		ECS::containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+		ECS::containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
 	{
 		const float maxSpeed = 500;
 		const float nbFrameToMaxSpeed = 5;

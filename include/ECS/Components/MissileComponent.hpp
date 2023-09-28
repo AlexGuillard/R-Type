@@ -9,7 +9,7 @@
 
 #include <cstddef>
 
-namespace ECS::components {
+namespace ECS::Components {
 	// X velocity in pixels per second for the missile that will be spawned
 	static const float missileSpeed = 500;
 	static const std::size_t missileBaseDamage = 1;
@@ -24,4 +24,4 @@ namespace ECS::components {
 		float y;
 		std::size_t damage = missileBaseDamage;
 	};
-}; // namespace ECS::components
+}; // namespace ECS::Components

@@ -12,24 +12,24 @@
 #include <raylib.h>
 
 #include "ECS/systems/shooting.hpp"
-#include "ECS/components/PositionComponent.hpp"
-#include "ECS/components/VelocityComponent.hpp"
-#include "ECS/components/DamageComponent.hpp"
-#include "ECS/components/HPComponent.hpp"
-#include "ECS/components/DrawableComponent.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/DamageComponent.hpp"
+#include "ECS/Components/HPComponent.hpp"
+#include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/containers/zipper/IndexedZipper.hpp"
 
 namespace ECS::systems {
 
 	/**
 	 * @brief Get the Drawable For Missile object
-	 * @return components::DrawableComponent
+	 * @return Components::DrawableComponent
 	 */
-	static components::DrawableComponent getDrawableForMissile()
+	static Components::DrawableComponent getDrawableForMissile()
 	{
 		const u_char nbFrameInSpriteSheet = 6;
 		const Vector2 missileFramePos = Vector2(2, 0);
-		components::DrawableComponent drawable = {
+		Components::DrawableComponent drawable = {
 				"assets/missiles/missile.png",
 				Vector2(nbFrameInSpriteSheet, 1), // frameRatio
 				missileFramePos, // start
@@ -45,50 +45,50 @@ namespace ECS::systems {
 	 */
 	static void shootMissiles(
 		containers::Registry &registry,
-		containers::SparseArray<components::MissileComponent> &missileRequests)
+		containers::SparseArray<Components::MissileComponent> &missileRequests)
 	{
 		for (auto &&[entityId, missileRequest] : containers::IndexedZipper(missileRequests)) {
 			auto missileEntity = registry.spawnEntity();
 
-			registry.emplaceComponent<components::PositionComponent>(
+			registry.emplaceComponent<Components::PositionComponent>(
 				missileEntity,
 				missileRequest->x,
 				missileRequest->y
 			);
-			registry.emplaceComponent<components::VelocityComponent>(
+			registry.emplaceComponent<Components::VelocityComponent>(
 				missileEntity,
-				components::missileSpeed,
+				Components::missileSpeed,
 				0
 			);
-			registry.emplaceComponent<components::DamageComponent>(
+			registry.emplaceComponent<Components::DamageComponent>(
 				missileEntity,
 				missileRequest->damage
 			);
-			registry.emplaceComponent<components::HPComponent>(
+			registry.emplaceComponent<Components::HPComponent>(
 				missileEntity,
 				0 // Die on collision
 			);
 			// TODO: add TeamComponent
-			components::DrawableComponent drawable = getDrawableForMissile();
-			registry.addComponent<components::DrawableComponent>(
+			Components::DrawableComponent drawable = getDrawableForMissile();
+			registry.addComponent<Components::DrawableComponent>(
 				missileEntity, std::move(drawable)
 			);
 			auto entity = registry.entityFromIndex(entityId);
-			registry.removeComponent<components::MissileComponent>(entity);
+			registry.removeComponent<Components::MissileComponent>(entity);
 		}
 	}
 
 	/**
 	 * @brief Get the Drawable For Wave Beam object
 	 * @param strength Number between 1 and 5 that represents the strength of the wave beam
-	 * @return components::DrawableComponent
+	 * @return Components::DrawableComponent
 	 */
-	static components::DrawableComponent getDrawableForWaveBeam(u_char strength)
+	static Components::DrawableComponent getDrawableForWaveBeam(u_char strength)
 	{
 		const u_char nbFrameInSpriteSheet = 6;
 		const Vector2 waveBeamFramePos = Vector2(3, 0);
-		char path[components::maxTexturePathSize] = "assets/missiles/waveBeam-out";
-		components::DrawableComponent drawable = {
+		char path[Components::maxTexturePathSize] = "assets/missiles/waveBeam-out";
+		Components::DrawableComponent drawable = {
 				"assets/missiles/waveBeam-out",
 				Vector2(nbFrameInSpriteSheet, 1), // frameRatio
 				waveBeamFramePos, // start
@@ -105,39 +105,39 @@ namespace ECS::systems {
 	 */
 	static void shootWaveBeams(
 		containers::Registry &registry,
-		containers::SparseArray<components::WaveBeamComponent> &waveBeamRequests)
+		containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests)
 	{
 		for (auto &&[entityId, waveBeamRequests] : containers::IndexedZipper(waveBeamRequests)) {
 			auto waveBeamEntity = registry.spawnEntity();
 
-			registry.emplaceComponent<components::PositionComponent>(
+			registry.emplaceComponent<Components::PositionComponent>(
 				waveBeamEntity,
 				waveBeamRequests->x,
 				waveBeamRequests->y
 			);
-			registry.emplaceComponent<components::VelocityComponent>(
+			registry.emplaceComponent<Components::VelocityComponent>(
 				waveBeamEntity,
-				components::waveBeamSpeed,
+				Components::waveBeamSpeed,
 				0
 			);
-			registry.emplaceComponent<components::DamageComponent>(
+			registry.emplaceComponent<Components::DamageComponent>(
 				waveBeamEntity,
 				waveBeamRequests->damage
 			);
 			// TODO: add TeamComponent
-			components::DrawableComponent drawable = getDrawableForWaveBeam(waveBeamRequests->strength);
-			registry.addComponent<components::DrawableComponent>(
+			Components::DrawableComponent drawable = getDrawableForWaveBeam(waveBeamRequests->strength);
+			registry.addComponent<Components::DrawableComponent>(
 				waveBeamEntity, std::move(drawable)
 			);
 			auto entity = registry.entityFromIndex(entityId);
-			registry.removeComponent<components::WaveBeamComponent>(entity);
+			registry.removeComponent<Components::WaveBeamComponent>(entity);
 		}
 	}
 
 	void shooting(
 		containers::Registry &registry,
-		containers::SparseArray<components::MissileComponent> &missileRequests,
-		containers::SparseArray<components::WaveBeamComponent> &waveBeamRequests
+		containers::SparseArray<Components::MissileComponent> &missileRequests,
+		containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests
 	)
 	{
 		shootMissiles(registry, missileRequests);

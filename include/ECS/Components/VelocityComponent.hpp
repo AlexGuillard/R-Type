@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace ECS::components {
+namespace ECS::Components {
 	/**
 	 * @brief Component that contains the velocity of an entity
 	 * @param x Velocity on the x axis
@@ -17,4 +17,4 @@ namespace ECS::components {
 		float x;
 		float y;
 	};
-}; // namespace ECS::components
+}; // namespace ECS::Components

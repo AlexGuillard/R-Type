@@ -13,7 +13,7 @@ namespace ECS::systems {
 	 */
 	void drawable(
 		containers::Registry &registry,
-		containers::SparseArray<components::PositionComponent> &positions,
-		containers::SparseArray<components::DrawableComponent> &drawables);
+		containers::SparseArray<Components::PositionComponent> &positions,
+		containers::SparseArray<Components::DrawableComponent> &drawables);
 
 }; // namespace ECS::systems

@@ -8,15 +8,15 @@
 #include <raylib.h>
 
 #include "ECS/systems/movement.hpp"
-#include "ECS/components/PositionComponent.hpp"
-#include "ECS/components/VelocityComponent.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace ECS::systems {
 
 	void movement(
 		[[maybe_unused]] containers::Registry &registry,
-		containers::SparseArray<components::PositionComponent> &positions,
-		containers::SparseArray<components::VelocityComponent> &velocities)
+		containers::SparseArray<Components::PositionComponent> &positions,
+		containers::SparseArray<Components::VelocityComponent> &velocities)
 	{
 		for (std::size_t entityId = 0; entityId < registry.size(); entityId++) {
 			if (!positions.at(entityId).has_value() || !velocities.at(entityId).has_value())

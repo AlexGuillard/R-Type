@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <raylib.h>
 #include <cstddef>
 
-namespace ECS::components {
+#include <raylib.h>
+
+namespace ECS::Components {
 	/**
 	 * @brief Component that contains the data needed to control an entity
 	 * @param up Key to go up
@@ -30,4 +31,4 @@ namespace ECS::components {
 		KeyboardKey force = KEY_LEFT_SHIFT;
 		double timeFireButtonHeld = 0.0;
 	};
-} // namespace ECS::components
+} // namespace ECS::Components
