@@ -108,6 +108,7 @@ void Screen::Display::mouseClickedMenu()
 	if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
 		std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
 		//TODO: handle basic error (empty hostname, empty port, invalid port (ex: chocolat instead of 8080)) on the graphic side
+		//connect return a bool to let us know if the connection was successful or not
 		_client.connect(_hostName, std::stoi(_port));
 		_gameState = true;
 	}
