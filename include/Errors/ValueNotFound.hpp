@@ -11,10 +11,10 @@
 
 namespace Errors {
 
-	class ValueNotFound : public std::runtime_error {
-	public:
-		explicit ValueNotFound(const std::string &what)
-			: std::runtime_error(std::string("ValueNotFound: ") + what) {};
-	};
+    class ValueNotFound : public std::runtime_error {
+    public:
+        explicit ValueNotFound(const std::string &what)
+            : std::runtime_error(std::string("ValueNotFound: ") + what) {};
+    };
 
 }; // namespace Error

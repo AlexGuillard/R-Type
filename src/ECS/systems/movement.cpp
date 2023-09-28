@@ -14,15 +14,15 @@
 
 namespace ECS::Systems {
 
-	void movement(
-		[[maybe_unused]] Containers::Registry &registry,
-		Containers::SparseArray<Components::PositionComponent> &positions,
-		Containers::SparseArray<Components::VelocityComponent> &velocities)
-	{
-		for (auto &&[position, velocity] : Containers::Zipper(positions, velocities)) {
-			position->x += velocity->x * GetFrameTime();
-			position->y += velocity->y * GetFrameTime();
-		}
-	}
+    void movement(
+        [[maybe_unused]] Containers::Registry &registry,
+        Containers::SparseArray<Components::PositionComponent> &positions,
+        Containers::SparseArray<Components::VelocityComponent> &velocities)
+    {
+        for (auto &&[position, velocity] : Containers::Zipper(positions, velocities)) {
+            position->x += velocity->x * GetFrameTime();
+            position->y += velocity->y * GetFrameTime();
+        }
+    }
 
 }; // namespace ECS::Systems

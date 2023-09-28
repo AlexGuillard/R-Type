@@ -10,15 +10,15 @@
 #include "ANetwork.hpp"
 
 namespace Network {
-	class ClientNetwork : public ANetwork {
-	public:
-		ClientNetwork();
-		~ClientNetwork();
-		void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
-		void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
-	protected:
-	private:
-	};
+    class ClientNetwork : public ANetwork {
+    public:
+        ClientNetwork();
+        ~ClientNetwork();
+        void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
+        void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+    protected:
+    private:
+    };
 }
 
 #endif /* !CLIENTNETWORK_HPP_ */

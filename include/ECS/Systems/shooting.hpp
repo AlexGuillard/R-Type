@@ -12,11 +12,11 @@
 #include "ECS/Components/WaveBeamComponent.hpp"
 
 namespace ECS::Systems {
-	/**
-	 * @brief Handles the input of the player
-	 */
-	void shooting(
-		Containers::Registry &registry,
-		Containers::SparseArray<Components::MissileComponent> &missileRequests,
-		Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests);
+    /**
+     * @brief Handles the input of the player
+     */
+    void shooting(
+        Containers::Registry &registry,
+        Containers::SparseArray<Components::MissileComponent> &missileRequests,
+        Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests);
 }; // namespace ECS::Systems

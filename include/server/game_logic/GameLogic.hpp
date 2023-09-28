@@ -8,12 +8,12 @@
 #pragma once
 
 namespace Game {
-	class GameLogic {
-	public:
-		GameLogic();
-		~GameLogic();
+    class GameLogic {
+    public:
+        GameLogic();
+        ~GameLogic();
 
-	protected:
-	private:
-	};
+    protected:
+    private:
+    };
 }

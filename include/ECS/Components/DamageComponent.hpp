@@ -10,11 +10,11 @@
 #include <cstddef>
 
 namespace ECS::Components {
-	/**
-	 * @brief Component for entities that deal damage
-	 * @param damage Damage of the entity
-	 */
-	struct DamageComponent {
-		std::size_t damage = 1;
-	};
+    /**
+     * @brief Component for entities that deal damage
+     * @param damage Damage of the entity
+     */
+    struct DamageComponent {
+        std::size_t damage = 1;
+    };
 }; // namespace ECS::Components

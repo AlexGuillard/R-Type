@@ -12,9 +12,9 @@
 #include "ECS/Components/VelocityComponent.hpp"
 
 namespace ECS::Systems {
-	/** @brief Updates the position of the entities using their velocity */
-	void movement(
-		Containers::Registry &registry,
-		Containers::SparseArray<Components::PositionComponent> &positions,
-		Containers::SparseArray<Components::VelocityComponent> &velocities);
+    /** @brief Updates the position of the entities using their velocity */
+    void movement(
+        Containers::Registry &registry,
+        Containers::SparseArray<Components::PositionComponent> &positions,
+        Containers::SparseArray<Components::VelocityComponent> &velocities);
 };
