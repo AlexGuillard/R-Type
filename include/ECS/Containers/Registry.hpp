@@ -52,7 +52,7 @@ namespace ECS::Containers {
 		{
 			const auto index = std::type_index(typeid(Component));
 
-			if (m_componentsArrays.contains(index) == false) {
+			if (!m_componentsArrays.contains(index)) {
 				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 			try {
@@ -72,7 +72,7 @@ namespace ECS::Containers {
 		{
 			const auto index = std::type_index(typeid(Component));
 
-			if (m_componentsArrays.contains(index) == false) {
+			if (!m_componentsArrays.contains(index)) {
 				throw Errors::ComponentNotRegisteredException(index.name());
 			}
 			try {
@@ -98,20 +98,21 @@ namespace ECS::Containers {
 		// ENTITY MANAGER
 		Entity spawnEntity()
 		{
-			std::size_t id = m_nbEntities;
+			std::size_t entityId = m_nbEntities;
 
 			m_nbEntities++;
-			return Entity(id);
+			return Entity(entityId);
 		}
-		Entity entityFromIndex(std::size_t idx)
+
+		static Entity entityFromIndex(std::size_t idx)
 		{
 			return Entity(idx);
 		}
-		void killEntity(Entity const &e)
+		void killEntity(Entity const &entity)
 		{
 			for (auto &[_, pair] : m_componentsArrays) {
 				auto &deleter = pair.second;
-				deleter(*this, e);
+				deleter(*this, entity);
 			}
 		}
 		std::size_t size() const
@@ -121,19 +122,19 @@ namespace ECS::Containers {
 
 		template <typename Component>
 		typename SparseArray<Component>::reference_type addComponent(
-			Entity const &to, Component &&c)
+			Entity const &target, Component &&component)
 		{
 			SparseArray<Component> &components = this->getComponents<Component>();
 
-			return components.insertAt(to, std::forward<Component>(c));
+			return components.insertAt(target, std::forward<Component>(component));
 		}
 		template <typename Component, typename... Params>
 		typename SparseArray<Component>::reference_type emplaceComponent(
-			Entity const &to, Params &&...p)
+			Entity const &target, Params &&...params)
 		{
 			SparseArray<Component> &components = this->getComponents<Component>();
 
-			return components.emplaceAt(to, std::forward<Params>(p)...);
+			return components.emplaceAt(target, std::forward<Params>(params)...);
 		}
 		template <typename Component>
 		void removeComponent(Entity const &from)
@@ -149,11 +150,11 @@ namespace ECS::Containers {
 		 * @param f system to add to add
 		 */
 		template <class... Components, typename Function>
-		void addSystem(Function &&f)
+		void addSystem(Function &&system)
 		{
 			m_systems.push_back(
-				[f = std::forward<Function>(f), this]() {
-					f(*this, this->getComponents<Components>()...);
+				[system = std::forward<Function>(system), this]() {
+					system(*this, this->getComponents<Components>()...);
 				});
 		}
 		/**
