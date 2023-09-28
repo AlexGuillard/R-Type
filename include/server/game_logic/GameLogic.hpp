@@ -5,18 +5,15 @@
 ** GameLogic
 */
 
-#ifndef GAMELOGIC_HPP_
-    #define GAMELOGIC_HPP_
+#pragma once
 
 namespace Game {
-    class GameLogic {
-        public:
-            GameLogic();
-            ~GameLogic();
+	class GameLogic {
+	public:
+		GameLogic();
+		~GameLogic();
 
-        protected:
-        private:
-    };
+	protected:
+	private:
+	};
 }
-
-#endif /* !GAMELOGIC_HPP_ */
