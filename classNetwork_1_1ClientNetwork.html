@@ -76,6 +76,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="classNetwork_1_1ClientNetwork.html" title="ClientNetwork class use to communicate with the server.">ClientNetwork</a> class use to communicate with the server.  
+ <a href="classNetwork_1_1ClientNetwork.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ClientNetwork_8hpp_source.html">ClientNetwork.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Network::ClientNetwork:</div>
@@ -90,16 +93,36 @@ Inheritance diagram for Network::ClientNetwork:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a033c9680d6f736a0f56855049991eb1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c">ClientNetwork</a> (boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)</td></tr>
+<tr class="memdesc:a033c9680d6f736a0f56855049991eb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object with parameters.  <a href="classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c">More...</a><br /></td></tr>
+<tr class="separator:a033c9680d6f736a0f56855049991eb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98fff34523115bfa0ac4c2e963fc3a3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d">ClientNetwork</a> ()</td></tr>
+<tr class="memdesc:a98fff34523115bfa0ac4c2e963fc3a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object without parameters.  <a href="classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d">More...</a><br /></td></tr>
 <tr class="separator:a98fff34523115bfa0ac4c2e963fc3a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d5902a13547dfabd50b331c2eb85815"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">~ClientNetwork</a> ()</td></tr>
+<tr class="memdesc:a8d5902a13547dfabd50b331c2eb85815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Client <a class="el" href="namespaceNetwork.html">Network</a> object.  <a href="classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815">More...</a><br /></td></tr>
 <tr class="separator:a8d5902a13547dfabd50b331c2eb85815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">handleReceive</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
-<tr class="memdesc:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after receiving data  <a href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">More...</a><br /></td></tr>
+<tr class="memdesc:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to receive data from the server.  <a href="classNetwork_1_1ClientNetwork.html#a9a2483a228a5f5d3beffd7cde0aa16d9">More...</a><br /></td></tr>
 <tr class="separator:a9a2483a228a5f5d3beffd7cde0aa16d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2c37d8bd96c0247865253971ee433f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">handleSend</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
-<tr class="memdesc:ad2c37d8bd96c0247865253971ee433f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after sending data  <a href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">More...</a><br /></td></tr>
+<tr class="memdesc:ad2c37d8bd96c0247865253971ee433f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send data to the server.  <a href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">More...</a><br /></td></tr>
 <tr class="separator:ad2c37d8bd96c0247865253971ee433f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac54e57b42ddb3dc434cff4b9ec48e85f">sendHello</a> ()</td></tr>
+<tr class="memdesc:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send a hello to the server to connect to it.  <a href="classNetwork_1_1ClientNetwork.html#ac54e57b42ddb3dc434cff4b9ec48e85f">More...</a><br /></td></tr>
+<tr class="separator:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33b71cda1fc7d386d5bff333283affa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad33b71cda1fc7d386d5bff333283affa">start</a> ()</td></tr>
+<tr class="memdesc:ad33b71cda1fc7d386d5bff333283affa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the main loop of the client.  <a href="classNetwork_1_1ClientNetwork.html#ad33b71cda1fc7d386d5bff333283affa">More...</a><br /></td></tr>
+<tr class="separator:ad33b71cda1fc7d386d5bff333283affa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5528b575454b2e3d2edb1a6087e0d455"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a5528b575454b2e3d2edb1a6087e0d455">sendMovement</a> (<a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5">Movement</a> movement)</td></tr>
+<tr class="memdesc:a5528b575454b2e3d2edb1a6087e0d455"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send a movement from the player to the server.  <a href="classNetwork_1_1ClientNetwork.html#a5528b575454b2e3d2edb1a6087e0d455">More...</a><br /></td></tr>
+<tr class="separator:a5528b575454b2e3d2edb1a6087e0d455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ff2994fd96d432616a605217cd28a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">sendAction</a> (<a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">Action</a> action)</td></tr>
+<tr class="memdesc:a72ff2994fd96d432616a605217cd28a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send an action from the player to the server.  <a href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">More...</a><br /></td></tr>
+<tr class="separator:a72ff2994fd96d432616a605217cd28a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50017784300e18ee76e9ba101d7bda7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a50017784300e18ee76e9ba101d7bda7d">connect</a> (const std::string &amp;host, int port)</td></tr>
+<tr class="memdesc:a50017784300e18ee76e9ba101d7bda7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to connect to the server if the server return 301 then the connection and return true else false.  <a href="classNetwork_1_1ClientNetwork.html#a50017784300e18ee76e9ba101d7bda7d">More...</a><br /></td></tr>
+<tr class="separator:a50017784300e18ee76e9ba101d7bda7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,9 +146,55 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">contain the IP address and a protocol port number  <a href="classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324">More...</a><br /></td></tr>
 <tr class="separator:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classNetwork_1_1ClientNetwork.html" title="ClientNetwork class use to communicate with the server.">ClientNetwork</a> class use to communicate with the server. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a033c9680d6f736a0f56855049991eb1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033c9680d6f736a0f56855049991eb1c">&#9670;&nbsp;</a></span>ClientNetwork() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Network::ClientNetwork::ClientNetwork </td>
+          <td>(</td>
+          <td class="paramtype">boost::asio::io_service &amp;&#160;</td>
+          <td class="paramname"><em>io_service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object with parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">io_service</td><td></td></tr>
+    <tr><td class="paramname">host</td><td></td></tr>
+    <tr><td class="paramname">port</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a98fff34523115bfa0ac4c2e963fc3a3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98fff34523115bfa0ac4c2e963fc3a3d">&#9670;&nbsp;</a></span>ClientNetwork()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a98fff34523115bfa0ac4c2e963fc3a3d">&#9670;&nbsp;</a></span>ClientNetwork() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -138,6 +207,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object without parameters. </p>
 
 </div>
 </div>
@@ -156,9 +227,48 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Destroy the Client <a class="el" href="namespaceNetwork.html">Network</a> object. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a50017784300e18ee76e9ba101d7bda7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50017784300e18ee76e9ba101d7bda7d">&#9670;&nbsp;</a></span>connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::ClientNetwork::connect </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to connect to the server if the server return 301 then the connection and return true else false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host</td><td></td></tr>
+    <tr><td class="paramname">port</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a9a2483a228a5f5d3beffd7cde0aa16d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a2483a228a5f5d3beffd7cde0aa16d9">&#9670;&nbsp;</a></span>handleReceive()</h2>
 
@@ -193,11 +303,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>function called after receiving data </p>
+<p>This function is used to receive data from the server. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">error</td><td>empty if finish with no error </td></tr>
-    <tr><td class="paramname">recvd_bytes</td><td>number of bytes received </td></tr>
+    <tr><td class="paramname">error</td><td></td></tr>
+    <tr><td class="paramname">recvd_bytes</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -240,16 +350,106 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>function called after sending data </p>
+<p>This function is used to send data to the server. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">error</td><td>empty if finish with no error </td></tr>
-    <tr><td class="paramname">recvd_bytes</td><td>number of bytes received </td></tr>
+    <tr><td class="paramname">error</td><td></td></tr>
+    <tr><td class="paramname">recvd_bytes</td><td></td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implements <a class="el" href="classNetwork_1_1ANetwork.html#a4b34fcd6d6a27bced6067eabe8e85774">Network::ANetwork</a>.</p>
+
+</div>
+</div>
+<a id="a72ff2994fd96d432616a605217cd28a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ff2994fd96d432616a605217cd28a9">&#9670;&nbsp;</a></span>sendAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::sendAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">Action</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to send an action from the player to the server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">action</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac54e57b42ddb3dc434cff4b9ec48e85f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54e57b42ddb3dc434cff4b9ec48e85f">&#9670;&nbsp;</a></span>sendHello()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::sendHello </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to send a hello to the server to connect to it. </p>
+
+</div>
+</div>
+<a id="a5528b575454b2e3d2edb1a6087e0d455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5528b575454b2e3d2edb1a6087e0d455">&#9670;&nbsp;</a></span>sendMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::sendMovement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5">Movement</a>&#160;</td>
+          <td class="paramname"><em>movement</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to send a movement from the player to the server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">movement</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad33b71cda1fc7d386d5bff333283affa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad33b71cda1fc7d386d5bff333283affa">&#9670;&nbsp;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start the main loop of the client. </p>
 
 </div>
 </div>

@@ -70,25 +70,65 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">ClientNetwork.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="ANetwork_8hpp_source.html">ANetwork.hpp</a>&quot;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="Error_8hpp_source.html">Error.hpp</a>&quot;</code><br />
 </div>
 <p><a href="ClientNetwork_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html">Network::ClientNetwork</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classNetwork_1_1ClientNetwork.html" title="ClientNetwork class use to communicate with the server.">ClientNetwork</a> class use to communicate with the server.  <a href="classNetwork_1_1ClientNetwork.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceNetwork"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html">Network</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad0276e2a9b126db0fd88443207235098"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ClientNetwork_8hpp.html#ad0276e2a9b126db0fd88443207235098">MAX_SIZE_BUFFER</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="separator:ad0276e2a9b126db0fd88443207235098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ab561f9296aca4b15f602698e052b25b5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5">Network::Movement</a> { <a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5afbaedde498cdead4f2780217646e9ba1">Network::UP</a>
+, <a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5ac4e0e4e3118472beeb2ae75827450f1f">Network::DOWN</a>
+, <a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a684d325a7303f52e64011467ff5c5758">Network::LEFT</a>
+, <a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403">Network::RIGHT</a>
+ }</td></tr>
+<tr class="memdesc:ab561f9296aca4b15f602698e052b25b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum used to know the movement of the player on the server.  <a href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5">More...</a><br /></td></tr>
+<tr class="separator:ab561f9296aca4b15f602698e052b25b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a939d5767ba0bbba93169571343fb14c0"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">Network::Action</a> { <a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2">Network::SHOOT</a>
+, <a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0abf8f3be424eb6a72b21549fbb24ffb57">Network::DROP</a>
+ }</td></tr>
+<tr class="memdesc:a939d5767ba0bbba93169571343fb14c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum used to know the action of the player on the server.  <a href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">More...</a><br /></td></tr>
+<tr class="separator:a939d5767ba0bbba93169571343fb14c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad0276e2a9b126db0fd88443207235098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0276e2a9b126db0fd88443207235098">&#9670;&nbsp;</a></span>MAX_SIZE_BUFFER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_SIZE_BUFFER&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

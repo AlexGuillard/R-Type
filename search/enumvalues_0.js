@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['max_5fsize_5fbuff_293',['MAX_SIZE_BUFF',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07',1,'Network']]]
+  ['down_318',['DOWN',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5ac4e0e4e3118472beeb2ae75827450f1f',1,'Network']]],
+  ['drop_319',['DROP',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0abf8f3be424eb6a72b21549fbb24ffb57',1,'Network']]]
 ];
