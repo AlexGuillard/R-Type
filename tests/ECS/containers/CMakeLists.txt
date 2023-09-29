@@ -2,7 +2,8 @@
 add_executable(SparseArrayTest SparseArray.cpp)
 target_include_directories(SparseArrayTest PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(SparseArrayTest PRIVATE
-    GTest::GTest
+    gtest
+    gtest_main
 )
 add_test(SparseArrayTest SparseArrayTest)
 
@@ -10,7 +11,8 @@ add_test(SparseArrayTest SparseArrayTest)
 add_executable(RegistryTest Registry.cpp)
 target_include_directories(RegistryTest PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(RegistryTest PRIVATE
-    GTest::GTest
+    gtest
+    gtest_main
     ECS
 )
 add_test(RegistryTest RegistryTest)

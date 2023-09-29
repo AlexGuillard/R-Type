@@ -26,12 +26,12 @@ Network::ClientNetwork::~ClientNetwork()
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
     if (!error && recvd_bytes > 0) {
-        std::array<char, 1024> buffer;
-        std::copy(_data.begin(), _data.begin() + recvd_bytes, buffer.begin());
-        _data = std::string(buffer.begin(), buffer.begin() + recvd_bytes);
-        std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
-        receive(_socket);
-    }
+        _dataReceived.resize(recvd_bytes);
+        std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
+        std::cout << "[" << recvd_bytes << "] " << _dataReceived << std::endl;
+    } else {
+	    receive(_socket);
+	}
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
