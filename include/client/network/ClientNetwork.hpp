@@ -10,6 +10,7 @@
 #include "ANetwork.hpp"
 #include <iostream>
 #include "Error.hpp"
+#define MAX_SIZE_BUFFER 1024
 
 namespace Network {
 
@@ -111,6 +112,8 @@ namespace Network {
 		boost::asio::ip::udp::socket _socket;
 		//Data received
 		std::string _data;
+		//Buffer used to receive data
+		std::array<char, MAX_SIZE_BUFFER> _buffer;
 	};
 }
 
