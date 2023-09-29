@@ -132,12 +132,16 @@ void Screen::Display::keyPressededMenu(int KeyPressed)
 	if (_state == 1) {
 		if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
 		_hostName += KeyPressed;
+		} else if (KeyPressed == '-' && !_hostName.empty()) {
+			 _hostName.erase(_hostName.size() - 1);
 		}
 	}
 
 	if (_state == 2) {
 		if (KeyPressed >= '0' && KeyPressed <= '9') {
 			_port += KeyPressed;
+		} else if (KeyPressed == '-' && !_port.empty()) {
+			 _port.erase(_port.size() - 1);
 		}
 	}
 }
