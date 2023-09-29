@@ -6,17 +6,18 @@
 */
 
 #ifndef CLIENTNETWORK_HPP_
-    #define CLIENTNETWORK_HPP_
-    #include "ANetwork.hpp"
+#define CLIENTNETWORK_HPP_
+#include "ANetwork.hpp"
 
 namespace Network {
-    class ClientNetwork : public ANetwork  {
-        public:
-            ClientNetwork();
-            ~ClientNetwork();
-
-        protected:
-        private:
+    class ClientNetwork : public ANetwork {
+    public:
+        ClientNetwork();
+        ~ClientNetwork();
+        void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
+        void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+    protected:
+    private:
     };
 }
 

@@ -5,7 +5,15 @@
 ** main
 */
 
-int main(int ac, char **av)
+#include <asio.hpp>
+
+#include "server/network/ServerNetwork.hpp"
+
+int main(int argc, char **argv)
 {
+    const int port = 4848;
+    boost::asio::io_service ioService;
+    Network::ServerNetwork network(ioService, port);
+    ioService.run();
     return (0);
 }
