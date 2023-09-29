@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hitboxcomponent_168',['HitBoxComponent',['../structECS_1_1components_1_1HitBoxComponent.html',1,'ECS::components']]],
-  ['hpcomponent_169',['HPComponent',['../structECS_1_1components_1_1HPComponent.html',1,'ECS::components']]]
+  ['hitboxcomponent_175',['HitBoxComponent',['../structECS_1_1Components_1_1HitBoxComponent.html',1,'ECS::Components']]],
+  ['hpcomponent_176',['HPComponent',['../structECS_1_1Components_1_1HPComponent.html',1,'ECS::Components']]]
 ];

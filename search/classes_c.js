@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wavebeamcomponent_179',['WaveBeamComponent',['../structECS_1_1components_1_1WaveBeamComponent.html',1,'ECS::components']]]
+  ['wavebeamcomponent_186',['WaveBeamComponent',['../structECS_1_1Components_1_1WaveBeamComponent.html',1,'ECS::Components']]]
 ];

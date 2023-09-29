@@ -64,7 +64,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_05a744dbef5d1796390494a739c4044f.html">containers</a></li><li class="navelem"><a class="el" href="dir_7fa54094fea427d7c13b92729c92ad65.html">zipper</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_08881d6529c367d028dd020fd36dee2e.html">Containers</a></li><li class="navelem"><a class="el" href="dir_c7c31f517511bcfea8de4da70170d017.html">zipper</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -81,62 +81,60 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ZipperIterator_8hpp.html">ECS/containers/zipper/ZipperIterator.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ZipperIterator_8hpp.html">ECS/Containers/zipper/ZipperIterator.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceECS_1_1containers.html">ECS::containers</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceECS_1_1Containers.html">ECS::Containers</a> {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... SparseArrays&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classECS_1_1containers_1_1Zipper.html">Zipper</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classECS_1_1Containers_1_1Zipper.html">Zipper</a> {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#a0a020d8d1e56ddb71232bddedd981f51">   21</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classECS_1_1containers_1_1ZipperIterator.html">iterator</a> = <a class="code" href="classECS_1_1containers_1_1ZipperIterator.html">ZipperIterator</a>&lt;<a class="code" href="classECS_1_1containers_1_1Zipper.html">Zipper</a>&lt;SparseArrays...&gt;, SparseArrays...&gt;;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">   22</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">iterator_tuple</a> = std::tuple&lt;decltype(std::declval&lt;SparseArrays&gt;().<a class="code" href="classECS_1_1containers_1_1Zipper.html#a2a170e47e1870e1a09ac6e4b325f4a7d">begin</a>())...&gt;;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#a1c5601c10a72d32ad9d2fc30a21a7adc">   27</a></span>&#160;        <a class="code" href="classECS_1_1containers_1_1Zipper.html#a1c5601c10a72d32ad9d2fc30a21a7adc">Zipper</a>(SparseArrays &amp;...arrays)</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#ac1cbed07b0e07fffe39391ccc0a0ba02">   21</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classECS_1_1Containers_1_1ZipperIterator.html">iterator</a> = <a class="code" href="classECS_1_1Containers_1_1ZipperIterator.html">ZipperIterator</a>&lt;<a class="code" href="classECS_1_1Containers_1_1Zipper.html">Zipper</a>&lt;SparseArrays...&gt;, SparseArrays...&gt;;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">   22</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">iterator_tuple</a> = std::tuple&lt;decltype(std::declval&lt;SparseArrays&gt;().<a class="code" href="classECS_1_1Containers_1_1Zipper.html#aba9da41154de17116f5ec0d3aca0da0d">begin</a>())...&gt;;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#a3e9d25e2b785fd4b3d7c132b65c67e24">   27</a></span>&#160;        <a class="code" href="classECS_1_1Containers_1_1Zipper.html#a3e9d25e2b785fd4b3d7c132b65c67e24">Zipper</a>(SparseArrays &amp;...arrays)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            m_size = std::min({ arrays.size()... });</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            m_begin = <a class="code" href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">iterator_tuple</a>(arrays.begin()...);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            m_begin = <a class="code" href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">iterator_tuple</a>(arrays.begin()...);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            this-&gt;calculateEnd();</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#a2a170e47e1870e1a09ac6e4b325f4a7d">   38</a></span>&#160;        <a class="code" href="classECS_1_1containers_1_1ZipperIterator.html">iterator</a> <a class="code" href="classECS_1_1containers_1_1Zipper.html#a2a170e47e1870e1a09ac6e4b325f4a7d">begin</a>() noexcept</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#aba9da41154de17116f5ec0d3aca0da0d">   38</a></span>&#160;        <a class="code" href="classECS_1_1Containers_1_1ZipperIterator.html">iterator</a> <a class="code" href="classECS_1_1Containers_1_1Zipper.html#aba9da41154de17116f5ec0d3aca0da0d">begin</a>() noexcept</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::vector&lt;int&gt; v;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classECS_1_1containers_1_1Zipper.html#a0a020d8d1e56ddb71232bddedd981f51">iterator</a>(m_begin, m_size);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#a17908310774d22617afefcac9c095306">   47</a></span>&#160;        <a class="code" href="classECS_1_1containers_1_1ZipperIterator.html">iterator</a> <a class="code" href="classECS_1_1containers_1_1Zipper.html#a17908310774d22617afefcac9c095306">end</a>() noexcept</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classECS_1_1containers_1_1Zipper.html#a0a020d8d1e56ddb71232bddedd981f51">iterator</a>(m_end, 0);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classECS_1_1containers_1_1Zipper.html#a770be5b0771abe5e2237e8fd3dd0bf62">   54</a></span>&#160;        std::size_t <a class="code" href="classECS_1_1containers_1_1Zipper.html#a770be5b0771abe5e2237e8fd3dd0bf62">size</a>() const noexcept</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">return</span> m_size;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">void</span> calculateEnd()</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            m_end = m_begin;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            std::apply([<span class="keyword">this</span>](<span class="keyword">auto</span> &amp;&amp;...args) { ((args += m_size), ...); },</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                m_end);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::size_t m_size;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::size_t m_idx;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">iterator_tuple</a> m_begin;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">iterator_tuple</a> m_end;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}; <span class="comment">// namespace ECS::containers</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classECS_1_1Containers_1_1Zipper.html#ac1cbed07b0e07fffe39391ccc0a0ba02">iterator</a>(m_begin, m_size);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#a6c2b8d97abb097af2a31c10f91f0c8a5">   46</a></span>&#160;        <a class="code" href="classECS_1_1Containers_1_1ZipperIterator.html">iterator</a> <a class="code" href="classECS_1_1Containers_1_1Zipper.html#a6c2b8d97abb097af2a31c10f91f0c8a5">end</a>() noexcept</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classECS_1_1Containers_1_1Zipper.html#ac1cbed07b0e07fffe39391ccc0a0ba02">iterator</a>(m_end, 0);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61">   53</a></span>&#160;        std::size_t <a class="code" href="classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61">size</a>() const noexcept</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> m_size;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">void</span> calculateEnd()</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            m_end = m_begin;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            std::apply([<span class="keyword">this</span>](<span class="keyword">auto</span> &amp;&amp;...args) { ((args += m_size), ...); },</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                m_end);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::size_t m_size;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        std::size_t m_idx;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">iterator_tuple</a> m_begin;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">iterator_tuple</a> m_end;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}; <span class="comment">// namespace ECS::Containers</span></div>
 <div class="ttc" id="aZipperIterator_8hpp_html"><div class="ttname"><a href="ZipperIterator_8hpp.html">ZipperIterator.hpp</a></div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1ZipperIterator_html"><div class="ttname"><a href="classECS_1_1containers_1_1ZipperIterator.html">ECS::containers::ZipperIterator</a></div><div class="ttdoc">The iterator for the Zipper class.</div><div class="ttdef"><b>Definition:</b> ZipperIterator.hpp:26</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html">ECS::containers::Zipper</a></div><div class="ttdoc">A class that allows to iterate over multiple SparseArrays at once.</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:19</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_a0a020d8d1e56ddb71232bddedd981f51"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#a0a020d8d1e56ddb71232bddedd981f51">ECS::containers::Zipper::iterator</a></div><div class="ttdeci">ZipperIterator&lt; Zipper&lt; SparseArrays... &gt;, SparseArrays... &gt; iterator</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:21</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_a17908310774d22617afefcac9c095306"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#a17908310774d22617afefcac9c095306">ECS::containers::Zipper::end</a></div><div class="ttdeci">iterator end() noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:47</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_a1c5601c10a72d32ad9d2fc30a21a7adc"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#a1c5601c10a72d32ad9d2fc30a21a7adc">ECS::containers::Zipper::Zipper</a></div><div class="ttdeci">Zipper(SparseArrays &amp;...arrays)</div><div class="ttdoc">Construct a new Zipper object.</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:27</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_a2a170e47e1870e1a09ac6e4b325f4a7d"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#a2a170e47e1870e1a09ac6e4b325f4a7d">ECS::containers::Zipper::begin</a></div><div class="ttdeci">iterator begin() noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:38</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_a770be5b0771abe5e2237e8fd3dd0bf62"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#a770be5b0771abe5e2237e8fd3dd0bf62">ECS::containers::Zipper::size</a></div><div class="ttdeci">std::size_t size() const noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:54</div></div>
-<div class="ttc" id="aclassECS_1_1containers_1_1Zipper_html_ac355fb9d0762bb4120f9c38b71385ba0"><div class="ttname"><a href="classECS_1_1containers_1_1Zipper.html#ac355fb9d0762bb4120f9c38b71385ba0">ECS::containers::Zipper::iterator_tuple</a></div><div class="ttdeci">std::tuple&lt; decltype(std::declval&lt; SparseArrays &gt;().begin())... &gt; iterator_tuple</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:22</div></div>
-<div class="ttc" id="anamespaceECS_1_1containers_html"><div class="ttname"><a href="namespaceECS_1_1containers.html">ECS::containers</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1ZipperIterator_html"><div class="ttname"><a href="classECS_1_1Containers_1_1ZipperIterator.html">ECS::Containers::ZipperIterator</a></div><div class="ttdoc">The iterator for the Zipper class.</div><div class="ttdef"><b>Definition:</b> ZipperIterator.hpp:26</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html">ECS::Containers::Zipper</a></div><div class="ttdoc">A class that allows to iterate over multiple SparseArrays at once.</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:19</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_a3e9d25e2b785fd4b3d7c132b65c67e24"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#a3e9d25e2b785fd4b3d7c132b65c67e24">ECS::Containers::Zipper::Zipper</a></div><div class="ttdeci">Zipper(SparseArrays &amp;...arrays)</div><div class="ttdoc">Construct a new Zipper object.</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:27</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_a6c2b8d97abb097af2a31c10f91f0c8a5"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#a6c2b8d97abb097af2a31c10f91f0c8a5">ECS::Containers::Zipper::end</a></div><div class="ttdeci">iterator end() noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:46</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_a763a70b21a03f324a741baf37f1a4f61"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61">ECS::Containers::Zipper::size</a></div><div class="ttdeci">std::size_t size() const noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:53</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_aba9da41154de17116f5ec0d3aca0da0d"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#aba9da41154de17116f5ec0d3aca0da0d">ECS::Containers::Zipper::begin</a></div><div class="ttdeci">iterator begin() noexcept</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:38</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_ac1cbed07b0e07fffe39391ccc0a0ba02"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#ac1cbed07b0e07fffe39391ccc0a0ba02">ECS::Containers::Zipper::iterator</a></div><div class="ttdeci">ZipperIterator&lt; Zipper&lt; SparseArrays... &gt;, SparseArrays... &gt; iterator</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:21</div></div>
+<div class="ttc" id="aclassECS_1_1Containers_1_1Zipper_html_acdde4f301f809e9884e3f1b3e6fb3008"><div class="ttname"><a href="classECS_1_1Containers_1_1Zipper.html#acdde4f301f809e9884e3f1b3e6fb3008">ECS::Containers::Zipper::iterator_tuple</a></div><div class="ttdeci">std::tuple&lt; decltype(std::declval&lt; SparseArrays &gt;().begin())... &gt; iterator_tuple</div><div class="ttdef"><b>Definition:</b> Zipper.hpp:22</div></div>
+<div class="ttc" id="anamespaceECS_1_1Containers_html"><div class="ttname"><a href="namespaceECS_1_1Containers.html">ECS::Containers</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

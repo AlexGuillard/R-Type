@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['start_298',['start',['../structECS_1_1components_1_1DrawableComponent.html#a3f32fac5556d2ea1ee060cbcd8190618',1,'ECS::components::DrawableComponent']]]
+  ['start_308',['start',['../structECS_1_1Components_1_1DrawableComponent.html#a52bdb0f23a3cf760dc981a79120f2be9',1,'ECS::Components::DrawableComponent']]],
+  ['strength_309',['strength',['../structECS_1_1Components_1_1WaveBeamComponent.html#a20ff0ec70fc1cbf4593b65b43d0bf66d',1,'ECS::Components::WaveBeamComponent']]]
 ];

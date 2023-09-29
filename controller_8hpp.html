@@ -64,21 +64,22 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_b08fec6c4ef98690db23d3de8158e8f6.html">systems</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_b89e78f1f9d461696062c0d95ce22a7b.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">controller.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="Registry_8hpp_source.html">ECS/containers/Registry.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="PositionComponent_8hpp_source.html">ECS/components/PositionComponent.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="VelocityComponent_8hpp_source.html">ECS/components/VelocityComponent.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ControllableComponent_8hpp_source.html">ECS/components/ControllableComponent.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Registry_8hpp_source.html">ECS/Containers/Registry.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="PositionComponent_8hpp_source.html">ECS/Components/PositionComponent.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="VelocityComponent_8hpp_source.html">ECS/Components/VelocityComponent.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ControllableComponent_8hpp_source.html">ECS/Components/ControllableComponent.hpp</a>&quot;</code><br />
 </div>
 <p><a href="controller_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -86,14 +87,19 @@ $(function() {
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceECS"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS.html">ECS</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceECS_1_1systems"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1systems.html">ECS::systems</a></td></tr>
+<tr class="memitem:namespaceECS_1_1Systems"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html">ECS::Systems</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaae34bfb65798ae6d7e1575e52a50752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1systems.html#aaae34bfb65798ae6d7e1575e52a50752">ECS::systems::controller</a> (containers::Registry &amp;registry, containers::SparseArray&lt; components::VelocityComponent &gt; &amp;velocities, containers::SparseArray&lt; components::ControllableComponent &gt; &amp;controllables)</td></tr>
-<tr class="memdesc:aaae34bfb65798ae6d7e1575e52a50752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the input of the player.  <a href="namespaceECS_1_1systems.html#aaae34bfb65798ae6d7e1575e52a50752">More...</a><br /></td></tr>
-<tr class="separator:aaae34bfb65798ae6d7e1575e52a50752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#ae0ca27cc4f9651ba35d0a693b0dfad62">ECS::Systems::controller</a> (Containers::Registry &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &gt; &amp;positions, Containers::SparseArray&lt; Components::VelocityComponent &gt; &amp;velocities, Containers::SparseArray&lt; Components::ControllableComponent &gt; &amp;controllables)</td></tr>
+<tr class="memdesc:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the input of the player.  <a href="namespaceECS_1_1Systems.html#ae0ca27cc4f9651ba35d0a693b0dfad62">More...</a><br /></td></tr>
+<tr class="separator:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adf07eef9145a289d8a80651272f357b5"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#adf07eef9145a289d8a80651272f357b5">ECS::Systems::timeNeededForWaveBeam</a> = 1</td></tr>
+<tr class="separator:adf07eef9145a289d8a80651272f357b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

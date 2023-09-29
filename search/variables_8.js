@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['maxtexturepathsize_296',['maxTexturePathSize',['../namespaceECS_1_1components.html#a496510f86a0619c80d653140ff0838d1',1,'ECS::components']]]
+  ['maxtexturepathsize_305',['maxTexturePathSize',['../namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430',1,'ECS::Components']]],
+  ['maxwavebeamstrength_306',['maxWaveBeamStrength',['../namespaceECS_1_1Components.html#a889129375139c77543a5ae29736db129',1,'ECS::Components']]]
 ];
