@@ -3,5 +3,5 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/ClientNetwork.cpp
 )
 add_library(ClientNetwork STATIC ${SRC})
-target_link_libraries(ClientNetwork PUBLIC ANetwork)
+target_link_libraries(ClientNetwork PUBLIC ANetwork Boost::asio)
 target_include_directories(ClientNetwork PUBLIC ${INCROOT})

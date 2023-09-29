@@ -30,7 +30,7 @@ namespace ECS::Components {
      * @param forward If true, the animation will go forward
      * @see SpriteSheetDrawer
      */
-    typedef struct {
+    struct DrawableComponent {
         char texture[maxTexturePathSize];
         Vector2 frameRatio;
         Vector2 start = { 0, 0 };
@@ -40,5 +40,5 @@ namespace ECS::Components {
         std::size_t frame = 0;
         float timeAtLastFrameChange = 0.0F;
         bool forward = true;
-    } DrawableComponent;
+    };
 } // namespace ECS::Components
