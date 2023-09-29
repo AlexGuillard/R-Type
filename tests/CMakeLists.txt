@@ -1,13 +1,3 @@
-find_package(GTest REQUIRED) # Find the googletest library
-
-if(NOT TARGET GTest::GTest) # Prevent overriding the parent project's compiler/linker
-    add_library(GTest::GTest INTERFACE IMPORTED)
-else() # If the target already exists, just make sure it's imported
-    include_directories(${GTEST_INCLUDE_DIRS})
-endif()
-
-target_link_libraries(GTest::GTest INTERFACE gtest_main)
-
 # Copy the lines below to add unit tests. Replace text that looks like this:
 # [REPLACE] with the appropriate values.
 # [TEXT]... means that the text can be reapeted as many times as needed.
