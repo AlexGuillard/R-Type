@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace ECS::components {
+namespace ECS::Components {
 	/**
 	 * @brief Component that contains the position of an entity
 	 * @param x Position on the x axis
@@ -17,4 +17,4 @@ namespace ECS::components {
 		float x;
 		float y;
 	};
-}; // namespace ECS::components
+}; // namespace ECS::Components
