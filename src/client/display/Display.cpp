@@ -10,11 +10,13 @@
 void Screen::Display::initWindow()
 {
 	int monitor = GetCurrentMonitor();
-    const int screenWidth = GetMonitorWidth(monitor);
-    const int screenHeight = GetMonitorHeight(monitor);
+    // const int screenWidth = GetMonitorWidth(monitor);
+    // const int screenHeight = GetMonitorHeight(monitor);
+    const int screenWidth = 700;
+    const int screenHeight = 500;
 	const int fps = 60;
 	InitWindow(screenWidth, screenHeight, "R-Type");
-	ToggleFullscreen();
+	// ToggleFullscreen();
     SetTargetFPS(fps);
 }
 
@@ -47,7 +49,11 @@ void Screen::Display::displayHostNameInput()
 	const int fontSizeText = 20;
 
 	_hostNameclickableZone = {posXRect, posYRect, widthRect, heightRect};
-	DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+	if (_hostName.empty()) {
+		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
+	} else {
+		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+	}
 	DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
@@ -63,7 +69,11 @@ void Screen::Display::displayPortInput()
 	const int fontSizeText = 20;
 
 	_portclickableZone = {posXRect, posYRect, widthRect, heightRect};
-	DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+	if (_port.empty()) {
+		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
+	} else {
+		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+	}
 	DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
@@ -74,8 +84,14 @@ void Screen::Display::displayConnectionButton()
 	const int posXText = 105;
 	const int posYText = 215;
 	const int fontSizeText = 20;
-	_connectionclickableZone = defaultClickableZone;
-	DrawRectangleRec(_connectionclickableZone, BLUE);
+
+	if (_hostName.empty() || _port.empty()) {
+		_connectionclickableZone = defaultClickableZone;
+		DrawRectangleRec(_connectionclickableZone, RED);
+	} else {
+		_connectionclickableZone = defaultClickableZone;
+		DrawRectangleRec(_connectionclickableZone, BLUE);
+	}
 	DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
 }
 
@@ -117,10 +133,19 @@ void Screen::Display::mouseClickedMenu()
 void Screen::Display::keyPressededMenu(int KeyPressed)
 {
 	if (_state == 1) {
+		if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
 		_hostName += KeyPressed;
+		} else if (KeyPressed == '-' && !_hostName.empty()) {
+			 _hostName.erase(_hostName.size() - 1);
+		}
 	}
+
 	if (_state == 2) {
-		_port += KeyPressed;
+		if (KeyPressed >= '0' && KeyPressed <= '9') {
+			_port += KeyPressed;
+		} else if (KeyPressed == '-' && !_port.empty()) {
+			 _port.erase(_port.size() - 1);
+		}
 	}
 }
 
