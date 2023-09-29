@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20.0)
+cmake_minimum_required(VERSION 3.27.4)
 enable_testing()
 set(CMAKE_BUILD_TYPE Release)
 project(R-Type VERSION 0.0.1 LANGUAGES CXX DESCRIPTION "RType")
