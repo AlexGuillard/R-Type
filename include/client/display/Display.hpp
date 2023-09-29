@@ -10,6 +10,7 @@
 
 	#include <iostream>
 	#include <raylib.h>
+	#include "client/network/ClientNetwork.hpp"
 
 namespace Screen {
 	/**
@@ -92,6 +93,8 @@ namespace Screen {
 			Rectangle _connectionclickableZone;
 			// Set game state 0=menu 1=game
 			bool _gameState;
+			// Client used to communicate with server (network)
+			Network::ClientNetwork _client;
     };
 }
 
