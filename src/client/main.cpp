@@ -10,8 +10,8 @@
 
 int main()
 {
-    // Screen::Display window;
-    Screen::Display window(Screen::Display::GameState::GAME); // Uncomment this line to start the game directly
+    Screen::Display window;
+    // Screen::Display window(Screen::Display::GameState::GAME); // Uncomment this line to start the game directly
     GameEngine::GameEngine engine = GameEngine::createEngine();
     window.displayWindow(engine);
 }
