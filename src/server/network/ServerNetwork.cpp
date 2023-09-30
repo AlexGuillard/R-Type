@@ -22,11 +22,11 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 	std::string actualClient;
 
     if ( !error && recvd_bytes > 0 ) {
-		std::cout << _clients.size() << std::endl;
-		addClient();
-		if (findClient(getActualClient()) != "")
-        std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
-        send(_socket, "receive data\n");
+		connection();
+		if (findClient(getActualClient()) != "") {
+			std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
+			send(_socket, "receive data\n");
+		}
 		for (int i = 0; i < MAX_SIZE_BUFF; i++) {
 			_data[i] = '\0';
 		}
@@ -63,4 +63,16 @@ std::string Network::ServerNetwork::findClient(std::string findId) const
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
 	receive(_socket);
+}
+
+void Network::ServerNetwork::connection()
+{
+	std::string res = _data.data();
+
+	if (res == "Hello R-Type server\n" && _clients.size() < 5) {
+		addClient();
+		send(_socket, "200\n");
+	} else {
+		send(_socket, "401: Forbidden\n");
+	}
 }

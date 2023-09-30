@@ -37,6 +37,7 @@ namespace Network {
             void addClient();
 			std::string findClient(std::string id) const;
 			std::string getActualClient() const;
+			void connection();
         protected:
 			/**
 			 * @brief variable where the client is
