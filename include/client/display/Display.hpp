@@ -9,7 +9,9 @@
 
 #include <iostream>
 #include <raylib.h>
+
 #include "client/network/ClientNetwork.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 namespace Screen {
     /**
@@ -18,16 +20,20 @@ namespace Screen {
      * */
     class Display {
     public:
+        enum class GameState {
+            MENU,
+            GAME
+        };
         /**
          * @brief Init the window with raylib
-         *
+         * @param state set the starting state of the game
          */
-        static void initWindow();
+        Display(GameState state = GameState::MENU);
         /**
          * @brief loop display window with menu or game
-         *
+         * @param engine GameEngine
          */
-        void displayWindow();
+        void displayWindow(GameEngine::GameEngine &engine);
 
         /**
          * @brief display an input for hostname
@@ -68,13 +74,9 @@ namespace Screen {
 
         /**
          * @brief draw the game
-         *
+         * @param engine GameEngine
          */
-        void drawGame();
-
-
-        Display();
-        ~Display();
+        void drawGame(GameEngine::GameEngine &engine);
 
     protected:
     private:
@@ -91,7 +93,8 @@ namespace Screen {
         // Set the rectangle clickable for conection button
         Rectangle _connectionclickableZone;
         // Set game state 0=menu 1=game
-        bool _gameState;
+        // bool _gameState;
+        GameState _gameState;
         // Client used to communicate with server (network)
         Network::ClientNetwork _client;
     };
