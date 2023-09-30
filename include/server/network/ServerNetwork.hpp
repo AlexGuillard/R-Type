@@ -8,6 +8,7 @@
 #ifndef SERVERNETWORK_HPP_
     #define SERVERNETWORK_HPP_
 	#include <iostream>
+	#include <algorithm>
     #include "ANetwork.hpp"
 
 namespace Network {
@@ -33,6 +34,9 @@ namespace Network {
 			 * @param recvd_bytes number of bytes received
 			 */
 			void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+            void addClient();
+			std::string findClient(std::string id) const;
+			std::string getActualClient() const;
         protected:
 			/**
 			 * @brief variable where the client is
@@ -43,7 +47,7 @@ namespace Network {
 			 * @brief hmap for the list of client on the server
 			 *
 			 */
-			std::unordered_map<std::string, boost::asio::ip::udp::endpoint> clients;
+			std::vector<std::string> _clients;
         private:
     };
 }

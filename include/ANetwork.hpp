@@ -7,6 +7,8 @@
 
 #ifndef ANETWORK_HPP_
     #define ANETWORK_HPP_
+	#include <iostream>
+	#include <vector>
     #include "INetwork.hpp"
 
 namespace Network {
@@ -48,7 +50,7 @@ namespace Network {
 			 * @brief variable that contain what you received
 			 *
 			 */
-			char _data[MAX_SIZE_BUFF];
+			std::vector<char> _data;
 			/**
 			 * @brief contain the IP address and a protocol port number
 			 *
