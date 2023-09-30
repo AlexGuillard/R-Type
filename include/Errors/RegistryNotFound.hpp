@@ -10,10 +10,10 @@
 #include <stdexcept>
 
 namespace Errors {
-	class RegistryNotFound : public std::runtime_error {
-	public:
-		RegistryNotFound(const std::string &type)
-			: std::runtime_error("Registry not found: " + type)
-		{}
-	};
+    class RegistryNotFound : public std::runtime_error {
+    public:
+        RegistryNotFound(const std::string &type)
+            : std::runtime_error("Registry not found: " + type)
+        {}
+    };
 }; // namespace Errors

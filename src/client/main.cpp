@@ -5,13 +5,11 @@
 ** main
 */
 
-#include <iostream>
 #include "client/display/Display.hpp"
-
 
 int main()
 {
-	Screen::Display window;
-	window.displayWindow();
+    Screen::Display window;
+    window.displayWindow();
 }
 

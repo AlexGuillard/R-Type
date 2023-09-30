@@ -8,7 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "GameEngine/GameEngine.hpp"
-#include "ECS/containers/SparseArray.hpp"
+#include "ECS/Containers/SparseArray.hpp"
 #include "Errors/RegistryNotFound.hpp"
 
 TEST(GameEngineT, creatingRegistry)
@@ -42,8 +42,8 @@ struct TestComponent {
 };
 
 void testSystem(
-	ECS::containers::Registry &registry,
-	ECS::containers::SparseArray<TestComponent> &components)
+	ECS::Containers::Registry &registry,
+	ECS::Containers::SparseArray<TestComponent> &components)
 {
 	for (auto &component : components) {
 		component->value++;
@@ -51,8 +51,8 @@ void testSystem(
 }
 
 void testSystem2(
-	ECS::containers::Registry &registry,
-	ECS::containers::SparseArray<TestComponent> &components)
+	ECS::Containers::Registry &registry,
+	ECS::Containers::SparseArray<TestComponent> &components)
 {
 	for (auto &component : components) {
 		component->value2 = true;
