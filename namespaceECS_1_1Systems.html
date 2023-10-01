@@ -78,6 +78,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a597f278d623676af0c0bf35c24453b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a597f278d623676af0c0bf35c24453b59">collision</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HitBoxComponent.html">Components::HitBoxComponent</a> &gt; &amp;hitboxes, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollidableComponent.html">Components::CollidableComponent</a> &gt; &amp;collidables, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollisionComponent.html">Components::CollisionComponent</a> &gt; &amp;collisions)</td></tr>
+<tr class="memdesc:a597f278d623676af0c0bf35c24453b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects collisions between entities with collidable components and update their collision components accordingly.  <a href="namespaceECS_1_1Systems.html#a597f278d623676af0c0bf35c24453b59">More...</a><br /></td></tr>
+<tr class="separator:a597f278d623676af0c0bf35c24453b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#ae0ca27cc4f9651ba35d0a693b0dfad62">controller</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">Components::VelocityComponent</a> &gt; &amp;velocities, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1ControllableComponent.html">Components::ControllableComponent</a> &gt; &amp;controllables)</td></tr>
 <tr class="memdesc:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the input of the player.  <a href="namespaceECS_1_1Systems.html#ae0ca27cc4f9651ba35d0a693b0dfad62">More...</a><br /></td></tr>
 <tr class="separator:ae0ca27cc4f9651ba35d0a693b0dfad62"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,6 +100,65 @@ Variables</h2></td></tr>
 <tr class="separator:adf07eef9145a289d8a80651272f357b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a597f278d623676af0c0bf35c24453b59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a597f278d623676af0c0bf35c24453b59">&#9670;&nbsp;</a></span>collision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ECS::Systems::collision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HitBoxComponent.html">Components::HitBoxComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>hitboxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollidableComponent.html">Components::CollidableComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>collidables</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollisionComponent.html">Components::CollisionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>collisions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detects collisions between entities with collidable components and update their collision components accordingly. </p>
+<p>The collision component of an entity contains the list of entities that are colliding with it. If an entity has no collision component, it means that it is not colliding with any other entity.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">registry</td><td>The <a class="el" href="namespaceECS.html">ECS</a> registry containing all entities and their components. </td></tr>
+    <tr><td class="paramname">positions</td><td>Position components for all entities. </td></tr>
+    <tr><td class="paramname">hitboxes</td><td>Hitbox components for all entities. </td></tr>
+    <tr><td class="paramname">collidables</td><td>Collidable components for all entities. </td></tr>
+    <tr><td class="paramname">collisions</td><td>Collision components for all entities. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae0ca27cc4f9651ba35d0a693b0dfad62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0ca27cc4f9651ba35d0a693b0dfad62">&#9670;&nbsp;</a></span>controller()</h2>
 

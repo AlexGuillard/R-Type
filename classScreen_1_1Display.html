@@ -69,8 +69,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classScreen_1_1Display-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Screen::Display Class Reference</div>  </div>
@@ -82,11 +82,21 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="Display_8hpp_source.html">Display.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a2d87c8007b598cb87597aaaca031d6c6"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> { <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">MENU</a>
+, <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13">GAME</a>
+ }</td></tr>
+<tr class="separator:a2d87c8007b598cb87597aaaca031d6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0082605dd6c88d63888cbf491804b529"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529">displayWindow</a> ()</td></tr>
-<tr class="memdesc:a0082605dd6c88d63888cbf491804b529"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop display window with menu or game  <a href="classScreen_1_1Display.html#a0082605dd6c88d63888cbf491804b529">More...</a><br /></td></tr>
-<tr class="separator:a0082605dd6c88d63888cbf491804b529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73aac76c704605918eae7cfebafcf12d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a73aac76c704605918eae7cfebafcf12d">Display</a> (<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> state=<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">GameState::MENU</a>)</td></tr>
+<tr class="memdesc:a73aac76c704605918eae7cfebafcf12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the window with raylib.  <a href="classScreen_1_1Display.html#a73aac76c704605918eae7cfebafcf12d">More...</a><br /></td></tr>
+<tr class="separator:a73aac76c704605918eae7cfebafcf12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37231053e6564d71388c413f90247506"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a37231053e6564d71388c413f90247506">displayWindow</a> (GameEngine::GameEngine &amp;engine)</td></tr>
+<tr class="memdesc:a37231053e6564d71388c413f90247506"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop display window with menu or game  <a href="classScreen_1_1Display.html#a37231053e6564d71388c413f90247506">More...</a><br /></td></tr>
+<tr class="separator:a37231053e6564d71388c413f90247506"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42929166bf61b69b06791e02142ce15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">displayHostNameInput</a> ()</td></tr>
 <tr class="memdesc:ac42929166bf61b69b06791e02142ce15"><td class="mdescLeft">&#160;</td><td class="mdescRight">display an input for hostname  <a href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">More...</a><br /></td></tr>
 <tr class="separator:ac42929166bf61b69b06791e02142ce15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,25 +118,46 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca4c5f6b99d0f519977442f70661cdf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0">drawMenu</a> ()</td></tr>
 <tr class="memdesc:aca4c5f6b99d0f519977442f70661cdf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the menu  <a href="classScreen_1_1Display.html#aca4c5f6b99d0f519977442f70661cdf0">More...</a><br /></td></tr>
 <tr class="separator:aca4c5f6b99d0f519977442f70661cdf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9997f0e1c4dd0c0b6e1b8cccc61a82f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">drawGame</a> ()</td></tr>
-<tr class="memdesc:a9997f0e1c4dd0c0b6e1b8cccc61a82f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the game  <a href="classScreen_1_1Display.html#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">More...</a><br /></td></tr>
-<tr class="separator:a9997f0e1c4dd0c0b6e1b8cccc61a82f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6aeb34636b44af48fea6cdeaf3cda08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ab6aeb34636b44af48fea6cdeaf3cda08">Display</a> ()</td></tr>
-<tr class="separator:ab6aeb34636b44af48fea6cdeaf3cda08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a910e0be806bb6328f452840f1dfee19e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a910e0be806bb6328f452840f1dfee19e">~Display</a> ()</td></tr>
-<tr class="separator:a910e0be806bb6328f452840f1dfee19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b4568a00da8bfcf52668477c26c5f45"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a9b4568a00da8bfcf52668477c26c5f45">initWindow</a> ()</td></tr>
-<tr class="memdesc:a9b4568a00da8bfcf52668477c26c5f45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the window with raylib.  <a href="classScreen_1_1Display.html#a9b4568a00da8bfcf52668477c26c5f45">More...</a><br /></td></tr>
-<tr class="separator:a9b4568a00da8bfcf52668477c26c5f45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a26ed58bd873959d95221c36309dea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac3a26ed58bd873959d95221c36309dea">drawGame</a> (GameEngine::GameEngine &amp;engine)</td></tr>
+<tr class="memdesc:ac3a26ed58bd873959d95221c36309dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the game  <a href="classScreen_1_1Display.html#ac3a26ed58bd873959d95221c36309dea">More...</a><br /></td></tr>
+<tr class="separator:ac3a26ed58bd873959d95221c36309dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classScreen_1_1Display.html" title="Display contain fonction for the graphic of the client.">Display</a> contain fonction for the graphic of the client. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab6aeb34636b44af48fea6cdeaf3cda08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6aeb34636b44af48fea6cdeaf3cda08">&#9670;&nbsp;</a></span>Display()</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a2d87c8007b598cb87597aaaca031d6c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d87c8007b598cb87597aaaca031d6c6">&#9670;&nbsp;</a></span>GameState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">Screen::Display::GameState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13"></a>GAME&#160;</td><td class="fielddoc"></td></tr>
+</table>
+<div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                             {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            MENU,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            GAME</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        };</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a73aac76c704605918eae7cfebafcf12d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73aac76c704605918eae7cfebafcf12d">&#9670;&nbsp;</a></span>Display()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,28 +165,20 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Screen::Display::Display </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a>&#160;</td>
+          <td class="paramname"><em>state</em> = <code><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">GameState::MENU</a></code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a910e0be806bb6328f452840f1dfee19e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a910e0be806bb6328f452840f1dfee19e">&#9670;&nbsp;</a></span>~Display()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Screen::Display::~Display </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Init the window with raylib. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>set the starting state of the game </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -236,8 +259,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0082605dd6c88d63888cbf491804b529"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0082605dd6c88d63888cbf491804b529">&#9670;&nbsp;</a></span>displayWindow()</h2>
+<a id="a37231053e6564d71388c413f90247506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37231053e6564d71388c413f90247506">&#9670;&nbsp;</a></span>displayWindow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -245,18 +268,25 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Screen::Display::displayWindow </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
+          <td class="paramname"><em>engine</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>loop display window with menu or game </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">engine</td><td>GameEngine </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="a9997f0e1c4dd0c0b6e1b8cccc61a82f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9997f0e1c4dd0c0b6e1b8cccc61a82f0">&#9670;&nbsp;</a></span>drawGame()</h2>
+<a id="ac3a26ed58bd873959d95221c36309dea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a26ed58bd873959d95221c36309dea">&#9670;&nbsp;</a></span>drawGame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,13 +294,20 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Screen::Display::drawGame </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
+          <td class="paramname"><em>engine</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>draw the game </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">engine</td><td>GameEngine </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -290,33 +327,6 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>draw the menu </p>
-
-</div>
-</div>
-<a id="a9b4568a00da8bfcf52668477c26c5f45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b4568a00da8bfcf52668477c26c5f45">&#9670;&nbsp;</a></span>initWindow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void Screen::Display::initWindow </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Init the window with raylib. </p>
 
 </div>
 </div>
