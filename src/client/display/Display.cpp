@@ -7,6 +7,8 @@
 
 #include "client/display/Display.hpp"
 
+///// Window
+
 void Screen::Display::initWindow()
 {
 	int monitor = GetCurrentMonitor();
@@ -37,6 +39,7 @@ void Screen::Display::displayWindow()
     CloseWindow();
 }
 
+///// Menu
 void Screen::Display::displayHostNameInput()
 {
 	const int posXRect = 100;
@@ -98,13 +101,15 @@ void Screen::Display::displayConnectionButton()
 void Screen::Display::detectActionMenu()
 {
 	int keyPressed = 0;
+	int key = 0;
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 		mouseClickedMenu();
     }
 	keyPressed = GetCharPressed();
-	if (keyPressed != 0) {
-		keyPressededMenu(keyPressed);
+	key = GetKeyPressed();
+	if (keyPressed != 0 || key != 0) {
+		keyPressededMenu(keyPressed, key);
 	}
 }
 
@@ -130,21 +135,30 @@ void Screen::Display::mouseClickedMenu()
 	}
 }
 
-void Screen::Display::keyPressededMenu(int KeyPressed)
+void Screen::Display::keyPressededMenu(int KeyPressed, int key)
 {
+	const int deleteKey = 259;
+
+	if (key == deleteKey) {
+		if (_state == 1) {
+				 _hostName.erase(_hostName.size() - 1);
+		}
+		if (_state == 2) {
+				 _port.erase(_port.size() - 1);
+		}
+	}
+	if (KeyPressed == 0) {
+		return;
+	}
 	if (_state == 1) {
 		if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
-		_hostName += KeyPressed;
-		} else if (KeyPressed == '-' && !_hostName.empty()) {
-			 _hostName.erase(_hostName.size() - 1);
+			_hostName += KeyPressed;
 		}
 	}
 
 	if (_state == 2) {
 		if (KeyPressed >= '0' && KeyPressed <= '9') {
 			_port += KeyPressed;
-		} else if (KeyPressed == '-' && !_port.empty()) {
-			 _port.erase(_port.size() - 1);
 		}
 	}
 }
@@ -156,9 +170,54 @@ void Screen::Display::drawMenu()
 	displayConnectionButton();
 }
 
-void Screen::Display::drawGame()
+///// Game
+
+void Screen::Display::detectActionGame()
+{
+	int keyPressed = 0;
+
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+		mouseClickedGame();
+    }
+	keyPressed = GetKeyPressed();
+	if (keyPressed != 0) {
+		keyPressededGame(keyPressed);
+	}
+}
+
+void Screen::Display::mouseClickedGame()
 {
 
+}
+
+void Screen::Display::keyPressededGame(int KeyPressed)
+{
+	const int upKey = 87;
+	const int downKey = 83;
+	const int leftKey = 65;
+	const int rightKey = 68;
+
+	switch (KeyPressed) {
+		case upKey:
+			_client.sendMovement(Network::Movement::UP);
+			break;
+		case downKey:
+			_client.sendMovement(Network::Movement::DOWN);
+			break;
+		case leftKey:
+			_client.sendMovement(Network::Movement::LEFT);
+			break;
+		case rightKey:
+			_client.sendMovement(Network::Movement::RIGHT);
+			break;
+		default:
+			break;
+	}
+}
+
+void Screen::Display::drawGame()
+{
+	detectActionGame();
 }
 
 Screen::Display::Display()
