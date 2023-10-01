@@ -25,6 +25,7 @@
 #include "ECS/systems/controller.hpp"
 #include "ECS/systems/movement.hpp"
 #include "ECS/systems/drawable.hpp"
+#include "ECS/systems/gravity.hpp"
 #include "ECS/systems/helper/SpriteSheetDrawer.hpp"
 #include "GameEngine/GameEngine.hpp"
 
@@ -69,6 +70,7 @@ containers::Registry &setupRegistry(containers::Registry &registry)
 	registry.addSystem<components::VelocityComponent, components::ControllableComponent>(systems::controller);
 	registry.addSystem<components::PositionComponent, components::VelocityComponent>(systems::movement);
 	registry.addSystem<components::PositionComponent, components::DrawableComponent>(systems::drawable);
+	registry.addSystem<components::VelocityComponent, components::GravityComponent>(systems::gravity);
 	return registry;
 }
 
