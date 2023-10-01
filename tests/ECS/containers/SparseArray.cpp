@@ -8,10 +8,10 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
 
-#include "ECS/containers/SparseArray.hpp"
+#include "ECS/Containers/SparseArray.hpp"
 #include "Errors/ValueNotFound.hpp"
 
-using namespace ECS::containers;
+using namespace ECS::Containers;
 
 TEST(SparseArray, increasingInsertion)
 {

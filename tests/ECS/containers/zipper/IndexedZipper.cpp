@@ -7,9 +7,9 @@
 
 #include <gtest/gtest.h>
 
-#include "ECS/containers/zipper/IndexedZipper.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
 
-using namespace ECS::containers;
+using namespace ECS::Containers;
 
 typedef struct {
 	int x;

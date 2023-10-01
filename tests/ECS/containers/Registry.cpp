@@ -7,10 +7,10 @@
 
 #include <gtest/gtest.h>
 
-#include "ECS/containers/Registry.hpp"
+#include "ECS/Containers/Registry.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
 
-using namespace ECS::containers;
+using namespace ECS::Containers;
 
 TEST(Registry, canGetRegisteredComponents)
 {

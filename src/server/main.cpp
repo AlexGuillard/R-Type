@@ -9,8 +9,9 @@
 
 int main(int argc, char **argv)
 {
-	boost::asio::io_service ioService;
-	Network::ServerNetwork network(ioService, 4848);
-	ioService.run();
-	return (0);
+    const int port = 4848;
+    boost::asio::io_service ioService;
+    Network::ServerNetwork network(ioService, port);
+    ioService.run();
+    return (0);
 }

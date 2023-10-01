@@ -9,7 +9,7 @@
 
 #include <cstddef>
 
-namespace ECS::components {
+namespace ECS::Components {
 	/**
 	 * @brief Component for entities that have HP
 	 * @param hp HP of the entity
@@ -17,4 +17,4 @@ namespace ECS::components {
 	struct HPComponent {
 		std::size_t hp = 1;
 	};
-}; // namespace ECS::components
+}; // namespace ECS::Components
