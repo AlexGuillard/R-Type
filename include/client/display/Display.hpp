@@ -65,7 +65,7 @@ namespace Screen {
          *
          * @param KeyPressed send the key pressed to function
          */
-        void keyPressededMenu(int KeyPressed);
+        void keyPressededMenu(int KeyPressed, int key);
         /**
          * @brief draw the menu
          *
