@@ -7,33 +7,30 @@
 
 #include "client/display/Display.hpp"
 
-///// Window
-
-void Screen::Display::initWindow()
+Screen::Display::Display(GameState state) : _state(0), _gameState(state)
 {
-	int monitor = GetCurrentMonitor();
+    int monitor = GetCurrentMonitor();
     // const int screenWidth = GetMonitorWidth(monitor);
     // const int screenHeight = GetMonitorHeight(monitor);
     const int screenWidth = 700;
     const int screenHeight = 500;
-	const int fps = 60;
-	InitWindow(screenWidth, screenHeight, "R-Type");
-	// ToggleFullscreen();
+    const int fps = 60;
+    InitWindow(screenWidth, screenHeight, "R-Type");
+    // ToggleFullscreen();
     SetTargetFPS(fps);
 }
 
-void Screen::Display::displayWindow()
+void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
-	initWindow();
     while (!WindowShouldClose()) {
         BeginDrawing();
-            ClearBackground(RAYWHITE);
-			if (!_gameState) {
-				detectActionMenu();
-				drawMenu();
-			} else {
-				drawGame();
-			}
+        ClearBackground(RAYWHITE);
+        if (_gameState == GameState::MENU) {
+            detectActionMenu();
+            drawMenu();
+        } else if (_gameState == GameState::GAME) {
+            drawGame(engine);
+        }
         EndDrawing();
     }
     CloseWindow();
@@ -42,14 +39,14 @@ void Screen::Display::displayWindow()
 ///// Menu
 void Screen::Display::displayHostNameInput()
 {
-	const int posXRect = 100;
-	const int posYRect = 100;
-	const int widthRect = 500;
-	const int heightRect = 30;
-	const int lineSize = 30;
-	const int posXText = 105;
-	const int posYText = 105;
-	const int fontSizeText = 20;
+    const int posXRect = 100;
+    const int posYRect = 100;
+    const int widthRect = 500;
+    const int heightRect = 30;
+    const int lineSize = 30;
+    const int posXText = 105;
+    const int posYText = 105;
+    const int fontSizeText = 20;
 
 	_hostNameclickableZone = {posXRect, posYRect, widthRect, heightRect};
 	if (_hostName.empty()) {
@@ -62,14 +59,14 @@ void Screen::Display::displayHostNameInput()
 
 void Screen::Display::displayPortInput()
 {
-	const int posXRect = 100;
-	const int posYRect = 150;
-	const int widthRect = 500;
-	const int heightRect = 30;
-	const int lineSize = 30;
-	const int posXText = 105;
-	const int posYText = 155;
-	const int fontSizeText = 20;
+    const int posXRect = 100;
+    const int posYRect = 150;
+    const int widthRect = 500;
+    const int heightRect = 30;
+    const int lineSize = 30;
+    const int posXText = 105;
+    const int posYText = 155;
+    const int fontSizeText = 20;
 
 	_portclickableZone = {posXRect, posYRect, widthRect, heightRect};
 	if (_port.empty()) {
@@ -104,7 +101,11 @@ void Screen::Display::detectActionMenu()
 	int key = 0;
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-		mouseClickedMenu();
+        mouseClickedMenu();
+    }
+    keyPressed = GetCharPressed();
+    if (keyPressed != 0) {
+        keyPressededMenu(keyPressed, key);
     }
 	keyPressed = GetCharPressed();
 	key = GetKeyPressed();
@@ -115,24 +116,24 @@ void Screen::Display::detectActionMenu()
 
 void Screen::Display::mouseClickedMenu()
 {
-	float mouseX = GetMouseX();
-	float mouseY = GetMouseY();
-	const Vector2 mouse = {mouseX, mouseY};
+    float mouseX = GetMouseX();
+    float mouseY = GetMouseY();
+    const Vector2 mouse = { mouseX, mouseY };
 
     if (CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
-		_state = 1;
-	} else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
-		_state = 2;
-	} else {
-		_state = 0;
-	}
-	if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
-		std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
-		//TODO: handle basic error (empty hostname, empty port, invalid port (ex: chocolat instead of 8080)) on the graphic side
-		//connect return a bool to let us know if the connection was successful or not
-		_client.connect(_hostName, std::stoi(_port));
-		_gameState = true;
-	}
+        _state = 1;
+    } else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
+        _state = 2;
+    } else {
+        _state = 0;
+    }
+    if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
+        std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
+        //TODO: handle basic error (empty hostname, empty port, invalid port (ex: chocolat instead of 8080)) on the graphic side
+        //connect return a bool to let us know if the connection was successful or not
+        _client.connect(_hostName, std::stoi(_port));
+        _gameState = GameState::GAME;
+    }
 }
 
 void Screen::Display::keyPressededMenu(int KeyPressed, int key)
@@ -165,64 +166,64 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
 
 void Screen::Display::drawMenu()
 {
-	displayHostNameInput();
-	displayPortInput();
-	displayConnectionButton();
+    displayHostNameInput();
+    displayPortInput();
+    displayConnectionButton();
 }
 
 ///// Game
 
-void Screen::Display::detectActionGame()
-{
-	int keyPressed = 0;
+// void Screen::Display::detectActionGame()
+// {
+// 	int keyPressed = 0;
 
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-		mouseClickedGame();
-    }
-	keyPressed = GetKeyPressed();
-	if (keyPressed != 0) {
-		keyPressededGame(keyPressed);
-	}
+// 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+// 		mouseClickedGame();
+//     }
+// 	keyPressed = GetKeyPressed();
+// 	if (keyPressed != 0) {
+// 		keyPressededGame(keyPressed);
+// 	}
+// }
+
+// void Screen::Display::mouseClickedGame()
+// {
+
+// }
+
+// void Screen::Display::keyPressededGame(int KeyPressed)
+// {
+// 	const int upKey = 87;
+// 	const int downKey = 83;
+// 	const int leftKey = 65;
+// 	const int rightKey = 68;
+
+// 	switch (KeyPressed) {
+// 		case upKey:
+// 			_client.sendMovement(Network::Movement::UP);
+// 			break;
+// 		case downKey:
+// 			_client.sendMovement(Network::Movement::DOWN);
+// 			break;
+// 		case leftKey:
+// 			_client.sendMovement(Network::Movement::LEFT);
+// 			break;
+// 		case rightKey:
+// 			_client.sendMovement(Network::Movement::RIGHT);
+// 			break;
+// 		default:
+// 			break;
+// 	}
+// }
+
+void Screen::Display::drawGame(GameEngine::GameEngine &engine)
+{
+    engine.run();
+	// detectActionGame();
 }
 
-void Screen::Display::mouseClickedGame()
-{
+// Screen::Display::Display(GameState state = GameState::MENU)
+// {
+// 	_gameState = false;
+// }
 
-}
-
-void Screen::Display::keyPressededGame(int KeyPressed)
-{
-	const int upKey = 87;
-	const int downKey = 83;
-	const int leftKey = 65;
-	const int rightKey = 68;
-
-	switch (KeyPressed) {
-		case upKey:
-			_client.sendMovement(Network::Movement::UP);
-			break;
-		case downKey:
-			_client.sendMovement(Network::Movement::DOWN);
-			break;
-		case leftKey:
-			_client.sendMovement(Network::Movement::LEFT);
-			break;
-		case rightKey:
-			_client.sendMovement(Network::Movement::RIGHT);
-			break;
-		default:
-			break;
-	}
-}
-
-void Screen::Display::drawGame()
-{
-	detectActionGame();
-}
-
-Screen::Display::Display()
-{
-	_gameState = false;
-}
-
-Screen::Display::~Display() {}
