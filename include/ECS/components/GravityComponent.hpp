@@ -11,7 +11,7 @@
 namespace ECS::components {
 	/**
 	* @brief Component that contains the gravity details
-	* @param gravity size_t for the gravity of the ship
+	* @param gravity in size_t (pixel per sec), gravity of entity
 	*/
 	struct GravityComponent{
 		std::size_t gravity;

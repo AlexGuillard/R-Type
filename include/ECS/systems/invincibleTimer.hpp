@@ -11,7 +11,9 @@
 #include "ECS/components/InvincibleTimerComponent.hpp"
 
 namespace ECS::systems {
-	/** @brief Updates the timer for incibility */
+	/**
+	 * @brief Updates the timer for invincibility
+	 */
 	void invincibleTimer(
 		containers::Registry &registry,
 		containers::SparseArray<components::InvincibleTimerComponent> &invincibleTimer);
