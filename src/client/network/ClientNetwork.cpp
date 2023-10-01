@@ -44,8 +44,7 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-	send(_socket, "Hello");
-	std::cout << "Hello sent" << std::endl;
+	send(_socket, "Hello R-Type server\r");
 }
 
 void Network::ClientNetwork::start()
@@ -102,14 +101,12 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 
 	    sendHello();
 
-		const int maxSizeBuffer = 1024;
-		char buffer[maxSizeBuffer];
-		size_t len = _socket.receive(boost::asio::buffer(buffer, maxSizeBuffer));
-
-		if (std::string(buffer, len) == "301") {
+        receive(_socket);
+        std::string receive = _data;
+        if (receive == "200") {
 			std::cout << "Connected to server" << std::endl;
 			return (true);
-		}
+        }
 	}
 
 	catch (std::exception &e) {
