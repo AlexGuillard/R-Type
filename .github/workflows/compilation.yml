@@ -60,8 +60,6 @@ jobs:
   check_program_windows_compilation:
     runs-on: windows-latest
     needs: check_repository_cleanliness
-    container:
-      image: windows-lastest
     steps:
     - uses: actions/checkout@v3
       with:
