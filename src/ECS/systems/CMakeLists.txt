@@ -11,6 +11,7 @@ target_include_directories(ECS PUBLIC ${INCROOT})
 target_link_libraries(systems PUBLIC
     raylib
     systems_helper
+    ClientNetwork
 )
 
 add_subdirectory(helper)
