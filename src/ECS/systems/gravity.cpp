@@ -18,7 +18,6 @@ namespace ECS::systems {
 		ECS::containers::SparseArray<ECS::components::VelocityComponent> &velocities,containers::SparseArray<components::GravityComponent> &gravity)
 	{
 		for (auto &&[velocity, gravity] : ECS::containers::Zipper(velocities, gravity)) {
-			velocity->x += gravity->gravity;
 			velocity->y += gravity->gravity;
 		}
 	}
