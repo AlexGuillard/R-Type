@@ -104,6 +104,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5cf40820c83baac481b616e353eab1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#aa5cf40820c83baac481b616e353eab1c">handleSend</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
 <tr class="memdesc:aa5cf40820c83baac481b616e353eab1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after sending data  <a href="classNetwork_1_1ServerNetwork.html#aa5cf40820c83baac481b616e353eab1c">More...</a><br /></td></tr>
 <tr class="separator:aa5cf40820c83baac481b616e353eab1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad683c28b128041389b383eb085a43389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ad683c28b128041389b383eb085a43389">addClient</a> ()</td></tr>
+<tr class="memdesc:ad683c28b128041389b383eb085a43389"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a client in vector of clients if it fills conditions  <a href="classNetwork_1_1ServerNetwork.html#ad683c28b128041389b383eb085a43389">More...</a><br /></td></tr>
+<tr class="separator:ad683c28b128041389b383eb085a43389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a7e4e2dc992aa0e03aa4ed3833c44e99a">findClient</a> (std::string id) const</td></tr>
+<tr class="memdesc:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="mdescLeft">&#160;</td><td class="mdescRight">find a client in the vector by sending a id, if can not find, return ""  <a href="classNetwork_1_1ServerNetwork.html#a7e4e2dc992aa0e03aa4ed3833c44e99a">More...</a><br /></td></tr>
+<tr class="separator:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e849cb597f4c0e6eaa2495d7720d08"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a43e849cb597f4c0e6eaa2495d7720d08">getActualClient</a> () const</td></tr>
+<tr class="memdesc:a43e849cb597f4c0e6eaa2495d7720d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Actual Client id.  <a href="classNetwork_1_1ServerNetwork.html#a43e849cb597f4c0e6eaa2495d7720d08">More...</a><br /></td></tr>
+<tr class="separator:a43e849cb597f4c0e6eaa2495d7720d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafcda5708ceac4342f4403cf9ad66de1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#aafcda5708ceac4342f4403cf9ad66de1">connection</a> ()</td></tr>
+<tr class="memdesc:aafcda5708ceac4342f4403cf9ad66de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">see if client have a good connection on the server, the server repond then with 200 or 401  <a href="classNetwork_1_1ServerNetwork.html#aafcda5708ceac4342f4403cf9ad66de1">More...</a><br /></td></tr>
+<tr class="separator:aafcda5708ceac4342f4403cf9ad66de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,13 +134,13 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a4699a78007d8d52b18c8a5995fdf21a2"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::socket&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a4699a78007d8d52b18c8a5995fdf21a2">_socket</a></td></tr>
 <tr class="memdesc:a4699a78007d8d52b18c8a5995fdf21a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable where the client is  <a href="classNetwork_1_1ServerNetwork.html#a4699a78007d8d52b18c8a5995fdf21a2">More...</a><br /></td></tr>
 <tr class="separator:a4699a78007d8d52b18c8a5995fdf21a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89b590be2fe6790a7abd40a262ed635c"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, boost::asio::ip::udp::endpoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a89b590be2fe6790a7abd40a262ed635c">clients</a></td></tr>
-<tr class="memdesc:a89b590be2fe6790a7abd40a262ed635c"><td class="mdescLeft">&#160;</td><td class="mdescRight">hmap for the list of client on the server  <a href="classNetwork_1_1ServerNetwork.html#a89b590be2fe6790a7abd40a262ed635c">More...</a><br /></td></tr>
-<tr class="separator:a89b590be2fe6790a7abd40a262ed635c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95380153266d61392561275f2e2bd1e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ae95380153266d61392561275f2e2bd1e">_clients</a></td></tr>
+<tr class="memdesc:ae95380153266d61392561275f2e2bd1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">hmap for the list of client on the server  <a href="classNetwork_1_1ServerNetwork.html#ae95380153266d61392561275f2e2bd1e">More...</a><br /></td></tr>
+<tr class="separator:ae95380153266d61392561275f2e2bd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
-<tr class="memitem:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95">_data</a> [<a class="el" href="namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07">MAX_SIZE_BUFF</a>]</td></tr>
-<tr class="memdesc:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#a2b9fe97052907b905e69296a49546b95">More...</a><br /></td></tr>
-<tr class="separator:a2b9fe97052907b905e69296a49546b95 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c39ce8e35dbaf19a4b62e119414db1 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">std::vector&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#ae7c39ce8e35dbaf19a4b62e119414db1">_data</a></td></tr>
+<tr class="memdesc:ae7c39ce8e35dbaf19a4b62e119414db1 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#ae7c39ce8e35dbaf19a4b62e119414db1">More...</a><br /></td></tr>
+<tr class="separator:ae7c39ce8e35dbaf19a4b62e119414db1 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::endpoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324">_endpoint</a></td></tr>
 <tr class="memdesc:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">contain the IP address and a protocol port number  <a href="classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324">More...</a><br /></td></tr>
 <tr class="separator:a5958955041ab27082ecc9f256ada7324 inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,6 +194,91 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad683c28b128041389b383eb085a43389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad683c28b128041389b383eb085a43389">&#9670;&nbsp;</a></span>addClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ServerNetwork::addClient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>add a client in vector of clients if it fills conditions </p>
+
+</div>
+</div>
+<a id="aafcda5708ceac4342f4403cf9ad66de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafcda5708ceac4342f4403cf9ad66de1">&#9670;&nbsp;</a></span>connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ServerNetwork::connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>see if client have a good connection on the server, the server repond then with 200 or 401 </p>
+
+</div>
+</div>
+<a id="a7e4e2dc992aa0e03aa4ed3833c44e99a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4e2dc992aa0e03aa4ed3833c44e99a">&#9670;&nbsp;</a></span>findClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network::ServerNetwork::findClient </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>find a client in the vector by sending a id, if can not find, return "" </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
+<a id="a43e849cb597f4c0e6eaa2495d7720d08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e849cb597f4c0e6eaa2495d7720d08">&#9670;&nbsp;</a></span>getActualClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network::ServerNetwork::getActualClient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Actual Client id. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
 <a id="a5f1bfce7d5577fb5303353fadeb420c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5f1bfce7d5577fb5303353fadeb420c2">&#9670;&nbsp;</a></span>handleReceive()</h2>
 
@@ -277,6 +374,30 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae95380153266d61392561275f2e2bd1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae95380153266d61392561275f2e2bd1e">&#9670;&nbsp;</a></span>_clients</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; Network::ServerNetwork::_clients</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>hmap for the list of client on the server </p>
+
+</div>
+</div>
 <a id="a4699a78007d8d52b18c8a5995fdf21a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4699a78007d8d52b18c8a5995fdf21a2">&#9670;&nbsp;</a></span>_socket</h2>
 
@@ -298,30 +419,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>variable where the client is </p>
-
-</div>
-</div>
-<a id="a89b590be2fe6790a7abd40a262ed635c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89b590be2fe6790a7abd40a262ed635c">&#9670;&nbsp;</a></span>clients</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_map&lt;std::string, boost::asio::ip::udp::endpoint&gt; Network::ServerNetwork::clients</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>hmap for the list of client on the server </p>
 
 </div>
 </div>
