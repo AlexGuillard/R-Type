@@ -7,14 +7,30 @@
 
 #include "server/network/ServerNetwork.hpp"
 
-Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int port)
-    : _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port))
+Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
+    : _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
 {
+    updateTicks();
     receive(_socket);
 }
 
 Network::ServerNetwork::~ServerNetwork()
 {}
+
+void Network::ServerNetwork::updateTicks()
+{
+    int timerTicks = 200;
+
+    _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
+    _timer.async_wait([this](const boost::system::error_code& error) {
+        if (!error) {
+            std::cout << "need to updates ticks\n";
+        } else {
+            std::cerr << "_timer error: " << error.message() << std::endl;
+        }
+        updateTicks();
+    });
+}
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
@@ -28,9 +44,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         } else {
             connection();
         }
-        for (int i = 0; i < MAX_SIZE_BUFF; i++) {
-            _data[i] = '\0';
-        }
+        _data.clear();
     } else {
         receive(_socket);
     }
