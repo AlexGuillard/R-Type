@@ -35,9 +35,28 @@ namespace Network {
              * @param recvd_bytes number of bytes received
              */
             void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+            /**
+             * @brief add a client in vector of clients if it fills conditions
+             *
+             */
             void addClient();
+            /**
+             * @brief find a client in the vector by sending a id, if can not find, return ""
+             *
+             * @param id
+             * @return std::string
+             */
             std::string findClient(std::string id) const;
+            /**
+             * @brief Get the Actual Client id
+             *
+             * @return std::string
+             */
             std::string getActualClient() const;
+            /**
+             * @brief see if client have a good connection on the server, the server repond then with 200 or 401
+             *
+             */
             void connection();
         protected:
             /**

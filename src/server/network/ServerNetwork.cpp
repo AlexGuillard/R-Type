@@ -22,10 +22,11 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     const size_t maxNbClients = 5;
 
     if ( !error && recvd_bytes > 0 ) {
-        connection();
         if (findClient(getActualClient()) != "") {
             std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
             send(_socket, "receive data\n");
+        } else {
+            connection();
         }
         for (int i = 0; i < MAX_SIZE_BUFF; i++) {
             _data[i] = '\0';
