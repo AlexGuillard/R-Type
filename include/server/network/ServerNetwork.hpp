@@ -48,6 +48,11 @@ namespace Network {
              */
             std::string findClient(std::string id) const;
             /**
+             * @brief function that update game when tick is finish
+             *
+             */
+            void updateTicks();
+            /**
              * @brief Get the Actual Client id
              *
              * @return std::string
@@ -69,6 +74,8 @@ namespace Network {
              *
              */
             std::vector<std::string> _clients;
+            // variable for the timer and the ticks
+            boost::asio::deadline_timer _timer;
         private:
     };
 }

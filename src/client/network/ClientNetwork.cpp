@@ -161,3 +161,20 @@ void Network::ClientNetwork::handleLogout(const std::string &message)
         std::cout << "Unexecepted message received" << std::endl;
     }
 }
+
+std::unique_ptr<Network::ClientNetwork> Network::ClientNetwork::_instance =  std::unique_ptr<Network::ClientNetwork>();
+
+Network::ClientNetwork& Network::ClientNetwork::getInstance() {
+    if (_instance == nullptr) {
+        _instance.reset(new ClientNetwork());
+    }
+    return *_instance;
+}
+
+Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_service &io_service, const std::string &host, int port)
+{
+    if (_instance == nullptr) {
+        _instance.reset(new ClientNetwork(io_service, host, port));
+    }
+    return *_instance;
+}

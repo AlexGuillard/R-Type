@@ -78,16 +78,6 @@ namespace GameEngine {
         registry.emplaceComponent<Components::ControllableComponent>(player);
         registry.getComponents<Components::PositionComponent>().at(player)->x = GetScreenWidth() / 2;
         registry.getComponents<Components::PositionComponent>().at(player)->y = GetScreenHeight() / 2;
-
-        const int nbEnemies = 10;
-        for (int i = 0; i < nbEnemies; i++) {
-            const u_int velocityRange = 200;
-            const u_char nbFrameInAnimation = 5;
-            ECS::Entity entity = spawnShip(registry);
-            registry.emplaceComponent<Components::PositionComponent>(entity, GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()));
-            registry.emplaceComponent<Components::VelocityComponent>(entity, GetRandomValue(-velocityRange, velocityRange), GetRandomValue(-velocityRange, velocityRange));
-            registry.getComponents<Components::DrawableComponent>().at(entity)->frame = GetRandomValue(0, nbFrameInAnimation);
-        }
     }
 
     GameEngine createEngine()

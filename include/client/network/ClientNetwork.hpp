@@ -43,19 +43,6 @@ namespace Network {
 
     public:
         /**
-         * @brief Construct a new Client Network object with parameters
-         *
-         * @param io_service
-         * @param host
-         * @param port
-         */
-        ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
-        /**
-         * @brief Construct a new Client Network object without parameters
-         *
-         */
-        ClientNetwork();
-        /**
          * @brief Destroy the Client Network object
          *
          */
@@ -133,6 +120,51 @@ namespace Network {
          */
         void handleLogout(const std::string &message);
 
+        /**
+         * @brief Get the Instance object
+         *
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance();
+        /**
+         * @brief Get the Instance object
+         *
+         * @param io_service
+         * @param host
+         * @param port
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
+
+        /**
+         * @brief Get the Instance object
+         *
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance();
+        /**
+         * @brief Get the Instance object
+         *
+         * @param io_service
+         * @param host
+         * @param port
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
+        /**
+         * @brief Construct a new Client Network object with parameters
+         *
+         * @param io_service
+         * @param host
+         * @param port
+         */
+        ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
+        /**
+         * @brief Construct a new Client Network object without parameters
+         *
+         */
+        ClientNetwork();
+
     private:
         //Port of the server
         int _port;
@@ -148,6 +180,8 @@ namespace Network {
         std::array<char, MAX_SIZE_BUFFER> _buffer;
         //Map to use the pointer on function
         std::map<std::string, ResponseHandler> _responseHandlers;
+        //Stock class for SingleTon
+        static std::unique_ptr<ClientNetwork> _instance;
     };
 }
 
