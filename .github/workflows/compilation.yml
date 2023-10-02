@@ -1,4 +1,4 @@
-name: chocolatine
+name: compilation
 
 on:
   pull_request:
