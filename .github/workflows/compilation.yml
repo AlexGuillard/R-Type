@@ -58,7 +58,7 @@ jobs:
         cd build
         ctest --output-on-failure
   check_program_windows_compilation:
-    runs-on: x64
+    runs-on: windows-latest
     needs: check_repository_cleanliness
     container:
       image: windows-lastest
