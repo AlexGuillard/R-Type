@@ -8,6 +8,7 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
 
 #include "ANetwork.hpp"
 
@@ -17,34 +18,57 @@ namespace Network {
      *
      */
     class ServerNetwork : public ANetwork {
-    public:
-        ServerNetwork(boost::asio::io_service &io_service, int port);
-        ~ServerNetwork();
-        /**
-         * @brief function called after receiving data
-         *
-         * @param error empty if finish with no error
-         * @param recvd_bytes number of bytes received
-         */
-        void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
-        /**
-         * @brief function called after sending data
-         *
-         * @param error empty if finish with no error
-         * @param recvd_bytes number of bytes received
-         */
-        void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
-    protected:
-        /**
-         * @brief variable where the client is
-         *
-         */
-        boost::asio::ip::udp::socket _socket;
-        /**
-         * @brief hmap for the list of client on the server
-         *
-         */
-        std::unordered_map<std::string, boost::asio::ip::udp::endpoint> clients;
-    private:
+        public:
+            ServerNetwork(boost::asio::io_service& io_service, int port);
+            ~ServerNetwork();
+            /**
+             * @brief function called after receiving data
+             *
+             * @param error empty if finish with no error
+             * @param recvd_bytes number of bytes received
+             */
+            void handleReceive(boost::system::error_code error, std::size_t recvd_bytes);
+            /**
+             * @brief function called after sending data
+             *
+             * @param error empty if finish with no error
+             * @param recvd_bytes number of bytes received
+             */
+            void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
+            /**
+             * @brief add a client in vector of clients if it fills conditions
+             *
+             */
+            void addClient();
+            /**
+             * @brief find a client in the vector by sending a id, if can not find, return ""
+             *
+             * @param id
+             * @return std::string
+             */
+            std::string findClient(std::string id) const;
+            /**
+             * @brief Get the Actual Client id
+             *
+             * @return std::string
+             */
+            std::string getActualClient() const;
+            /**
+             * @brief see if client have a good connection on the server, the server repond then with 200 or 401
+             *
+             */
+            void connection();
+        protected:
+            /**
+             * @brief variable where the client is
+             *
+             */
+            boost::asio::ip::udp::socket _socket;
+            /**
+             * @brief hmap for the list of client on the server
+             *
+             */
+            std::vector<std::string> _clients;
+        private:
     };
 }
