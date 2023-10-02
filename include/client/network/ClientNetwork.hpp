@@ -77,11 +77,6 @@ namespace Network {
          */
         void sendHello();
         /**
-         * @brief Start the main loop of the client
-         *
-         */
-        void start();
-        /**
          * @brief This function is used to send a movement from the player to the server
          *
          * @param movement

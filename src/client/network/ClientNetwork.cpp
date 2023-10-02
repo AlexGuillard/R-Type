@@ -52,11 +52,6 @@ void Network::ClientNetwork::sendHello()
 	send(_socket, "Hello R-Type server\r");
 }
 
-void Network::ClientNetwork::start()
-{
-	receive(_socket);
-}
-
 void Network::ClientNetwork::sendMovement(Movement movement)
 {
 	std::string message;
