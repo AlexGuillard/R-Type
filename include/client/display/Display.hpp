@@ -96,6 +96,6 @@ namespace Screen {
         // bool _gameState;
         GameState _gameState;
         // Client used to communicate with server (network)
-        Network::ClientNetwork _client;
+        Network::ClientNetwork &_client = Network::ClientNetwork::getInstance();
     };
 }
