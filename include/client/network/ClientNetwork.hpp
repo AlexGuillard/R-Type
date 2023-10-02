@@ -10,6 +10,9 @@
 #include "ANetwork.hpp"
 #include <iostream>
 #include "Error.hpp"
+#include <map>
+#include <functional>
+#include <memory>
 #define MAX_SIZE_BUFFER 1024
 
 namespace Network {
@@ -95,6 +98,40 @@ namespace Network {
          * @param port
          */
         bool connect(const std::string &host, int port);
+        /**
+         * @brief Is contained on the map of funciton to use the pointer on function
+         *
+         */
+        using ResponseHandler = std::function<void (const std::string&)>;
+        /**
+         * @brief Initialize the function to use the pointer to function
+         *
+         */
+        void initializeResponsehandler();
+        /**
+         * @brief Respond pong if the server send ping
+         *
+         * @param message message from the server
+         */
+        void handlePong(const std::string &message);
+        /**
+         * @brief Handle the Connection from server
+         *
+         * @param message message from the server
+         */
+        void handleConnection(const std::string &message);
+        /**
+         * @brief Handle the Login from server
+         *
+         * @param message message from the server
+         */
+        void handleLogin(const std::string &message);
+        /**
+         * @brief Handle the Logout from server
+         *
+         * @param message message from the server
+         */
+        void handleLogout(const std::string &message);
 
     private:
         //Port of the server
@@ -109,6 +146,8 @@ namespace Network {
         std::string _dataReceived;
         //Buffer used to receive data
         std::array<char, MAX_SIZE_BUFFER> _buffer;
+        //Map to use the pointer on function
+        std::map<std::string, ResponseHandler> _responseHandlers;
     };
 }
 

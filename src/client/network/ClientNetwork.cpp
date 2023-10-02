@@ -18,6 +18,7 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
 
 Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
 {
+    initializeResponsehandler();
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -30,10 +31,10 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
         std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
         std::cout << "[" << recvd_bytes << "] " << _dataReceived << std::endl;
 
-        if (_dataReceived == "ping") {
-            send(_socket, "pong");
+        auto responseHandlerIt = _responseHandlers.find(_dataReceived);
+        if (responseHandlerIt != _responseHandlers.end()) {
+            responseHandlerIt->second(_dataReceived);
         }
-
     } else {
 	    receive(_socket);
 	}
@@ -114,4 +115,48 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 	}
 
 	return (false);
+}
+
+void Network::ClientNetwork::initializeResponsehandler()
+{
+    _responseHandlers["pong"] = std::bind(&ClientNetwork::handlePong, this, std::placeholders::_1);
+    _responseHandlers["200"] = std::bind(&ClientNetwork::handleConnection, this, std::placeholders::_1);
+    _responseHandlers["201"] = std::bind(&ClientNetwork::handleLogin, this, std::placeholders::_1);
+    _responseHandlers["202"] = std::bind(&ClientNetwork::handleLogout, this, std::placeholders::_1);
+}
+
+void Network::ClientNetwork::handlePong(const std::string &message)
+{
+    if (message == "ping") {
+        send(_socket, "pong");
+    } else {
+        std::cout << "Unexecepted message received" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleConnection(const std::string &message)
+{
+    if (message == "200") {
+        std::cout << "Ur connected" << std::endl;
+    } else {
+        std::cout << "Unexecepted message received" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleLogin(const std::string &message)
+{
+    if (message == "201") {
+        std::cout << "Ur logged" << std::endl;
+    } else {
+        std::cout << "Unexecepted message received" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleLogout(const std::string &message)
+{
+    if (message == "202") {
+        std::cout << "Ur loggout" << std::endl;
+    } else {
+        std::cout << "Unexecepted message received" << std::endl;
+    }
 }
