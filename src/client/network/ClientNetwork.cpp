@@ -50,7 +50,7 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-	send(_socket, "Hello R-Type server\r");
+	send(_socket, "Hello R-Type server\n");
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
@@ -103,7 +103,8 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 	    sendHello();
 
         receive(_socket);
-        std::string receive = _data;
+        std::string receive = _data.data();
+
         if (receive == "200") {
 			std::cout << "Connected to server" << std::endl;
 			return (true);
@@ -119,10 +120,10 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 
 void Network::ClientNetwork::initializeResponsehandler()
 {
-    _responseHandlers["pong"] = std::bind(&ClientNetwork::handlePong, this, std::placeholders::_1);
-    _responseHandlers["200"] = std::bind(&ClientNetwork::handleConnection, this, std::placeholders::_1);
-    _responseHandlers["201"] = std::bind(&ClientNetwork::handleLogin, this, std::placeholders::_1);
-    _responseHandlers["202"] = std::bind(&ClientNetwork::handleLogout, this, std::placeholders::_1);
+    _responseHandlers["pong\n"] = std::bind(&ClientNetwork::handlePong, this, std::placeholders::_1);
+    _responseHandlers["200\n"] = std::bind(&ClientNetwork::handleConnection, this, std::placeholders::_1);
+    _responseHandlers["201\n"] = std::bind(&ClientNetwork::handleLogin, this, std::placeholders::_1);
+    _responseHandlers["202\n"] = std::bind(&ClientNetwork::handleLogout, this, std::placeholders::_1);
 }
 
 void Network::ClientNetwork::handlePong(const std::string &message)
