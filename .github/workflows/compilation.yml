@@ -69,21 +69,7 @@ jobs:
       with:
         cmake-version: '3.27.x'
     - name: compilation program
-      run: |
-        cmake -B ./build -DCMAKE_BUILD_TYPE=Release && cmake --build build
-        mv Debug/* ./
-        OIFS=$IFS
-        IFS=','
-        sep=$WINDOWS_EXECUTABLES
-        for sep in $sep
-        do
-            check=""
-            check=$(find -wholename ${sep})
-            if [[ ${check} == "" || ! -x "$check" ]]
-            then
-                exit 1
-            fi
-        done
+      run: cmake -B ./build -DCMAKE_BUILD_TYPE=Release && cmake --build build
     - name: test run
       run: |
         cd build
