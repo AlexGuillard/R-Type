@@ -43,7 +43,7 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
 	if (!error && recvd_bytes > 0) {
-		std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
+		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
 		receive(_socket);
 	}
 }
