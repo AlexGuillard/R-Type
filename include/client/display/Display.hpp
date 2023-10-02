@@ -8,7 +8,9 @@
 #pragma once
 
 #include <iostream>
-#include <raylib.h>
+namespace Raylib {
+    #include <raylib.h>
+};
 
 #include "client/network/ClientNetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
@@ -87,11 +89,11 @@ namespace Screen {
         // Stock the state of the input in menu 0=none 1=hostname 2=port
         int _state = 0;
         // Set the rectangle clickable for hostname input
-        Rectangle _hostNameclickableZone;
+        Raylib::Rectangle _hostNameclickableZone;
         // Set the rectangle clickable for port input
-        Rectangle _portclickableZone;
+        Raylib::Rectangle _portclickableZone;
         // Set the rectangle clickable for conection button
-        Rectangle _connectionclickableZone;
+        Raylib::Rectangle _connectionclickableZone;
         // Set game state 0=menu 1=game
         // bool _gameState;
         GameState _gameState;
