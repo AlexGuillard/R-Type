@@ -135,22 +135,6 @@ namespace Network {
          * @return ClientNetwork&
          */
         static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
-
-        /**
-         * @brief Get the Instance object
-         *
-         * @return ClientNetwork&
-         */
-        static ClientNetwork &getInstance();
-        /**
-         * @brief Get the Instance object
-         *
-         * @param io_service
-         * @param host
-         * @param port
-         * @return ClientNetwork&
-         */
-        static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
         /**
          * @brief Construct a new Client Network object with parameters
          *

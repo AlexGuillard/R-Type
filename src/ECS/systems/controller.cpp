@@ -139,9 +139,9 @@ namespace ECS::Systems {
         Network::ClientNetwork& clientNetwork = Network::ClientNetwork::getInstance();
 
         if (!IsKeyPressed(controllable.force)) {
-            clientNetwork.sendAction(Network::Action::DROP);
             return;
         }
+        clientNetwork.sendAction(Network::Action::DROP);
         // TODO: add force implementation here
     }
 
