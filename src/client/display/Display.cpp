@@ -10,13 +10,11 @@
 Screen::Display::Display(GameState state) : _state(0), _gameState(state)
 {
     int monitor = GetCurrentMonitor();
-    // const int screenWidth = GetMonitorWidth(monitor);
-    // const int screenHeight = GetMonitorHeight(monitor);
-    const int screenWidth = 700;
-    const int screenHeight = 500;
+    const int screenWidth = GetMonitorWidth(monitor);
+    const int screenHeight = GetMonitorHeight(monitor);
     const int fps = 60;
     InitWindow(screenWidth, screenHeight, "R-Type");
-    // ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(fps);
 }
 
@@ -173,57 +171,9 @@ void Screen::Display::drawMenu()
 
 ///// Game
 
-// void Screen::Display::detectActionGame()
-// {
-// 	int keyPressed = 0;
-
-// 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-// 		mouseClickedGame();
-//     }
-// 	keyPressed = GetKeyPressed();
-// 	if (keyPressed != 0) {
-// 		keyPressededGame(keyPressed);
-// 	}
-// }
-
-// void Screen::Display::mouseClickedGame()
-// {
-
-// }
-
-// void Screen::Display::keyPressededGame(int KeyPressed)
-// {
-// 	const int upKey = 87;
-// 	const int downKey = 83;
-// 	const int leftKey = 65;
-// 	const int rightKey = 68;
-
-// 	switch (KeyPressed) {
-// 		case upKey:
-// 			_client.sendMovement(Network::Movement::UP);
-// 			break;
-// 		case downKey:
-// 			_client.sendMovement(Network::Movement::DOWN);
-// 			break;
-// 		case leftKey:
-// 			_client.sendMovement(Network::Movement::LEFT);
-// 			break;
-// 		case rightKey:
-// 			_client.sendMovement(Network::Movement::RIGHT);
-// 			break;
-// 		default:
-// 			break;
-// 	}
-// }
-
 void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 {
     engine.run();
-	// detectActionGame();
 }
 
-// Screen::Display::Display(GameState state = GameState::MENU)
-// {
-// 	_gameState = false;
-// }
 
