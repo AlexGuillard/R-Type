@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['down_354',['DOWN',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5ac4e0e4e3118472beeb2ae75827450f1f',1,'Network']]],
-  ['drop_355',['DROP',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0abf8f3be424eb6a72b21549fbb24ffb57',1,'Network']]]
+  ['ally_376',['ALLY',['../namespaceECS_1_1Components.html#ade739e14c78b803c49878ff759e47d19a1f0034fbc008024fa84fff8ed10989ad',1,'ECS::Components']]]
 ];

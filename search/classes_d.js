@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['zipper_201',['Zipper',['../classECS_1_1Containers_1_1Zipper.html',1,'ECS::Containers']]],
-  ['zipperiterator_202',['ZipperIterator',['../classECS_1_1Containers_1_1ZipperIterator.html',1,'ECS::Containers']]]
+  ['wavebeamcomponent_215',['WaveBeamComponent',['../structECS_1_1Components_1_1WaveBeamComponent.html',1,'ECS::Components']]]
 ];
