@@ -7,7 +7,8 @@ on:
 
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2026/B-CPP-500-NAN-5-1-rtype-alexandre.guillard.git"
-  EXECUTABLES: "./r-type_client,./r-type_server"
+  LINUX_EXECUTABLES: "./r-type_client,./r-type_server"
+  WINDOWS_EXECUTABLES: "./r-type_client.exe,./r-type_server.exe"
 
 jobs:
   check_repository_cleanliness:
@@ -28,7 +29,7 @@ jobs:
           then
               exit 1
           fi
-  check_program_compilation:
+  check_program_linux_compilation:
     runs-on: ubuntu-latest
     needs: check_repository_cleanliness
     container:
@@ -42,7 +43,40 @@ jobs:
         cmake -B ./build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release && cmake --build build
         OIFS=$IFS
         IFS=','
-        sep=$EXECUTABLES
+        sep=$LINUX_EXECUTABLES
+        for sep in $sep
+        do
+            check=""
+            check=$(find -wholename ${sep})
+            if [[ ${check} == "" || ! -x "$check" ]]
+            then
+                exit 1
+            fi
+        done
+    - name: test run
+      run: |
+        cd build
+        ctest --output-on-failure
+  check_program_windows_compilation:
+    runs-on: x64
+    needs: check_repository_cleanliness
+    container:
+      image: windows-lastest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: '3.27.x'
+    - name: compilation program
+      run: |
+        cmake -B ./build -DCMAKE_BUILD_TYPE=Release && cmake --build build
+        mv Debug/* ./
+        OIFS=$IFS
+        IFS=','
+        sep=$WINDOWS_EXECUTABLES
         for sep in $sep
         do
             check=""
@@ -58,7 +92,7 @@ jobs:
         ctest --output-on-failure
   push_to_mirror:
     runs-on: ubuntu-latest
-    needs: check_program_compilation
+    needs: [check_program_linux_compilation, check_program_windows_compilation]
     steps:
       - uses: actions/checkout@v3
         with:
