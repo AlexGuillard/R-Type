@@ -65,7 +65,7 @@ namespace Screen {
          *
          * @param KeyPressed send the key pressed to function
          */
-        void keyPressededMenu(int KeyPressed);
+        void keyPressededMenu(int KeyPressed, int key);
         /**
          * @brief draw the menu
          *
@@ -96,6 +96,6 @@ namespace Screen {
         // bool _gameState;
         GameState _gameState;
         // Client used to communicate with server (network)
-        Network::ClientNetwork _client;
+        Network::ClientNetwork &_client = Network::ClientNetwork::getInstance();
     };
 }
