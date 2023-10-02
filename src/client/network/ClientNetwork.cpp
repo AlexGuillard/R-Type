@@ -29,6 +29,11 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
         _dataReceived.resize(recvd_bytes);
         std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
         std::cout << "[" << recvd_bytes << "] " << _dataReceived << std::endl;
+
+        if (_dataReceived == "ping") {
+            send(_socket, "pong");
+        }
+
     } else {
 	    receive(_socket);
 	}
