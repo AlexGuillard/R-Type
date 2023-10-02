@@ -5,6 +5,8 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/movement.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/invincibleTimer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/gravity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/shooting.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/collision.cpp
 )
 add_library(systems STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})

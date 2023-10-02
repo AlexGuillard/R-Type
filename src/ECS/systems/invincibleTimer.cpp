@@ -7,19 +7,19 @@
 
 #include <raylib.h>
 #include "ECS/systems/invincibleTimer.hpp"
-#include "ECS/components/InvincibleTimerComponent.hpp"
-#include "ECS/containers/zipper/Zipper.hpp"
+#include "ECS/Components/InvincibleTimerComponent.hpp"
+#include "ECS/Containers/zipper/Zipper.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 
-	void invincibleTimer(
-		[[maybe_unused]] containers::Registry &registry,
-		containers::SparseArray<components::InvincibleTimerComponent> &invincibleTimer)
-	{
-		for (auto &&[invincibleTimer] : ECS::containers::Zipper(invincibleTimer)) {
-			auto &timer = invincibleTimer->timer;
-			timer -= GetFrameTime();
-		}
-	}
+    void invincibleTimer(
+        [[maybe_unused]] Containers::Registry &registry,
+        Containers::SparseArray<Components::InvincibleTimerComponent> &invincibleTimer)
+    {
+        for (auto &&[invincibleTimer] : ECS::Containers::Zipper(invincibleTimer)) {
+            auto &timer = invincibleTimer->timer;
+            timer -= GetFrameTime();
+        }
+    }
 
 }; // namespace ECS::systems

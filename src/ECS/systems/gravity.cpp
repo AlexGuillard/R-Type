@@ -7,19 +7,19 @@
 
 #include <raylib.h>
 #include "ECS/systems/gravity.hpp"
-#include "ECS/components/GravityComponent.hpp"
-#include "ECS/components/VelocityComponent.hpp"
-#include "ECS/containers/zipper/Zipper.hpp"
+#include "ECS/Components/GravityComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Containers/zipper/Zipper.hpp"
 
-namespace ECS::systems {
+namespace ECS::Systems {
 
-	void gravity(
-		[[maybe_unused]] containers::Registry &registry,
-		ECS::containers::SparseArray<ECS::components::VelocityComponent> &velocities,containers::SparseArray<components::GravityComponent> &gravity)
-	{
-		for (auto &&[velocity, gravity] : ECS::containers::Zipper(velocities, gravity)) {
-			velocity->y += gravity->gravity;
-		}
-	}
+    void gravity(
+        [[maybe_unused]] Containers::Registry &registry,
+        ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities, Containers::SparseArray<Components::GravityComponent> &gravity)
+    {
+        for (auto &&[velocity, gravity] : ECS::Containers::Zipper(velocities, gravity)) {
+            velocity->y += gravity->gravity;
+        }
+    }
 
 }; // namespace ECS::systems

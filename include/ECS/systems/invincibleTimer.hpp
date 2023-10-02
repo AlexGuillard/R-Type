@@ -7,14 +7,14 @@
 
 #pragma once
 
-#include "ECS/containers/Registry.hpp"
-#include "ECS/components/InvincibleTimerComponent.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/InvincibleTimerComponent.hpp"
 
-namespace ECS::systems {
-	/**
-	 * @brief Updates the timer for invincibility
-	 */
-	void invincibleTimer(
-		containers::Registry &registry,
-		containers::SparseArray<components::InvincibleTimerComponent> &invincibleTimer);
+namespace ECS::Systems {
+    /**
+     * @brief Updates the timer for invincibility
+     */
+    void invincibleTimer(
+        Containers::Registry &registry,
+        Containers::SparseArray<Components::InvincibleTimerComponent> &invincibleTimer);
 };

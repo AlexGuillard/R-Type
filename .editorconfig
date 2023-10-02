@@ -22,7 +22,7 @@ indent_style = space
 
 [*.[c,h,t,h]pp]
 indent_size = 4
-indent_style = tab
+indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 cpp_indent_braces=false
@@ -34,7 +34,7 @@ cpp_indent_case_contents=true
 cpp_indent_case_contents_when_block=false
 cpp_indent_lambda_braces_when_parameter=true
 cpp_indent_goto_labels=one_left
-cpp_indent_preprocessor=none
+cpp_indent_preprocessor=one_left
 cpp_indent_access_specifiers=false
 cpp_indent_namespace_contents=true
 cpp_indent_preserve_comments=true

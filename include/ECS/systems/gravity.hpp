@@ -7,14 +7,14 @@
 
 #pragma once
 
-#include "ECS/containers/Registry.hpp"
-#include "ECS/components/GravityComponent.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/GravityComponent.hpp"
 
-namespace ECS::systems {
-	/** 
-	 * @brief Add gravity to velocity
-	 */
-	void gravity(
-		containers::Registry &registry,
-		containers::SparseArray<components::GravityComponent> &gravity);
+namespace ECS::Systems {
+    /**
+     * @brief Add gravity to velocity
+     */
+    void gravity(
+        Containers::Registry &registry,
+        Containers::SparseArray<Components::GravityComponent> &gravity);
 };
