@@ -9,7 +9,8 @@ var searchData=
   ['getcomponents_80',['getComponents',['../classECS_1_1Containers_1_1Registry.html#a18b341e465258d06ece11a3df9702996',1,'ECS::Containers::Registry::getComponents()'],['../classECS_1_1Containers_1_1Registry.html#a40cefbf72a5cccb74bafd87715554b6d',1,'ECS::Containers::Registry::getComponents() const']]],
   ['getcomponentstuple_81',['getComponentsTuple',['../classECS_1_1Containers_1_1Registry.html#a914002845f1088a996aea8103d1e9a91',1,'ECS::Containers::Registry']]],
   ['getindex_82',['getIndex',['../classECS_1_1Containers_1_1SparseArray.html#a4692ece9e5c0d79d3a800b6e25d6dc3e',1,'ECS::Containers::SparseArray']]],
-  ['gravity_83',['gravity',['../structECS_1_1Components_1_1GravityComponent.html#ab97fdc700deb81385ed841627b69a106',1,'ECS::Components::GravityComponent']]],
-  ['gravitycomponent_84',['GravityComponent',['../structECS_1_1Components_1_1GravityComponent.html',1,'ECS::Components']]],
-  ['gravitycomponent_2ehpp_85',['GravityComponent.hpp',['../GravityComponent_8hpp.html',1,'']]]
+  ['getinstance_83',['getInstance',['../classNetwork_1_1ClientNetwork.html#a7f294dc91e0112d42907bfb07b81e823',1,'Network::ClientNetwork::getInstance()'],['../classNetwork_1_1ClientNetwork.html#a7efd33e6954b5ef3658ce9bf293442f3',1,'Network::ClientNetwork::getInstance(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)']]],
+  ['gravity_84',['gravity',['../structECS_1_1Components_1_1GravityComponent.html#ab97fdc700deb81385ed841627b69a106',1,'ECS::Components::GravityComponent']]],
+  ['gravitycomponent_85',['GravityComponent',['../structECS_1_1Components_1_1GravityComponent.html',1,'ECS::Components']]],
+  ['gravitycomponent_2ehpp_86',['GravityComponent.hpp',['../GravityComponent_8hpp.html',1,'']]]
 ];

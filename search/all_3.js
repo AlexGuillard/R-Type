@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['clientnetwork_14',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c',1,'Network::ClientNetwork::ClientNetwork(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
+  ['clientnetwork_14',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html',1,'Network']]],
   ['clientnetwork_2ehpp_15',['ClientNetwork.hpp',['../ClientNetwork_8hpp.html',1,'']]],
   ['collidablecomponent_16',['CollidableComponent',['../structECS_1_1Components_1_1CollidableComponent.html',1,'ECS::Components']]],
   ['collidablecomponent_2ehpp_17',['CollidableComponent.hpp',['../CollidableComponent_8hpp.html',1,'']]],

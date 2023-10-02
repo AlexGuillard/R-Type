@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['_7eanetwork_321',['~ANetwork',['../classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f',1,'Network::ANetwork']]],
-  ['_7eclientnetwork_322',['~ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815',1,'Network::ClientNetwork']]],
-  ['_7egamelogic_323',['~GameLogic',['../classGame_1_1GameLogic.html#a85f4cf07d3172efe4b7087225e38224f',1,'Game::GameLogic']]],
-  ['_7einetwork_324',['~INetwork',['../classNetwork_1_1INetwork.html#ae88c1a3764d9a078d5bf8ebc248d8d2e',1,'Network::INetwork']]],
-  ['_7eservernetwork_325',['~ServerNetwork',['../classNetwork_1_1ServerNetwork.html#a735dd788ec03403b118f0947561e6327',1,'Network::ServerNetwork']]]
+  ['_7eanetwork_322',['~ANetwork',['../classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f',1,'Network::ANetwork']]],
+  ['_7eclientnetwork_323',['~ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a8d5902a13547dfabd50b331c2eb85815',1,'Network::ClientNetwork']]],
+  ['_7egamelogic_324',['~GameLogic',['../classGame_1_1GameLogic.html#a85f4cf07d3172efe4b7087225e38224f',1,'Game::GameLogic']]],
+  ['_7einetwork_325',['~INetwork',['../classNetwork_1_1INetwork.html#ae88c1a3764d9a078d5bf8ebc248d8d2e',1,'Network::INetwork']]],
+  ['_7eservernetwork_326',['~ServerNetwork',['../classNetwork_1_1ServerNetwork.html#a735dd788ec03403b118f0947561e6327',1,'Network::ServerNetwork']]]
 ];
