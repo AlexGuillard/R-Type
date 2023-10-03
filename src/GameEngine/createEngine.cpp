@@ -23,6 +23,7 @@
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
+#include "ECS/Systems/damage.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -48,6 +49,7 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
+        registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
     }
 
     static ECS::Entity spawnShip(Containers::Registry &registry)
