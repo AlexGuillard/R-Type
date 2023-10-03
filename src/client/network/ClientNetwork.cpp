@@ -36,7 +36,7 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
             responseHandlerIt->second(_dataReceived);
         }
     } else {
-	    receive(_socket);
+	    // receive(_socket);
 	}
 }
 
@@ -44,8 +44,10 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 {
 	if (!error && recvd_bytes > 0) {
 		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
-		receive(_socket);
-	}
+		// receive(_socket);
+	} else {
+        std::cout << "erreur\n";
+    }
 }
 
 void Network::ClientNetwork::sendHello()
@@ -95,27 +97,28 @@ void Network::ClientNetwork::sendAction(Action action)
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
-	try {
-	    boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
-	    _endpoint = endpoint;
-	    _socket.open(endpoint.protocol());
+	// try {
+	    // boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
+	    boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string("127.0.0.1"), 4848);
+        _endpoint = serverEndpoint;
+	    _socket.open(_endpoint.protocol());
 
-	    sendHello();
+	    // sendHello();
 
-        receive(_socket);
-        std::string receive = _data.data();
+        // receive(_socket);
+        // std::string receive = _data.data();
 
-        if (receive == "200") {
-			std::cout << "Connected to server" << std::endl;
-			return (true);
-        }
-	}
+        // if (receive == "200") {
+		// 	std::cout << "Connected to server" << std::endl;
+		// 	return (true);
+        // }
+	// }
 
-	catch (std::exception &e) {
-		std::cerr << "Error connecting to server: " <<e.what() << std::endl;
-	}
+	// catch (std::exception &e) {
+	// 	std::cerr << "Error connecting to server: " <<e.what() << std::endl;
+	// }
 
-	return (false);
+	return (true);
 }
 
 void Network::ClientNetwork::initializeResponsehandler()

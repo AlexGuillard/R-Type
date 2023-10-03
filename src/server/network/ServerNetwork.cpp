@@ -24,7 +24,7 @@ void Network::ServerNetwork::updateTicks()
     _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
-            std::cout << "need to updates ticks\n";
+            // std::cout << "need to updates ticks\n";
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
@@ -39,7 +39,14 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
-            std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
+            std::cout << "[" << recvd_bytes << "] " << _data.data() << " from " << getActualClient() << std::endl;
+            std::string test(_data.begin(), _data.end());
+                std::cout << "Test = [" << test << "]" << std::endl;
+            if (test == "212") {
+                send(_socket, "connard\n");
+                std::cout << "Connard send" << std::endl;
+            }
+
             send(_socket, "receive data\n");
         } else {
             connection();
@@ -84,10 +91,14 @@ void Network::ServerNetwork::connection()
 {
     std::string res = _data.data();
 
+    std::cout << "Message from client" << res << std::endl;
+
     if (res == "Hello R-Type server\n" && _clients.size() < 5) {
         addClient();
         send(_socket, "200\n");
+        std::cout << "200 envoyé" << std::endl;
     } else {
         send(_socket, "401: Forbidden\n");
+        std::cout << "401 envoyé" << std::endl;
     }
 }

@@ -148,6 +148,9 @@ namespace Network {
          *
          */
         ClientNetwork();
+        //TODO reput these on private
+        boost::asio::io_service _ioService;
+        boost::asio::ip::udp::socket _socket;
 
     private:
         //Port of the server
@@ -155,9 +158,7 @@ namespace Network {
         //Host of the server
         std::string _host;
         //Used to manage asynchrous services
-        boost::asio::io_service _ioService;
         //Socket of the clientok but
-        boost::asio::ip::udp::socket _socket;
         //Data received
         std::string _dataReceived;
         //Buffer used to receive data
@@ -166,6 +167,8 @@ namespace Network {
         std::map<std::string, ResponseHandler> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
+        //Endpoint to send
+        // boost::asio::ip::udp::endpoint _senderEndpoint;
     };
 }
 
