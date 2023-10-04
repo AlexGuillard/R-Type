@@ -91,14 +91,16 @@ namespace GameEngine {
         const u_char nbFrameInAnimation = 8;
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, 1, 1, 20, 24, id);
-        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->x = x;
-        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->y = y;
+        registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
         Components::DrawableComponent drawableComponent = {
             "assets/r-typesheet5.gif",
             nbFrameInSpriteSheet, // frameRatio
             Vector2(0, 0), // start
             Vector2(nbFrameInAnimation, 0), // end
-            false, // boomerang
+            true, // boomerang
             nbFrameInAnimation // fps
         };
         registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
