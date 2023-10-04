@@ -112,6 +112,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1PositionComponent.html">PositionComponent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component that contains the position of an entity.  <a href="structECS_1_1Components_1_1PositionComponent.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1SinMovementComponent.html">SinMovementComponent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component that makes the entity move in a sine wave. Every value is in pixels per second. The equation is: y = amplitude * sin(frequency * (t + horizontalOffset)) + verticalOffset.  <a href="structECS_1_1Components_1_1SinMovementComponent.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1TeamComponent.html">TeamComponent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component that contains the type of team.  <a href="structECS_1_1Components_1_1TeamComponent.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,6 +136,12 @@ Enumerations</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a9cda1abd218c2e15157401cb1850c430"><td class="memItemLeft" align="right" valign="top">const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430">maxTexturePathSize</a> = 256</td></tr>
 <tr class="separator:a9cda1abd218c2e15157401cb1850c430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7423839cb3263a2aef0f8e556e9a86db"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db">defaultSinXSpeed</a> = -100</td></tr>
+<tr class="separator:a7423839cb3263a2aef0f8e556e9a86db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efccd438e60e3dd4aaddeefe893984b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a8efccd438e60e3dd4aaddeefe893984b">defaultSinAmplitude</a> = 100</td></tr>
+<tr class="separator:a8efccd438e60e3dd4aaddeefe893984b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae424e9a3df246145d92e1f91ddb46e9"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#aae424e9a3df246145d92e1f91ddb46e9">defaultSinFrequency</a> = 100</td></tr>
+<tr class="separator:aae424e9a3df246145d92e1f91ddb46e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a889129375139c77543a5ae29736db129"><td class="memItemLeft" align="right" valign="top">const u_char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a889129375139c77543a5ae29736db129">maxWaveBeamStrength</a> = 5</td></tr>
 <tr class="separator:a889129375139c77543a5ae29736db129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f1900bb3fb8fa6bfc286b2aca4f990"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#ae1f1900bb3fb8fa6bfc286b2aca4f990">waveBeamSpeed</a> = 500</td></tr>
@@ -166,6 +175,48 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a8efccd438e60e3dd4aaddeefe893984b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8efccd438e60e3dd4aaddeefe893984b">&#9670;&nbsp;</a></span>defaultSinAmplitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ECS::Components::defaultSinAmplitude = 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae424e9a3df246145d92e1f91ddb46e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae424e9a3df246145d92e1f91ddb46e9">&#9670;&nbsp;</a></span>defaultSinFrequency</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ECS::Components::defaultSinFrequency = 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7423839cb3263a2aef0f8e556e9a86db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7423839cb3263a2aef0f8e556e9a86db">&#9670;&nbsp;</a></span>defaultSinXSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int ECS::Components::defaultSinXSpeed = -100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9cda1abd218c2e15157401cb1850c430"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9cda1abd218c2e15157401cb1850c430">&#9670;&nbsp;</a></span>maxTexturePathSize</h2>
 

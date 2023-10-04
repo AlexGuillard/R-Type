@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boomerang_342',['boomerang',['../structECS_1_1Components_1_1DrawableComponent.html#adefb1c97fbf984ebef7a49535244cea7',1,'ECS::Components::DrawableComponent']]]
+  ['amplitude_358',['amplitude',['../structECS_1_1Components_1_1SinMovementComponent.html#a2b98a9ebdb2b68cd6755f2912b569382',1,'ECS::Components::SinMovementComponent']]]
 ];
