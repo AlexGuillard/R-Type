@@ -6,7 +6,7 @@
 */
 
 #include <raylib.h>
-#include "ECS/systems/gravity.hpp"
+#include "ECS/Systems/gravity.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
