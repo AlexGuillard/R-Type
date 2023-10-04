@@ -36,6 +36,15 @@ namespace ECS {
             std::size_t width,
             std::size_t height
         );
+        static Entity createCharacter(
+            Containers::Registry &registry,
+            /* enum TeamGroup team, */
+            std::size_t damage,
+            std::size_t health,
+            std::size_t width,
+            std::size_t height,
+            std::size_t id
+        );
     protected:
     private:
     };
