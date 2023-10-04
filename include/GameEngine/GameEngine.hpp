@@ -14,6 +14,10 @@
 #include "ECS/Containers/Registry.hpp"
 
 namespace GameEngine {
+    // Registry type
+    const std::string registryTypeEntities = "Entities";
+    const std::string registryTypeBackground = "Background";
+
     class GameEngine {
         using Registry = ECS::Containers::Registry;
     public:
@@ -50,4 +54,9 @@ namespace GameEngine {
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
     };
+
+    /**
+     * @brief Creates the game engine that will run the game
+     */
+    GameEngine createEngine();
 }; // namespace ECS::GameEngine

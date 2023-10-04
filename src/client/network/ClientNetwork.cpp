@@ -37,7 +37,7 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
 	if (!error && recvd_bytes > 0) {
-		std::cout << "[" << recvd_bytes << "] " << _data << std::endl;
+		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
 		receive(_socket);
 	}
 }
@@ -117,4 +117,21 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 	}
 
 	return (false);
+}
+
+std::unique_ptr<Network::ClientNetwork> Network::ClientNetwork::_instance =  std::unique_ptr<Network::ClientNetwork>();
+
+Network::ClientNetwork& Network::ClientNetwork::getInstance() {
+    if (_instance == nullptr) {
+        _instance.reset(new ClientNetwork());
+    }
+    return *_instance;
+}
+
+Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_service &io_service, const std::string &host, int port)
+{
+    if (_instance == nullptr) {
+        _instance.reset(new ClientNetwork(io_service, host, port));
+    }
+    return *_instance;
 }

@@ -6,10 +6,12 @@
 */
 
 #include "client/display/Display.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 int main()
 {
     Screen::Display window;
-    window.displayWindow();
+    // Screen::Display window(Screen::Display::GameState::GAME); // Uncomment this line to start the game directly
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    window.displayWindow(engine);
 }
-

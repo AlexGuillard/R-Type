@@ -10,6 +10,7 @@
 #include "ANetwork.hpp"
 #include <iostream>
 #include "Error.hpp"
+#include <memory>
 #define MAX_SIZE_BUFFER 1024
 
 namespace Network {
@@ -39,19 +40,6 @@ namespace Network {
     class ClientNetwork : public ANetwork {
 
     public:
-        /**
-         * @brief Construct a new Client Network object with parameters
-         *
-         * @param io_service
-         * @param host
-         * @param port
-         */
-        ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
-        /**
-         * @brief Construct a new Client Network object without parameters
-         *
-         */
-        ClientNetwork();
         /**
          * @brief Destroy the Client Network object
          *
@@ -101,6 +89,22 @@ namespace Network {
          */
         bool connect(const std::string &host, int port);
 
+        /**
+         * @brief Get the Instance object
+         *
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance();
+        /**
+         * @brief Get the Instance object
+         *
+         * @param io_service
+         * @param host
+         * @param port
+         * @return ClientNetwork&
+         */
+        static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
+
     private:
         //Port of the server
         int _port;
@@ -114,6 +118,22 @@ namespace Network {
         std::string _dataReceived;
         //Buffer used to receive data
         std::array<char, MAX_SIZE_BUFFER> _buffer;
+        //Stock class for SingleTon
+        static std::unique_ptr<ClientNetwork> _instance;
+
+        /**
+         * @brief Construct a new Client Network object with parameters
+         *
+         * @param io_service
+         * @param host
+         * @param port
+         */
+        ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
+        /**
+         * @brief Construct a new Client Network object without parameters
+         *
+         */
+        ClientNetwork();
     };
 }
 
