@@ -33,4 +33,24 @@ namespace ECS {
         return entity;
     }
 
+    Entity Creator::createCharacter(
+        Containers::Registry &registry,
+        /* enum TeamGroup team, */
+        std::size_t damage,
+        std::size_t health,
+        std::size_t width,
+        std::size_t height,
+        std::size_t id
+    )
+    {
+        Entity entity = registry.entityFromIndex(id);
+
+        registry.emplaceComponent<Components::PositionComponent>(entity, 0, 0);
+        registry.emplaceComponent<Components::VelocityComponent>(entity, 0, 0);
+        registry.emplaceComponent<Components::DamageComponent>(entity, damage);
+        registry.emplaceComponent<Components::HPComponent>(entity, health);
+        registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
+        return entity;
+    }
+
 }; // namespace ECS
