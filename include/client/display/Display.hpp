@@ -8,11 +8,8 @@
 #pragma once
 
 #include <iostream>
-namespace Raylib {
-    #include <raylib.h>
-};
+#include <raylib.h>
 
-#include "client/network/ClientNetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
 
 namespace Screen {
@@ -26,16 +23,59 @@ namespace Screen {
             MENU,
             GAME
         };
+        enum class MenuState {
+            WAITING_FOR_PLAYER_INPUT, // waiting for player input
+            CONNECTING,               // waiting for connection to server to be established
+            CONNECTED,                // connected to server
+        };
         /**
          * @brief Init the window with raylib
          * @param state set the starting state of the game
          */
         Display(GameState state = GameState::MENU);
+
         /**
-         * @brief loop display window with menu or game
-         * @param engine GameEngine
+         * @returns True if the window is open
          */
-        void displayWindow(GameEngine::GameEngine &engine);
+        static bool isOpen();
+
+        /**
+         * @returns The current state of the game
+         */
+        GameState getGameState() const;
+        /**
+         * @returns The current state of the menu
+         */
+        MenuState getMenuState() const;
+        /**
+         * @brief Sets the state of the menu
+         * @param state The new state of the menu
+         */
+        void setMenuState(MenuState state);
+        /**
+         * @returns The host name entered in the login menu
+         */
+        const std::string &getHostName() const;
+        /**
+         * @returns The port name entered in the login menu or -1 if
+         * no port is entered
+         */
+        int getPort() const;
+
+        /**
+         * @brief Start updating the window
+         */
+        void beginUpdate();
+        /**
+         * @brief End updating the window
+         */
+        void endUpdate();
+
+        // /**
+        //  * @brief loop display window with menu or game
+        //  * @param engine GameEngine
+        //  */
+        // void displayWindow(GameEngine::GameEngine &engine);
 
         /**
          * @brief display an input for hostname
@@ -80,8 +120,12 @@ namespace Screen {
          */
         void drawGame(GameEngine::GameEngine &engine);
 
-    protected:
     private:
+        /**
+         * @brief Updates the window's states
+         */
+        void update();
+
         // Stock the Hostname in a string
         std::string _hostName;
         // Stock the Port in a string
@@ -89,15 +133,12 @@ namespace Screen {
         // Stock the state of the input in menu 0=none 1=hostname 2=port
         int _state = 0;
         // Set the rectangle clickable for hostname input
-        Raylib::Rectangle _hostNameclickableZone;
+        Rectangle _hostNameclickableZone;
         // Set the rectangle clickable for port input
-        Raylib::Rectangle _portclickableZone;
+        Rectangle _portclickableZone;
         // Set the rectangle clickable for conection button
-        Raylib::Rectangle _connectionclickableZone;
-        // Set game state 0=menu 1=game
-        // bool _gameState;
-        GameState _gameState;
-        // Client used to communicate with server (network)
-        Network::ClientNetwork &_client = Network::ClientNetwork::getInstance();
+        Rectangle _connectionclickableZone;
+        GameState _gameState = GameState::MENU;
+        MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
     };
 }

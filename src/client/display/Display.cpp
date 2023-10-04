@@ -8,117 +8,147 @@
 #include "client/display/Display.hpp"
 #include "GameEngine/Events.hpp"
 
+#include <iostream>
 Screen::Display::Display(GameState state) : _state(0), _gameState(state)
 {
-    int monitor = Raylib::GetCurrentMonitor();
-    const int screenWidth = Raylib::GetMonitorWidth(monitor);
-    const int screenHeight = Raylib::GetMonitorHeight(monitor);
     const int fps = 60;
-    Raylib::InitWindow(screenWidth, screenHeight, "R-Type");
-    Raylib::ToggleFullscreen();
-    Raylib::SetTargetFPS(fps);
+    int monitor = GetCurrentMonitor();
+
+    InitWindow(480, 240, "R-Type");
+    SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
+    ToggleFullscreen();
+    SetTargetFPS(fps);
 }
 
-void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
+bool Screen::Display::isOpen()
 {
-    auto &clientNetwork = Network::ClientNetwork::getInstance();
+    return !WindowShouldClose();
+}
 
-    while (!Raylib::WindowShouldClose()) {
-        Raylib::BeginDrawing();
-        Raylib::ClearBackground(Raylib::RAYWHITE);
-        if (_gameState == GameState::MENU) {
-            detectActionMenu();
-            drawMenu();
-        } else if (_gameState == GameState::GAME) {
-            GameEngine::Events::Type type;
-            while (GameEngine::Events::poll(type)) {
-                switch (type) {
-                case GameEngine::Events::Type::PLAYER_UP:
-                    clientNetwork.sendMovement(Network::Movement::UP);
-                    break;
-                case GameEngine::Events::Type::PLAYER_DOWN:
-                    clientNetwork.sendMovement(Network::Movement::DOWN);
-                    break;
-                case GameEngine::Events::Type::PLAYER_LEFT:
-                    clientNetwork.sendMovement(Network::Movement::LEFT);
-                    break;
-                case GameEngine::Events::Type::PLAYER_RIGHT:
-                    clientNetwork.sendMovement(Network::Movement::RIGHT);
-                    break;
-                case GameEngine::Events::Type::PLAYER_SHOOT:
-                    clientNetwork.sendAction(Network::Action::SHOOT);
-                    break;
-                case GameEngine::Events::Type::PLAYER_DROP:
-                    clientNetwork.sendAction(Network::Action::DROP);
-                    break;
-                default:
-                    break;
-                }
-            }
-            drawGame(engine);
-        }
-        Raylib::EndDrawing();
+Screen::Display::GameState Screen::Display::getGameState() const
+{
+    return _gameState;
+}
+
+Screen::Display::MenuState Screen::Display::getMenuState() const
+{
+    return _menuState;
+}
+
+void Screen::Display::setMenuState(MenuState state)
+{
+    _menuState = state;
+}
+
+const std::string &Screen::Display::getHostName() const
+{
+    return _hostName;
+}
+
+int Screen::Display::getPort() const
+{
+    if (_port.empty()) {
+        return -1;
     }
-    Raylib::CloseWindow();
+    return std::stoi(_port);
+}
+
+void Screen::Display::beginUpdate()
+{
+    this->detectActionMenu();
+    this->update();
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+}
+
+void Screen::Display::endUpdate()
+{
+    EndDrawing();
+}
+
+void Screen::Display::update()
+{
+    if (_gameState == GameState::MENU) {
+        if (_menuState == MenuState::CONNECTED) {
+            _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
+            _gameState = GameState::GAME;
+        }
+    }
 }
 
 ///// Menu
+static Rectangle getInputRect(int posX, int posY)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    const int widthRect = 0.5 * screenWidth;
+    const int heightRect = 0.05 * screenHeight;
+
+    return { (float)posX, (float)posY, (float)widthRect, (float)heightRect };
+}
+
 void Screen::Display::displayHostNameInput()
 {
-    const int posXRect = 100;
-    const int posYRect = 100;
-    const int widthRect = 500;
-    const int heightRect = 30;
-    const int lineSize = 30;
-    const int posXText = 105;
-    const int posYText = 105;
-    const int fontSizeText = 20;
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    const int posXRect = 0.25 * screenWidth;
+    const int posYRect = 0.4 * screenHeight;
+    _hostNameclickableZone = getInputRect(posXRect, posYRect);
+    const int lineSize = std::max(1., 0.1 * _hostNameclickableZone.width);
+    const int posXText = posXRect + 0.05 * _hostNameclickableZone.width;
+    const int posYText = posYRect + 0.001 * _hostNameclickableZone.height;
+    const int fontSizeText = _hostNameclickableZone.height;
 
-    _hostNameclickableZone = { posXRect, posYRect, widthRect, heightRect };
+    _hostNameclickableZone.x = posXRect;
+    _hostNameclickableZone.y = posYRect;
     if (_hostName.empty()) {
-        Raylib::DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, Raylib::RED);
+        DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, RED);
     } else {
-        Raylib::DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, Raylib::BLUE);
+        DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, BLUE);
     }
-    Raylib::DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, Raylib::LIGHTGRAY);
+    DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayPortInput()
 {
-    const int posXRect = 100;
-    const int posYRect = 150;
-    const int widthRect = 500;
-    const int heightRect = 30;
-    const int lineSize = 30;
-    const int posXText = 105;
-    const int posYText = 155;
-    const int fontSizeText = 20;
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    const int posXRect = 0.25 * screenWidth;
+    const int posYRect = 0.5 * screenHeight;
+    _portclickableZone = getInputRect(posXRect, posYRect);
+    const int lineSize = std::max(1., 0.1 * _portclickableZone.width);
+    const int posXText = posXRect + 0.05 * _portclickableZone.width;
+    const int posYText = posYRect + 0.001 * _portclickableZone.height;
+    const int fontSizeText = _portclickableZone.height;
 
-    _portclickableZone = { posXRect, posYRect, widthRect, heightRect };
-    if (_port.empty()) {
-        Raylib::DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, Raylib::RED);
+    _portclickableZone.x = posXRect;
+    _portclickableZone.y = posYRect;
+    if (_hostName.empty()) {
+        DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, RED);
     } else {
-        Raylib::DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, Raylib::BLUE);
+        DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, BLUE);
     }
-    Raylib::DrawText(_port.c_str(), posXText, posYText, fontSizeText, Raylib::LIGHTGRAY);
+    DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayConnectionButton()
 {
-    const Raylib::Rectangle defaultClickableZone = { 100, 210, 110, 30 };
-    const int lineSize = 30;
-    const int posXText = 105;
-    const int posYText = 215;
-    const int fontSizeText = 20;
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    const int posXRect = 0.25 * screenWidth;
+    const int posYRect = 0.75 * screenHeight;
+    _connectionclickableZone = getInputRect(posXRect, posYRect);
+    const int lineSize = std::max(1., 0.1 * _connectionclickableZone.width);
+    const int posXText = posXRect + 0.05 * _connectionclickableZone.width;
+    const int posYText = posYRect + 0.001 * _connectionclickableZone.height;
+    const int fontSizeText = _connectionclickableZone.height;
 
     if (_hostName.empty() || _port.empty()) {
-        _connectionclickableZone = defaultClickableZone;
-        Raylib::DrawRectangleRec(_connectionclickableZone, Raylib::RED);
+        DrawRectangleRec(_connectionclickableZone, RED);
     } else {
-        _connectionclickableZone = defaultClickableZone;
-        Raylib::DrawRectangleRec(_connectionclickableZone, Raylib::BLUE);
+        DrawRectangleRec(_connectionclickableZone, BLUE);
     }
-    Raylib::DrawText("Connexion", posXText, posYText, fontSizeText, Raylib::WHITE);
+    DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
 }
 
 void Screen::Display::detectActionMenu()
@@ -126,15 +156,15 @@ void Screen::Display::detectActionMenu()
     int keyPressed = 0;
     int key = 0;
 
-    if (Raylib::IsMouseButtonPressed(Raylib::MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         mouseClickedMenu();
     }
-    keyPressed = Raylib::GetCharPressed();
+    keyPressed = GetCharPressed();
     if (keyPressed != 0) {
         keyPressededMenu(keyPressed, key);
     }
-    keyPressed = Raylib::GetCharPressed();
-    key = Raylib::GetKeyPressed();
+    keyPressed = GetCharPressed();
+    key = GetKeyPressed();
     if (keyPressed != 0 || key != 0) {
         keyPressededMenu(keyPressed, key);
     }
@@ -142,23 +172,20 @@ void Screen::Display::detectActionMenu()
 
 void Screen::Display::mouseClickedMenu()
 {
-    float mouseX = Raylib::GetMouseX();
-    float mouseY = Raylib::GetMouseY();
-    const Raylib::Vector2 mouse = { mouseX, mouseY };
+    float mouseX = GetMouseX();
+    float mouseY = GetMouseY();
+    const Vector2 mouse = { mouseX, mouseY };
 
-    if (Raylib::CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
+    if (CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
         _state = 1;
-    } else if (Raylib::CheckCollisionPointRec(mouse, _portclickableZone)) {
+    } else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
         _state = 2;
     } else {
         _state = 0;
     }
-    if (Raylib::CheckCollisionPointRec(mouse, _connectionclickableZone)) {
+    if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
-        //TODO: handle basic error (empty hostname, empty port, invalid port (ex: chocolat instead of 8080)) on the graphic side
-        //connect return a bool to let us know if the connection was successful or not
-        _client.connect(_hostName, std::stoi(_port));
-        _gameState = GameState::GAME;
+        _menuState = MenuState::CONNECTING;
     }
 }
 
