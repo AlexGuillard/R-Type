@@ -13,7 +13,7 @@ target_include_directories(ECS PUBLIC ${INCROOT})
 target_link_libraries(systems PUBLIC
     raylib
     systems_helper
-    ClientNetwork
+    GameEngine
 )
 
 add_subdirectory(helper)
