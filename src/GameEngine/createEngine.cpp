@@ -19,12 +19,14 @@
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Systems/damage.hpp"
+#include "ECS/Systems/sinMovement.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -45,6 +47,7 @@ namespace GameEngine {
         registry.registerComponent<Components::CollidableComponent>();
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::TeamComponent>();
+        registry.registerComponent<Components::SinMovementComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
@@ -52,6 +55,7 @@ namespace GameEngine {
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
+        registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
     }
 
     static ECS::Entity spawnShip(Containers::Registry &registry)
@@ -82,16 +86,6 @@ namespace GameEngine {
         registry.emplaceComponent<Components::ControllableComponent>(player);
         registry.getComponents<Components::PositionComponent>().at(player)->x = GetScreenWidth() / 2;
         registry.getComponents<Components::PositionComponent>().at(player)->y = GetScreenHeight() / 2;
-
-        const int nbEnemies = 10;
-        for (int i = 0; i < nbEnemies; i++) {
-            const u_int velocityRange = 200;
-            const u_char nbFrameInAnimation = 5;
-            ECS::Entity entity = spawnShip(registry);
-            registry.emplaceComponent<Components::PositionComponent>(entity, GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()));
-            registry.emplaceComponent<Components::VelocityComponent>(entity, GetRandomValue(-velocityRange, velocityRange), GetRandomValue(-velocityRange, velocityRange));
-            registry.getComponents<Components::DrawableComponent>().at(entity)->frame = GetRandomValue(0, nbFrameInAnimation);
-        }
     }
 
     GameEngine createEngine()
