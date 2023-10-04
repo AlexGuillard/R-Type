@@ -23,6 +23,7 @@
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
+#include "ECS/Creator.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -78,6 +79,25 @@ namespace GameEngine {
         registry.emplaceComponent<Components::ControllableComponent>(player);
         registry.getComponents<Components::PositionComponent>().at(player)->x = GetScreenWidth() / 2;
         registry.getComponents<Components::PositionComponent>().at(player)->y = GetScreenHeight() / 2;
+    }
+
+    static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Vector2 nbFrameInSpriteSheet = Vector2(16, 1);
+        const u_char nbFrameInAnimation = 8;
+
+        ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, 1, 1, 20, 24, id);
+        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->y = y;
+        Components::DrawableComponent drawableComponent = {
+            "assets/r-typesheet5.gif",
+            nbFrameInSpriteSheet, // frameRatio
+            Vector2(0, 0), // start
+            Vector2(nbFrameInAnimation, 0), // end
+            false, // boomerang
+            nbFrameInAnimation // fps
+        };
+        registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
     }
 
     GameEngine createEngine()
