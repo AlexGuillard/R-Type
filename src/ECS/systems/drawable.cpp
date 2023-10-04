@@ -98,7 +98,7 @@ namespace ECS::Systems {
             drawer.draw(Vector2(position->x, position->y));
         #ifdef DEBUG
             debugDraw(
-                Containers::Registry::entityFromIndex(eId),
+                registry.entityFromIndex(eId),
                 *position,
                 hitboxes.at(eId),
                 collisions.at(eId)
