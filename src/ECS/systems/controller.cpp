@@ -94,9 +94,9 @@ namespace ECS::Systems {
             return;
         }
         if (controllable.timeFireButtonHeld > 0) {
-            u_char strength = clamp(
-                static_cast<u_char>(controllable.timeFireButtonHeld / Systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
-                static_cast<u_char>(1),
+            uint8_t strength = clamp(
+                static_cast<uint8_t>(controllable.timeFireButtonHeld / Systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
+                static_cast<uint8_t>(1),
                 Components::maxWaveBeamStrength
             );
             auto missileEntity = registry.spawnEntity();

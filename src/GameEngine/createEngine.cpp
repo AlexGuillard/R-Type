@@ -53,7 +53,7 @@ namespace GameEngine {
     static ECS::Entity spawnShip(Containers::Registry &registry)
     {
         const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
-        const u_char nbFrameInAnimation = 5;
+        const uint8_t nbFrameInAnimation = 5;
         ECS::Entity ship = registry.spawnEntity();
         registry.emplaceComponent<Components::PositionComponent>(ship, 0, 0);
         registry.emplaceComponent<Components::VelocityComponent>(ship, 0, 0);
