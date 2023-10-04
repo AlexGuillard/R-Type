@@ -13,6 +13,7 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
     _endpoint = endpoint;
     _socket.open(endpoint.protocol());
 
+    initializeResponsehandler();
     sendHello();
 }
 
@@ -24,27 +25,32 @@ Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
 Network::ClientNetwork::~ClientNetwork()
 {}
 
-void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
-{
+void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes) {
     if (!error && recvd_bytes > 0) {
         _dataReceived.resize(recvd_bytes);
         std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
-        std::cout << "[" << recvd_bytes << "] " << _dataReceived << std::endl;
+
+        _receivedMessages.push(_dataReceived);
 
         auto responseHandlerIt = _responseHandlers.find(_dataReceived);
+
         if (responseHandlerIt != _responseHandlers.end()) {
             responseHandlerIt->second(_dataReceived);
         }
+
+        myReceive();
+
+        std::cout << "Received: " << _dataReceived << std::endl;
     } else {
-	    // receive(_socket);
-	}
+        myReceive();
+    }
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
 	if (!error && recvd_bytes > 0) {
 		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
-		// receive(_socket);
+		receive(_socket);
 	} else {
         std::cout << "erreur\n";
     }
@@ -52,7 +58,8 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-	send(_socket, "Hello R-Type server\n");
+	// send(_socket, "Hello R-Type server\n");
+	mySend("Hello R-Type server\n");
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
@@ -103,14 +110,6 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
         _endpoint = serverEndpoint;
 	    _socket.open(_endpoint.protocol());
 
-	    // sendHello();
-
-        // receive(_socket);
-        // std::string receive = _data.data();
-
-        // if (receive == "200") {
-		// 	std::cout << "Connected to server" << std::endl;
-		// 	return (true);
         // }
 	// }
 

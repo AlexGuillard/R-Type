@@ -14,6 +14,7 @@
 #include <functional>
 #include <memory>
 #define MAX_SIZE_BUFFER 1024
+#include <queue>
 
 namespace Network {
 
@@ -152,6 +153,38 @@ namespace Network {
         boost::asio::io_service _ioService;
         boost::asio::ip::udp::socket _socket;
 
+        void mySend(const std::string& message) {
+            _socket.send_to(boost::asio::buffer(message), _endpoint);
+        }
+
+        void myReceive() {
+            _socket.async_receive_from(
+                boost::asio::buffer(_buffer), _senderEndpoint,
+                std::bind(&ClientNetwork::handleReceive, this,
+                          std::placeholders::_1, std::placeholders::_2));
+        }
+
+        void printReceivedMessages() {
+            while (!_receivedMessages.empty()) {
+                std::string message = _receivedMessages.front();
+                _receivedMessages.pop();
+                std::cout << "Received: " << message << std::endl;
+            }
+        }
+
+        void enqueueReceivedMessage(const std::string& message) {
+            _receivedMessages.push(message);
+        }
+
+        std::string dequeueReceivedMessage() {
+            if (!_receivedMessages.empty()) {
+                std::string message = _receivedMessages.front();
+                _receivedMessages.pop();
+                return message;
+            }
+            return "";
+        }
+
     private:
         //Port of the server
         int _port;
@@ -168,7 +201,8 @@ namespace Network {
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
         //Endpoint to send
-        // boost::asio::ip::udp::endpoint _senderEndpoint;
+        boost::asio::ip::udp::endpoint _senderEndpoint;
+        std::queue<std::string> _receivedMessages;
     };
 }
 

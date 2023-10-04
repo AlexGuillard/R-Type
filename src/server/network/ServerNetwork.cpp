@@ -41,12 +41,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         if (findClient(getActualClient()) != "") {
             std::cout << "[" << recvd_bytes << "] " << _data.data() << " from " << getActualClient() << std::endl;
             std::string test(_data.begin(), _data.end());
-                std::cout << "Test = [" << test << "]" << std::endl;
-            if (test == "212") {
-                send(_socket, "connard\n");
-                std::cout << "Connard send" << std::endl;
-            }
-
+            std::cout << "Test = [" << test << "]" << std::endl;
             send(_socket, "receive data\n");
         } else {
             connection();

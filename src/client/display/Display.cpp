@@ -21,19 +21,17 @@ Screen::Display::Display(GameState state) : _state(0), _gameState(state)
     SetTargetFPS(fps);
 }
 
-void handleReceive(const boost::system::error_code& error, std::size_t bytes_received) {
-    if (!error) {
-        // std::cout << "Server response: " << std::string(response, bytes_received) << std::endl;
+void handleNetworkMessages(Network::ClientNetwork& client) {
+    std::string receivedMessage = client.dequeueReceivedMessage();
+    while (!receivedMessage.empty()) {
+        std::cout << "Received message: " << receivedMessage << std::endl;
+        receivedMessage = client.dequeueReceivedMessage();
     }
 }
 
-#include <iostream>
-#include <boost/asio.hpp>
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
-    char response[1024];
-    boost::asio::ip::udp::endpoint _senderEndpoint;
-
+    _client.myReceive();
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -41,62 +39,14 @@ void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
             detectActionMenu();
             drawMenu();
         } else if (_gameState == GameState::GAME) {
-            _client._socket.async_receive_from(boost::asio::buffer(response), _senderEndpoint, handleReceive);
-            // size_t bytes_received = _client._socket.receive_from(boost::asio::buffer(response), _senderEndpoint);
-            std::string responseStr(response); // Convert the char array to a string
-            std::cout << "Server response: " << responseStr << std::endl;
-
-            // Compare with "200\n" to account for the newline character
-            if (responseStr == "200\n") {
-                std::cout << "J'ai 200" << std::endl;
-            }
-            // _client._ioService.run_one();
+            _client.mySend("hello");
             drawGame(engine);
+            _client._ioService.run_one();
         }
         EndDrawing();
     }
     CloseWindow();
 }
-
-
-#include <boost/algorithm/string.hpp>
-// void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
-// {
-//     boost::asio::ip::udp::endpoint _senderEndpoint;
-//     std::string previousResponse = "";
-//     char response[1024];
-
-//     while (!WindowShouldClose()) {
-//         BeginDrawing();
-//         ClearBackground(RAYWHITE);
-//         if (_gameState == GameState::MENU) {
-//             detectActionMenu();
-//             drawMenu();
-//         } else if (_gameState == GameState::GAME) {
-//             _client._socket.async_receive_from(boost::asio::buffer(response), _senderEndpoint,
-//                 [this, &previousResponse, &response](const boost::system::error_code& error, std::size_t bytes_received) {
-//                     if (!error && bytes_received > 0) {
-//                         std::string serverResponse(response, bytes_received);
-
-//                         // Check if the serverResponse starts with "200" and contains a newline
-//                         if (serverResponse.find("200\n") == 0) {
-//                             std::cout << "Server response: " << serverResponse << std::endl;
-//                             previousResponse = serverResponse;
-//                             std::cout << "200 received" << std::endl;
-//                         }
-//                         // Handle the response as needed
-//                     }
-//                     _client.receive(_client._socket);
-//                     _client._ioService.run();
-//                 });
-
-//             drawGame(engine);
-//         }
-//         EndDrawing();
-//     }
-//     CloseWindow();
-// }
-
 
 ///// Menu
 void Screen::Display::displayHostNameInput()
@@ -241,5 +191,3 @@ void Screen::Display::drawGame(GameEngine::GameEngine &engine)
     engine.run();
 
 }
-
-
