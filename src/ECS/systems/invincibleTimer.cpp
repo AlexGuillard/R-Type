@@ -6,7 +6,7 @@
 */
 
 #include <raylib.h>
-#include "ECS/systems/invincibleTimer.hpp"
+#include "ECS/Systems/invincibleTimer.hpp"
 #include "ECS/Components/InvincibleTimerComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 
