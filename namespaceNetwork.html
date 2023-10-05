@@ -66,7 +66,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Network Namespace Reference</div>  </div>
 </div><!--header-->
@@ -108,6 +109,18 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a939d5767ba0bbba93169571343fb14c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum used to know the action of the player on the server.  <a href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">More...</a><br /></td></tr>
 <tr class="separator:a939d5767ba0bbba93169571343fb14c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a70b3790ab28716d145986735455c108b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a70b3790ab28716d145986735455c108b">startClientNetwork</a> (const std::string &amp;host, int port)</td></tr>
+<tr class="memdesc:a70b3790ab28716d145986735455c108b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start running the client.  <a href="namespaceNetwork.html#a70b3790ab28716d145986735455c108b">More...</a><br /></td></tr>
+<tr class="separator:a70b3790ab28716d145986735455c108b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4023b97ad27e00e83689c6736a03ca70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a4023b97ad27e00e83689c6736a03ca70">updateClientNetwork</a> ()</td></tr>
+<tr class="memdesc:a4023b97ad27e00e83689c6736a03ca70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the client. Fetches the server information then answers from the server.  <a href="namespaceNetwork.html#a4023b97ad27e00e83689c6736a03ca70">More...</a><br /></td></tr>
+<tr class="separator:a4023b97ad27e00e83689c6736a03ca70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8458e76dfdf40cb81b0f19e93a82654"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654">stopClientNetwork</a> ()</td></tr>
+<tr class="memdesc:aa8458e76dfdf40cb81b0f19e93a82654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the client.  <a href="namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654">More...</a><br /></td></tr>
+<tr class="separator:aa8458e76dfdf40cb81b0f19e93a82654"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a939d5767ba0bbba93169571343fb14c0"></a>
@@ -205,6 +218,76 @@ Enumerations</h2></td></tr>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    };</div>
 <div class="ttc" id="anamespaceNetwork_html_a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07"><div class="ttname"><a href="namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07">Network::MAX_SIZE_BUFF</a></div><div class="ttdeci">@ MAX_SIZE_BUFF</div><div class="ttdef"><b>Definition:</b> INetwork.hpp:18</div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a70b3790ab28716d145986735455c108b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70b3790ab28716d145986735455c108b">&#9670;&nbsp;</a></span>startClientNetwork()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::startClientNetwork </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start running the client. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the client successfully started, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aa8458e76dfdf40cb81b0f19e93a82654"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8458e76dfdf40cb81b0f19e93a82654">&#9670;&nbsp;</a></span>stopClientNetwork()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::stopClientNetwork </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cleanup the client. </p>
+
+</div>
+</div>
+<a id="a4023b97ad27e00e83689c6736a03ca70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4023b97ad27e00e83689c6736a03ca70">&#9670;&nbsp;</a></span>updateClientNetwork()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::updateClientNetwork </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the client. Fetches the server information then answers from the server. </p>
+
 </div>
 </div>
 </div><!-- contents -->

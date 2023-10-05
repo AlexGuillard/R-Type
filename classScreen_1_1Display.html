@@ -71,6 +71,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classScreen_1_1Display-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Screen::Display Class Reference</div>  </div>
@@ -88,15 +89,34 @@ Public Types</h2></td></tr>
 , <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13">GAME</a>
  }</td></tr>
 <tr class="separator:a2d87c8007b598cb87597aaaca031d6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3dd09842c4b6a8d306234dc9f582b2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a> { <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2a6b8c757fb752d3730720ccbf3d73cd56">WAITING_FOR_PLAYER_INPUT</a>
+, <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2a9a14f95e151eec641316e7c784ce832d">CONNECTING</a>
+, <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2aa5afd6edd5336d91316964e493936858">CONNECTED</a>
+ }</td></tr>
+<tr class="separator:a3f3dd09842c4b6a8d306234dc9f582b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a73aac76c704605918eae7cfebafcf12d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a73aac76c704605918eae7cfebafcf12d">Display</a> (<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> state=<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">GameState::MENU</a>)</td></tr>
 <tr class="memdesc:a73aac76c704605918eae7cfebafcf12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the window with raylib.  <a href="classScreen_1_1Display.html#a73aac76c704605918eae7cfebafcf12d">More...</a><br /></td></tr>
 <tr class="separator:a73aac76c704605918eae7cfebafcf12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37231053e6564d71388c413f90247506"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a37231053e6564d71388c413f90247506">displayWindow</a> (GameEngine::GameEngine &amp;engine)</td></tr>
-<tr class="memdesc:a37231053e6564d71388c413f90247506"><td class="mdescLeft">&#160;</td><td class="mdescRight">loop display window with menu or game  <a href="classScreen_1_1Display.html#a37231053e6564d71388c413f90247506">More...</a><br /></td></tr>
-<tr class="separator:a37231053e6564d71388c413f90247506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4e111c7af9691e08e4e597d7f5d0eb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac4e111c7af9691e08e4e597d7f5d0eb4">getGameState</a> () const</td></tr>
+<tr class="separator:ac4e111c7af9691e08e4e597d7f5d0eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af343aa8ba6eb3a81f31b2d375cbcb03a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#af343aa8ba6eb3a81f31b2d375cbcb03a">getMenuState</a> () const</td></tr>
+<tr class="separator:af343aa8ba6eb3a81f31b2d375cbcb03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a352a3ce3dca79f71b33647524d6f9f09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a352a3ce3dca79f71b33647524d6f9f09">setMenuState</a> (<a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a> state)</td></tr>
+<tr class="memdesc:a352a3ce3dca79f71b33647524d6f9f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the state of the menu.  <a href="classScreen_1_1Display.html#a352a3ce3dca79f71b33647524d6f9f09">More...</a><br /></td></tr>
+<tr class="separator:a352a3ce3dca79f71b33647524d6f9f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57eced4f7ccc0bf10562991120fcffc3"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a57eced4f7ccc0bf10562991120fcffc3">getHostName</a> () const</td></tr>
+<tr class="separator:a57eced4f7ccc0bf10562991120fcffc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091b9243a30b8ef00df455cf52d00c19"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a091b9243a30b8ef00df455cf52d00c19">getPort</a> () const</td></tr>
+<tr class="separator:a091b9243a30b8ef00df455cf52d00c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac64937cc03e09c21c04c30358ba2e0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#aac64937cc03e09c21c04c30358ba2e0c">beginUpdate</a> ()</td></tr>
+<tr class="memdesc:aac64937cc03e09c21c04c30358ba2e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start updating the window.  <a href="classScreen_1_1Display.html#aac64937cc03e09c21c04c30358ba2e0c">More...</a><br /></td></tr>
+<tr class="separator:aac64937cc03e09c21c04c30358ba2e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa388bb28c78929754ce2479c5e48dbf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#aa388bb28c78929754ce2479c5e48dbf0">endUpdate</a> ()</td></tr>
+<tr class="memdesc:aa388bb28c78929754ce2479c5e48dbf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">End updating the window.  <a href="classScreen_1_1Display.html#aa388bb28c78929754ce2479c5e48dbf0">More...</a><br /></td></tr>
+<tr class="separator:aa388bb28c78929754ce2479c5e48dbf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42929166bf61b69b06791e02142ce15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">displayHostNameInput</a> ()</td></tr>
 <tr class="memdesc:ac42929166bf61b69b06791e02142ce15"><td class="mdescLeft">&#160;</td><td class="mdescRight">display an input for hostname  <a href="classScreen_1_1Display.html#ac42929166bf61b69b06791e02142ce15">More...</a><br /></td></tr>
 <tr class="separator:ac42929166bf61b69b06791e02142ce15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +141,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac3a26ed58bd873959d95221c36309dea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac3a26ed58bd873959d95221c36309dea">drawGame</a> (GameEngine::GameEngine &amp;engine)</td></tr>
 <tr class="memdesc:ac3a26ed58bd873959d95221c36309dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the game  <a href="classScreen_1_1Display.html#ac3a26ed58bd873959d95221c36309dea">More...</a><br /></td></tr>
 <tr class="separator:ac3a26ed58bd873959d95221c36309dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:af18cace4a8002bc97011f0a7ca53b3d1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#af18cace4a8002bc97011f0a7ca53b3d1">isOpen</a> ()</td></tr>
+<tr class="separator:af18cace4a8002bc97011f0a7ca53b3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classScreen_1_1Display.html" title="Display contain fonction for the graphic of the client.">Display</a> contain fonction for the graphic of the client. </p>
@@ -148,10 +173,42 @@ Public Member Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13"></a>GAME&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                             {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            MENU,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            GAME</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                             {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            MENU,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            GAME</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        };</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3f3dd09842c4b6a8d306234dc9f582b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f3dd09842c4b6a8d306234dc9f582b2">&#9670;&nbsp;</a></span>MenuState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">Screen::Display::MenuState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2a6b8c757fb752d3730720ccbf3d73cd56"></a>WAITING_FOR_PLAYER_INPUT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2a9a14f95e151eec641316e7c784ce832d"></a>CONNECTING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2aa5afd6edd5336d91316964e493936858"></a>CONNECTED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                             {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            WAITING_FOR_PLAYER_INPUT, <span class="comment">// waiting for player input</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            CONNECTING,               <span class="comment">// waiting for connection to server to be established</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            CONNECTED,                <span class="comment">// connected to server</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -183,6 +240,25 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aac64937cc03e09c21c04c30358ba2e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac64937cc03e09c21c04c30358ba2e0c">&#9670;&nbsp;</a></span>beginUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::beginUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start updating the window. </p>
+
+</div>
+</div>
 <a id="a27acb7cd8548ddd74c562e2aa4e6d979"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a27acb7cd8548ddd74c562e2aa4e6d979">&#9670;&nbsp;</a></span>detectActionMenu()</h2>
 
@@ -259,32 +335,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a37231053e6564d71388c413f90247506"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37231053e6564d71388c413f90247506">&#9670;&nbsp;</a></span>displayWindow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Screen::Display::displayWindow </td>
-          <td>(</td>
-          <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
-          <td class="paramname"><em>engine</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>loop display window with menu or game </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">engine</td><td>GameEngine </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ac3a26ed58bd873959d95221c36309dea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac3a26ed58bd873959d95221c36309dea">&#9670;&nbsp;</a></span>drawGame()</h2>
 
@@ -327,6 +377,123 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>draw the menu </p>
+
+</div>
+</div>
+<a id="aa388bb28c78929754ce2479c5e48dbf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa388bb28c78929754ce2479c5e48dbf0">&#9670;&nbsp;</a></span>endUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::endUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>End updating the window. </p>
+
+</div>
+</div>
+<a id="ac4e111c7af9691e08e4e597d7f5d0eb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4e111c7af9691e08e4e597d7f5d0eb4">&#9670;&nbsp;</a></span>getGameState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> Screen::Display::getGameState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The current state of the game </dd></dl>
+
+</div>
+</div>
+<a id="a57eced4f7ccc0bf10562991120fcffc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57eced4f7ccc0bf10562991120fcffc3">&#9670;&nbsp;</a></span>getHostName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string&amp; Screen::Display::getHostName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The host name entered in the login menu </dd></dl>
+
+</div>
+</div>
+<a id="af343aa8ba6eb3a81f31b2d375cbcb03a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af343aa8ba6eb3a81f31b2d375cbcb03a">&#9670;&nbsp;</a></span>getMenuState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a> Screen::Display::getMenuState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The current state of the menu </dd></dl>
+
+</div>
+</div>
+<a id="a091b9243a30b8ef00df455cf52d00c19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a091b9243a30b8ef00df455cf52d00c19">&#9670;&nbsp;</a></span>getPort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Screen::Display::getPort </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The port name entered in the login menu or -1 if no port is entered </dd></dl>
+
+</div>
+</div>
+<a id="af18cace4a8002bc97011f0a7ca53b3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af18cace4a8002bc97011f0a7ca53b3d1">&#9670;&nbsp;</a></span>isOpen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Screen::Display::isOpen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>True if the window is open </dd></dl>
 
 </div>
 </div>
@@ -382,6 +549,32 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>do when action is mouse clicked in menu </p>
+
+</div>
+</div>
+<a id="a352a3ce3dca79f71b33647524d6f9f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a352a3ce3dca79f71b33647524d6f9f09">&#9670;&nbsp;</a></span>setMenuState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::setMenuState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the state of the menu. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>The new state of the menu </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shoot_422',['SHOOT',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2',1,'Network']]]
+  ['right_454',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]]
 ];
