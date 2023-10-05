@@ -26,7 +26,7 @@ namespace ECS::Systems {
                 if(teams.at(eId)->team != teams.at(entityId)->team) {
                     std::size_t damageOther = damage.at(eId)->damage;
                     std::size_t hpEntity = hpComponents.at(entityId)->hp;
-                    if (hpEntity == 0 || (hpEntity - damageOther) <= 0) {
+                    if (hpEntity == 0 || hpEntity <= damageOther) {
                         registry.killEntity(ECS::Containers::Registry::entityFromIndex(entityId));
                         break;
                     }
