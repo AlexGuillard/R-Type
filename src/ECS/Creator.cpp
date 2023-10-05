@@ -11,6 +11,13 @@
 #include "ECS/Components/DamageComponent.hpp"
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/HitBoxComponent.hpp"
+#include "ECS/Components/DrawableComponent.hpp"
+#include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/MissileComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
+#include "ECS/Components/CollidableComponent.hpp"
+#include "ECS/Components/CollisionComponent.hpp"
+#include "ECS/Components/SinMovementComponent.hpp"
 
 namespace ECS {
 
@@ -51,6 +58,27 @@ namespace ECS {
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
         return entity;
+    }
+
+    void Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Vector2 nbFrameInSpriteSheet = Vector2(16, 1);
+        const u_char nbFrameInAnimation = 8;
+
+        ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, 1, 1, 20, 24, id);
+        registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
+        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
+        Components::DrawableComponent drawableComponent = {
+            "assets/r-typesheet5.gif",
+            nbFrameInSpriteSheet, // frameRatio
+            Vector2(0, 0), // start
+            Vector2(nbFrameInAnimation, 0), // end
+            true, // boomerang
+            nbFrameInAnimation // fps
+        };
+        registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
     }
 
 }; // namespace ECS
