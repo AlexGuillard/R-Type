@@ -5,6 +5,8 @@
 ** createEngine
 */
 
+#include <cstdint>
+
 #include "GameEngine/GameEngine.hpp"
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"

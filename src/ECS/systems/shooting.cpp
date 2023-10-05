@@ -8,6 +8,7 @@
 #include <string>
 #include <cstring>
 #include <sys/types.h>
+#include <cstdint>
 
 #include <raylib.h>
 

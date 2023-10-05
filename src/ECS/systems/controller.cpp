@@ -6,6 +6,7 @@
 */
 
 #include <raylib.h>
+#include <cstdint>
 
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Components/PositionComponent.hpp"

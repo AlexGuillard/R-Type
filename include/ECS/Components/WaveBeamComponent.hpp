@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <sys/types.h>
+#include <cstdint>
 
 namespace ECS::Components {
     const uint8_t maxWaveBeamStrength = 5;
