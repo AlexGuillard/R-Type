@@ -17,8 +17,7 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
 }
 
 Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
-{
-}
+{}
 
 Network::ClientNetwork::~ClientNetwork()
 {}
@@ -30,108 +29,109 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
         std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
         std::cout << "[" << recvd_bytes << "] " << _dataReceived << std::endl;
     } else {
-	    receive(_socket);
-	}
+        receive(_socket);
+    }
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-	if (!error && recvd_bytes > 0) {
-		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
-		receive(_socket);
-	}
+    if (!error && recvd_bytes > 0) {
+        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
+        receive(_socket);
+    }
 }
 
 void Network::ClientNetwork::sendHello()
 {
-	send(_socket, "Hello");
-	std::cout << "Hello sent" << std::endl;
+    send(_socket, "Hello");
+    std::cout << "Hello sent" << std::endl;
 }
 
 void Network::ClientNetwork::start()
 {
-	receive(_socket);
+    receive(_socket);
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
 {
-	std::string message;
+    std::string message;
 
-	switch (movement) {
-		case Movement::UP:
-			message = "211";
-			break;
-		case Movement::DOWN:
-			message = "212";
-			break;
-		case Movement::LEFT:
-			message = "213";
-			break;
-		case Movement::RIGHT:
-			message = "214";
-			break;
-		default:
-			break;
-	}
-	send(_socket, message);
+    switch (movement) {
+    case Movement::UP:
+        message = "211";
+        break;
+    case Movement::DOWN:
+        message = "212";
+        break;
+    case Movement::LEFT:
+        message = "213";
+        break;
+    case Movement::RIGHT:
+        message = "214";
+        break;
+    default:
+        break;
+    }
+    send(_socket, message);
 }
 
 void Network::ClientNetwork::sendAction(Action action)
 {
-	std::string message;
+    std::string message;
 
-	switch (action) {
-		case Action::SHOOT:
-			message = "215";
-			break;
-		case Action::DROP:
-			message = "216";
-			break;
-		default:
-			break;
-	}
-	send(_socket, message);
+    switch (action) {
+    case Action::SHOOT:
+        message = "215";
+        break;
+    case Action::DROP:
+        message = "216";
+        break;
+    default:
+        break;
+    }
+    send(_socket, message);
 }
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
-	try {
-	    boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
-	    _endpoint = endpoint;
-	    _socket.open(endpoint.protocol());
+    try {
+        boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
+        _endpoint = endpoint;
+        _socket.open(endpoint.protocol());
 
-	    sendHello();
+        sendHello();
 
-		const int maxSizeBuffer = 1024;
-		char buffer[maxSizeBuffer];
-		size_t len = _socket.receive(boost::asio::buffer(buffer, maxSizeBuffer));
+        const int maxSizeBuffer = 1024;
+        char buffer[maxSizeBuffer];
+        size_t len = _socket.receive(boost::asio::buffer(buffer, maxSizeBuffer));
 
-		if (std::string(buffer, len) == "301") {
-			std::cout << "Connected to server" << std::endl;
-			return (true);
-		}
-	}
+        if (std::string(buffer, len) == "301") {
+            std::cout << "Connected to server" << std::endl;
+            return (true);
+        }
+    }
 
-	catch (std::exception &e) {
-		std::cerr << "Error connecting to server: " <<e.what() << std::endl;
-	}
+    catch (std::exception &e) {
+        std::cerr << "Error connecting to server: " << e.what() << std::endl;
+    }
 
-	return (false);
+    return (false);
 }
 
-std::unique_ptr<Network::ClientNetwork> Network::ClientNetwork::_instance =  std::unique_ptr<Network::ClientNetwork>();
+std::unique_ptr<Network::ClientNetwork> Network::ClientNetwork::instance = std::unique_ptr<Network::ClientNetwork>();
 
-Network::ClientNetwork& Network::ClientNetwork::getInstance() {
-    if (_instance == nullptr) {
-        _instance.reset(new ClientNetwork());
+Network::ClientNetwork &Network::ClientNetwork::getInstance()
+{
+    if (instance == nullptr) {
+        instance.reset(new ClientNetwork());
     }
-    return *_instance;
+    return *instance;
 }
 
 Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_service &io_service, const std::string &host, int port)
 {
-    if (_instance == nullptr) {
-        _instance.reset(new ClientNetwork(io_service, host, port));
+    if (instance == nullptr) {
+        instance.reset(new ClientNetwork(io_service, host, port));
     }
-    return *_instance;
+    return *instance;
 }

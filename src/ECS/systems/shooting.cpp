@@ -8,6 +8,7 @@
 #include <string>
 #include <cstring>
 #include <sys/types.h>
+#include <cstdint>
 
 #include <raylib.h>
 
@@ -27,7 +28,7 @@ namespace ECS::Systems {
      */
     static Components::DrawableComponent getDrawableForMissile()
     {
-        const u_char nbFrameInSpriteSheet = 6;
+        const uint8_t nbFrameInSpriteSheet = 6;
         const Vector2 missileFramePos = Vector2(2, 0);
         Components::DrawableComponent drawable = {
                 "assets/missiles/missile.png",
@@ -83,9 +84,9 @@ namespace ECS::Systems {
      * @param strength Number between 1 and 5 that represents the strength of the wave beam
      * @return Components::DrawableComponent
      */
-    static Components::DrawableComponent getDrawableForWaveBeam(u_char strength)
+    static Components::DrawableComponent getDrawableForWaveBeam(uint8_t strength)
     {
-        const u_char nbFrameInSpriteSheet = 6;
+        const uint8_t nbFrameInSpriteSheet = 6;
         const Vector2 waveBeamFramePos = Vector2(3, 0);
         char path[Components::maxTexturePathSize] = "assets/missiles/waveBeam-out";
         Components::DrawableComponent drawable = {

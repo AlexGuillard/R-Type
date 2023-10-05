@@ -119,7 +119,7 @@ namespace Network {
         //Buffer used to receive data
         std::array<char, MAX_SIZE_BUFFER> _buffer;
         //Stock class for SingleTon
-        static std::unique_ptr<ClientNetwork> _instance;
+        static std::unique_ptr<ClientNetwork> instance;
 
         /**
          * @brief Construct a new Client Network object with parameters
