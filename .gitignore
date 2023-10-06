@@ -45,3 +45,6 @@ Release/
 .vs/
 *.ilk
 *.pdb
+
+# generated assets
+**/generated*.*pp
