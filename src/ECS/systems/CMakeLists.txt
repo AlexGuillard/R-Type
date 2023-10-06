@@ -15,6 +15,7 @@ target_link_libraries(systems PUBLIC
     raylib
     systems_helper
     GameEngine
+    assets
 )
 
 add_subdirectory(helper)

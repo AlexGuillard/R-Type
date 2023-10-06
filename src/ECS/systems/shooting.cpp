@@ -19,6 +19,7 @@
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
+#include "Assets/generatedAssets.hpp"
 
 namespace ECS::Systems {
 
@@ -31,7 +32,7 @@ namespace ECS::Systems {
         const uint8_t nbFrameInSpriteSheet = 6;
         const Vector2 missileFramePos = Vector2(2, 0);
         Components::DrawableComponent drawable = {
-                "assets/missiles/missile.png",
+                Assets::AssetsIndex::MISSILE_PNG,
                 Vector2(nbFrameInSpriteSheet, 1), // frameRatio
                 missileFramePos, // start
                 missileFramePos // end
@@ -88,14 +89,13 @@ namespace ECS::Systems {
     {
         const uint8_t nbFrameInSpriteSheet = 6;
         const Vector2 waveBeamFramePos = Vector2(3, 0);
-        char path[Components::maxTexturePathSize] = "assets/missiles/waveBeam-out";
+        const Assets::AssetsIndex waveBeams[] = { Assets::AssetsIndex::WAVEBEAM_OUT1_PNG, Assets::AssetsIndex::WAVEBEAM_OUT2_PNG, Assets::AssetsIndex::WAVEBEAM_OUT3_PNG, Assets::AssetsIndex::WAVEBEAM_OUT4_PNG, Assets::AssetsIndex::WAVEBEAM_OUT5_PNG };
         Components::DrawableComponent drawable = {
-                "assets/missiles/waveBeam-out",
+                waveBeams[strength - 1],
                 Vector2(nbFrameInSpriteSheet, 1), // frameRatio
                 waveBeamFramePos, // start
                 waveBeamFramePos // end
         };
-        std::strcat(drawable.texture, (std::to_string(strength) + ".png").c_str());
         return drawable;
     }
 
