@@ -65,7 +65,7 @@ namespace GameEngine {
         registry.emplaceComponent<Components::PositionComponent>(ship, 0, 0);
         registry.emplaceComponent<Components::VelocityComponent>(ship, 0, 0);
         Components::DrawableComponent drawableComponent = {
-            Assets::AssetsIndex::R_TYPESHEET42_GIF,
+            Assets::AssetsIndex::R_TYPESHEET42_PNG,
             nbFrameInSpriteSheet, // frameRatio
             Vector2(0, 0), // start
             Vector2(nbFrameInAnimation, 0), // end
