@@ -4,7 +4,7 @@
 
 #include <raylib.h>
 
-#include "assets/AssetLoader.hpp"
+#include "Assets/AssetLoader.hpp"
 
 namespace Assets {
     std::unordered_map<AssetsIndex, Image> AssetLoader::imageCache;

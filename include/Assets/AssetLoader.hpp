@@ -11,7 +11,7 @@
 #include <raylib.h>
 #include <unordered_map>
 
-#include "assets/generatedAssets.hpp"
+#include "Assets/generatedAssets.hpp"
 
 namespace Assets {
     class AssetLoader {
