@@ -70,7 +70,7 @@ namespace ECS::Systems {
     #endif
         for (auto &&[eId, position, drawable] : Containers::IndexedZipper(positions, drawables)) {
             Helper::SpriteSheetDrawer drawer(
-                Assets::AssetLoader::loadTextureGif(drawable->spriteSheetIndex),
+                Assets::AssetLoader::loadTexturePng(drawable->spriteSheetIndex),
                 drawable->frameRatio,
                 drawable->start,
                 drawable->end,
