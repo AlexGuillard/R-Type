@@ -77,7 +77,7 @@ namespace Screen {
         /**
          * @brief End updating the window
          */
-        void endUpdate();
+        static void endUpdate();
 
         /**
          * @brief display an input for hostname
@@ -120,7 +120,7 @@ namespace Screen {
          * @brief draw the game
          * @param engine GameEngine
          */
-        void drawGame(GameEngine::GameEngine &engine);
+        static void drawGame(GameEngine::GameEngine &engine);
 
         /**
          * @brief Centers the window on screen
@@ -170,8 +170,8 @@ namespace Screen {
         */
         bool toggleFullScreen();
 
-        void beginDrawCamera();
-        void endDrawCamera();
+        static void beginDrawCamera();
+        static void endDrawCamera();
 
         /**
          * @returns The size of the camera view
@@ -206,12 +206,7 @@ namespace Screen {
         static uint16_t cameraWidth;
         static uint16_t cameraHeight;
         float aspectRatio;
-        Camera2D _camera = {
-            .offset = {0, 0},
-            .target = {0, 0},
-            .rotation = 0.F,
-            .zoom = 1
-        };
+        static Camera2D camera;
         /**
          * @brief Camera shake option
          * @struct

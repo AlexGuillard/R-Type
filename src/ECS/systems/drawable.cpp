@@ -13,6 +13,7 @@
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/Helper/SpriteSheetDrawer.hpp"
+#include "client/display/Display.hpp"
 
 #ifdef DEBUG
 #include "ECS/Components/CollisionComponent.hpp"
@@ -78,6 +79,7 @@ namespace ECS::Systems {
         auto &collisions = registry.getComponents<Components::CollisionComponent>();
         auto &hitboxes = registry.getComponents<Components::HitBoxComponent>();
     #endif
+        Screen::Display::beginDrawCamera();
         for (auto &&[eId, position, drawable] : Containers::IndexedZipper(positions, drawables)) {
             Helper::SpriteSheetDrawer drawer(
                 loadTexture(drawable->texture),
@@ -105,6 +107,7 @@ namespace ECS::Systems {
             );
         #endif
         }
+        Screen::Display::endDrawCamera();
     }
 
 }; // namespace ECS::Systems

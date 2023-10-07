@@ -9,10 +9,15 @@
 
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
-#include "GameEngine/Events.hpp"
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
 uint16_t Screen::Display::cameraHeight = Screen::Display::defaultCameraHeight;
+Camera2D Screen::Display::camera = {
+    .offset = {0, 0},
+    .target = {0, 0},
+    .rotation = 0.F,
+    .zoom = 1
+};
 
 Screen::Display::Display(GameState state) : _state(0), _gameState(state)
 {
@@ -69,7 +74,6 @@ void Screen::Display::beginUpdate()
 
 void Screen::Display::endUpdate()
 {
-    (void)_camera;
     EndDrawing();
 }
 
@@ -87,12 +91,12 @@ void Screen::Display::updateShake()
 
     if (_cameraShake.t > 0) {
         _cameraShake.t = std::max(0.F, _cameraShake.t - GetFrameTime());
-        _camera.offset.x =
+        Screen::Display::camera.offset.x =
             (
                 std::sin(_cameraShake.t * xTremor1 * static_cast<int>(_cameraShake.intensity)) +
                 std::cos(_cameraShake.t * xTremor2 * static_cast<int>(_cameraShake.intensity))) *
             _cameraShake.xRange * Screen::Display::cameraWidth;
-        _camera.offset.y =
+        Screen::Display::camera.offset.y =
             (
                 std::cos(_cameraShake.t * yTremor1 * static_cast<int>(_cameraShake.intensity)) +
                 std::sin(_cameraShake.t * yTremor2 * static_cast<int>(_cameraShake.intensity))) *
@@ -104,11 +108,11 @@ void Screen::Display::updateShake()
         yTremor2 = GetRandomValue(minLowTremor, maxLowTremor) / divisor;
         const float drag = 0.9;
 
-        if (_camera.offset.x != 0) {
-            _camera.offset.x *= drag;
+        if (Screen::Display::camera.offset.x != 0) {
+            Screen::Display::camera.offset.x *= drag;
         }
-        if (_camera.offset.y != 0) {
-            _camera.offset.y *= drag;
+        if (Screen::Display::camera.offset.y != 0) {
+            Screen::Display::camera.offset.y *= drag;
         }
         _cameraShake.t = 0;
     }
@@ -331,21 +335,21 @@ Screen::Display &Screen::Display::resizeCamera(
         std::cout << Screen::Display::cameraHeight << std::endl;
         return this->resizeCamera(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
     }
-    _camera.zoom = windowToCameraRatio;
+    Screen::Display::camera.zoom = windowToCameraRatio;
     return *this;
 }
 
 Screen::Display &Screen::Display::moveCamera(int16_t posX, int16_t posY)
 {
-    _camera.target.x += posX;
-    _camera.target.y += posY;
+    Screen::Display::camera.target.x += posX;
+    Screen::Display::camera.target.y += posY;
     return *this;
 }
 
 Screen::Display &Screen::Display::setCameraPosition(int16_t posX, int16_t posY)
 {
-    _camera.target.x = posX;
-    _camera.target.y = posY;
+    Screen::Display::camera.target.x = posX;
+    Screen::Display::camera.target.y = posY;
     return *this;
 }
 
@@ -386,12 +390,11 @@ bool Screen::Display::toggleFullScreen()
 
 void Screen::Display::beginDrawCamera()
 {
-    BeginMode2D(_camera);
+    BeginMode2D(Screen::Display::camera);
 }
 
 void Screen::Display::endDrawCamera()
 {
-    (void)_camera;
     EndMode2D();
 }
 
