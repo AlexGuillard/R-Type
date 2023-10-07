@@ -13,7 +13,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
     _socket.push_back(boost::asio::ip::tcp::socket(_ioService));
     _acceptor.async_accept(_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
     updateTicks();
-    receive(_asyncSocket);
+    asyncReceive(_asyncSocket);
 }
 
 Network::ServerNetwork::~ServerNetwork()
@@ -51,13 +51,13 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
             std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
-            send(_asyncSocket, "receive data\n");
+            asyncSend(_asyncSocket, "receive data\n");
         } else {
-            send(_asyncSocket, "need tcp connection first\n");
+            asyncSend(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
     } else {
-        receive(_asyncSocket);
+        asyncReceive(_asyncSocket);
     }
 }
 
@@ -88,7 +88,7 @@ std::string Network::ServerNetwork::findClient(std::string findId) const
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    receive(_asyncSocket);
+    asyncReceive(_asyncSocket);
 }
 
 void Network::ServerNetwork::connection()
@@ -97,8 +97,8 @@ void Network::ServerNetwork::connection()
 
     if (res == "Hello R-Type server\n" && _clients.size() < 5) {
         addClient();
-        send(_asyncSocket, "200\n");
+        asyncSend(_asyncSocket, "200\n");
     } else {
-        send(_asyncSocket, "401: Forbidden\n");
+        asyncSend(_asyncSocket, "401: Forbidden\n");
     }
 }
