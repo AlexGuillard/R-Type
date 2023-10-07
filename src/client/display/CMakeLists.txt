@@ -6,5 +6,4 @@ add_library(Display STATIC ${SRC})
 target_include_directories(Display PUBLIC ${INCROOT})
 target_link_libraries(Display PUBLIC
     raylib
-    ClientNetwork
 )
