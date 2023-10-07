@@ -87,14 +87,15 @@ namespace ECS::Systems {
      */
     static Components::DrawableComponent getDrawableForWaveBeam(uint8_t strength)
     {
-        const uint8_t nbFrameInSpriteSheet = 6;
-        const Vector2 waveBeamFramePos = Vector2(3, 0);
+        const uint8_t nbFrameInSpriteSheet = 2;
+        const Vector2 waveBeamFrameStart = Vector2(0, 0);
+        const Vector2 waveBeamFrameEnd = Vector2(1, 0);
         const Assets::AssetsIndex waveBeams[] = { Assets::AssetsIndex::WAVEBEAM_OUT1_PNG, Assets::AssetsIndex::WAVEBEAM_OUT2_PNG, Assets::AssetsIndex::WAVEBEAM_OUT3_PNG, Assets::AssetsIndex::WAVEBEAM_OUT4_PNG, Assets::AssetsIndex::WAVEBEAM_OUT5_PNG };
         Components::DrawableComponent drawable = {
-                waveBeams[strength - 1],
-                Vector2(nbFrameInSpriteSheet, 1), // frameRatio
-                waveBeamFramePos, // start
-                waveBeamFramePos // end
+                .spriteSheetIndex = waveBeams[strength - 1],
+                .frameRatio = Vector2(nbFrameInSpriteSheet, 1),
+                .start = waveBeamFrameStart,
+                .end = waveBeamFrameEnd
         };
         return drawable;
     }
