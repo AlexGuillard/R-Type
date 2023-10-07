@@ -29,6 +29,11 @@ namespace Screen {
             CONNECTING,               // waiting for connection to server to be established
             CONNECTED,                // connected to server
         };
+        enum class CameraShakeIntensity {
+            RUMBLE = 3,
+            EARTHQUAKE = 5,
+            END_OF_THE_WORLD = 8
+        };
         /**
          * @brief Init the window with raylib
          * @param state set the starting state of the game
@@ -62,6 +67,8 @@ namespace Screen {
          * no port is entered
          */
         int getPort() const;
+
+        void updateShake();
 
         /**
          * @brief Start updating the window
@@ -144,6 +151,20 @@ namespace Screen {
         Display &setCameraPosition(int16_t posX, int16_t posY);
 
         /**
+         * @brief Camera shake option
+         * @param t Time (in sec.) left until shake end
+         * @param intensity The intensity at which the camera shakes
+         * @param xRange How much (in %) does the screen shake on x axis
+         * @param yRange How much (in %) does the screen shake on x axis
+         * @returns (*this) to allow chain calls
+         */
+        Display &shake(
+            float time = 0.2,
+            enum class CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE,
+            float xRange = 0.01,
+            float yRange = 0.01
+        );
+        /**
          * @brief Toggles between fullscreen and windowed
          * @returns True if switched to fullscreen, false otherwise
         */
@@ -191,5 +212,21 @@ namespace Screen {
             .rotation = 0.F,
             .zoom = 1
         };
+        /**
+         * @brief Camera shake option
+         * @struct
+         * @property t Time (in sec.) left until shake end
+         * @property xRange How much (in %) does the screen shake on x axis
+         * @property yRange How much (in %) does the screen shake on x axis
+         * @property intensity The intensity at which the camera shakes
+         * @property _startTime Used for internal processing, do not edit
+         */
+        struct {
+            float t = 0;
+            float xRange = 0.01;
+            float yRange = 0.01;
+            enum class CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE;
+            double _startTime = 0;
+        } _cameraShake;
     };
 }

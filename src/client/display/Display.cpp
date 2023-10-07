@@ -5,6 +5,9 @@
 ** Display
 */
 
+#include <cmath>
+
+#include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
 #include "GameEngine/Events.hpp"
 
@@ -66,7 +69,49 @@ void Screen::Display::beginUpdate()
 
 void Screen::Display::endUpdate()
 {
+    (void)_camera;
     EndDrawing();
+}
+
+void Screen::Display::updateShake()
+{
+    const double divisor = 10.F;
+    const int minHighTremor = 50;
+    const int maxHighTremor = 150;
+    const int minLowTremor = 1;
+    const int maxLowTremor = 50;
+    static int xTremor1 = GetRandomValue(minHighTremor, maxHighTremor) / divisor;
+    static int xTremor2 = GetRandomValue(minLowTremor, maxLowTremor) / divisor;
+    static int yTremor1 = GetRandomValue(minHighTremor, maxHighTremor) / divisor;
+    static int yTremor2 = GetRandomValue(minLowTremor, maxLowTremor) / divisor;
+
+    if (_cameraShake.t > 0) {
+        _cameraShake.t = std::max(0.F, _cameraShake.t - GetFrameTime());
+        _camera.offset.x =
+            (
+                std::sin(_cameraShake.t * xTremor1 * static_cast<int>(_cameraShake.intensity)) +
+                std::cos(_cameraShake.t * xTremor2 * static_cast<int>(_cameraShake.intensity))) *
+            _cameraShake.xRange * Screen::Display::cameraWidth;
+        _camera.offset.y =
+            (
+                std::cos(_cameraShake.t * yTremor1 * static_cast<int>(_cameraShake.intensity)) +
+                std::sin(_cameraShake.t * yTremor2 * static_cast<int>(_cameraShake.intensity))) *
+            _cameraShake.yRange * Screen::Display::cameraHeight;
+    } else {
+        xTremor1 = GetRandomValue(minHighTremor, maxHighTremor) / divisor;
+        xTremor2 = GetRandomValue(minLowTremor, maxLowTremor) / divisor;
+        yTremor1 = GetRandomValue(minHighTremor, maxHighTremor) / divisor;
+        yTremor2 = GetRandomValue(minLowTremor, maxLowTremor) / divisor;
+        const float drag = 0.9;
+
+        if (_camera.offset.x != 0) {
+            _camera.offset.x *= drag;
+        }
+        if (_camera.offset.y != 0) {
+            _camera.offset.y *= drag;
+        }
+        _cameraShake.t = 0;
+    }
 }
 
 void Screen::Display::update()
@@ -80,6 +125,13 @@ void Screen::Display::update()
     if (IsKeyPressed(KEY_F11)) {
         this->toggleFullScreen();
     }
+    for (auto it = GameEngine::Events::begin(); it != GameEngine::Events::end(); ++it) {
+        GameEngine::Events::Type type = *it;
+        if (type == GameEngine::Events::Type::PLAYER_SHOOT) {
+            this->shake();
+        }
+    }
+    this->updateShake();
 }
 
 ///// Menu
@@ -294,6 +346,23 @@ Screen::Display &Screen::Display::setCameraPosition(int16_t posX, int16_t posY)
 {
     _camera.target.x = posX;
     _camera.target.y = posY;
+    return *this;
+}
+
+Screen::Display &Screen::Display::shake(
+    float time,
+    enum class CameraShakeIntensity intensity,
+    float xRange,
+    float yRange
+)
+{
+    _cameraShake = {
+        .t = time,
+        .xRange = xRange,
+        .yRange = yRange,
+        .intensity = intensity,
+        ._startTime = GetTime()
+    };
     return *this;
 }
 
