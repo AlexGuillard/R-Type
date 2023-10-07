@@ -11,6 +11,7 @@
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DamageComponent.hpp"
 #include "ECS/Components/HitBoxComponent.hpp"
@@ -42,8 +43,9 @@ namespace GameEngine {
         registry.registerComponent<Components::WaveBeamComponent>();
         registry.registerComponent<Components::CollidableComponent>();
         registry.registerComponent<Components::CollisionComponent>();
+        registry.registerComponent<Components::TeamComponent>();
 
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);

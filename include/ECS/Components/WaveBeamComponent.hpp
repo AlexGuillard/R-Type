@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <sys/types.h>
+#include "ECS/Components/TeamComponent.hpp"
 
 namespace ECS::Components {
     const u_char maxWaveBeamStrength = 5;
@@ -22,6 +23,7 @@ namespace ECS::Components {
     struct WaveBeamComponent {
         float x;
         float y;
+        TeamComponent team;
         std::size_t damage = waveBeamBaseDamage;
         u_char strength = 1;
     };

@@ -68,7 +68,10 @@ namespace ECS::Systems {
                 missileEntity,
                 0 // Die on collision
             );
-            // TODO: add TeamComponent
+            registry.emplaceComponent<Components::TeamComponent>(
+                missileEntity,
+                missileRequest->team
+            );
             Components::DrawableComponent drawable = getDrawableForMissile();
             registry.addComponent<Components::DrawableComponent>(
                 missileEntity, std::move(drawable)
@@ -124,7 +127,10 @@ namespace ECS::Systems {
                 waveBeamEntity,
                 waveBeamRequests->damage
             );
-            // TODO: add TeamComponent
+            registry.emplaceComponent<Components::TeamComponent>(
+                waveBeamEntity,
+                waveBeamRequests->team
+            );
             Components::DrawableComponent drawable = getDrawableForWaveBeam(waveBeamRequests->strength);
             registry.addComponent<Components::DrawableComponent>(
                 waveBeamEntity, std::move(drawable)

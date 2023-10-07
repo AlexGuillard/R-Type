@@ -11,6 +11,7 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
@@ -89,7 +90,8 @@ namespace ECS::Systems {
     static void handleShooting(
         ECS::Containers::Registry &registry,
         ECS::Components::ControllableComponent &controllable,
-        ECS::Components::PositionComponent &position)
+        ECS::Components::PositionComponent &position,
+        ECS::Components::TeamComponent &team)
     {
 
         Network::ClientNetwork& clientNetwork = Network::ClientNetwork::getInstance();
@@ -111,6 +113,7 @@ namespace ECS::Systems {
                     missileEntity,
                     position.x,
                     position.y,
+                    team,
                     static_cast<std::size_t>(strength * Components::waveBeamBaseDamage),
                     strength
                 );
@@ -119,6 +122,7 @@ namespace ECS::Systems {
                     missileEntity,
                     position.x,
                     position.y,
+                    team,
                     static_cast<std::size_t>(strength * Components::missileBaseDamage)
                 );
             }
@@ -150,15 +154,16 @@ namespace ECS::Systems {
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
         ECS::Containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
     {
         const float maxSpeed = 500;
         const float nbFrameToMaxSpeed = 5;
         const float nbFrameToStop = 5;
 
-        for (auto &&[position, velocity, controllable] : ECS::Containers::Zipper(positions, velocities, controllables)) {
+        for (auto &&[position, velocity, team, controllable] : ECS::Containers::Zipper(positions, velocities, teams, controllables)) {
             changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
-            handleShooting(registry, *controllable, *position);
+            handleShooting(registry, *controllable, *position, *team);
             useForce(registry, *controllable);
         }
     }
