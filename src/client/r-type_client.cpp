@@ -25,7 +25,9 @@ static void menuLoop(Screen::Display &window)
 static void gameLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 {
     Network::updateClientNetwork();
+    window.beginDrawCamera();
     window.drawGame(engine);
+    window.endDrawCamera();
 }
 
 int rtype_client()

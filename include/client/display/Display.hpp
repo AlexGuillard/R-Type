@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <raylib.h>
+#include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
 
@@ -114,6 +115,47 @@ namespace Screen {
          */
         void drawGame(GameEngine::GameEngine &engine);
 
+        /**
+         * @brief Centers the window on screen
+         * @return (*this) to allow chain calls
+         */
+        Display &center();
+        /**
+         * @brief Resizes the window
+         * @return (*this) to allow chain calls
+         */
+        Display &resizeWindow(uint16_t width, uint16_t height);
+        /**
+         * @brief Resizes the camera
+         * @return (*this) to allow chain calls
+         */
+        Display &resizeCamera(uint16_t width, uint16_t height);
+        /**
+         * @brief Moves the camera by some amount
+         * @param x Distance to move camera on X axis
+         * @param y Distance to move camera on Y axis
+         * @return (*this) to allow chain calls
+         */
+        Display &moveCamera(int16_t posX, int16_t posY);
+        /**
+         * @brief Sets the position of the camera
+         * @return (*this) to allow chain calls
+         */
+        Display &setCameraPosition(int16_t posX, int16_t posY);
+
+        /**
+         * @brief Toggles between fullscreen and windowed
+         * @returns True if switched to fullscreen, false otherwise
+        */
+        bool toggleFullScreen();
+
+        void beginDrawCamera();
+        void endDrawCamera();
+
+        /**
+         * @returns The size of the camera view
+         */
+        static Vector2 getCameraSize();
     private:
         /**
          * @brief Updates the window's states
@@ -134,5 +176,20 @@ namespace Screen {
         Rectangle _connectionclickableZone;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
+
+        // Camera
+        const float _defaultWidthRatio = 0.5;
+        const float _defaultHeightRatio = 0.5;
+        static const uint16_t defaultCameraWidth = 480;
+        static const uint16_t defaultCameraHeight = 240;
+        static uint16_t cameraWidth;
+        static uint16_t cameraHeight;
+        float aspectRatio;
+        Camera2D _camera = {
+            .offset = {0, 0},
+            .target = {0, 0},
+            .rotation = 0.F,
+            .zoom = 1
+        };
     };
 }
