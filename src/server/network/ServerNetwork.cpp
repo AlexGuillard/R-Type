@@ -8,14 +8,25 @@
 #include "server/network/ServerNetwork.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
-    : _socket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
+    : _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), _socket(io_service), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
 {
+    _acceptor.async_accept(_socket, std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
     updateTicks();
-    receive(_socket);
+    receive(_asyncSocket);
 }
 
 Network::ServerNetwork::~ServerNetwork()
 {}
+
+void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error)
+{
+    if (!error) {
+        std::cout << "acceptation success" << std::endl;
+    } else {
+        std::cout << "error on acceptation" << std::endl;
+    }
+    _acceptor.async_accept(_socket, std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
+}
 
 void Network::ServerNetwork::updateTicks()
 {
@@ -40,13 +51,13 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
             std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
-            send(_socket, "receive data\n");
+            send(_asyncSocket, "receive data\n");
         } else {
             connection();
         }
         _data.clear();
     } else {
-        receive(_socket);
+        receive(_asyncSocket);
     }
 }
 
@@ -77,7 +88,7 @@ std::string Network::ServerNetwork::findClient(std::string findId) const
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    receive(_socket);
+    receive(_asyncSocket);
 }
 
 void Network::ServerNetwork::connection()
@@ -86,8 +97,8 @@ void Network::ServerNetwork::connection()
 
     if (res == "Hello R-Type server\n" && _clients.size() < 5) {
         addClient();
-        send(_socket, "200\n");
+        send(_asyncSocket, "200\n");
     } else {
-        send(_socket, "401: Forbidden\n");
+        send(_asyncSocket, "401: Forbidden\n");
     }
 }

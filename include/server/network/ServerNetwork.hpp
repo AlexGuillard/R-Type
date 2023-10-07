@@ -21,6 +21,7 @@ namespace Network {
         public:
             ServerNetwork(boost::asio::io_service& io_service, int port);
             ~ServerNetwork();
+            void acceptHandler(const boost::system::error_code& error);
             /**
              * @brief function called after receiving data
              *
@@ -68,7 +69,9 @@ namespace Network {
              * @brief variable where the client is
              *
              */
-            boost::asio::ip::udp::socket _socket;
+            boost::asio::ip::udp::socket _asyncSocket;
+            boost::asio::ip::tcp::socket _socket;
+            boost::asio::ip::tcp::acceptor _acceptor;
             /**
              * @brief hmap for the list of client on the server
              *

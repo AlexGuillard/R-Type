@@ -34,6 +34,7 @@ namespace Network {
          * @brief function to call when you want to send informations
          *
          * @param _socket variable where you send
+         * @param str string for message to send
          */
         virtual void send(boost::asio::ip::udp::socket &_socket, std::string str) = 0;
         /**
