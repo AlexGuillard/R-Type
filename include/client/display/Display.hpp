@@ -71,12 +71,6 @@ namespace Screen {
          */
         void endUpdate();
 
-        // /**
-        //  * @brief loop display window with menu or game
-        //  * @param engine GameEngine
-        //  */
-        // void displayWindow(GameEngine::GameEngine &engine);
-
         /**
          * @brief display an input for hostname
          *
