@@ -9,18 +9,28 @@
 
 namespace GameEngine {
 
-    std::queue<Events::Type> Events::mQueue = std::queue<Events::Type>();
+    std::vector<Events::Type> Events::mQueue = std::vector<Events::Type>();
 
     void Events::push(Type event)
     {
-        Events::mQueue.push(event);
+        Events::mQueue.insert(Events::mQueue.begin(), event);
     }
 
     bool Events::poll(Type &event)
     {
         if (Events::mQueue.empty()) { return false; }
-        event = Events::mQueue.front();
-        Events::mQueue.pop();
+        event = Events::mQueue.back();
+        Events::mQueue.pop_back();
         return true;
+    }
+
+    std::vector<Events::Type>::iterator Events::begin()
+    {
+        return Events::mQueue.begin();
+    }
+
+    std::vector<Events::Type>::iterator Events::end()
+    {
+        return Events::mQueue.end();
     }
 }
