@@ -27,6 +27,7 @@
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Systems/sinMovement.hpp"
+#include "ECS/Systems/solid.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -47,13 +48,15 @@ namespace GameEngine {
         registry.registerComponent<Components::CollidableComponent>();
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::SinMovementComponent>();
+        registry.registerComponent<Components::SolidComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
+        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent>(Systems::solid);
+        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
     static ECS::Entity spawnShip(Containers::Registry &registry)
