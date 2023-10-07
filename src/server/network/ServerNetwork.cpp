@@ -8,9 +8,10 @@
 #include "server/network/ServerNetwork.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
-    : _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), _socket(io_service), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
+    : _ioService(io_service), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
 {
-    _acceptor.async_accept(_socket, std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
+    _socket.push_back(boost::asio::ip::tcp::socket(_ioService));
+    _acceptor.async_accept(_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
     updateTicks();
     receive(_asyncSocket);
 }
@@ -22,10 +23,9 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code& erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-    } else {
-        std::cout << "error on acceptation" << std::endl;
     }
-    _acceptor.async_accept(_socket, std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
+    _socket.push_back(boost::asio::ip::tcp::socket(_ioService));
+    _acceptor.async_accept(_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
 }
 
 void Network::ServerNetwork::updateTicks()
@@ -35,7 +35,7 @@ void Network::ServerNetwork::updateTicks()
     _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
-            std::cout << "need to updates ticks\n";
+            // std::cout << "need to updates ticks\n";
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
@@ -53,7 +53,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
             std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
             send(_asyncSocket, "receive data\n");
         } else {
-            connection();
+            send(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
     } else {

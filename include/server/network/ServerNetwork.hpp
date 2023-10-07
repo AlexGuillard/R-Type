@@ -21,6 +21,7 @@ namespace Network {
         public:
             ServerNetwork(boost::asio::io_service& io_service, int port);
             ~ServerNetwork();
+            // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error);
             /**
              * @brief function called after receiving data
@@ -65,12 +66,16 @@ namespace Network {
              */
             void connection();
         protected:
+            // store the io_service
+            boost::asio::io_service &_ioService;
             /**
              * @brief variable where the client is
              *
              */
             boost::asio::ip::udp::socket _asyncSocket;
-            boost::asio::ip::tcp::socket _socket;
+            // list of sockets for potential clients
+            std::vector<boost::asio::ip::tcp::socket> _socket;
+            // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
             /**
              * @brief hmap for the list of client on the server
