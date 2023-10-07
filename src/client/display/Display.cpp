@@ -39,11 +39,11 @@ void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
             detectActionMenu();
             drawMenu();
         } else if (_gameState == GameState::GAME) {
-            _client.mySend("hello");
+            _client.mySend("choclao");
             drawGame(engine);
-            _client._ioService.run_one();
         }
         EndDrawing();
+        _client._ioService.run_one();
     }
     CloseWindow();
 }
