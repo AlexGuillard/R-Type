@@ -27,6 +27,7 @@
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Systems/sinMovement.hpp"
+#include "client/display/Display.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -82,8 +83,8 @@ namespace GameEngine {
     {
         ECS::Entity player = spawnShip(registry);
         registry.emplaceComponent<Components::ControllableComponent>(player);
-        registry.getComponents<Components::PositionComponent>().at(player)->x = GetScreenWidth() / 2;
-        registry.getComponents<Components::PositionComponent>().at(player)->y = GetScreenHeight() / 2;
+        registry.getComponents<Components::PositionComponent>().at(player)->x = Screen::Display::getCameraSize().x / 2;
+        registry.getComponents<Components::PositionComponent>().at(player)->y = Screen::Display::getCameraSize().y / 2;
     }
 
     GameEngine createEngine()
