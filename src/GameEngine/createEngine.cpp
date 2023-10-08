@@ -32,6 +32,7 @@
 #include "ECS/Systems/sinMovement.hpp"
 #include "ECS/Systems/target.hpp"
 #include "ECS/Systems/walkingAI.hpp"
+#include "ECS/Systems/solid.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -55,15 +56,17 @@ namespace GameEngine {
         registry.registerComponent<Components::InRangeComponent>();
         registry.registerComponent<Components::WalkingAIComponent>();
         registry.registerComponent<Components::TargetComponent>();
+        registry.registerComponent<Components::SolidComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
+        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent>(Systems::solid);
+        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
     static ECS::Entity spawnShip(Containers::Registry &registry)
