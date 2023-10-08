@@ -30,7 +30,7 @@ static void gameLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 
 int rtype_client()
 {
-    Screen::Display window;
+    Screen::Display window(Screen::Display::GameState::GAME);
     GameEngine::GameEngine engine = GameEngine::createEngine();
     while (Screen::Display::isOpen()) {
         window.beginUpdate();

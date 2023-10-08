@@ -15,6 +15,7 @@ namespace ECS::Components {
      * towards it.
      * @param preferredDistance Pair of floats representing the preferred
      * distance between the entity and its target (first: min, second: max)
+     * @param speed Walking speed of the entity
      * @param dropsDownLedge Whether the entity can drops down ledges
      * (default: false)
      * @param jumpsOverObstacle Whether the entity can jump over obstacles
@@ -22,6 +23,7 @@ namespace ECS::Components {
      */
     struct WalkingAIComponent {
         std::pair<float, float> preferredDistance; // first: min, second: max
+        float speed;
         bool dropsDownLedge = false;
         bool jumpsOverObstacle = false;
     };
