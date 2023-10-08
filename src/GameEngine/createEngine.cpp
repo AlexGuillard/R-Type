@@ -24,6 +24,7 @@
 #include "ECS/Components/InRange.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
@@ -33,6 +34,7 @@
 #include "ECS/Systems/target.hpp"
 #include "ECS/Systems/walkingAI.hpp"
 #include "ECS/Systems/solid.hpp"
+#include "ECS/Systems/gravity.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -57,6 +59,7 @@ namespace GameEngine {
         registry.registerComponent<Components::WalkingAIComponent>();
         registry.registerComponent<Components::TargetComponent>();
         registry.registerComponent<Components::SolidComponent>();
+        registry.registerComponent<Components::GravityComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
@@ -66,6 +69,7 @@ namespace GameEngine {
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
+        registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
