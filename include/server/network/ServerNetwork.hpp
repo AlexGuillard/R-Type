@@ -21,6 +21,8 @@ namespace Network {
         public:
             ServerNetwork(boost::asio::io_service& io_service, int port);
             ~ServerNetwork();
+            void tcpConnection();
+            void udpConnection();
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error);
             /**
@@ -80,6 +82,11 @@ namespace Network {
             std::vector<std::string> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
+            bool isGame = false;
+            // list of sockets for potential clients
+            std::vector<boost::asio::ip::tcp::socket> _socket;
+            // necessary for acceptation tcp clients
+            boost::asio::ip::tcp::acceptor _acceptor;
         private:
     };
 }

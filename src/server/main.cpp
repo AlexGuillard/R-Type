@@ -14,7 +14,6 @@ int main(int argc, char **argv)
     try {
         boost::asio::io_service ioService;
         Network::ServerNetwork network(ioService, port);
-        ioService.run();
     } catch(const std::exception &e) {
         std::cout << e.what() << std::endl;
         return error;
