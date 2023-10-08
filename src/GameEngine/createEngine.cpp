@@ -21,6 +21,7 @@
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "ECS/Components/InRange.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
@@ -47,6 +48,7 @@ namespace GameEngine {
         registry.registerComponent<Components::CollidableComponent>();
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::SinMovementComponent>();
+        registry.registerComponent<Components::InRangeComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
