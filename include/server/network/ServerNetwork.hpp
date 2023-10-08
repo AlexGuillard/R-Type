@@ -25,8 +25,9 @@ namespace Network {
             ~ServerNetwork();
             void tcpConnection();
             void udpConnection();
+            void waitRequest(boost::asio::ip::tcp::socket &socket);
             // handler for asynd accept in tcp connection
-            void acceptHandler(const boost::system::error_code& error);
+            void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
              * @brief function called after receiving data
              *

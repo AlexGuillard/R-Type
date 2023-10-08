@@ -52,33 +52,45 @@ void HandleRead(const boost::system::error_code& error, std::size_t bytes_transf
 
 void Network::ServerNetwork::tcpConnection()
 {
-    // for (int i = 0; i < 4; i++) {
-        _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(_ioService));
-        _acceptor.async_accept(*_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
-    // }
-    // for (int i = 0; i < _socket.size(); i++) {
-    //     _data.resize(MAX_SIZE_BUFF);
-    //     _socket[i]->async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &i](const boost::system::error_code& read_error, std::size_t read_bytes) {
-    //         HandleRead(read_error, read_bytes, _socket[i], _data);
-    //     });
-    // }
+    // _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(_ioService));
+    _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
 
-void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error)
+void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
+{
+    // auto self(shared_from_this());
+    _data.resize(MAX_SIZE_BUFF);
+    socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
+        // HandleRead(read_error, read_bytes, socket[nb], _data);
+        if (!error) {
+            // Process the received data in the 'buffer' vector
+
+            // Print the received data
+            std::cout << "Received " << bytes_transferred << " bytes: " << _data.data() << std::endl;
+
+            _data.clear();
+            // Start another asynchronous read operation
+            waitRequest(socket);
+        } else {
+            // std::cerr << "Error reading from client: " << error.message() << std::endl;
+            waitRequest(socket);
+            // Handle the error, possibly by closing the socket
+        }
+    });
+}
+
+void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket)
 {
     static int nb = 0;
 
     if (!error && nb < 4) {
         std::cout << "acceptation success" << std::endl;
-        std::cout << _socket[nb]->remote_endpoint().address().to_string() << std::endl;
-        _data.resize(MAX_SIZE_BUFF);
-        _socket[nb]->async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this](const boost::system::error_code& read_error, std::size_t read_bytes) {
-            HandleRead(read_error, read_bytes, _socket[nb], _data);
-        });
+        _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(std::move(socket)));
+        std::cout << _socket.back()->remote_endpoint().address().to_string() << std::endl;
+        waitRequest(*_socket.back());
         nb++;
+        _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
     }
-    _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(_ioService));
-    _acceptor.async_accept(*_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
 }
 
 void Network::ServerNetwork::udpConnection()
