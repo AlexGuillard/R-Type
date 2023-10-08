@@ -41,8 +41,8 @@ void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
     socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
         if (!error) {
             // Print the received data
-            std::cout << "Received " << bytes_transferred << " bytes: " << _data.data() << std::endl;
-
+            std::cout << "Received " << bytes_transferred << " bytes: " << _data.data() << " from ";
+            std::cout << socket.remote_endpoint().address().to_string() << ":" << std::to_string(socket.remote_endpoint().port()) << std::endl;
             _data.clear();
             // Start another asynchronous read operation
             waitRequest(socket);
