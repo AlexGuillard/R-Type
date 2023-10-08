@@ -30,41 +30,16 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
 Network::ServerNetwork::~ServerNetwork()
 {}
 
-void HandleRead(const boost::system::error_code& error, std::size_t bytes_transferred, std::shared_ptr<boost::asio::ip::tcp::socket> socket, std::vector<char>& buffer) {
-    if (!error) {
-        // Process the received data in the 'buffer' vector
-
-        // Print the received data
-        std::cout << "Received " << bytes_transferred << " bytes: " << std::string(buffer.begin(), buffer.begin() + bytes_transferred) << std::endl;
-
-        // Start another asynchronous read operation
-        socket->async_read_some(boost::asio::buffer(buffer), [socket, &buffer](const boost::system::error_code& read_error, std::size_t read_bytes) {
-            HandleRead(read_error, read_bytes, socket, buffer);
-        });
-    } else {
-        // std::cerr << "Error reading from client: " << error.message() << std::endl;
-        socket->async_read_some(boost::asio::buffer(buffer), [socket, &buffer](const boost::system::error_code& read_error, std::size_t read_bytes) {
-            HandleRead(read_error, read_bytes, socket, buffer);
-        });
-        // Handle the error, possibly by closing the socket
-    }
-}
-
 void Network::ServerNetwork::tcpConnection()
 {
-    // _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(_ioService));
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
 {
-    // auto self(shared_from_this());
     _data.resize(MAX_SIZE_BUFF);
     socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
-        // HandleRead(read_error, read_bytes, socket[nb], _data);
         if (!error) {
-            // Process the received data in the 'buffer' vector
-
             // Print the received data
             std::cout << "Received " << bytes_transferred << " bytes: " << _data.data() << std::endl;
 
@@ -72,7 +47,6 @@ void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
             // Start another asynchronous read operation
             waitRequest(socket);
         } else {
-            // std::cerr << "Error reading from client: " << error.message() << std::endl;
             waitRequest(socket);
             // Handle the error, possibly by closing the socket
         }
