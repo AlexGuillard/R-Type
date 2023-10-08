@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <algorithm>
+#include <thread>
+#include <memory>
 
 #include "ANetwork.hpp"
 
@@ -84,7 +86,7 @@ namespace Network {
             boost::asio::deadline_timer _timer;
             bool isGame = false;
             // list of sockets for potential clients
-            std::vector<boost::asio::ip::tcp::socket> _socket;
+            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
         private:
