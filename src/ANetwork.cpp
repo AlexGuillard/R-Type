@@ -19,3 +19,14 @@ void Network::ANetwork::asyncSend(boost::asio::ip::udp::socket &_socket, std::st
     _socket.async_send_to(boost::asio::buffer(str.c_str(), str.length()), _endpoint,
         std::bind(&Network::ANetwork::handleSend, this, std::placeholders::_1, std::placeholders::_2));
 }
+
+void Network::ANetwork::receive(boost::asio::ip::tcp::socket &_socket)
+{
+	_data.resize(MAX_SIZE_BUFF);
+    _socket.read_some(boost::asio::buffer(_data.data(), _data.size()));
+}
+
+void Network::ANetwork::send(boost::asio::ip::tcp::socket &_socket, std::string str)
+{
+    _socket.write_some(boost::asio::buffer(str.c_str(), str.length()));
+}

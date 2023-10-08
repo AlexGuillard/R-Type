@@ -10,23 +10,12 @@
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
     : _ioService(io_service), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
 {
-    _socket.push_back(boost::asio::ip::tcp::socket(_ioService));
-    _acceptor.async_accept(_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
     updateTicks();
     asyncReceive(_asyncSocket);
 }
 
 Network::ServerNetwork::~ServerNetwork()
 {}
-
-void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error)
-{
-    if (!error) {
-        std::cout << "acceptation success" << std::endl;
-    }
-    _socket.push_back(boost::asio::ip::tcp::socket(_ioService));
-    _acceptor.async_accept(_socket.back(), std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1));
-}
 
 void Network::ServerNetwork::updateTicks()
 {

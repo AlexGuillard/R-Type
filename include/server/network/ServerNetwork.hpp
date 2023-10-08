@@ -73,10 +73,6 @@ namespace Network {
              *
              */
             boost::asio::ip::udp::socket _asyncSocket;
-            // list of sockets for potential clients
-            std::vector<boost::asio::ip::tcp::socket> _socket;
-            // necessary for acceptation tcp clients
-            boost::asio::ip::tcp::acceptor _acceptor;
             /**
              * @brief hmap for the list of client on the server
              *
