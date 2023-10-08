@@ -8,6 +8,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/shooting.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/collision.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sinMovement.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/target.cpp
 )
 add_library(systems STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})
