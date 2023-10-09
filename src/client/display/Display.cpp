@@ -160,14 +160,24 @@ void Screen::Display::displayHostNameInput()
     const int posXText = posXRect + 0.05 * _hostNameclickableZone.width;
     const int posYText = posYRect + 0.001 * _hostNameclickableZone.height;
     const int fontSizeText = _hostNameclickableZone.height;
+    Color color = RED;
 
     _hostNameclickableZone.x = posXRect;
     _hostNameclickableZone.y = posYRect;
     if (_hostName.empty()) {
-        DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, RED);
+        if (_state == 1) {
+            color = RED;
+        } else {
+            color = BROWN;
+        }
     } else {
-        DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, BLUE);
+        if (_state == 1) {
+            color = BLUE;
+        } else {
+            color = DARKBLUE;
+        }
     }
+    DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, color);
     DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
@@ -182,14 +192,24 @@ void Screen::Display::displayPortInput()
     const int posXText = posXRect + 0.05 * _portclickableZone.width;
     const int posYText = posYRect + 0.001 * _portclickableZone.height;
     const int fontSizeText = _portclickableZone.height;
+    Color color = RED;
 
     _portclickableZone.x = posXRect;
     _portclickableZone.y = posYRect;
-    if (_hostName.empty()) {
-        DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, RED);
+    if (_port.empty()) {
+        if (_state == 2) {
+            color = RED;
+        } else {
+            color = BROWN;
+        }
     } else {
-        DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, BLUE);
+        if (_state == 2) {
+            color = BLUE;
+        } else {
+            color = DARKBLUE;
+        }
     }
+    DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, color);
     DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
@@ -256,10 +276,10 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     const int deleteKey = 259;
 
     if (key == deleteKey) {
-        if (_state == 1) {
+        if (_state == 1 && !_hostName.empty()) {
             _hostName.erase(_hostName.size() - 1);
         }
-        if (_state == 2) {
+        if (_state == 2 && !_port.empty()) {
             _port.erase(_port.size() - 1);
         }
     }
