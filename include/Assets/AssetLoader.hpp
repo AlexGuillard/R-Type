@@ -74,7 +74,9 @@ namespace Assets {
         static void clearCache();
 
     private:
+        // Cache of Images. Used to avoid having to reload the same image thousands of time
         static std::unordered_map<AssetsIndex, Image> imageCache;
+        // Cache of Textures. Used to avoid having to reload the same image thousands of time
         static std::unordered_map<AssetsIndex, Texture2D> textureCache;
     };
 }
