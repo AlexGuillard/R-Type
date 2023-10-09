@@ -188,7 +188,12 @@ namespace Screen {
         // Stock the Port in a string
         std::string _port;
         // Stock the state of the input in menu 0=none 1=hostname 2=port
-        int _state = 0;
+        // int _state = 0;
+        enum class InputState {
+            NONE,
+            HOSTNAME,
+            PORT
+        } _state = InputState::NONE;
         // Set the rectangle clickable for hostname input
         Rectangle _hostNameclickableZone;
         // Set the rectangle clickable for port input

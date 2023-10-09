@@ -19,7 +19,7 @@ Camera2D Screen::Display::camera = {
     .zoom = 1
 };
 
-Screen::Display::Display(GameState state) : _state(0), _gameState(state)
+Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
     const int fps = 60;
@@ -165,13 +165,13 @@ void Screen::Display::displayHostNameInput()
     _hostNameclickableZone.x = posXRect;
     _hostNameclickableZone.y = posYRect;
     if (_hostName.empty()) {
-        if (_state == 1) {
+        if (_state == InputState::HOSTNAME) {
             color = RED;
         } else {
             color = BROWN;
         }
     } else {
-        if (_state == 1) {
+        if (_state == InputState::HOSTNAME) {
             color = BLUE;
         } else {
             color = DARKBLUE;
@@ -197,13 +197,13 @@ void Screen::Display::displayPortInput()
     _portclickableZone.x = posXRect;
     _portclickableZone.y = posYRect;
     if (_port.empty()) {
-        if (_state == 2) {
+        if (_state == InputState::PORT) {
             color = RED;
         } else {
             color = BROWN;
         }
     } else {
-        if (_state == 2) {
+        if (_state == InputState::PORT) {
             color = BLUE;
         } else {
             color = DARKBLUE;
@@ -259,11 +259,11 @@ void Screen::Display::mouseClickedMenu()
     const Vector2 mouse = { mouseX, mouseY };
 
     if (CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
-        _state = 1;
+        _state = InputState::HOSTNAME;
     } else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
-        _state = 2;
+        _state = InputState::PORT;
     } else {
-        _state = 0;
+        _state = InputState::NONE;
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
@@ -276,23 +276,23 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     const int deleteKey = 259;
 
     if (key == deleteKey) {
-        if (_state == 1 && !_hostName.empty()) {
+        if (_state == InputState::HOSTNAME && !_hostName.empty()) {
             _hostName.erase(_hostName.size() - 1);
         }
-        if (_state == 2 && !_port.empty()) {
+        if (_state == InputState::PORT && !_port.empty()) {
             _port.erase(_port.size() - 1);
         }
     }
     if (KeyPressed == 0) {
         return;
     }
-    if (_state == 1) {
+    if (_state == InputState::HOSTNAME) {
         if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
             _hostName += KeyPressed;
         }
     }
 
-    if (_state == 2) {
+    if (_state == InputState::PORT) {
         if (KeyPressed >= '0' && KeyPressed <= '9') {
             _port += KeyPressed;
         }
