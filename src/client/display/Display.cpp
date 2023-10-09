@@ -160,21 +160,21 @@ void Screen::Display::displayHostNameInput()
     const int posXText = posXRect + 0.05 * _hostNameclickableZone.width;
     const int posYText = posYRect + 0.001 * _hostNameclickableZone.height;
     const int fontSizeText = _hostNameclickableZone.height;
-    Color color = RED;
+    Color color = _buttonFocusedKO;
 
     _hostNameclickableZone.x = posXRect;
     _hostNameclickableZone.y = posYRect;
     if (_hostName.empty()) {
         if (_state == InputState::HOSTNAME) {
-            color = RED;
+            color = _buttonFocusedKO;
         } else {
-            color = BROWN;
+            color = _buttonUnfocusedKO;
         }
     } else {
         if (_state == InputState::HOSTNAME) {
-            color = BLUE;
+            color = _buttonFocusedOK;
         } else {
-            color = DARKBLUE;
+            color = _buttonUnfocusedOK;
         }
     }
     DrawRectangleLines(posXRect, posYRect, _hostNameclickableZone.width, _hostNameclickableZone.height, color);
@@ -192,21 +192,21 @@ void Screen::Display::displayPortInput()
     const int posXText = posXRect + 0.05 * _portclickableZone.width;
     const int posYText = posYRect + 0.001 * _portclickableZone.height;
     const int fontSizeText = _portclickableZone.height;
-    Color color = RED;
+    Color color = _buttonFocusedKO;
 
     _portclickableZone.x = posXRect;
     _portclickableZone.y = posYRect;
     if (_port.empty()) {
         if (_state == InputState::PORT) {
-            color = RED;
+            color = _buttonFocusedKO;
         } else {
-            color = BROWN;
+            color = _buttonUnfocusedKO;
         }
     } else {
         if (_state == InputState::PORT) {
-            color = BLUE;
+            color = _buttonFocusedOK;
         } else {
-            color = DARKBLUE;
+            color = _buttonUnfocusedOK;
         }
     }
     DrawRectangleLines(posXRect, posYRect, _portclickableZone.width, _portclickableZone.height, color);
@@ -226,9 +226,9 @@ void Screen::Display::displayConnectionButton()
     const int fontSizeText = _connectionclickableZone.height;
 
     if (_hostName.empty() || _port.empty()) {
-        DrawRectangleRec(_connectionclickableZone, RED);
+        DrawRectangleRec(_connectionclickableZone, _buttonFocusedKO);
     } else {
-        DrawRectangleRec(_connectionclickableZone, BLUE);
+        DrawRectangleRec(_connectionclickableZone, _buttonFocusedOK);
     }
     DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
 }

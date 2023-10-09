@@ -178,6 +178,10 @@ namespace Screen {
          */
         static Vector2 getCameraSize();
     private:
+        Color _buttonFocusedOK = BLUE;
+        Color _buttonFocusedKO = RED;
+        Color _buttonUnfocusedOK = DARKBLUE;
+        Color _buttonUnfocusedKO = { 150, 75, 0, 255 };
         /**
          * @brief Updates the window's states
          */
