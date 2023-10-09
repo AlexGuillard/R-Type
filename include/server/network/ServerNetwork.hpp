@@ -66,10 +66,17 @@ namespace Network {
              */
             std::string getActualClient() const;
             /**
+             * @brief Get the Actual Client id
+             *
+             * @param socket tcp socket of client
+             * @return std::string
+             */
+            std::string getActualClient(boost::asio::ip::tcp::socket &socket) const;
+            /**
              * @brief see if client have a good connection on the server, the server repond then with 200 or 401
              *
              */
-            void connection();
+            void connection(boost::asio::ip::tcp::socket &socket);
         protected:
             // store the io_service
             boost::asio::io_service &_ioService;

@@ -40,9 +40,11 @@ void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
     _data.resize(MAX_SIZE_BUFF);
     socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
         if (!error) {
-            // Print the received data
-            std::cout << "Received " << bytes_transferred << " bytes: " << _data.data() << " from ";
-            std::cout << socket.remote_endpoint().address().to_string() << ":" << std::to_string(socket.remote_endpoint().port()) << std::endl;
+            if (findClient(getActualClient(socket)) != "") {
+                std::cout << "[" << bytes_transferred << "] " << _data.data() << "from" << getActualClient(socket) << std::endl;
+            } else {
+                connection(socket);
+            }
             _data.clear();
             // Start another asynchronous read operation
             waitRequest(socket);
@@ -110,7 +112,7 @@ void Network::ServerNetwork::addClient()
 {
     std::string actualClient;
 
-    if (_clients.size() < 5) {
+    if (_clients.size() < 4) {
         actualClient = _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
         _clients.push_back(actualClient);
     }
@@ -119,6 +121,11 @@ void Network::ServerNetwork::addClient()
 std::string Network::ServerNetwork::getActualClient() const
 {
     return _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
+}
+
+std::string Network::ServerNetwork::getActualClient(boost::asio::ip::tcp::socket &socket) const
+{
+    return socket.remote_endpoint().address().to_string() + ":" + std::to_string(socket.remote_endpoint().port());
 }
 
 std::string Network::ServerNetwork::findClient(std::string findId) const
@@ -136,14 +143,16 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
     asyncReceive(_asyncSocket);
 }
 
-void Network::ServerNetwork::connection()
+void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
 {
     std::string res = _data.data();
+    std::string actualClient;
 
-    if (res == "Hello R-Type server\n" && _clients.size() < 5) {
-        addClient();
-        asyncSend(_asyncSocket, "200\n");
+    if (res == "Hello R-Type server\n" && _clients.size() < 4) {
+        actualClient = getActualClient(socket);
+        _clients.push_back(actualClient);
+        send(socket, "200\n");
     } else {
-        asyncSend(_asyncSocket, "401: Forbidden\n");
+        send(socket, "401: Forbidden\n");
     }
 }
