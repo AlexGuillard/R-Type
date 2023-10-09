@@ -375,15 +375,13 @@ bool Screen::Display::toggleFullScreen()
     const int monitor = GetCurrentMonitor();
     const int width = GetMonitorWidth(monitor);
     const int height = GetMonitorHeight(monitor);
-    const int hWidth = width / 2;
-    const int hHeight = height / 2;
 
     if (!IsWindowFullscreen()) {
         this->resizeWindow(width, height);
     }
     ToggleFullscreen();
     if (!IsWindowFullscreen()) {
-        this->resizeWindow(hWidth, hHeight).center();
+        this->resizeWindow(GetMonitorWidth(monitor) / 2, GetMonitorHeight(monitor) / 2).center();
     }
     return IsWindowFullscreen();
 }
