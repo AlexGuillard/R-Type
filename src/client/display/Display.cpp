@@ -32,14 +32,6 @@ void handleNetworkMessages(Network::ClientNetwork &client)
 
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
-
-    // std::thread serviceThread([&] {
-    // });
-    // _client._ioService.post([&] {
-    //     // _client.myReceive();
-    // _client.receive(_client._socket);
-// });
-
     while (!WindowShouldClose()) {
 
         // _client._ioService.post([&] {

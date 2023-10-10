@@ -153,24 +153,11 @@ namespace Network {
         boost::asio::io_service _ioService;
         boost::asio::ip::udp::socket _socket;
 
-        // void mySend(const std::string& message) {
-        //     _socket.send_to(boost::asio::buffer(message), _endpoint);
-        //     myReceive();
-        // }
-
         void mySend(const std::string& message) {
             std::cout << "Sending: " << message << std::endl;
             _socket.async_send_to(
                 boost::asio::buffer(message), _endpoint,
                 std::bind(&ClientNetwork::handleSend, this,
-                          std::placeholders::_1, std::placeholders::_2));
-        }
-
-        void myReceive()
-        {
-            _socket.async_receive_from(
-                boost::asio::buffer(_buffer), _senderEndpoint,
-                std::bind(&ClientNetwork::handleReceive, this,
                           std::placeholders::_1, std::placeholders::_2));
         }
 
