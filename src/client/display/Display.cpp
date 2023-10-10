@@ -46,8 +46,7 @@ void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
             drawGame(engine);
         }
         EndDrawing();
-        _client._ioService.reset();
-        _client._ioService.poll();
+        _client.handleNetwork();
     }
     _client._ioService.stop();
     CloseWindow();

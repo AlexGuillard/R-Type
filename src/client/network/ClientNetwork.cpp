@@ -188,3 +188,9 @@ Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_serv
     }
     return *_instance;
 }
+
+void Network::ClientNetwork::handleNetwork()
+{
+    _ioService.reset();
+    _ioService.poll();
+}

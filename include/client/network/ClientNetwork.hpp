@@ -149,11 +149,17 @@ namespace Network {
          *
          */
         ClientNetwork();
+        /**
+         * @brief Function to put at the end of the loop to handle the network, it make a reset and poll for the ioService
+         *
+         */
+        void handleNetwork();
         //TODO reput these on private
         boost::asio::io_service _ioService;
         boost::asio::ip::udp::socket _socket;
 
-        void mySend(const std::string& message) {
+        void mySend(const std::string& message)
+        {
             _socket.async_send_to(
                 boost::asio::buffer(message), _endpoint,
                 std::bind(&ClientNetwork::handleSend, this,
@@ -190,6 +196,7 @@ namespace Network {
             }
             return "";
         }
+
         void sendAll() {
             while (!_messagesToSend.empty()) {
                 mySend(_messagesToSend.front());
