@@ -22,10 +22,10 @@ static void menuLoop(Screen::Display &window)
     }
 }
 
-static void gameLoop(Screen::Display &window, GameEngine::GameEngine &engine)
+static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
     Network::updateClientNetwork();
-    window.drawGame(engine);
+    Screen::Display::drawGame(engine);
 }
 
 int rtype_client()
@@ -42,7 +42,7 @@ int rtype_client()
             gameLoop(window, engine);
             break;
         }
-        window.endUpdate();
+        Screen::Display::endUpdate();
     }
     Network::stopClientNetwork();
     return 0;

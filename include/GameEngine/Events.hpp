@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <queue>
+#include <vector>
 
 namespace GameEngine {
     class Events {
@@ -41,8 +41,12 @@ namespace GameEngine {
         */
         static bool poll(Type &event);
 
+        static std::vector<Type>::iterator begin();
+        static std::vector<Type>::iterator end();
+
     private:
-        static std::queue<Type> mQueue;
+        friend class Iterator;
+        static std::vector<Type> mQueue;
         Events() = default;
         ~Events() = default;
         Events(const Events &) = delete;
