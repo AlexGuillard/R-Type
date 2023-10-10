@@ -61,8 +61,7 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-    // send(_socket, "Hello R-Type server\n");
-    mySend("Hello R-Type server\n");
+    send(_socket, "Hello R-Type server\n");
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
@@ -85,8 +84,7 @@ void Network::ClientNetwork::sendMovement(Movement movement)
     default:
         break;
     }
-    // send(_socket, message);
-    mySend(message);
+    send(_socket, message);
 }
 
 void Network::ClientNetwork::sendAction(Action action)
@@ -103,8 +101,7 @@ void Network::ClientNetwork::sendAction(Action action)
     default:
         break;
     }
-    // send(_socket, message);
-    mySend(message);
+    send(_socket, message);
 }
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
@@ -136,7 +133,7 @@ void Network::ClientNetwork::initializeResponsehandler()
 void Network::ClientNetwork::handlePong(const std::string &message)
 {
     if (message == "ping") {
-        mySend("pong");
+        send(_socket, "pong");
     } else {
         std::cout << "Unexecepted message received" << std::endl;
     }
