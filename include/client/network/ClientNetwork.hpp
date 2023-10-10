@@ -178,40 +178,6 @@ namespace Network {
                           std::placeholders::_1, std::placeholders::_2));
         }
 
-        void printReceivedMessages() {
-            while (!_receivedMessages.empty()) {
-                std::string message = _receivedMessages.front();
-                _receivedMessages.pop();
-                std::cout << "Received: " << message << std::endl;
-            }
-        }
-
-        void enqueueMessageToSend(const std::string& message) {
-            std::lock_guard<std::mutex> guard(_mutex);
-            _messagesToSend.push(message);
-            }
-
-        std::string dequeueReceivedMessage() {
-            std::lock_guard<std::mutex> guard(_mutex);
-            if (!_receivedMessages.empty()) {
-                std::string message = _receivedMessages.front();
-                _receivedMessages.pop();
-                return message;
-            }
-            return "";
-        }
-
-        void sendAll() {
-            while (!_messagesToSend.empty()) {
-                send(_socket, _messagesToSend.front());
-                _messagesToSend.pop();
-            }
-        }
-
-        bool isConnected() const {
-            return _socket.is_open();
-        }
-
         void enqueueReceivedMessage(const std::string& message) {
             _receivedMessages.push(message);
         }

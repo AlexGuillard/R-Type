@@ -21,23 +21,12 @@ Screen::Display::Display(GameState state) : _state(0), _gameState(state)
     SetTargetFPS(fps);
 }
 
-void handleNetworkMessages(Network::ClientNetwork &client)
-{
-    std::string receivedMessage = client.dequeueReceivedMessage();
-    while (!receivedMessage.empty()) {
-        std::cout << "Received message: " << receivedMessage << std::endl;
-        receivedMessage = client.dequeueReceivedMessage();
-    }
-}
-
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
     while (!WindowShouldClose()) {
         _client.receive(_client.getSocket());
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
-        handleNetworkMessages(_client);
 
         if (_gameState == GameState::MENU) {
             detectActionMenu();
