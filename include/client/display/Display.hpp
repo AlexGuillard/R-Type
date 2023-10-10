@@ -164,11 +164,6 @@ namespace Screen {
             float xRange = 0.01,
             float yRange = 0.01
         );
-        /**
-         * @brief Toggles between fullscreen and windowed
-         * @returns True if switched to fullscreen, false otherwise
-        */
-        bool toggleFullScreen();
 
         static void beginDrawCamera();
         static void endDrawCamera();
@@ -178,6 +173,11 @@ namespace Screen {
          */
         static Vector2 getCameraSize();
     private:
+        /**
+         * @brief Toggles between fullscreen and windowed
+         * @returns True if switched to fullscreen, false otherwise
+        */
+        bool toggleFullScreen();
         Color _buttonFocusedOK = BLUE;
         Color _buttonFocusedKO = RED;
         Color _buttonUnfocusedOK = DARKBLUE;

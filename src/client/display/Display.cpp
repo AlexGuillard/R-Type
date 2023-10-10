@@ -123,9 +123,6 @@ void Screen::Display::update()
             _gameState = GameState::GAME;
         }
     }
-    if (IsKeyPressed(KEY_F11)) {
-        this->toggleFullScreen();
-    }
     for (auto it = GameEngine::Events::begin(); it != GameEngine::Events::end(); ++it) {
         GameEngine::Events::Type type = *it;
         if (type == GameEngine::Events::Type::PLAYER_SHOOT) {
@@ -395,9 +392,6 @@ bool Screen::Display::toggleFullScreen()
         this->resizeWindow(width, height);
     }
     ToggleFullscreen();
-    if (!IsWindowFullscreen()) {
-        this->resizeWindow(width / 2, height / 2).center();
-    }
     return IsWindowFullscreen();
 }
 
