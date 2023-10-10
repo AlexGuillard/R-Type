@@ -45,8 +45,6 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
     if (responseHandlerIt != _responseHandlers.end()) {
         responseHandlerIt->second(receivedMessage);
     }
-
-    std::cout << "Received: " << receivedMessage << std::endl;
 }
 
 

@@ -33,7 +33,7 @@ void handleNetworkMessages(Network::ClientNetwork &client)
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
     while (!WindowShouldClose()) {
-        _client.receive(_client._socket);
+        _client.receive(_client.getSocket());
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
@@ -48,7 +48,7 @@ void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
         EndDrawing();
         _client.handleNetwork();
     }
-    _client._ioService.stop();
+    _client.stopIOService();
     CloseWindow();
 }
 

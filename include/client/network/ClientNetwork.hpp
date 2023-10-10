@@ -154,9 +154,21 @@ namespace Network {
          *
          */
         void handleNetwork();
-        //TODO reput these on private
-        boost::asio::io_service _ioService;
-        boost::asio::ip::udp::socket _socket;
+        /**
+         * @brief stop the ioService
+         *
+         */
+        void stopIOService() {
+            _ioService.stop();
+        }
+        /**
+         * @brief Get the Socket object
+         *
+         * @return const boost::asio::ip::udp::socket&
+         */
+        boost::asio::ip::udp::socket& getSocket() {
+            return _socket;
+        }
 
         void mySend(const std::string& message)
         {
@@ -212,15 +224,6 @@ namespace Network {
             _receivedMessages.push(message);
         }
 
-        // std::string dequeueReceivedMessage() {
-        //     if (!_receivedMessages.empty()) {
-        //         std::string message = _receivedMessages.front();
-        //         _receivedMessages.pop();
-        //         return message;
-        //     }
-        //     return "";
-        // }
-
         std::queue<std::string> _receivedMessages;
     private:
         //Port of the server
@@ -228,7 +231,9 @@ namespace Network {
         //Host of the server
         std::string _host;
         //Used to manage asynchrous services
-        //Socket of the clientok but
+        boost::asio::io_service _ioService;
+        //Socket of the client
+        boost::asio::ip::udp::socket _socket;
         //Data received
         std::string _dataReceived;
         //Buffer used to receive data
@@ -239,7 +244,9 @@ namespace Network {
         static std::unique_ptr<ClientNetwork> _instance;
         //Endpoint to send
         boost::asio::ip::udp::endpoint _senderEndpoint;
+        //Message to send
         std::queue<std::string> _messagesToSend;
+        //Mutex to lock the queue
         std::mutex _mutex;
     };
 }
