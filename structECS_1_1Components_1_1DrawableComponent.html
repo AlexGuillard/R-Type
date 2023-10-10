@@ -83,8 +83,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad33c3f61a1fdd87aeecd43daa7bbce18"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1DrawableComponent.html#ad33c3f61a1fdd87aeecd43daa7bbce18">texture</a> [<a class="el" href="namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430">maxTexturePathSize</a>]</td></tr>
-<tr class="separator:ad33c3f61a1fdd87aeecd43daa7bbce18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bec56b72f20662b11e1e1bf23cc558b"><td class="memItemLeft" align="right" valign="top">Assets::AssetsIndex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1DrawableComponent.html#a5bec56b72f20662b11e1e1bf23cc558b">spriteSheetIndex</a></td></tr>
+<tr class="separator:a5bec56b72f20662b11e1e1bf23cc558b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdb06ef360226dde715decf03cc7b1a5"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1DrawableComponent.html#acdb06ef360226dde715decf03cc7b1a5">frameRatio</a></td></tr>
 <tr class="separator:acdb06ef360226dde715decf03cc7b1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52bdb0f23a3cf760dc981a79120f2be9"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1DrawableComponent.html#a52bdb0f23a3cf760dc981a79120f2be9">start</a> = { 0, 0 }</td></tr>
@@ -106,7 +106,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Component that contains the data needed to draw a sprite. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">texture</td><td>Path to the texture </td></tr>
+    <tr><td class="paramname">spriteSheetIndex</td><td>The index of the sprite sheet to use </td></tr>
     <tr><td class="paramname">frameRatio</td><td>Ratio of the frame in the texture ex: { 16, 1 } for a sprite sheet with 16 columns and 1 row </td></tr>
     <tr><td class="paramname">start</td><td>First frame of the animation ex: { 3, 0 } for the 4th frame of the first row </td></tr>
     <tr><td class="paramname">end</td><td>Last frame of the animation ex: { 8, 0 } for the 9th frame of the first row </td></tr>
@@ -204,6 +204,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5bec56b72f20662b11e1e1bf23cc558b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bec56b72f20662b11e1e1bf23cc558b">&#9670;&nbsp;</a></span>spriteSheetIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Assets::AssetsIndex ECS::Components::DrawableComponent::spriteSheetIndex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a52bdb0f23a3cf760dc981a79120f2be9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52bdb0f23a3cf760dc981a79120f2be9">&#9670;&nbsp;</a></span>start</h2>
 
@@ -212,20 +226,6 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">Vector2 ECS::Components::DrawableComponent::start = { 0, 0 }</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad33c3f61a1fdd87aeecd43daa7bbce18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad33c3f61a1fdd87aeecd43daa7bbce18">&#9670;&nbsp;</a></span>texture</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char ECS::Components::DrawableComponent::texture[<a class="el" href="namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430">maxTexturePathSize</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">

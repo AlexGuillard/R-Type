@@ -18,14 +18,15 @@ var searchData=
   ['sinmovementcomponent_193',['SinMovementComponent',['../structECS_1_1Components_1_1SinMovementComponent.html',1,'ECS::Components']]],
   ['sinmovementcomponent_2ehpp_194',['SinMovementComponent.hpp',['../SinMovementComponent_8hpp.html',1,'']]],
   ['size_195',['Size',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94',1,'Network']]],
-  ['size_196',['size',['../classECS_1_1Containers_1_1Registry.html#a321bc24cfcf3f4bf8b7f5cbaaee0c480',1,'ECS::Containers::Registry::size()'],['../classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61',1,'ECS::Containers::Zipper::size()'],['../classECS_1_1Containers_1_1IndexedZipper.html#a04ad6db87bc621e8d801f227847ef583',1,'ECS::Containers::IndexedZipper::size()']]],
+  ['size_196',['size',['../classECS_1_1Containers_1_1IndexedZipper.html#a04ad6db87bc621e8d801f227847ef583',1,'ECS::Containers::IndexedZipper::size()'],['../classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61',1,'ECS::Containers::Zipper::size()'],['../classECS_1_1Containers_1_1Registry.html#a321bc24cfcf3f4bf8b7f5cbaaee0c480',1,'ECS::Containers::Registry::size()']]],
   ['size_5ftype_197',['size_type',['../classECS_1_1Containers_1_1SparseArray.html#a15fdb5368be9ffc5347f149387fa147b',1,'ECS::Containers::SparseArray']]],
   ['sparsearray_198',['SparseArray',['../classECS_1_1Containers_1_1SparseArray.html',1,'ECS::Containers::SparseArray&lt; T &gt;'],['../classECS_1_1Containers_1_1SparseArray.html#a3c21181e3636d9f3596f8e3301993743',1,'ECS::Containers::SparseArray::SparseArray()=default'],['../classECS_1_1Containers_1_1SparseArray.html#a31faf3d401267b79055bb2ab9ab001ae',1,'ECS::Containers::SparseArray::SparseArray(SparseArray const &amp;)=default'],['../classECS_1_1Containers_1_1SparseArray.html#a31f934a02a5857dd8e0af4c909059b88',1,'ECS::Containers::SparseArray::SparseArray(SparseArray &amp;&amp;) noexcept=default'],['../classECS_1_1Containers_1_1SparseArray.html#a3e0d96b3be59dab32b10db7ff235a45b',1,'ECS::Containers::SparseArray::SparseArray(std::size_t n)']]],
   ['sparsearray_2ehpp_199',['SparseArray.hpp',['../SparseArray_8hpp.html',1,'']]],
   ['spawnentity_200',['spawnEntity',['../classECS_1_1Containers_1_1Registry.html#a83cba407a3d064a9694cc01bc9879137',1,'ECS::Containers::Registry']]],
   ['speed_201',['speed',['../structECS_1_1Components_1_1SinMovementComponent.html#acf1682aea7d3c8fa2d95180eb5e67953',1,'ECS::Components::SinMovementComponent']]],
-  ['start_202',['start',['../structECS_1_1Components_1_1DrawableComponent.html#a52bdb0f23a3cf760dc981a79120f2be9',1,'ECS::Components::DrawableComponent::start()'],['../classNetwork_1_1ClientNetwork.html#ad33b71cda1fc7d386d5bff333283affa',1,'Network::ClientNetwork::start()']]],
-  ['startclientnetwork_203',['startClientNetwork',['../namespaceNetwork.html#a70b3790ab28716d145986735455c108b',1,'Network']]],
-  ['stopclientnetwork_204',['stopClientNetwork',['../namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654',1,'Network']]],
-  ['strength_205',['strength',['../structECS_1_1Components_1_1WaveBeamComponent.html#a720c870daefe3149b3084fb776d82011',1,'ECS::Components::WaveBeamComponent']]]
+  ['spritesheetindex_202',['spriteSheetIndex',['../structECS_1_1Components_1_1DrawableComponent.html#a5bec56b72f20662b11e1e1bf23cc558b',1,'ECS::Components::DrawableComponent']]],
+  ['start_203',['start',['../structECS_1_1Components_1_1DrawableComponent.html#a52bdb0f23a3cf760dc981a79120f2be9',1,'ECS::Components::DrawableComponent::start()'],['../classNetwork_1_1ClientNetwork.html#ad33b71cda1fc7d386d5bff333283affa',1,'Network::ClientNetwork::start()']]],
+  ['startclientnetwork_204',['startClientNetwork',['../namespaceNetwork.html#a70b3790ab28716d145986735455c108b',1,'Network']]],
+  ['stopclientnetwork_205',['stopClientNetwork',['../namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654',1,'Network']]],
+  ['strength_206',['strength',['../structECS_1_1Components_1_1WaveBeamComponent.html#a720c870daefe3149b3084fb776d82011',1,'ECS::Components::WaveBeamComponent']]]
 ];
