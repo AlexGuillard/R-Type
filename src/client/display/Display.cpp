@@ -31,20 +31,26 @@ void handleNetworkMessages(Network::ClientNetwork& client) {
 
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
-    _client.myReceive();
+    std::thread serviceThread([&] {
+        _client._ioService.run();
+    });
+
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
+
+        handleNetworkMessages(_client);
+
         if (_gameState == GameState::MENU) {
             detectActionMenu();
             drawMenu();
         } else if (_gameState == GameState::GAME) {
-            _client.mySend("choclao");
             drawGame(engine);
         }
         EndDrawing();
-        _client._ioService.run_one();
     }
+    _client._ioService.stop();
+    serviceThread.join();
     CloseWindow();
 }
 

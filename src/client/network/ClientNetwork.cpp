@@ -20,6 +20,9 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
 Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
 {
     initializeResponsehandler();
+    std::cout << "ClientNetwork constructor" << std::endl;
+    _senderEndpoint = boost::asio::ip::udp::endpoint(
+        boost::asio::ip::address::from_string("127.0.0.1"), 4848);
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -30,27 +33,30 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
         _dataReceived.resize(recvd_bytes);
         std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
 
-        _receivedMessages.push(_dataReceived);
+        std::string receivedMessage(_dataReceived.begin(), _dataReceived.end());
 
-        auto responseHandlerIt = _responseHandlers.find(_dataReceived);
+        enqueueReceivedMessage(receivedMessage);
+
+        auto responseHandlerIt = _responseHandlers.find(receivedMessage);
 
         if (responseHandlerIt != _responseHandlers.end()) {
-            responseHandlerIt->second(_dataReceived);
+            responseHandlerIt->second(receivedMessage);
         }
 
         myReceive();
 
-        std::cout << "Received: " << _dataReceived << std::endl;
+        std::cout << "Received: " << receivedMessage << std::endl;
     } else {
         myReceive();
     }
 }
 
+
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
 	if (!error && recvd_bytes > 0) {
 		std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
-		receive(_socket);
+		myReceive();
 	} else {
         std::cout << "erreur\n";
     }
@@ -82,7 +88,8 @@ void Network::ClientNetwork::sendMovement(Movement movement)
 		default:
 			break;
 	}
-	send(_socket, message);
+	// send(_socket, message);
+    mySend(message);
 }
 
 void Network::ClientNetwork::sendAction(Action action)
@@ -99,7 +106,8 @@ void Network::ClientNetwork::sendAction(Action action)
 		default:
 			break;
 	}
-	send(_socket, message);
+	// send(_socket, message);
+    mySend(message);
 }
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
@@ -131,7 +139,7 @@ void Network::ClientNetwork::initializeResponsehandler()
 void Network::ClientNetwork::handlePong(const std::string &message)
 {
     if (message == "ping") {
-        send(_socket, "pong");
+        mySend("pong");
     } else {
         std::cout << "Unexecepted message received" << std::endl;
     }

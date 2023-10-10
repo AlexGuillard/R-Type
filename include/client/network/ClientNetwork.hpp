@@ -153,8 +153,17 @@ namespace Network {
         boost::asio::io_service _ioService;
         boost::asio::ip::udp::socket _socket;
 
+        // void mySend(const std::string& message) {
+        //     _socket.send_to(boost::asio::buffer(message), _endpoint);
+        //     myReceive();
+        // }
+
         void mySend(const std::string& message) {
-            _socket.send_to(boost::asio::buffer(message), _endpoint);
+            std::cout << "Sending: " << message << std::endl;
+            _socket.async_send_to(
+                boost::asio::buffer(message), _endpoint,
+                std::bind(&ClientNetwork::handleSend, this,
+                          std::placeholders::_1, std::placeholders::_2));
         }
 
         void myReceive() {
@@ -172,11 +181,13 @@ namespace Network {
             }
         }
 
-        void enqueueReceivedMessage(const std::string& message) {
-            _receivedMessages.push(message);
-        }
+        void enqueueMessageToSend(const std::string& message) {
+            std::lock_guard<std::mutex> guard(_mutex);
+            _messagesToSend.push(message);
+            }
 
         std::string dequeueReceivedMessage() {
+            std::lock_guard<std::mutex> guard(_mutex);
             if (!_receivedMessages.empty()) {
                 std::string message = _receivedMessages.front();
                 _receivedMessages.pop();
@@ -184,7 +195,31 @@ namespace Network {
             }
             return "";
         }
+        void sendAll() {
+            while (!_messagesToSend.empty()) {
+                mySend(_messagesToSend.front());
+                _messagesToSend.pop();
+            }
+        }
 
+        bool isConnected() const {
+            return _socket.is_open();
+        }
+
+        void enqueueReceivedMessage(const std::string& message) {
+            _receivedMessages.push(message);
+        }
+
+        // std::string dequeueReceivedMessage() {
+        //     if (!_receivedMessages.empty()) {
+        //         std::string message = _receivedMessages.front();
+        //         _receivedMessages.pop();
+        //         return message;
+        //     }
+        //     return "";
+        // }
+
+        std::queue<std::string> _receivedMessages;
     private:
         //Port of the server
         int _port;
@@ -202,7 +237,8 @@ namespace Network {
         static std::unique_ptr<ClientNetwork> _instance;
         //Endpoint to send
         boost::asio::ip::udp::endpoint _senderEndpoint;
-        std::queue<std::string> _receivedMessages;
+        std::queue<std::string> _messagesToSend;
+        std::mutex _mutex;
     };
 }
 
