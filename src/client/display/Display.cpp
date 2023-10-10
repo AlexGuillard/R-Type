@@ -23,11 +23,8 @@ Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
     const int fps = 60;
-    int monitor = GetCurrentMonitor();
-    int hWidth = GetMonitorWidth(monitor) / 2;
-    int hHeight = GetMonitorHeight(monitor) / 2;
 
-    this->resizeWindow(hWidth, hHeight).center();
+    this->toggleFullScreen();
     SetTargetFPS(fps);
 }
 
@@ -319,8 +316,8 @@ Screen::Display &Screen::Display::center()
     int monitor = GetCurrentMonitor();
     int hMonitorWidth = GetMonitorWidth(monitor) / 2;
     int hMonitorHeight = GetMonitorHeight(monitor) / 2;
-    int hWindowWidth = GetScreenWidth() / 2;
-    int hWindowHeight = GetScreenHeight() / 2;
+    int hWindowWidth = _windowSize.x / 2;
+    int hWindowHeight = _windowSize.y / 2;
 
     SetWindowPosition(hMonitorWidth - hWindowWidth, hMonitorHeight - hWindowHeight);
     return *this;
@@ -330,6 +327,7 @@ Screen::Display &Screen::Display::resizeWindow(
     uint16_t width, uint16_t height)
 {
     SetWindowSize(width, height);
+    _windowSize = Vector2(static_cast<float>(width), static_cast<float>(height));
     this->resizeCamera(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
     return *this;
 }
@@ -337,8 +335,8 @@ Screen::Display &Screen::Display::resizeWindow(
 Screen::Display &Screen::Display::resizeCamera(
     uint16_t width, uint16_t height)
 {
-    const int windowWidth = GetScreenWidth();
-    const int windowHeight = GetScreenHeight();
+    const int windowWidth = _windowSize.x;
+    const int windowHeight = _windowSize.y;
     const float windowRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
     const float cameraRatio = static_cast<float>(width) / static_cast<float>(height);
     const float windowToCameraRatio = static_cast<float>(windowWidth) / static_cast<float>(width);
@@ -348,9 +346,6 @@ Screen::Display &Screen::Display::resizeCamera(
     Screen::Display::cameraWidth = width;
     Screen::Display::cameraHeight = height;
     if (ratioDiff > epsilon) {
-        std::cout << "WARNING: Camera and window ratio not equal ((" <<
-            Screen::Display::cameraWidth << "x" << Screen::Display::cameraHeight << " " << cameraRatio << ") != ((" <<
-            windowWidth << "x" << windowHeight << " " << windowRatio << ")). Updating Camera height to ";
         Screen::Display::cameraHeight = width / windowRatio;
         std::cout << Screen::Display::cameraHeight << std::endl;
         return this->resizeCamera(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
@@ -375,7 +370,7 @@ Screen::Display &Screen::Display::setCameraPosition(int16_t posX, int16_t posY)
 
 Screen::Display &Screen::Display::shake(
     float time,
-    enum class CameraShakeIntensity intensity,
+    enum CameraShakeIntensity intensity,
     float xRange,
     float yRange
 )
@@ -401,7 +396,7 @@ bool Screen::Display::toggleFullScreen()
     }
     ToggleFullscreen();
     if (!IsWindowFullscreen()) {
-        this->resizeWindow(GetMonitorWidth(monitor) / 2, GetMonitorHeight(monitor) / 2).center();
+        this->resizeWindow(width / 2, height / 2).center();
     }
     return IsWindowFullscreen();
 }

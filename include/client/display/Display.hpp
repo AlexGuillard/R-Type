@@ -160,7 +160,7 @@ namespace Screen {
          */
         Display &shake(
             float time = 0.2,
-            enum class CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE,
+            enum CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE,
             float xRange = 0.01,
             float yRange = 0.01
         );
@@ -208,6 +208,7 @@ namespace Screen {
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
 
         // Camera
+        Vector2 _windowSize = { 0, 0 };
         const float _defaultWidthRatio = 0.5;
         const float _defaultHeightRatio = 0.5;
         static const uint16_t defaultCameraWidth = 480;
@@ -229,7 +230,7 @@ namespace Screen {
             float t = 0;
             float xRange = 0.01;
             float yRange = 0.01;
-            enum class CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE;
+            enum CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE;
             double _startTime = 0;
         } _cameraShake;
     };
