@@ -166,7 +166,8 @@ namespace Network {
                           std::placeholders::_1, std::placeholders::_2));
         }
 
-        void myReceive() {
+        void myReceive()
+        {
             _socket.async_receive_from(
                 boost::asio::buffer(_buffer), _senderEndpoint,
                 std::bind(&ClientNetwork::handleReceive, this,

@@ -21,7 +21,8 @@ Screen::Display::Display(GameState state) : _state(0), _gameState(state)
     SetTargetFPS(fps);
 }
 
-void handleNetworkMessages(Network::ClientNetwork& client) {
+void handleNetworkMessages(Network::ClientNetwork &client)
+{
     std::string receivedMessage = client.dequeueReceivedMessage();
     while (!receivedMessage.empty()) {
         std::cout << "Received message: " << receivedMessage << std::endl;
@@ -31,11 +32,20 @@ void handleNetworkMessages(Network::ClientNetwork& client) {
 
 void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
 {
-    std::thread serviceThread([&] {
-        _client._ioService.run();
-    });
+
+    // std::thread serviceThread([&] {
+    // });
+    // _client._ioService.post([&] {
+    //     // _client.myReceive();
+    // _client.receive(_client._socket);
+// });
 
     while (!WindowShouldClose()) {
+
+        // _client._ioService.post([&] {
+        //     // _client.myReceive();
+        _client.receive(_client._socket);
+        // });
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
@@ -48,9 +58,11 @@ void Screen::Display::displayWindow(GameEngine::GameEngine &engine)
             drawGame(engine);
         }
         EndDrawing();
+        _client._ioService.reset();
+        _client._ioService.poll();
     }
     _client._ioService.stop();
-    serviceThread.join();
+    // serviceThread.join();
     CloseWindow();
 }
 
@@ -66,13 +78,13 @@ void Screen::Display::displayHostNameInput()
     const int posYText = 105;
     const int fontSizeText = 20;
 
-	_hostNameclickableZone = {posXRect, posYRect, widthRect, heightRect};
-	if (_hostName.empty()) {
-		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
-	} else {
-		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
-	}
-	DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
+    _hostNameclickableZone = { posXRect, posYRect, widthRect, heightRect };
+    if (_hostName.empty()) {
+        DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
+    } else {
+        DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+    }
+    DrawText(_hostName.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayPortInput()
@@ -86,37 +98,37 @@ void Screen::Display::displayPortInput()
     const int posYText = 155;
     const int fontSizeText = 20;
 
-	_portclickableZone = {posXRect, posYRect, widthRect, heightRect};
-	if (_port.empty()) {
-		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
-	} else {
-		DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
-	}
-	DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
+    _portclickableZone = { posXRect, posYRect, widthRect, heightRect };
+    if (_port.empty()) {
+        DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, RED);
+    } else {
+        DrawRectangleLines(posXRect, posYRect, widthRect, heightRect, BLUE);
+    }
+    DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
 void Screen::Display::displayConnectionButton()
 {
-	const Rectangle defaultClickableZone = {100, 210, 110, 30};
-	const int lineSize = 30;
-	const int posXText = 105;
-	const int posYText = 215;
-	const int fontSizeText = 20;
+    const Rectangle defaultClickableZone = { 100, 210, 110, 30 };
+    const int lineSize = 30;
+    const int posXText = 105;
+    const int posYText = 215;
+    const int fontSizeText = 20;
 
-	if (_hostName.empty() || _port.empty()) {
-		_connectionclickableZone = defaultClickableZone;
-		DrawRectangleRec(_connectionclickableZone, RED);
-	} else {
-		_connectionclickableZone = defaultClickableZone;
-		DrawRectangleRec(_connectionclickableZone, BLUE);
-	}
-	DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
+    if (_hostName.empty() || _port.empty()) {
+        _connectionclickableZone = defaultClickableZone;
+        DrawRectangleRec(_connectionclickableZone, RED);
+    } else {
+        _connectionclickableZone = defaultClickableZone;
+        DrawRectangleRec(_connectionclickableZone, BLUE);
+    }
+    DrawText("Connexion", posXText, posYText, fontSizeText, WHITE);
 }
 
 void Screen::Display::detectActionMenu()
 {
-	int keyPressed = 0;
-	int key = 0;
+    int keyPressed = 0;
+    int key = 0;
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         mouseClickedMenu();
@@ -125,11 +137,11 @@ void Screen::Display::detectActionMenu()
     if (keyPressed != 0) {
         keyPressededMenu(keyPressed, key);
     }
-	keyPressed = GetCharPressed();
-	key = GetKeyPressed();
-	if (keyPressed != 0 || key != 0) {
-		keyPressededMenu(keyPressed, key);
-	}
+    keyPressed = GetCharPressed();
+    key = GetKeyPressed();
+    if (keyPressed != 0 || key != 0) {
+        keyPressededMenu(keyPressed, key);
+    }
 }
 
 void Screen::Display::mouseClickedMenu()
@@ -157,30 +169,30 @@ void Screen::Display::mouseClickedMenu()
 
 void Screen::Display::keyPressededMenu(int KeyPressed, int key)
 {
-	const int deleteKey = 259;
+    const int deleteKey = 259;
 
-	if (key == deleteKey) {
-		if (_state == 1) {
-				 _hostName.erase(_hostName.size() - 1);
-		}
-		if (_state == 2) {
-				 _port.erase(_port.size() - 1);
-		}
-	}
-	if (KeyPressed == 0) {
-		return;
-	}
-	if (_state == 1) {
-		if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
-			_hostName += KeyPressed;
-		}
-	}
+    if (key == deleteKey) {
+        if (_state == 1) {
+            _hostName.erase(_hostName.size() - 1);
+        }
+        if (_state == 2) {
+            _port.erase(_port.size() - 1);
+        }
+    }
+    if (KeyPressed == 0) {
+        return;
+    }
+    if (_state == 1) {
+        if (KeyPressed >= '0' && KeyPressed <= '9' || KeyPressed == '.') {
+            _hostName += KeyPressed;
+        }
+    }
 
-	if (_state == 2) {
-		if (KeyPressed >= '0' && KeyPressed <= '9') {
-			_port += KeyPressed;
-		}
-	}
+    if (_state == 2) {
+        if (KeyPressed >= '0' && KeyPressed <= '9') {
+            _port += KeyPressed;
+        }
+    }
 }
 
 void Screen::Display::drawMenu()
