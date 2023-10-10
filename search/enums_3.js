@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['size_445',['Size',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94',1,'Network']]]
+  ['menustate_476',['MenuState',['../classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2',1,'Screen::Display']]],
+  ['movement_477',['Movement',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5',1,'Network']]]
 ];

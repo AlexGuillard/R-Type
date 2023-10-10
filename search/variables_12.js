@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y_431',['y',['../structECS_1_1Components_1_1MissileComponent.html#a32202e65c454c944ac123f9cfdafdc8b',1,'ECS::Components::MissileComponent::y()'],['../structECS_1_1Components_1_1PositionComponent.html#af9afcb2f254630fceba5666e7f467e83',1,'ECS::Components::PositionComponent::y()'],['../structECS_1_1Components_1_1VelocityComponent.html#aef40102c249116f70db97a39b0681147',1,'ECS::Components::VelocityComponent::y()'],['../structECS_1_1Components_1_1WaveBeamComponent.html#a4438a213698e114477aee0a5801b4fd3',1,'ECS::Components::WaveBeamComponent::y()']]]
+  ['x_460',['x',['../structECS_1_1Components_1_1MissileComponent.html#a77ddfba348125fb3c60e10a4a3184579',1,'ECS::Components::MissileComponent::x()'],['../structECS_1_1Components_1_1PositionComponent.html#a03b8b4275d41c6e7d00f58b659d8a583',1,'ECS::Components::PositionComponent::x()'],['../structECS_1_1Components_1_1VelocityComponent.html#a2ade3885b7e9723a0c720a23b2114060',1,'ECS::Components::VelocityComponent::x()'],['../structECS_1_1Components_1_1WaveBeamComponent.html#a3e0b8010b1e23d6ff72cd9dd922e18c0',1,'ECS::Components::WaveBeamComponent::x()']]],
+  ['xrange_461',['xRange',['../classScreen_1_1Display.html#a0fe40a4022eed2ee9fd598074277fc9c',1,'Screen::Display']]]
 ];
