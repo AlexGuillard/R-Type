@@ -123,19 +123,9 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
 
 void Network::ClientNetwork::initializeResponsehandler()
 {
-    _responseHandlers["pong\n"] = std::bind(&ClientNetwork::handlePong, this, std::placeholders::_1);
     _responseHandlers["200\n"] = std::bind(&ClientNetwork::handleConnection, this, std::placeholders::_1);
     _responseHandlers["201\n"] = std::bind(&ClientNetwork::handleLogin, this, std::placeholders::_1);
     _responseHandlers["202\n"] = std::bind(&ClientNetwork::handleLogout, this, std::placeholders::_1);
-}
-
-void Network::ClientNetwork::handlePong(const std::string &message)
-{
-    if (message == "ping") {
-        send(_socket, "pong");
-    } else {
-        std::cout << "Unexecepted message received" << std::endl;
-    }
 }
 
 void Network::ClientNetwork::handleConnection(const std::string &message)

@@ -97,12 +97,6 @@ namespace Network {
          */
         void initializeResponsehandler();
         /**
-         * @brief Respond pong if the server send ping
-         *
-         * @param message message from the server
-         */
-        void handlePong(const std::string &message);
-        /**
          * @brief Handle the Connection from server
          *
          * @param message message from the server
