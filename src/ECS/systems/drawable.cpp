@@ -13,24 +13,14 @@
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/Helper/SpriteSheetDrawer.hpp"
+#include "Assets/AssetLoader.hpp"
 #include "client/display/Display.hpp"
 
 #ifdef DEBUG
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/HitBoxComponent.hpp"
 #endif
-
 namespace ECS::Systems {
-    static std::unordered_map<std::string, Texture2D> textures;
-
-    static Texture2D loadTexture(const std::string &path)
-    {
-        if (!textures.contains(path)) {
-            textures[path] = LoadTexture(path.c_str());
-        }
-        return textures[path];
-    }
-
 #ifdef DEBUG
     /**
      * @brief Draws the hitbox of an entity.
@@ -82,7 +72,7 @@ namespace ECS::Systems {
         Screen::Display::beginDrawCamera();
         for (auto &&[eId, position, drawable] : Containers::IndexedZipper(positions, drawables)) {
             Helper::SpriteSheetDrawer drawer(
-                loadTexture(drawable->texture),
+                Assets::AssetLoader::loadTexturePng(drawable->spriteSheetIndex),
                 drawable->frameRatio,
                 drawable->start,
                 drawable->end,
