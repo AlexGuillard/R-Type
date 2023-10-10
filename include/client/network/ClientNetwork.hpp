@@ -170,14 +170,6 @@ namespace Network {
             return _socket;
         }
 
-        void mySend(const std::string& message)
-        {
-            _socket.async_send_to(
-                boost::asio::buffer(message), _endpoint,
-                std::bind(&ClientNetwork::handleSend, this,
-                          std::placeholders::_1, std::placeholders::_2));
-        }
-
         void myReceive()
         {
             _socket.async_receive_from(
@@ -211,7 +203,7 @@ namespace Network {
 
         void sendAll() {
             while (!_messagesToSend.empty()) {
-                mySend(_messagesToSend.front());
+                send(_socket, _messagesToSend.front());
                 _messagesToSend.pop();
             }
         }
