@@ -23,8 +23,21 @@ namespace Network {
         public:
             ServerNetwork(boost::asio::io_service& io_service, int portTcp, int portUdp);
             ~ServerNetwork();
+            /**
+             * @brief used when making the connections from the clients
+             *
+             */
             void tcpConnection();
+            /**
+             * @brief used when going into the game
+             *
+             */
             void udpConnection();
+            /**
+             * @brief used to wait read of tcp socket
+             *
+             * @param socket client socket that send data
+             */
             void waitRequest(boost::asio::ip::tcp::socket &socket);
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
