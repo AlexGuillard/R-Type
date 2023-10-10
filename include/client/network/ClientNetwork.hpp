@@ -170,14 +170,6 @@ namespace Network {
             return _socket;
         }
 
-        void myReceive()
-        {
-            _socket.async_receive_from(
-                boost::asio::buffer(_buffer), _senderEndpoint,
-                std::bind(&ClientNetwork::handleReceive, this,
-                          std::placeholders::_1, std::placeholders::_2));
-        }
-
         void enqueueReceivedMessage(const std::string& message) {
             _receivedMessages.push(message);
         }
