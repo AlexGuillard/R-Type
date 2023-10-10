@@ -7,14 +7,14 @@
 
 #include "server/network/ServerNetwork.hpp"
 
-Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int port)
-    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), port)), _timer(io_service)
+Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
+    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)), _timer(io_service), portUdp(portUdp)
 {
-    boost::asio::ip::udp::resolver resolver(_ioService);
-    boost::asio::ip::udp::resolver::query query(boost::asio::ip::host_name(), "");
-    boost::asio::ip::udp::resolver::iterator endpoints = resolver.resolve(query);
+    boost::asio::ip::tcp::resolver resolver(_ioService);
+    boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
+    boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
 
-    for (boost::asio::ip::udp::resolver::iterator it = endpoints; it != boost::asio::ip::udp::resolver::iterator(); ++it) {
+    for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
     while (1) {
@@ -151,7 +151,9 @@ void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
     if (res == "Hello R-Type server\n" && _clients.size() < 4) {
         actualClient = getActualClient(socket);
         _clients.push_back(actualClient);
+        res = std::to_string(portUdp);
         send(socket, "200\n");
+        send(socket, res);
     } else {
         send(socket, "401: Forbidden\n");
     }

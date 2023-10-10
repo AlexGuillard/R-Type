@@ -21,7 +21,7 @@ namespace Network {
      */
     class ServerNetwork : public ANetwork {
         public:
-            ServerNetwork(boost::asio::io_service& io_service, int port);
+            ServerNetwork(boost::asio::io_service& io_service, int portTcp, int portUdp);
             ~ServerNetwork();
             void tcpConnection();
             void udpConnection();
@@ -78,6 +78,8 @@ namespace Network {
              */
             void connection(boost::asio::ip::tcp::socket &socket);
         protected:
+            // int for udp port to send when tcp connection
+            int portUdp;
             // store the io_service
             boost::asio::io_service &_ioService;
             /**
@@ -92,6 +94,7 @@ namespace Network {
             std::vector<std::string> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
+            // boolean to change from tcp to udp and vice versa
             bool isGame = false;
             // list of sockets for potential clients
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
