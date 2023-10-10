@@ -15,7 +15,6 @@ namespace Assets {
         if (AssetLoader::imageCache.contains(index)) {
             return AssetLoader::imageCache[index];
         }
-        Assets::assets[static_cast<uint16_t>(index)];
         auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
         AssetLoader::imageCache[index] = LoadImageFromMemory(extension.c_str(), *data, dataSize);
         return AssetLoader::imageCache[index];
@@ -48,6 +47,16 @@ namespace Assets {
     Texture2D AssetLoader::loadTextureGif(AssetsIndex index)
     {
         return AssetLoader::loadTexture(index, ".gif");
+    }
+
+    std::string AssetLoader::loadText(AssetsIndex index)
+    {
+        auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
+        std::string result;
+        for (uint16_t i = 0; i < dataSize; i++) {
+            result += (*data)[i];
+        }
+        return result;
     }
 
     void AssetLoader::clearImageCache()

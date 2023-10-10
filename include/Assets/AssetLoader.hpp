@@ -61,6 +61,13 @@ namespace Assets {
         */
         static Texture2D loadTextureGif(AssetsIndex index);
         /**
+         * @brief Loads a text from the one embeded in the executable
+         *
+         * @param index index of the text
+         * @return std::string
+         */
+        static std::string loadText(AssetsIndex index);
+        /**
          * @brief Clears the cache of images
         */
         static void clearImageCache();
