@@ -29,6 +29,7 @@
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Systems/damage.hpp"
 #include "ECS/Systems/sinMovement.hpp"
+#include "ECS/Systems/solid.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -52,14 +53,16 @@ namespace GameEngine {
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::TeamComponent>();
         registry.registerComponent<Components::SinMovementComponent>();
+        registry.registerComponent<Components::SolidComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
+        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
+        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
     static ECS::Entity spawnShip(Containers::Registry &registry)
