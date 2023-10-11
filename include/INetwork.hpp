@@ -8,6 +8,8 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include "enums.hpp"
+#define CONNECTION_NB 81732;
 
 namespace Network {
     /**
@@ -17,6 +19,32 @@ namespace Network {
     enum Size {
         MAX_SIZE_BUFF = 1024,
     };
+
+    struct header {
+        int codeRfc;
+        int entity;
+    };
+
+    struct bodyMob {
+        int x;
+        int y;
+    };
+
+    struct bodyAlly {
+        int x;
+        int y;
+        Enums::PlayerColor color;
+    };
+
+    struct bodyMissile {
+        int x;
+        int y;
+        double velocityX;
+        double velocityY;
+        Enums::TeamGroup team;
+        int strength;
+    };
+
     /**
      * @brief interface of the network
      *
@@ -29,13 +57,27 @@ namespace Network {
          *
          * @param _socket variable where you listening
          */
-        virtual void receive(boost::asio::ip::udp::socket &_socket) = 0;
+        virtual void asyncReceive(boost::asio::ip::udp::socket &_socket) = 0;
         /**
          * @brief function to call when you want to send informations
          *
          * @param _socket variable where you send
+         * @param str string for message to send
          */
-        virtual void send(boost::asio::ip::udp::socket &_socket, std::string str) = 0;
+        virtual void asyncSend(boost::asio::ip::udp::socket &_socket, std::string str) = 0;
+        /**
+         * @brief function to call when you want to receive informations
+         *
+         * @param _socket variable where you listening
+         */
+        virtual void receive(boost::asio::ip::tcp::socket &_socket) = 0;
+        /**
+         * @brief function to call when you want to send informations
+         *
+         * @param _socket variable where you send
+         * @param str string for message to send
+         */
+        virtual void send(boost::asio::ip::tcp::socket &_socket, std::string str) = 0;
         /**
          * @brief function called after receiving data
          *

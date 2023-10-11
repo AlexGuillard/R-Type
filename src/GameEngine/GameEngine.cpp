@@ -6,6 +6,7 @@
 */
 
 #include <algorithm>
+#include <iostream>
 
 #include "GameEngine/GameEngine.hpp"
 #include "Errors/RegistryNotFound.hpp"
