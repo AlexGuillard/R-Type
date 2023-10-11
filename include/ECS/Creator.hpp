@@ -20,6 +20,28 @@ namespace ECS {
         ~Creator() = delete;
 
         /**
+         * @brief Add a walking AI to an entity.
+         * Assumes the entity already has a position, velocity and hitbox.
+         *
+         * @param entity Entity to add the AI to
+         * @param registry Registry to add the AI to
+         * @param target Target of the AI
+         * @param preferredDistance Pair of floats representing the preferred
+         * @param speed Walking speed of the entity
+         * @param dropsDownLedge Whether the entity can drops down ledges
+         * @param jumpsOverObstacle Whether the entity can jump over obstacles
+         * @return Entity The entity with the AI
+         */
+        static Entity addWalkingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            std::pair<float, float> preferredDistance,
+            float speed,
+            bool dropsDownLedge = false,
+            bool jumpsOverObstacle = false);
+
+        /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
          * @//param team The team the entity belongs to

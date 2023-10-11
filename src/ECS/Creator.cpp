@@ -7,6 +7,10 @@
 
 #include <cstdint>
 #include "ECS/Creator.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/WalkingAIComponent.hpp"
+#include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/DamageComponent.hpp"
@@ -22,6 +26,22 @@
 #include "Assets/generatedAssets.hpp"
 
 namespace ECS {
+
+    Entity Creator::addWalkingAI(
+        const Entity &entity,
+        Containers::Registry &registry,
+        const Entity &target,
+        std::pair<float, float> preferredDistance,
+        float speed,
+        bool dropsDownLedge,
+        bool jumpsOverObstacle)
+    {
+        registry.emplaceComponent<Components::WalkingAIComponent>(entity, std::make_pair(100.F, 200.F), 100);
+        registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
+        registry.emplaceComponent<Components::GravityComponent>(entity, 9.81F);
+        registry.emplaceComponent<Components::CollidableComponent>(entity);
+        return entity;
+    }
 
     Entity Creator::createCharacter(
         Containers::Registry &registry,
