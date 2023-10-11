@@ -11,12 +11,14 @@
 
 #include <raylib.h>
 
+#include "Assets/generatedAssets.hpp"
+
 namespace ECS::Components {
     // size of the texture path
     const std::size_t maxTexturePathSize = 256;
     /**
      * @brief Component that contains the data needed to draw a sprite
-     * @param texture Path to the texture
+     * @param spriteSheetIndex The index of the sprite sheet to use
      * @param frameRatio Ratio of the frame in the texture
      * ex: { 16, 1 } for a sprite sheet with 16 columns and 1 row
      * @param start First frame of the animation
@@ -31,7 +33,7 @@ namespace ECS::Components {
      * @see SpriteSheetDrawer
      */
     struct DrawableComponent {
-        char texture[maxTexturePathSize];
+        Assets::AssetsIndex spriteSheetIndex;
         Vector2 frameRatio;
         Vector2 start = { 0, 0 };
         Vector2 end = { 0, 0 };

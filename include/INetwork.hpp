@@ -29,13 +29,27 @@ namespace Network {
          *
          * @param _socket variable where you listening
          */
-        virtual void receive(boost::asio::ip::udp::socket &_socket) = 0;
+        virtual void asyncReceive(boost::asio::ip::udp::socket &_socket) = 0;
         /**
          * @brief function to call when you want to send informations
          *
          * @param _socket variable where you send
+         * @param str string for message to send
          */
-        virtual void send(boost::asio::ip::udp::socket &_socket, std::string str) = 0;
+        virtual void asyncSend(boost::asio::ip::udp::socket &_socket, std::string str) = 0;
+        /**
+         * @brief function to call when you want to receive informations
+         *
+         * @param _socket variable where you listening
+         */
+        virtual void receive(boost::asio::ip::tcp::socket &_socket) = 0;
+        /**
+         * @brief function to call when you want to send informations
+         *
+         * @param _socket variable where you send
+         * @param str string for message to send
+         */
+        virtual void send(boost::asio::ip::tcp::socket &_socket, std::string str) = 0;
         /**
          * @brief function called after receiving data
          *

@@ -32,6 +32,7 @@ target_link_libraries(ANetwork PRIVATE
     Boost::thread
 )
 
+add_subdirectory(Assets)
 add_subdirectory(client)
 add_subdirectory(ECS)
 add_subdirectory(GameEngine)
