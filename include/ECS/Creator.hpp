@@ -66,6 +66,15 @@ namespace ECS {
          */
         static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
         /**
+         * @brief Create a enemy Cancer object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createCancer(Containers::Registry &registry, size_t id, int x, int y);
+        /**
          * @brief Create a Ally object
          *
          * @param registry registre entity
