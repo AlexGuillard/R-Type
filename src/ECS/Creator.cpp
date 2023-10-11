@@ -5,6 +5,7 @@
 ** Creator
 */
 
+#include <cstdint>
 #include "ECS/Creator.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
@@ -64,7 +65,7 @@ namespace ECS {
     void Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
     {
         const Vector2 nbFrameInSpriteSheet = Vector2(16, 1);
-        const u_char nbFrameInAnimation = 8;
+        const uint8_t nbFrameInAnimation = 8;
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, 1, 1, 20, 24, id);
         registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
