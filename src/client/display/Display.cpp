@@ -24,8 +24,21 @@ Screen::Display::Display(GameState state) : _gameState(state)
     InitWindow(0, 0, "R-Type");
     const int fps = 60;
 
-    this->toggleFullScreen();
+    //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
+    // We will remove this when the game will be finished or for presentation
+    this->resizeWindow(720, 480);
+    // this->toggleFullScreen();
     SetTargetFPS(fps);
+}
+
+Screen::Display::~Display()
+{
+    Screen::Display::camera.zoom = 1;
+    BeginDrawing();
+    BeginMode2D(Screen::Display::camera);
+    EndMode2D();
+    EndDrawing();
+    CloseWindow();
 }
 
 bool Screen::Display::isOpen()
@@ -305,6 +318,7 @@ void Screen::Display::drawMenu()
 void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 {
     engine.run();
+
 }
 
 

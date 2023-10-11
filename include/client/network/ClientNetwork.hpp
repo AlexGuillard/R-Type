@@ -10,8 +10,10 @@
 #include "ANetwork.hpp"
 #include <iostream>
 #include "Error.hpp"
+#include <map>
+#include <functional>
 #include <memory>
-#define MAX_SIZE_BUFFER 1024
+#include <queue>
 
 namespace Network {
 
@@ -65,11 +67,6 @@ namespace Network {
          */
         void sendHello();
         /**
-         * @brief Start the main loop of the client
-         *
-         */
-        void start();
-        /**
          * @brief This function is used to send a movement from the player to the server
          *
          * @param movement
@@ -88,6 +85,34 @@ namespace Network {
          * @param port
          */
         bool connect(const std::string &host, int port);
+        /**
+         * @brief Is contained on the map of funciton to use the pointer on function
+         *
+         */
+        using ResponseHandler = std::function<void (const std::string&)>;
+        /**
+         * @brief Initialize the function to use the pointer to function
+         *
+         */
+        void initializeResponsehandler();
+        /**
+         * @brief Handle the Connection from server
+         *
+         * @param message message from the server
+         */
+        void handleConnection(const std::string &message);
+        /**
+         * @brief Handle the Login from server
+         *
+         * @param message message from the server
+         */
+        void handleLogin(const std::string &message);
+        /**
+         * @brief Handle the Logout from server
+         *
+         * @param message message from the server
+         */
+        void handleLogout(const std::string &message);
 
         /**
          * @brief Get the Instance object
@@ -104,23 +129,6 @@ namespace Network {
          * @return ClientNetwork&
          */
         static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
-
-    private:
-        //Port of the server
-        int _port;
-        //Host of the server
-        std::string _host;
-        //Used to manage asynchrous services
-        boost::asio::io_service _ioService;
-        //Socket of the clientok but
-        boost::asio::ip::udp::socket _socket;
-        //Data received
-        std::string _dataReceived;
-        //Buffer used to receive data
-        std::array<char, MAX_SIZE_BUFFER> _buffer;
-        //Stock class for SingleTon
-        static std::unique_ptr<ClientNetwork> instance;
-
         /**
          * @brief Construct a new Client Network object with parameters
          *
@@ -134,6 +142,50 @@ namespace Network {
          *
          */
         ClientNetwork();
+        /**
+         * @brief Function to put at the end of the loop to handle the network, it make a reset and poll for the ioService
+         *
+         */
+        void handleNetwork();
+        /**
+         * @brief stop the ioService
+         *
+         */
+        void stopIOService();
+        /**
+         * @brief Get the Socket object
+         *
+         * @return const boost::asio::ip::udp::socket&
+         */
+        boost::asio::ip::udp::socket& getSocket();
+        /**
+         * @brief Enqueue a received message
+         *
+         * @param message
+         */
+        void enqueueReceivedMessage(const std::string& message);
+
+    private:
+        //Port of the server
+        int _port;
+        //Host of the server
+        std::string _host;
+        //Used to manage asynchrous services
+        boost::asio::io_service _ioService;
+        //Socket of the client
+        boost::asio::ip::udp::socket _socket;
+        //Data received
+        std::string _dataReceived;
+        //Map to use the pointer on function
+        std::map<std::string, ResponseHandler> _responseHandlers;
+        //Stock class for SingleTon
+        static std::unique_ptr<ClientNetwork> _instance;
+        //Message to send
+        std::queue<std::string> _messagesToSend;
+        //Mutex to lock the queue
+        std::mutex _mutex;
+        //Queue of received messages
+        std::queue<std::string> _receivedMessages;
     };
 }
 

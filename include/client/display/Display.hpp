@@ -39,7 +39,11 @@ namespace Screen {
          * @param state set the starting state of the game
          */
         Display(GameState state = GameState::MENU);
-
+        /**
+         * @brief Destroy the Display object
+         *
+         */
+        ~Display();
         /**
          * @returns True if the window is open
          */
