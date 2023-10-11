@@ -9,7 +9,6 @@
 #include "client/display/Display.hpp"
 #include "client/network.hpp"
 #include "GameEngine/GameEngine.hpp"
-#include "client/network/ClientNetwork.hpp"
 
 static void menuLoop(Screen::Display &window)
 {
@@ -34,7 +33,6 @@ int rtype_client()
     Screen::Display window;
     GameEngine::GameEngine engine = GameEngine::createEngine();
     while (Screen::Display::isOpen()) {
-        Network::ClientNetwork::getInstance().receive(Network::ClientNetwork::getInstance().getSocket());
         window.beginUpdate();
         switch (window.getGameState()) {
         case Screen::Display::GameState::MENU:
@@ -45,9 +43,7 @@ int rtype_client()
             break;
         }
         Screen::Display::endUpdate();
-        Network::ClientNetwork::getInstance().handleNetwork();
     }
-    Network::ClientNetwork::getInstance().stopIOService();
     Network::stopClientNetwork();
     return 0;
 }

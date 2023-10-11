@@ -24,6 +24,8 @@ namespace Network {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
+        clientNetwork.receive(Network::ClientNetwork::getInstance().getSocket());
+        clientNetwork.handleNetwork();
         while (GameEngine::Events::poll(type)) {
             switch (type) {
             case GameEngine::Events::Type::PLAYER_UP:
@@ -52,6 +54,6 @@ namespace Network {
 
     void stopClientNetwork()
     {
-
+        Network::ClientNetwork::getInstance().stopIOService();
     }
 }
