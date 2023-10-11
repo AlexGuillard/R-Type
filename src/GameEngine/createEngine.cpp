@@ -22,7 +22,10 @@
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
+#include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
@@ -32,6 +35,8 @@
 #include "ECS/Systems/damage.hpp"
 #include "ECS/Systems/sinMovement.hpp"
 #include "ECS/Systems/target.hpp"
+#include "ECS/Systems/walkingAI.hpp"
+#include "ECS/Systems/gravity.hpp"
 #include "ECS/Systems/solid.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
@@ -56,8 +61,12 @@ namespace GameEngine {
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::TeamComponent>();
         registry.registerComponent<Components::SinMovementComponent>();
+        registry.registerComponent<Components::InRangeComponent>();
+        registry.registerComponent<Components::WalkingAIComponent>();
         registry.registerComponent<Components::TargetComponent>();
         registry.registerComponent<Components::SolidComponent>();
+        registry.registerComponent<Components::GravityComponent>();
+        registry.registerComponent<Components::TargetComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
@@ -66,7 +75,9 @@ namespace GameEngine {
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
+        registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
+        registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
