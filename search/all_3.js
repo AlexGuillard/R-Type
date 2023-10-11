@@ -2,7 +2,7 @@ var searchData=
 [
   ['camerashakeintensity_25',['CameraShakeIntensity',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9',1,'Screen::Display']]],
   ['center_26',['center',['../classScreen_1_1Display.html#a55e18cc61bcb1f66c89422df911293e9',1,'Screen::Display']]],
-  ['clientnetwork_27',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html',1,'Network']]],
+  ['clientnetwork_27',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c',1,'Network::ClientNetwork::ClientNetwork(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
   ['clientnetwork_2ehpp_28',['ClientNetwork.hpp',['../ClientNetwork_8hpp.html',1,'']]],
   ['collidablecomponent_29',['CollidableComponent',['../structECS_1_1Components_1_1CollidableComponent.html',1,'ECS::Components']]],
   ['collidablecomponent_2ehpp_30',['CollidableComponent.hpp',['../CollidableComponent_8hpp.html',1,'']]],
