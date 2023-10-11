@@ -11,7 +11,6 @@
 
 #include "ECS/Entity.hpp"
 #include "ECS/Containers/Registry.hpp"
-#include <raylib.h>
 
 namespace ECS {
 
