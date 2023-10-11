@@ -6,6 +6,7 @@
 */
 
 #include <raylib.h>
+#include <cstdint>
 
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Components/PositionComponent.hpp"
@@ -14,7 +15,7 @@
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
-#include "client/network/ClientNetwork.hpp"
+#include "GameEngine/Events.hpp"
 
 namespace ECS::Systems {
 
@@ -53,14 +54,11 @@ namespace ECS::Systems {
     {
         const float acceleration = maxSpeed / nbFrameToMaxSpeed;
         const float deceleration = maxSpeed / nbFrameToStop;
-
-        Network::ClientNetwork& clientNetwork = Network::ClientNetwork::getInstance();
-
         if (IsKeyDown(controllable.up)) {
-            clientNetwork.sendMovement(Network::Movement::UP);
+            GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP);
             velocity.y -= 1 * acceleration;
         } else if (IsKeyDown(controllable.down)) {
-            clientNetwork.sendMovement(Network::Movement::DOWN);
+            GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN);
             velocity.y += 1 * acceleration;
         } else {
             if (abs(velocity.y) < deceleration) {
@@ -70,10 +68,10 @@ namespace ECS::Systems {
             }
         }
         if (IsKeyDown(controllable.left)) {
-            clientNetwork.sendMovement(Network::Movement::LEFT);
+            GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT);
             velocity.x -= 1 * acceleration;
         } else if (IsKeyDown(controllable.right)) {
-            clientNetwork.sendMovement(Network::Movement::RIGHT);
+            GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
             velocity.x += 1 * acceleration;
         } else {
             if (abs(velocity.x) < deceleration) {
@@ -91,18 +89,15 @@ namespace ECS::Systems {
         ECS::Components::ControllableComponent &controllable,
         ECS::Components::PositionComponent &position)
     {
-
-        Network::ClientNetwork& clientNetwork = Network::ClientNetwork::getInstance();
-
         if (IsKeyDown(controllable.fire)) {
-            clientNetwork.sendAction(Network::Action::SHOOT);
+            GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT);
             controllable.timeFireButtonHeld += GetFrameTime();
             return;
         }
         if (controllable.timeFireButtonHeld > 0) {
-            u_char strength = clamp(
-                static_cast<u_char>(controllable.timeFireButtonHeld / Systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
-                static_cast<u_char>(1),
+            uint8_t strength = clamp(
+                static_cast<uint8_t>(controllable.timeFireButtonHeld / Systems::timeNeededForWaveBeam * Components::maxWaveBeamStrength),
+                static_cast<uint8_t>(1),
                 Components::maxWaveBeamStrength
             );
             auto missileEntity = registry.spawnEntity();
@@ -135,13 +130,8 @@ namespace ECS::Systems {
         ECS::Containers::Registry &registry,
         ECS::Components::ControllableComponent &controllable)
     {
-
-        Network::ClientNetwork& clientNetwork = Network::ClientNetwork::getInstance();
-
-        if (!IsKeyPressed(controllable.force)) {
-            return;
-        }
-        clientNetwork.sendAction(Network::Action::DROP);
+        if (!IsKeyPressed(controllable.force)) { return; }
+        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_FORCE);
         // TODO: add force implementation here
     }
 

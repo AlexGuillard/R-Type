@@ -160,15 +160,19 @@ Network::ClientNetwork &Network::ClientNetwork::getInstance()
     if (_instance == nullptr) {
         _instance.reset(new ClientNetwork());
     }
-    return *_instance;
+    return *instance;
 }
 
 Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_service &io_service, const std::string &host, int port)
 {
-    if (_instance == nullptr) {
-        _instance.reset(new ClientNetwork(io_service, host, port));
+    if (instance == nullptr) {
+        instance.reset(new ClientNetwork(io_service, host, port));
     }
-    return *_instance;
+    return *instance;
+}
+
+void Network::ClientNetwork::enqueueReceivedMessage(const std::string& message) {
+    _receivedMessages.push(message);
 }
 
 void Network::ClientNetwork::handleNetwork()

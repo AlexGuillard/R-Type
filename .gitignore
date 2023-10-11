@@ -40,4 +40,12 @@ r-type_server
 CMakeCache.txt
 a.out
 .cache
-Debug
+Debug/
+Release/
+.vs/
+*.ilk
+*.pdb
+*~
+
+# generated assets
+**/generated*.*pp

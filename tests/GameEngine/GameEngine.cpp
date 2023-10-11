@@ -13,66 +13,70 @@
 
 TEST(GameEngineT, creatingRegistry)
 {
-	GameEngine::GameEngine engine;
+    GameEngine::GameEngine engine;
 
-	engine.createRegistry("test");
-	ASSERT_NO_THROW(engine["test"]);
+    engine.createRegistry("test");
+    ASSERT_NO_THROW(engine["test"]);
 }
 
 TEST(GameEngineT, gettingNonExistingRegistry)
 {
-	GameEngine::GameEngine engine;
+    GameEngine::GameEngine engine;
 
-	ASSERT_THROW(engine["test"], Errors::RegistryNotFound);
+    ASSERT_THROW(engine["test"], Errors::RegistryNotFound);
 }
 
 TEST(GameEngineT, RegistriesAreEditable)
 {
-	GameEngine::GameEngine engine;
+    GameEngine::GameEngine engine;
 
-	engine.createRegistry("test");
-	auto &registry = engine["test"];
-	registry.spawnEntity();
-	ASSERT_EQ(registry.size(), 1);
+    engine.createRegistry("test");
+    auto &registry = engine["test"];
+    registry.spawnEntity();
+    ASSERT_EQ(registry.size(), 1);
 }
 
 struct TestComponent {
-	int value = 0;
-	bool value2 = false;
+    int value = 0;
+    bool value2 = false;
 };
 
 void testSystem(
-	ECS::Containers::Registry &registry,
-	ECS::Containers::SparseArray<TestComponent> &components)
+    ECS::Containers::Registry &registry,
+    ECS::Containers::SparseArray<TestComponent> &components)
 {
-	for (auto &component : components) {
-		component->value++;
-	}
+    for (auto &component : components) {
+        component->value++;
+    }
 }
 
 void testSystem2(
-	ECS::Containers::Registry &registry,
-	ECS::Containers::SparseArray<TestComponent> &components)
+    ECS::Containers::Registry &registry,
+    ECS::Containers::SparseArray<TestComponent> &components)
 {
-	for (auto &component : components) {
-		component->value2 = true;
-	}
+    for (auto &component : components) {
+        ASSERT_TRUE(component.has_value());
+        component->value2 = true;
+    }
 }
 
 TEST(GameEngineT, RegistriesCanBeRun)
 {
-	GameEngine::GameEngine engine;
+    GameEngine::GameEngine engine;
 
-	engine.createRegistry("test");
-	auto &registry = engine["test"];
-	registry.registerComponent<TestComponent>();
-	registry.addSystem<TestComponent>(testSystem);
-	registry.addSystem<TestComponent>(testSystem2);
-	registry.spawnEntity();
-	auto &component = registry.getComponents<TestComponent>().at(0);
-	ASSERT_EQ(component->value, 0);
-	ASSERT_FALSE(component->value2);
-	engine.run();
-	ASSERT_EQ(component->value, 1);
-	ASSERT_TRUE(component->value2);
+    engine.createRegistry("test");
+    auto &registry = engine["test"];
+    registry.registerComponent<TestComponent>();
+    registry.addSystem<TestComponent>(testSystem);
+    registry.addSystem<TestComponent>(testSystem2);
+    auto entity = registry.spawnEntity();
+    registry.emplaceComponent<TestComponent>(entity);
+    auto &component = registry.getComponents<TestComponent>().at(0);
+    ASSERT_TRUE(component.has_value());
+    ASSERT_EQ(component->value, 0);
+    ASSERT_FALSE(component->value2);
+    engine.run();
+    ASSERT_TRUE(component.has_value());
+    ASSERT_EQ(component->value, 1);
+    ASSERT_TRUE(component->value2);
 }
