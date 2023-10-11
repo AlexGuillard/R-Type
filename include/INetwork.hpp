@@ -28,6 +28,7 @@ namespace Network {
     struct bodyMob {
         int x;
         int y;
+        Enums::Position pos;
     };
 
     struct bodyAlly {
