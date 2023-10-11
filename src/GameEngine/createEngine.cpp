@@ -22,7 +22,7 @@
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
-#include "ECS/Components/InRange.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
 #include "ECS/Components/GravityComponent.hpp"
