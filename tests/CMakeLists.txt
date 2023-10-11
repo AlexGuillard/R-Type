@@ -5,7 +5,9 @@
 
 # add_executable([TEST_NAME] [FILE1.CPP]...)
 # target_include_directories([TEST_NAME] PRIVATE ${CMAKE_SOURCE_DIR}/include)
-# target_link_libraries([TEST_NAME] PRIVATE GTest::GTest
+# target_link_libraries([TEST_NAME] PRIVATE
+# gtest
+# gtest_main
 # [LIBRARY1]?...
 # )
 # add_test([TEST_NAME] [TEST_NAME])

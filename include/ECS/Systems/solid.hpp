@@ -16,6 +16,9 @@
 #include "ECS/Components/VelocityComponent.hpp"
 
 namespace ECS::Systems {
+    /**
+     * @brief Makes every solid entity unpenetrable by other entities
+    */
     void solid(
         Containers::Registry &,
         Containers::SparseArray<Components::SolidComponent> &,
