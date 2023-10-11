@@ -77,9 +77,7 @@ void Network::ServerNetwork::udpConnection()
 
 void Network::ServerNetwork::updateTicks()
 {
-    int timerTicks = 200;
-
-    _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
+    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
             // std::cout << "need to updates ticks\n";
@@ -151,11 +149,14 @@ void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
     if (res == "Hello R-Type server\n" && _clients.size() < 4) {
         actualClient = getActualClient(socket);
         _clients.push_back(actualClient);
-        res = std::to_string(portUdp);
-        send(socket, "200\n");
-        send(socket, res);
+        actualClient = makeHeader(200, _clients.size() - 1);
+        actualClient.append(makeBinaryInt(portUdp));
+        actualClient.append(makeBinaryInt(200));
+        send(socket, actualClient);
     } else {
-        send(socket, "401: Forbidden\n");
+        actualClient = makeHeader(401, -1);
+        actualClient.append(makeBinaryInt(401));
+        send(socket, actualClient);
     }
 }
 
@@ -168,5 +169,14 @@ std::string Network::ServerNetwork::makeHeader(int code, int entityNb)
     res.codeRfc = code;
     res.entity = entityNb;
     std::memcpy(str.data(), &res, sizeof(header));
+    return str;
+}
+
+std::string Network::ServerNetwork::makeBinaryInt(int number)
+{
+    std::string str;
+
+    str.resize(sizeof(int));
+    std::memcpy(str.data(), &number, sizeof(int));
     return str;
 }

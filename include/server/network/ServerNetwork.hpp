@@ -13,6 +13,7 @@
 #include <memory>
 
 #include "ANetwork.hpp"
+#define TICKS_UPDATE 200
 
 namespace Network {
     /**
@@ -121,6 +122,7 @@ namespace Network {
              * @return std::string
              */
             std::string makeHeader(int code, int entityNb);
+            std::string makeBinaryInt(int number);
         private:
     };
 }
