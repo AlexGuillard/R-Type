@@ -8,6 +8,7 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include "enums.hpp"
 #define CONNECTION_NB 81732;
 
 namespace Network {
@@ -22,6 +23,26 @@ namespace Network {
     struct header {
         int codeRfc;
         int entity;
+    };
+
+    struct bodyMob {
+        int x;
+        int y;
+    };
+
+    struct bodyAlly {
+        int x;
+        int y;
+        Enums::PlayerColor color;
+    };
+
+    struct bodyMissile {
+        int x;
+        int y;
+        double velocityX;
+        double velocityY;
+        Enums::TeamGroup team;
+        int strength;
     };
 
     /**
