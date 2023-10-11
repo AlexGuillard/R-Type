@@ -13,6 +13,7 @@
 #include <memory>
 
 #include "ANetwork.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 namespace Network {
     /**
@@ -97,7 +98,7 @@ namespace Network {
         /**
          * @brief Runs the io service of asio
         */
-        void run();
+        void run(GameEngine::GameEngine &engine);
     protected:
         // int for udp port to send when tcp connection
         int portUdp;

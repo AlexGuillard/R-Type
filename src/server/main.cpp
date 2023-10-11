@@ -4,6 +4,8 @@
 ** File description:
 ** main
 */
+
+#include "GameEngine/GameEngine.hpp"
 #include "server/network/ServerNetwork.hpp"
 
 int main(int argc, char **argv)
@@ -11,6 +13,7 @@ int main(int argc, char **argv)
     const int port = 4848;
     const int portUdp = 6084;
     const int error = 84;
+    GameEngine::GameEngine engine = GameEngine::createServerEngine();
 
     try {
         boost::asio::io_service ioService;
@@ -21,7 +24,7 @@ int main(int argc, char **argv)
             } else {
                 network.udpConnection();
             }
-            network.run();
+            network.run(engine);
         }
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

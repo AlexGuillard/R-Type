@@ -156,7 +156,8 @@ bool Network::ServerNetwork::isGameRunning() const
     return this->isGame;
 }
 
-void Network::ServerNetwork::run()
+void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
 {
     _ioService.run();
+    engine.run();
 }
