@@ -8,6 +8,7 @@
 #include <string>
 #include <cstring>
 #include <sys/types.h>
+#include <cstdint>
 
 #include <raylib.h>
 
@@ -18,6 +19,7 @@
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
+#include "Assets/generatedAssets.hpp"
 
 namespace ECS::Systems {
 
@@ -27,10 +29,10 @@ namespace ECS::Systems {
      */
     static Components::DrawableComponent getDrawableForMissile()
     {
-        const u_char nbFrameInSpriteSheet = 6;
+        const uint8_t nbFrameInSpriteSheet = 6;
         const Vector2 missileFramePos = Vector2(2, 0);
         Components::DrawableComponent drawable = {
-                "assets/missiles/missile.png",
+                Assets::AssetsIndex::MISSILE_PNG,
                 Vector2(nbFrameInSpriteSheet, 1), // frameRatio
                 missileFramePos, // start
                 missileFramePos // end
@@ -83,18 +85,18 @@ namespace ECS::Systems {
      * @param strength Number between 1 and 5 that represents the strength of the wave beam
      * @return Components::DrawableComponent
      */
-    static Components::DrawableComponent getDrawableForWaveBeam(u_char strength)
+    static Components::DrawableComponent getDrawableForWaveBeam(uint8_t strength)
     {
-        const u_char nbFrameInSpriteSheet = 6;
-        const Vector2 waveBeamFramePos = Vector2(3, 0);
-        char path[Components::maxTexturePathSize] = "assets/missiles/waveBeam-out";
+        const uint8_t nbFrameInSpriteSheet = 2;
+        const Vector2 waveBeamFrameStart = Vector2(0, 0);
+        const Vector2 waveBeamFrameEnd = Vector2(1, 0);
+        const Assets::AssetsIndex waveBeams[] = { Assets::AssetsIndex::WAVEBEAM_OUT1_PNG, Assets::AssetsIndex::WAVEBEAM_OUT2_PNG, Assets::AssetsIndex::WAVEBEAM_OUT3_PNG, Assets::AssetsIndex::WAVEBEAM_OUT4_PNG, Assets::AssetsIndex::WAVEBEAM_OUT5_PNG };
         Components::DrawableComponent drawable = {
-                "assets/missiles/waveBeam-out",
-                Vector2(nbFrameInSpriteSheet, 1), // frameRatio
-                waveBeamFramePos, // start
-                waveBeamFramePos // end
+                .spriteSheetIndex = waveBeams[strength - 1],
+                .frameRatio = Vector2(nbFrameInSpriteSheet, 1),
+                .start = waveBeamFrameStart,
+                .end = waveBeamFrameEnd
         };
-        std::strcat(drawable.texture, (std::to_string(strength) + ".png").c_str());
         return drawable;
     }
 

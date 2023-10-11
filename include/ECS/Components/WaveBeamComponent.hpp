@@ -9,9 +9,10 @@
 
 #include <cstddef>
 #include <sys/types.h>
+#include <cstdint>
 
 namespace ECS::Components {
-    const u_char maxWaveBeamStrength = 5;
+    const uint8_t maxWaveBeamStrength = 5;
     const float waveBeamSpeed = 500;
     const std::size_t waveBeamBaseDamage = 2;
     /**
@@ -23,6 +24,6 @@ namespace ECS::Components {
         float x;
         float y;
         std::size_t damage = waveBeamBaseDamage;
-        u_char strength = 1;
+        uint8_t strength = 1;
     };
 }; // namespace ECS::Components

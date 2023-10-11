@@ -5,13 +5,9 @@
 ** main
 */
 
-#include "client/display/Display.hpp"
-#include "GameEngine/GameEngine.hpp"
+#include "client/r-type_client.hpp"
 
 int main()
 {
-    Screen::Display window;
-    // Screen::Display window(Screen::Display::GameState::GAME); // Uncomment this line to start the game directly
-    GameEngine::GameEngine engine = GameEngine::createEngine();
-    window.displayWindow(engine);
+    return rtype_client();
 }

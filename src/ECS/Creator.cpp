@@ -18,6 +18,7 @@
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "Assets/generatedAssets.hpp"
 
 namespace ECS {
 
@@ -71,7 +72,7 @@ namespace ECS {
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
         Components::DrawableComponent drawableComponent = {
-            "assets/r-typesheet5.gif",
+            Assets::AssetsIndex::R_TYPESHEET5_PNG,
             nbFrameInSpriteSheet, // frameRatio
             Vector2(0, 0), // start
             Vector2(nbFrameInAnimation, 0), // end

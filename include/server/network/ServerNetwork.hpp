@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <algorithm>
+#include <thread>
+#include <memory>
 
 #include "ANetwork.hpp"
 
@@ -19,8 +21,26 @@ namespace Network {
      */
     class ServerNetwork : public ANetwork {
         public:
-            ServerNetwork(boost::asio::io_service& io_service, int port);
+            ServerNetwork(boost::asio::io_service& io_service, int portTcp, int portUdp);
             ~ServerNetwork();
+            /**
+             * @brief used when making the connections from the clients
+             *
+             */
+            void tcpConnection();
+            /**
+             * @brief used when going into the game
+             *
+             */
+            void udpConnection();
+            /**
+             * @brief used to wait read of tcp socket
+             *
+             * @param socket client socket that send data
+             */
+            void waitRequest(boost::asio::ip::tcp::socket &socket);
+            // handler for asynd accept in tcp connection
+            void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
              * @brief function called after receiving data
              *
@@ -59,16 +79,27 @@ namespace Network {
              */
             std::string getActualClient() const;
             /**
+             * @brief Get the Actual Client id
+             *
+             * @param socket tcp socket of client
+             * @return std::string
+             */
+            std::string getActualClient(boost::asio::ip::tcp::socket &socket) const;
+            /**
              * @brief see if client have a good connection on the server, the server repond then with 200 or 401
              *
              */
-            void connection();
+            void connection(boost::asio::ip::tcp::socket &socket);
         protected:
+            // int for udp port to send when tcp connection
+            int portUdp;
+            // store the io_service
+            boost::asio::io_service &_ioService;
             /**
              * @brief variable where the client is
              *
              */
-            boost::asio::ip::udp::socket _socket;
+            boost::asio::ip::udp::socket _asyncSocket;
             /**
              * @brief hmap for the list of client on the server
              *
@@ -76,6 +107,12 @@ namespace Network {
             std::vector<std::string> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
+            // boolean to change from tcp to udp and vice versa
+            bool isGame = false;
+            // list of sockets for potential clients
+            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
+            // necessary for acceptation tcp clients
+            boost::asio::ip::tcp::acceptor _acceptor;
         private:
     };
 }
