@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['keypressededmenu_170',['keyPressededMenu',['../classScreen_1_1Display.html#a39c0c8aef55613aec1956961691f6700',1,'Screen::Display']]],
-  ['killentity_171',['killEntity',['../classECS_1_1Containers_1_1Registry.html#a9f5d1c1593619e0bdf57f6b70481c271',1,'ECS::Containers::Registry']]]
+  ['keypressededmenu_171',['keyPressededMenu',['../classScreen_1_1Display.html#a39c0c8aef55613aec1956961691f6700',1,'Screen::Display']]],
+  ['killentity_172',['killEntity',['../classECS_1_1Containers_1_1Registry.html#a9f5d1c1593619e0bdf57f6b70481c271',1,'ECS::Containers::Registry']]]
 ];
