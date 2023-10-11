@@ -6,6 +6,7 @@
 */
 
 #include "server/network/ServerNetwork.hpp"
+#include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)), _timer(io_service), portUdp(portUdp)
@@ -149,34 +150,13 @@ void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
     if (res == "Hello R-Type server\n" && _clients.size() < 4) {
         actualClient = getActualClient(socket);
         _clients.push_back(actualClient);
-        actualClient = makeHeader(200, _clients.size() - 1);
-        actualClient.append(makeBinaryInt(portUdp));
-        actualClient.append(makeBinaryInt(200));
+        actualClient = Network::Send::makeHeader(200, _clients.size() - 1);
+        actualClient.append(Network::Send::makeBinaryInt(_clients.size()));
+        actualClient.append(Network::Send::makeBinaryInt(200));
         send(socket, actualClient);
     } else {
-        actualClient = makeHeader(401, -1);
-        actualClient.append(makeBinaryInt(401));
+        actualClient = Network::Send::makeHeader(401, -1);
+        actualClient.append(Network::Send::makeBinaryInt(401));
         send(socket, actualClient);
     }
-}
-
-std::string Network::ServerNetwork::makeHeader(int code, int entityNb)
-{
-    header res;
-    std::string str;
-
-    str.resize(sizeof(header));
-    res.codeRfc = code;
-    res.entity = entityNb;
-    std::memcpy(str.data(), &res, sizeof(header));
-    return str;
-}
-
-std::string Network::ServerNetwork::makeBinaryInt(int number)
-{
-    std::string str;
-
-    str.resize(sizeof(int));
-    std::memcpy(str.data(), &number, sizeof(int));
-    return str;
 }

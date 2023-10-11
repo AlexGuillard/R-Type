@@ -5,7 +5,7 @@
 ** sendCode
 */
 
-#include "sendCode.hpp"
+#include "server/network/sendCode.hpp"
 
 std::string Network::Send::makeHeader(int code, int entityNb)
 {

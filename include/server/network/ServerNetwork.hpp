@@ -114,15 +114,6 @@ namespace Network {
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
-            /**
-             * @brief function to make header for message
-             *
-             * @param code rfc code in header
-             * @param entityNb entity nb in header
-             * @return std::string
-             */
-            std::string makeHeader(int code, int entityNb);
-            std::string makeBinaryInt(int number);
         private:
     };
 }
