@@ -75,7 +75,7 @@ namespace ECS::Systems {
             registry.addComponent<Components::DrawableComponent>(
                 missileEntity, std::move(drawable)
             );
-            auto entity = Containers::Registry::entityFromIndex(entityId);
+            auto entity = registry.entityFromIndex(entityId);
             registry.removeComponent<Components::MissileComponent>(entity);
         }
     }
@@ -131,7 +131,7 @@ namespace ECS::Systems {
             registry.addComponent<Components::DrawableComponent>(
                 waveBeamEntity, std::move(drawable)
             );
-            auto entity = Containers::Registry::entityFromIndex(entityId);
+            auto entity = registry.entityFromIndex(entityId);
             registry.removeComponent<Components::WaveBeamComponent>(entity);
         }
     }

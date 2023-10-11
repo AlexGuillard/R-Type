@@ -104,8 +104,9 @@ namespace ECS::Containers {
             return Entity(entityId);
         }
 
-        static Entity entityFromIndex(std::size_t idx)
+        Entity entityFromIndex(std::size_t idx)
         {
+            m_nbEntities = std::max(m_nbEntities, idx + 1);
             return Entity(idx);
         }
         void killEntity(Entity const &entity)

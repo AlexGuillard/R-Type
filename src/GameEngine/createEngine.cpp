@@ -28,6 +28,7 @@
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
+#include "ECS/Creator.hpp"
 #include "ECS/Systems/damage.hpp"
 #include "ECS/Systems/sinMovement.hpp"
 #include "ECS/Systems/target.hpp"
