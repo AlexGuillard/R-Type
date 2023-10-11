@@ -9,6 +9,7 @@
 
 #include <cstddef>
 
+#include "enums.hpp"
 #include "ECS/Entity.hpp"
 #include "ECS/Containers/Registry.hpp"
 
@@ -58,12 +59,22 @@ namespace ECS {
         /**
          * @brief Create a Enemy Basic object
          *
-         * @param registry
-         * @param id
-         * @param x
-         * @param y
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
          */
         static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
+        /**
+         * @brief Create a Ally object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         * @param color color of the ship
+         */
+        static void createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
     protected:
     private:
     };
