@@ -8,6 +8,7 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#define CONNECTION_NB 81732;
 
 namespace Network {
     /**
@@ -17,6 +18,12 @@ namespace Network {
     enum Size {
         MAX_SIZE_BUFF = 1024,
     };
+
+    struct header {
+        int codeRfc;
+        int entity;
+    };
+
     /**
      * @brief interface of the network
      *
