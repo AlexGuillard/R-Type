@@ -7,7 +7,7 @@
 
 #include "server/network/ServerNetwork.hpp"
 
-Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
+Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)), _timer(io_service), portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
@@ -16,14 +16,6 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
 
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
-    }
-    while (1) {
-        if (isGame == false) {
-            tcpConnection();
-        } else {
-            udpConnection();
-        }
-        _ioService.run();
     }
 }
 
@@ -52,10 +44,10 @@ void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
             waitRequest(socket);
             // Handle the error, possibly by closing the socket
         }
-    });
+        });
 }
 
-void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket)
+void Network::ServerNetwork::acceptHandler(const boost::system::error_code &error, boost::asio::ip::tcp::socket socket)
 {
     static int nb = 0;
 
@@ -80,14 +72,14 @@ void Network::ServerNetwork::updateTicks()
     int timerTicks = 200;
 
     _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
-    _timer.async_wait([this](const boost::system::error_code& error) {
+    _timer.async_wait([this](const boost::system::error_code &error) {
         if (!error) {
             // std::cout << "need to updates ticks\n";
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
         updateTicks();
-    });
+        });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -95,7 +87,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     std::string actualClient;
     const size_t maxNbClients = 5;
 
-    if ( !error && recvd_bytes > 0 ) {
+    if (!error && recvd_bytes > 0) {
         if (findClient(getActualClient()) != "") {
             std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
@@ -157,4 +149,14 @@ void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
     } else {
         send(socket, "401: Forbidden\n");
     }
+}
+
+bool Network::ServerNetwork::isGameRunning() const
+{
+    return this->isGame;
+}
+
+void Network::ServerNetwork::run()
+{
+    _ioService.run();
 }

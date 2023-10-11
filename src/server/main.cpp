@@ -15,7 +15,15 @@ int main(int argc, char **argv)
     try {
         boost::asio::io_service ioService;
         Network::ServerNetwork network(ioService, port, portUdp);
-    } catch(const std::exception &e) {
+        while (true) {
+            if (!network.isGameRunning()) {
+                network.tcpConnection();
+            } else {
+                network.udpConnection();
+            }
+            network.run();
+        }
+    } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
         return error;
     }
