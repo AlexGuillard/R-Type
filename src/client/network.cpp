@@ -13,8 +13,9 @@ namespace Network {
 
     bool startClientNetwork(const std::string &host, int port)
     {
-        //TODO: handle basic error (empty hostname, empty port, invalid port (ex: chocolat instead of 8080))
+        //TODO:
         //connect return a bool to let us know if the connection was successful or not
+        std::cout << "Connecting to " << host << ":" << port << std::endl;
         return ClientNetwork::getInstance().connect(host, port);
     }
 

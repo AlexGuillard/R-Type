@@ -84,14 +84,10 @@ void Network::ServerNetwork::connection()
 {
     std::string res = _data.data();
 
-    std::cout << "Message from client" << res << std::endl;
-
     if (res == "Hello R-Type server\n" && _clients.size() < 5) {
         addClient();
         send(_socket, "200\n");
-        std::cout << "200 envoyé" << std::endl;
     } else {
         send(_socket, "401: Forbidden\n");
-        std::cout << "401 envoyé" << std::endl;
     }
 }

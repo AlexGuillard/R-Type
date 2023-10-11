@@ -46,7 +46,6 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
     }
 }
 
-
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
     if (!error && recvd_bytes > 0) {
@@ -108,7 +107,7 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
         boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
         _endpoint = serverEndpoint;
         _socket.open(_endpoint.protocol());
-
+        sendHello();
     }
 
     catch (std::exception &e) {
@@ -160,15 +159,15 @@ Network::ClientNetwork &Network::ClientNetwork::getInstance()
     if (_instance == nullptr) {
         _instance.reset(new ClientNetwork());
     }
-    return *instance;
+    return *_instance;
 }
 
 Network::ClientNetwork &Network::ClientNetwork::getInstance(boost::asio::io_service &io_service, const std::string &host, int port)
 {
-    if (instance == nullptr) {
-        instance.reset(new ClientNetwork(io_service, host, port));
+    if (_instance == nullptr) {
+        _instance.reset(new ClientNetwork(io_service, host, port));
     }
-    return *instance;
+    return *_instance;
 }
 
 void Network::ClientNetwork::enqueueReceivedMessage(const std::string& message) {
@@ -187,8 +186,4 @@ void Network::ClientNetwork::stopIOService() {
 
 boost::asio::ip::udp::socket& Network::ClientNetwork::getSocket() {
     return _socket;
-}
-
-void Network::ClientNetwork::enqueueReceivedMessage(const std::string& message) {
-    _receivedMessages.push(message);
 }
