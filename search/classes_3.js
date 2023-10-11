@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['entity_277',['Entity',['../classECS_1_1Entity.html',1,'ECS']]],
-  ['error_278',['Error',['../classNetwork_1_1Error.html',1,'Network']]]
+  ['damagecomponent_297',['DamageComponent',['../structECS_1_1Components_1_1DamageComponent.html',1,'ECS::Components']]],
+  ['display_298',['Display',['../classScreen_1_1Display.html',1,'Screen']]],
+  ['drawablecomponent_299',['DrawableComponent',['../structECS_1_1Components_1_1DrawableComponent.html',1,'ECS::Components']]]
 ];

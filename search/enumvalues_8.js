@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shoot_544',['SHOOT',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2',1,'Network']]]
+  ['purple_5fcolor_579',['PURPLE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ae9acca2d6222b6c7b6e23f78473d45cc',1,'Enums']]]
 ];

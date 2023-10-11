@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gamelogic_279',['GameLogic',['../classGame_1_1GameLogic.html',1,'Game']]],
-  ['gravitycomponent_280',['GravityComponent',['../structECS_1_1Components_1_1GravityComponent.html',1,'ECS::Components']]]
+  ['entity_300',['Entity',['../classECS_1_1Entity.html',1,'ECS']]],
+  ['error_301',['Error',['../classNetwork_1_1Error.html',1,'Network']]]
 ];

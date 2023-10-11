@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['max_5fsize_5fbuff_540',['MAX_SIZE_BUFF',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07',1,'Network']]],
-  ['menu_541',['MENU',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf',1,'Screen::Display']]]
+  ['left_575',['LEFT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a684d325a7303f52e64011467ff5c5758',1,'Network']]],
+  ['lime_5fcolor_576',['LIME_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ab0cfff57bcf7d2576164aed380d07a0b',1,'Enums']]]
 ];

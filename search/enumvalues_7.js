@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['right_542',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]],
-  ['rumble_543',['RUMBLE',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9a8704ee6755aa31b8b12c493a816757fb',1,'Screen::Display']]]
+  ['max_5fsize_5fbuff_577',['MAX_SIZE_BUFF',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94a96ef1e0bb445fb88232bc7eda0415c07',1,'Network']]],
+  ['menu_578',['MENU',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf',1,'Screen::Display']]]
 ];
