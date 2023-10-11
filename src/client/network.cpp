@@ -24,7 +24,7 @@ namespace Network {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        clientNetwork.receive(Network::ClientNetwork::getInstance().getSocket());
+        clientNetwork.asyncReceive(Network::ClientNetwork::getInstance().getSocket());
         clientNetwork.handleNetwork();
         while (GameEngine::Events::poll(type)) {
             switch (type) {
