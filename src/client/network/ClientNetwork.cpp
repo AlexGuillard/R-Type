@@ -7,7 +7,7 @@
 
 #include "client/network/ClientNetwork.hpp"
 
-Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port) : _port(port), _host(host), _socket(io_service)
+Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port) : _port(port), _host(host), _socket(io_service), _tcpSocket(io_service)
 {
     boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
     _endpoint = endpoint;
@@ -17,7 +17,7 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
     sendHello();
 }
 
-Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
+Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService), _tcpSocket(_ioService)
 {
     initializeResponsehandler();
 }
@@ -103,19 +103,25 @@ void Network::ClientNetwork::sendAction(Action action)
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
-    try {
-        boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
-        _endpoint = serverEndpoint;
-        _socket.open(_endpoint.protocol());
-        sendHello();
-    }
+    if (connectTCP(host, port)) {
+    } else {
+        try {
+            boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
+            _endpoint = serverEndpoint;
+            _socket.open(_endpoint.protocol());
+            sendHello();
+        }
 
-    catch (std::exception &e) {
-    	std::cerr << "Error connecting to server: " <<e.what() << std::endl;
-        return (false);
+        catch (std::exception &e) {
+        	std::cerr << "Error connecting to server: " <<e.what() << std::endl;
+            return (false);
+        }
+        return (true);
     }
-
-    return (true);
+    // else {
+    //     std::cout << "Error connecting to server by TCP" << std::endl;
+    //     return (false);
+    // }
 }
 
 void Network::ClientNetwork::initializeResponsehandler()
@@ -184,6 +190,27 @@ void Network::ClientNetwork::stopIOService() {
     _ioService.stop();
 }
 
-boost::asio::ip::udp::socket& Network::ClientNetwork::getSocket() {
+boost::asio::ip::udp::socket& Network::ClientNetwork::getUDPSocket() {
     return _socket;
+}
+
+boost::asio::ip::tcp::socket& Network::ClientNetwork::getTCPSocket() {
+    return _tcpSocket;
+}
+
+bool Network::ClientNetwork::connectTCP(const std::string &host, int port)
+{
+    try {
+        boost::asio::ip::tcp::resolver resolver(_ioService);
+        boost::asio::ip::tcp::resolver::query query(host, std::to_string(port));
+        boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
+        boost::asio::connect(_tcpSocket, endpoint_iterator);
+    }
+
+    catch (std::exception &e) {
+        std::cerr << "Error connecting to TCP server: " << e.what() << std::endl;
+        return (false);
+    }
+
+    return (true);
 }

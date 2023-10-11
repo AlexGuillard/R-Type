@@ -157,13 +157,26 @@ namespace Network {
          *
          * @return const boost::asio::ip::udp::socket&
          */
-        boost::asio::ip::udp::socket& getSocket();
+        boost::asio::ip::udp::socket& getUDPSocket();
         /**
          * @brief Enqueue a received message
          *
          * @param message
          */
         void enqueueReceivedMessage(const std::string& message);
+        /**
+         * @brief Establish a TCP connection
+         *
+         * @return true
+         * @return false
+         */
+        bool connectTCP(const std::string &host, int port);
+        /**
+         * @brief Get the TCP Socket object
+         *
+         * @return boost::asio::ip::tcp::socket&
+         */
+        boost::asio::ip::tcp::socket& getTCPSocket();
 
     private:
         //Port of the server
@@ -186,6 +199,8 @@ namespace Network {
         std::mutex _mutex;
         //Queue of received messages
         std::queue<std::string> _receivedMessages;
+        //Socket of the tcp
+        boost::asio::ip::tcp::socket _tcpSocket;
     };
 }
 
