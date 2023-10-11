@@ -5,6 +5,8 @@ set(SRC
 )
 add_library(ECS STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})
-target_link_libraries(ECS PUBLIC assets)
+target_link_libraries(ECS PUBLIC assets
+    raylib
+)
 
 add_subdirectory(systems)
