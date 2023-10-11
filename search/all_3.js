@@ -2,7 +2,7 @@ var searchData=
 [
   ['camerashakeintensity_29',['CameraShakeIntensity',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9',1,'Screen::Display']]],
   ['center_30',['center',['../classScreen_1_1Display.html#a55e18cc61bcb1f66c89422df911293e9',1,'Screen::Display']]],
-  ['clientnetwork_31',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c',1,'Network::ClientNetwork::ClientNetwork(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)'],['../classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
+  ['clientnetwork_31',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c',1,'Network::ClientNetwork::ClientNetwork(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
   ['clientnetwork_2ehpp_32',['ClientNetwork.hpp',['../ClientNetwork_8hpp.html',1,'']]],
   ['coderfc_33',['codeRfc',['../structNetwork_1_1header.html#aa56412b32b32617d2527de78e388554e',1,'Network::header']]],
   ['collidablecomponent_34',['CollidableComponent',['../structECS_1_1Components_1_1CollidableComponent.html',1,'ECS::Components']]],
@@ -27,6 +27,10 @@ var searchData=
   ['controller_53',['controller',['../namespaceECS_1_1Systems.html#ae0ca27cc4f9651ba35d0a693b0dfad62',1,'ECS::Systems']]],
   ['controller_2ehpp_54',['controller.hpp',['../controller_8hpp.html',1,'']]],
   ['count_55',['COUNT',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a4905ac9d6a22bdfc1ae096094ce6248d',1,'Enums']]],
-  ['cyan_5fcolor_56',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
-  ['registry_57',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
+  ['createcharacter_56',['createCharacter',['../classECS_1_1Creator.html#aa68312b9637a8aa4ed84be2b1e7e04ca',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)'],['../classECS_1_1Creator.html#a4a4ac22752d9e61355bc624279b8f296',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)']]],
+  ['createenemybasic_57',['createEnemyBasic',['../classECS_1_1Creator.html#a288699725a5d21d2e5f90d9369375690',1,'ECS::Creator']]],
+  ['creator_58',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
+  ['creator_2ehpp_59',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
+  ['cyan_5fcolor_60',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
+  ['registry_61',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
 ];
