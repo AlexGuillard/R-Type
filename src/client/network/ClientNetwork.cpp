@@ -178,3 +178,15 @@ void Network::ClientNetwork::handleNetwork()
     _ioService.reset();
     _ioService.poll();
 }
+
+void Network::ClientNetwork::stopIOService() {
+    _ioService.stop();
+}
+
+boost::asio::ip::udp::socket& Network::ClientNetwork::getSocket() {
+    return _socket;
+}
+
+void Network::ClientNetwork::enqueueReceivedMessage(const std::string& message) {
+    _receivedMessages.push(message);
+}

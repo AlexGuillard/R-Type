@@ -152,23 +152,20 @@ namespace Network {
          * @brief stop the ioService
          *
          */
-        void stopIOService() {
-            _ioService.stop();
-        }
+        void stopIOService();
         /**
          * @brief Get the Socket object
          *
          * @return const boost::asio::ip::udp::socket&
          */
-        boost::asio::ip::udp::socket& getSocket() {
-            return _socket;
-        }
+        boost::asio::ip::udp::socket& getSocket();
+        /**
+         * @brief Enqueue a received message
+         *
+         * @param message
+         */
+        void enqueueReceivedMessage(const std::string& message);
 
-        void enqueueReceivedMessage(const std::string& message) {
-            _receivedMessages.push(message);
-        }
-
-        std::queue<std::string> _receivedMessages;
     private:
         //Port of the server
         int _port;
@@ -192,6 +189,8 @@ namespace Network {
         std::queue<std::string> _messagesToSend;
         //Mutex to lock the queue
         std::mutex _mutex;
+        //Queue of received messages
+        std::queue<std::string> _receivedMessages;
     };
 }
 
