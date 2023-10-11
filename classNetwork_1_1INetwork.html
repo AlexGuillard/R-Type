@@ -96,12 +96,18 @@ Inheritance diagram for Network::INetwork:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae88c1a3764d9a078d5bf8ebc248d8d2e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#ae88c1a3764d9a078d5bf8ebc248d8d2e">~INetwork</a> ()=default</td></tr>
 <tr class="separator:ae88c1a3764d9a078d5bf8ebc248d8d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f353cdc7f875d9568931137ee709d7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#ad4f353cdc7f875d9568931137ee709d7">receive</a> (boost::asio::ip::udp::socket &amp;_socket)=0</td></tr>
-<tr class="memdesc:ad4f353cdc7f875d9568931137ee709d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to receive informations  <a href="classNetwork_1_1INetwork.html#ad4f353cdc7f875d9568931137ee709d7">More...</a><br /></td></tr>
-<tr class="separator:ad4f353cdc7f875d9568931137ee709d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add4681e212bb30f0be6c2c6b75446fe5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#add4681e212bb30f0be6c2c6b75446fe5">send</a> (boost::asio::ip::udp::socket &amp;_socket, std::string str)=0</td></tr>
-<tr class="memdesc:add4681e212bb30f0be6c2c6b75446fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to send informations  <a href="classNetwork_1_1INetwork.html#add4681e212bb30f0be6c2c6b75446fe5">More...</a><br /></td></tr>
-<tr class="separator:add4681e212bb30f0be6c2c6b75446fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2b2f4138b23279ffa7904c58f09b49e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#aa2b2f4138b23279ffa7904c58f09b49e">asyncReceive</a> (boost::asio::ip::udp::socket &amp;_socket)=0</td></tr>
+<tr class="memdesc:aa2b2f4138b23279ffa7904c58f09b49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to receive informations  <a href="classNetwork_1_1INetwork.html#aa2b2f4138b23279ffa7904c58f09b49e">More...</a><br /></td></tr>
+<tr class="separator:aa2b2f4138b23279ffa7904c58f09b49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f6f61f33bd955470290793f38ec4dfe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#a8f6f61f33bd955470290793f38ec4dfe">asyncSend</a> (boost::asio::ip::udp::socket &amp;_socket, std::string str)=0</td></tr>
+<tr class="memdesc:a8f6f61f33bd955470290793f38ec4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to send informations  <a href="classNetwork_1_1INetwork.html#a8f6f61f33bd955470290793f38ec4dfe">More...</a><br /></td></tr>
+<tr class="separator:a8f6f61f33bd955470290793f38ec4dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20777828dbf085184f64f61ecc30eeed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#a20777828dbf085184f64f61ecc30eeed">receive</a> (boost::asio::ip::tcp::socket &amp;_socket)=0</td></tr>
+<tr class="memdesc:a20777828dbf085184f64f61ecc30eeed"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to receive informations  <a href="classNetwork_1_1INetwork.html#a20777828dbf085184f64f61ecc30eeed">More...</a><br /></td></tr>
+<tr class="separator:a20777828dbf085184f64f61ecc30eeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65186e9aa6e12b09228649bddd63a95a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#a65186e9aa6e12b09228649bddd63a95a">send</a> (boost::asio::ip::tcp::socket &amp;_socket, std::string str)=0</td></tr>
+<tr class="memdesc:a65186e9aa6e12b09228649bddd63a95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to call when you want to send informations  <a href="classNetwork_1_1INetwork.html#a65186e9aa6e12b09228649bddd63a95a">More...</a><br /></td></tr>
+<tr class="separator:a65186e9aa6e12b09228649bddd63a95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5a635f3df5b711b1e16fc1866a811be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#aa5a635f3df5b711b1e16fc1866a811be">handleReceive</a> (boost::system::error_code error, std::size_t recvd_bytes)=0</td></tr>
 <tr class="memdesc:aa5a635f3df5b711b1e16fc1866a811be"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after receiving data  <a href="classNetwork_1_1INetwork.html#aa5a635f3df5b711b1e16fc1866a811be">More...</a><br /></td></tr>
 <tr class="separator:aa5a635f3df5b711b1e16fc1866a811be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +144,89 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa2b2f4138b23279ffa7904c58f09b49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b2f4138b23279ffa7904c58f09b49e">&#9670;&nbsp;</a></span>asyncReceive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Network::INetwork::asyncReceive </td>
+          <td>(</td>
+          <td class="paramtype">boost::asio::ip::udp::socket &amp;&#160;</td>
+          <td class="paramname"><em>_socket</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function to call when you want to receive informations </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_socket</td><td>variable where you listening </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#a94004c7ba5b56488b12504723016e5a8">Network::ANetwork</a>.</p>
+
+</div>
+</div>
+<a id="a8f6f61f33bd955470290793f38ec4dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f6f61f33bd955470290793f38ec4dfe">&#9670;&nbsp;</a></span>asyncSend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Network::INetwork::asyncSend </td>
+          <td>(</td>
+          <td class="paramtype">boost::asio::ip::udp::socket &amp;&#160;</td>
+          <td class="paramname"><em>_socket</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>function to call when you want to send informations </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_socket</td><td>variable where you send </td></tr>
+    <tr><td class="paramname">str</td><td>string for message to send </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#ac4b18801ffa4165c4338f059226f4b4f">Network::ANetwork</a>.</p>
+
+</div>
+</div>
 <a id="aa5a635f3df5b711b1e16fc1866a811be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5a635f3df5b711b1e16fc1866a811be">&#9670;&nbsp;</a></span>handleReceive()</h2>
 
@@ -232,8 +321,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad4f353cdc7f875d9568931137ee709d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4f353cdc7f875d9568931137ee709d7">&#9670;&nbsp;</a></span>receive()</h2>
+<a id="a20777828dbf085184f64f61ecc30eeed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20777828dbf085184f64f61ecc30eeed">&#9670;&nbsp;</a></span>receive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,7 +333,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Network::INetwork::receive </td>
           <td>(</td>
-          <td class="paramtype">boost::asio::ip::udp::socket &amp;&#160;</td>
+          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
           <td class="paramname"><em>_socket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -264,12 +353,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#a0fdc5f937b5477aad673f9d0af03f4a8">Network::ANetwork</a>.</p>
+<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#a28962e51bbc227023a0958be4f79b230">Network::ANetwork</a>.</p>
 
 </div>
 </div>
-<a id="add4681e212bb30f0be6c2c6b75446fe5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add4681e212bb30f0be6c2c6b75446fe5">&#9670;&nbsp;</a></span>send()</h2>
+<a id="a65186e9aa6e12b09228649bddd63a95a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65186e9aa6e12b09228649bddd63a95a">&#9670;&nbsp;</a></span>send()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +369,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Network::INetwork::send </td>
           <td>(</td>
-          <td class="paramtype">boost::asio::ip::udp::socket &amp;&#160;</td>
+          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
           <td class="paramname"><em>_socket</em>, </td>
         </tr>
         <tr>
@@ -306,11 +395,12 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">_socket</td><td>variable where you send </td></tr>
+    <tr><td class="paramname">str</td><td>string for message to send </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#add3b8b28d973a10129638eccc64234eb">Network::ANetwork</a>.</p>
+<p>Implemented in <a class="el" href="classNetwork_1_1ANetwork.html#af5b60566fc6146693737336f3d159685">Network::ANetwork</a>.</p>
 
 </div>
 </div>
