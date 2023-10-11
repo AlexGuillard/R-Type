@@ -6,7 +6,8 @@
 */
 
 #include "ECS/Systems/walkingAI.hpp"
-#include "ECS/Containers/zipper/Zipper.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
 
 namespace ECS::Systems {
     /**
@@ -51,7 +52,7 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::PositionComponent> &positions,
         Containers::SparseArray<Components::HitBoxComponent> &hitBoxes)
     {
-        for (auto &&[walkingAI, target, velocity, collisions, position, hitBox] : Containers::Zipper(walkingAIs, targets, velocities, allCollisions, positions, hitBoxes)) {
+        for (auto &&[eId, walkingAI, target, velocity, collisions, position, hitBox] : Containers::IndexedZipper(walkingAIs, targets, velocities, allCollisions, positions, hitBoxes)) {
             // check if collision with ground
             bool isOnGround = false;
             for (const ECS::Entity &entityId : collisions->collisions) {
@@ -64,8 +65,10 @@ namespace ECS::Systems {
             if (target->distance > walkingAI->preferredDistance.first &&
                 target->distance < walkingAI->preferredDistance.second) {
                 velocity->x = 0;
+                registry.emplaceComponent<Components::InRangeComponent>(registry.entityFromIndex(eId));
                 continue;
             }
+            registry.removeComponent<Components::InRangeComponent>(registry.entityFromIndex(eId));
             int direction = (target->dX > 0 ? 1 : -1) * (target->distance > walkingAI->preferredDistance.second ? 1 : -1);
             velocity->x = walkingAI->speed * direction;
         }
