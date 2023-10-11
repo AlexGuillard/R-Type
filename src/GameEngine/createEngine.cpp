@@ -26,6 +26,8 @@
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
 #include "ECS/Components/GravityComponent.hpp"
+#include "ECS/Components/BydoShootingAIComponent.hpp"
+#include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
@@ -67,6 +69,8 @@ namespace GameEngine {
         registry.registerComponent<Components::SolidComponent>();
         registry.registerComponent<Components::GravityComponent>();
         registry.registerComponent<Components::TargetComponent>();
+        registry.registerComponent<Components::BydoShootingAIComponent>();
+        registry.registerComponent<Components::BydoShotComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
