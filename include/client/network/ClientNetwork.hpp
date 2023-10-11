@@ -13,7 +13,6 @@
 #include <map>
 #include <functional>
 #include <memory>
-#define MAX_SIZE_BUFFER 1024
 #include <queue>
 
 namespace Network {
@@ -177,14 +176,10 @@ namespace Network {
         boost::asio::ip::udp::socket _socket;
         //Data received
         std::string _dataReceived;
-        //Buffer used to receive data
-        std::array<char, MAX_SIZE_BUFFER> _buffer;
         //Map to use the pointer on function
         std::map<std::string, ResponseHandler> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
-        //Endpoint to send
-        boost::asio::ip::udp::endpoint _senderEndpoint;
         //Message to send
         std::queue<std::string> _messagesToSend;
         //Mutex to lock the queue

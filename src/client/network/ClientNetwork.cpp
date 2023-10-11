@@ -20,9 +20,6 @@ Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const
 Network::ClientNetwork::ClientNetwork() : _port(0), _socket(_ioService)
 {
     initializeResponsehandler();
-    std::cout << "ClientNetwork constructor" << std::endl;
-    _senderEndpoint = boost::asio::ip::udp::endpoint(
-        boost::asio::ip::address::from_string("127.0.0.1"), 4848);
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -34,11 +31,13 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
         return;
     }
     _dataReceived.resize(recvd_bytes);
-    std::copy(_buffer.begin(), _buffer.begin() + recvd_bytes, _dataReceived.begin());
+    std::copy(_data.begin(), _data.begin() + recvd_bytes, _dataReceived.begin());
 
     std::string receivedMessage(_dataReceived.begin(), _dataReceived.end());
 
     enqueueReceivedMessage(receivedMessage);
+
+    std::cout << "Received: " << receivedMessage << std::endl;
 
     auto responseHandlerIt = _responseHandlers.find(receivedMessage);
 
@@ -105,18 +104,17 @@ void Network::ClientNetwork::sendAction(Action action)
 
 bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
-    // try {
-        // boost::asio::ip::udp::endpoint endpoint(boost::asio::ip::address::from_string(host), port);
-    boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string("127.0.0.1"), 4848);
-    _endpoint = serverEndpoint;
-    _socket.open(_endpoint.protocol());
+    try {
+        boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
+        _endpoint = serverEndpoint;
+        _socket.open(_endpoint.protocol());
 
-    // }
-// }
+    }
 
-// catch (std::exception &e) {
-// 	std::cerr << "Error connecting to server: " <<e.what() << std::endl;
-// }
+    catch (std::exception &e) {
+    	std::cerr << "Error connecting to server: " <<e.what() << std::endl;
+        return (false);
+    }
 
     return (true);
 }
@@ -130,7 +128,7 @@ void Network::ClientNetwork::initializeResponsehandler()
 
 void Network::ClientNetwork::handleConnection(const std::string &message)
 {
-    if (message == "200") {
+    if (message == "200\n") {
         std::cout << "Ur connected" << std::endl;
     } else {
         std::cout << "Unexecepted message received" << std::endl;
@@ -139,7 +137,7 @@ void Network::ClientNetwork::handleConnection(const std::string &message)
 
 void Network::ClientNetwork::handleLogin(const std::string &message)
 {
-    if (message == "201") {
+    if (message == "201\n") {
         std::cout << "Ur logged" << std::endl;
     } else {
         std::cout << "Unexecepted message received" << std::endl;
@@ -148,7 +146,7 @@ void Network::ClientNetwork::handleLogin(const std::string &message)
 
 void Network::ClientNetwork::handleLogout(const std::string &message)
 {
-    if (message == "202") {
+    if (message == "202\n") {
         std::cout << "Ur loggout" << std::endl;
     } else {
         std::cout << "Unexecepted message received" << std::endl;
