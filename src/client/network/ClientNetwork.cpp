@@ -58,7 +58,7 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-    asyncSend(_socket, "Hello R-Type server\n");
+    send(_tcpSocket, "Hello R-Type server\n");
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
@@ -104,12 +104,12 @@ void Network::ClientNetwork::sendAction(Action action)
 bool Network::ClientNetwork::connect(const std::string &host, int port)
 {
     if (connectTCP(host, port)) {
+        sendHello();
     } else {
         try {
             boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
             _endpoint = serverEndpoint;
             _socket.open(_endpoint.protocol());
-            sendHello();
         }
 
         catch (std::exception &e) {
