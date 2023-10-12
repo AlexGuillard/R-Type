@@ -84,6 +84,25 @@ namespace ECS {
         registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
     }
 
+    void Creator::createBink(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
+        const uint8_t nbFrameInAnimation = 3;
+
+        ECS::Entity bink = ECS::Creator::createCharacter(registry, 1, 1, 28, 33, id);
+        registry.getComponents<Components::PositionComponent>().at(bink)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(bink)->y = y;
+        Components::DrawableComponent drawableComponent = {
+            Assets::AssetsIndex::R_TYPESHEET7_PNG,
+            nbFrameInSpriteSheet, // frameRatio
+            Vector2(0, 0), // start
+            Vector2(nbFrameInAnimation, 0), // end
+            true, // boomerang
+            nbFrameInAnimation // fps
+        };
+        registry.addComponent<Components::DrawableComponent>(bink, std::move(drawableComponent));
+    }
+
     void Creator::createScant(Containers::Registry &registry, size_t id, int x, int y)
     {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 1);
