@@ -110,12 +110,3 @@ int Network::Send::stringToInt(std::string &code)
     copyCode = std::to_string(res);
     return res;
 }
-
-std::string Network::Send::intString(int code)
-{
-    std::string res;
-
-    res.resize(sizeof(int));
-    std::memcpy(res.data(), &code, sizeof(int));
-    return res;
-}

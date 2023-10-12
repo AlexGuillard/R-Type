@@ -94,11 +94,4 @@ namespace Network::Send {
      * @return int
      */
     int stringToInt(std::string &code);
-    /**
-     * @brief transform a int to a string with the binary int
-     *
-     * @param code number to put in the string
-     * @return std::string
-     */
-    std::string intString(int code);
 };
