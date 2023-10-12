@@ -70,36 +70,8 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
-    static ECS::Entity spawnShip(Containers::Registry &registry)
-    {
-        const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
-        const uint8_t nbFrameInAnimation = 5;
-        ECS::Entity ship = registry.spawnEntity();
-        registry.emplaceComponent<Components::PositionComponent>(ship, 0, 0);
-        registry.emplaceComponent<Components::VelocityComponent>(ship, 0, 0);
-        static int i = 0;
-        Components::DrawableComponent drawableComponent = {
-            Assets::AssetsIndex::R_TYPESHEET42_PNG,
-            nbFrameInSpriteSheet, // frameRatio
-            Vector2(0 + nbFrameInAnimation * i, 0), // start
-            Vector2(nbFrameInAnimation + nbFrameInAnimation * i, 0), // end
-            true, // boomerang
-            nbFrameInAnimation // fps
-        };
-        i = (i + 1) % 5;
-        registry.addComponent<Components::DrawableComponent>(ship, std::move(drawableComponent));
-        registry.emplaceComponent<Components::CollidableComponent>(ship);
-        const Vector2 hitboxSize = Vector2(32, 16);
-        registry.emplaceComponent<Components::HitBoxComponent>(ship, hitboxSize.x, hitboxSize.y);
-        return ship;
-    }
-
     static void populateEntities(Containers::Registry &registry)
     {
-        ECS::Entity player = spawnShip(registry);
-        registry.emplaceComponent<Components::ControllableComponent>(player);
-        registry.getComponents<Components::PositionComponent>().at(player)->x = Screen::Display::getCameraSize().x / 2;
-        registry.getComponents<Components::PositionComponent>().at(player)->y = Screen::Display::getCameraSize().y / 2;
     }
 
     GameEngine createEngine()
@@ -109,6 +81,7 @@ namespace GameEngine {
         engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));
+        ECS::Creator::createPlayer(engine.getRegistry(registryTypeEntities), 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // delete when client is ready
         return engine;
     }
 
