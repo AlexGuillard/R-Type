@@ -28,11 +28,12 @@ var searchData=
   ['controller_2ehpp_54',['controller.hpp',['../controller_8hpp.html',1,'']]],
   ['count_55',['COUNT',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a4905ac9d6a22bdfc1ae096094ce6248d',1,'Enums']]],
   ['createally_56',['createAlly',['../classECS_1_1Creator.html#ab700ff9129e30a5966ca7079c04c7d87',1,'ECS::Creator']]],
-  ['createcharacter_57',['createCharacter',['../classECS_1_1Creator.html#a4a4ac22752d9e61355bc624279b8f296',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)'],['../classECS_1_1Creator.html#aa68312b9637a8aa4ed84be2b1e7e04ca',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)']]],
-  ['createenemybasic_58',['createEnemyBasic',['../classECS_1_1Creator.html#a288699725a5d21d2e5f90d9369375690',1,'ECS::Creator']]],
-  ['createplayer_59',['createPlayer',['../classECS_1_1Creator.html#ac46094b00d275c7fab44353fb50a4d98',1,'ECS::Creator']]],
-  ['creator_60',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
-  ['creator_2ehpp_61',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
-  ['cyan_5fcolor_62',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
-  ['registry_63',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
+  ['createblaster_57',['createBlaster',['../classECS_1_1Creator.html#a83acb50627a908b68923481d941da5a5',1,'ECS::Creator']]],
+  ['createcharacter_58',['createCharacter',['../classECS_1_1Creator.html#a4a4ac22752d9e61355bc624279b8f296',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)'],['../classECS_1_1Creator.html#aa68312b9637a8aa4ed84be2b1e7e04ca',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)']]],
+  ['createenemybasic_59',['createEnemyBasic',['../classECS_1_1Creator.html#a288699725a5d21d2e5f90d9369375690',1,'ECS::Creator']]],
+  ['createplayer_60',['createPlayer',['../classECS_1_1Creator.html#ac46094b00d275c7fab44353fb50a4d98',1,'ECS::Creator']]],
+  ['creator_61',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
+  ['creator_2ehpp_62',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
+  ['cyan_5fcolor_63',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
+  ['registry_64',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
 ];
