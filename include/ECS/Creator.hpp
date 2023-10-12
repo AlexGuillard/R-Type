@@ -66,6 +66,15 @@ namespace ECS {
          */
         static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
         /**
+         * @brief Create a Enemy Bink object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createBink(Containers::Registry &registry, size_t id, int x, int y);
+        /**
          * @brief Create a Ally object
          *
          * @param registry registre entity
