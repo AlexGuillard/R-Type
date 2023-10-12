@@ -19,6 +19,10 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
+    std::string res = Send::intString(81732);
+    std::string res2 = Send::intString(31732);
+    std::cout << "81732: " << Send::stringToInt(res) << std::endl;
+    std::cout << "201: " << Send::stringToInt(res2) << std::endl;
     while (1) {
         if (isGame == false) {
             tcpConnection();
@@ -37,15 +41,24 @@ void Network::ServerNetwork::tcpConnection()
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
 
-void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
+void Network::ServerNetwork::waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket)
 {
     int res = 0;
 
     _data.resize(MAX_SIZE_BUFF);
-    socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
+    socket->async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
+        int number = 0;
+
         if (!error) {
-            if (findClient(getActualClient(socket)) != "") {
-                std::cout << "[" << bytes_transferred << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient(socket) << std::endl;
+            if (findClient(getActualClient(*socket)) != "") {
+                std::cout << "enter" << std::endl;
+                number = Network::Send::stringToInt(_data);
+                std::cout << "[" << bytes_transferred << "] " << number << "from" << getActualClient(*socket) << std::endl;
+                if (number == 201) {
+                    isGame = true;
+                    Network::ServerNetwork::send201();
+                    _ioService.reset();
+                }
             } else {
                 connection(socket);
             }
@@ -67,7 +80,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code& erro
         std::cout << "acceptation success" << std::endl;
         _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(std::move(socket)));
         std::cout << _socket.back()->remote_endpoint().address().to_string() << std::endl;
-        waitRequest(*_socket.back());
+        waitRequest(_socket.back());
         nb++;
         _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
     }
@@ -84,7 +97,7 @@ void Network::ServerNetwork::updateTicks()
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
-            // std::cout << "need to updates ticks\n";
+            std::cout << "need to updates ticks\n";
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
@@ -145,20 +158,20 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
     asyncReceive(_asyncSocket);
 }
 
-void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
+void Network::ServerNetwork::connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket)
 {
-    std::string res = _data.data();
     int number = Network::Send::stringToInt(_data);
     std::string actualClient;
 
+    std::cout << number << std::endl;
     if (number == CONNECTION_NB && _clients.size() < 4) {
-        actualClient = getActualClient(socket);
+        actualClient = getActualClient(*socket);
         _clients.push_back(actualClient);
-        _clientsTcp.push_back(std::move(socket));
-        send(_clientsTcp.back(), codeLogin(200));
+        _clientsTcp.push_back(socket);
+        send(*socket, codeLogin(200));
         send202(_clientsTcp.size());
     } else {
-        send(socket, code401());
+        send(*socket, code401());
     }
 }
 
@@ -185,6 +198,18 @@ void Network::ServerNetwork::send202(int indexClient)
 {
     for (int i = 0; i < _clientsTcp.size(); i++) {
         if (indexClient != i)
-            send(_clientsTcp[i], codeLogin(202));
+            send(*_clientsTcp[i], codeLogin(202));
+    }
+}
+
+void Network::ServerNetwork::send201()
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(201, -1);
+    res.append(Network::Send::makeBinaryInt(portUdp));
+    res.append(Network::Send::makeBinaryInt(201));
+    for (int i = 0; i < _clientsTcp.size(); i++) {
+        send(*_clientsTcp[i], res);
     }
 }

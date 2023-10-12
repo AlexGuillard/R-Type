@@ -103,8 +103,20 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
 int Network::Send::stringToInt(std::string &code)
 {
     int res = 0;
+    std::string copyCode(code.data());
 
-    std::memcpy(&res, code.data(), sizeof(int));
+    std::cout << "size: " <<  copyCode.size() << " content: " << copyCode << std::endl;
+    std::memcpy(&res, copyCode.data(), sizeof(int));
     code.erase(0, sizeof(int));
+    std::cout << "..." << res << "..." << std::endl;
+    return res;
+}
+
+std::string Network::Send::intString(int code)
+{
+    std::string res;
+
+    res.resize(sizeof(int));
+    std::memcpy(res.data(), &code, sizeof(int));
     return res;
 }

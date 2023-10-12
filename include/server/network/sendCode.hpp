@@ -94,4 +94,5 @@ namespace Network::Send {
      * @return int
      */
     int stringToInt(std::string &code);
+    std::string intString(int code);
 };

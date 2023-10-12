@@ -39,7 +39,7 @@ namespace Network {
              *
              * @param socket client socket that send data
              */
-            void waitRequest(boost::asio::ip::tcp::socket &socket);
+            void waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
@@ -90,7 +90,7 @@ namespace Network {
              * @brief see if client have a good connection on the server, the server repond then with 200 or 401
              *
              */
-            void connection(boost::asio::ip::tcp::socket &socket);
+            void connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
         protected:
             // int for udp port to send when tcp connection
             int portUdp;
@@ -115,7 +115,7 @@ namespace Network {
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
             // lists of accepted clients
-            std::vector<boost::asio::ip::tcp::socket> _clientsTcp;
+            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _clientsTcp;
         private:
             /**
              * @brief write a login code (202 or 200)
@@ -136,5 +136,10 @@ namespace Network {
              * @param indexClient index of the new client in _clientsTcp
              */
             void send202(int indexClient);
+            /**
+             * @brief send to clients to pass in udp mod
+             *
+             */
+            void send201();
     };
 }
