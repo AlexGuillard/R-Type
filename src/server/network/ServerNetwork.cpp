@@ -19,10 +19,6 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
-    std::string res = Send::intString(81732);
-    std::string res2 = Send::intString(31732);
-    std::cout << "81732: " << Send::stringToInt(res) << std::endl;
-    std::cout << "201: " << Send::stringToInt(res2) << std::endl;
     while (1) {
         if (isGame == false) {
             tcpConnection();

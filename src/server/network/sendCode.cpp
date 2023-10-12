@@ -105,10 +105,9 @@ int Network::Send::stringToInt(std::string &code)
     int res = 0;
     std::string copyCode(code.data());
 
-    std::cout << "size: " <<  copyCode.size() << " content: " << copyCode << std::endl;
     std::memcpy(&res, copyCode.data(), sizeof(int));
     code.erase(0, sizeof(int));
-    std::cout << "..." << res << "..." << std::endl;
+    copyCode = std::to_string(res);
     return res;
 }
 
