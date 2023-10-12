@@ -122,4 +122,24 @@ namespace ECS {
         registry.addComponent<Components::DrawableComponent>(ally, std::move(drawableComponent));
     }
 
+    void Creator::createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
+    {
+        const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
+        const uint8_t nbFrameInAnimation = 5;
+
+        ECS::Entity player = ECS::Creator::createCharacter(registry, 1, 1, 33, 14, id);
+        registry.getComponents<Components::PositionComponent>().at(player)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(player)->y = y;
+        Components::DrawableComponent drawableComponent = {
+            Assets::AssetsIndex::R_TYPESHEET42_PNG,
+            nbFrameInSpriteSheet, // frameRatio
+            Vector2(nbFrameInAnimation * (int)color, 0), // start
+            Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
+            true, // boomerang
+            nbFrameInAnimation // fps
+        };
+        registry.addComponent<Components::DrawableComponent>(player, std::move(drawableComponent));
+        registry.emplaceComponent<Components::ControllableComponent>(player);
+    }
+
 }; // namespace ECS
