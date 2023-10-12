@@ -108,8 +108,6 @@ namespace Network {
             std::vector<std::string> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
-            // boolean to change from tcp to udp and vice versa
-            bool isGame = false;
             // list of sockets for potential clients
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients

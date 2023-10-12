@@ -9,7 +9,7 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
-    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)),
+    : _ioService(std::ref(io_service)), _acceptor(_ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(_ioService, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)),
     _timer(io_service), portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
@@ -19,14 +19,11 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
-    while (1) {
-        if (isGame == false) {
-            tcpConnection();
-        } else {
-            udpConnection();
-        }
-        _ioService.run();
-    }
+    std::thread tcp(&Network::ServerNetwork::tcpConnection, this);
+    std::thread udp(&Network::ServerNetwork::udpConnection, this);
+    tcp.join();
+    udp.join();
+    _ioService.run();
 }
 
 Network::ServerNetwork::~ServerNetwork()
@@ -47,23 +44,18 @@ void Network::ServerNetwork::waitRequest(std::shared_ptr<boost::asio::ip::tcp::s
 
         if (!error) {
             if (findClient(getActualClient(*socket)) != "") {
-                std::cout << "enter" << std::endl;
                 number = Network::Send::stringToInt(_data);
                 std::cout << "[" << bytes_transferred << "] " << number << "from" << getActualClient(*socket) << std::endl;
                 if (number == 201) {
-                    isGame = true;
                     Network::ServerNetwork::send201();
-                    _ioService.reset();
                 }
             } else {
                 connection(socket);
             }
             _data.clear();
-            // Start another asynchronous read operation
             waitRequest(socket);
         } else {
             waitRequest(socket);
-            // Handle the error, possibly by closing the socket
         }
     });
 }
@@ -93,7 +85,7 @@ void Network::ServerNetwork::updateTicks()
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
-            std::cout << "need to updates ticks\n";
+            // std::cout << "need to updates ticks\n";
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
