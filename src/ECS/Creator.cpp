@@ -84,6 +84,25 @@ namespace ECS {
         registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
     }
 
+    void Creator::createBlaster(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
+        const uint8_t nbFrameInAnimation = 6;
+
+        ECS::Entity Blaster = ECS::Creator::createCharacter(registry, 1, 1, 16, 15, id);
+        registry.getComponents<Components::PositionComponent>().at(Blaster)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(Blaster)->y = y;
+        Components::DrawableComponent drawableComponent = {
+            Assets::AssetsIndex::R_TYPESHEET12_PNG,
+            nbFrameInSpriteSheet, // frameRatio
+            Vector2(0, 0), // start
+            Vector2(nbFrameInAnimation, 0), // end
+            true, // boomerang
+            nbFrameInAnimation // fps
+        };
+        registry.addComponent<Components::DrawableComponent>(Blaster, std::move(drawableComponent));
+    }
+
     void Creator::createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
     {
         const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
