@@ -114,6 +114,27 @@ namespace Network {
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
+            // lists of accepted clients
+            std::vector<boost::asio::ip::tcp::socket> _clientsTcp;
         private:
+            /**
+             * @brief write a login code (202 or 200)
+             *
+             * @param code the code sended in the header and the footer
+             * @return std::string
+             */
+            std::string codeLogin(int code);
+            /**
+             * @brief string for 401 error for client
+             *
+             * @return std::string
+             */
+            std::string code401();
+            /**
+             * @brief send a login of a new client to every client
+             *
+             * @param indexClient index of the new client in _clientsTcp
+             */
+            void send202(int indexClient);
     };
 }

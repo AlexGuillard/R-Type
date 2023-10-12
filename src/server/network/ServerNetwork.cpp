@@ -9,7 +9,8 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
-    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)), _timer(io_service), portUdp(portUdp)
+    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)),
+    _timer(io_service), portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
@@ -150,13 +151,37 @@ void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
     if (res == "Hello R-Type server\n" && _clients.size() < 4) {
         actualClient = getActualClient(socket);
         _clients.push_back(actualClient);
-        actualClient = Network::Send::makeHeader(200, _clients.size() - 1);
-        actualClient.append(Network::Send::makeBinaryInt(_clients.size()));
-        actualClient.append(Network::Send::makeBinaryInt(200));
-        send(socket, actualClient);
+        _clientsTcp.push_back(std::move(socket));
+        send(_clientsTcp.back(), codeLogin(200));
+        send202(_clientsTcp.size());
     } else {
-        actualClient = Network::Send::makeHeader(401, -1);
-        actualClient.append(Network::Send::makeBinaryInt(401));
-        send(socket, actualClient);
+        send(socket, code401());
+    }
+}
+
+std::string Network::ServerNetwork::codeLogin(int code)
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(code, _clients.size() - 1);
+    res.append(Network::Send::makeBinaryInt(_clients.size()));
+    res.append(Network::Send::makeBinaryInt(code));
+    return res;
+}
+
+std::string Network::ServerNetwork::code401()
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(401, -1);
+    res.append(Network::Send::makeBinaryInt(401));
+    return res;
+}
+
+void Network::ServerNetwork::send202(int indexClient)
+{
+    for (int i = 0; i < _clientsTcp.size(); i++) {
+        if (indexClient != i)
+            send(_clientsTcp[i], codeLogin(202));
     }
 }
