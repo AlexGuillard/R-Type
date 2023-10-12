@@ -9,7 +9,7 @@
 
 #include <boost/asio.hpp>
 #include "enums.hpp"
-#define CONNECTION_NB 81732;
+#define CONNECTION_NB 81732
 
 namespace Network {
     /**

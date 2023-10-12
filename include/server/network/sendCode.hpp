@@ -87,4 +87,11 @@ namespace Network::Send {
      * @return std::string
      */
     std::string codeMissil(const int header[2], const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
+    /**
+     * @brief transform string send by client to int
+     *
+     * @param code string cotaining the rfc code
+     * @return int
+     */
+    int stringToInt(std::string &code);
 };

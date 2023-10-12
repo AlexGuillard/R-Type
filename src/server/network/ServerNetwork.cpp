@@ -39,11 +39,13 @@ void Network::ServerNetwork::tcpConnection()
 
 void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
 {
+    int res = 0;
+
     _data.resize(MAX_SIZE_BUFF);
     socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
         if (!error) {
             if (findClient(getActualClient(socket)) != "") {
-                std::cout << "[" << bytes_transferred << "] " << _data.data() << "from" << getActualClient(socket) << std::endl;
+                std::cout << "[" << bytes_transferred << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient(socket) << std::endl;
             } else {
                 connection(socket);
             }
@@ -97,7 +99,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
-            std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
+            std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
         } else {
             asyncSend(_asyncSocket, "need tcp connection first\n");
@@ -146,9 +148,10 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
 void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
 {
     std::string res = _data.data();
+    int number = Network::Send::stringToInt(_data);
     std::string actualClient;
 
-    if (res == "Hello R-Type server\n" && _clients.size() < 4) {
+    if (number == CONNECTION_NB && _clients.size() < 4) {
         actualClient = getActualClient(socket);
         _clients.push_back(actualClient);
         _clientsTcp.push_back(std::move(socket));

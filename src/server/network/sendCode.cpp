@@ -99,3 +99,12 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
     str.append(makeBinaryInt(header[0]));
     return str;
 }
+
+int Network::Send::stringToInt(std::string &code)
+{
+    int res = 0;
+
+    std::memcpy(&res, code.data(), sizeof(int));
+    code.erase(0, sizeof(int));
+    return res;
+}
