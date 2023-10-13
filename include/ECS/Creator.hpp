@@ -18,6 +18,7 @@ namespace ECS {
     class Creator {
     public:
         static constexpr std::size_t defaultScrollSpeed = 100;
+        static constexpr float defaultGravity = 9.81F;
 
         Creator() = delete;
         ~Creator() = delete;

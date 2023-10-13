@@ -145,6 +145,8 @@ namespace ECS {
             nbFrameInAnimation // fps
         };
         registry.addComponent<Components::DrawableComponent>(bink, std::move(drawableComponent));
+        registry.emplaceComponent<Components::WalkingAIComponent>(bink, std::make_pair(250.F, 500.F), 100);
+        registry.emplaceComponent<Components::GravityComponent>(bink, Creator::defaultGravity);
     }
 
     void Creator::createScant(Containers::Registry &registry, size_t id, int x, int y)
