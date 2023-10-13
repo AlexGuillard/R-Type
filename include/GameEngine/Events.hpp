@@ -29,6 +29,12 @@ namespace GameEngine {
         */
         static void push(Type event);
         /**
+         * @brief Push a new event to the queue
+         * @param event Event to push
+         * @param idx Id of the player that triggered the event
+         */
+        static void push(Type event, int idx);
+        /**
          * @brief Pop the event on top of the event queue, if any, and return it.
          *
          * This function is not blocking: if there's no pending event then it
@@ -40,6 +46,14 @@ namespace GameEngine {
          * @returns True if an event was polled, false otherwise
         */
         static bool poll(Type &event);
+        /**
+         * @brief Pop the event on top of the event queue, if any, and return it.
+         *
+         * @param event Variable to fill with the event
+         * @param idx Variable to fill with the id of the player that triggered the event
+         * @return True if an event was polled, false otherwise
+         */
+        static bool poll(Type &event, int &idx);
 
         static std::vector<Type>::iterator begin();
         static std::vector<Type>::iterator end();
@@ -47,6 +61,7 @@ namespace GameEngine {
     private:
         friend class Iterator;
         static std::vector<Type> mQueue;
+        static std::vector<int> mQueueId;
         Events() = default;
         ~Events() = default;
         Events(const Events &) = delete;

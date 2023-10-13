@@ -26,9 +26,7 @@
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
 #include "ECS/Components/GravityComponent.hpp"
-#include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
-#include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -68,7 +66,6 @@ namespace GameEngine {
         registry.registerComponent<Components::GravityComponent>();
         registry.registerComponent<Components::TargetComponent>();
 
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
@@ -78,11 +75,11 @@ namespace GameEngine {
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
     static void populateEntities(Containers::Registry &registry)
     {
+        ECS::Creator::createPlayer(registry, 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // TODO: delete when client is ready
     }
 
     GameEngine createEngine()
@@ -92,7 +89,6 @@ namespace GameEngine {
         engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));
-        ECS::Creator::createPlayer(engine.getRegistry(registryTypeEntities), 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // delete when client is ready
         return engine;
     }
 

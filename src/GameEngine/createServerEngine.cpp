@@ -35,36 +35,12 @@ namespace GameEngine {
     namespace Systems = ECS::Systems;
 
     static void initEntitiesRegistry(Containers::Registry &registry)
-    {
-        registry.registerComponent<Components::PositionComponent>();
-        registry.registerComponent<Components::VelocityComponent>();
-        registry.registerComponent<Components::DrawableComponent>();
-        registry.registerComponent<Components::ControllableComponent>();
-        registry.registerComponent<Components::HPComponent>();
-        registry.registerComponent<Components::DamageComponent>();
-        registry.registerComponent<Components::HitBoxComponent>();
-        registry.registerComponent<Components::MissileComponent>();
-        registry.registerComponent<Components::WaveBeamComponent>();
-        registry.registerComponent<Components::CollidableComponent>();
-        registry.registerComponent<Components::CollisionComponent>();
-        registry.registerComponent<Components::TeamComponent>();
-        registry.registerComponent<Components::SinMovementComponent>();
-        registry.registerComponent<Components::SolidComponent>();
-
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
-        registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
-        registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
-        registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
-        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
-    }
+    {}
 
     GameEngine createServerEngine()
     {
-        GameEngine engine;
+        GameEngine engine = createEngine();
 
-        engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine[registryTypeEntities]);
         return engine;
     }
