@@ -27,34 +27,18 @@ Network::ClientNetwork::~ClientNetwork()
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    if (error && recvd_bytes == 0) {
-        return;
+    if ( !error && recvd_bytes > 0 ) {
+        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
+        _data.clear();
+        asyncReceive(_socket);
+    } else {
+        asyncReceive(_socket);
     }
-    _dataReceived.resize(recvd_bytes);
-    std::copy(_data.begin(), _data.begin() + recvd_bytes, _dataReceived.begin());
-
-    std::string receivedMessage(_dataReceived.begin(), _dataReceived.end());
-
-    enqueueReceivedMessage(receivedMessage);
-
-    std::cout << "Received: " << receivedMessage << std::endl;
-
-    auto responseHandlerIt = _responseHandlers.find(receivedMessage);
-
-    if (responseHandlerIt != _responseHandlers.end()) {
-        responseHandlerIt->second(receivedMessage);
-    }
-    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    if (!error && recvd_bytes > 0) {
-        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
-        asyncReceive(_socket);
-    } else {
-        std::cout << "erreur\n";
-    }
+    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::sendHello()
