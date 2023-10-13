@@ -93,7 +93,7 @@ namespace Network {
             void connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
         protected:
             // int for udp port to send when tcp connection
-            int portUdp;
+            int _portUdp;
             // store the io_service
             boost::asio::io_service &_ioService;
             /**
@@ -122,6 +122,13 @@ namespace Network {
              * @return int
              */
             int setUdpSocket(int port);
+            /**
+             * @brief Set the Tcp Socket object
+             *
+             * @param port port for udp to listen to
+             * @return int
+             */
+            int setTcpSocket(int port);
             /**
              * @brief write a login code (202 or 200)
              *

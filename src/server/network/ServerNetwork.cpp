@@ -9,17 +9,21 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
-    : _ioService(std::ref(io_service)), _acceptor(_ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(_ioService),
-    _timer(io_service), portUdp(portUdp)
+    : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
+    _timer(io_service), _portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
     boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
 
-    portUdp = setUdpSocket(portUdp);
-    if (portUdp == -1)
-        throw std::runtime_error("Can not set server");
-    std::cout << "udp on " << portUdp << std::endl;
+    portTCP = setTcpSocket(portTCP);
+    if (portTCP == -1)
+        throw std::runtime_error("Can not set server tcp");
+    _portUdp = setUdpSocket(portUdp);
+    if (_portUdp == -1)
+        throw std::runtime_error("Can not set server udp");
+    std::cout << "tcp on " << portTCP << std::endl;
+    std::cout << "udp on " << _portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
@@ -32,6 +36,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
 
 Network::ServerNetwork::~ServerNetwork()
 {
+    _acceptor.close();
     _asyncSocket.close();
 }
 
@@ -59,6 +64,35 @@ int Network::ServerNetwork::setUdpSocket(int port)
         }
         return setUdpSocket(port + 1);
     }
+    return port;
+}
+
+int Network::ServerNetwork::setTcpSocket(int port)
+{
+    boost::system::error_code error;
+    boost::asio::ip::tcp::endpoint end;
+    static int index = 0;
+
+    if (!_acceptor.is_open()) {
+        _acceptor.open(boost::asio::ip::tcp::v4(), error);
+    }
+    if (error) {
+        index++;
+        if (index == 65535) {
+            return -1;
+        }
+        return setTcpSocket(port + 1);
+    }
+    end = boost::asio::ip::tcp::endpoint(boost::asio::ip::address_v4::any(), port);
+    _acceptor.bind(end, error);
+    if (error) {
+        index++;
+        if (index == 65535) {
+            return -1;
+        }
+        return setTcpSocket(port + 1);
+    }
+    _acceptor.listen();
     return port;
 }
 
@@ -227,7 +261,7 @@ void Network::ServerNetwork::send201()
     std::string res;
 
     res = Network::Send::makeHeader(201, -1);
-    res.append(Network::Send::makeBinaryInt(portUdp));
+    res.append(Network::Send::makeBinaryInt(_portUdp));
     res.append(Network::Send::makeBinaryInt(201));
     for (int i = 0; i < _clientsTcp.size(); i++) {
         send(*_clientsTcp[i], res);
