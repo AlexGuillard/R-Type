@@ -21,9 +21,10 @@ namespace ECS::Systems {
         ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
         ECS::Containers::SparseArray<ECS::Components::HPComponent> &hpComponents)
     {
-        for (auto &&[entityId, hpComponent, team, collision] : Containers::IndexedZipper(hpComponents, teams, collision)) {
+        for (auto &&[entityId, hpComponent, collision] : Containers::IndexedZipper(hpComponents, collision)) {
+            auto &&team = teams.at(entityId);
             for (auto eId : collision->collisions) {
-                if(teams.at(eId)->team != teams.at(entityId)->team) {
+                if (!team || !teams.at(eId) || teams.at(eId)->team != team->team) {
                     std::size_t damageOther = damage.at(eId)->damage;
                     std::size_t hpEntity = hpComponents.at(entityId)->hp;
                     if (hpEntity == 0 || hpEntity <= damageOther) {
