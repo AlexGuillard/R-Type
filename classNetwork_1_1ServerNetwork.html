@@ -70,7 +70,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classNetwork_1_1ServerNetwork-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -105,9 +104,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a54c4167006df1208faf9a6d58260a6bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a54c4167006df1208faf9a6d58260a6bf">udpConnection</a> ()</td></tr>
 <tr class="memdesc:a54c4167006df1208faf9a6d58260a6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">used when going into the game  <a href="classNetwork_1_1ServerNetwork.html#a54c4167006df1208faf9a6d58260a6bf">More...</a><br /></td></tr>
 <tr class="separator:a54c4167006df1208faf9a6d58260a6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7734a0efe1d2e71813df992eb1ccb07a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a7734a0efe1d2e71813df992eb1ccb07a">waitRequest</a> (boost::asio::ip::tcp::socket &amp;socket)</td></tr>
-<tr class="memdesc:a7734a0efe1d2e71813df992eb1ccb07a"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to wait read of tcp socket  <a href="classNetwork_1_1ServerNetwork.html#a7734a0efe1d2e71813df992eb1ccb07a">More...</a><br /></td></tr>
-<tr class="separator:a7734a0efe1d2e71813df992eb1ccb07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4910314443918f318c6b5f26495798b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ae4910314443918f318c6b5f26495798b">waitRequest</a> (std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &amp;socket)</td></tr>
+<tr class="memdesc:ae4910314443918f318c6b5f26495798b"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to wait read of tcp socket  <a href="classNetwork_1_1ServerNetwork.html#ae4910314443918f318c6b5f26495798b">More...</a><br /></td></tr>
+<tr class="separator:ae4910314443918f318c6b5f26495798b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ccbd9db3c7d68d6951e059e1a3e1b8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a8ccbd9db3c7d68d6951e059e1a3e1b8d">acceptHandler</a> (const boost::system::error_code &amp;error, boost::asio::ip::tcp::socket socket)</td></tr>
 <tr class="separator:a8ccbd9db3c7d68d6951e059e1a3e1b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f1bfce7d5577fb5303353fadeb420c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a5f1bfce7d5577fb5303353fadeb420c2">handleReceive</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
@@ -131,9 +130,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6d9521247188dadcdb0663b589231a0f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a6d9521247188dadcdb0663b589231a0f">getActualClient</a> (boost::asio::ip::tcp::socket &amp;socket) const</td></tr>
 <tr class="memdesc:a6d9521247188dadcdb0663b589231a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Actual Client id.  <a href="classNetwork_1_1ServerNetwork.html#a6d9521247188dadcdb0663b589231a0f">More...</a><br /></td></tr>
 <tr class="separator:a6d9521247188dadcdb0663b589231a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26a6a9d67878f5bb451dbf70346c7152"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a26a6a9d67878f5bb451dbf70346c7152">connection</a> (boost::asio::ip::tcp::socket &amp;socket)</td></tr>
-<tr class="memdesc:a26a6a9d67878f5bb451dbf70346c7152"><td class="mdescLeft">&#160;</td><td class="mdescRight">see if client have a good connection on the server, the server repond then with 200 or 401  <a href="classNetwork_1_1ServerNetwork.html#a26a6a9d67878f5bb451dbf70346c7152">More...</a><br /></td></tr>
-<tr class="separator:a26a6a9d67878f5bb451dbf70346c7152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a114eb5adae25a1b011d99afb40d07eea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a114eb5adae25a1b011d99afb40d07eea">connection</a> (std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &amp;socket)</td></tr>
+<tr class="memdesc:a114eb5adae25a1b011d99afb40d07eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">see if client have a good connection on the server, the server repond then with 200 or 401  <a href="classNetwork_1_1ServerNetwork.html#a114eb5adae25a1b011d99afb40d07eea">More...</a><br /></td></tr>
+<tr class="separator:a114eb5adae25a1b011d99afb40d07eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,12 +152,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae88c1a3764d9a078d5bf8ebc248d8d2e inherit pub_methods_classNetwork_1_1INetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1INetwork.html#ae88c1a3764d9a078d5bf8ebc248d8d2e">~INetwork</a> ()=default</td></tr>
 <tr class="separator:ae88c1a3764d9a078d5bf8ebc248d8d2e inherit pub_methods_classNetwork_1_1INetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a9a9ad05afb7e477e2895eeb0cb16d159"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a9a9ad05afb7e477e2895eeb0cb16d159">makeHeader</a> (int code, int entityNb)</td></tr>
-<tr class="memdesc:a9a9ad05afb7e477e2895eeb0cb16d159"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to make header for message  <a href="classNetwork_1_1ServerNetwork.html#a9a9ad05afb7e477e2895eeb0cb16d159">More...</a><br /></td></tr>
-<tr class="separator:a9a9ad05afb7e477e2895eeb0cb16d159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a1031adb1845fdef13ac8343a033b6fb9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a1031adb1845fdef13ac8343a033b6fb9">portUdp</a></td></tr>
@@ -173,12 +166,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ae95380153266d61392561275f2e2bd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a1e3984020e2d8e2030350f5f1016a3"><td class="memItemLeft" align="right" valign="top">boost::asio::deadline_timer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a7a1e3984020e2d8e2030350f5f1016a3">_timer</a></td></tr>
 <tr class="separator:a7a1e3984020e2d8e2030350f5f1016a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf175ba974e20393d449ff5a6f245775"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#abf175ba974e20393d449ff5a6f245775">isGame</a> = false</td></tr>
-<tr class="separator:abf175ba974e20393d449ff5a6f245775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a446ba8e21012597f9c3a25435a23a189"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a446ba8e21012597f9c3a25435a23a189">_socket</a></td></tr>
 <tr class="separator:a446ba8e21012597f9c3a25435a23a189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4681e1a679ec1b7be3db9844ccbcfbf9"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::tcp::acceptor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a4681e1a679ec1b7be3db9844ccbcfbf9">_acceptor</a></td></tr>
 <tr class="separator:a4681e1a679ec1b7be3db9844ccbcfbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11ac748a4436f804fef6452c16458903"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a11ac748a4436f804fef6452c16458903">_clientsTcp</a></td></tr>
+<tr class="separator:a11ac748a4436f804fef6452c16458903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">_data</a></td></tr>
 <tr class="memdesc:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">More...</a><br /></td></tr>
@@ -289,8 +282,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a26a6a9d67878f5bb451dbf70346c7152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26a6a9d67878f5bb451dbf70346c7152">&#9670;&nbsp;</a></span>connection()</h2>
+<a id="a114eb5adae25a1b011d99afb40d07eea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a114eb5adae25a1b011d99afb40d07eea">&#9670;&nbsp;</a></span>connection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,7 +291,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Network::ServerNetwork::connection </td>
           <td>(</td>
-          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &amp;&#160;</td>
           <td class="paramname"><em>socket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -477,52 +470,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9a9ad05afb7e477e2895eeb0cb16d159"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a9ad05afb7e477e2895eeb0cb16d159">&#9670;&nbsp;</a></span>makeHeader()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Network::ServerNetwork::makeHeader </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>code</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>entityNb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>function to make header for message </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">code</td><td>rfc code in header </td></tr>
-    <tr><td class="paramname">entityNb</td><td>entity nb in header </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
-
-</div>
-</div>
 <a id="a917ccff23db3cb6c6019988a9e7a86fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a917ccff23db3cb6c6019988a9e7a86fb">&#9670;&nbsp;</a></span>tcpConnection()</h2>
 
@@ -580,8 +527,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7734a0efe1d2e71813df992eb1ccb07a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7734a0efe1d2e71813df992eb1ccb07a">&#9670;&nbsp;</a></span>waitRequest()</h2>
+<a id="ae4910314443918f318c6b5f26495798b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4910314443918f318c6b5f26495798b">&#9670;&nbsp;</a></span>waitRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -589,7 +536,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Network::ServerNetwork::waitRequest </td>
           <td>(</td>
-          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; boost::asio::ip::tcp::socket &gt; &amp;&#160;</td>
           <td class="paramname"><em>socket</em></td><td>)</td>
           <td></td>
         </tr>
@@ -677,6 +624,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a11ac748a4436f804fef6452c16458903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11ac748a4436f804fef6452c16458903">&#9670;&nbsp;</a></span>_clientsTcp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;boost::asio::ip::tcp::socket&gt; &gt; Network::ServerNetwork::_clientsTcp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a40ecfd5c91aeaa2d7fb1a15ac0f28279"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a40ecfd5c91aeaa2d7fb1a15ac0f28279">&#9670;&nbsp;</a></span>_ioService</h2>
 
@@ -732,28 +701,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">boost::asio::deadline_timer Network::ServerNetwork::_timer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abf175ba974e20393d449ff5a6f245775"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf175ba974e20393d449ff5a6f245775">&#9670;&nbsp;</a></span>isGame</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Network::ServerNetwork::isGame = false</td>
         </tr>
       </table>
   </td>
