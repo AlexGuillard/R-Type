@@ -9,13 +9,17 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
-    : _ioService(std::ref(io_service)), _acceptor(_ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(_ioService, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)),
+    : _ioService(std::ref(io_service)), _acceptor(_ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(_ioService),
     _timer(io_service), portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
     boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
 
+    portUdp = setUdpSocket(portUdp);
+    if (portUdp == -1)
+        throw std::runtime_error("Can not set server");
+    std::cout << "udp on " << portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
@@ -27,7 +31,36 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
 }
 
 Network::ServerNetwork::~ServerNetwork()
-{}
+{
+    _asyncSocket.close();
+}
+
+int Network::ServerNetwork::setUdpSocket(int port)
+{
+    boost::system::error_code error;
+    static int index = 0;
+
+    if (!_asyncSocket.is_open()) {
+        _asyncSocket.open(boost::asio::ip::udp::v4(), error);
+    }
+    if (error) {
+        index++;
+        if (index == 65535) {
+            return -1;
+        }
+        return setUdpSocket(port + 1);
+    }
+    _endpoint = boost::asio::ip::udp::endpoint(boost::asio::ip::address_v4::any(), port);
+    _asyncSocket.bind(_endpoint, error);
+    if (error) {
+        index++;
+        if (index == 65535) {
+            return -1;
+        }
+        return setUdpSocket(port + 1);
+    }
+    return port;
+}
 
 void Network::ServerNetwork::tcpConnection()
 {

@@ -116,6 +116,13 @@ namespace Network {
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _clientsTcp;
         private:
             /**
+             * @brief Set the Udp Socket object
+             *
+             * @param port port for udp to listen to
+             * @return int
+             */
+            int setUdpSocket(int port);
+            /**
              * @brief write a login code (202 or 200)
              *
              * @param code the code sended in the header and the footer
