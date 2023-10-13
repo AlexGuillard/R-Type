@@ -61,6 +61,11 @@ void Screen::Display::setMenuState(MenuState state)
     _menuState = state;
 }
 
+void Screen::Display::setGameState(GameState state)
+{
+    _gameState = state;
+}
+
 const std::string &Screen::Display::getHostName() const
 {
     return _hostName;
@@ -257,6 +262,18 @@ void Screen::Display::detectActionMenu()
     if (keyPressed != 0 || key != 0) {
         keyPressededMenu(keyPressed, key);
     }
+    if (_gameState == Display::GameState::WAITINGROOM) {
+        detectActionWaitingRoom({ 320, 240, 160, 60 });
+    }
+}
+
+void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
+{
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect)) {
+            setGameState(GameState::GAME);
+        }
+    }
 }
 
 void Screen::Display::mouseClickedMenu()
@@ -321,6 +338,11 @@ void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 
 }
 
+void Screen::Display::drawWaitingRoom(Rectangle playButtonRect)
+{
+    DrawRectangleRec(playButtonRect, SKYBLUE);
+    DrawText("Play", playButtonRect.x + 45, playButtonRect.y + 10, 32, RAYWHITE);
+}
 
 Screen::Display &Screen::Display::center()
 {

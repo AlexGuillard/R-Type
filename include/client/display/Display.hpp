@@ -22,7 +22,8 @@ namespace Screen {
     public:
         enum class GameState {
             MENU,
-            GAME
+            GAME,
+            WAITINGROOM,             // play button waiting room
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -127,6 +128,11 @@ namespace Screen {
         static void drawGame(GameEngine::GameEngine &engine);
 
         /**
+         * @brief draw the waitingRoom
+         */
+        static void drawWaitingRoom(Rectangle playButtonRect);
+
+        /**
          * @brief Centers the window on screen
          * @return (*this) to allow chain calls
          */
@@ -176,6 +182,20 @@ namespace Screen {
          * @returns The size of the camera view
          */
         static Vector2 getCameraSize();
+
+        /**
+         * @brief Set the Game State object
+         *
+         * @param state
+         */
+        void setGameState(GameState state);
+        /**
+         * @brief detect the action in waiting room
+         *
+         * @param playButtonRect
+         */
+        void detectActionWaitingRoom(Rectangle playButtonRect);
+
     private:
         /**
          * @brief Toggles between fullscreen and windowed
