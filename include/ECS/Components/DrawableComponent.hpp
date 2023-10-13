@@ -34,7 +34,7 @@ namespace ECS::Components {
      */
     struct DrawableComponent {
         Assets::AssetsIndex spriteSheetIndex;
-        Vector2 frameRatio;
+        Vector2 frameRatio = { 1, 1 };
         Vector2 start = { 0, 0 };
         Vector2 end = { 0, 0 };
         bool boomerang = false;
