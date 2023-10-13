@@ -88,6 +88,51 @@ namespace ECS {
          */
         static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
         /**
+         * @brief Create a Enemy Bink object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createBink(Containers::Registry &registry, size_t id, int x, int y);
+        /**
+         * @brief Create a Enemy Scant object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createScant(Containers::Registry &registry, size_t id, int x, int y);
+        /**
+         * @brief Create a Enemy Bug object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createBug(Containers::Registry &registry, size_t id, int x, int y);
+        /**
+         * @brief Create a enemy Cancer object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createCancer(Containers::Registry &registry, size_t id, int x, int y);
+        /**
+         * @brief Create a Blaster object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static void createBlaster(Containers::Registry &registry, size_t id, int x, int y);
+        /**
          * @brief Create a Ally object
          *
          * @param registry registre entity
@@ -97,6 +142,16 @@ namespace ECS {
          * @param color color of the ship
          */
         static void createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        /**
+         * @brief Create a Player object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         * @param color color of the ship
+         */
+        static void createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
     protected:
     private:
     };

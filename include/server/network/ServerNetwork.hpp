@@ -13,6 +13,7 @@
 #include <memory>
 
 #include "ANetwork.hpp"
+#define TICKS_UPDATE 200
 
 namespace Network {
     /**
@@ -38,7 +39,7 @@ namespace Network {
              *
              * @param socket client socket that send data
              */
-            void waitRequest(boost::asio::ip::tcp::socket &socket);
+            void waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
@@ -89,7 +90,7 @@ namespace Network {
              * @brief see if client have a good connection on the server, the server repond then with 200 or 401
              *
              */
-            void connection(boost::asio::ip::tcp::socket &socket);
+            void connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
         protected:
             // int for udp port to send when tcp connection
             int portUdp;
@@ -104,23 +105,40 @@ namespace Network {
              * @brief hmap for the list of client on the server
              *
              */
-            std::vector<std::string> _clients;
+            std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
-            // boolean to change from tcp to udp and vice versa
-            bool isGame = false;
             // list of sockets for potential clients
             std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
+            // lists of accepted clients
+            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _clientsTcp;
+        private:
             /**
-             * @brief function to make header for message
+             * @brief write a login code (202 or 200)
              *
-             * @param code rfc code in header
-             * @param entityNb entity nb in header
+             * @param code the code sended in the header and the footer
              * @return std::string
              */
-            std::string makeHeader(int code, int entityNb);
-        private:
+            std::string codeLogin(int code);
+            /**
+             * @brief string for 401 error for client
+             *
+             * @return std::string
+             */
+            std::string code401();
+            /**
+             * @brief send a login of a new client to every client
+             *
+             * @param indexClient index of the new client in _clientsTcp
+             */
+            void send202(int indexClient);
+            /**
+             * @brief send to clients to pass in udp mod
+             *
+             */
+            void send201();
+            void handleClientData(int num);
     };
 }

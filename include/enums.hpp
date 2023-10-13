@@ -21,4 +21,8 @@ namespace Enums {
         ALLY,
         ENEMY
     };
+    enum class Position {
+        UP,
+        DOWN
+    };
 }
