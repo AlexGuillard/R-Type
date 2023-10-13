@@ -87,17 +87,6 @@ void Network::ServerNetwork::udpConnection()
     asyncReceive(_asyncSocket);
 }
 
-std::unordered_map<std::string, std::pair<int, std::vector<int>>> Network::ServerNetwork::getClientInputs()
-{
-    std::unordered_map<std::string, std::pair<int, std::vector<int>>> clientInputs;
-
-    for (int i = 0; i < _clients.size(); i++) {
-        std::string client = _clients[i];
-        clientInputs[client] = std::make_pair(i, std::vector<int>());
-    }
-    return clientInputs;
-}
-
 void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
@@ -108,8 +97,7 @@ void Network::ServerNetwork::updateTicks()
             return;
         }
         // host:ip -> {id, [RFC, ...]}
-        std::unordered_map<std::string, std::pair<int, std::vector<int>>> clientInputs = getClientInputs();
-        for (auto &&[client, data] : clientInputs) {
+        for (auto &&[client, data] : _clients) {
             auto &&[id, inputs] = data;
             for (auto &&input : inputs) {
                 switch (input) {
@@ -137,7 +125,8 @@ void Network::ServerNetwork::updateTicks()
             }
         }
         updateTicks();
-        });
+        }
+    );
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)

@@ -69,8 +69,6 @@ namespace Network {
          * @return std::string
          */
         std::string findClient(std::string id) const;
-        // TODO: Replace with actual implementation
-        std::unordered_map<std::string, std::pair<int, std::vector<int>>> getClientInputs();
         /**
          * @brief function that update game when tick is finish
          *
