@@ -149,16 +149,13 @@ void Network::ServerNetwork::delClient(std::shared_ptr<boost::asio::ip::tcp::soc
 
 void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket)
 {
-    static int nb = 0;
-
-    if (!error && nb < 4) {
+    if (!error && _socket.size() < 4) {
         std::cout << "acceptation success" << std::endl;
         _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(std::move(socket)));
         std::cout << _socket.back()->remote_endpoint().address().to_string() << std::endl;
         waitRequest(_socket.back());
-        nb++;
-        _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
     }
+    _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void Network::ServerNetwork::udpConnection()
