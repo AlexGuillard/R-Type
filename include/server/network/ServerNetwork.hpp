@@ -69,7 +69,6 @@ namespace Network {
          * @return std::string
          */
         std::string findClient(std::string id) const;
-        void setGameEngine(std::shared_ptr<GameEngine::GameEngine> &engine);
         // TODO: Replace with actual implementation
         std::unordered_map<std::string, std::pair<int, std::vector<int>>> getClientInputs();
         /**
@@ -117,7 +116,7 @@ namespace Network {
          * @brief hmap for the list of client on the server
          *
          */
-        std::vector<std::string> _clients;
+        std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
         // variable for the timer and the ticks
         boost::asio::deadline_timer _timer;
         // boolean to change from tcp to udp and vice versa
@@ -153,6 +152,7 @@ namespace Network {
          *
          */
         void send201();
+        void handleClientData(int num);
         std::shared_ptr<GameEngine::GameEngine> _engine;
     };
 }

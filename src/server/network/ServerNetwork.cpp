@@ -147,6 +147,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if (!error && recvd_bytes > 0) {
         if (findClient(getActualClient()) != "") {
+            handleClientData(Network::Send::stringToInt(_data));
             std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
         } else {
@@ -164,7 +165,7 @@ void Network::ServerNetwork::addClient()
 
     if (_clients.size() < 4) {
         actualClient = _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
-        _clients.push_back(actualClient);
+        _clients[actualClient].first = _clients.size();
     }
 }
 
@@ -180,9 +181,7 @@ std::string Network::ServerNetwork::getActualClient(boost::asio::ip::tcp::socket
 
 std::string Network::ServerNetwork::findClient(std::string findId) const
 {
-    auto res = std::find(_clients.begin(), _clients.end(), findId);
-
-    if (res != _clients.end()) {
+    if (_clients.contains(findId)) {
         return findId;
     }
     return "";
@@ -201,7 +200,7 @@ void Network::ServerNetwork::connection(std::shared_ptr<boost::asio::ip::tcp::so
     std::cout << number << std::endl;
     if (number == CONNECTION_NB && _clients.size() < 4) {
         actualClient = getActualClient(*socket);
-        _clients.push_back(actualClient);
+        _clients[actualClient].first = _clients.size();
         _clientsTcp.push_back(socket);
         send(*socket, codeLogin(200));
         send202(_clientsTcp.size());
@@ -257,5 +256,12 @@ void Network::ServerNetwork::send201()
     res.append(Network::Send::makeBinaryInt(201));
     for (int i = 0; i < _clientsTcp.size(); i++) {
         send(*_clientsTcp[i], res);
+    }
+}
+
+void Network::ServerNetwork::handleClientData(int num)
+{
+    if (num >= 211 && num <= 216) {
+        _clients[getActualClient()].second.push_back(num);
     }
 }
