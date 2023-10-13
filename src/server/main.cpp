@@ -5,8 +5,12 @@
 ** main
 */
 
+#include <csignal>
+
 #include "GameEngine/GameEngine.hpp"
 #include "server/network/ServerNetwork.hpp"
+
+static bool isServerRunning = true;
 
 int main(int argc, char **argv)
 {
@@ -15,20 +19,21 @@ int main(int argc, char **argv)
     const int error = 84;
     GameEngine::GameEngine engine = GameEngine::createServerEngine();
 
+    // catch CTRL-C
+    signal(SIGINT, [](int) {
+        isServerRunning = false;
+        }
+    );
     try {
         boost::asio::io_service ioService;
         Network::ServerNetwork network(ioService, port, portUdp);
-        while (true) {
-            if (!network.isGameRunning()) {
-                network.tcpConnection();
-            } else {
-                network.udpConnection();
-            }
+        while (isServerRunning) {
             network.run(engine);
         }
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
         return error;
     }
+    std::cout << "Server closed" << std::endl;
     return (0);
 }

@@ -152,5 +152,7 @@ namespace Network {
         void send201();
         void handleClientData(int num);
         std::shared_ptr<GameEngine::GameEngine> _engine;
+        std::unique_ptr<std::thread> _tcp;
+        std::unique_ptr<std::thread> _udp;
     };
 }

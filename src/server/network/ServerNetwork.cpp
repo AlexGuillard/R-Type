@@ -26,15 +26,17 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
-    std::thread tcp(&Network::ServerNetwork::tcpConnection, this);
-    std::thread udp(&Network::ServerNetwork::udpConnection, this);
-    tcp.join();
-    udp.join();
+    _tcp.reset(new std::thread(&Network::ServerNetwork::tcpConnection, this));
+    _udp.reset(new std::thread(&Network::ServerNetwork::udpConnection, this));
     _ioService.run();
 }
 
 Network::ServerNetwork::~ServerNetwork()
-{}
+{
+    _tcp->join();
+    _udp->join();
+    _ioService.stop();
+}
 
 void Network::ServerNetwork::tcpConnection()
 {
