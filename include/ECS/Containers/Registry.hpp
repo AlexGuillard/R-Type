@@ -84,6 +84,33 @@ namespace ECS::Containers {
         }
 
         /**
+         * @brief Get the component of an entity
+         * @tparam Component type of the component to get
+         * @param entity entity to get the component from
+         * @return Reference to the component of the entity
+         */
+        template <class Component>
+        std::optional<Component> &getComponent(Entity const &entity)
+        {
+            SparseArray<Component> &components = this->getComponents<Component>();
+
+            return components.at(entity);
+        }
+        /**
+         * @brief Get the component of an entity
+         * @tparam Component type of the component to get
+         * @param entity entity to get the component from
+         * @return Reference to the component of the entity
+         */
+        template <class Component>
+        const std::optional<Component> &getComponent(Entity const &entity) const
+        {
+            SparseArray<Component> const &components = this->getComponents<Component>();
+
+            return components.at(entity);
+        }
+
+        /**
          * @brief Get the SparseArray of one or more component types
          * @tparam ...Component types of the components to get
          * @return Tuple of references to the SparseArrays of the component types
