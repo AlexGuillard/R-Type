@@ -28,7 +28,7 @@ namespace Network {
     {
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        clientNetwork.startAsyncReceive(clientNetwork.getTCPSocket());
+        clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());
         clientNetwork.handleNetwork();
     }
 
