@@ -64,7 +64,7 @@ namespace ECS::Systems {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
             right = true;
         }
-        Player::movePlayer(velocity.x, velocity.y, up, down, left, right);
+        Player::updateVelocity(velocity.x, velocity.y, up, down, left, right);
     }
 
     static void handleShooting(

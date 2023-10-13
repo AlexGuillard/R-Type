@@ -18,7 +18,7 @@ namespace Player {
      * @param left If the player is going left
      * @param right If the player is going right
      */
-    void movePlayer(
+    void updateVelocity(
         float &velX,
         float &velY,
         bool up,

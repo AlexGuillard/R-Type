@@ -24,16 +24,16 @@ namespace ECS::Systems {
             ECS::Entity entity = registry.entityFromIndex(entityId);
             switch (event) {
             case GameEngine::Events::Type::PLAYER_UP:
-                Player::movePlayer(velocities[entity]->x, velocities[entity]->y, true, false, false, false);
+                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, true, false, false, false);
                 break;
             case GameEngine::Events::Type::PLAYER_DOWN:
-                Player::movePlayer(velocities[entity]->x, velocities[entity]->y, false, true, false, false);
+                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, true, false, false);
                 break;
             case GameEngine::Events::Type::PLAYER_LEFT:
-                Player::movePlayer(velocities[entity]->x, velocities[entity]->y, false, false, true, false);
+                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, false, true, false);
                 break;
             case GameEngine::Events::Type::PLAYER_RIGHT:
-                Player::movePlayer(velocities[entity]->x, velocities[entity]->y, false, false, false, true);
+                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, false, false, true);
                 break;
             default:
                 break;

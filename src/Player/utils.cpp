@@ -27,7 +27,7 @@ namespace Player {
         return value < 0 ? -value : value;
     }
 
-    void movePlayer(
+    void updateVelocity(
         float &velX,
         float &velY,
         bool up,
