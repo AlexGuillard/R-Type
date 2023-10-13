@@ -139,5 +139,6 @@ namespace Network {
              *
              */
             void send201();
+            void handleClientData(int num);
     };
 }

@@ -100,6 +100,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
+            handleClientData(Network::Send::stringToInt(_data));
             std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
         } else {
@@ -197,5 +198,12 @@ void Network::ServerNetwork::send201()
     res.append(Network::Send::makeBinaryInt(201));
     for (int i = 0; i < _clientsTcp.size(); i++) {
         send(*_clientsTcp[i], res);
+    }
+}
+
+void Network::ServerNetwork::handleClientData(int num)
+{
+    if (num >= 211 && num <= 216) {
+        _clients[getActualClient()].second.push_back(num);
     }
 }
