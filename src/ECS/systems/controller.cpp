@@ -45,24 +45,24 @@ namespace ECS::Systems {
         ECS::Components::ControllableComponent &controllable
     )
     {
-        bool up = false;
-        bool down = false;
-        bool left = false;
-        bool right = false;
+        std::size_t up = 0;
+        std::size_t down = 0;
+        std::size_t left = 0;
+        std::size_t right = 0;
 
         if (IsKeyDown(controllable.up)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP);
-            up = true;
+            up = 1;
         } else if (IsKeyDown(controllable.down)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN);
-            down = true;
+            down = 1;
         }
         if (IsKeyDown(controllable.left)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT);
-            left = true;
+            left = 1;
         } else if (IsKeyDown(controllable.right)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
-            right = true;
+            right = 1;
         }
         Player::updateVelocity(velocity.x, velocity.y, up, down, left, right);
     }

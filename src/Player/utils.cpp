@@ -30,17 +30,17 @@ namespace Player {
     void updateVelocity(
         float &velX,
         float &velY,
-        bool up,
-        bool down,
-        bool left,
-        bool right)
+        std::size_t up,
+        std::size_t down,
+        std::size_t left,
+        std::size_t right)
     {
         const float acceleration = Constants::playerMaxSpeed / (float)Constants::playerNbFrameToMaxSpeed;
         const float deceleration = Constants::playerMaxSpeed / (float)Constants::playerNbFrameToStop;
-        if (up) {
-            velY -= 1 * acceleration;
-        } else if (down) {
-            velY += 1 * acceleration;
+        if (up > 0) {
+            velY -= up * acceleration;
+        } else if (down > 0) {
+            velY += down * acceleration;
         } else {
             if (abs(velY) < deceleration) {
                 velY = 0;
@@ -48,10 +48,10 @@ namespace Player {
                 velY += (velY > 0 ? -1 : 1) * deceleration;
             }
         }
-        if (left) {
-            velX -= 1 * acceleration;
-        } else if (right) {
-            velX += 1 * acceleration;
+        if (left > 0) {
+            velX -= left * acceleration;
+        } else if (right > 0) {
+            velX += right * acceleration;
         } else {
             if (abs(velX) < deceleration) {
                 velX = 0;

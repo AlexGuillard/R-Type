@@ -12,6 +12,12 @@
 #include "Player/utils.hpp"
 
 namespace ECS::Systems {
+    struct PlayerInput {
+        std::size_t up = 0;
+        std::size_t down = 0;
+        std::size_t left = 0;
+        std::size_t right = 0;
+    };
     void serverEventHandler(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
@@ -19,25 +25,28 @@ namespace ECS::Systems {
     {
         GameEngine::Events::Type event;
         int entityId = 0;
+        std::unordered_map<int, PlayerInput> playerInputs;
 
         while (GameEngine::Events::poll(event, entityId)) {
-            ECS::Entity entity = registry.entityFromIndex(entityId);
             switch (event) {
             case GameEngine::Events::Type::PLAYER_UP:
-                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, true, false, false, false);
+                playerInputs[entityId].up++;
                 break;
             case GameEngine::Events::Type::PLAYER_DOWN:
-                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, true, false, false);
+                playerInputs[entityId].down++;
                 break;
             case GameEngine::Events::Type::PLAYER_LEFT:
-                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, false, true, false);
+                playerInputs[entityId].left++;
                 break;
             case GameEngine::Events::Type::PLAYER_RIGHT:
-                Player::updateVelocity(velocities[entity]->x, velocities[entity]->y, false, false, false, true);
+                playerInputs[entityId].right++;
                 break;
             default:
                 break;
             }
+        }
+        for (auto &[entityId, input] : playerInputs) {
+            Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
         }
     }
 } // namespace ECS::Systems

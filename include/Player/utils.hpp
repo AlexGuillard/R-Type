@@ -7,22 +7,24 @@
 
 #pragma once // NOLINT
 
+#include <cstddef>
+
 namespace Player {
     /**
      * @brief Function that moves a player.
      * Uses the speed constant to move the player.
      * @param velX X velocity of the player
      * @param velY Y velocity of the player
-     * @param up If the player is going up
-     * @param down If the player is going down
-     * @param left If the player is going left
-     * @param right If the player is going right
+     * @param up Nb of time the player pressed up
+     * @param down Nb of time the player pressed down
+     * @param left Nb of time the player pressed left
+     * @param right Nb of time the player pressed right
      */
     void updateVelocity(
         float &velX,
         float &velY,
-        bool up,
-        bool down,
-        bool left,
-        bool right);
+        std::size_t up,
+        std::size_t down,
+        std::size_t left,
+        std::size_t right);
 } // namespace Player
