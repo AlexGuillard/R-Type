@@ -110,9 +110,9 @@ void Network::ServerNetwork::waitRequest(std::shared_ptr<boost::asio::ip::tcp::s
         int number = 0;
 
         if (!error) {
-            if (findClient(getActualClient(*socket)) != "") {
+            if (findClient(getActualClient(socket)) != "") {
                 number = Network::Send::stringToInt(_data);
-                std::cout << "[" << bytes_transferred << "] " << number << "from" << getActualClient(*socket) << std::endl;
+                std::cout << "[" << bytes_transferred << "] " << number << "from" << getActualClient(socket) << std::endl;
                 if (number == 201) {
                     Network::ServerNetwork::send201();
                 }
@@ -122,9 +122,29 @@ void Network::ServerNetwork::waitRequest(std::shared_ptr<boost::asio::ip::tcp::s
             _data.clear();
             waitRequest(socket);
         } else {
-            waitRequest(socket);
+            if ((boost::asio::error::eof != error) &&
+            (boost::asio::error::connection_reset != error)) {
+                waitRequest(socket);
+            } else {
+                std::cout << "disconnection: size before: " << _socket.size() << " connected: " << _clientsTcp.size() << std::endl;
+                delClient(socket);
+                std::cout << "disconnection: size after: " << _socket.size() << " connected: " << _clientsTcp.size() << std::endl;
+            }
         }
     });
+}
+
+void Network::ServerNetwork::delClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket)
+{
+    auto index = std::find(_socket.begin(), _socket.end(), socket);
+
+    socket->shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+    socket->close();
+    if (index != _socket.end())
+        _socket.erase(index);
+    auto indexconnected = std::find(_clientsTcp.begin(), _clientsTcp.end(), socket);
+    if (indexconnected != _clientsTcp.end())
+        _clientsTcp.erase(indexconnected);
 }
 
 void Network::ServerNetwork::acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket)
@@ -194,9 +214,9 @@ std::string Network::ServerNetwork::getActualClient() const
     return _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
 }
 
-std::string Network::ServerNetwork::getActualClient(boost::asio::ip::tcp::socket &socket) const
+std::string Network::ServerNetwork::getActualClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket) const
 {
-    return socket.remote_endpoint().address().to_string() + ":" + std::to_string(socket.remote_endpoint().port());
+    return socket->remote_endpoint().address().to_string() + ":" + std::to_string(socket->remote_endpoint().port());
 }
 
 std::string Network::ServerNetwork::findClient(std::string findId) const
@@ -219,7 +239,7 @@ void Network::ServerNetwork::connection(std::shared_ptr<boost::asio::ip::tcp::so
 
     std::cout << number << std::endl;
     if (number == CONNECTION_NB && _clients.size() < 4) {
-        actualClient = getActualClient(*socket);
+        actualClient = getActualClient(socket);
         _clients[actualClient].first = _clients.size();
         _clientsTcp.push_back(socket);
         send(*socket, codeLogin(200));

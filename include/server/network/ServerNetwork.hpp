@@ -85,7 +85,7 @@ namespace Network {
              * @param socket tcp socket of client
              * @return std::string
              */
-            std::string getActualClient(boost::asio::ip::tcp::socket &socket) const;
+            std::string getActualClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket) const;
             /**
              * @brief see if client have a good connection on the server, the server repond then with 200 or 401
              *
@@ -154,5 +154,6 @@ namespace Network {
              */
             void send201();
             void handleClientData(int num);
+            void delClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
     };
 }
