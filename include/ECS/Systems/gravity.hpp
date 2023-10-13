@@ -9,6 +9,7 @@
 
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/GravityComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace ECS::Systems {
     /**
@@ -16,5 +17,6 @@ namespace ECS::Systems {
      */
     void gravity(
         Containers::Registry &registry,
+        ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
         Containers::SparseArray<Components::GravityComponent> &gravity);
 };
