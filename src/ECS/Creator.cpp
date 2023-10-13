@@ -23,6 +23,7 @@
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 
@@ -75,6 +76,37 @@ namespace ECS {
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
         return entity;
+    }
+
+    Entity Creator::createBydoShot(
+        Containers::Registry &registry,
+        float x,
+        float y,
+        float xDirection,
+        float yDirection,
+        Enums::TeamGroup team
+    )
+    {
+        Entity shot = Creator::createCharacter(
+            registry,
+            // TODO: add team
+            1, // damage
+            0, // hp: dies on collision
+            7, // width
+            7 // height
+        );
+        registry.emplaceComponent<Components::PositionComponent>(shot, x, y);
+        registry.emplaceComponent<Components::VelocityComponent>(shot, xDirection, yDirection);
+        registry.emplaceComponent<Components::DrawableComponent>(shot,
+            Assets::AssetsIndex::BYDO_SHOT_PNG,
+            Vector2(4, 1), // frameRatio
+            Vector2(0, 0), // start
+            Vector2(4, 0), // end
+            false, // boomerang
+            4 // fps
+        );
+        registry.emplaceComponent<Components::CollidableComponent>(shot);
+        return shot;
     }
 
     Entity Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)

@@ -78,6 +78,16 @@ namespace ECS {
             std::size_t height,
             std::size_t id
         );
+
+        static Entity createBydoShot(
+            Containers::Registry &registry,
+            float x,
+            float y,
+            float xDirection,
+            float yDirection,
+            Enums::TeamGroup team = Enums::TeamGroup::ENEMY
+        );
+
         /**
          * @brief Create a Enemy Basic object
          *
