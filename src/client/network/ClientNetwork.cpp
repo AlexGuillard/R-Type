@@ -44,6 +44,7 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
     if (responseHandlerIt != _responseHandlers.end()) {
         responseHandlerIt->second(receivedMessage);
     }
+    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
@@ -101,15 +102,18 @@ void Network::ClientNetwork::sendAction(Action action)
     asyncSend(_socket, message);
 }
 
-bool Network::ClientNetwork::connect(const std::string &host, int port)
+bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP)
 {
-    if (connectTCP(host, port)) {
+    if (isTCP) {
+        connectTCP(host, port);
         sendHello();
+        return (true);
     } else {
         try {
             boost::asio::ip::udp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
             _endpoint = serverEndpoint;
             _socket.open(_endpoint.protocol());
+            std::cout << "Connected to server by udp" << std::endl;
         }
 
         catch (std::exception &e) {
@@ -118,10 +122,6 @@ bool Network::ClientNetwork::connect(const std::string &host, int port)
         }
         return (true);
     }
-    // else {
-    //     std::cout << "Error connecting to server by TCP" << std::endl;
-    //     return (false);
-    // }
 }
 
 void Network::ClientNetwork::initializeResponsehandler()
@@ -205,12 +205,32 @@ bool Network::ClientNetwork::connectTCP(const std::string &host, int port)
         boost::asio::ip::tcp::resolver::query query(host, std::to_string(port));
         boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
         boost::asio::connect(_tcpSocket, endpoint_iterator);
+
+        std::cout << "Connected to server by tcp" << std::endl;
+
+        return (true);
     }
 
     catch (std::exception &e) {
         std::cerr << "Error connecting to TCP server: " << e.what() << std::endl;
         return (false);
     }
+}
 
-    return (true);
+void Network::ClientNetwork::handleTCPData(const boost::system::error_code& error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket)
+{
+    if (!error && recvd_bytes > 0) {
+        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
+        startAsyncReceiveTCP(tcpsocket);
+    } else {
+        std::cerr << "Error receiving data: " << error.message() << std::endl;
+    }
+}
+
+void Network::ClientNetwork::startAsyncReceiveTCP(boost::asio::ip::tcp::socket &tcpsocket)
+{
+    _data.resize(MAX_SIZE_BUFF);
+    tcpsocket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &tcpsocket](boost::system::error_code error, std::size_t bytes_transferred) {
+        handleTCPData(error, bytes_transferred, tcpsocket);
+    });
 }

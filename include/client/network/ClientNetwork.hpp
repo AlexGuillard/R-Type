@@ -84,7 +84,7 @@ namespace Network {
          * @param host
          * @param port
          */
-        bool connect(const std::string &host, int port);
+        bool connect(const std::string &host, int port, bool isTCP);
         /**
          * @brief Is contained on the map of funciton to use the pointer on function
          *
@@ -177,6 +177,20 @@ namespace Network {
          * @return boost::asio::ip::tcp::socket&
          */
         boost::asio::ip::tcp::socket& getTCPSocket();
+        /**
+         * @brief Handle the TCP data received
+         *
+         * @param error error
+         * @param recvd_bytes size of the data
+         * @param tcpsocket socket
+         */
+        void handleTCPData(const boost::system::error_code& error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket);
+        /**
+         * @brief Start the async receive for tcp connection
+         *
+         * @param tcpsocket socket
+         */
+        void startAsyncReceiveTCP(boost::asio::ip::tcp::socket &tcpsocket);
 
     private:
         //Port of the server
