@@ -105,7 +105,7 @@ namespace Network {
              * @brief hmap for the list of client on the server
              *
              */
-            std::vector<std::string> _clients;
+            std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
             // list of sockets for potential clients
