@@ -16,6 +16,8 @@
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 #include "GameEngine/Events.hpp"
+#include "constants.hpp"
+#include "Player/utils.hpp"
 
 namespace ECS::Systems {
 
@@ -31,12 +33,6 @@ namespace ECS::Systems {
         return value;
     }
 
-    template <typename T>
-    static T abs(T value)
-    {
-        return value < 0 ? -value : value;
-    }
-
     /**
      * @brief Change the velocity of an entity based on the player input
      * @param velocity Current velocity of the entity
@@ -46,42 +42,29 @@ namespace ECS::Systems {
      */
     static void changeVelocity(
         ECS::Components::VelocityComponent &velocity,
-        ECS::Components::ControllableComponent &controllable,
-        float nbFrameToMaxSpeed,
-        float nbFrameToStop,
-        float maxSpeed
+        ECS::Components::ControllableComponent &controllable
     )
     {
-        const float acceleration = maxSpeed / nbFrameToMaxSpeed;
-        const float deceleration = maxSpeed / nbFrameToStop;
+        bool up = false;
+        bool down = false;
+        bool left = false;
+        bool right = false;
+
         if (IsKeyDown(controllable.up)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP);
-            velocity.y -= 1 * acceleration;
+            up = true;
         } else if (IsKeyDown(controllable.down)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN);
-            velocity.y += 1 * acceleration;
-        } else {
-            if (abs(velocity.y) < deceleration) {
-                velocity.y = 0;
-            } else {
-                velocity.y += (velocity.y > 0 ? -1 : 1) * deceleration;
-            }
+            down = true;
         }
         if (IsKeyDown(controllable.left)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT);
-            velocity.x -= 1 * acceleration;
+            left = true;
         } else if (IsKeyDown(controllable.right)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
-            velocity.x += 1 * acceleration;
-        } else {
-            if (abs(velocity.x) < deceleration) {
-                velocity.x = 0;
-            } else {
-                velocity.x += (velocity.x > 0 ? -1 : 1) * deceleration;
-            }
+            right = true;
         }
-        velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed);
-        velocity.y = clamp(velocity.y, -maxSpeed, maxSpeed);
+        Player::movePlayer(velocity.x, velocity.y, up, down, left, right);
     }
 
     static void handleShooting(
@@ -142,12 +125,8 @@ namespace ECS::Systems {
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
         ECS::Containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
     {
-        const float maxSpeed = 500;
-        const float nbFrameToMaxSpeed = 5;
-        const float nbFrameToStop = 5;
-
         for (auto &&[position, velocity, controllable] : ECS::Containers::Zipper(positions, velocities, controllables)) {
-            changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
+            changeVelocity(*velocity, *controllable);
             handleShooting(registry, *controllable, *position);
             useForce(registry, *controllable);
         }
