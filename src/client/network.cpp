@@ -17,25 +17,29 @@ namespace Network {
         //connect return a bool to let us know if the connection was successful or not
         if (type == Network::ConnectionType::TCP) {
             std::cout << "Connecting TCP " << host << ":" << tcpPort << std::endl;
-            return ClientNetwork::getInstance().connect(host, tcpPort);
+            return ClientNetwork::getInstance().connect(host, tcpPort, true);
         } else {
             std::cout << "Connecting UDP " << host << ":" << udpPort << std::endl;
-            return ClientNetwork::getInstance().connect(host, udpPort);
+            return ClientNetwork::getInstance().connect(host, udpPort, false);
         }
     }
 
-    void updateClientNetwork(Network::ConnectionType connectionType)
+    void updateClientNetworkTCP()
+    {
+        ClientNetwork &clientNetwork = ClientNetwork::getInstance();
+
+        clientNetwork.startAsyncReceive(clientNetwork.getTCPSocket());
+        clientNetwork.handleNetwork();
+    }
+
+    void updateClientNetworkUDP()
     {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        if (connectionType == Network::ConnectionType::TCP) {
-            clientNetwork.receive(clientNetwork.getTCPSocket());
-        } else if (connectionType == Network::ConnectionType::UDP) {
-            clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
-        }
-
+        clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
         clientNetwork.handleNetwork();
+
         while (GameEngine::Events::poll(type)) {
             switch (type) {
             case GameEngine::Events::Type::PLAYER_UP:

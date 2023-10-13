@@ -27,7 +27,12 @@ namespace Network {
      * @brief Update the client.
      * Fetches the server information then answers from the server
      */
-    void updateClientNetwork(Network::ConnectionType connectionType);
+    void updateClientNetworkUDP();
+    /**
+     * @brief Update the TCP client.
+     * Fetches the server information then answers from the server
+     */
+    void updateClientNetworkTCP();
     /**
      * @brief Cleanup the client
      */
