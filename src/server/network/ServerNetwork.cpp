@@ -161,3 +161,15 @@ void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
     _ioService.run();
     engine.run();
 }
+
+std::string Network::ServerNetwork::makeHeader(int code, int entityNb)
+{
+    header res;
+    std::string str;
+
+    str.resize(sizeof(header));
+    res.codeRfc = code;
+    res.entity = entityNb;
+    std::memcpy(str.data(), &res, sizeof(header));
+    return str;
+}

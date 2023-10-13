@@ -6,17 +6,14 @@
 */
 
 #pragma once
+#include "enums.hpp"
 
 namespace ECS::Components {
-	enum TeamGroup {
-		ALLY,
-		ENEMY
-	};
 	/**
 	* @brief Component that contains the  type of team
 	* @param team enum of the type of team of the component
 	*/
 	struct TeamComponent{
-		TeamGroup team;
+		Enums::TeamGroup team;
 	};
 }

@@ -63,7 +63,7 @@ namespace Network {
              * @brief variable that contain what you received
              *
              */
-            std::vector<char> _data;
+            std::string _data;
             /**
              * @brief contain the IP address and a protocol port number
              *
