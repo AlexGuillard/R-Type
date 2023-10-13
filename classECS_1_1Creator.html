@@ -88,6 +88,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">addWalkingAI</a> (const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;entity, <a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;target, std::pair&lt; float, float &gt; preferredDistance, float speed, bool dropsDownLedge=false, bool jumpsOverObstacle=false)</td></tr>
+<tr class="memdesc:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a walking AI to an entity. Assumes the entity already has a position, velocity and hitbox.  <a href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">More...</a><br /></td></tr>
+<tr class="separator:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a4ac22752d9e61355bc624279b8f296"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a4a4ac22752d9e61355bc624279b8f296">createCharacter</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)</td></tr>
 <tr class="memdesc:a4a4ac22752d9e61355bc624279b8f296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a base entity.  <a href="classECS_1_1Creator.html#a4a4ac22752d9e61355bc624279b8f296">More...</a><br /></td></tr>
 <tr class="separator:a4a4ac22752d9e61355bc624279b8f296"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +174,87 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7e07f21cacd1f2f944c09a3a2d64378a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e07f21cacd1f2f944c09a3a2d64378a">&#9670;&nbsp;</a></span>addWalkingAI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classECS_1_1Entity.html">Entity</a> ECS::Creator::addWalkingAI </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::pair&lt; float, float &gt;&#160;</td>
+          <td class="paramname"><em>preferredDistance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>dropsDownLedge</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>jumpsOverObstacle</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a walking AI to an entity. Assumes the entity already has a position, velocity and hitbox. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classECS_1_1Entity.html">Entity</a> to add the AI to </td></tr>
+    <tr><td class="paramname">registry</td><td>Registry to add the AI to </td></tr>
+    <tr><td class="paramname">target</td><td>Target of the AI </td></tr>
+    <tr><td class="paramname">preferredDistance</td><td>Pair of floats representing the preferred </td></tr>
+    <tr><td class="paramname">speed</td><td>Walking speed of the entity </td></tr>
+    <tr><td class="paramname">dropsDownLedge</td><td>Whether the entity can drops down ledges </td></tr>
+    <tr><td class="paramname">jumpsOverObstacle</td><td>Whether the entity can jump over obstacles </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classECS_1_1Entity.html">Entity</a> The entity with the AI </dd></dl>
+
+</div>
+</div>
 <a id="ab700ff9129e30a5966ca7079c04c7d87"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab700ff9129e30a5966ca7079c04c7d87">&#9670;&nbsp;</a></span>createAlly()</h2>
 

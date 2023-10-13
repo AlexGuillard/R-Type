@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['waiting_5ffor_5fplayer_5finput_287',['WAITING_FOR_PLAYER_INPUT',['../classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2a6b8c757fb752d3730720ccbf3d73cd56',1,'Screen::Display']]],
-  ['waitrequest_288',['waitRequest',['../classNetwork_1_1ServerNetwork.html#a7734a0efe1d2e71813df992eb1ccb07a',1,'Network::ServerNetwork']]],
-  ['wavebeambasedamage_289',['waveBeamBaseDamage',['../namespaceECS_1_1Components.html#ae5ee810ebe4de2a9fac16f008147f4c1',1,'ECS::Components']]],
-  ['wavebeamcomponent_290',['WaveBeamComponent',['../structECS_1_1Components_1_1WaveBeamComponent.html',1,'ECS::Components']]],
-  ['wavebeamcomponent_2ehpp_291',['WaveBeamComponent.hpp',['../WaveBeamComponent_8hpp.html',1,'']]],
-  ['wavebeamspeed_292',['waveBeamSpeed',['../namespaceECS_1_1Components.html#ae1f1900bb3fb8fa6bfc286b2aca4f990',1,'ECS::Components']]],
-  ['width_293',['width',['../structECS_1_1Components_1_1HitBoxComponent.html#ac1c7f72915107bd5081ee73fc437cb64',1,'ECS::Components::HitBoxComponent']]]
+  ['value_5ftype_288',['value_type',['../classECS_1_1Containers_1_1SparseArray.html#a88433dd38cc7b3f7ece996999ec5b2df',1,'ECS::Containers::SparseArray::value_type()'],['../classECS_1_1Containers_1_1IndexedZipperIterator.html#a96192f302d71791c9f540384f77c7dac',1,'ECS::Containers::IndexedZipperIterator::value_type()'],['../classECS_1_1Containers_1_1ZipperIterator.html#add9fafe3feb40a1341ffe5898017ec62',1,'ECS::Containers::ZipperIterator::value_type()']]],
+  ['velocitycomponent_289',['VelocityComponent',['../structECS_1_1Components_1_1VelocityComponent.html',1,'ECS::Components']]],
+  ['velocitycomponent_2ehpp_290',['VelocityComponent.hpp',['../VelocityComponent_8hpp.html',1,'']]],
+  ['velocityx_291',['velocityX',['../structNetwork_1_1bodyMissile.html#a9b8a9e3c1667a2b72c5b3b0445715ec7',1,'Network::bodyMissile']]],
+  ['velocityy_292',['velocityY',['../structNetwork_1_1bodyMissile.html#ab2c5d874e64101165ea221ff47a2a5f5',1,'Network::bodyMissile']]],
+  ['verticaloffset_293',['verticalOffset',['../structECS_1_1Components_1_1SinMovementComponent.html#a33256cad837c8140c5119ad0f6cb07bc',1,'ECS::Components::SinMovementComponent']]]
 ];
