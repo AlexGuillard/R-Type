@@ -27,10 +27,9 @@ static bool isConnected = false;
 
 static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
-    if (!isConnected) {
-        Network::startClientNetwork(window.getHostName(), 0, 6084, type);
-        isConnected = true;
-    }
+    // if (Network::returnIsCoUDP()) {
+    //     Screen::Display::setGameState(Screen::Display::GameState::GAME);
+    // }
 
     Network::updateClientNetworkUDP();
     Screen::Display::drawGame(engine);

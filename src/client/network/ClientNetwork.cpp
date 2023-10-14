@@ -28,9 +28,11 @@ Network::ClientNetwork::~ClientNetwork()
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    if ( !error && recvd_bytes > 0 ) {
+    if (!error && recvd_bytes > 0) {
         if (_data.size() >= HEADER_SIZE) {
+            std::cout << "Je passe par la" << std::endl;
             header packet = getHeader(_data);
+            handleMessageData(packet, _data);
         }
         _data.clear();
         asyncReceive(_socket);
@@ -54,25 +56,31 @@ void Network::ClientNetwork::sendHello()
 
 void Network::ClientNetwork::sendMovement(Movement movement)
 {
-    std::string message;
+    int message;
 
     switch (movement) {
     case Movement::UP:
-        message = "211";
+        message = 211;
         break;
     case Movement::DOWN:
-        message = "212";
+        message = 212;
         break;
     case Movement::LEFT:
-        message = "213";
+        message = 213;
         break;
     case Movement::RIGHT:
-        message = "214";
+        message = 214;
         break;
     default:
         break;
     }
-    asyncSend(_socket, message);
+
+    std::string messageStr = std::to_string(message);
+    std::string res;
+    res.append(Network::Send::makeBinaryInt(message));
+
+    std::cout << "Sending movement: " <<  messageStr << std::endl;
+    asyncSend(_socket, "212");
 }
 
 void Network::ClientNetwork::sendAction(Action action)
@@ -116,35 +124,63 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
 void Network::ClientNetwork::initializeResponsehandler()
 {
-    _responseHandlers["200\n"] = std::bind(&ClientNetwork::handleConnection, this, std::placeholders::_1);
-    _responseHandlers["201\n"] = std::bind(&ClientNetwork::handleLogin, this, std::placeholders::_1);
-    _responseHandlers["202\n"] = std::bind(&ClientNetwork::handleLogout, this, std::placeholders::_1);
+    _responseHandlers[200] = [this](const header& h, const std::string& s) {
+        handleConnection(h, s);
+    };
+    _responseHandlers[201] = [this](const header& h, const std::string& s) {
+        handleLogin(h, s);
+    };
+    _responseHandlers[202] = [this](const header& h, const std::string& s) {
+        handleLogout(h, s);
+    };
 }
 
-void Network::ClientNetwork::handleConnection(const std::string &message)
+void Network::ClientNetwork::handleConnection(const header& messageHeader, const std::string &str)
 {
-    if (message == "200\n") {
-        std::cout << "Ur connected" << std::endl;
+    std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
+
+    if (str.size() >= sizeof(int)) {
+        int numClients = *reinterpret_cast<const int*>(str.c_str());
+        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients << " players including you." << std::endl;
     } else {
-        std::cout << "Unexecepted message received" << std::endl;
+        std::cout << "Unexpected message received" << std::endl;
     }
 }
 
-void Network::ClientNetwork::handleLogin(const std::string &message)
+void Network::ClientNetwork::handleLogin(const header& messageHeader, const std::string &str)
 {
-    if (message == "201\n") {
-        std::cout << "Ur logged" << std::endl;
+    std::string strCopy = str;
+    static bool firstTime = false;
+
+    if (strCopy.size() >= sizeof(int)) {
+        int udpPort = *reinterpret_cast<const int*>(strCopy.c_str());
+        std::cout << "Im the player " << messageHeader.entity << " and this is the UDP port: " << udpPort << std::endl;
+
+        strCopy.erase(0, sizeof(int));
+
+        if (!strCopy.empty() && strCopy.size() >= sizeof(int)) {
+            int additionalCode = *reinterpret_cast<const int*>(strCopy.c_str());
+            std::cout << "Additional code: " << additionalCode << std::endl;
+            if (additionalCode == 201 && !firstTime) {
+                if (connect("0.0.0.0", udpPort, false)) {
+                    firstTime = true;
+                    isConnectedUDP = true;
+                }
+            }
+        } else {
+            std::cout << "Only header found" << std::endl;
+        }
     } else {
-        std::cout << "Unexecepted message received" << std::endl;
+        std::cout << "Unexpected message received" << std::endl;
     }
 }
 
-void Network::ClientNetwork::handleLogout(const std::string &message)
+void Network::ClientNetwork::handleLogout(const header& messageHeader, const std::string &str)
 {
-    if (message == "202\n") {
-        std::cout << "Ur loggout" << std::endl;
+    if (messageHeader.codeRfc == 202) {
+        // std::cout << "Logged out as entity: " << entity << std::endl;
     } else {
-        std::cout << "Unexecepted message received" << std::endl;
+        std::cout << "Unexpected message received" << std::endl;
     }
 }
 
@@ -212,6 +248,7 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code& erro
     if (!error && recvd_bytes > 0) {
         if (_data.size() >= HEADER_SIZE) {
             header packet = getHeader(_data);
+            handleMessageData(packet, _data);
         }
         startAsyncReceiveTCP(tcpsocket);
     } else {
@@ -232,7 +269,26 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
     header res;
 
     std::memcpy(&res, str.data(), HEADER_SIZE);
-    std::cout << "code: " << res.codeRfc << " nb: " << res.entity << std::endl;
+    std::cout << "Header -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
     str.erase(0, HEADER_SIZE);
     return res;
+}
+
+void Network::ClientNetwork::send201()
+{
+    std::string res;
+
+    res.append(Network::Send::makeBinaryInt(201));
+    send(_tcpSocket, res);
+}
+
+void Network::ClientNetwork::handleMessageData(const header &messageHeader, std::string &str)
+{
+    auto responsehandlerIt = _responseHandlers.find(messageHeader.codeRfc);
+
+    if (responsehandlerIt != _responseHandlers.end()) {
+        responsehandlerIt->second(messageHeader, str);
+    } else {
+        std::cout << "Unexecepted message received" << std::endl;
+    }
 }

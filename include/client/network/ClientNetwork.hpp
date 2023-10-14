@@ -100,19 +100,19 @@ namespace Network {
          *
          * @param message message from the server
          */
-        void handleConnection(const std::string &message);
+        void handleConnection(const header& messageHeader, const std::string &str);
         /**
          * @brief Handle the Login from server
          *
          * @param message message from the server
          */
-        void handleLogin(const std::string &message);
+        void handleLogin(const header& messageHeader, const std::string &str);
         /**
          * @brief Handle the Logout from server
          *
          * @param message message from the server
          */
-        void handleLogout(const std::string &message);
+        void handleLogout(const header& messageHeader, const std::string &str);
 
         /**
          * @brief Get the Instance object
@@ -198,6 +198,9 @@ namespace Network {
          * @return header
          */
         header getHeader(std::string &str);
+        void send201();
+        void handleMessageData(const header &messageHeader, std::string &str);
+        bool isConnectedUDP = false;
 
     private:
         //Port of the server
@@ -211,7 +214,7 @@ namespace Network {
         //Data received
         std::string _dataReceived;
         //Map to use the pointer on function
-        std::map<std::string, ResponseHandler> _responseHandlers;
+        std::map<int, std::function<void(const header&, const std::string&)>> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
         //Message to send
