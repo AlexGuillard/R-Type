@@ -17,8 +17,21 @@ namespace ECS {
 
     class Creator {
     public:
+        static constexpr std::size_t defaultScrollSpeed = 100;
+        static constexpr float defaultGravity = 9.81F;
+
         Creator() = delete;
         ~Creator() = delete;
+
+        /**
+         * @brief Set the global horizontal scroll speed
+         * @param speed The speed to set in pixels per second
+         */
+        static void setLevelScrollSpeed(float speed);
+        /**
+         * @returns The global horizontal scroll speed in pixels per second
+         */
+        static float getLevelScrollSpeed();
 
         /**
          * @brief Add a walking AI to an entity.
@@ -86,6 +99,27 @@ namespace ECS {
             float xDirection,
             float yDirection,
             Enums::TeamGroup team = Enums::TeamGroup::ENEMY
+        );
+
+        /**
+         * @brief Create a base entity that moves with the background
+         *
+         * @param registry The registry to create the entity in
+         * @//param team The team the entity belongs to
+         * @param damage The damage the entity deals to the other team on collision
+         * @param health The health of the entity
+         * @param width The width of the entity's hitbox/texture
+         * @param height The height of the entity's hitbox/texture
+         * @param id The id of the entity
+         */
+        static Entity createGroundedCharacter(
+            Containers::Registry &registry,
+            /* enum TeamGroup team, */
+            std::size_t damage,
+            std::size_t health,
+            std::size_t width,
+            std::size_t height,
+            std::size_t id
         );
 
         /**
@@ -162,8 +196,8 @@ namespace ECS {
          * @param color color of the ship
          */
         static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
-    protected:
     private:
+        static float mLevelScrollSpeed;
     };
 
 } // namespace ECS

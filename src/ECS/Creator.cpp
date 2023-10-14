@@ -23,11 +23,14 @@
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 
 namespace ECS {
+
+    float Creator::mLevelScrollSpeed = Creator::defaultScrollSpeed;
 
     Entity Creator::addWalkingAI(
         const Entity &entity,
@@ -40,8 +43,19 @@ namespace ECS {
     {
         registry.emplaceComponent<Components::WalkingAIComponent>(entity, preferredDistance, speed, dropsDownLedge, jumpsOverObstacle);
         registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
-        registry.emplaceComponent<Components::GravityComponent>(entity, 9.81F);
+        registry.emplaceComponent<Components::GravityComponent>(entity, Creator::defaultGravity);
+        registry.emplaceComponent<Components::CollidableComponent>(entity);
         return entity;
+    }
+
+    void Creator::setLevelScrollSpeed(float speed)
+    {
+        mLevelScrollSpeed = speed;
+    }
+
+    float Creator::getLevelScrollSpeed()
+    {
+        return mLevelScrollSpeed;
     }
 
     Entity Creator::createCharacter(
@@ -75,6 +89,22 @@ namespace ECS {
         registry.emplaceComponent<Components::DamageComponent>(entity, damage);
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
+        return entity;
+    }
+
+    Entity Creator::createGroundedCharacter(
+        Containers::Registry &registry,
+        /* enum TeamGroup team, */
+        std::size_t damage,
+        std::size_t health,
+        std::size_t width,
+        std::size_t height,
+        std::size_t id
+    )
+    {
+        Entity entity = Creator::createCharacter(registry, damage, health, width, height, id);
+
+        registry.emplaceComponent<Components::HorizontalScrollComponent>(entity, mLevelScrollSpeed);
         return entity;
     }
 
@@ -136,7 +166,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
         const uint8_t nbFrameInAnimation = 3;
 
-        ECS::Entity bink = ECS::Creator::createCharacter(registry, 1, 1, 28, 33, id);
+        ECS::Entity bink = ECS::Creator::createGroundedCharacter(registry, 1, 1, 28, 33, id);
         registry.getComponents<Components::PositionComponent>().at(bink)->x = x;
         registry.getComponents<Components::PositionComponent>().at(bink)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -219,7 +249,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
         const uint8_t nbFrameInAnimation = 6;
 
-        ECS::Entity blaster = ECS::Creator::createCharacter(registry, 1, 1, 16, 15, id);
+        ECS::Entity blaster = ECS::Creator::createGroundedCharacter(registry, 1, 1, 16, 15, id);
         registry.getComponents<Components::PositionComponent>().at(blaster)->x = x;
         registry.getComponents<Components::PositionComponent>().at(blaster)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -232,7 +262,7 @@ namespace ECS {
         };
         registry.addComponent<Components::DrawableComponent>(blaster, std::move(drawableComponent));
         registry.emplaceComponent<Components::CollidableComponent>(blaster);
-        registry.emplaceComponent<Components::GravityComponent>(blaster, 9.81F);
+        registry.emplaceComponent<Components::GravityComponent>(blaster, Creator::defaultGravity);
         return blaster;
     }
 
