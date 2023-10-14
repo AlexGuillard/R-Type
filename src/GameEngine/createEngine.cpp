@@ -23,9 +23,11 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/BackgroundComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
+#include "ECS/Systems/background.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -70,6 +72,16 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
+    static void initLevelRegistry(Containers::Registry &registry)
+    {
+        registry.registerComponent<Components::BackgroundComponent>(); //background
+        //ground
+        //size
+        //speed
+
+        registry.addSystem<Components::BackgroundComponent>(Systems::background);
+    }
+
     static ECS::Entity spawnShip(Containers::Registry &registry)
     {
         const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
@@ -94,6 +106,29 @@ namespace GameEngine {
         return ship;
     }
 
+    static ECS::Entity spawnLevel(Containers::Registry &registry)
+    {
+        const float frameScale = 5;
+        const Vector2 position = {0, 0};
+        ECS::Entity level = registry.spawnEntity();
+        Components::BackgroundComponent backgroundComponent = {
+            Assets::AssetsIndex::BACKGROUND1_PNG,
+            frameScale,
+            position
+        };
+        //ground
+        //size
+        //speed
+        //position
+
+        registry.addComponent<Components::BackgroundComponent>(level, std::move(backgroundComponent));
+        //add ground
+        // add size
+        // add speed
+        // add position
+        return level;
+    }
+
     static void populateEntities(Containers::Registry &registry)
     {
         ECS::Entity player = spawnShip(registry);
@@ -102,12 +137,19 @@ namespace GameEngine {
         registry.getComponents<Components::PositionComponent>().at(player)->y = Screen::Display::getCameraSize().y / 2;
     }
 
+    static void levelEntities(Containers::Registry &registry)
+    {
+        ECS::Entity level = spawnLevel(registry);
+    }
+
     GameEngine createEngine()
     {
         GameEngine engine;
-        // engine.createRegistry(RegistryType::Background);
+        engine.createRegistry(registryTypeBackground);
         engine.createRegistry(registryTypeEntities);
+        initLevelRegistry(engine.getRegistry(registryTypeBackground));
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
+        levelEntities(engine.getRegistry(registryTypeBackground));
         populateEntities(engine.getRegistry(registryTypeEntities));
         return engine;
     }

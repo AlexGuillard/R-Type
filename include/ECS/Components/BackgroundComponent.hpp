@@ -27,7 +27,5 @@ namespace ECS::Components {
         Assets::AssetsIndex spriteSheetIndex;
         float frameScale = 1.0;
         Vector2 position = {0, 0};
-        float speed = 1.0;
-        float timeAtLastFrameChange = 0.0F;
     };
 } // namespace ECS::Components

@@ -23,7 +23,8 @@ namespace ECS::Systems::Helper {
 
     void BackgroundDrawer::draw(int posX, int posY)
     {
-        DrawTexture(m_texture, posX, posY, WHITE);
+        Vector2 pos = {(float) posX, (float) posY};
+        DrawTextureEx(m_texture, pos, (float) 0.0, m_frameScale, WHITE);
     }
 
     void BackgroundDrawer::draw(const Vector2 &position)
