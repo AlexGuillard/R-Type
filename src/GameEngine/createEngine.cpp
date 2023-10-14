@@ -25,12 +25,9 @@
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
-<<<<<<< HEAD
 #include "ECS/Components/BackgroundComponent.hpp"
 #include "Assets/AssetLoader.hpp"
-=======
 #include "ECS/Components/GravityComponent.hpp"
->>>>>>> adc42cb955c860313119d5115ae9645c104f94a2
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
