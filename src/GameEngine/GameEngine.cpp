@@ -54,6 +54,16 @@ namespace GameEngine {
         return registryIterator->second;
     }
 
+    void GameEngine::setLevel(int level)
+    {
+        this->_level = level;
+    }
+
+    int GameEngine::getLevel() const
+    {
+        return this->_level;
+    }
+
     void GameEngine::run()
     {
         for (auto &[_, registry] : m_registries) {

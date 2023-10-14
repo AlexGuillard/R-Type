@@ -13,6 +13,7 @@ namespace ECS::Systems {
      */
     void background(
         Containers::Registry &registry,
+        Containers::SparseArray<Components::LevelComponent> &levels,
         Containers::SparseArray<Components::BackgroundComponent> &backgrounds);
 
 }; // namespace ECS::Systems

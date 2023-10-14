@@ -26,6 +26,7 @@
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
 #include "ECS/Components/BackgroundComponent.hpp"
+#include "ECS/Components/LevelComponent.hpp"
 #include "Assets/AssetLoader.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Systems/controller.hpp"
@@ -86,12 +87,10 @@ namespace GameEngine {
 
     static void initLevelRegistry(Containers::Registry &registry)
     {
-        registry.registerComponent<Components::BackgroundComponent>(); //background
-        //ground
-        //size
-        //speed
+        registry.registerComponent<Components::BackgroundComponent>();
+        registry.registerComponent<Components::LevelComponent>();
 
-        registry.addSystem<Components::BackgroundComponent>(Systems::background);
+        registry.addSystem<Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
     }
     static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, float scale, float speed)
     {
@@ -109,7 +108,7 @@ namespace GameEngine {
     {
     }
 
-    static void levelEntities(Containers::Registry &registry)
+    static void levelEntities(Containers::Registry &registry, int _level)
     {
         std::vector<Assets::AssetsIndex> assetIndices = {
             Assets::AssetsIndex::BACKGROUND1_PNG,
@@ -131,6 +130,7 @@ namespace GameEngine {
             sizeAndSpeed[i].first, sizeAndSpeed[i].second);
             ECS::Entity level = registry.spawnEntity();
             registry.emplaceComponent<Components::BackgroundComponent>(level, background);
+            registry.emplaceComponent<Components::LevelComponent>(level, _level);
         }
     }
 
@@ -141,7 +141,7 @@ namespace GameEngine {
         engine.createRegistry(registryTypeEntities);
         initLevelRegistry(engine.getRegistry(registryTypeBackground));
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
-        levelEntities(engine.getRegistry(registryTypeBackground));
+        levelEntities(engine.getRegistry(registryTypeBackground), engine.getLevel());
         populateEntities(engine.getRegistry(registryTypeEntities));
         ECS::Creator::createPlayer(engine.getRegistry(registryTypeEntities), 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // delete when client is ready
         return engine;
