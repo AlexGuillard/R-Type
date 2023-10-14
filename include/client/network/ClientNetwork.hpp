@@ -191,6 +191,13 @@ namespace Network {
          * @param tcpsocket socket
          */
         void startAsyncReceiveTCP(boost::asio::ip::tcp::socket &tcpsocket);
+        /**
+         * @brief Get the Header object
+         *
+         * @param str string from server
+         * @return header
+         */
+        header getHeader(std::string &str);
 
     private:
         //Port of the server
@@ -215,6 +222,8 @@ namespace Network {
         std::queue<std::string> _receivedMessages;
         //Socket of the tcp
         boost::asio::ip::tcp::socket _tcpSocket;
+        //Size of the header of the message
+        static constexpr std::size_t HEADER_SIZE = sizeof(header);
     };
 }
 
