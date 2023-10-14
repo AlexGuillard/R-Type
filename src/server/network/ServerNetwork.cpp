@@ -6,9 +6,11 @@
 */
 
 #include "server/network/ServerNetwork.hpp"
+#include "server/network/sendCode.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int portTCP, int portUdp)
-    : _ioService(std::ref(io_service)), _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(io_service, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)), _timer(io_service), portUdp(portUdp)
+    : _ioService(std::ref(io_service)), _acceptor(_ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), portTCP)), _asyncSocket(_ioService, boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), portUdp)),
+    _timer(io_service), portUdp(portUdp)
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
@@ -17,14 +19,11 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service& io_service, int p
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
         std::cout << "Server running on: " << it->endpoint().address().to_string() << ":" << std::to_string(_acceptor.local_endpoint().port()) << std::endl;
     }
-    while (1) {
-        if (isGame == false) {
-            tcpConnection();
-        } else {
-            udpConnection();
-        }
-        _ioService.run();
-    }
+    std::thread tcp(&Network::ServerNetwork::tcpConnection, this);
+    std::thread udp(&Network::ServerNetwork::udpConnection, this);
+    tcp.join();
+    udp.join();
+    _ioService.run();
 }
 
 Network::ServerNetwork::~ServerNetwork()
@@ -35,22 +34,28 @@ void Network::ServerNetwork::tcpConnection()
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
 
-void Network::ServerNetwork::waitRequest(boost::asio::ip::tcp::socket &socket)
+void Network::ServerNetwork::waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket)
 {
+    int res = 0;
+
     _data.resize(MAX_SIZE_BUFF);
-    socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
+    socket->async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &socket](boost::system::error_code error, std::size_t bytes_transferred) {
+        int number = 0;
+
         if (!error) {
-            if (findClient(getActualClient(socket)) != "") {
-                std::cout << "[" << bytes_transferred << "] " << _data.data() << "from" << getActualClient(socket) << std::endl;
+            if (findClient(getActualClient(*socket)) != "") {
+                number = Network::Send::stringToInt(_data);
+                std::cout << "[" << bytes_transferred << "] " << number << "from" << getActualClient(*socket) << std::endl;
+                if (number == 201) {
+                    Network::ServerNetwork::send201();
+                }
             } else {
                 connection(socket);
             }
             _data.clear();
-            // Start another asynchronous read operation
             waitRequest(socket);
         } else {
             waitRequest(socket);
-            // Handle the error, possibly by closing the socket
         }
     });
 }
@@ -63,7 +68,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code& erro
         std::cout << "acceptation success" << std::endl;
         _socket.push_back(std::make_shared<boost::asio::ip::tcp::socket>(std::move(socket)));
         std::cout << _socket.back()->remote_endpoint().address().to_string() << std::endl;
-        waitRequest(*_socket.back());
+        waitRequest(_socket.back());
         nb++;
         _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
     }
@@ -77,9 +82,7 @@ void Network::ServerNetwork::udpConnection()
 
 void Network::ServerNetwork::updateTicks()
 {
-    int timerTicks = 200;
-
-    _timer.expires_from_now(boost::posix_time::millisec(timerTicks));
+    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
             // std::cout << "need to updates ticks\n";
@@ -97,7 +100,8 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if ( !error && recvd_bytes > 0 ) {
         if (findClient(getActualClient()) != "") {
-            std::cout << "[" << recvd_bytes << "] " << _data.data() << "from" << getActualClient() << std::endl;
+            handleClientData(Network::Send::stringToInt(_data));
+            std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
         } else {
             asyncSend(_asyncSocket, "need tcp connection first\n");
@@ -114,7 +118,7 @@ void Network::ServerNetwork::addClient()
 
     if (_clients.size() < 4) {
         actualClient = _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
-        _clients.push_back(actualClient);
+        _clients[actualClient].first = _clients.size();
     }
 }
 
@@ -130,9 +134,7 @@ std::string Network::ServerNetwork::getActualClient(boost::asio::ip::tcp::socket
 
 std::string Network::ServerNetwork::findClient(std::string findId) const
 {
-    auto res = std::find(_clients.begin(), _clients.end(), findId);
-
-    if (res != _clients.end()) {
+    if (_clients.contains(findId)) {
         return findId;
     }
     return "";
@@ -143,18 +145,65 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
     asyncReceive(_asyncSocket);
 }
 
-void Network::ServerNetwork::connection(boost::asio::ip::tcp::socket &socket)
+void Network::ServerNetwork::connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket)
 {
-    std::string res = _data.data();
+    int number = Network::Send::stringToInt(_data);
     std::string actualClient;
 
-    if (res == "Hello R-Type server\n" && _clients.size() < 4) {
-        actualClient = getActualClient(socket);
-        _clients.push_back(actualClient);
-        res = std::to_string(portUdp);
-        send(socket, "200\n");
-        send(socket, res);
+    std::cout << number << std::endl;
+    if (number == CONNECTION_NB && _clients.size() < 4) {
+        actualClient = getActualClient(*socket);
+        _clients[actualClient].first = _clients.size();
+        _clientsTcp.push_back(socket);
+        send(*socket, codeLogin(200));
+        send202(_clientsTcp.size());
     } else {
-        send(socket, "401: Forbidden\n");
+        send(*socket, code401());
+    }
+}
+
+std::string Network::ServerNetwork::codeLogin(int code)
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(code, _clients.size() - 1);
+    res.append(Network::Send::makeBinaryInt(_clients.size()));
+    res.append(Network::Send::makeBinaryInt(code));
+    return res;
+}
+
+std::string Network::ServerNetwork::code401()
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(401, -1);
+    res.append(Network::Send::makeBinaryInt(401));
+    return res;
+}
+
+void Network::ServerNetwork::send202(int indexClient)
+{
+    for (int i = 0; i < _clientsTcp.size(); i++) {
+        if (indexClient != i)
+            send(*_clientsTcp[i], codeLogin(202));
+    }
+}
+
+void Network::ServerNetwork::send201()
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(201, -1);
+    res.append(Network::Send::makeBinaryInt(portUdp));
+    res.append(Network::Send::makeBinaryInt(201));
+    for (int i = 0; i < _clientsTcp.size(); i++) {
+        send(*_clientsTcp[i], res);
+    }
+}
+
+void Network::ServerNetwork::handleClientData(int num)
+{
+    if (num >= 211 && num <= 216) {
+        _clients[getActualClient()].second.push_back(num);
     }
 }

@@ -26,7 +26,7 @@ Screen::Display::Display(GameState state) : _gameState(state)
 
     //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
     // We will remove this when the game will be finished or for presentation
-    this->resizeWindow(720, 480);
+    this->resizeWindow(1080, 675).center();
     // this->toggleFullScreen();
     SetTargetFPS(fps);
 }

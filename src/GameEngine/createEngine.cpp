@@ -22,13 +22,21 @@
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
+#include "ECS/Components/WalkingAIComponent.hpp"
+#include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
+#include "ECS/Creator.hpp"
 #include "ECS/Systems/damage.hpp"
 #include "ECS/Systems/sinMovement.hpp"
+#include "ECS/Systems/target.hpp"
+#include "ECS/Systems/walkingAI.hpp"
+#include "ECS/Systems/gravity.hpp"
 #include "ECS/Systems/solid.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
@@ -53,7 +61,12 @@ namespace GameEngine {
         registry.registerComponent<Components::CollisionComponent>();
         registry.registerComponent<Components::TeamComponent>();
         registry.registerComponent<Components::SinMovementComponent>();
+        registry.registerComponent<Components::InRangeComponent>();
+        registry.registerComponent<Components::WalkingAIComponent>();
+        registry.registerComponent<Components::TargetComponent>();
         registry.registerComponent<Components::SolidComponent>();
+        registry.registerComponent<Components::GravityComponent>();
+        registry.registerComponent<Components::TargetComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
@@ -61,38 +74,15 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
+        registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
+        registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
+        registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
-    }
-
-    static ECS::Entity spawnShip(Containers::Registry &registry)
-    {
-        const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
-        const uint8_t nbFrameInAnimation = 5;
-        ECS::Entity ship = registry.spawnEntity();
-        registry.emplaceComponent<Components::PositionComponent>(ship, 0, 0);
-        registry.emplaceComponent<Components::VelocityComponent>(ship, 0, 0);
-        Components::DrawableComponent drawableComponent = {
-            Assets::AssetsIndex::R_TYPESHEET42_PNG,
-            nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
-            true, // boomerang
-            nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(ship, std::move(drawableComponent));
-        registry.emplaceComponent<Components::CollidableComponent>(ship);
-        const Vector2 hitboxSize = Vector2(32, 16);
-        registry.emplaceComponent<Components::HitBoxComponent>(ship, hitboxSize.x, hitboxSize.y);
-        return ship;
     }
 
     static void populateEntities(Containers::Registry &registry)
     {
-        ECS::Entity player = spawnShip(registry);
-        registry.emplaceComponent<Components::ControllableComponent>(player);
-        registry.getComponents<Components::PositionComponent>().at(player)->x = Screen::Display::getCameraSize().x / 2;
-        registry.getComponents<Components::PositionComponent>().at(player)->y = Screen::Display::getCameraSize().y / 2;
     }
 
     GameEngine createEngine()
@@ -102,6 +92,7 @@ namespace GameEngine {
         engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));
+        ECS::Creator::createPlayer(engine.getRegistry(registryTypeEntities), 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // delete when client is ready
         return engine;
     }
 

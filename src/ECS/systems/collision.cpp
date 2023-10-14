@@ -21,7 +21,7 @@ namespace ECS::Systems {
             if (collision->collisions.empty()) {
                 registry.removeComponent
                     <Components::CollisionComponent>(
-                        Containers::Registry::entityFromIndex(entityId)
+                        registry.entityFromIndex(entityId)
                     );
             }
         }
@@ -49,6 +49,7 @@ namespace ECS::Systems {
      * Creates the collision component if it doesn't exist.
     */
     static void addToCollisionComponent(
+        Containers::Registry &registry,
         std::optional<Components::CollisionComponent> &collision,
         const std::size_t receiverId,
         const std::size_t giverId)
@@ -57,7 +58,7 @@ namespace ECS::Systems {
             collision = Components::CollisionComponent();
         }
         collision->collisions.insert(
-            Containers::Registry::entityFromIndex(giverId)
+            registry.entityFromIndex(giverId)
         );
     }
 
@@ -65,13 +66,14 @@ namespace ECS::Systems {
      * @brief Removes an entity from the collision component of another entity.
     */
     static void removeFromCollisionComponent(
+        Containers::Registry &registry,
         std::optional<Components::CollisionComponent> &collision,
         const std::size_t receiverId,
         const std::size_t giverId)
     {
         if (collision.has_value()) {
             collision->collisions.erase(
-                Containers::Registry::entityFromIndex(giverId)
+                registry.entityFromIndex(giverId)
             );
         }
     }
@@ -90,9 +92,9 @@ namespace ECS::Systems {
                 // collision giver
                 if (receiverId == giverId) { continue; }
                 if (collidesWith(*receiverHitbox, *receiverPosition, *giverHitbox, *giverPosition)) {
-                    addToCollisionComponent(collisions.at(receiverId), receiverId, giverId);
+                    addToCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
                 } else {
-                    removeFromCollisionComponent(collisions.at(receiverId), receiverId, giverId);
+                    removeFromCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
                 }
             }
         }
