@@ -41,7 +41,7 @@ Rectangle playButtonRect = { 320, 240, 160, 60 };
 
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
-    Network::updateClientNetworkTCP();
+    Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
     Screen::Display::drawWaitingRoom(playButtonRect);
 }
 
