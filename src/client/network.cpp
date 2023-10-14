@@ -24,9 +24,15 @@ namespace Network {
         }
     }
 
-    void updateClientNetworkTCP()
+    void updateClientNetworkTCP(bool playButton)
     {
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
+
+        static bool firstTime = false;
+        if (playButton && !firstTime) {
+            clientNetwork.send201();
+            firstTime = true;
+        }
 
         clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());
         clientNetwork.handleNetwork();

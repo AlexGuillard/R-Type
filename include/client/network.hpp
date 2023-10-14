@@ -32,7 +32,7 @@ namespace Network {
      * @brief Update the TCP client.
      * Fetches the server information then answers from the server
      */
-    void updateClientNetworkTCP();
+    void updateClientNetworkTCP(bool playButton);
     /**
      * @brief Cleanup the client
      */
