@@ -253,6 +253,7 @@ namespace ECS {
             nbFrameInAnimation // fps
         };
         registry.addComponent<Components::DrawableComponent>(ally, std::move(drawableComponent));
+        registry.emplaceComponent<Components::CollidableComponent>(ally);
         return ally;
     }
 
