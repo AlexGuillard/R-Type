@@ -1,22 +1,8 @@
 var searchData=
 [
-  ['send_544',['send',['../classNetwork_1_1INetwork.html#a65186e9aa6e12b09228649bddd63a95a',1,'Network::INetwork::send()'],['../classNetwork_1_1ANetwork.html#af5b60566fc6146693737336f3d159685',1,'Network::ANetwork::send()']]],
-  ['sendaction_545',['sendAction',['../classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9',1,'Network::ClientNetwork']]],
-  ['sendhello_546',['sendHello',['../classNetwork_1_1ClientNetwork.html#ac54e57b42ddb3dc434cff4b9ec48e85f',1,'Network::ClientNetwork']]],
-  ['sendmovement_547',['sendMovement',['../classNetwork_1_1ClientNetwork.html#a5528b575454b2e3d2edb1a6087e0d455',1,'Network::ClientNetwork']]],
-  ['servernetwork_548',['ServerNetwork',['../classNetwork_1_1ServerNetwork.html#a17b2e7de81cbc55d7d36f4ee18c05bce',1,'Network::ServerNetwork']]],
-  ['setcameraposition_549',['setCameraPosition',['../classScreen_1_1Display.html#ad6e5a4e58d0ddd525d368f660b5f45f2',1,'Screen::Display']]],
-  ['setlevelscrollspeed_550',['setLevelScrollSpeed',['../classECS_1_1Creator.html#a826dd1ee770aee8d9c67e1623373447c',1,'ECS::Creator']]],
-  ['setmenustate_551',['setMenuState',['../classScreen_1_1Display.html#a352a3ce3dca79f71b33647524d6f9f09',1,'Screen::Display']]],
-  ['shake_552',['shake',['../classScreen_1_1Display.html#ab726c3a3b2d93b6a1c16c8f0a96bba23',1,'Screen::Display']]],
-  ['shooting_553',['shooting',['../namespaceECS_1_1Systems.html#a0ee574fa5cec611f311a104e50318f0a',1,'ECS::Systems']]],
-  ['sinmovement_554',['sinMovement',['../namespaceECS_1_1Systems.html#a7a8eb9d8ef7786915490604bee89481e',1,'ECS::Systems']]],
-  ['size_555',['size',['../classECS_1_1Containers_1_1Zipper.html#a763a70b21a03f324a741baf37f1a4f61',1,'ECS::Containers::Zipper::size()'],['../classECS_1_1Containers_1_1IndexedZipper.html#a04ad6db87bc621e8d801f227847ef583',1,'ECS::Containers::IndexedZipper::size()'],['../classECS_1_1Containers_1_1Registry.html#a321bc24cfcf3f4bf8b7f5cbaaee0c480',1,'ECS::Containers::Registry::size()']]],
-  ['solid_556',['solid',['../namespaceECS_1_1Systems.html#a07ebeb68ac6fe8f7507b9098e7d458eb',1,'ECS::Systems']]],
-  ['sparsearray_557',['SparseArray',['../classECS_1_1Containers_1_1SparseArray.html#a3c21181e3636d9f3596f8e3301993743',1,'ECS::Containers::SparseArray::SparseArray()=default'],['../classECS_1_1Containers_1_1SparseArray.html#a31faf3d401267b79055bb2ab9ab001ae',1,'ECS::Containers::SparseArray::SparseArray(SparseArray const &amp;)=default'],['../classECS_1_1Containers_1_1SparseArray.html#a31f934a02a5857dd8e0af4c909059b88',1,'ECS::Containers::SparseArray::SparseArray(SparseArray &amp;&amp;) noexcept=default'],['../classECS_1_1Containers_1_1SparseArray.html#a3e0d96b3be59dab32b10db7ff235a45b',1,'ECS::Containers::SparseArray::SparseArray(std::size_t n)']]],
-  ['spawnentity_558',['spawnEntity',['../classECS_1_1Containers_1_1Registry.html#a83cba407a3d064a9694cc01bc9879137',1,'ECS::Containers::Registry']]],
-  ['startclientnetwork_559',['startClientNetwork',['../namespaceNetwork.html#a70b3790ab28716d145986735455c108b',1,'Network']]],
-  ['stopclientnetwork_560',['stopClientNetwork',['../namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654',1,'Network']]],
-  ['stopioservice_561',['stopIOService',['../classNetwork_1_1ClientNetwork.html#a32b41efa147c0fe5a93a1f4c188b6b7d',1,'Network::ClientNetwork']]],
-  ['stringtoint_562',['stringToInt',['../namespaceNetwork_1_1Send.html#a536ae864cbfc0d1510a5156b27bb8283',1,'Network::Send']]]
+  ['operator_2a_563',['operator*',['../classECS_1_1Containers_1_1IndexedZipperIterator.html#a601645eb9cffe54d0b1054cbf41cdc8e',1,'ECS::Containers::IndexedZipperIterator::operator*()'],['../classECS_1_1Containers_1_1ZipperIterator.html#a120410b0cfd27bebadb6607e8a8e8b4b',1,'ECS::Containers::ZipperIterator::operator*()']]],
+  ['operator_2b_2b_564',['operator++',['../classECS_1_1Containers_1_1IndexedZipperIterator.html#a188c7b0f0394e2f3f203b0824f9c9e53',1,'ECS::Containers::IndexedZipperIterator::operator++()'],['../classECS_1_1Containers_1_1IndexedZipperIterator.html#a2808a31a9c95c5a44a6cebe730db030a',1,'ECS::Containers::IndexedZipperIterator::operator++(int)'],['../classECS_1_1Containers_1_1ZipperIterator.html#a858be17bba77de9fff632ec2dc7ee3c4',1,'ECS::Containers::ZipperIterator::operator++()'],['../classECS_1_1Containers_1_1ZipperIterator.html#a65212590b0318628a0b422dc88ca1dc2',1,'ECS::Containers::ZipperIterator::operator++(int)']]],
+  ['operator_2d_3e_565',['operator-&gt;',['../classECS_1_1Containers_1_1IndexedZipperIterator.html#a4ab8996050e95f9022181e8190801c8c',1,'ECS::Containers::IndexedZipperIterator::operator-&gt;()'],['../classECS_1_1Containers_1_1ZipperIterator.html#abd445c43b0d82dca532511090e846b3e',1,'ECS::Containers::ZipperIterator::operator-&gt;()']]],
+  ['operator_5b_5d_566',['operator[]',['../classECS_1_1Containers_1_1SparseArray.html#a3fd17850da14a0a893b4b455c2b49a0b',1,'ECS::Containers::SparseArray::operator[](size_type index)'],['../classECS_1_1Containers_1_1SparseArray.html#ad3974db4ede8b950c181f184cfeb5135',1,'ECS::Containers::SparseArray::operator[](size_type index) const']]],
+  ['size_5ft_567',['size_t',['../classECS_1_1Entity.html#a3e9f6afb916d7372995b0e945ea0188c',1,'ECS::Entity']]]
 ];

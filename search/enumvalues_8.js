@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['purple_5fcolor_685',['PURPLE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ae9acca2d6222b6c7b6e23f78473d45cc',1,'Enums']]]
+  ['not_5fconnected_728',['NOT_CONNECTED',['../namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677ad91be9b5ceb9fe0af02b9b02413eccf8',1,'Network']]]
 ];

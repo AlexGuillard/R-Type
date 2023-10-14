@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['waitrequest_569',['waitRequest',['../classNetwork_1_1ServerNetwork.html#ae4910314443918f318c6b5f26495798b',1,'Network::ServerNetwork']]],
-  ['walkingai_570',['walkingAI',['../namespaceECS_1_1Systems.html#a870d9aedbceb0f83a10bad213da7b595',1,'ECS::Systems']]]
+  ['target_600',['target',['../namespaceECS_1_1Systems.html#a56dc2d3a44dbcc189273b184de914d22',1,'ECS::Systems']]],
+  ['tcpconnection_601',['tcpConnection',['../classNetwork_1_1ServerNetwork.html#a917ccff23db3cb6c6019988a9e7a86fb',1,'Network::ServerNetwork']]]
 ];
