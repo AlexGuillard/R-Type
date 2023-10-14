@@ -122,7 +122,7 @@ void Network::ServerNetwork::updateTicks()
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
             if (_isGame == true) {
-                _tickCout++;
+                _tickCount++;
                 std::cout << "need to updates ticks\n";
             }
         } else {

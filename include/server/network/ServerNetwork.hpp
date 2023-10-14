@@ -94,7 +94,7 @@ namespace Network {
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
             // counter for ticks in game
-            std::size_t _tickCout = 0;
+            std::size_t _tickCount = 0;
             // boolean to check if we are on game or not
             bool _isGame = false;
         private:
