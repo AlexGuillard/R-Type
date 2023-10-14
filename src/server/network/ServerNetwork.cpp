@@ -36,7 +36,6 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     }
     _tcp.reset(new std::thread(&Network::ServerNetwork::tcpConnection, this));
     _udp.reset(new std::thread(&Network::ServerNetwork::udpConnection, this));
-    _ioService.run();
 }
 
 Network::ServerNetwork::~ServerNetwork()
