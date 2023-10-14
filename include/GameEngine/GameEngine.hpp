@@ -50,9 +50,16 @@ namespace GameEngine {
          */
         void run();
 
+        /**
+         * @brief Returns the delta time between the last two calls to run
+         * @return The delta time
+         */
+        static double getDeltaTime();
+
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
+        static double mDeltaTime;
     };
 
     /**

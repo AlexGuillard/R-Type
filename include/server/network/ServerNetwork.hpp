@@ -13,9 +13,15 @@
 #include <memory>
 
 #include "ANetwork.hpp"
+#include "server/network/Participants.hpp"
+#include "server/network/ServerTcp.hpp"
 #define TICKS_UPDATE 200
 
 namespace Network {
+    enum class Connection {
+        CONNECTED,
+        NOT_CONNECTED
+    };
     /**
      * @brief Network class for server
      *
@@ -34,12 +40,6 @@ namespace Network {
              *
              */
             void udpConnection();
-            /**
-             * @brief used to wait read of tcp socket
-             *
-             * @param socket client socket that send data
-             */
-            void waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
@@ -56,11 +56,6 @@ namespace Network {
              * @param recvd_bytes number of bytes received
              */
             void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
-            /**
-             * @brief add a client in vector of clients if it fills conditions
-             *
-             */
-            void addClient();
             /**
              * @brief find a client in the vector by sending a id, if can not find, return ""
              *
@@ -79,21 +74,9 @@ namespace Network {
              * @return std::string
              */
             std::string getActualClient() const;
-            /**
-             * @brief Get the Actual Client id
-             *
-             * @param socket tcp socket of client
-             * @return std::string
-             */
-            std::string getActualClient(boost::asio::ip::tcp::socket &socket) const;
-            /**
-             * @brief see if client have a good connection on the server, the server repond then with 200 or 401
-             *
-             */
-            void connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
         protected:
             // int for udp port to send when tcp connection
-            int portUdp;
+            int _portUdp;
             // store the io_service
             boost::asio::io_service &_ioService;
             /**
@@ -108,37 +91,24 @@ namespace Network {
             std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
-            // list of sockets for potential clients
-            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
-            // lists of accepted clients
-            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _clientsTcp;
         private:
+            Participants _list;
             /**
-             * @brief write a login code (202 or 200)
+             * @brief Set the Udp Socket object
              *
-             * @param code the code sended in the header and the footer
-             * @return std::string
+             * @param port port for udp to listen to
+             * @return int
              */
-            std::string codeLogin(int code);
+            int setUdpSocket(int port);
             /**
-             * @brief string for 401 error for client
+             * @brief Set the Tcp Socket object
              *
-             * @return std::string
+             * @param port port for udp to listen to
+             * @return int
              */
-            std::string code401();
-            /**
-             * @brief send a login of a new client to every client
-             *
-             * @param indexClient index of the new client in _clientsTcp
-             */
-            void send202(int indexClient);
-            /**
-             * @brief send to clients to pass in udp mod
-             *
-             */
-            void send201();
+            int setTcpSocket(int port);
             void handleClientData(int num);
     };
 }
