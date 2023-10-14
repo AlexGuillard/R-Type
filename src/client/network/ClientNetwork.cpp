@@ -6,6 +6,7 @@
 */
 
 #include "client/network/ClientNetwork.hpp"
+#include "server/network/sendCode.hpp"
 
 Network::ClientNetwork::ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port) : _port(port), _host(host), _socket(io_service), _tcpSocket(io_service)
 {
@@ -28,7 +29,9 @@ Network::ClientNetwork::~ClientNetwork()
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
     if ( !error && recvd_bytes > 0 ) {
-        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
+        if (_data.size() >= HEADER_SIZE) {
+            header packet = getHeader(_data);
+        }
         _data.clear();
         asyncReceive(_socket);
     } else {
@@ -43,7 +46,10 @@ void Network::ClientNetwork::handleSend(boost::system::error_code error, std::si
 
 void Network::ClientNetwork::sendHello()
 {
-    send(_tcpSocket, "Hello R-Type server\n");
+    std::string res;
+
+    res.append(Network::Send::makeBinaryInt(81732));
+    send(_tcpSocket, res);
 }
 
 void Network::ClientNetwork::sendMovement(Movement movement)
@@ -204,7 +210,9 @@ bool Network::ClientNetwork::connectTCP(const std::string &host, int port)
 void Network::ClientNetwork::handleTCPData(const boost::system::error_code& error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket)
 {
     if (!error && recvd_bytes > 0) {
-        std::cout << "[" << recvd_bytes << "] " << _data.data() << std::endl;
+        if (_data.size() >= HEADER_SIZE) {
+            header packet = getHeader(_data);
+        }
         startAsyncReceiveTCP(tcpsocket);
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
@@ -217,4 +225,14 @@ void Network::ClientNetwork::startAsyncReceiveTCP(boost::asio::ip::tcp::socket &
     tcpsocket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, &tcpsocket](boost::system::error_code error, std::size_t bytes_transferred) {
         handleTCPData(error, bytes_transferred, tcpsocket);
     });
+}
+
+Network::header Network::ClientNetwork::getHeader(std::string &str)
+{
+    header res;
+
+    std::memcpy(&res, str.data(), HEADER_SIZE);
+    std::cout << "code: " << res.codeRfc << " nb: " << res.entity << std::endl;
+    str.erase(0, HEADER_SIZE);
+    return res;
 }
