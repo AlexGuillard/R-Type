@@ -19,6 +19,8 @@ Camera2D Screen::Display::camera = {
     .zoom = 1
 };
 
+bool Screen::Display::_playButton = false;
+
 Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
@@ -150,6 +152,11 @@ void Screen::Display::update()
     this->updateShake();
 }
 
+bool Screen::Display::getPlayButton()
+{
+    return _playButton;
+}
+
 ///// Menu
 static Rectangle getInputRect(int posX, int posY)
 {
@@ -270,8 +277,9 @@ void Screen::Display::detectActionMenu()
 void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect)) {
-            setGameState(GameState::GAME);
+        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect) && !_playButton) {
+            _playButton = true;
+            // setGameState(GameState::GAME);
         }
     }
 }

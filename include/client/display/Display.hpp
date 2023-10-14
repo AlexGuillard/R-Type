@@ -35,6 +35,14 @@ namespace Screen {
             EARTHQUAKE = 5,
             END_OF_THE_WORLD = 8
         };
+        static bool _playButton;
+        /**
+         * @brief Get the Play Button object
+         *
+         * @return true need to connect udp
+         * @return false tcp connection
+         */
+        static bool getPlayButton();
         /**
          * @brief Init the window with raylib
          * @param state set the starting state of the game
