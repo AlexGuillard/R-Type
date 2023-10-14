@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gamestate_705',['GameState',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6',1,'Screen::Display']]]
+  ['extratype_734',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]]
 ];

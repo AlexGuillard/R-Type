@@ -21,5 +21,9 @@ var searchData=
   ['erase_127',['erase',['../classECS_1_1Containers_1_1SparseArray.html#a1408a7e3b79b06eb35c237691aedc81a',1,'ECS::Containers::SparseArray']]],
   ['error_128',['Error',['../classNetwork_1_1Error.html#a6abb09ad2909ba4e156b46532e5f3c74',1,'Network::Error::Error()'],['../classNetwork_1_1Error.html',1,'Network::Error']]],
   ['error_2ehpp_129',['Error.hpp',['../Error_8hpp.html',1,'']]],
-  ['systems_130',['Systems',['../namespaceECS_1_1Systems.html',1,'ECS']]]
+  ['extra_130',['extra',['../structNetwork_1_1Info.html#acb99fc879db915fca7db9fa28d9d3513',1,'Network::Info']]],
+  ['extra_131',['Extra',['../unionNetwork_1_1Info_1_1Extra.html',1,'Network::Info']]],
+  ['extratype_132',['extraType',['../structNetwork_1_1Info.html#a72aa4ff1139b56a12333c559455447e5',1,'Network::Info']]],
+  ['extratype_133',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]],
+  ['systems_134',['Systems',['../namespaceECS_1_1Systems.html',1,'ECS']]]
 ];

@@ -17,7 +17,7 @@ var searchData=
   ['displayportinput_95',['displayPortInput',['../classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4',1,'Screen::Display']]],
   ['distance_96',['distance',['../structECS_1_1Components_1_1TargetComponent.html#a0ce588c6e430757e9b3ba2099258565d',1,'ECS::Components::TargetComponent']]],
   ['down_97',['down',['../structECS_1_1Components_1_1ControllableComponent.html#a394f5e800afc114b4e6aa51458b2f1e7',1,'ECS::Components::ControllableComponent']]],
-  ['down_98',['DOWN',['../namespaceEnums.html#a04ba6023509953c154816d888df61876ac4e0e4e3118472beeb2ae75827450f1f',1,'Enums::DOWN()'],['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5ac4e0e4e3118472beeb2ae75827450f1f',1,'Network::DOWN()']]],
+  ['down_98',['DOWN',['../namespaceEnums.html#a04ba6023509953c154816d888df61876ac4e0e4e3118472beeb2ae75827450f1f',1,'Enums::DOWN()'],['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5ac4e0e4e3118472beeb2ae75827450f1f',1,'Network::DOWN()'],['../namespaceNetwork.html#ae75de31524babcbdfc98fbffa46bb827ac4e0e4e3118472beeb2ae75827450f1f',1,'Network::DOWN()']]],
   ['drawable_99',['drawable',['../namespaceECS_1_1Systems.html#a675c6a20f3bfc204c96f98723482de4b',1,'ECS::Systems']]],
   ['drawable_2ehpp_100',['drawable.hpp',['../drawable_8hpp.html',1,'']]],
   ['drawablecomponent_101',['DrawableComponent',['../structECS_1_1Components_1_1DrawableComponent.html',1,'ECS::Components']]],

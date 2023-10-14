@@ -3,7 +3,7 @@ var searchData=
   ['_5facceptor_0',['_acceptor',['../classNetwork_1_1ServerNetwork.html#a4681e1a679ec1b7be3db9844ccbcfbf9',1,'Network::ServerNetwork']]],
   ['_5fasyncsocket_1',['_asyncSocket',['../classNetwork_1_1ServerNetwork.html#a596088deab986aa023b3a5539735eef5',1,'Network::ServerNetwork']]],
   ['_5fclients_2',['_clients',['../classNetwork_1_1ServerNetwork.html#a19e07addd6e2fd874484d551fd98bb45',1,'Network::ServerNetwork']]],
-  ['_5fdata_3',['_data',['../classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c',1,'Network::ANetwork::_data()'],['../classNetwork_1_1ServerTcp.html#a1334a17961622dd1501be5e677fa0543',1,'Network::ServerTcp::_data()']]],
+  ['_5fdata_3',['_data',['../classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c',1,'Network::ANetwork::_data()'],['../classNetwork_1_1RecupInfo.html#aca363f6f40c42318e0288437125dfa59',1,'Network::RecupInfo::_data()'],['../classNetwork_1_1ServerTcp.html#a1334a17961622dd1501be5e677fa0543',1,'Network::ServerTcp::_data()']]],
   ['_5fendpoint_4',['_endpoint',['../classNetwork_1_1ANetwork.html#a5958955041ab27082ecc9f256ada7324',1,'Network::ANetwork']]],
   ['_5fioservice_5',['_ioService',['../classNetwork_1_1ServerNetwork.html#a40ecfd5c91aeaa2d7fb1a15ac0f28279',1,'Network::ServerNetwork']]],
   ['_5flist_6',['_list',['../classNetwork_1_1ServerTcp.html#a89cd1145f4d176735f7fea3ef123df7c',1,'Network::ServerTcp']]],
