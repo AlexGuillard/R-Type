@@ -6,7 +6,7 @@
 */
 
 #include "server/network/recupInfo.hpp"
-#include "Assets/AssetLoader.hpp"
+#include "Assets/TextLoader.hpp"
 
 std::vector<Network::Info> Network::RecupInfo::getScript() {
     return _data;
@@ -23,7 +23,7 @@ std::vector<Network::Info> Network::RecupInfo::getTickScript(std::size_t tick) {
 }
 
 void Network::RecupInfo::openFile() {
-    std::string fill= Assets::AssetLoader::loadText(Assets::AssetsIndex::SCRIPT_TXT);
+    std::string fill = Assets::TextLoader::loadText(Assets::AssetsIndex::SCRIPT_TXT);
     std::istringstream ss(fill);
     std::string line;
     std::vector<std::string> lines;
