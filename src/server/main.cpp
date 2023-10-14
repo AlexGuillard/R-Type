@@ -6,11 +6,18 @@
 */
 
 #include <csignal>
+#include <iostream>
+#include <thread>
 
 #include "GameEngine/GameEngine.hpp"
 #include "server/network/ServerNetwork.hpp"
 
-static bool isServerRunning = true;
+bool isServerRunning = true;
+
+void signalHandler(int signum)
+{
+    isServerRunning = false;
+}
 
 int main(int argc, char **argv)
 {
@@ -20,10 +27,7 @@ int main(int argc, char **argv)
     GameEngine::GameEngine engine = GameEngine::createServerEngine();
 
     // catch CTRL-C
-    signal(SIGINT, [](int) {
-        isServerRunning = false;
-        }
-    );
+    signal(SIGINT, signalHandler);
     try {
         boost::asio::io_service ioService;
         Network::ServerNetwork network(ioService, port, portUdp);

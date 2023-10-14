@@ -209,7 +209,8 @@ bool Network::ServerNetwork::isGameRunning() const
 
 void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
 {
-    _ioService.run();
+    _ioService.poll();
+    _ioService.reset();
     engine.run();
 }
 
