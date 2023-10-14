@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['side_740',['Side',['../namespaceNetwork.html#ae75de31524babcbdfc98fbffa46bb827',1,'Network']]],
-  ['size_741',['Size',['../namespaceNetwork.html#a05aeb40dbcc377598b6f868aa622ba94',1,'Network']]]
+  ['rfccode_770',['RFCCode',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527',1,'Enums']]]
 ];

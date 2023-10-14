@@ -81,13 +81,20 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceECS_1_1Systems.html">ECS::Systems</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceECS_1_1Systems.html#a675c6a20f3bfc204c96f98723482de4b">   14</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceECS_1_1Systems.html#a675c6a20f3bfc204c96f98723482de4b">drawable</a>(</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray&lt;Components::PositionComponent&gt;</a> &amp;positions,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray&lt;Components::DrawableComponent&gt;</a> &amp;drawables);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}; <span class="comment">// namespace ECS::Systems</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Registry_8hpp.html">ECS/Containers/Registry.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="PositionComponent_8hpp.html">ECS/Components/PositionComponent.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="DrawableComponent_8hpp.html">ECS/Components/DrawableComponent.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceECS_1_1Systems.html">ECS::Systems</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="namespaceECS_1_1Systems.html#a675c6a20f3bfc204c96f98723482de4b">   18</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespaceECS_1_1Systems.html#a675c6a20f3bfc204c96f98723482de4b">drawable</a>(</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray&lt;Components::PositionComponent&gt;</a> &amp;positions,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray&lt;Components::DrawableComponent&gt;</a> &amp;drawables);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}; <span class="comment">// namespace ECS::Systems</span></div>
+<div class="ttc" id="aDrawableComponent_8hpp_html"><div class="ttname"><a href="DrawableComponent_8hpp.html">DrawableComponent.hpp</a></div></div>
+<div class="ttc" id="aPositionComponent_8hpp_html"><div class="ttname"><a href="PositionComponent_8hpp.html">PositionComponent.hpp</a></div></div>
+<div class="ttc" id="aRegistry_8hpp_html"><div class="ttname"><a href="Registry_8hpp.html">Registry.hpp</a></div></div>
 <div class="ttc" id="aclassECS_1_1Containers_1_1Registry_html"><div class="ttname"><a href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a></div><div class="ttdef"><b>Definition:</b> Registry.hpp:23</div></div>
 <div class="ttc" id="aclassECS_1_1Containers_1_1SparseArray_html"><div class="ttname"><a href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a></div><div class="ttdoc">SparseArray is a vector of std::optional&lt;T&gt;.</div><div class="ttdef"><b>Definition:</b> SparseArray.hpp:23</div></div>
 <div class="ttc" id="anamespaceECS_1_1Systems_html"><div class="ttname"><a href="namespaceECS_1_1Systems.html">ECS::Systems</a></div><div class="ttdef"><b>Definition:</b> collision.hpp:16</div></div>
