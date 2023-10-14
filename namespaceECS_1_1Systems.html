@@ -92,6 +92,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">gravity</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &gt; &amp;velocities, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1GravityComponent.html">Components::GravityComponent</a> &gt; &amp;gravity)</td></tr>
 <tr class="memdesc:a7eba9fe2c53f2961afcb042d833bc78b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add gravity to velocity.  <a href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">More...</a><br /></td></tr>
 <tr class="separator:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091005440e184366810d6dc33730587a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a091005440e184366810d6dc33730587a">horizontalScroll</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HorizontalScrollComponent.html">ECS::Components::HorizontalScrollComponent</a> &gt; &amp;horizontalScrolls, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &gt; &amp;positions)</td></tr>
+<tr class="memdesc:a091005440e184366810d6dc33730587a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add horizontal scroll to position.  <a href="namespaceECS_1_1Systems.html#a091005440e184366810d6dc33730587a">More...</a><br /></td></tr>
+<tr class="separator:a091005440e184366810d6dc33730587a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0207fff9d66444d6c5da05bf2effe31b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a0207fff9d66444d6c5da05bf2effe31b">invincibleTimer</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1InvincibleTimerComponent.html">Components::InvincibleTimerComponent</a> &gt; &amp;invincibleTimer)</td></tr>
 <tr class="memdesc:a0207fff9d66444d6c5da05bf2effe31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the timer for invincibility.  <a href="namespaceECS_1_1Systems.html#a0207fff9d66444d6c5da05bf2effe31b">More...</a><br /></td></tr>
 <tr class="separator:a0207fff9d66444d6c5da05bf2effe31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -345,6 +348,42 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add gravity to velocity. </p>
+
+</div>
+</div>
+<a id="a091005440e184366810d6dc33730587a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a091005440e184366810d6dc33730587a">&#9670;&nbsp;</a></span>horizontalScroll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ECS::Systems::horizontalScroll </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HorizontalScrollComponent.html">ECS::Components::HorizontalScrollComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>horizontalScrolls</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add horizontal scroll to position. </p>
 
 </div>
 </div>

@@ -71,6 +71,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classECS_1_1Creator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ECS::Creator Class Reference</div>  </div>
@@ -88,6 +89,11 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a826dd1ee770aee8d9c67e1623373447c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a826dd1ee770aee8d9c67e1623373447c">setLevelScrollSpeed</a> (float speed)</td></tr>
+<tr class="memdesc:a826dd1ee770aee8d9c67e1623373447c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the global horizontal scroll speed.  <a href="classECS_1_1Creator.html#a826dd1ee770aee8d9c67e1623373447c">More...</a><br /></td></tr>
+<tr class="separator:a826dd1ee770aee8d9c67e1623373447c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056b4970258f56e6c69a198cbbded11a"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a056b4970258f56e6c69a198cbbded11a">getLevelScrollSpeed</a> ()</td></tr>
+<tr class="separator:a056b4970258f56e6c69a198cbbded11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">addWalkingAI</a> (const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;entity, <a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;target, std::pair&lt; float, float &gt; preferredDistance, float speed, bool dropsDownLedge=false, bool jumpsOverObstacle=false)</td></tr>
 <tr class="memdesc:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a walking AI to an entity. Assumes the entity already has a position, velocity and hitbox.  <a href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">More...</a><br /></td></tr>
 <tr class="separator:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,6 +103,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa68312b9637a8aa4ed84be2b1e7e04ca"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#aa68312b9637a8aa4ed84be2b1e7e04ca">createCharacter</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)</td></tr>
 <tr class="memdesc:aa68312b9637a8aa4ed84be2b1e7e04ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a base entity.  <a href="classECS_1_1Creator.html#aa68312b9637a8aa4ed84be2b1e7e04ca">More...</a><br /></td></tr>
 <tr class="separator:aa68312b9637a8aa4ed84be2b1e7e04ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7b3943b83e71034553a45563cb3688"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#ada7b3943b83e71034553a45563cb3688">createGroundedCharacter</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)</td></tr>
+<tr class="memdesc:ada7b3943b83e71034553a45563cb3688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a base entity that moves with the background.  <a href="classECS_1_1Creator.html#ada7b3943b83e71034553a45563cb3688">More...</a><br /></td></tr>
+<tr class="separator:ada7b3943b83e71034553a45563cb3688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a288699725a5d21d2e5f90d9369375690"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a288699725a5d21d2e5f90d9369375690">createEnemyBasic</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, size_t id, int x, int y)</td></tr>
 <tr class="memdesc:a288699725a5d21d2e5f90d9369375690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Enemy Basic object.  <a href="classECS_1_1Creator.html#a288699725a5d21d2e5f90d9369375690">More...</a><br /></td></tr>
 <tr class="separator:a288699725a5d21d2e5f90d9369375690"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +130,13 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac46094b00d275c7fab44353fb50a4d98"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#ac46094b00d275c7fab44353fb50a4d98">createPlayer</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, size_t id, int x, int y, <a class="el" href="namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783">Enums::PlayerColor</a> color)</td></tr>
 <tr class="memdesc:ac46094b00d275c7fab44353fb50a4d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Player object.  <a href="classECS_1_1Creator.html#ac46094b00d275c7fab44353fb50a4d98">More...</a><br /></td></tr>
 <tr class="separator:ac46094b00d275c7fab44353fb50a4d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a27ef41a11292ecab32b17c02ef5484bf"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a27ef41a11292ecab32b17c02ef5484bf">defaultScrollSpeed</a> = 100</td></tr>
+<tr class="separator:a27ef41a11292ecab32b17c02ef5484bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872e2de427b4a2bf9a5ba42dd061c711"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a872e2de427b4a2bf9a5ba42dd061c711">defaultGravity</a> = 9.81F</td></tr>
+<tr class="separator:a872e2de427b4a2bf9a5ba42dd061c711"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a688bff176c01a4dcef9a101dd06523fd"></a>
@@ -755,6 +771,79 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ada7b3943b83e71034553a45563cb3688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7b3943b83e71034553a45563cb3688">&#9670;&nbsp;</a></span>createGroundedCharacter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classECS_1_1Entity.html">Entity</a> ECS::Creator::createGroundedCharacter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>damage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>health</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a base entity that moves with the background. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">registry</td><td>The registry to create the entity in @//param team The team the entity belongs to </td></tr>
+    <tr><td class="paramname">damage</td><td>The damage the entity deals to the other team on collision </td></tr>
+    <tr><td class="paramname">health</td><td>The health of the entity </td></tr>
+    <tr><td class="paramname">width</td><td>The width of the entity's hitbox/texture </td></tr>
+    <tr><td class="paramname">height</td><td>The height of the entity's hitbox/texture </td></tr>
+    <tr><td class="paramname">id</td><td>The id of the entity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac46094b00d275c7fab44353fb50a4d98"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac46094b00d275c7fab44353fb50a4d98">&#9670;&nbsp;</a></span>createPlayer()</h2>
 
@@ -877,6 +966,111 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a056b4970258f56e6c69a198cbbded11a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a056b4970258f56e6c69a198cbbded11a">&#9670;&nbsp;</a></span>getLevelScrollSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static float ECS::Creator::getLevelScrollSpeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The global horizontal scroll speed in pixels per second </dd></dl>
+
+</div>
+</div>
+<a id="a826dd1ee770aee8d9c67e1623373447c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a826dd1ee770aee8d9c67e1623373447c">&#9670;&nbsp;</a></span>setLevelScrollSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void ECS::Creator::setLevelScrollSpeed </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the global horizontal scroll speed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speed</td><td>The speed to set in pixels per second </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a872e2de427b4a2bf9a5ba42dd061c711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872e2de427b4a2bf9a5ba42dd061c711">&#9670;&nbsp;</a></span>defaultGravity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float ECS::Creator::defaultGravity = 9.81F</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27ef41a11292ecab32b17c02ef5484bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27ef41a11292ecab32b17c02ef5484bf">&#9670;&nbsp;</a></span>defaultScrollSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::size_t ECS::Creator::defaultScrollSpeed = 100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
