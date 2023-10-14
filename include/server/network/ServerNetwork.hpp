@@ -93,6 +93,10 @@ namespace Network {
             boost::asio::deadline_timer _timer;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
+            // counter for ticks in game
+            std::size_t _tickCout = 0;
+            // boolean to check if we are on game or not
+            bool _isGame = false;
         private:
             Participants _list;
             /**

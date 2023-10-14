@@ -105,7 +105,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code& erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients)->start();
+        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame)->start();
     }
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -121,7 +121,10 @@ void Network::ServerNetwork::updateTicks()
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code& error) {
         if (!error) {
-            // std::cout << "need to updates ticks\n";
+            if (_isGame == true) {
+                _tickCout++;
+                std::cout << "need to updates ticks\n";
+            }
         } else {
             std::cerr << "_timer error: " << error.message() << std::endl;
         }
