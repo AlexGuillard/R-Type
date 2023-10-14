@@ -11,6 +11,11 @@
 
 namespace Network {
 
+    bool returnIsCoUDP()
+    {
+        return isCoUDP;
+    }
+
     bool startClientNetwork(const std::string &host, int tcpPort, int udpPort, Network::ConnectionType type)
     {
         //TODO:
@@ -32,6 +37,10 @@ namespace Network {
         if (playButton && !firstTime) {
             clientNetwork.send201();
             firstTime = true;
+        }
+
+        if (clientNetwork.isConnectedUDP && !isCoUDP) {
+            isCoUDP = true;
         }
 
         clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());

@@ -18,6 +18,8 @@ namespace Network {
         TCP,
         UDP
     };
+    static bool isCoUDP = false;
+    bool returnIsCoUDP();
     /**
      * @brief Start running the client
      * @returns True if the client successfully started, false otherwise
