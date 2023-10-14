@@ -13,9 +13,15 @@
 #include <memory>
 
 #include "ANetwork.hpp"
+#include "server/network/Participants.hpp"
+#include "server/network/ServerTcp.hpp"
 #define TICKS_UPDATE 200
 
 namespace Network {
+    enum class Connection {
+        CONNECTED,
+        NOT_CONNECTED
+    };
     /**
      * @brief Network class for server
      *
@@ -34,12 +40,6 @@ namespace Network {
              *
              */
             void udpConnection();
-            /**
-             * @brief used to wait read of tcp socket
-             *
-             * @param socket client socket that send data
-             */
-            void waitRequest(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
             // handler for asynd accept in tcp connection
             void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
             /**
@@ -79,18 +79,6 @@ namespace Network {
              * @return std::string
              */
             std::string getActualClient() const;
-            /**
-             * @brief Get the Actual Client id
-             *
-             * @param socket tcp socket of client
-             * @return std::string
-             */
-            std::string getActualClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket) const;
-            /**
-             * @brief see if client have a good connection on the server, the server repond then with 200 or 401
-             *
-             */
-            void connection(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
         protected:
             // int for udp port to send when tcp connection
             int _portUdp;
@@ -108,13 +96,10 @@ namespace Network {
             std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
             // variable for the timer and the ticks
             boost::asio::deadline_timer _timer;
-            // list of sockets for potential clients
-            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _socket;
             // necessary for acceptation tcp clients
             boost::asio::ip::tcp::acceptor _acceptor;
-            // lists of accepted clients
-            std::vector<std::shared_ptr<boost::asio::ip::tcp::socket>> _clientsTcp;
         private:
+            Participants _list;
             /**
              * @brief Set the Udp Socket object
              *
@@ -129,31 +114,6 @@ namespace Network {
              * @return int
              */
             int setTcpSocket(int port);
-            /**
-             * @brief write a login code (202 or 200)
-             *
-             * @param code the code sended in the header and the footer
-             * @return std::string
-             */
-            std::string codeLogin(int code);
-            /**
-             * @brief string for 401 error for client
-             *
-             * @return std::string
-             */
-            std::string code401();
-            /**
-             * @brief send a login of a new client to every client
-             *
-             * @param indexClient index of the new client in _clientsTcp
-             */
-            void send202(int indexClient);
-            /**
-             * @brief send to clients to pass in udp mod
-             *
-             */
-            void send201();
             void handleClientData(int num);
-            void delClient(std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
     };
 }
