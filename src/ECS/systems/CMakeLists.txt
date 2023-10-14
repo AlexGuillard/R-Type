@@ -10,6 +10,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/damage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sinMovement.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/target.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/walkingAI.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/solid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/background.cpp
 )

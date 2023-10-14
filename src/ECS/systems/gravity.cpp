@@ -5,7 +5,6 @@
 ** gravity
 */
 
-#include <raylib.h>
 #include "ECS/Systems/gravity.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
