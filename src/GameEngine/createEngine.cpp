@@ -93,30 +93,16 @@ namespace GameEngine {
 
         registry.addSystem<Components::BackgroundComponent>(Systems::background);
     }
-
-    static ECS::Entity spawnLevel(Containers::Registry &registry)
+    static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, float scale, float speed)
     {
-        const float scale = 5;
-        const float speed = 1.0;
         const Vector2 position = {0, 0};
-        ECS::Entity level = registry.spawnEntity();
         Components::BackgroundComponent backgroundComponent = {
-            Assets::AssetLoader::loadTexturePng(Assets::AssetsIndex::BACKGROUND1_PNG),
+            Assets::AssetLoader::loadTexturePng(index),
             scale,
             speed,
             position,
         };
-        //ground
-        //size
-        //speed
-        //position
-
-        registry.addComponent<Components::BackgroundComponent>(level, std::move(backgroundComponent));
-        //add ground
-        // add size
-        // add speed
-        // add position
-        return level;
+        return backgroundComponent;
     }
 
     static void populateEntities(Containers::Registry &registry)
@@ -125,7 +111,27 @@ namespace GameEngine {
 
     static void levelEntities(Containers::Registry &registry)
     {
-        ECS::Entity level = spawnLevel(registry);
+        std::vector<Assets::AssetsIndex> assetIndices = {
+            Assets::AssetsIndex::BACKGROUND1_PNG,
+            Assets::AssetsIndex::BACKGROUND2_PNG,
+            Assets::AssetsIndex::BACKGROUND3_PNG,
+            Assets::AssetsIndex::BACKGROUND4_PNG,
+        };
+
+        std::vector<std::pair<float, float>> sizeAndSpeed = {
+            {(float) 5.0, (float) 0.5},
+            {(float) 1.5, (float) 1.0},
+            {(float) 1.5, (float) 1.5},
+            {(float) 7.0, (float) 2.0}
+        };
+
+        for (size_t i = 0; i < assetIndices.size(); ++i)
+        {
+            Components::BackgroundComponent background = createBackground(assetIndices[i],
+            sizeAndSpeed[i].first, sizeAndSpeed[i].second);
+            ECS::Entity level = registry.spawnEntity();
+            registry.emplaceComponent<Components::BackgroundComponent>(level, background);
+        }
     }
 
     GameEngine createEngine()
