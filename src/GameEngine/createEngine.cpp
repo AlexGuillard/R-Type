@@ -24,6 +24,7 @@
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
 #include "ECS/Components/BackgroundComponent.hpp"
+#include "Assets/AssetLoader.hpp"
 #include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
@@ -108,13 +109,15 @@ namespace GameEngine {
 
     static ECS::Entity spawnLevel(Containers::Registry &registry)
     {
-        const float frameScale = 5;
+        const float scale = 5;
+        const float speed = 1.0;
         const Vector2 position = {0, 0};
         ECS::Entity level = registry.spawnEntity();
         Components::BackgroundComponent backgroundComponent = {
-            Assets::AssetsIndex::BACKGROUND1_PNG,
-            frameScale,
-            position
+            Assets::AssetLoader::loadTexturePng(Assets::AssetsIndex::BACKGROUND1_PNG),
+            scale,
+            speed,
+            position,
         };
         //ground
         //size

@@ -24,8 +24,9 @@ namespace ECS::Components {
      * @see SpriteSheetDrawer
      */
     struct BackgroundComponent {
-        Assets::AssetsIndex spriteSheetIndex;
+        Texture2D texture;
         float frameScale = 1.0;
+        float paralaxSpeed = 1.0;
         Vector2 position = {0, 0};
     };
 } // namespace ECS::Components

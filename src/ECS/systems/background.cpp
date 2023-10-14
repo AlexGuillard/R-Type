@@ -11,7 +11,6 @@
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Systems/background.hpp"
-#include "ECS/Systems/Helper/BackgroundDrawer.hpp"
 #include "Assets/AssetLoader.hpp"
 #include "client/display/Display.hpp"
 
@@ -25,11 +24,16 @@ namespace ECS::Systems {
     {
         Screen::Display::beginDrawCamera();
         for (auto &&[eId, background] : Containers::IndexedZipper(backgrounds)) {
-            Helper::BackgroundDrawer drawer(
-                Assets::AssetLoader::loadTexturePng(background->spriteSheetIndex),
-                background->frameScale
-            );
-            drawer.draw(background->position);
+            background->position.x -= background->paralaxSpeed;
+            if(background->position.x <= (-(background->texture.width) * background->frameScale)) {
+                background->position.x = 0;
+            }
+            DrawTextureEx(background->texture,
+            (Vector2) {background->position.x, 0},
+            (float) 0.0, background->frameScale, WHITE);
+            DrawTextureEx(background->texture,
+            (Vector2) {background->texture.width * background->frameScale + background->position.x, 0},
+            (float) 0.0, background->frameScale, WHITE);
         }
         Screen::Display::endDrawCamera();
     }
