@@ -329,6 +329,10 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
             _port += KeyPressed;
         }
     }
+
+    if (KeyPressed == 'j') {
+        setGameState(GameState::GAME);
+    }
 }
 
 void Screen::Display::drawMenu()
