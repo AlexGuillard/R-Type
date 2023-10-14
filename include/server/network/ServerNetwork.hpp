@@ -57,11 +57,6 @@ namespace Network {
              */
             void handleSend(boost::system::error_code error, std::size_t recvd_bytes);
             /**
-             * @brief add a client in vector of clients if it fills conditions
-             *
-             */
-            void addClient();
-            /**
              * @brief find a client in the vector by sending a id, if can not find, return ""
              *
              * @param id

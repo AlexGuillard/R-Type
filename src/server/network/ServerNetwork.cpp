@@ -105,7 +105,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code& erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp)->start();
+        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients)->start();
     }
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -145,16 +145,6 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         _data.clear();
     } else {
         asyncReceive(_asyncSocket);
-    }
-}
-
-void Network::ServerNetwork::addClient()
-{
-    std::string actualClient;
-
-    if (_clients.size() < 4) {
-        actualClient = _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
-        _clients[actualClient].first = _clients.size();
     }
 }
 

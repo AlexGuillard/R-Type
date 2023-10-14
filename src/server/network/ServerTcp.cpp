@@ -8,7 +8,9 @@
 #include "server/network/ServerTcp.hpp"
 #include "server/network/sendCode.hpp"
 
-Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list, int udpPort) : _socket(std::move(socket)), _list(list), _udpPort(udpPort)
+Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list,
+    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients)
+    : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients)
 {
 }
 
@@ -47,9 +49,8 @@ void Network::ServerTcp::waitRequest()
             (boost::asio::error::connection_reset != error)) {
                 waitRequest();
             } else {
-                std::cout << "list before" << _list.size() << std::endl;
                 _list.leave(shared_from_this());
-                std::cout << "list after" << _list.size() << std::endl;
+                removeClient();
             }
         }
     });
@@ -65,6 +66,7 @@ void Network::ServerTcp::write(std::string message)
             waitRequest();
         } else {
             _list.leave(shared_from_this());
+            removeClient();
         }
     });
 }
@@ -77,6 +79,7 @@ void Network::ServerTcp::connection()
     std::cout << number << std::endl;
     if (number == CONNECTION_NB && _list.size() < 4) {
         _list.join(shared_from_this());
+        addClient();
         write(codeLogin(200));
         send202(_list.size());
     } else {
@@ -120,4 +123,22 @@ void Network::ServerTcp::send201()
     for (int i = 0; i < _list.size(); i++) {
         _list.getClient(i)->write(res);
     }
+}
+
+std::string Network::ServerTcp::getActualClient()
+{
+    return _socket.remote_endpoint().address().to_string() + ":" + std::to_string(_socket.remote_endpoint().port());
+}
+
+void Network::ServerTcp::addClient()
+{
+    std::string actualClient;
+
+    actualClient = _socket.remote_endpoint().address().to_string() + ":" + std::to_string(_socket.remote_endpoint().port());
+    _listClient[actualClient].first = _listClient.size();
+}
+
+void Network::ServerTcp::removeClient()
+{
+    _listClient.erase(getActualClient());
 }
