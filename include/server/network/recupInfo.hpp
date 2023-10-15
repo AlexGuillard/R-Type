@@ -30,7 +30,7 @@ namespace Network {
         std::size_t tick;
         enum ExtraType {
             SIDE,
-            None
+            NONE,
         } extraType;
         union Extra
         {
