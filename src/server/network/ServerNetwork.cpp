@@ -134,11 +134,11 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        if (_isGame == true) {
+        if (_canPlay == true) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 std::cout << "info to add in game" << std::endl;
-                SendClients(scriptInfo);
+                SendClientsInfo(scriptInfo);
             }
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
@@ -183,8 +183,6 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         header dataClient = Send::stringToheader(_data);
         if (findClient(dataClient)) {
             handleClientData(dataClient.codeRfc);
-            std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToBodyNum(_data).number << "from" << getActualClient() << std::endl;
-            asyncSend(_asyncSocket, "receive data\n");
         } else {
             asyncSend(_asyncSocket, "need tcp connection first\n");
         }
@@ -203,7 +201,10 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 {
     if (clientData.entity >= 0 && clientData.entity <= 4) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
-        return true;
+        if (_listUdpEndpoints.size() == _clients.size()) {
+            _canPlay = true;
+            return true;
+        }
     }
     return false;
 }
@@ -247,9 +248,14 @@ void Network::ServerNetwork::SpawnMob(Info script)
     }
 }
 
-void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)
+void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 {
     for (int i = 0; i < scriptInfo.size(); i++) {
         SpawnMob(scriptInfo[i]);
     }
+}
+
+void Network::ServerNetwork::SendClientsPlay()
+{
+
 }

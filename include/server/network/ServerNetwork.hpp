@@ -107,6 +107,7 @@ namespace Network {
         std::size_t _tickCount = 0;
         // boolean to check if we are on game or not
         bool _isGame = false;
+        bool _canPlay = false;
         std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
     private:
         Participants _list;
@@ -126,7 +127,8 @@ namespace Network {
         int setTcpSocket(int port);
         void handleClientData(int num);
         void SpawnMob(Info script);
-        void SendClients(std::vector<Info> scriptInfo);
+        void SendClientsInfo(std::vector<Info> scriptInfo);
+        void SendClientsPlay();
         std::shared_ptr<GameEngine::GameEngine> _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
