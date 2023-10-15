@@ -109,6 +109,7 @@ namespace Network {
         bool _isGame = false;
         bool _canPlay = false;
         std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
+        std::vector<std::pair<std::string, int>> _ids;
     private:
         Participants _list;
         /**

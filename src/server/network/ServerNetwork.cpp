@@ -202,8 +202,10 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 {
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
+        _ids.push_back(std::pair(getActualClient(), clientData.entity));
         if (_listUdpEndpoints.size() == _clients.size()) {
             _canPlay = true;
+            SendClientsPlay();
         }
         return true;
     }
@@ -217,7 +219,7 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
 
 bool Network::ServerNetwork::isGameRunning() const
 {
-    return this->_isGame;
+    return this->_canPlay;
 }
 
 void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
@@ -258,5 +260,32 @@ void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 
 void Network::ServerNetwork::SendClientsPlay()
 {
+    std::string res;
+    Enums::PlayerColor color;
 
+    for (const auto& pair : _listUdpEndpoints) {
+        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+        for (int i = 0; i < _ids.size(); i++) {
+            if (i == 0)
+                color = Enums::PlayerColor::CYAN_COLOR;
+            else if (i == 1)
+                color = Enums::PlayerColor::PURPLE_COLOR;
+            else if (i == 2)
+                color = Enums::PlayerColor::LIME_COLOR;
+            else if (i == 3)
+                color = Enums::PlayerColor::RED_COLOR;
+            else
+                color = Enums::PlayerColor::BLUE_COLOR;
+            if (pair.first == _ids[i].first) {
+                res = Send::makeHeader(311, _ids[i].second);
+                res = Send::makeBodyAlly(50, 50, color);
+                res = Send::makeBodyNum(311);
+            } else {
+                res = Send::makeHeader(312, _ids[i].second);
+                res = Send::makeBodyAlly(50, 50, color);
+                res = Send::makeBodyNum(312);
+            }
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        }
+    }
 }
