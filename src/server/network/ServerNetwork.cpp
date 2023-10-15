@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <string>
 #include <utility>
-
 #include "server/network/ServerNetwork.hpp"
 #include "server/network/sendCode.hpp"
 #include "GameEngine/Events.hpp"
@@ -171,7 +170,7 @@ void Network::ServerNetwork::updateTicks()
             }
         }
         updateTicks();
-    });
+        });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -188,6 +187,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
                 asyncSend(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
+        asyncReceive(_asyncSocket);
     } else {
         asyncReceive(_asyncSocket);
     }
