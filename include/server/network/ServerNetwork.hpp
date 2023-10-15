@@ -64,7 +64,7 @@ namespace Network {
          * @param id
          * @return std::string
          */
-        std::string findClient(std::string id) const;
+        bool findClient(Network::header clientData) const;
         /**
          * @brief function that update game when tick is finish
          *

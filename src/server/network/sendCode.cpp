@@ -111,3 +111,13 @@ Network::BodyNumber Network::Send::stringToBodyNum(std::string code)
     code.erase(0, sizeof(BodyNumber));
     return res;
 }
+
+Network::header Network::Send::stringToheader(std::string code)
+{
+    header res;
+    std::string copyCode(code.data());
+
+    std::memcpy(&res, copyCode.data(), sizeof(header));
+    code.erase(0, sizeof(header));
+    return res;
+}

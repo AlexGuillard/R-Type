@@ -178,8 +178,9 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     const size_t maxNbClients = 5;
 
     if (!error && recvd_bytes > 0) {
-        if (findClient(getActualClient()) != "") {
-            handleClientData(Network::Send::stringToBodyNum(_data).number);
+        header dataClient = Send::stringToheader(_data);
+        if (findClient(dataClient)) {
+            handleClientData(dataClient.codeRfc);
             std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToBodyNum(_data).number << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
         } else {
@@ -196,12 +197,9 @@ std::string Network::ServerNetwork::getActualClient() const
     return _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
 }
 
-std::string Network::ServerNetwork::findClient(std::string findId) const
+bool Network::ServerNetwork::findClient(Network::header clientData) const
 {
-    if (_clients.contains(findId)) {
-        return findId;
-    }
-    return "";
+    return (clientData.entity >= 0 && clientData.entity <= 4);
 }
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
