@@ -66,7 +66,7 @@ std::string Network::Send::makeBinaryInt(int number)
     std::string str;
 
     str.resize(sizeof(int));
-    std::memcpy(str.data(), &number, sizeof(int));
+    std::memcpy(&str.data()[0], &number, sizeof(int));
     return str;
 }
 
@@ -105,7 +105,7 @@ int Network::Send::stringToInt(std::string &code)
     int res = 0;
     std::string copyCode(code.data());
 
-    std::memcpy(&res, copyCode.data(), sizeof(int));
+    std::memcpy(&res, &copyCode.data()[0], sizeof(int));
     code.erase(0, sizeof(int));
     copyCode = std::to_string(res);
     return res;
