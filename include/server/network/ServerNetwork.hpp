@@ -64,7 +64,7 @@ namespace Network {
          * @param id
          * @return std::string
          */
-        bool findClient(Network::header clientData) const;
+        bool findClient(Network::header clientData);
         /**
          * @brief function that update game when tick is finish
          *
@@ -107,7 +107,7 @@ namespace Network {
         std::size_t _tickCount = 0;
         // boolean to check if we are on game or not
         bool _isGame = false;
-        std::vector<boost::asio::ip::udp::socket> _listUdpSocket;
+        std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
     private:
         Participants _list;
         /**

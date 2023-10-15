@@ -15,6 +15,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "enums.hpp"
 
 namespace Network {
 

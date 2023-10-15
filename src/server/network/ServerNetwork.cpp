@@ -136,8 +136,10 @@ void Network::ServerNetwork::updateTicks()
         }
         if (_isGame == true) {
             scriptInfo = _script.getTickScript(_tickCount);
-            if (!scriptInfo.empty())
+            if (!scriptInfo.empty()) {
                 std::cout << "info to add in game" << std::endl;
+                SendClients(scriptInfo);
+            }
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
             for (auto &&[client, data] : _clients) {
@@ -197,9 +199,13 @@ std::string Network::ServerNetwork::getActualClient() const
     return _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
 }
 
-bool Network::ServerNetwork::findClient(Network::header clientData) const
+bool Network::ServerNetwork::findClient(Network::header clientData)
 {
-    return (clientData.entity >= 0 && clientData.entity <= 4);
+    if (clientData.entity >= 0 && clientData.entity <= 4) {
+        _listUdpEndpoints[getActualClient()] = _endpoint;
+        return true;
+    }
+    return false;
 }
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
@@ -226,20 +232,24 @@ void Network::ServerNetwork::handleClientData(int num)
     }
 }
 
-std::string Network::ServerNetwork::SpawnMob(Info script)
+void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         res.append(Send::makeHeader(script.rfc, 0));
         res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
-        res.append(script.rfc);
+        res.append(Send::makeBodyNum(script.rfc));
     }
-    return res;
+    for (const auto& pair : _listUdpEndpoints) {
+        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+    }
 }
 
 void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)
 {
     for (int i = 0; i < scriptInfo.size(); i++) {
+        SpawnMob(scriptInfo[i]);
     }
 }
