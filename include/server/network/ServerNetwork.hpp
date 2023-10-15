@@ -16,6 +16,7 @@
 #include "GameEngine/GameEngine.hpp"
 #include "server/network/Participants.hpp"
 #include "server/network/ServerTcp.hpp"
+#include "server/network/recupInfo.hpp"
 #define TICKS_UPDATE 200
 
 namespace Network {
@@ -63,7 +64,7 @@ namespace Network {
          * @param id
          * @return std::string
          */
-        std::string findClient(std::string id) const;
+        bool findClient(Network::header clientData);
         /**
          * @brief function that update game when tick is finish
          *
@@ -106,6 +107,7 @@ namespace Network {
         std::size_t _tickCount = 0;
         // boolean to check if we are on game or not
         bool _isGame = false;
+        std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
     private:
         Participants _list;
         /**
@@ -123,8 +125,11 @@ namespace Network {
          */
         int setTcpSocket(int port);
         void handleClientData(int num);
+        void SpawnMob(Info script);
+        void SendClients(std::vector<Info> scriptInfo);
         std::shared_ptr<GameEngine::GameEngine> _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
+        RecupInfo _script;
     };
 }
