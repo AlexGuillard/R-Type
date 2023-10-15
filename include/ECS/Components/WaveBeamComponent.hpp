@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <sys/types.h>
+#include "ECS/Components/TeamComponent.hpp"
 #include <cstdint>
 
 namespace ECS::Components {
@@ -23,6 +24,7 @@ namespace ECS::Components {
     struct WaveBeamComponent {
         float x;
         float y;
+        TeamComponent team;
         std::size_t damage = waveBeamBaseDamage;
         uint8_t strength = 1;
     };

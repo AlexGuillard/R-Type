@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <chrono>
 
 #include "GameEngine/GameEngine.hpp"
 #include "Errors/RegistryNotFound.hpp"
@@ -14,6 +15,7 @@
 namespace GameEngine {
 
     using Registry = ECS::Containers::Registry;
+    double GameEngine::mDeltaTime = 0.;
 
     Registry &GameEngine::operator[](const std::string &type)
     {
@@ -66,9 +68,21 @@ namespace GameEngine {
 
     void GameEngine::run()
     {
+        static auto lastTime = std::chrono::high_resolution_clock::now();
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        auto deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(
+            currentTime - lastTime).count() / 1000000.0F;
+        lastTime = currentTime;
+
+        mDeltaTime = deltaTime;
         for (auto &[_, registry] : m_registries) {
             registry.runSystems();
         }
+    }
+
+    double GameEngine::getDeltaTime()
+    {
+        return GameEngine::mDeltaTime;
     }
 
 }; // namespace GameEngine

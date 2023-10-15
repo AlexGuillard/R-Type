@@ -13,6 +13,7 @@
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DamageComponent.hpp"
 #include "ECS/Components/HitBoxComponent.hpp"
@@ -20,7 +21,6 @@
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
-#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
@@ -29,7 +29,7 @@
 #include "ECS/Components/LevelComponent.hpp"
 #include "Assets/AssetLoader.hpp"
 #include "ECS/Components/GravityComponent.hpp"
-#include "ECS/Systems/controller.hpp"
+#include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/background.hpp"
@@ -42,6 +42,7 @@
 #include "ECS/Systems/walkingAI.hpp"
 #include "ECS/Systems/gravity.hpp"
 #include "ECS/Systems/solid.hpp"
+#include "ECS/Systems/horizontalScroll.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -71,8 +72,8 @@ namespace GameEngine {
         registry.registerComponent<Components::SolidComponent>();
         registry.registerComponent<Components::GravityComponent>();
         registry.registerComponent<Components::TargetComponent>();
+        registry.registerComponent<Components::HorizontalScrollComponent>();
 
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
@@ -82,7 +83,7 @@ namespace GameEngine {
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
+        registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
     }
 
     static void initLevelRegistry(Containers::Registry &registry)
@@ -106,6 +107,9 @@ namespace GameEngine {
 
     static void populateEntities(Containers::Registry &registry)
     {
+        // TODO: delete when client is ready
+        ECS::Creator::createPlayer(registry, 3, 500, 500, Enums::PlayerColor::CYAN_COLOR);
+        ECS::Creator::createBink(registry, 1, 1000, 500);
     }
 
     static void levelEntities(Containers::Registry &registry, int _level)
@@ -143,7 +147,6 @@ namespace GameEngine {
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         levelEntities(engine.getRegistry(registryTypeBackground), engine.getLevel());
         populateEntities(engine.getRegistry(registryTypeEntities));
-        ECS::Creator::createPlayer(engine.getRegistry(registryTypeEntities), 3, 500, 500, Enums::PlayerColor::CYAN_COLOR); // delete when client is ready
         return engine;
     }
 

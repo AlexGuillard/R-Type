@@ -13,6 +13,8 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/walkingAI.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/solid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/background.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/serverEventHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/horizontalScroll.cpp
 )
 add_library(systems STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})
@@ -21,6 +23,7 @@ target_link_libraries(systems PUBLIC
     systems_helper
     GameEngine
     assets
+    player
 )
 
 add_subdirectory(helper)
