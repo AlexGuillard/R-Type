@@ -105,6 +105,7 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
     if (isTCP) {
         connectTCP(host, port);
         sendHello();
+        _host = host;
         return (true);
     } else {
         try {
@@ -162,7 +163,7 @@ void Network::ClientNetwork::handleLogin(const header& messageHeader, const std:
             int additionalCode = *reinterpret_cast<const int*>(strCopy.c_str());
             std::cout << "Additional code: " << additionalCode << std::endl;
             if (additionalCode == 201 && !firstTime) {
-                if (connect("0.0.0.0", udpPort, false)) {
+                if (connect(_host, udpPort, false)) {
                     firstTime = true;
                     isConnectedUDP = true;
                     std::cout << "jme suis co en udp\n";
