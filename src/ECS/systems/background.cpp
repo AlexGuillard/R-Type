@@ -25,7 +25,6 @@ namespace ECS::Systems {
     )
     {
         Screen::Display::beginDrawCamera();
-
         for (auto &&[eId, level, background] : Containers::IndexedZipper(levels, backgrounds)) {
             if (eId == (level->level - 1)) {
                 background->position.x -= background->paralaxSpeed;

@@ -9,7 +9,7 @@
 
 namespace ECS::Systems {
     /**
-     * @brief Draws the entities with a position and a drawable component
+     * @brief Draws the background with a level and a background component
      */
     void background(
         Containers::Registry &registry,

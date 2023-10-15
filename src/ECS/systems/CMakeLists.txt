@@ -24,6 +24,7 @@ target_link_libraries(systems PUBLIC
     GameEngine
     assets
     player
+    Display
 )
 
 add_subdirectory(helper)
