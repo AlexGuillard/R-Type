@@ -29,15 +29,17 @@ Network::ClientNetwork::~ClientNetwork()
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
     if (!error && recvd_bytes > 0) {
-        if (_data.size() >= HEADER_SIZE) {
+        while (_data.size() >= HEADER_SIZE) {
             header packet = getHeader(_data);
+            if (packet.codeRfc == 0) {
+                _data.clear();
+                break;
+            }
             handleMessageData(packet, _data);
         }
-        _data.clear();
-        asyncReceive(_socket);
-    } else {
-        asyncReceive(_socket);
+        // _data.clear();
     }
+    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
@@ -137,6 +139,40 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[202] = [this](const header &h, std::string &s) {
         handleLogout(h, s);
         };
+    _responseHandlers[311] = [this](const header &h, std::string &s) {
+        handlePlayerSpawn(h, s);
+        };
+    _responseHandlers[312] = [this](const header &h, std::string &s) {
+        handleAllySpawn(h, s);
+        };
+}
+
+void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+        bodyAlly allyData = getAlly(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 311) {
+            std::cout << "Entity: " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
+        }
+    } else {
+        std::cout << "Unexpected message received player" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+        bodyAlly allyData = getAlly(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 312) {
+            std::cout << "Ally : " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
+        }
+    } else {
+        std::cout << "Unexpected message received ally" << std::endl;
+    }
 }
 
 void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
@@ -150,7 +186,7 @@ void Network::ClientNetwork::handleConnection(const header &messageHeader, std::
         std::cout << "footer" << footer.number << std::endl;
         _indexPlayer = messageHeader.entity;
     } else {
-        std::cout << "Unexpected message received" << std::endl;
+        std::cout << "Unexpected message received connection" << std::endl;
     }
 }
 
@@ -189,7 +225,7 @@ void Network::ClientNetwork::handleLogout(const header &messageHeader, std::stri
     if (messageHeader.codeRfc == 202) {
         // std::cout << "Logged out as entity: " << entity << std::endl;
     } else {
-        std::cout << "Unexpected message received" << std::endl;
+        std::cout << "Unexpected message received logout" << std::endl;
     }
 }
 
@@ -273,9 +309,17 @@ Network::BodyNumber Network::ClientNetwork::getBody(std::string &str)
 {
     BodyNumber res;
 
-
     std::memcpy(&res, str.data(), sizeof(BodyNumber));
     str.erase(0, sizeof(BodyNumber));
+    return res;
+}
+
+Network::bodyAlly Network::ClientNetwork::getAlly(std::string &str)
+{
+    bodyAlly res;
+
+    std::memcpy(&res, str.data(), sizeof(bodyAlly));
+    str.erase(0, sizeof(bodyAlly));
     return res;
 }
 
@@ -309,9 +353,11 @@ void Network::ClientNetwork::handleMessageData(const header &messageHeader, std:
 {
     auto responsehandlerIt = _responseHandlers.find(messageHeader.codeRfc);
 
+    std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
+
     if (responsehandlerIt != _responseHandlers.end()) {
         responsehandlerIt->second(messageHeader, str);
     } else {
-        std::cout << "Unexecepted message received" << std::endl;
+        std::cout << "Unexecepted message received message data" << std::endl;
     }
 }

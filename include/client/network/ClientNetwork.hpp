@@ -113,7 +113,14 @@ namespace Network {
          * @param message message from the server
          */
         void handleLogout(const header &messageHeader, std::string &str);
-
+        /**
+         * @brief Handle the player spawn
+         *
+         * @param messageHeader header
+         * @param str string from server
+         */
+        void handlePlayerSpawn(const header &messageHeader, std::string &str);
+        void handleAllySpawn(const header &messageHeader, std::string &str);
         /**
          * @brief Get the Instance object
          *
@@ -198,6 +205,7 @@ namespace Network {
          * @return header
          */
         header getHeader(std::string &str);
+        bodyAlly getAlly(std::string &str);
         void send201();
         void handleMessageData(const header &messageHeader, std::string &str);
         bool isConnectedUDP = false;
