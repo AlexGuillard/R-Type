@@ -19,7 +19,7 @@ add_custom_command(
 )
 
 # create library
-set(SOURCES ${ASSET_SOURCE} AssetLoader.cpp)
+set(SOURCES ${ASSET_SOURCE} AssetLoader.cpp TextLoader.cpp)
 add_library(assets STATIC ${SOURCES})
 target_include_directories(assets PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(assets PRIVATE raylib)

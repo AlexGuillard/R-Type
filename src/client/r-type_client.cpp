@@ -46,8 +46,8 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
 
 int rtype_client()
 {
-    Screen::Display window(Screen::Display::GameState::MENU);
-    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Screen::Display window(Screen::Display::GameState::GAME);
+    GameEngine::GameEngine engine = GameEngine::createClientEngine();
     while (Screen::Display::isOpen()) {
         window.beginUpdate();
         switch (window.getGameState()) {

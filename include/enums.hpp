@@ -25,4 +25,15 @@ namespace Enums {
         UP,
         DOWN
     };
+    enum class RFCCode {
+        CLIENT_CONNECT = 200,
+        LAUNCH_GAME = 201,
+        NEW_PLAYER = 202,
+        PLAYER_UP = 211,
+        PLAYER_DOWN = 212,
+        PLAYER_LEFT = 213,
+        PLAYER_RIGHT = 214,
+        PLAYER_SHOOT = 215,
+        PLAYER_DROP = 216,
+    };
 }

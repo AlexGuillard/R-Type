@@ -12,10 +12,13 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/ControllableComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 #include "GameEngine/Events.hpp"
+#include "constants.hpp"
+#include "Player/utils.hpp"
 
 namespace ECS::Systems {
 
@@ -31,12 +34,6 @@ namespace ECS::Systems {
         return value;
     }
 
-    template <typename T>
-    static T abs(T value)
-    {
-        return value < 0 ? -value : value;
-    }
-
     /**
      * @brief Change the velocity of an entity based on the player input
      * @param velocity Current velocity of the entity
@@ -46,48 +43,36 @@ namespace ECS::Systems {
      */
     static void changeVelocity(
         ECS::Components::VelocityComponent &velocity,
-        ECS::Components::ControllableComponent &controllable,
-        float nbFrameToMaxSpeed,
-        float nbFrameToStop,
-        float maxSpeed
+        ECS::Components::ControllableComponent &controllable
     )
     {
-        const float acceleration = maxSpeed / nbFrameToMaxSpeed;
-        const float deceleration = maxSpeed / nbFrameToStop;
+        std::size_t up = 0;
+        std::size_t down = 0;
+        std::size_t left = 0;
+        std::size_t right = 0;
+
         if (IsKeyDown(controllable.up)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP);
-            velocity.y -= 1 * acceleration;
+            up = 1;
         } else if (IsKeyDown(controllable.down)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN);
-            velocity.y += 1 * acceleration;
-        } else {
-            if (abs(velocity.y) < deceleration) {
-                velocity.y = 0;
-            } else {
-                velocity.y += (velocity.y > 0 ? -1 : 1) * deceleration;
-            }
+            down = 1;
         }
         if (IsKeyDown(controllable.left)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT);
-            velocity.x -= 1 * acceleration;
+            left = 1;
         } else if (IsKeyDown(controllable.right)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
-            velocity.x += 1 * acceleration;
-        } else {
-            if (abs(velocity.x) < deceleration) {
-                velocity.x = 0;
-            } else {
-                velocity.x += (velocity.x > 0 ? -1 : 1) * deceleration;
-            }
+            right = 1;
         }
-        velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed);
-        velocity.y = clamp(velocity.y, -maxSpeed, maxSpeed);
+        Player::updateVelocity(velocity.x, velocity.y, up, down, left, right);
     }
 
     static void handleShooting(
         ECS::Containers::Registry &registry,
         ECS::Components::ControllableComponent &controllable,
-        ECS::Components::PositionComponent &position)
+        ECS::Components::PositionComponent &position,
+        ECS::Components::TeamComponent &team)
     {
         if (IsKeyDown(controllable.fire)) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT);
@@ -106,6 +91,7 @@ namespace ECS::Systems {
                     missileEntity,
                     position.x,
                     position.y,
+                    team,
                     static_cast<std::size_t>(strength * Components::waveBeamBaseDamage),
                     strength
                 );
@@ -114,6 +100,7 @@ namespace ECS::Systems {
                     missileEntity,
                     position.x,
                     position.y,
+                    team,
                     static_cast<std::size_t>(strength * Components::missileBaseDamage)
                 );
             }
@@ -140,15 +127,12 @@ namespace ECS::Systems {
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
         ECS::Containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
     {
-        const float maxSpeed = 500;
-        const float nbFrameToMaxSpeed = 5;
-        const float nbFrameToStop = 5;
-
-        for (auto &&[position, velocity, controllable] : ECS::Containers::Zipper(positions, velocities, controllables)) {
-            changeVelocity(*velocity, *controllable, nbFrameToMaxSpeed, nbFrameToStop, maxSpeed);
-            handleShooting(registry, *controllable, *position);
+        for (auto &&[position, velocity, team, controllable] : ECS::Containers::Zipper(positions, velocities, teams, controllables)) {
+            changeVelocity(*velocity, *controllable);
+            handleShooting(registry, *controllable, *position, *team);
             useForce(registry, *controllable);
         }
     }

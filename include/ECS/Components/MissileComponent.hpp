@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstddef>
+#include "ECS/Components/TeamComponent.hpp"
 
 namespace ECS::Components {
     // X velocity in pixels per second for the missile that will be spawned
@@ -22,6 +23,7 @@ namespace ECS::Components {
     struct MissileComponent {
         float x;
         float y;
+        TeamComponent team;
         std::size_t damage = missileBaseDamage;
     };
 }; // namespace ECS::Components

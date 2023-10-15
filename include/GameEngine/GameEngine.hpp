@@ -50,13 +50,28 @@ namespace GameEngine {
          */
         void run();
 
+        /**
+         * @brief Returns the delta time between the last two calls to run
+         * @return The delta time
+         */
+        static double getDeltaTime();
+
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
+        static double mDeltaTime;
     };
 
     /**
-     * @brief Creates the game engine that will run the game
+     * @brief Creates a game engine that can run the game
      */
     GameEngine createEngine();
+    /**
+     * @brief Create the game engine that will run the game on the client side
+     */
+    GameEngine createClientEngine();
+    /**
+     * @brief Create the game engine that will run the game on the server side
+     */
+    GameEngine createServerEngine();
 }; // namespace ECS::GameEngine
