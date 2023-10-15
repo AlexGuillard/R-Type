@@ -90,8 +90,8 @@ Inheritance diagram for Network::ServerTcp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a08ab3bd9cb3d5883e6d248e8654d20d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a08ab3bd9cb3d5883e6d248e8654d20d9">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients)</td></tr>
-<tr class="separator:a08ab3bd9cb3d5883e6d248e8654d20d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4a6e7030b802295219a7cbc7b4e242"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ada4a6e7030b802295219a7cbc7b4e242">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients, bool &amp;isGame)</td></tr>
+<tr class="separator:ada4a6e7030b802295219a7cbc7b4e242"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0752c15cfc11aeea93cfb84696ebcab2">~ServerTcp</a> ()</td></tr>
 <tr class="separator:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac68750b642bc19424b165de2f19422eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ac68750b642bc19424b165de2f19422eb">start</a> ()</td></tr>
@@ -132,10 +132,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a56a74a45f3c42902f054857c33a209b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1334a17961622dd1501be5e677fa0543"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a1334a17961622dd1501be5e677fa0543">_data</a></td></tr>
 <tr class="separator:a1334a17961622dd1501be5e677fa0543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f94eb207654d5d3d657ae3204fde9db"><td class="memItemLeft" align="right" valign="top">bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a7f94eb207654d5d3d657ae3204fde9db">_isGame</a></td></tr>
+<tr class="separator:a7f94eb207654d5d3d657ae3204fde9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a08ab3bd9cb3d5883e6d248e8654d20d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08ab3bd9cb3d5883e6d248e8654d20d9">&#9670;&nbsp;</a></span>ServerTcp()</h2>
+<a id="ada4a6e7030b802295219a7cbc7b4e242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada4a6e7030b802295219a7cbc7b4e242">&#9670;&nbsp;</a></span>ServerTcp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +164,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>_clients</em>&#160;</td>
+          <td class="paramname"><em>_clients</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>isGame</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -474,6 +482,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::string Network::ServerTcp::_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f94eb207654d5d3d657ae3204fde9db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f94eb207654d5d3d657ae3204fde9db">&#9670;&nbsp;</a></span>_isGame</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool&amp; Network::ServerTcp::_isGame</td>
         </tr>
       </table>
   </td>
