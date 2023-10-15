@@ -60,7 +60,7 @@ namespace ECS {
 
     Entity Creator::createCharacter(
         Containers::Registry &registry,
-        /* enum TeamGroup team, */
+        enum Enums::TeamGroup team,
         std::size_t damage,
         std::size_t health,
         std::size_t width,
@@ -69,12 +69,12 @@ namespace ECS {
     {
         Entity entity = registry.spawnEntity();
 
-        return Creator::createCharacter(registry, /* team, */ damage, health, width, height, entity);
+        return Creator::createCharacter(registry, team, damage, health, width, height, entity);
     }
 
     Entity Creator::createCharacter(
         Containers::Registry &registry,
-        /* enum TeamGroup team, */
+        enum Enums::TeamGroup team,
         std::size_t damage,
         std::size_t health,
         std::size_t width,
@@ -89,12 +89,13 @@ namespace ECS {
         registry.emplaceComponent<Components::DamageComponent>(entity, damage);
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
+        registry.emplaceComponent<Components::TeamComponent>(entity, team);
         return entity;
     }
 
     Entity Creator::createGroundedCharacter(
         Containers::Registry &registry,
-        /* enum TeamGroup team, */
+        enum Enums::TeamGroup team,
         std::size_t damage,
         std::size_t health,
         std::size_t width,
@@ -102,7 +103,7 @@ namespace ECS {
         std::size_t id
     )
     {
-        Entity entity = Creator::createCharacter(registry, damage, health, width, height, id);
+        Entity entity = Creator::createCharacter(registry, team, damage, health, width, height, id);
 
         registry.emplaceComponent<Components::HorizontalScrollComponent>(entity, mLevelScrollSpeed);
         return entity;
@@ -119,7 +120,7 @@ namespace ECS {
     {
         Entity shot = Creator::createCharacter(
             registry,
-            // TODO: add team
+            team,
             1, // damage
             0, // hp: dies on collision
             7, // width
@@ -144,7 +145,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(16, 1);
         const uint8_t nbFrameInAnimation = 8;
 
-        ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, 1, 1, 20, 24, id);
+        ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 20, 24, id);
         registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
@@ -166,7 +167,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
         const uint8_t nbFrameInAnimation = 3;
 
-        ECS::Entity bink = ECS::Creator::createGroundedCharacter(registry, 1, 1, 28, 33, id);
+        ECS::Entity bink = ECS::Creator::createGroundedCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 28, 33, id);
         registry.getComponents<Components::PositionComponent>().at(bink)->x = x;
         registry.getComponents<Components::PositionComponent>().at(bink)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -179,7 +180,6 @@ namespace ECS {
         };
         registry.addComponent<Components::DrawableComponent>(bink, std::move(drawableComponent));
         Creator::addWalkingAI(bink, registry, bink, std::make_pair(0.F, 500.F), 100, true, false);
-        registry.emplaceComponent<Components::CollidableComponent>(bink);
         return bink;
     }
 
@@ -188,7 +188,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 1);
         const uint8_t nbFrameInAnimation = 3;
 
-        ECS::Entity scant = ECS::Creator::createCharacter(registry, 1, 1, 58, 54, id);
+        ECS::Entity scant = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 58, 54, id);
         registry.getComponents<Components::PositionComponent>().at(scant)->x = x;
         registry.getComponents<Components::PositionComponent>().at(scant)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -208,7 +208,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(8, 2);
         const uint8_t nbFrameInAnimation = 16;
 
-        ECS::Entity bug = ECS::Creator::createCharacter(registry, 1, 1, 30, 23, id);
+        ECS::Entity bug = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 30, 23, id);
         registry.getComponents<Components::PositionComponent>().at(bug)->x = x;
         registry.getComponents<Components::PositionComponent>().at(bug)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -228,7 +228,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 1);
         const uint8_t nbFrameInAnimation = 3;
 
-        ECS::Entity cancer = ECS::Creator::createCharacter(registry, 1, 1, 32, 32, id);
+        ECS::Entity cancer = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 32, 32, id);
         registry.getComponents<Components::PositionComponent>().at(cancer)->x = x;
         registry.getComponents<Components::PositionComponent>().at(cancer)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -249,7 +249,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
         const uint8_t nbFrameInAnimation = 6;
 
-        ECS::Entity blaster = ECS::Creator::createGroundedCharacter(registry, 1, 1, 16, 15, id);
+        ECS::Entity blaster = ECS::Creator::createGroundedCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 16, 15, id);
         registry.getComponents<Components::PositionComponent>().at(blaster)->x = x;
         registry.getComponents<Components::PositionComponent>().at(blaster)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -271,7 +271,7 @@ namespace ECS {
         const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
         const uint8_t nbFrameInAnimation = 5;
 
-        ECS::Entity ally = ECS::Creator::createCharacter(registry, 1, 1, 33, 14, id);
+        ECS::Entity ally = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ALLY, 1, 1, 33, 14, id);
         registry.getComponents<Components::PositionComponent>().at(ally)->x = x;
         registry.getComponents<Components::PositionComponent>().at(ally)->y = y;
         Components::DrawableComponent drawableComponent = {
@@ -289,8 +289,7 @@ namespace ECS {
 
     Entity Creator::createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
     {
-        ECS::Entity player = ECS::Creator::createAlly(registry, id, x, y, color);
-
+        Entity player = Creator::createAlly(registry, id, x, y, color);
         registry.emplaceComponent<Components::ControllableComponent>(player);
         return player;
     }

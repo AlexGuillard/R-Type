@@ -58,7 +58,7 @@ namespace ECS {
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -66,7 +66,7 @@ namespace ECS {
          */
         static Entity createCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
@@ -75,7 +75,7 @@ namespace ECS {
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -84,7 +84,7 @@ namespace ECS {
          */
         static Entity createCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
@@ -105,7 +105,7 @@ namespace ECS {
          * @brief Create a base entity that moves with the background
          *
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -114,7 +114,7 @@ namespace ECS {
          */
         static Entity createGroundedCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
