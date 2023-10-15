@@ -170,10 +170,12 @@ $(function() {
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        boost::asio::ip::tcp::socket _tcpSocket;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="comment">//Size of the header of the message</span></div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keyword">static</span> constexpr std::size_t HEADER_SIZE = <span class="keyword">sizeof</span>(<a class="code" href="structNetwork_1_1header.html">header</a>);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    };</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !CLIENTNETWORK_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="comment">//The Index of the player send by server for the color etc... (between 0 and 3)</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="keywordtype">int</span> _indexPlayer;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    };</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !CLIENTNETWORK_HPP_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aANetwork_8hpp_html"><div class="ttname"><a href="ANetwork_8hpp.html">ANetwork.hpp</a></div></div>
 <div class="ttc" id="aError_8hpp_html"><div class="ttname"><a href="Error_8hpp.html">Error.hpp</a></div></div>
 <div class="ttc" id="aclassNetwork_1_1ANetwork_html"><div class="ttname"><a href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></div><div class="ttdoc">abstract class of INetwork</div><div class="ttdef"><b>Definition:</b> ANetwork.hpp:20</div></div>
