@@ -173,7 +173,6 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if (!error && recvd_bytes >= sizeof(BodyNumber)) {
         // if (findClient(getActualClient()) != "") {
-        std::cout << "Je passe par la" << std::endl;
         BodyNumber num = { 0 };
         num = Network::Send::stringToBodyNum(_data);
         if (num.number != -1) {
