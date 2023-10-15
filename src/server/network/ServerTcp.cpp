@@ -30,13 +30,13 @@ void Network::ServerTcp::waitRequest()
     auto self(shared_from_this());
     _data.resize(MAX_SIZE_BUFF);
     _socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, self](boost::system::error_code error, std::size_t bytes_transferred) {
-        int number = 0;
+        BodyNumber number;
 
         if (!error) {
             if (_list.findClient(shared_from_this()) == true) {
-                number = Network::Send::stringToInt(_data);
-                std::cout << "[" << bytes_transferred << "] " << number << "from" << _socket.remote_endpoint().address() << std::endl;
-                if (number == 201) {
+                number = Network::Send::stringToBodyNum(_data);
+                std::cout << "[" << bytes_transferred << "] " << number.number << " from " << _socket.remote_endpoint().address() << std::endl;
+                if (number.number != 201) {
                     send201();
                     _isGame = true;
                 }
@@ -74,11 +74,11 @@ void Network::ServerTcp::write(std::string message)
 
 void Network::ServerTcp::connection()
 {
-    int number = Network::Send::stringToInt(_data);
+    BodyNumber number = Network::Send::stringToBodyNum(_data);
     std::string actualClient;
 
-    std::cout << number << std::endl;
-    if (number == CONNECTION_NB && _list.size() < 4) {
+    std::cout << number.number << std::endl;
+    if (number.number == CONNECTION_NB && _list.size() < 4) {
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200));
@@ -93,8 +93,8 @@ std::string Network::ServerTcp::codeLogin(int code)
     std::string res;
 
     res = Network::Send::makeHeader(code, _list.size() - 1);
-    res.append(Network::Send::makeBinaryInt(_list.size()));
-    res.append(Network::Send::makeBinaryInt(code));
+    res.append(Network::Send::makeBodyNum(_list.size()));
+    res.append(Network::Send::makeBodyNum(code));
     return res;
 }
 
@@ -110,7 +110,7 @@ std::string Network::ServerTcp::code401()
     std::string res;
 
     res = Network::Send::makeHeader(401, -1);
-    res.append(Network::Send::makeBinaryInt(401));
+    res.append(Network::Send::makeBodyNum(401));
     return res;
 }
 
@@ -119,8 +119,8 @@ void Network::ServerTcp::send201()
     std::string res;
 
     res = Network::Send::makeHeader(201, -1);
-    res.append(Network::Send::makeBinaryInt(_udpPort));
-    res.append(Network::Send::makeBinaryInt(201));
+    res.append(Network::Send::makeBodyNum(_udpPort));
+    res.append(Network::Send::makeBodyNum(201));
     for (int i = 0; i < _list.size(); i++) {
         _list.getClient(i)->write(res);
     }

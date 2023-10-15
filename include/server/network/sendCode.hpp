@@ -19,6 +19,13 @@ namespace Network::Send {
      */
     std::string makeHeader(int code, int entityNb);
     /**
+     * @brief function to create a header BodyNumber in std::string
+     *
+     * @param num number
+     * @return std::string
+     */
+    std::string makeBodyNum(int num);
+    /**
      * @brief function to create a BodyMob struct in std::string
      *
      * @param xMob position x of mob
@@ -46,14 +53,6 @@ namespace Network::Send {
      * @return std::string
      */
     std::string makeBodyMissile(const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
-
-    /**
-     * @brief function to create a int in std::string
-     *
-     * @param number number to put in sd::string
-     * @return std::string
-     */
-    std::string makeBinaryInt(int number);
     /**
      * @brief called when spawn a mob
      *
@@ -93,5 +92,5 @@ namespace Network::Send {
      * @param code string cotaining the rfc code
      * @return int
      */
-    int stringToInt(std::string &code);
+    BodyNumber stringToBodyNum(std::string code);
 };

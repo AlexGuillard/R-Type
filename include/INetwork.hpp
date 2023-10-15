@@ -25,6 +25,10 @@ namespace Network {
         int entity;
     };
 
+    struct BodyNumber {
+        int number;
+    };
+
     struct bodyMob {
         int x;
         int y;
