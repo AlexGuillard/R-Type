@@ -33,11 +33,11 @@ namespace ECS::Systems {
                     position->x = 0;
                 }
                 DrawTextureEx(background->texture,
-                (Vector2) {position->x, 0},
-                (float) 0.0, background->frameScale, WHITE);
+                Vector2(position->x, 0),
+                double(0.0), background->frameScale, WHITE);
                 DrawTextureEx(background->texture,
-                (Vector2) {background->texture.width * background->frameScale + position->x, 0},
-                (float) 0.0, background->frameScale, WHITE);
+                Vector2(background->texture.width * background->frameScale + position->x, 0),
+                double(0.0), background->frameScale, WHITE);
             }
         }
         Screen::Display::endDrawCamera();

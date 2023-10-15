@@ -38,7 +38,7 @@ namespace GameEngine {
 
         registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
     }
-    static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, float scale, float speed)
+    static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, double scale, double speed)
     {
         Components::BackgroundComponent backgroundComponent = {
             Assets::AssetLoader::loadTexturePng(index),
@@ -60,11 +60,11 @@ namespace GameEngine {
             Assets::AssetsIndex::BACKGROUND4_PNG,
         };
 
-        std::vector<std::pair<float, float>> sizeAndSpeed = {
-            {(float) 5.0, (float) 0.5},
-            {(float) 1.5, (float) 1.0},
-            {(float) 1.5, (float) 1.5},
-            {(float) 7.0, (float) 2.0}
+        std::vector<std::pair<double, double>> sizeAndSpeed = {
+            {double(5.0), double(0.5)},
+            {double(1.5), double(1.0)},
+            {double(1.5), double(1.5)},
+            {double(7.0), double(2.0)}
         };
 
         for (size_t i = 0; i < assetIndices.size(); ++i)
