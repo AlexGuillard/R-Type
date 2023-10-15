@@ -49,7 +49,15 @@ namespace GameEngine {
          * inserted.
          */
         void run();
-
+        /**
+         * @brief set the level of the game
+         */
+        void setLevel(int level);
+        /**
+          * @brief Returns the current level of the game
+         * @return The level in int
+         */
+        int getLevel() const;
         /**
          * @brief Returns the delta time between the last two calls to run
          * @return The delta time
@@ -59,6 +67,7 @@ namespace GameEngine {
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
+        int _level = 2;
         static double mDeltaTime;
     };
 

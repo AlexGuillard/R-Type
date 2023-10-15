@@ -56,6 +56,16 @@ namespace GameEngine {
         return registryIterator->second;
     }
 
+    void GameEngine::setLevel(int level)
+    {
+        this->_level = level;
+    }
+
+    int GameEngine::getLevel() const
+    {
+        return this->_level;
+    }
+
     void GameEngine::run()
     {
         static auto lastTime = std::chrono::high_resolution_clock::now();

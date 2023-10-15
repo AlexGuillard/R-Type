@@ -25,9 +25,11 @@
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "Assets/AssetLoader.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Systems/movement.hpp"
+#include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -88,10 +90,11 @@ namespace GameEngine {
         ECS::Creator::createBink(registry, registry.spawnEntity(), 1000, 500);
     }
 
+
     GameEngine createEngine()
     {
         GameEngine engine;
-        // engine.createRegistry(RegistryType::Background);
+        engine.createRegistry(registryTypeBackground);
         engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));

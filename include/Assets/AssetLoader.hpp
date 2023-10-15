@@ -32,6 +32,13 @@ namespace Assets {
         */
         static Image loadImagePng(AssetsIndex index);
         /**
+         * @brief Loads a Jpg image from the one embeded in the executable.
+         * Images loaded from this function are cached.
+         * @param index index of the image
+         * @returns A raylib image
+        */
+        static Image loadImageJpg(AssetsIndex index);
+        /**
          * @brief Loads a Gif image from the one embeded in the executable
          * Images loaded from this function are cached.
          * @param index index of the image
@@ -53,6 +60,13 @@ namespace Assets {
          * @returns A raylib texture
         */
         static Texture2D loadTexturePng(AssetsIndex index);
+        /**
+         * @brief Loads a Jpg texture from the one embeded in the executable.
+         * Images loaded from this function are cached.
+         * @param index index of the texture
+         * @returns A raylib texture
+        */
+        static Texture2D loadTextureJpg(AssetsIndex index);
         /**
          * @brief Loads a Gif texture from the one embeded in the executable
          * Images loaded from this function are cached.
