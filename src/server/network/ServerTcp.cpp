@@ -36,7 +36,7 @@ void Network::ServerTcp::waitRequest()
             if (_list.findClient(shared_from_this()) == true) {
                 number = Network::Send::stringToBodyNum(_data);
                 std::cout << "[" << bytes_transferred << "] " << number.number << " from " << _socket.remote_endpoint().address() << std::endl;
-                if (number.number != 201) {
+                if (number.number == 201) {
                     send201();
                     _isGame = true;
                 }
