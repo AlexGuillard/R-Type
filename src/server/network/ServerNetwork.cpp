@@ -187,6 +187,7 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         } else {
             asyncSend(_asyncSocket, "need tcp connection first\n");
         }
+        _data.clear();
         asyncReceive(_asyncSocket);
     } else {
         asyncReceive(_asyncSocket);
