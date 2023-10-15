@@ -72,6 +72,7 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classNetwork_1_1ClientNetwork-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Network::ClientNetwork Class Reference</div>  </div>
@@ -95,9 +96,9 @@ Inheritance diagram for Network::ClientNetwork:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a67733acbf0ca9e178b457338c8d963fc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a67733acbf0ca9e178b457338c8d963fc">ResponseHandler</a> = std::function&lt; void(const std::string &amp;)&gt;</td></tr>
-<tr class="memdesc:a67733acbf0ca9e178b457338c8d963fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is contained on the map of funciton to use the pointer on function.  <a href="classNetwork_1_1ClientNetwork.html#a67733acbf0ca9e178b457338c8d963fc">More...</a><br /></td></tr>
-<tr class="separator:a67733acbf0ca9e178b457338c8d963fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5929a0ac0822c4432eed5202a42c3f87"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a5929a0ac0822c4432eed5202a42c3f87">ResponseHandler</a> = std::function&lt; void(const std::string &amp;)&gt;</td></tr>
+<tr class="memdesc:a5929a0ac0822c4432eed5202a42c3f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is contained on the map of funciton to use the pointer on function.  <a href="classNetwork_1_1ClientNetwork.html#a5929a0ac0822c4432eed5202a42c3f87">More...</a><br /></td></tr>
+<tr class="separator:a5929a0ac0822c4432eed5202a42c3f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -119,21 +120,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a72ff2994fd96d432616a605217cd28a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">sendAction</a> (<a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">Action</a> action)</td></tr>
 <tr class="memdesc:a72ff2994fd96d432616a605217cd28a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send an action from the player to the server.  <a href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">More...</a><br /></td></tr>
 <tr class="separator:a72ff2994fd96d432616a605217cd28a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50017784300e18ee76e9ba101d7bda7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a50017784300e18ee76e9ba101d7bda7d">connect</a> (const std::string &amp;host, int port)</td></tr>
-<tr class="memdesc:a50017784300e18ee76e9ba101d7bda7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to connect to the server if the server return 301 then the connection and return true else false.  <a href="classNetwork_1_1ClientNetwork.html#a50017784300e18ee76e9ba101d7bda7d">More...</a><br /></td></tr>
-<tr class="separator:a50017784300e18ee76e9ba101d7bda7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8ec46aefa10c3f98894f17bfbe0112c4">connect</a> (const std::string &amp;host, int port, bool isTCP)</td></tr>
+<tr class="memdesc:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to connect to the server if the server return 301 then the connection and return true else false.  <a href="classNetwork_1_1ClientNetwork.html#a8ec46aefa10c3f98894f17bfbe0112c4">More...</a><br /></td></tr>
+<tr class="separator:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac35bd3772f195137325d4802f65c9166"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac35bd3772f195137325d4802f65c9166">initializeResponsehandler</a> ()</td></tr>
 <tr class="memdesc:ac35bd3772f195137325d4802f65c9166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the function to use the pointer to function.  <a href="classNetwork_1_1ClientNetwork.html#ac35bd3772f195137325d4802f65c9166">More...</a><br /></td></tr>
 <tr class="separator:ac35bd3772f195137325d4802f65c9166"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd0f6160c35aec3d6f1c02b450ad6efa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#abd0f6160c35aec3d6f1c02b450ad6efa">handleConnection</a> (const std::string &amp;message)</td></tr>
-<tr class="memdesc:abd0f6160c35aec3d6f1c02b450ad6efa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Connection from server.  <a href="classNetwork_1_1ClientNetwork.html#abd0f6160c35aec3d6f1c02b450ad6efa">More...</a><br /></td></tr>
-<tr class="separator:abd0f6160c35aec3d6f1c02b450ad6efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f236a450633e70fc5de3e69c845a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a77f236a450633e70fc5de3e69c845a9c">handleLogin</a> (const std::string &amp;message)</td></tr>
-<tr class="memdesc:a77f236a450633e70fc5de3e69c845a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Login from server.  <a href="classNetwork_1_1ClientNetwork.html#a77f236a450633e70fc5de3e69c845a9c">More...</a><br /></td></tr>
-<tr class="separator:a77f236a450633e70fc5de3e69c845a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f0960594f442a9dd231eacddcced41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac2f0960594f442a9dd231eacddcced41">handleLogout</a> (const std::string &amp;message)</td></tr>
-<tr class="memdesc:ac2f0960594f442a9dd231eacddcced41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Logout from server.  <a href="classNetwork_1_1ClientNetwork.html#ac2f0960594f442a9dd231eacddcced41">More...</a><br /></td></tr>
-<tr class="separator:ac2f0960594f442a9dd231eacddcced41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b9b130e5bb705c4d65d70b6ca44273"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a42b9b130e5bb705c4d65d70b6ca44273">handleConnection</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
+<tr class="memdesc:a42b9b130e5bb705c4d65d70b6ca44273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Connection from server.  <a href="classNetwork_1_1ClientNetwork.html#a42b9b130e5bb705c4d65d70b6ca44273">More...</a><br /></td></tr>
+<tr class="separator:a42b9b130e5bb705c4d65d70b6ca44273"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a084cf7ae6a290fbaad6328d0998c5699"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a084cf7ae6a290fbaad6328d0998c5699">handleLogin</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
+<tr class="memdesc:a084cf7ae6a290fbaad6328d0998c5699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Login from server.  <a href="classNetwork_1_1ClientNetwork.html#a084cf7ae6a290fbaad6328d0998c5699">More...</a><br /></td></tr>
+<tr class="separator:a084cf7ae6a290fbaad6328d0998c5699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf545893c3fb68db07dc36eb1557e6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a4cf545893c3fb68db07dc36eb1557e6d">handleLogout</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
+<tr class="memdesc:a4cf545893c3fb68db07dc36eb1557e6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the Logout from server.  <a href="classNetwork_1_1ClientNetwork.html#a4cf545893c3fb68db07dc36eb1557e6d">More...</a><br /></td></tr>
+<tr class="separator:a4cf545893c3fb68db07dc36eb1557e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a033c9680d6f736a0f56855049991eb1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c">ClientNetwork</a> (boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)</td></tr>
 <tr class="memdesc:a033c9680d6f736a0f56855049991eb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object with parameters.  <a href="classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c">More...</a><br /></td></tr>
 <tr class="separator:a033c9680d6f736a0f56855049991eb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,12 +147,37 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32b41efa147c0fe5a93a1f4c188b6b7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a32b41efa147c0fe5a93a1f4c188b6b7d">stopIOService</a> ()</td></tr>
 <tr class="memdesc:a32b41efa147c0fe5a93a1f4c188b6b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">stop the ioService  <a href="classNetwork_1_1ClientNetwork.html#a32b41efa147c0fe5a93a1f4c188b6b7d">More...</a><br /></td></tr>
 <tr class="separator:a32b41efa147c0fe5a93a1f4c188b6b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26fb1191880775a8a140335d89c91ee4"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::socket &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a26fb1191880775a8a140335d89c91ee4">getSocket</a> ()</td></tr>
-<tr class="memdesc:a26fb1191880775a8a140335d89c91ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Socket object.  <a href="classNetwork_1_1ClientNetwork.html#a26fb1191880775a8a140335d89c91ee4">More...</a><br /></td></tr>
-<tr class="separator:a26fb1191880775a8a140335d89c91ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8156dc5c0b8cfa43ca7df605483cea17"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::socket &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8156dc5c0b8cfa43ca7df605483cea17">getUDPSocket</a> ()</td></tr>
+<tr class="memdesc:a8156dc5c0b8cfa43ca7df605483cea17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Socket object.  <a href="classNetwork_1_1ClientNetwork.html#a8156dc5c0b8cfa43ca7df605483cea17">More...</a><br /></td></tr>
+<tr class="separator:a8156dc5c0b8cfa43ca7df605483cea17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f842cc289d34a26f139386d6bbc36c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a4f842cc289d34a26f139386d6bbc36c0">enqueueReceivedMessage</a> (const std::string &amp;message)</td></tr>
 <tr class="memdesc:a4f842cc289d34a26f139386d6bbc36c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue a received message.  <a href="classNetwork_1_1ClientNetwork.html#a4f842cc289d34a26f139386d6bbc36c0">More...</a><br /></td></tr>
 <tr class="separator:a4f842cc289d34a26f139386d6bbc36c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600bba6035ffef24e96700e54d759fbb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a600bba6035ffef24e96700e54d759fbb">connectTCP</a> (const std::string &amp;host, int port)</td></tr>
+<tr class="memdesc:a600bba6035ffef24e96700e54d759fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish a TCP connection.  <a href="classNetwork_1_1ClientNetwork.html#a600bba6035ffef24e96700e54d759fbb">More...</a><br /></td></tr>
+<tr class="separator:a600bba6035ffef24e96700e54d759fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4b5b587239b65149a4cd3675485ad76"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::tcp::socket &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac4b5b587239b65149a4cd3675485ad76">getTCPSocket</a> ()</td></tr>
+<tr class="memdesc:ac4b5b587239b65149a4cd3675485ad76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the TCP Socket object.  <a href="classNetwork_1_1ClientNetwork.html#ac4b5b587239b65149a4cd3675485ad76">More...</a><br /></td></tr>
+<tr class="separator:ac4b5b587239b65149a4cd3675485ad76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5ad715f1125831d296636d8c480a7a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#af5ad715f1125831d296636d8c480a7a4">handleTCPData</a> (const boost::system::error_code &amp;error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &amp;tcpsocket)</td></tr>
+<tr class="memdesc:af5ad715f1125831d296636d8c480a7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle the TCP data received.  <a href="classNetwork_1_1ClientNetwork.html#af5ad715f1125831d296636d8c480a7a4">More...</a><br /></td></tr>
+<tr class="separator:af5ad715f1125831d296636d8c480a7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f35a87f65fde8223b9410978a364e04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a3f35a87f65fde8223b9410978a364e04">startAsyncReceiveTCP</a> (boost::asio::ip::tcp::socket &amp;tcpsocket)</td></tr>
+<tr class="memdesc:a3f35a87f65fde8223b9410978a364e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the async receive for tcp connection.  <a href="classNetwork_1_1ClientNetwork.html#a3f35a87f65fde8223b9410978a364e04">More...</a><br /></td></tr>
+<tr class="separator:a3f35a87f65fde8223b9410978a364e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce516ed4f264c02011b0cc03573d798"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNetwork_1_1header.html">header</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a2ce516ed4f264c02011b0cc03573d798">getHeader</a> (std::string &amp;str)</td></tr>
+<tr class="memdesc:a2ce516ed4f264c02011b0cc03573d798"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Header object.  <a href="classNetwork_1_1ClientNetwork.html#a2ce516ed4f264c02011b0cc03573d798">More...</a><br /></td></tr>
+<tr class="separator:a2ce516ed4f264c02011b0cc03573d798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5dc60a2bedb86dbcc167131af62c35d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad5dc60a2bedb86dbcc167131af62c35d">send201</a> ()</td></tr>
+<tr class="separator:ad5dc60a2bedb86dbcc167131af62c35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb4b06e5a2bd164ad433ea228f87632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#abeb4b06e5a2bd164ad433ea228f87632">handleMessageData</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
+<tr class="separator:abeb4b06e5a2bd164ad433ea228f87632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b9dd9b4b516e6204bcc00850cd0138d"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::udp::endpoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a2b9dd9b4b516e6204bcc00850cd0138d">getLocalUDPEndpoint</a> ()</td></tr>
+<tr class="separator:a2b9dd9b4b516e6204bcc00850cd0138d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ae9706423c1ee072614a4528542f58"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::tcp::endpoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a54ae9706423c1ee072614a4528542f58">getLocalTCPEndpoint</a> ()</td></tr>
+<tr class="separator:a54ae9706423c1ee072614a4528542f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0e8008ea8fdee184a23e5e19932b2a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNetwork_1_1BodyNumber.html">Network::BodyNumber</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac0e8008ea8fdee184a23e5e19932b2a2">getBody</a> (std::string &amp;str)</td></tr>
+<tr class="separator:ac0e8008ea8fdee184a23e5e19932b2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,6 +206,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7efd33e6954b5ef3658ce9bf293442f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Instance object.  <a href="classNetwork_1_1ClientNetwork.html#a7efd33e6954b5ef3658ce9bf293442f3">More...</a><br /></td></tr>
 <tr class="separator:a7efd33e6954b5ef3658ce9bf293442f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a8ee0b3fb3670e673f47108022b1eb09d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8ee0b3fb3670e673f47108022b1eb09d">isConnectedUDP</a> = false</td></tr>
+<tr class="separator:a8ee0b3fb3670e673f47108022b1eb09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
@@ -193,14 +224,14 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classNetwork_1_1ClientNetwork.html" title="ClientNetwork class use to communicate with the server.">ClientNetwork</a> class use to communicate with the server. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a67733acbf0ca9e178b457338c8d963fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67733acbf0ca9e178b457338c8d963fc">&#9670;&nbsp;</a></span>ResponseHandler</h2>
+<a id="a5929a0ac0822c4432eed5202a42c3f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5929a0ac0822c4432eed5202a42c3f87">&#9670;&nbsp;</a></span>ResponseHandler</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classNetwork_1_1ClientNetwork.html#a67733acbf0ca9e178b457338c8d963fc">Network::ClientNetwork::ResponseHandler</a> =  std::function&lt;void (const std::string&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="classNetwork_1_1ClientNetwork.html#a5929a0ac0822c4432eed5202a42c3f87">Network::ClientNetwork::ResponseHandler</a> =  std::function&lt;void(const std::string &amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -293,14 +324,57 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a50017784300e18ee76e9ba101d7bda7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50017784300e18ee76e9ba101d7bda7d">&#9670;&nbsp;</a></span>connect()</h2>
+<a id="a8ec46aefa10c3f98894f17bfbe0112c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ec46aefa10c3f98894f17bfbe0112c4">&#9670;&nbsp;</a></span>connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Network::ClientNetwork::connect </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isTCP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is used to connect to the server if the server return 301 then the connection and return true else false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host</td><td></td></tr>
+    <tr><td class="paramname">port</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a600bba6035ffef24e96700e54d759fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600bba6035ffef24e96700e54d759fbb">&#9670;&nbsp;</a></span>connectTCP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::ClientNetwork::connectTCP </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>host</em>, </td>
@@ -319,14 +393,10 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function is used to connect to the server if the server return 301 then the connection and return true else false. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">host</td><td></td></tr>
-    <tr><td class="paramname">port</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Establish a TCP connection. </p>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -353,6 +423,51 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ac0e8008ea8fdee184a23e5e19932b2a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0e8008ea8fdee184a23e5e19932b2a2">&#9670;&nbsp;</a></span>getBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structNetwork_1_1BodyNumber.html">Network::BodyNumber</a> Network::ClientNetwork::getBody </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ce516ed4f264c02011b0cc03573d798"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce516ed4f264c02011b0cc03573d798">&#9670;&nbsp;</a></span>getHeader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structNetwork_1_1header.html">header</a> Network::ClientNetwork::getHeader </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Header object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>string from server </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>header </dd></dl>
 
 </div>
 </div>
@@ -437,14 +552,90 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a26fb1191880775a8a140335d89c91ee4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26fb1191880775a8a140335d89c91ee4">&#9670;&nbsp;</a></span>getSocket()</h2>
+<a id="a54ae9706423c1ee072614a4528542f58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ae9706423c1ee072614a4528542f58">&#9670;&nbsp;</a></span>getLocalTCPEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::asio::ip::tcp::endpoint Network::ClientNetwork::getLocalTCPEndpoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keywordflow">return</span> _tcpSocket.local_endpoint();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2b9dd9b4b516e6204bcc00850cd0138d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b9dd9b4b516e6204bcc00850cd0138d">&#9670;&nbsp;</a></span>getLocalUDPEndpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::asio::ip::udp::endpoint Network::ClientNetwork::getLocalUDPEndpoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">return</span> _socket.local_endpoint();</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac4b5b587239b65149a4cd3675485ad76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4b5b587239b65149a4cd3675485ad76">&#9670;&nbsp;</a></span>getTCPSocket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">boost::asio::ip::udp::socket&amp; Network::ClientNetwork::getSocket </td>
+          <td class="memname">boost::asio::ip::tcp::socket&amp; Network::ClientNetwork::getTCPSocket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the TCP Socket object. </p>
+<dl class="section return"><dt>Returns</dt><dd>boost::asio::ip::tcp::socket&amp; </dd></dl>
+
+</div>
+</div>
+<a id="a8156dc5c0b8cfa43ca7df605483cea17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8156dc5c0b8cfa43ca7df605483cea17">&#9670;&nbsp;</a></span>getUDPSocket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boost::asio::ip::udp::socket&amp; Network::ClientNetwork::getUDPSocket </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -457,8 +648,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="abd0f6160c35aec3d6f1c02b450ad6efa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd0f6160c35aec3d6f1c02b450ad6efa">&#9670;&nbsp;</a></span>handleConnection()</h2>
+<a id="a42b9b130e5bb705c4d65d70b6ca44273"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b9b130e5bb705c4d65d70b6ca44273">&#9670;&nbsp;</a></span>handleConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -466,9 +657,19 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Network::ClientNetwork::handleConnection </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>message</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;&#160;</td>
+          <td class="paramname"><em>messageHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -483,8 +684,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a77f236a450633e70fc5de3e69c845a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77f236a450633e70fc5de3e69c845a9c">&#9670;&nbsp;</a></span>handleLogin()</h2>
+<a id="a084cf7ae6a290fbaad6328d0998c5699"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a084cf7ae6a290fbaad6328d0998c5699">&#9670;&nbsp;</a></span>handleLogin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -492,9 +693,19 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Network::ClientNetwork::handleLogin </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>message</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;&#160;</td>
+          <td class="paramname"><em>messageHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -509,8 +720,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ac2f0960594f442a9dd231eacddcced41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2f0960594f442a9dd231eacddcced41">&#9670;&nbsp;</a></span>handleLogout()</h2>
+<a id="a4cf545893c3fb68db07dc36eb1557e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf545893c3fb68db07dc36eb1557e6d">&#9670;&nbsp;</a></span>handleLogout()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -518,9 +729,19 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Network::ClientNetwork::handleLogout </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>message</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;&#160;</td>
+          <td class="paramname"><em>messageHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -532,6 +753,34 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="abeb4b06e5a2bd164ad433ea228f87632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeb4b06e5a2bd164ad433ea228f87632">&#9670;&nbsp;</a></span>handleMessageData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::handleMessageData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;&#160;</td>
+          <td class="paramname"><em>messageHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -648,6 +897,50 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="af5ad715f1125831d296636d8c480a7a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5ad715f1125831d296636d8c480a7a4">&#9670;&nbsp;</a></span>handleTCPData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::handleTCPData </td>
+          <td>(</td>
+          <td class="paramtype">const boost::system::error_code &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>recvd_bytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
+          <td class="paramname"><em>tcpsocket</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handle the TCP data received. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td>error </td></tr>
+    <tr><td class="paramname">recvd_bytes</td><td>size of the data </td></tr>
+    <tr><td class="paramname">tcpsocket</td><td>socket </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac35bd3772f195137325d4802f65c9166"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac35bd3772f195137325d4802f65c9166">&#9670;&nbsp;</a></span>initializeResponsehandler()</h2>
 
@@ -664,6 +957,23 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the function to use the pointer to function. </p>
+
+</div>
+</div>
+<a id="ad5dc60a2bedb86dbcc167131af62c35d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5dc60a2bedb86dbcc167131af62c35d">&#9670;&nbsp;</a></span>send201()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::send201 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -738,6 +1048,32 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a3f35a87f65fde8223b9410978a364e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f35a87f65fde8223b9410978a364e04">&#9670;&nbsp;</a></span>startAsyncReceiveTCP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::startAsyncReceiveTCP </td>
+          <td>(</td>
+          <td class="paramtype">boost::asio::ip::tcp::socket &amp;&#160;</td>
+          <td class="paramname"><em>tcpsocket</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start the async receive for tcp connection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tcpsocket</td><td>socket </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a32b41efa147c0fe5a93a1f4c188b6b7d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32b41efa147c0fe5a93a1f4c188b6b7d">&#9670;&nbsp;</a></span>stopIOService()</h2>
 
@@ -754,6 +1090,21 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>stop the ioService </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8ee0b3fb3670e673f47108022b1eb09d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee0b3fb3670e673f47108022b1eb09d">&#9670;&nbsp;</a></span>isConnectedUDP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::ClientNetwork::isConnectedUDP = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
