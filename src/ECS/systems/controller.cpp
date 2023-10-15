@@ -15,7 +15,7 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
-#include "ECS/Containers/zipper/Zipper.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "GameEngine/Events.hpp"
 #include "constants.hpp"
 #include "Player/utils.hpp"
@@ -130,9 +130,10 @@ namespace ECS::Systems {
         ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
         ECS::Containers::SparseArray<ECS::Components::ControllableComponent> &controllables)
     {
-        for (auto &&[position, velocity, team, controllable] : ECS::Containers::Zipper(positions, velocities, teams, controllables)) {
+        for (auto &&[eId, position, velocity, controllable] : ECS::Containers::IndexedZipper(positions, velocities, controllables)) {
+            auto &&team = teams.at(eId) ? *teams.at(eId) : ECS::Components::TeamComponent(Enums::TeamGroup::NEUTRAL);
             changeVelocity(*velocity, *controllable);
-            handleShooting(registry, *controllable, *position, *team);
+            handleShooting(registry, *controllable, *position, team);
             useForce(registry, *controllable);
         }
     }
