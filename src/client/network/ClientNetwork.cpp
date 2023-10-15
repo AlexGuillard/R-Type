@@ -50,7 +50,7 @@ void Network::ClientNetwork::sendHello()
 {
     std::string res;
 
-    res.append(Network::Send::makeBinaryInt(81732));
+    res.append(Network::Send::makeBodyNum(81732));
     send(_tcpSocket, res);
 }
 
@@ -77,7 +77,7 @@ void Network::ClientNetwork::sendMovement(Movement movement)
 
     std::string messageStr = std::to_string(message);
     std::string res;
-    res.append(Network::Send::makeBinaryInt(message));
+    res.append(Network::Send::makeBodyNum(message));
 
     std::cout << "Sending movement: " <<  messageStr << std::endl;
     asyncSend(_socket, res);
@@ -282,7 +282,7 @@ void Network::ClientNetwork::send201()
 {
     std::string res;
 
-    res.append(Network::Send::makeBinaryInt(201));
+    res.append(Network::Send::makeBodyNum(201));
     send(_tcpSocket, res);
 }
 
