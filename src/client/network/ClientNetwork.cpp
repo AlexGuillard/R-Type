@@ -214,7 +214,7 @@ void Network::ClientNetwork::enqueueReceivedMessage(const std::string &message)
 void Network::ClientNetwork::handleNetwork()
 {
     _ioService.reset();
-    _ioService.poll();
+    _ioService.poll_one();
 }
 
 void Network::ClientNetwork::stopIOService()
