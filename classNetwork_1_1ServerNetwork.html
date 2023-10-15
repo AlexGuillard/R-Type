@@ -165,8 +165,12 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a89b663de091b01c8a177260a13570d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a916a63f71c7602182fdb3388c2cecd18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a916a63f71c7602182fdb3388c2cecd18">_isGame</a> = false</td></tr>
 <tr class="separator:a916a63f71c7602182fdb3388c2cecd18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d341b5e560c5434851c80a587908da2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a7d341b5e560c5434851c80a587908da2">_canPlay</a> = false</td></tr>
+<tr class="separator:a7d341b5e560c5434851c80a587908da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab987709c91f075b980e5c0e80656e24f"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, boost::asio::ip::udp::endpoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ab987709c91f075b980e5c0e80656e24f">_listUdpEndpoints</a></td></tr>
 <tr class="separator:ab987709c91f075b980e5c0e80656e24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8c4f622bbec9205343845d334bbce2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a1b8c4f622bbec9205343845d334bbce2">_ids</a></td></tr>
+<tr class="separator:a1b8c4f622bbec9205343845d334bbce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">_data</a></td></tr>
 <tr class="memdesc:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">More...</a><br /></td></tr>
@@ -541,6 +545,28 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a7d341b5e560c5434851c80a587908da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d341b5e560c5434851c80a587908da2">&#9670;&nbsp;</a></span>_canPlay</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::ServerNetwork::_canPlay = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a19e07addd6e2fd874484d551fd98bb45"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19e07addd6e2fd874484d551fd98bb45">&#9670;&nbsp;</a></span>_clients</h2>
 
@@ -562,6 +588,28 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>hmap for the list of client on the server </p>
+
+</div>
+</div>
+<a id="a1b8c4f622bbec9205343845d334bbce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b8c4f622bbec9205343845d334bbce2">&#9670;&nbsp;</a></span>_ids</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::pair&lt;std::string, int&gt; &gt; Network::ServerNetwork::_ids</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
