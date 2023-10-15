@@ -49,16 +49,6 @@ namespace Assets {
         return AssetLoader::loadTexture(index, ".gif");
     }
 
-    std::string AssetLoader::loadText(AssetsIndex index)
-    {
-        auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
-        std::string result;
-        for (uint16_t i = 0; i < dataSize; i++) {
-            result += (*data)[i];
-        }
-        return result;
-    }
-
     void AssetLoader::clearImageCache()
     {
         AssetLoader::imageCache.clear();

@@ -63,7 +63,15 @@ namespace GameEngine {
     };
 
     /**
-     * @brief Creates the game engine that will run the game
+     * @brief Creates a game engine that can run the game
      */
     GameEngine createEngine();
+    /**
+     * @brief Create the game engine that will run the game on the client side
+     */
+    GameEngine createClientEngine();
+    /**
+     * @brief Create the game engine that will run the game on the server side
+     */
+    GameEngine createServerEngine();
 }; // namespace ECS::GameEngine

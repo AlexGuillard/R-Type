@@ -21,7 +21,6 @@
 #include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
-#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
@@ -30,9 +29,7 @@
 #include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
-#include "ECS/Systems/controller.hpp"
 #include "ECS/Systems/movement.hpp"
-#include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -76,7 +73,6 @@ namespace GameEngine {
         registry.registerComponent<Components::BydoShotComponent>();
         registry.registerComponent<Components::HorizontalScrollComponent>();
 
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent, Components::ControllableComponent>(Systems::controller);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
@@ -87,7 +83,6 @@ namespace GameEngine {
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
-        registry.addSystem<Components::PositionComponent, Components::DrawableComponent>(Systems::drawable); // keep last
     }
 
     static void populateEntities(Containers::Registry &registry)

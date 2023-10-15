@@ -33,6 +33,7 @@ target_link_libraries(ANetwork PRIVATE
 )
 
 add_subdirectory(Assets)
+add_subdirectory(Player)
 add_subdirectory(client)
 add_subdirectory(ECS)
 add_subdirectory(GameEngine)
