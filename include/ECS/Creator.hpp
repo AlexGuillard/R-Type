@@ -92,6 +92,17 @@ namespace ECS {
             std::size_t id
         );
 
+        /**
+         * @brief Create a bydo shot
+         *
+         * @param registry The registry to create the entity in
+         * @param x The x position of the entity
+         * @param y The y position of the entity
+         * @param xDirection The x direction of the entity
+         * @param yDirection The y direction of the entity
+         * @param team The team the entity belongs to
+         * @return Entity The entity created
+         */
         static Entity createBydoShot(
             Containers::Registry &registry,
             float x,
