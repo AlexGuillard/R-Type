@@ -15,13 +15,9 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "enums.hpp"
 
 namespace Network {
-
-    enum class Side {
-        UP,
-        DOWN
-    };
 
     struct Info
     {
@@ -30,10 +26,11 @@ namespace Network {
         std::size_t tick;
         enum ExtraType {
             SIDE,
+            NONE,
         } extraType;
         union Extra
         {
-            Network::Side side;
+            Enums::Position side;
         } extra;
     };
 

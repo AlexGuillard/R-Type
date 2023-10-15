@@ -104,12 +104,18 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
 
 Network::BodyNumber Network::Send::stringToBodyNum(std::string &code)
 {
-    BodyNumber res = { -1 };
+    BodyNumber res;
 
-    if (code.length() < sizeof(BodyNumber)) {
-        return res;
-    }
     std::memcpy(&res, code.data(), sizeof(BodyNumber));
     code.erase(0, sizeof(BodyNumber));
+    return res;
+}
+
+Network::header Network::Send::stringToheader(std::string code)
+{
+    header res;
+
+    std::memcpy(&res, code.data(), sizeof(header));
+    code.erase(0, sizeof(header));
     return res;
 }

@@ -30,13 +30,13 @@ void Network::ServerTcp::waitRequest()
     auto self(shared_from_this());
     _data.resize(MAX_SIZE_BUFF);
     _socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, self](boost::system::error_code error, std::size_t bytes_transferred) {
-        BodyNumber number;
+        header dataClient;
 
         if (!error) {
             if (_list.findClient(shared_from_this()) == true) {
-                number = Network::Send::stringToBodyNum(_data);
-                std::cout << "[" << bytes_transferred << "] " << number.number << " from " << _socket.remote_endpoint().address() << std::endl;
-                if (number.number == 201) {
+                dataClient = Network::Send::stringToheader(_data);
+                std::cout << "[" << bytes_transferred << "] " << dataClient.codeRfc << " from " << _socket.remote_endpoint().address() << std::endl;
+                if (dataClient.codeRfc == 201) {
                     send201();
                     _isGame = true;
                 }
@@ -74,11 +74,11 @@ void Network::ServerTcp::write(std::string message)
 
 void Network::ServerTcp::connection()
 {
-    BodyNumber number = Network::Send::stringToBodyNum(_data);
+    header number = Network::Send::stringToheader(_data);
     std::string actualClient;
 
-    std::cout << number.number << std::endl;
-    if (number.number == CONNECTION_NB && _list.size() < 4) {
+    std::cout << number.codeRfc << std::endl;
+    if (number.codeRfc == CONNECTION_NB && _list.size() < 4) {
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200));

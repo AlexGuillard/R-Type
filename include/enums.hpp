@@ -24,7 +24,8 @@ namespace Enums {
     };
     enum class Position {
         UP,
-        DOWN
+        DOWN,
+        NONE
     };
     enum class RFCCode {
         CLIENT_CONNECT = 200,
