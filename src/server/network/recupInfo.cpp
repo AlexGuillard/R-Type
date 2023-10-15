@@ -48,9 +48,9 @@ void Network::RecupInfo::openFile() {
             } else if (elements[3] == "up") {
                 data.extraType = Network::Info::SIDE;
                 data.extra.side = Enums::Position::UP;
-            } else {
-                data.extra.side = Enums::Position::NONE;
             }
+        } else {
+            data.extra.side = Enums::Position::NONE;
         }
         _data.push_back(data);
     }
