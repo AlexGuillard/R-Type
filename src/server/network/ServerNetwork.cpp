@@ -29,6 +29,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     _portUdp = setUdpSocket(portUdp);
     if (_portUdp == -1)
         throw std::runtime_error("Can not set server udp");
+    _script.openFile();
     std::cout << "tcp on " << portTCP << std::endl;
     std::cout << "udp on " << _portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
@@ -127,12 +128,16 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code &error) {
+        std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
             updateTicks();
             return;
         }
         if (_isGame == true) {
+            scriptInfo = _script.getTickScript(_tickCount);
+            if (!scriptInfo.empty())
+                std::cout << "info to add in game" << std::endl;
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
             for (auto &&[client, data] : _clients) {
@@ -220,5 +225,23 @@ void Network::ServerNetwork::handleClientData(int num)
 {
     if (num >= 211 && num <= 216) {
         _clients[getActualClient()].second.push_back(num);
+    }
+}
+
+void Network::ServerNetwork::SpawnMob(Info script)
+{
+    // switch (expression) {
+    //     case /* constant-expression */:
+    //         /* code */
+    //         break;
+
+    //     default:
+    //         break;
+    // }
+}
+
+void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)
+{
+    for (int i = 0; i < scriptInfo.size(); i++) {
     }
 }
