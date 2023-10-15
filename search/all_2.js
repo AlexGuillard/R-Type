@@ -7,5 +7,6 @@ var searchData=
   ['bodyally_32',['bodyAlly',['../structNetwork_1_1bodyAlly.html',1,'Network']]],
   ['bodymissile_33',['bodyMissile',['../structNetwork_1_1bodyMissile.html',1,'Network']]],
   ['bodymob_34',['bodyMob',['../structNetwork_1_1bodyMob.html',1,'Network']]],
-  ['boomerang_35',['boomerang',['../structECS_1_1Components_1_1DrawableComponent.html#adefb1c97fbf984ebef7a49535244cea7',1,'ECS::Components::DrawableComponent']]]
+  ['bodynumber_35',['BodyNumber',['../structNetwork_1_1BodyNumber.html',1,'Network']]],
+  ['boomerang_36',['boomerang',['../structECS_1_1Components_1_1DrawableComponent.html#adefb1c97fbf984ebef7a49535244cea7',1,'ECS::Components::DrawableComponent']]]
 ];

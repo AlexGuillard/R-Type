@@ -80,6 +80,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a8909d5cb50f36e01a17cb1bbc196b83b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a8909d5cb50f36e01a17cb1bbc196b83b">makeHeader</a> (int code, int entityNb)</td></tr>
 <tr class="memdesc:a8909d5cb50f36e01a17cb1bbc196b83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header struct in std::string  <a href="namespaceNetwork_1_1Send.html#a8909d5cb50f36e01a17cb1bbc196b83b">More...</a><br /></td></tr>
 <tr class="separator:a8909d5cb50f36e01a17cb1bbc196b83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">makeBodyNum</a> (int num)</td></tr>
+<tr class="memdesc:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">More...</a><br /></td></tr>
+<tr class="separator:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">makeBodyMob</a> (int xMob, int yMob, <a class="el" href="namespaceEnums.html#a04ba6023509953c154816d888df61876">Enums::Position</a> pos)</td></tr>
 <tr class="memdesc:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a BodyMob struct in std::string  <a href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">More...</a><br /></td></tr>
 <tr class="separator:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -89,9 +92,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a9cc98182ae348d29986c4e5b2d80d381"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a9cc98182ae348d29986c4e5b2d80d381">makeBodyMissile</a> (const int pos[2], const int velocity[2], <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team, int strenght)</td></tr>
 <tr class="memdesc:a9cc98182ae348d29986c4e5b2d80d381"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a BodyMissile struct in std::string  <a href="namespaceNetwork_1_1Send.html#a9cc98182ae348d29986c4e5b2d80d381">More...</a><br /></td></tr>
 <tr class="separator:a9cc98182ae348d29986c4e5b2d80d381"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f6affb78d5e9781ef604ed4f1d117aa"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a9f6affb78d5e9781ef604ed4f1d117aa">makeBinaryInt</a> (int number)</td></tr>
-<tr class="memdesc:a9f6affb78d5e9781ef604ed4f1d117aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a int in std::string  <a href="namespaceNetwork_1_1Send.html#a9f6affb78d5e9781ef604ed4f1d117aa">More...</a><br /></td></tr>
-<tr class="separator:a9f6affb78d5e9781ef604ed4f1d117aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86199e383da2816bf1c7ce6cc043e6b8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a86199e383da2816bf1c7ce6cc043e6b8">codeMob</a> (int code, int ide, int xMob, int yMob, <a class="el" href="namespaceEnums.html#a04ba6023509953c154816d888df61876">Enums::Position</a> pos)</td></tr>
 <tr class="memdesc:a86199e383da2816bf1c7ce6cc043e6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">called when spawn a mob  <a href="namespaceNetwork_1_1Send.html#a86199e383da2816bf1c7ce6cc043e6b8">More...</a><br /></td></tr>
 <tr class="separator:a86199e383da2816bf1c7ce6cc043e6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,9 +101,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a6945bfdb86fb29e55abb98f9f7694dd1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a6945bfdb86fb29e55abb98f9f7694dd1">codeMissil</a> (const int <a class="el" href="structNetwork_1_1header.html">header</a>[2], const int pos[2], const int velocity[2], <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team, int strenght)</td></tr>
 <tr class="memdesc:a6945bfdb86fb29e55abb98f9f7694dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">called when spawn a missile  <a href="namespaceNetwork_1_1Send.html#a6945bfdb86fb29e55abb98f9f7694dd1">More...</a><br /></td></tr>
 <tr class="separator:a6945bfdb86fb29e55abb98f9f7694dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a536ae864cbfc0d1510a5156b27bb8283"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a536ae864cbfc0d1510a5156b27bb8283">stringToInt</a> (std::string &amp;code)</td></tr>
-<tr class="memdesc:a536ae864cbfc0d1510a5156b27bb8283"><td class="mdescLeft">&#160;</td><td class="mdescRight">transform string send by client to int  <a href="namespaceNetwork_1_1Send.html#a536ae864cbfc0d1510a5156b27bb8283">More...</a><br /></td></tr>
-<tr class="separator:a536ae864cbfc0d1510a5156b27bb8283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a447a4dfacce2d6e65d8bf9e050a67249"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a447a4dfacce2d6e65d8bf9e050a67249">stringToBodyNum</a> (std::string code)</td></tr>
+<tr class="memdesc:a447a4dfacce2d6e65d8bf9e050a67249"><td class="mdescLeft">&#160;</td><td class="mdescRight">transform string send by client to int  <a href="namespaceNetwork_1_1Send.html#a447a4dfacce2d6e65d8bf9e050a67249">More...</a><br /></td></tr>
+<tr class="separator:a447a4dfacce2d6e65d8bf9e050a67249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a8175a11c8d0d27b0962515c08ee11ba4"></a>
@@ -283,33 +283,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9f6affb78d5e9781ef604ed4f1d117aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f6affb78d5e9781ef604ed4f1d117aa">&#9670;&nbsp;</a></span>makeBinaryInt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Network::Send::makeBinaryInt </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>number</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>function to create a int in std::string </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">number</td><td>number to put in sd::string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
-
-</div>
-</div>
 <a id="a9d5f7b30f6334b5f116106dc1de2a58f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d5f7b30f6334b5f116106dc1de2a58f">&#9670;&nbsp;</a></span>makeBodyAlly()</h2>
 
@@ -452,6 +425,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0a5e1cee83569680f44c0c29ff8d7a9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a5e1cee83569680f44c0c29ff8d7a9a">&#9670;&nbsp;</a></span>makeBodyNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network::Send::makeBodyNum </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
 <a id="a8909d5cb50f36e01a17cb1bbc196b83b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8909d5cb50f36e01a17cb1bbc196b83b">&#9670;&nbsp;</a></span>makeHeader()</h2>
 
@@ -490,16 +490,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a536ae864cbfc0d1510a5156b27bb8283"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a536ae864cbfc0d1510a5156b27bb8283">&#9670;&nbsp;</a></span>stringToInt()</h2>
+<a id="a447a4dfacce2d6e65d8bf9e050a67249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a447a4dfacce2d6e65d8bf9e050a67249">&#9670;&nbsp;</a></span>stringToBodyNum()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Network::Send::stringToInt </td>
+          <td class="memname"><a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> Network::Send::stringToBodyNum </td>
           <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
           <td></td>
         </tr>

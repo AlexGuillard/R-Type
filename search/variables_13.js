@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wavebeambasedamage_746',['waveBeamBaseDamage',['../namespaceECS_1_1Components.html#ae5ee810ebe4de2a9fac16f008147f4c1',1,'ECS::Components']]],
-  ['wavebeamspeed_747',['waveBeamSpeed',['../namespaceECS_1_1Components.html#ae1f1900bb3fb8fa6bfc286b2aca4f990',1,'ECS::Components']]],
-  ['width_748',['width',['../structECS_1_1Components_1_1HitBoxComponent.html#ac1c7f72915107bd5081ee73fc437cb64',1,'ECS::Components::HitBoxComponent']]]
+  ['velocityx_747',['velocityX',['../structNetwork_1_1bodyMissile.html#a9b8a9e3c1667a2b72c5b3b0445715ec7',1,'Network::bodyMissile']]],
+  ['velocityy_748',['velocityY',['../structNetwork_1_1bodyMissile.html#ab2c5d874e64101165ea221ff47a2a5f5',1,'Network::bodyMissile']]],
+  ['verticaloffset_749',['verticalOffset',['../structECS_1_1Components_1_1SinMovementComponent.html#a33256cad837c8140c5119ad0f6cb07bc',1,'ECS::Components::SinMovementComponent']]]
 ];
