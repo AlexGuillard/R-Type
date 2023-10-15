@@ -24,7 +24,7 @@ TEST(Creator, createCharacter)
     registry.registerComponent<Components::HitBoxComponent>();
     registry.registerComponent<Components::PositionComponent>();
     registry.registerComponent<Components::VelocityComponent>();
-    Entity entity = Creator::createCharacter(registry, 1, 2, 3, 4);
+    Entity entity = Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 1, 2, 3, 4);
 
     ASSERT_EQ(registry.getComponents<Components::DamageComponent>().at(entity)->damage, 1);
     ASSERT_EQ(registry.getComponents<Components::HPComponent>().at(entity)->hp, 2);
