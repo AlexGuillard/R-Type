@@ -89,7 +89,7 @@ namespace Network {
          * @brief Is contained on the map of funciton to use the pointer on function
          *
          */
-        using ResponseHandler = std::function<void (const std::string&)>;
+        using ResponseHandler = std::function<void(const std::string &)>;
         /**
          * @brief Initialize the function to use the pointer to function
          *
@@ -100,19 +100,19 @@ namespace Network {
          *
          * @param message message from the server
          */
-        void handleConnection(const header& messageHeader, const std::string &str);
+        void handleConnection(const header &messageHeader, const std::string &str);
         /**
          * @brief Handle the Login from server
          *
          * @param message message from the server
          */
-        void handleLogin(const header& messageHeader, const std::string &str);
+        void handleLogin(const header &messageHeader, const std::string &str);
         /**
          * @brief Handle the Logout from server
          *
          * @param message message from the server
          */
-        void handleLogout(const header& messageHeader, const std::string &str);
+        void handleLogout(const header &messageHeader, const std::string &str);
 
         /**
          * @brief Get the Instance object
@@ -157,13 +157,13 @@ namespace Network {
          *
          * @return const boost::asio::ip::udp::socket&
          */
-        boost::asio::ip::udp::socket& getUDPSocket();
+        boost::asio::ip::udp::socket &getUDPSocket();
         /**
          * @brief Enqueue a received message
          *
          * @param message
          */
-        void enqueueReceivedMessage(const std::string& message);
+        void enqueueReceivedMessage(const std::string &message);
         /**
          * @brief Establish a TCP connection
          *
@@ -176,7 +176,7 @@ namespace Network {
          *
          * @return boost::asio::ip::tcp::socket&
          */
-        boost::asio::ip::tcp::socket& getTCPSocket();
+        boost::asio::ip::tcp::socket &getTCPSocket();
         /**
          * @brief Handle the TCP data received
          *
@@ -184,7 +184,7 @@ namespace Network {
          * @param recvd_bytes size of the data
          * @param tcpsocket socket
          */
-        void handleTCPData(const boost::system::error_code& error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket);
+        void handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket);
         /**
          * @brief Start the async receive for tcp connection
          *
@@ -201,13 +201,17 @@ namespace Network {
         void send201();
         void handleMessageData(const header &messageHeader, std::string &str);
         bool isConnectedUDP = false;
-        boost::asio::ip::udp::endpoint getLocalUDPEndpoint() {
+        boost::asio::ip::udp::endpoint getLocalUDPEndpoint()
+        {
             return _socket.local_endpoint();
         }
 
-        boost::asio::ip::tcp::endpoint getLocalTCPEndpoint() {
+        boost::asio::ip::tcp::endpoint getLocalTCPEndpoint()
+        {
             return _tcpSocket.local_endpoint();
         }
+
+        Network::BodyNumber getBody(std::string &str);
 
     private:
         //Port of the server
@@ -221,7 +225,7 @@ namespace Network {
         //Data received
         std::string _dataReceived;
         //Map to use the pointer on function
-        std::map<int, std::function<void(const header&, const std::string&)>> _responseHandlers;
+        std::map<int, std::function<void(const header &, const std::string &)>> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
         //Message to send

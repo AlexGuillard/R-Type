@@ -163,7 +163,7 @@ void Network::ServerNetwork::updateTicks()
             }
         }
         updateTicks();
-    });
+        });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -171,15 +171,21 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     std::string actualClient;
     const size_t maxNbClients = 5;
 
-    if (!error && recvd_bytes > 0) {
+    if (!error && recvd_bytes >= sizeof(BodyNumber)) {
         // if (findClient(getActualClient()) != "") {
-            handleClientData(Network::Send::stringToBodyNum(_data).number);
-            std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToBodyNum(_data).number << "from" << getActualClient() << std::endl;
-            asyncSend(_asyncSocket, "receive data\n");
-        // } else {
-        //     asyncSend(_asyncSocket, "need tcp connection first\n");
-        // }
+        std::cout << "Je passe par la" << std::endl;
+        BodyNumber num = { 0 };
+        num = Network::Send::stringToBodyNum(_data);
+        if (num.number != -1) {
+            handleClientData(num.number);
+            std::cout << "[" << recvd_bytes << "] " << num.number << "from" << getActualClient() << std::endl;
+        }
         _data.clear();
+        // asyncSend(_asyncSocket, "receive data\n");
+    // } else {
+    //     asyncSend(_asyncSocket, "need tcp connection first\n");
+    // }
+        asyncReceive(_asyncSocket);
     } else {
         asyncReceive(_asyncSocket);
     }
