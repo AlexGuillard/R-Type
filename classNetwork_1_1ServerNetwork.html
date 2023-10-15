@@ -112,9 +112,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5cf40820c83baac481b616e353eab1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#aa5cf40820c83baac481b616e353eab1c">handleSend</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
 <tr class="memdesc:aa5cf40820c83baac481b616e353eab1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">function called after sending data  <a href="classNetwork_1_1ServerNetwork.html#aa5cf40820c83baac481b616e353eab1c">More...</a><br /></td></tr>
 <tr class="separator:aa5cf40820c83baac481b616e353eab1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a7e4e2dc992aa0e03aa4ed3833c44e99a">findClient</a> (std::string id) const</td></tr>
-<tr class="memdesc:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="mdescLeft">&#160;</td><td class="mdescRight">find a client in the vector by sending a id, if can not find, return ""  <a href="classNetwork_1_1ServerNetwork.html#a7e4e2dc992aa0e03aa4ed3833c44e99a">More...</a><br /></td></tr>
-<tr class="separator:a7e4e2dc992aa0e03aa4ed3833c44e99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2c17d2eada2cd2396b0da80ef600a91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ac2c17d2eada2cd2396b0da80ef600a91">findClient</a> (<a class="el" href="structNetwork_1_1header.html">Network::header</a> clientData)</td></tr>
+<tr class="memdesc:ac2c17d2eada2cd2396b0da80ef600a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">find a client in the vector by sending a id, if can not find, return ""  <a href="classNetwork_1_1ServerNetwork.html#ac2c17d2eada2cd2396b0da80ef600a91">More...</a><br /></td></tr>
+<tr class="separator:ac2c17d2eada2cd2396b0da80ef600a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d33069600e73f4a3f01c3c5507d143f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a3d33069600e73f4a3f01c3c5507d143f">updateTicks</a> ()</td></tr>
 <tr class="memdesc:a3d33069600e73f4a3f01c3c5507d143f"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that update game when tick is finish  <a href="classNetwork_1_1ServerNetwork.html#a3d33069600e73f4a3f01c3c5507d143f">More...</a><br /></td></tr>
 <tr class="separator:a3d33069600e73f4a3f01c3c5507d143f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,6 +165,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a89b663de091b01c8a177260a13570d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a916a63f71c7602182fdb3388c2cecd18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a916a63f71c7602182fdb3388c2cecd18">_isGame</a> = false</td></tr>
 <tr class="separator:a916a63f71c7602182fdb3388c2cecd18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab987709c91f075b980e5c0e80656e24f"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, boost::asio::ip::udp::endpoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ab987709c91f075b980e5c0e80656e24f">_listUdpEndpoints</a></td></tr>
+<tr class="separator:ab987709c91f075b980e5c0e80656e24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">_data</a></td></tr>
 <tr class="memdesc:a32e578badcede1f912eab0fa67587c8c inherit pro_attribs_classNetwork_1_1ANetwork"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable that contain what you received  <a href="classNetwork_1_1ANetwork.html#a32e578badcede1f912eab0fa67587c8c">More...</a><br /></td></tr>
@@ -256,18 +258,18 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7e4e2dc992aa0e03aa4ed3833c44e99a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e4e2dc992aa0e03aa4ed3833c44e99a">&#9670;&nbsp;</a></span>findClient()</h2>
+<a id="ac2c17d2eada2cd2396b0da80ef600a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2c17d2eada2cd2396b0da80ef600a91">&#9670;&nbsp;</a></span>findClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Network::ServerNetwork::findClient </td>
+          <td class="memname">bool Network::ServerNetwork::findClient </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="structNetwork_1_1header.html">Network::header</a>&#160;</td>
+          <td class="paramname"><em>clientData</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -596,6 +598,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool Network::ServerNetwork::_isGame = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab987709c91f075b980e5c0e80656e24f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab987709c91f075b980e5c0e80656e24f">&#9670;&nbsp;</a></span>_listUdpEndpoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, boost::asio::ip::udp::endpoint&gt; Network::ServerNetwork::_listUdpEndpoints</td>
         </tr>
       </table>
   </td>
