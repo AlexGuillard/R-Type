@@ -80,7 +80,7 @@ void Network::ClientNetwork::sendMovement(Movement movement)
     res.append(Network::Send::makeBinaryInt(message));
 
     std::cout << "Sending movement: " <<  messageStr << std::endl;
-    asyncSend(_socket, "212");
+    asyncSend(_socket, res);
 }
 
 void Network::ClientNetwork::sendAction(Action action)
@@ -167,6 +167,8 @@ void Network::ClientNetwork::handleLogin(const header& messageHeader, const std:
                     firstTime = true;
                     isConnectedUDP = true;
                     std::cout << "jme suis co en udp\n";
+                } else {
+                    std::cout << "jme suis pas co en udp\n";
                 }
             }
         } else {
@@ -279,8 +281,10 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
 void Network::ClientNetwork::send201()
 {
     std::string res;
+    std::cout << "Sending 201" << std::endl;
+    const int code = 201;
 
-    res.append(Network::Send::makeBinaryInt(201));
+    res.append(Network::Send::makeBinaryInt(code));
     send(_tcpSocket, res);
 }
 

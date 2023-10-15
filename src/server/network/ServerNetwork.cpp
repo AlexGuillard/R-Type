@@ -99,13 +99,13 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     const size_t maxNbClients = 5;
 
     if ( !error && recvd_bytes > 0 ) {
-        if (findClient(getActualClient()) != "") {
+        // if (findClient(getActualClient()) != "") {
             handleClientData(Network::Send::stringToInt(_data));
             std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToInt(_data) << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
-        } else {
-            asyncSend(_asyncSocket, "need tcp connection first\n");
-        }
+        // } else {
+        //     asyncSend(_asyncSocket, "need tcp connection first\n");
+        // }
         _data.clear();
     } else {
         asyncReceive(_asyncSocket);
