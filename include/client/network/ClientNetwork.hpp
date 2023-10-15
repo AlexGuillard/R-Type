@@ -201,6 +201,13 @@ namespace Network {
         void send201();
         void handleMessageData(const header &messageHeader, std::string &str);
         bool isConnectedUDP = false;
+        boost::asio::ip::udp::endpoint getLocalUDPEndpoint() {
+            return _socket.local_endpoint();
+        }
+
+        boost::asio::ip::tcp::endpoint getLocalTCPEndpoint() {
+            return _tcpSocket.local_endpoint();
+        }
 
     private:
         //Port of the server

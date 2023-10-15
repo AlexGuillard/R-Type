@@ -165,6 +165,7 @@ void Network::ClientNetwork::handleLogin(const header& messageHeader, const std:
                 if (connect("0.0.0.0", udpPort, false)) {
                     firstTime = true;
                     isConnectedUDP = true;
+                    std::cout << "jme suis co en udp\n";
                 }
             }
         } else {
