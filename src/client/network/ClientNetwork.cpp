@@ -30,10 +30,7 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
 {
     if (!error && recvd_bytes > 0) {
         if (_data.size() >= HEADER_SIZE) {
-            std::cout << "Je passe par la" << std::endl;
             header packet = getHeader(_data);
-            // BodyNumber body = getBody(_data);
-            // BodyNumber footer = getBody(_data);
             handleMessageData(packet, _data);
         }
         _data.clear();
@@ -58,7 +55,7 @@ void Network::ClientNetwork::sendHello()
 
 void Network::ClientNetwork::sendMovement(Movement movement)
 {
-    int message;
+    int message = 0;
 
     switch (movement) {
     case Movement::UP:
@@ -85,7 +82,7 @@ void Network::ClientNetwork::sendMovement(Movement movement)
 
 void Network::ClientNetwork::sendAction(Action action)
 {
-    int message;
+    int message = 0;
 
     switch (action) {
     case Action::SHOOT:
@@ -127,45 +124,46 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
 void Network::ClientNetwork::initializeResponsehandler()
 {
-    _responseHandlers[200] = [this](const header &h, const std::string &s) {
+    _responseHandlers[200] = [this](const header &h, std::string &s) {
         handleConnection(h, s);
         };
-    _responseHandlers[201] = [this](const header &h, const std::string &s) {
+    _responseHandlers[201] = [this](const header &h, std::string &s) {
         handleLogin(h, s);
         };
-    _responseHandlers[202] = [this](const header &h, const std::string &s) {
+    _responseHandlers[202] = [this](const header &h, std::string &s) {
         handleLogout(h, s);
         };
 }
 
-void Network::ClientNetwork::handleConnection(const header &messageHeader, const std::string &str)
+void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
 {
     std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
 
-    if (str.size() >= sizeof(header)) {
-        int numClients = *reinterpret_cast<const int *>(str.c_str());
-        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients << " players including you." << std::endl;
+    if (str.size() >= sizeof(BodyNumber) + sizeof(BodyNumber)) {
+        BodyNumber numClients = getBody(str);
+        BodyNumber footer = getBody(str);
+        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients.number << " players including you." << std::endl;
+        std::cout << "footer" << footer.number << std::endl;
     } else {
         std::cout << "Unexpected message received" << std::endl;
     }
 }
 
-void Network::ClientNetwork::handleLogin(const header &messageHeader, const std::string &str)
+void Network::ClientNetwork::handleLogin(const header &messageHeader, std::string &str)
 {
-    std::string strCopy = str;
     static bool firstTime = false;
 
-    if (strCopy.size() >= sizeof(int)) {
-        int udpPort = *reinterpret_cast<const int *>(strCopy.c_str());
-        std::cout << "Im the player " << messageHeader.entity << " and this is the UDP port: " << udpPort << std::endl;
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber udpPort = getBody(str);
+        std::cout << "Im the player " << messageHeader.entity << " and this is the UDP port: " << udpPort.number << std::endl;
 
-        strCopy.erase(0, sizeof(int));
+        if (!str.empty() && str.size() >= sizeof(BodyNumber)) {
 
-        if (!strCopy.empty() && strCopy.size() >= sizeof(int)) {
-            int additionalCode = *reinterpret_cast<const int *>(strCopy.c_str());
-            std::cout << "Additional code: " << additionalCode << std::endl;
-            if (additionalCode == 201 && !firstTime) {
-                if (connect(_host, udpPort, false)) {
+            BodyNumber footer = getBody(str);
+            std::cout << "Additional code: " << footer.number << std::endl;
+
+            if (footer.number == 201 && !firstTime) {
+                if (connect(_host, udpPort.number, false)) {
                     firstTime = true;
                     isConnectedUDP = true;
                     std::cout << "jme suis co en udp\n";
@@ -177,11 +175,11 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, const std:
             std::cout << "Only header found" << std::endl;
         }
     } else {
-        std::cout << "Unexpected message received" << std::endl;
+        std::cout << "Unexpected message received on login" << std::endl;
     }
 }
 
-void Network::ClientNetwork::handleLogout(const header &messageHeader, const std::string &str)
+void Network::ClientNetwork::handleLogout(const header &messageHeader, std::string &str)
 {
     if (messageHeader.codeRfc == 202) {
         // std::cout << "Logged out as entity: " << entity << std::endl;
@@ -272,8 +270,8 @@ Network::BodyNumber Network::ClientNetwork::getBody(std::string &str)
 {
     BodyNumber res;
 
+
     std::memcpy(&res, str.data(), sizeof(BodyNumber));
-    // std::cout << "BodyNumber -> number: " << res.number << " garbage: " << res.garbage << std::endl;
     str.erase(0, sizeof(BodyNumber));
     return res;
 }
