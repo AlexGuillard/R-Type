@@ -183,8 +183,9 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
         if (findClient(dataClient) && _canPlay == true) {
             handleClientData(dataClient.codeRfc);
         } else {
-            if (_canPlay == true)
+            if (_canPlay == true) {
                 asyncSend(_asyncSocket, "need tcp connection first\n");
+            }
         }
         _data.clear();
         asyncReceive(_asyncSocket);
@@ -278,12 +279,12 @@ void Network::ServerNetwork::SendClientsPlay()
                 color = Enums::PlayerColor::BLUE_COLOR;
             if (pair.first == _ids[i].first) {
                 res = Send::makeHeader(311, _ids[i].second);
-                res = Send::makeBodyAlly(50, 50, color);
-                res = Send::makeBodyNum(311);
+                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, _ids[i].second);
-                res = Send::makeBodyAlly(50, 50, color);
-                res = Send::makeBodyNum(312);
+                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyNum(312));
             }
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
