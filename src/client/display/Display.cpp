@@ -279,7 +279,6 @@ void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         if (CheckCollisionPointRec(GetMousePosition(), playButtonRect) && !_playButton) {
             _playButton = true;
-            // setGameState(GameState::GAME);
         }
     }
 }
@@ -331,6 +330,7 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 
     if (KeyPressed == 'j') {
+        std::cout << "j'appuis sur j\n";
         setGameState(GameState::GAME);
     }
 }
