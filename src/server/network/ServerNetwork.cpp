@@ -112,7 +112,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code &erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients)->start();
+        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame)->start();
     }
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -132,37 +132,39 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        // host:ip -> {id, [RFC, ...]}
-        for (auto &&[client, data] : _clients) {
-            auto &&[id, inputs] = data;
-            for (auto &&input : inputs) {
-                switch (input) {
-                case static_cast<int>(Enums::RFCCode::PLAYER_UP):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
-                    break;
-                case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
-                    break;
-                case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
-                    break;
-                case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
-                    break;
-                case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
-                    break;
-                case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
-                    GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
-                    break;
-                default:
-                    break;
+        if (_isGame == true) {
+            _tickCount++;
+            // host:ip -> {id, [RFC, ...]}
+            for (auto &&[client, data] : _clients) {
+                auto &&[id, inputs] = data;
+                for (auto &&input : inputs) {
+                    switch (input) {
+                    case static_cast<int>(Enums::RFCCode::PLAYER_UP):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
+                        break;
+                    case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
+                        break;
+                    case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
+                        break;
+                    case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
+                        break;
+                    case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
+                        break;
+                    case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
+                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
         }
         updateTicks();
-        }
-    );
+    });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -204,7 +206,7 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
 
 bool Network::ServerNetwork::isGameRunning() const
 {
-    return this->isGame;
+    return this->_isGame;
 }
 
 void Network::ServerNetwork::run(GameEngine::GameEngine &engine)

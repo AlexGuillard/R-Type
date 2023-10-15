@@ -9,8 +9,8 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list,
-    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients)
-    : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients)
+    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients, bool &isGame)
+    : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients), _isGame(isGame)
 {
 }
 
@@ -38,6 +38,7 @@ void Network::ServerTcp::waitRequest()
                 std::cout << "[" << bytes_transferred << "] " << number << "from" << _socket.remote_endpoint().address() << std::endl;
                 if (number == 201) {
                     send201();
+                    _isGame = true;
                 }
             } else {
                 connection();
