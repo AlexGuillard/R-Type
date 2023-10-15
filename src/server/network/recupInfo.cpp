@@ -50,7 +50,7 @@ void Network::RecupInfo::openFile() {
                 data.extra.side = Network::Side::UP;
             }
         } else {
-            data.extraType = Network::Info::None;
+            data.extraType = Network::Info::NONE;
         }
         _data.push_back(data);
     }
