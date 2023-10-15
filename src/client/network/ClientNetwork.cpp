@@ -281,10 +281,8 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
 void Network::ClientNetwork::send201()
 {
     std::string res;
-    std::cout << "Sending 201" << std::endl;
-    const int code = 201;
 
-    res.append(Network::Send::makeBinaryInt(code));
+    res.append(Network::Send::makeBinaryInt(201));
     send(_tcpSocket, res);
 }
 
