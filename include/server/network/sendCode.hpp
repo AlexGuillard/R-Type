@@ -92,5 +92,6 @@ namespace Network::Send {
      * @param code string cotaining the rfc code
      * @return int
      */
-    BodyNumber stringToBodyNum(std::string code);
+    BodyNumber stringToBodyNum(std::string &code);
+    Network::header stringToheader(std::string code);
 };

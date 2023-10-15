@@ -15,7 +15,7 @@ std::string Network::Send::makeHeader(int code, int entityNb)
     str.resize(sizeof(Network::header));
     res.codeRfc = code;
     res.entity = entityNb;
-    std::memcpy(str.data(), &res, sizeof(Network::header));
+    std::memcpy(&str.data()[0], &res, sizeof(Network::header));
     return str;
 }
 
@@ -39,7 +39,7 @@ std::string Network::Send::makeBodyMob(int xMob, int yMob, Enums::Position pos)
     res.x = xMob;
     res.y = yMob;
     res.pos = pos;
-    std::memcpy(str.data(), &res, sizeof(Network::bodyMob));
+    std::memcpy(&str.data()[0], &res, sizeof(Network::bodyMob));
     return str;
 }
 
@@ -52,7 +52,7 @@ std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor
     res.x = xAlly;
     res.y = yAlly;
     res.color = actualColor;
-    std::memcpy(str.data(), &res, sizeof(Network::bodyAlly));
+    std::memcpy(&str.data()[0], &res, sizeof(Network::bodyAlly));
     return str;
 }
 
@@ -68,7 +68,7 @@ std::string Network::Send::makeBodyMissile(const int posXY[2], const int velocit
     res.velocityY = velocityXY[1];
     res.team = team;
     res.strength = strenght;
-    std::memcpy(str.data(), &res, sizeof(Network::bodyMissile));
+    std::memcpy(&str.data()[0], &res, sizeof(Network::bodyMissile));
     return str;
 }
 
@@ -102,12 +102,20 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
     return str;
 }
 
-Network::BodyNumber Network::Send::stringToBodyNum(std::string code)
+Network::BodyNumber Network::Send::stringToBodyNum(std::string &code)
 {
     BodyNumber res;
-    std::string copyCode(code.data());
 
-    std::memcpy(&res, copyCode.data(), sizeof(BodyNumber));
+    std::memcpy(&res, code.data(), sizeof(BodyNumber));
     code.erase(0, sizeof(BodyNumber));
+    return res;
+}
+
+Network::header Network::Send::stringToheader(std::string code)
+{
+    header res;
+
+    std::memcpy(&res, code.data(), sizeof(header));
+    code.erase(0, sizeof(header));
     return res;
 }

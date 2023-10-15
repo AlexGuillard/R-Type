@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <string>
 #include <utility>
-
 #include "server/network/ServerNetwork.hpp"
 #include "server/network/sendCode.hpp"
 #include "GameEngine/Events.hpp"
@@ -29,6 +28,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     _portUdp = setUdpSocket(portUdp);
     if (_portUdp == -1)
         throw std::runtime_error("Can not set server udp");
+    _script.openFile();
     std::cout << "tcp on " << portTCP << std::endl;
     std::cout << "udp on " << _portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
@@ -127,12 +127,18 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code &error) {
+        std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
             updateTicks();
             return;
         }
         if (_isGame == true) {
+            scriptInfo = _script.getTickScript(_tickCount);
+            if (!scriptInfo.empty()) {
+                std::cout << "info to add in game" << std::endl;
+                SendClients(scriptInfo);
+            }
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
             for (auto &&[client, data] : _clients) {
@@ -164,7 +170,7 @@ void Network::ServerNetwork::updateTicks()
             }
         }
         updateTicks();
-    });
+        });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -173,14 +179,17 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
     const size_t maxNbClients = 5;
 
     if (!error && recvd_bytes > 0) {
-        if (findClient(getActualClient()) != "") {
-            handleClientData(Network::Send::stringToBodyNum(_data).number);
+        header dataClient = Send::stringToheader(_data);
+        if (findClient(dataClient)) {
+            handleClientData(dataClient.codeRfc);
             std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToBodyNum(_data).number << "from" << getActualClient() << std::endl;
             asyncSend(_asyncSocket, "receive data\n");
+
         } else {
             asyncSend(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
+        asyncReceive(_asyncSocket);
     } else {
         asyncReceive(_asyncSocket);
     }
@@ -191,12 +200,13 @@ std::string Network::ServerNetwork::getActualClient() const
     return _endpoint.address().to_string() + ":" + std::to_string(_endpoint.port());
 }
 
-std::string Network::ServerNetwork::findClient(std::string findId) const
+bool Network::ServerNetwork::findClient(Network::header clientData)
 {
-    if (_clients.contains(findId)) {
-        return findId;
+    if (clientData.entity >= 0 && clientData.entity <= 4) {
+        _listUdpEndpoints[getActualClient()] = _endpoint;
+        return true;
     }
-    return "";
+    return false;
 }
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
@@ -220,5 +230,27 @@ void Network::ServerNetwork::handleClientData(int num)
 {
     if (num >= 211 && num <= 216) {
         _clients[getActualClient()].second.push_back(num);
+    }
+}
+
+void Network::ServerNetwork::SpawnMob(Info script)
+{
+    std::string res = "";
+
+    if (script.rfc >= 301 && script.rfc <= 306) {
+        res.append(Send::makeHeader(script.rfc, 0));
+        res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
+        res.append(Send::makeBodyNum(script.rfc));
+    }
+    for (const auto& pair : _listUdpEndpoints) {
+        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+    }
+}
+
+void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)
+{
+    for (int i = 0; i < scriptInfo.size(); i++) {
+        SpawnMob(scriptInfo[i]);
     }
 }
