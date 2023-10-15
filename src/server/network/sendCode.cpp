@@ -19,6 +19,17 @@ std::string Network::Send::makeHeader(int code, int entityNb)
     return str;
 }
 
+std::string Network::Send::makeBodyNum(int num)
+{
+    Network::BodyNumber res;
+    std::string str;
+
+    str.resize(sizeof(Network::BodyNumber));
+    res.number = num;
+    std::memcpy(str.data(), &res, sizeof(Network::BodyNumber));
+    return str;
+}
+
 std::string Network::Send::makeBodyMob(int xMob, int yMob, Enums::Position pos)
 {
     Network::bodyMob res;
@@ -61,22 +72,13 @@ std::string Network::Send::makeBodyMissile(const int posXY[2], const int velocit
     return str;
 }
 
-std::string Network::Send::makeBinaryInt(int number)
-{
-    std::string str;
-
-    str.resize(sizeof(int));
-    std::memcpy(str.data(), &number, sizeof(int));
-    return str;
-}
-
 std::string Network::Send::codeMob(int code, int ide, int xPata, int yPata, Enums::Position pos)
 {
     std::string str;
 
     str = makeHeader(code, ide);
     str.append(makeBodyMob(xPata, yPata, pos));
-    str.append(makeBinaryInt(code));
+    str.append(makeBodyNum(code));
     return str;
 }
 
@@ -86,7 +88,7 @@ std::string Network::Send::codeAlly(int code, int ide, int xMob, int yMob, Enums
 
     str = makeHeader(code, ide);
     str.append(makeBodyAlly(xMob, yMob, color));
-    str.append(makeBinaryInt(code));
+    str.append(makeBodyNum(code));
     return str;
 }
 
@@ -96,7 +98,7 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
 
     str = makeHeader(header[0], header[1]);
     str.append(makeBodyMissile(pos, velocity, team, strenght));
-    str.append(makeBinaryInt(header[0]));
+    str.append(makeBodyNum(header[0]));
     return str;
 }
 
