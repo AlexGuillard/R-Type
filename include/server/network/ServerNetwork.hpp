@@ -29,7 +29,7 @@ namespace Network {
      */
     class ServerNetwork : public ANetwork {
     public:
-        ServerNetwork(boost::asio::io_service &io_service, int portTcp, int portUdp);
+        ServerNetwork(boost::asio::io_service& io_service, int portTcp, int portUdp);
         ~ServerNetwork();
         /**
          * @brief used when making the connections from the clients
@@ -42,7 +42,7 @@ namespace Network {
          */
         void udpConnection();
         // handler for asynd accept in tcp connection
-        void acceptHandler(const boost::system::error_code &error, boost::asio::ip::tcp::socket socket);
+        void acceptHandler(const boost::system::error_code& error, boost::asio::ip::tcp::socket socket);
         /**
          * @brief function called after receiving data
          *
@@ -100,10 +100,12 @@ namespace Network {
         std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
         // variable for the timer and the ticks
         boost::asio::deadline_timer _timer;
-        // boolean to change from tcp to udp and vice versa
-        bool isGame = false;
         // necessary for acceptation tcp clients
         boost::asio::ip::tcp::acceptor _acceptor;
+        // counter for ticks in game
+        std::size_t _tickCount = 0;
+        // boolean to check if we are on game or not
+        bool _isGame = false;
     private:
         Participants _list;
         /**
