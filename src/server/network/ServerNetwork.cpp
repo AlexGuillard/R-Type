@@ -181,10 +181,11 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if (!error && recvd_bytes > 0) {
         header dataClient = Send::stringToheader(_data);
-        if (findClient(dataClient)) {
+        if (findClient(dataClient) && _canPlay == true) {
             handleClientData(dataClient.codeRfc);
         } else {
-            asyncSend(_asyncSocket, "need tcp connection first\n");
+            if (_canPlay == true)
+                asyncSend(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
     } else {
@@ -199,12 +200,12 @@ std::string Network::ServerNetwork::getActualClient() const
 
 bool Network::ServerNetwork::findClient(Network::header clientData)
 {
-    if (clientData.entity >= 0 && clientData.entity <= 4) {
+    if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         if (_listUdpEndpoints.size() == _clients.size()) {
             _canPlay = true;
-            return true;
         }
+        return true;
     }
     return false;
 }
