@@ -133,11 +133,11 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        if (_isGame == true) {
+        if (_canPlay == true) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 std::cout << "info to add in game" << std::endl;
-                SendClients(scriptInfo);
+                SendClientsInfo(scriptInfo);
             }
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
@@ -180,13 +180,11 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
 
     if (!error && recvd_bytes > 0) {
         header dataClient = Send::stringToheader(_data);
-        if (findClient(dataClient)) {
+        if (findClient(dataClient) && _canPlay == true) {
             handleClientData(dataClient.codeRfc);
-            std::cout << "[" << recvd_bytes << "] " << Network::Send::stringToBodyNum(_data).number << "from" << getActualClient() << std::endl;
-            asyncSend(_asyncSocket, "receive data\n");
-
         } else {
-            asyncSend(_asyncSocket, "need tcp connection first\n");
+            if (_canPlay == true)
+                asyncSend(_asyncSocket, "need tcp connection first\n");
         }
         _data.clear();
         asyncReceive(_asyncSocket);
@@ -202,8 +200,13 @@ std::string Network::ServerNetwork::getActualClient() const
 
 bool Network::ServerNetwork::findClient(Network::header clientData)
 {
-    if (clientData.entity >= 0 && clientData.entity <= 4) {
+    if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
+        _ids.push_back(std::pair(getActualClient(), clientData.entity));
+        if (_listUdpEndpoints.size() == _clients.size()) {
+            _canPlay = true;
+            SendClientsPlay();
+        }
         return true;
     }
     return false;
@@ -216,7 +219,7 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
 
 bool Network::ServerNetwork::isGameRunning() const
 {
-    return this->_isGame;
+    return this->_canPlay;
 }
 
 void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
@@ -248,9 +251,41 @@ void Network::ServerNetwork::SpawnMob(Info script)
     }
 }
 
-void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)
+void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 {
     for (int i = 0; i < scriptInfo.size(); i++) {
         SpawnMob(scriptInfo[i]);
+    }
+}
+
+void Network::ServerNetwork::SendClientsPlay()
+{
+    std::string res;
+    Enums::PlayerColor color;
+
+    for (const auto& pair : _listUdpEndpoints) {
+        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+        for (int i = 0; i < _ids.size(); i++) {
+            if (i == 0)
+                color = Enums::PlayerColor::CYAN_COLOR;
+            else if (i == 1)
+                color = Enums::PlayerColor::PURPLE_COLOR;
+            else if (i == 2)
+                color = Enums::PlayerColor::LIME_COLOR;
+            else if (i == 3)
+                color = Enums::PlayerColor::RED_COLOR;
+            else
+                color = Enums::PlayerColor::BLUE_COLOR;
+            if (pair.first == _ids[i].first) {
+                res = Send::makeHeader(311, _ids[i].second);
+                res = Send::makeBodyAlly(50, 50, color);
+                res = Send::makeBodyNum(311);
+            } else {
+                res = Send::makeHeader(312, _ids[i].second);
+                res = Send::makeBodyAlly(50, 50, color);
+                res = Send::makeBodyNum(312);
+            }
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        }
     }
 }
