@@ -51,6 +51,7 @@ void Network::RecupInfo::openFile() {
             }
         } else {
             data.extra.side = Enums::Position::NONE;
+            data.extraType = Network::Info::NONE;
         }
         _data.push_back(data);
     }

@@ -58,7 +58,7 @@ namespace ECS {
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -66,7 +66,7 @@ namespace ECS {
          */
         static Entity createCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
@@ -75,7 +75,7 @@ namespace ECS {
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -84,7 +84,7 @@ namespace ECS {
          */
         static Entity createCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
@@ -96,7 +96,7 @@ namespace ECS {
          * @brief Create a base entity that moves with the background
          *
          * @param registry The registry to create the entity in
-         * @//param team The team the entity belongs to
+         * @param team The team the entity belongs to
          * @param damage The damage the entity deals to the other team on collision
          * @param health The health of the entity
          * @param width The width of the entity's hitbox/texture
@@ -105,7 +105,7 @@ namespace ECS {
          */
         static Entity createGroundedCharacter(
             Containers::Registry &registry,
-            /* enum TeamGroup team, */
+            enum Enums::TeamGroup team,
             std::size_t damage,
             std::size_t health,
             std::size_t width,
@@ -121,7 +121,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a Enemy Bink object
          *
@@ -130,7 +130,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createBink(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createBink(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a Enemy Scant object
          *
@@ -139,7 +139,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createScant(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createScant(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a Enemy Bug object
          *
@@ -148,7 +148,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createBug(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createBug(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a enemy Cancer object
          *
@@ -157,7 +157,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createCancer(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createCancer(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a Blaster object
          *
@@ -166,7 +166,7 @@ namespace ECS {
          * @param x position X
          * @param y position y
          */
-        static void createBlaster(Containers::Registry &registry, size_t id, int x, int y);
+        static Entity createBlaster(Containers::Registry &registry, size_t id, int x, int y);
         /**
          * @brief Create a Ally object
          *
@@ -176,7 +176,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static void createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
         /**
          * @brief Create a Player object
          *
@@ -186,7 +186,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static void createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
     private:
         static float mLevelScrollSpeed;
     };

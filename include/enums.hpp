@@ -18,6 +18,7 @@ namespace Enums {
     };
 
     enum class TeamGroup {
+        NEUTRAL,
         ALLY,
         ENEMY
     };
