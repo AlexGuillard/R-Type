@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['participants_457',['Participants',['../classNetwork_1_1Participants.html',1,'Network']]],
-  ['positioncomponent_458',['PositionComponent',['../structECS_1_1Components_1_1PositionComponent.html',1,'ECS::Components']]]
+  ['missilecomponent_468',['MissileComponent',['../structECS_1_1Components_1_1MissileComponent.html',1,'ECS::Components']]]
 ];

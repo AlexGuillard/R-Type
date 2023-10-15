@@ -78,6 +78,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a844cee10d2ed31740bfc17c4b6a74852"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a844cee10d2ed31740bfc17c4b6a74852">background</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1LevelComponent.html">Components::LevelComponent</a> &gt; &amp;levels, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1BackgroundComponent.html">Components::BackgroundComponent</a> &gt; &amp;backgrounds)</td></tr>
+<tr class="memdesc:a844cee10d2ed31740bfc17c4b6a74852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the background with a level and a background component.  <a href="namespaceECS_1_1Systems.html#a844cee10d2ed31740bfc17c4b6a74852">More...</a><br /></td></tr>
+<tr class="separator:a844cee10d2ed31740bfc17c4b6a74852"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a597f278d623676af0c0bf35c24453b59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a597f278d623676af0c0bf35c24453b59">collision</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HitBoxComponent.html">Components::HitBoxComponent</a> &gt; &amp;hitboxes, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollidableComponent.html">Components::CollidableComponent</a> &gt; &amp;collidables, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1CollisionComponent.html">Components::CollisionComponent</a> &gt; &amp;collisions)</td></tr>
 <tr class="memdesc:a597f278d623676af0c0bf35c24453b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects collisions between entities with collidable components and update their collision components accordingly.  <a href="namespaceECS_1_1Systems.html#a597f278d623676af0c0bf35c24453b59">More...</a><br /></td></tr>
 <tr class="separator:a597f278d623676af0c0bf35c24453b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +128,48 @@ Variables</h2></td></tr>
 <tr class="separator:adf07eef9145a289d8a80651272f357b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a844cee10d2ed31740bfc17c4b6a74852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844cee10d2ed31740bfc17c4b6a74852">&#9670;&nbsp;</a></span>background()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ECS::Systems::background </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1LevelComponent.html">Components::LevelComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>levels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1BackgroundComponent.html">Components::BackgroundComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>backgrounds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws the background with a level and a background component. </p>
+
+</div>
+</div>
 <a id="a597f278d623676af0c0bf35c24453b59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a597f278d623676af0c0bf35c24453b59">&#9670;&nbsp;</a></span>collision()</h2>
 
