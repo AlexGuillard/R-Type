@@ -49,7 +49,7 @@ void Network::ClientNetwork::sendHello()
 {
     std::string res;
 
-    res.append(Network::Send::makeBodyNum(81732));
+    res = Network::Send::makeHeader(CONNECTION_NB, 5);
     send(_tcpSocket, res);
 }
 
@@ -144,6 +144,7 @@ void Network::ClientNetwork::handleConnection(const header &messageHeader, std::
         BodyNumber footer = getBody(str);
         std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients.number << " players including you." << std::endl;
         std::cout << "footer" << footer.number << std::endl;
+        _indexPlayer = messageHeader.entity;
     } else {
         std::cout << "Unexpected message received" << std::endl;
     }
@@ -256,8 +257,6 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code &erro
     if (!error && recvd_bytes > 0) {
         if (_data.size() >= (HEADER_SIZE)) {
             header packet = getHeader(_data);
-            // BodyNumber body = getBody(_data);
-            // BodyNumber footer = getBody(_data);
             handleMessageData(packet, _data);
         }
         startAsyncReceiveTCP(tcpsocket);
@@ -298,7 +297,7 @@ void Network::ClientNetwork::send201()
 {
     std::string res;
 
-    res.append(Network::Send::makeBodyNum(201));
+    res = Network::Send::makeHeader(201, _indexPlayer);
     send(_tcpSocket, res);
 }
 
