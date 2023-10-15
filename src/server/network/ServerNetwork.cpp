@@ -228,16 +228,16 @@ void Network::ServerNetwork::handleClientData(int num)
     }
 }
 
-void Network::ServerNetwork::SpawnMob(Info script)
+std::string Network::ServerNetwork::SpawnMob(Info script)
 {
-    // switch (expression) {
-    //     case /* constant-expression */:
-    //         /* code */
-    //         break;
+    std::string res = "";
 
-    //     default:
-    //         break;
-    // }
+    if (script.rfc >= 301 && script.rfc <= 306) {
+        res.append(Send::makeHeader(script.rfc, 0));
+        res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
+        res.append(script.rfc);
+    }
+    return res;
 }
 
 void Network::ServerNetwork::SendClients(std::vector<Info> scriptInfo)

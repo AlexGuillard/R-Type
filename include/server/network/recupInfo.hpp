@@ -18,11 +18,6 @@
 
 namespace Network {
 
-    enum class Side {
-        UP,
-        DOWN
-    };
-
     struct Info
     {
         std::size_t rfc;
@@ -33,7 +28,7 @@ namespace Network {
         } extraType;
         union Extra
         {
-            Network::Side side;
+            Enums::Position side;
         } extra;
     };
 
