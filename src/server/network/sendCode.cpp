@@ -102,13 +102,12 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
     return str;
 }
 
-int Network::Send::stringToInt(std::string &code)
+Network::BodyNumber Network::Send::stringToBodyNum(std::string code)
 {
-    int res = 0;
+    BodyNumber res;
     std::string copyCode(code.data());
 
-    std::memcpy(&res, copyCode.data(), sizeof(int));
-    code.erase(0, sizeof(int));
-    copyCode = std::to_string(res);
+    std::memcpy(&res, copyCode.data(), sizeof(BodyNumber));
+    code.erase(0, sizeof(BodyNumber));
     return res;
 }
