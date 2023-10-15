@@ -264,9 +264,10 @@ void Network::ServerNetwork::SendClientsPlay()
     std::string res;
     Enums::PlayerColor color;
 
-    for (const auto& pair : _listUdpEndpoints) {
-        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        for (int i = 0; i < _ids.size(); i++) {
+
+    for (int i = 0; i < _ids.size(); i++) {
+        for (const auto& pair : _listUdpEndpoints) {
+            const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (i == 0)
                 color = Enums::PlayerColor::CYAN_COLOR;
             else if (i == 1)
@@ -286,6 +287,7 @@ void Network::ServerNetwork::SendClientsPlay()
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(312));
             }
+            sleep(1);
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
     }

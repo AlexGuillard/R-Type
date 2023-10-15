@@ -31,10 +31,6 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
     if (!error && recvd_bytes > 0) {
         while (_data.size() >= HEADER_SIZE) {
             header packet = getHeader(_data);
-            if (packet.codeRfc == 0) {
-                _data.clear();
-                break;
-            }
             handleMessageData(packet, _data);
         }
         // _data.clear();
@@ -177,7 +173,8 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
 {
-    std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
+    if (messageHeader.codeRfc != 0)
+        std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
 
     if (str.size() >= sizeof(BodyNumber) + sizeof(BodyNumber)) {
         BodyNumber numClients = getBody(str);
@@ -336,7 +333,9 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
     header res;
 
     std::memcpy(&res, str.data(), HEADER_SIZE);
-    std::cout << "Header -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
+    if (res.codeRfc != 0) {
+        std::cout << "Header -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
+    }
     str.erase(0, HEADER_SIZE);
     return res;
 }
@@ -353,11 +352,9 @@ void Network::ClientNetwork::handleMessageData(const header &messageHeader, std:
 {
     auto responsehandlerIt = _responseHandlers.find(messageHeader.codeRfc);
 
-    std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
-
     if (responsehandlerIt != _responseHandlers.end()) {
         responsehandlerIt->second(messageHeader, str);
     } else {
-        std::cout << "Unexecepted message received message data" << std::endl;
+        // std::cout << "Unexecepted message received message data" << std::endl;
     }
 }
