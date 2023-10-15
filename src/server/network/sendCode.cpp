@@ -105,9 +105,8 @@ std::string Network::Send::codeMissil(const int header[2], const int pos[2], con
 Network::BodyNumber Network::Send::stringToBodyNum(std::string code)
 {
     BodyNumber res;
-    std::string copyCode(code.data());
 
-    std::memcpy(&res, copyCode.data(), sizeof(BodyNumber));
+    std::memcpy(&res, code.data(), sizeof(BodyNumber));
     code.erase(0, sizeof(BodyNumber));
     return res;
 }
@@ -115,9 +114,8 @@ Network::BodyNumber Network::Send::stringToBodyNum(std::string code)
 Network::header Network::Send::stringToheader(std::string code)
 {
     header res;
-    std::string copyCode(code.data());
 
-    std::memcpy(&res, copyCode.data(), sizeof(header));
+    std::memcpy(&res, code.data(), sizeof(header));
     code.erase(0, sizeof(header));
     return res;
 }

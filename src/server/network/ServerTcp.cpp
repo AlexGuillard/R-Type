@@ -74,11 +74,11 @@ void Network::ServerTcp::write(std::string message)
 
 void Network::ServerTcp::connection()
 {
-    BodyNumber number = Network::Send::stringToBodyNum(_data);
+    header number = Network::Send::stringToheader(_data);
     std::string actualClient;
 
-    std::cout << number.number << std::endl;
-    if (number.number == CONNECTION_NB && _list.size() < 4) {
+    std::cout << number.codeRfc << std::endl;
+    if (number.codeRfc == CONNECTION_NB && _list.size() < 4) {
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200));
