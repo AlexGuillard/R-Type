@@ -13,6 +13,7 @@
 #include "ECS/Components/HitBoxComponent.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 
 using namespace ECS;
 
@@ -24,6 +25,7 @@ TEST(Creator, createCharacter)
     registry.registerComponent<Components::HitBoxComponent>();
     registry.registerComponent<Components::PositionComponent>();
     registry.registerComponent<Components::VelocityComponent>();
+    registry.registerComponent<Components::TeamComponent>();
     Entity entity = Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 1, 2, 3, 4);
 
     ASSERT_EQ(registry.getComponents<Components::DamageComponent>().at(entity)->damage, 1);
