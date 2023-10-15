@@ -27,9 +27,6 @@ static bool isConnected = false;
 
 static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
-    // if (Network::returnIsCoUDP()) {
-    //     Screen::Display::setGameState(Screen::Display::GameState::GAME);
-    // }
 
     Network::updateClientNetworkUDP();
     Screen::Display::drawGame(engine);
@@ -42,6 +39,10 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
     Screen::Display::drawWaitingRoom(playButtonRect);
+
+    if (Network::returnIsCoUDP()) {
+        window.setGameState(Screen::Display::GameState::GAME);
+    }
 }
 
 int rtype_client()
