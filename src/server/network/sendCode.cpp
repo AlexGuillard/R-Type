@@ -26,7 +26,6 @@ std::string Network::Send::makeBodyNum(int num)
 
     str.resize(sizeof(Network::BodyNumber));
     res.number = num;
-    // res.garbage = 20;
     std::memcpy(str.data(), &res, sizeof(Network::BodyNumber));
     return str;
 }

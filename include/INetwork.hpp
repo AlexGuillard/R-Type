@@ -27,7 +27,6 @@ namespace Network {
 
     struct BodyNumber {
         int number;
-        // int garbage;
     };
 
     struct bodyMob {
