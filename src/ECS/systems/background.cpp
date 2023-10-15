@@ -20,22 +20,23 @@ namespace ECS::Systems {
 
     void background(
         [[maybe_unused]] Containers::Registry &registry,
+        Containers::SparseArray<Components::PositionComponent> &positions,
         Containers::SparseArray<Components::LevelComponent> &levels,
         Containers::SparseArray<Components::BackgroundComponent> &backgrounds
     )
     {
         Screen::Display::beginDrawCamera();
-        for (auto &&[eId, level, background] : Containers::IndexedZipper(levels, backgrounds)) {
+        for (auto &&[eId, position, level, background] : Containers::IndexedZipper(positions, levels, backgrounds)) {
             if (eId == (level->level - 1)) {
-                background->position.x -= background->paralaxSpeed;
-                if(background->position.x <= (-(background->texture.width) * background->frameScale)) {
-                    background->position.x = 0;
+                position->x -= background->paralaxSpeed;
+                if(position->x <= (-(background->texture.width) * background->frameScale)) {
+                    position->x = 0;
                 }
                 DrawTextureEx(background->texture,
-                (Vector2) {background->position.x, 0},
+                (Vector2) {position->x, 0},
                 (float) 0.0, background->frameScale, WHITE);
                 DrawTextureEx(background->texture,
-                (Vector2) {background->texture.width * background->frameScale + background->position.x, 0},
+                (Vector2) {background->texture.width * background->frameScale + position->x, 0},
                 (float) 0.0, background->frameScale, WHITE);
             }
         }

@@ -34,17 +34,16 @@ namespace GameEngine {
     {
         registry.registerComponent<Components::BackgroundComponent>();
         registry.registerComponent<Components::LevelComponent>();
+        registry.registerComponent<Components::PositionComponent>();
 
-        registry.addSystem<Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
+        registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
     }
     static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, float scale, float speed)
     {
-        const Vector2 position = {0, 0};
         Components::BackgroundComponent backgroundComponent = {
             Assets::AssetLoader::loadTexturePng(index),
             scale,
-            speed,
-            position,
+            speed
         };
         return backgroundComponent;
     }
@@ -75,6 +74,7 @@ namespace GameEngine {
             ECS::Entity level = registry.spawnEntity();
             registry.emplaceComponent<Components::BackgroundComponent>(level, background);
             registry.emplaceComponent<Components::LevelComponent>(level, _level);
+            registry.emplaceComponent<Components::PositionComponent>(level, 0, 0);
         }
     }
 
