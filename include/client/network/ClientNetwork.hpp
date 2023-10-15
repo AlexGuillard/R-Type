@@ -100,19 +100,19 @@ namespace Network {
          *
          * @param message message from the server
          */
-        void handleConnection(const header &messageHeader, const std::string &str);
+        void handleConnection(const header &messageHeader, std::string &str);
         /**
          * @brief Handle the Login from server
          *
          * @param message message from the server
          */
-        void handleLogin(const header &messageHeader, const std::string &str);
+        void handleLogin(const header &messageHeader, std::string &str);
         /**
          * @brief Handle the Logout from server
          *
          * @param message message from the server
          */
-        void handleLogout(const header &messageHeader, const std::string &str);
+        void handleLogout(const header &messageHeader, std::string &str);
 
         /**
          * @brief Get the Instance object
@@ -225,7 +225,7 @@ namespace Network {
         //Data received
         std::string _dataReceived;
         //Map to use the pointer on function
-        std::map<int, std::function<void(const header &, const std::string &)>> _responseHandlers;
+        std::map<int, std::function<void(const header &, std::string &)>> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
         //Message to send
