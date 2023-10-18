@@ -10,11 +10,11 @@
 #include "client/network.hpp"
 #include "GameEngine/GameEngine.hpp"
 
-static void menuLoop(Screen::Display &window)
+static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 {
     window.drawMenu();
     if (window.getMenuState() == Screen::Display::MenuState::CONNECTING) {
-        if (Network::startClientNetwork(window.getHostName(), window.getPort(), 0, Network::ConnectionType::TCP)) {
+        if (Network::startClientNetwork(window.getHostName(), window.getPort(), 0, Network::ConnectionType::TCP, engine)) {
             window.setGameState(Screen::Display::GameState::WAITINGROOM);
             window.setMenuState(Screen::Display::MenuState::CONNECTED);
         } else {
@@ -49,11 +49,12 @@ int rtype_client()
 {
     Screen::Display window(Screen::Display::GameState::MENU);
     GameEngine::GameEngine engine = GameEngine::createClientEngine();
+
     while (Screen::Display::isOpen()) {
         window.beginUpdate();
         switch (window.getGameState()) {
         case Screen::Display::GameState::MENU:
-            menuLoop(window);
+            menuLoop(window, engine);
             break;
         case Screen::Display::GameState::WAITINGROOM:
             waitRoomLoop(window, engine, Network::ConnectionType::TCP);
