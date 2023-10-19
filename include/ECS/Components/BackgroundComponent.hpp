@@ -9,8 +9,6 @@
 
 #include <cstddef>
 
-#include <raylib.h>
-
 #include "Assets/generatedAssets.hpp"
 
 namespace ECS::Components {
@@ -21,7 +19,7 @@ namespace ECS::Components {
      * @see SpriteSheetDrawer
      */
     struct BackgroundComponent {
-        Texture2D texture;
+        Assets::AssetsIndex texture;
         double frameScale = 1.0;
         double paralaxSpeed = 1.0;
     };
