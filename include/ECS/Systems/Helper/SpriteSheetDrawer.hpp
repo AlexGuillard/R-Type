@@ -8,12 +8,14 @@
 #pragma once
 
 #include <cstddef>
-
 #include <raylib.h>
+
+#include "Utils.hpp"
 
 namespace ECS::Systems::Helper {
 
     class SpriteSheetDrawer {
+        using Vector2 = Utils::Vector2;
     public:
         /**
          * @brief Construct a new Sprite Sheet Drawer object

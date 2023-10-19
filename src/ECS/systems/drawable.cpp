@@ -87,7 +87,7 @@ namespace ECS::Systems {
                 drawable->forward = drawer.isForward();
                 drawable->timeAtLastFrameChange = time;
             }
-            drawer.draw(Vector2(position->x, position->y));
+            drawer.draw(Utils::Vector2(position->x, position->y));
         #ifdef DEBUG
             debugDraw(
                 registry.entityFromIndex(eId),
