@@ -83,7 +83,7 @@ namespace Network {
         /**
          * @brief Runs the io service of asio
         */
-        void run(GameEngine::GameEngine &engine);
+        void update();
     protected:
         // int for udp port to send when tcp connection
         int _portUdp;
@@ -130,7 +130,7 @@ namespace Network {
         void SpawnMob(Info script);
         void SendClientsInfo(std::vector<Info> scriptInfo);
         void SendClientsPlay();
-        std::shared_ptr<GameEngine::GameEngine> _engine;
+        GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
         RecupInfo _script;

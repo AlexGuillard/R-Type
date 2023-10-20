@@ -16,7 +16,7 @@
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
-    _timer(io_service), _portUdp(portUdp)
+    _timer(io_service), _portUdp(portUdp), _engine(GameEngine::createServerEngine())
 {
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
@@ -133,7 +133,7 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        if (_canPlay == true) {
+        if (_canPlay) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 std::cout << "info to add in game" << std::endl;
@@ -168,6 +168,7 @@ void Network::ServerNetwork::updateTicks()
                     }
                 }
             }
+            _engine.run();
         }
         updateTicks();
         });
@@ -222,11 +223,10 @@ bool Network::ServerNetwork::isGameRunning() const
     return this->_canPlay;
 }
 
-void Network::ServerNetwork::run(GameEngine::GameEngine &engine)
+void Network::ServerNetwork::update()
 {
     _ioService.poll();
     _ioService.reset();
-    engine.run();
 }
 
 void Network::ServerNetwork::handleClientData(int num)

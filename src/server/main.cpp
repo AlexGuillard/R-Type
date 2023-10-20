@@ -24,7 +24,6 @@ int main(int argc, char **argv)
     const int port = 4848;
     const int portUdp = 6084;
     const int error = 84;
-    GameEngine::GameEngine engine = GameEngine::createServerEngine();
 
     // catch CTRL-C
     signal(SIGINT, signalHandler);
@@ -32,7 +31,7 @@ int main(int argc, char **argv)
         boost::asio::io_service ioService;
         Network::ServerNetwork network(ioService, port, portUdp);
         while (isServerRunning) {
-            network.run(engine);
+            network.update();
         }
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
