@@ -9,7 +9,7 @@
 
 #include <cstddef>
 
-#include "Enums.hpp"
+#include "enums.hpp"
 
 namespace ECS::Components {
     /**
