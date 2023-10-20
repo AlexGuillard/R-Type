@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['waiting_5ffor_5fplayer_5finput_884',['WAITING_FOR_PLAYER_INPUT',['../classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2a6b8c757fb752d3730720ccbf3d73cd56',1,'Screen::Display']]],
-  ['waitingroom_885',['WAITINGROOM',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6ab0e1829e0217a661114d66d54d1a2dec',1,'Screen::Display']]]
+  ['udp_1123',['UDP',['../namespaceNetwork.html#a08857128f6a52e9cedc9aa85c91e9e69af5ef036b4d8b630721e51fe23489fbc9',1,'Network']]],
+  ['up_1124',['UP',['../namespaceEnums.html#a04ba6023509953c154816d888df61876afbaedde498cdead4f2780217646e9ba1',1,'Enums::UP()'],['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5afbaedde498cdead4f2780217646e9ba1',1,'Network::UP()']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['playercolor_842',['PlayerColor',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783',1,'Enums']]],
-  ['position_843',['Position',['../namespaceEnums.html#a04ba6023509953c154816d888df61876',1,'Enums']]]
+  ['menustate_971',['MenuState',['../classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2',1,'Screen::Display']]],
+  ['movement_972',['Movement',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5',1,'Network']]]
 ];

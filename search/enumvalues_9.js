@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['player_5fdown_869',['PLAYER_DOWN',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ac74660f5d9acc6796f4e7988fcd81e7a',1,'Enums']]],
-  ['player_5fdrop_870',['PLAYER_DROP',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a343fa25895663b14ab5b0a3b946516d9',1,'Enums']]],
-  ['player_5fleft_871',['PLAYER_LEFT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a87cdb9e462b232158ce1860f18f87a77',1,'Enums']]],
-  ['player_5fright_872',['PLAYER_RIGHT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ae32aeba6af61e69051269fb9e4541537',1,'Enums']]],
-  ['player_5fshoot_873',['PLAYER_SHOOT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527afe4988a800f011ba5a87de48d5b3747a',1,'Enums']]],
-  ['player_5fup_874',['PLAYER_UP',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527aafee4a4340023016ed2b66993bdfa470',1,'Enums']]],
-  ['purple_5fcolor_875',['PURPLE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ae9acca2d6222b6c7b6e23f78473d45cc',1,'Enums']]]
+  ['neutral_1106',['NEUTRAL',['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a31ba17aa58cdb681423f07ca21a6efc7',1,'Enums']]],
+  ['new_5fplayer_1107',['NEW_PLAYER',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ad4f5148ace6252399e4d60ce75602ae8',1,'Enums']]],
+  ['none_1108',['NONE',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932acaffa8ca3fbbe74ac2c536b2a077f0ecf5',1,'Network::Info::NONE()'],['../namespaceEnums.html#a04ba6023509953c154816d888df61876ab50339a10e1de285ac99d4c3990b8693',1,'Enums::NONE()']]],
+  ['not_5fconnected_1109',['NOT_CONNECTED',['../namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677ad91be9b5ceb9fe0af02b9b02413eccf8',1,'Network']]]
 ];
