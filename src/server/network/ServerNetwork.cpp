@@ -287,7 +287,11 @@ void Network::ServerNetwork::SendClientsPlay()
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(312));
             }
-            sleep(1);
+            #ifndef _WIN32
+                sleep(1);
+            #else
+                Sleep(1000);
+            #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
     }
