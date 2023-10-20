@@ -126,7 +126,6 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
         return enemyBasic;
     }
 
@@ -146,7 +145,6 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(bink, std::move(drawableComponent));
         registry.emplaceComponent<Components::WalkingAIComponent>(bink, std::make_pair(250.F, 500.F), 100);
         registry.emplaceComponent<Components::GravityComponent>(bink, Creator::defaultGravity);
         return bink;
@@ -168,7 +166,6 @@ namespace ECS {
             false, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(scant, std::move(drawableComponent));
         return scant;
     }
 
@@ -188,7 +185,6 @@ namespace ECS {
             false, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(bug, std::move(drawableComponent));
         return bug;
     }
 
@@ -208,7 +204,6 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(cancer, std::move(drawableComponent));
         return cancer;
     }
 
@@ -228,7 +223,6 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(blaster, std::move(drawableComponent));
         return blaster;
     }
 
@@ -248,7 +242,6 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        // registry.addComponent<Components::DrawableComponent>(ally, std::move(drawableComponent));
         return ally;
     }
 
