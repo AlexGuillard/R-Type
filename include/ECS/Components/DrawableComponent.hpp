@@ -9,8 +9,7 @@
 
 #include <cstddef>
 
-#include <raylib.h>
-
+#include "Utils.hpp"
 #include "Assets/generatedAssets.hpp"
 
 namespace ECS::Components {
@@ -34,9 +33,9 @@ namespace ECS::Components {
      */
     struct DrawableComponent {
         Assets::AssetsIndex spriteSheetIndex;
-        Vector2 frameRatio;
-        Vector2 start = { 0, 0 };
-        Vector2 end = { 0, 0 };
+        Utils::Vector2 frameRatio;
+        Utils::Vector2 start = { 0, 0 };
+        Utils::Vector2 end = { 0, 0 };
         bool boomerang = false;
         std::size_t fps = 1;
         std::size_t frame = 0;

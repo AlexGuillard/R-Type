@@ -9,7 +9,7 @@
 
 #include <cstddef>
 
-#include <raylib.h>
+#include "enums.hpp"
 
 namespace ECS::Components {
     /**
@@ -23,12 +23,12 @@ namespace ECS::Components {
      * @param timeFireButtonHeld Time (in sec) since the fire button is held
      */
     struct ControllableComponent {
-        KeyboardKey up = KEY_UP;
-        KeyboardKey down = KEY_DOWN;
-        KeyboardKey left = KEY_LEFT;
-        KeyboardKey right = KEY_RIGHT;
-        KeyboardKey fire = KEY_SPACE;
-        KeyboardKey force = KEY_LEFT_SHIFT;
+        Enums::KeyboardKey up = Enums::KeyboardKey::KEY_UP;
+        Enums::KeyboardKey down = Enums::KeyboardKey::KEY_DOWN;
+        Enums::KeyboardKey left = Enums::KeyboardKey::KEY_LEFT;
+        Enums::KeyboardKey right = Enums::KeyboardKey::KEY_RIGHT;
+        Enums::KeyboardKey fire = Enums::KeyboardKey::KEY_SPACE;
+        Enums::KeyboardKey force = Enums::KeyboardKey::KEY_LEFT_SHIFT;
         double timeFireButtonHeld = 0.0;
     };
 } // namespace ECS::Components

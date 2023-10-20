@@ -28,15 +28,16 @@ namespace ECS::Systems {
         Screen::Display::beginDrawCamera();
         for (auto &&[eId, position, level, background] : Containers::IndexedZipper(positions, levels, backgrounds)) {
             if (eId == (level->level - 1)) {
+                auto &&texture = Assets::AssetLoader::loadTexturePng(background->texture);
                 position->x -= background->paralaxSpeed;
-                if(position->x <= (-(background->texture.width) * background->frameScale)) {
+                if(position->x <= (-(texture.width) * background->frameScale)) {
                     position->x = 0;
                 }
-                DrawTextureEx(background->texture,
+                DrawTextureEx(texture,
                 Vector2(position->x, 0),
                 double(0.0), background->frameScale, WHITE);
-                DrawTextureEx(background->texture,
-                Vector2(background->texture.width * background->frameScale + position->x, 0),
+                DrawTextureEx(texture,
+                Vector2(texture.width * background->frameScale + position->x, 0),
                 double(0.0), background->frameScale, WHITE);
             }
         }

@@ -34,6 +34,11 @@ namespace ECS::Systems {
         return value;
     }
 
+    static KeyboardKey toRaylibKey(Enums::KeyBoardKey key)
+    {
+        return static_cast<KeyboardKey>(key);
+    }
+
     /**
      * @brief Change the velocity of an entity based on the player input
      * @param velocity Current velocity of the entity
@@ -51,17 +56,17 @@ namespace ECS::Systems {
         std::size_t left = 0;
         std::size_t right = 0;
 
-        if (IsKeyDown(controllable.up)) {
+        if (IsKeyDown(toRaylibKey(controllable.up))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP);
             up = 1;
-        } else if (IsKeyDown(controllable.down)) {
+        } else if (IsKeyDown(toRaylibKey(controllable.down))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN);
             down = 1;
         }
-        if (IsKeyDown(controllable.left)) {
+        if (IsKeyDown(toRaylibKey(controllable.left))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT);
             left = 1;
-        } else if (IsKeyDown(controllable.right)) {
+        } else if (IsKeyDown(toRaylibKey(controllable.right))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT);
             right = 1;
         }
@@ -74,7 +79,7 @@ namespace ECS::Systems {
         ECS::Components::PositionComponent &position,
         ECS::Components::TeamComponent &team)
     {
-        if (IsKeyDown(controllable.fire)) {
+        if (IsKeyDown(toRaylibKey(controllable.fire))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT);
             controllable.timeFireButtonHeld += GetFrameTime();
             return;
@@ -117,7 +122,7 @@ namespace ECS::Systems {
         ECS::Containers::Registry &registry,
         ECS::Components::ControllableComponent &controllable)
     {
-        if (!IsKeyPressed(controllable.force)) { return; }
+        if (!IsKeyPressed(toRaylibKey(controllable.force))) { return; }
         GameEngine::Events::push(GameEngine::Events::Type::PLAYER_FORCE);
         // TODO: add force implementation here
     }

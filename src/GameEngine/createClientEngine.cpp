@@ -41,7 +41,7 @@ namespace GameEngine {
     static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, double scale, double speed)
     {
         Components::BackgroundComponent backgroundComponent = {
-            Assets::AssetLoader::loadTexturePng(index),
+            index,
             scale,
             speed
         };
