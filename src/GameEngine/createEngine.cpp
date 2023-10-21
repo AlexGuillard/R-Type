@@ -84,11 +84,7 @@ namespace GameEngine {
     }
 
     static void populateEntities(Containers::Registry &registry)
-    {
-        // TODO: delete when client is ready
-        auto &&player = ECS::Creator::createPlayer(registry, registry.spawnEntity(), 500, 500, Enums::PlayerColor::CYAN_COLOR);
-        ECS::Creator::createBink(registry, registry.spawnEntity(), 1000, 500);
-    }
+    {}
 
 
     GameEngine createEngine()

@@ -7,6 +7,7 @@
 
 #ifndef CLIENTNETWORK_HPP_
 #define CLIENTNETWORK_HPP_
+#include <optional>
 #include "ANetwork.hpp"
 #include <iostream>
 #include "Error.hpp"
@@ -14,6 +15,7 @@
 #include <functional>
 #include <memory>
 #include <queue>
+#include "GameEngine/GameEngine.hpp"
 
 namespace Network {
 
@@ -113,7 +115,62 @@ namespace Network {
          * @param message message from the server
          */
         void handleLogout(const header &messageHeader, std::string &str);
-
+        /**
+         * @brief Handle the player spawn
+         *
+         * @param messageHeader header
+         * @param str string from server
+         */
+        void handlePlayerSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create pata pata ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handlePataPataSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create bink ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleBinkSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create scant ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleScantSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create bug ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleBugSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create cancer ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleCancerSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create blaster ennemies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleBlasterSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of creat allies when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleAllySpawn(const header &messageHeader, std::string &str);
         /**
          * @brief Get the Instance object
          *
@@ -123,25 +180,14 @@ namespace Network {
         /**
          * @brief Get the Instance object
          *
-         * @param io_service
-         * @param host
-         * @param port
          * @return ClientNetwork&
          */
-        static ClientNetwork &getInstance(boost::asio::io_service &io_service, const std::string &host, int port);
-        /**
-         * @brief Construct a new Client Network object with parameters
-         *
-         * @param io_service
-         * @param host
-         * @param port
-         */
-        ClientNetwork(boost::asio::io_service &io_service, const std::string &host, int port);
+        static ClientNetwork &getInstance(GameEngine::GameEngine &engine);
         /**
          * @brief Construct a new Client Network object without parameters
          *
          */
-        ClientNetwork();
+        ClientNetwork(GameEngine::GameEngine &engine);
         /**
          * @brief Function to put at the end of the loop to handle the network, it make a reset and poll for the ioService
          *
@@ -198,20 +244,59 @@ namespace Network {
          * @return header
          */
         header getHeader(std::string &str);
+        /**
+         * @brief Get the Ally object
+         *
+         * @param str
+         * @return bodyAlly
+         */
+        bodyAlly getAlly(std::string &str);
+        /**
+         * @brief send a 201 to the server on binary format with a header struct
+         *
+         */
         void send201();
+        /**
+         * @brief handle messages from the server and call the right function attributed to the header rfc code
+         *
+         * @param messageHeader
+         * @param str
+         */
         void handleMessageData(const header &messageHeader, std::string &str);
+        //Use to know if the client is connected to the server
         bool isConnectedUDP = false;
-        boost::asio::ip::udp::endpoint getLocalUDPEndpoint()
-        {
-            return _socket.local_endpoint();
-        }
-
-        boost::asio::ip::tcp::endpoint getLocalTCPEndpoint()
-        {
-            return _tcpSocket.local_endpoint();
-        }
-
+        /**
+         * @brief Get the Local UDP Endpoint object
+         *
+         * @return boost::asio::ip::udp::endpoint
+         */
+        boost::asio::ip::udp::endpoint getLocalUDPEndpoint();
+        /**
+         * @brief Get the Local TCP Endpoint object
+         *
+         * @return boost::asio::ip::tcp::endpoint
+         */
+        boost::asio::ip::tcp::endpoint getLocalTCPEndpoint();
+        /**
+         * @brief Get the Body object
+         *
+         * @param str
+         * @return Network::BodyNumber
+         */
         Network::BodyNumber getBody(std::string &str);
+        /**
+         * @brief Get the Mob object
+         *
+         * @param str
+         * @return Network::bodyMob
+         */
+        Network::bodyMob getMob(std::string &str);
+        /**
+         * @brief Set the Engine object
+         *
+         * @param engine
+         */
+        void setEngine(GameEngine::GameEngine &engine);
 
     private:
         //Port of the server
@@ -240,6 +325,8 @@ namespace Network {
         static constexpr std::size_t HEADER_SIZE = sizeof(header);
         //The Index of the player send by server for the color etc... (between 0 and 3)
         int _indexPlayer;
+        //Engine of the game
+        GameEngine::GameEngine &_engine;
     };
 }
 
