@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tcp_881',['TCP',['../namespaceNetwork.html#a08857128f6a52e9cedc9aa85c91e9e69ab136ef5f6a01d816991fe3cf7a6ac763',1,'Network']]]
+  ['shoot_1144',['SHOOT',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2',1,'Network']]],
+  ['side_1145',['SIDE',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932aca916e53b1daa968675e0e39ca4d68ec7f',1,'Network::Info']]]
 ];

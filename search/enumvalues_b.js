@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['shoot_879',['SHOOT',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2',1,'Network']]],
-  ['side_880',['SIDE',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932aca916e53b1daa968675e0e39ca4d68ec7f',1,'Network::Info']]]
+  ['red_5fcolor_1141',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums']]],
+  ['right_1142',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]],
+  ['rumble_1143',['RUMBLE',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9a8704ee6755aa31b8b12c493a816757fb',1,'Screen::Display']]]
 ];

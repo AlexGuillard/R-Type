@@ -3,7 +3,7 @@ var searchData=
   ['camerashakeintensity_45',['CameraShakeIntensity',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9',1,'Screen::Display']]],
   ['center_46',['center',['../classScreen_1_1Display.html#a55e18cc61bcb1f66c89422df911293e9',1,'Screen::Display']]],
   ['client_5fconnect_47',['CLIENT_CONNECT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ab553d3d5041d76da39ab245bf3763662',1,'Enums']]],
-  ['clientnetwork_48',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a98fff34523115bfa0ac4c2e963fc3a3d',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html#a033c9680d6f736a0f56855049991eb1c',1,'Network::ClientNetwork::ClientNetwork(boost::asio::io_service &amp;io_service, const std::string &amp;host, int port)'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
+  ['clientnetwork_48',['ClientNetwork',['../classNetwork_1_1ClientNetwork.html#a0fb44555661268ef4e347998ce797b50',1,'Network::ClientNetwork::ClientNetwork()'],['../classNetwork_1_1ClientNetwork.html',1,'Network::ClientNetwork']]],
   ['clientnetwork_2ehpp_49',['ClientNetwork.hpp',['../ClientNetwork_8hpp.html',1,'']]],
   ['code401_50',['code401',['../classNetwork_1_1ServerTcp.html#a9244d2b879c32de02137bb88fb483d64',1,'Network::ServerTcp::code401()'],['../classNetwork_1_1IServerTcp.html#ada389ce1fd291e36dd351ee0a6ebedf9',1,'Network::IServerTcp::code401()']]],
   ['codeally_51',['codeAlly',['../namespaceNetwork_1_1Send.html#a8175a11c8d0d27b0962515c08ee11ba4',1,'Network::Send']]],
