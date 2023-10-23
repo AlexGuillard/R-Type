@@ -14,6 +14,9 @@
 
 #include "ANetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Creator.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 #include "server/network/Participants.hpp"
 #include "server/network/ServerTcp.hpp"
 #include "server/network/recupInfo.hpp"

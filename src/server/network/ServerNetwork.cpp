@@ -169,6 +169,10 @@ void Network::ServerNetwork::updateTicks()
                 }
             }
             _engine.run();
+            auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+            // for (int i = 0; i < data.size(); i++) {
+            //     std::cout << data[i]->x << std::endl;
+            // }
         }
         updateTicks();
         });
@@ -240,9 +244,33 @@ void Network::ServerNetwork::handleClientData(int num)
 void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
+    auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
+    ECS::Entity entity = registry.spawnEntity();
 
+    switch (script.rfc) {
+        case 301:
+            ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+            break;
+        case 302:
+            ECS::Creator::createBink(registry, entity, 1940, script.y);
+            break;
+        case 303:
+            ECS::Creator::createScant(registry, entity, 1940, script.y);
+            break;
+        case 304:
+            ECS::Creator::createBug(registry, entity, 1940, script.y);
+            break;
+        case 305:
+            ECS::Creator::createCancer(registry, entity, 1940, script.y);
+            break;
+        case 306:
+            ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+            break;
+        default:
+            break;
+    }
     if (script.rfc >= 301 && script.rfc <= 306) {
-        res.append(Send::makeHeader(script.rfc, 0));
+        res.append(Send::makeHeader(script.rfc, entity));
         res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
         res.append(Send::makeBodyNum(script.rfc));
     }
