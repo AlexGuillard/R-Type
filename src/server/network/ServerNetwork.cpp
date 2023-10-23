@@ -291,21 +291,23 @@ void Network::ServerNetwork::SendClientsPlay()
 {
     std::string res;
     Enums::PlayerColor color;
-
+    auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
     for (int i = 0; i < _ids.size(); i++) {
+        if (i == 0)
+            color = Enums::PlayerColor::CYAN_COLOR;
+        else if (i == 1)
+            color = Enums::PlayerColor::PURPLE_COLOR;
+        else if (i == 2)
+            color = Enums::PlayerColor::LIME_COLOR;
+        else if (i == 3)
+            color = Enums::PlayerColor::RED_COLOR;
+        else
+            color = Enums::PlayerColor::BLUE_COLOR;
+        ECS::Entity entity = registry.spawnEntity();
+        ECS::Creator::createAlly(registry, entity, 50, 50, color);
         for (const auto& pair : _listUdpEndpoints) {
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-            if (i == 0)
-                color = Enums::PlayerColor::CYAN_COLOR;
-            else if (i == 1)
-                color = Enums::PlayerColor::PURPLE_COLOR;
-            else if (i == 2)
-                color = Enums::PlayerColor::LIME_COLOR;
-            else if (i == 3)
-                color = Enums::PlayerColor::RED_COLOR;
-            else
-                color = Enums::PlayerColor::BLUE_COLOR;
             if (pair.first == _ids[i].first) {
                 res = Send::makeHeader(311, _ids[i].second);
                 res.append(Send::makeBodyAlly(50, 50, color));
