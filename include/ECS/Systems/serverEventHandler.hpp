@@ -10,6 +10,7 @@
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 
 namespace ECS::Systems {
     /**
@@ -22,5 +23,6 @@ namespace ECS::Systems {
     void serverEventHandler(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
-        Containers::SparseArray<Components::VelocityComponent> &velocities);
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
+        Containers::SparseArray<Components::TeamComponent> &teams);
 } // namespace ECS::Systems
