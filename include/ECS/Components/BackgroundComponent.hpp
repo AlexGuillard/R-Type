@@ -22,5 +22,7 @@ namespace ECS::Components {
         Assets::AssetsIndex texture;
         double frameScale = 1.0;
         double paralaxSpeed = 1.0;
+        double fps = 1;
+        float timeAtLastFrameChange = 0.0F;
     };
 } // namespace ECS::Components
