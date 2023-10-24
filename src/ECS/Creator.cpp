@@ -108,6 +108,25 @@ namespace ECS {
         return entity;
     }
 
+    Entity Creator::createMissile(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team)
+    {
+        const Utils::Vector2 missileFramePos(2, 0);
+        const uint8_t nbFrameInSpriteSheet = 6;
+
+        ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, team, 1, 1, 16, 16, id);
+        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(enemyBasic)->y = y;
+        registry.getComponents<Components::VelocityComponent>().at(enemyBasic)->x = Components::missileSpeed;
+        registry.getComponents<Components::VelocityComponent>().at(enemyBasic)->y = 0;
+        registry.emplaceComponent<Components::DrawableComponent>(enemyBasic,
+                Assets::AssetsIndex::MISSILE_PNG,
+                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                missileFramePos, // start
+                missileFramePos // end
+        );
+        return enemyBasic;
+    }
+
     Entity Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
     {
         const Utils::Vector2 nbFrameInSpriteSheet(16, 1);

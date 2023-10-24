@@ -123,6 +123,42 @@ void Network::ServerNetwork::udpConnection()
     asyncReceive(_asyncSocket);
 }
 
+void Network::ServerNetwork::updateGame()
+{
+    _tickCount++;
+    // host:ip -> {id, [RFC, ...]}
+    for (auto &&[client, data] : _ids) {
+        auto &&[id, inputs] = data;
+        for (auto &&input : inputs) {
+            switch (input) {
+            case static_cast<int>(Enums::RFCCode::PLAYER_UP):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
+                break;
+            default:
+                break;
+            }
+        }
+        data.second.clear();
+    }
+    _engine.run();
+    auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+}
+
 void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
@@ -139,39 +175,10 @@ void Network::ServerNetwork::updateTicks()
                 std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
-            _tickCount++;
-            // host:ip -> {id, [RFC, ...]}
-            for (auto &&[client, data] : _clients) {
-                auto &&[id, inputs] = data;
-                for (auto &&input : inputs) {
-                    switch (input) {
-                    case static_cast<int>(Enums::RFCCode::PLAYER_UP):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
-                        break;
-                    default:
-                        break;
-                    }
-                }
-            }
-            _engine.run();
+            updateGame();
         }
         updateTicks();
-        });
+    });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -204,11 +211,13 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 {
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
-        _ids.push_back(std::pair(getActualClient(), clientData.entity));
+        _ids[getActualClient()].first = clientData.entity;
         if (_listUdpEndpoints.size() == _clients.size()) {
             _canPlay = true;
             SendClientsPlay();
         }
+        return true;
+    } else if (_listUdpEndpoints.size() == _clients.size()) {
         return true;
     }
     return false;
@@ -233,16 +242,42 @@ void Network::ServerNetwork::update()
 void Network::ServerNetwork::handleClientData(int num)
 {
     if (num >= 211 && num <= 216) {
-        _clients[getActualClient()].second.push_back(num);
+        if (_ids.count(getActualClient())) {
+            _ids[getActualClient()].second.push_back(num);
+        }
     }
 }
 
 void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
+    auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
     if (script.rfc >= 301 && script.rfc <= 306) {
-        res.append(Send::makeHeader(script.rfc, 0));
+        ECS::Entity entity = registry.spawnEntity();
+        switch (script.rfc) {
+            case 301:
+                ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+                break;
+            case 302:
+                ECS::Creator::createBink(registry, entity, 1940, script.y);
+                break;
+            case 303:
+                ECS::Creator::createScant(registry, entity, 1940, script.y);
+                break;
+            case 304:
+                ECS::Creator::createBug(registry, entity, 1940, script.y);
+                break;
+            case 305:
+                ECS::Creator::createCancer(registry, entity, 1940, script.y);
+                break;
+            case 306:
+                ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+                break;
+            default:
+                break;
+        }
+        res.append(Send::makeHeader(script.rfc, entity));
         res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
         res.append(Send::makeBodyNum(script.rfc));
     }
@@ -263,27 +298,30 @@ void Network::ServerNetwork::SendClientsPlay()
 {
     std::string res;
     Enums::PlayerColor color;
+    int index = 0;
+    auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-
-    for (int i = 0; i < _ids.size(); i++) {
+    for (const auto& allIds : _ids) {
+        if (index == 0)
+            color = Enums::PlayerColor::CYAN_COLOR;
+        else if (index == 1)
+            color = Enums::PlayerColor::PURPLE_COLOR;
+        else if (index == 2)
+            color = Enums::PlayerColor::LIME_COLOR;
+        else if (index == 3)
+            color = Enums::PlayerColor::RED_COLOR;
+        else
+            color = Enums::PlayerColor::BLUE_COLOR;
+        ECS::Entity entity = registry.spawnEntity();
+        ECS::Creator::createAlly(registry, entity, 50, 50, color);
         for (const auto& pair : _listUdpEndpoints) {
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-            if (i == 0)
-                color = Enums::PlayerColor::CYAN_COLOR;
-            else if (i == 1)
-                color = Enums::PlayerColor::PURPLE_COLOR;
-            else if (i == 2)
-                color = Enums::PlayerColor::LIME_COLOR;
-            else if (i == 3)
-                color = Enums::PlayerColor::RED_COLOR;
-            else
-                color = Enums::PlayerColor::BLUE_COLOR;
-            if (pair.first == _ids[i].first) {
-                res = Send::makeHeader(311, _ids[i].second);
+            if (pair.first == allIds.first) {
+                res = Send::makeHeader(311, entity);
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(311));
             } else {
-                res = Send::makeHeader(312, _ids[i].second);
+                res = Send::makeHeader(312, entity);
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(312));
             }
@@ -294,5 +332,6 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
+        index++;
     }
 }
