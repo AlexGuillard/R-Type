@@ -167,6 +167,7 @@ void Network::ServerNetwork::updateTicks()
                         break;
                     }
                 }
+                data.second.clear();
             }
             _engine.run();
             auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
