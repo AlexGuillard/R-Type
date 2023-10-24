@@ -133,6 +133,7 @@ namespace Network {
         void SpawnMob(Info script);
         void SendClientsInfo(std::vector<Info> scriptInfo);
         void SendClientsPlay();
+        void updateGame();
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

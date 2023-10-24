@@ -123,6 +123,42 @@ void Network::ServerNetwork::udpConnection()
     asyncReceive(_asyncSocket);
 }
 
+void Network::ServerNetwork::updateGame()
+{
+    _tickCount++;
+    // host:ip -> {id, [RFC, ...]}
+    for (auto &&[client, data] : _ids) {
+        auto &&[id, inputs] = data;
+        for (auto &&input : inputs) {
+            switch (input) {
+            case static_cast<int>(Enums::RFCCode::PLAYER_UP):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
+                break;
+            case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
+                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
+                break;
+            default:
+                break;
+            }
+        }
+        data.second.clear();
+    }
+    _engine.run();
+    auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+}
+
 void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
@@ -139,44 +175,10 @@ void Network::ServerNetwork::updateTicks()
                 std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
-            _tickCount++;
-            // host:ip -> {id, [RFC, ...]}
-            for (auto &&[client, data] : _ids) {
-                auto &&[id, inputs] = data;
-                for (auto &&input : inputs) {
-                    switch (input) {
-                    case static_cast<int>(Enums::RFCCode::PLAYER_UP):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_DOWN):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DOWN, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_LEFT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_LEFT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_RIGHT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_RIGHT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_SHOOT):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT, id);
-                        break;
-                    case static_cast<int>(Enums::RFCCode::PLAYER_DROP):
-                        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_DROP, id);
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                data.second.clear();
-            }
-            _engine.run();
-            auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
-            // for (int i = 0; i < data.size(); i++) {
-            //     std::cout << data[i]->x << std::endl;
-            // }
+            updateGame();
         }
         updateTicks();
-        });
+    });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -250,31 +252,31 @@ void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
-    ECS::Entity entity = registry.spawnEntity();
 
-    switch (script.rfc) {
-        case 301:
-            ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
-            break;
-        case 302:
-            ECS::Creator::createBink(registry, entity, 1940, script.y);
-            break;
-        case 303:
-            ECS::Creator::createScant(registry, entity, 1940, script.y);
-            break;
-        case 304:
-            ECS::Creator::createBug(registry, entity, 1940, script.y);
-            break;
-        case 305:
-            ECS::Creator::createCancer(registry, entity, 1940, script.y);
-            break;
-        case 306:
-            ECS::Creator::createBlaster(registry, entity, 1940, script.y);
-            break;
-        default:
-            break;
-    }
     if (script.rfc >= 301 && script.rfc <= 306) {
+        ECS::Entity entity = registry.spawnEntity();
+        switch (script.rfc) {
+            case 301:
+                ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+                break;
+            case 302:
+                ECS::Creator::createBink(registry, entity, 1940, script.y);
+                break;
+            case 303:
+                ECS::Creator::createScant(registry, entity, 1940, script.y);
+                break;
+            case 304:
+                ECS::Creator::createBug(registry, entity, 1940, script.y);
+                break;
+            case 305:
+                ECS::Creator::createCancer(registry, entity, 1940, script.y);
+                break;
+            case 306:
+                ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+                break;
+            default:
+                break;
+        }
         res.append(Send::makeHeader(script.rfc, entity));
         res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
         res.append(Send::makeBodyNum(script.rfc));
