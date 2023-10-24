@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
+#include "constants.hpp"
 
 namespace Screen {
     /**
@@ -243,8 +244,8 @@ namespace Screen {
         Vector2 _windowSize = { 0, 0 };
         const float _defaultWidthRatio = 0.5;
         const float _defaultHeightRatio = 0.5;
-        static const uint16_t defaultCameraWidth = 1920;
-        static const uint16_t defaultCameraHeight = 1080;
+        static const uint16_t defaultCameraWidth = Constants::cameraDefaultWidth;
+        static const uint16_t defaultCameraHeight = Constants::cameraDefaultHeight;
         static uint16_t cameraWidth;
         static uint16_t cameraHeight;
         float aspectRatio;
