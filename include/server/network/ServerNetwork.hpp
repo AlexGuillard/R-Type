@@ -14,6 +14,9 @@
 
 #include "ANetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Creator.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 #include "server/network/Participants.hpp"
 #include "server/network/ServerTcp.hpp"
 #include "server/network/recupInfo.hpp"
@@ -94,10 +97,7 @@ namespace Network {
          *
          */
         boost::asio::ip::udp::socket _asyncSocket;
-        /**
-         * @brief hmap for the list of client on the server
-         *
-         */
+        // hmap for the list of client on the server with string of client and pair with entity of client + list of commands send
         std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
         // variable for the timer and the ticks
         boost::asio::deadline_timer _timer;
@@ -107,9 +107,12 @@ namespace Network {
         std::size_t _tickCount = 0;
         // boolean to check if we are on game or not
         bool _isGame = false;
+        // boolean to check if every player is in play mode
         bool _canPlay = false;
+        // contain the string of client (address + port) and there udp endpoint
         std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
-        std::vector<std::pair<std::string, int>> _ids;
+        // contain the string of client (address + port) and the id
+        std::unordered_map<std::string, std::pair<int, std::vector<int>>> _ids;
     private:
         Participants _list;
         /**
@@ -130,6 +133,7 @@ namespace Network {
         void SpawnMob(Info script);
         void SendClientsInfo(std::vector<Info> scriptInfo);
         void SendClientsPlay();
+        void updateGame();
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

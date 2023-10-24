@@ -10,6 +10,7 @@
 #include "ECS/Systems/serverEventHandler.hpp"
 #include "GameEngine/Events.hpp"
 #include "Player/utils.hpp"
+#include "ECS/Creator.hpp"
 
 namespace ECS::Systems {
     struct PlayerInput {
@@ -21,7 +22,8 @@ namespace ECS::Systems {
     void serverEventHandler(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
-        Containers::SparseArray<Components::VelocityComponent> &velocities)
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
+        Containers::SparseArray<Components::TeamComponent> &teams)
     {
         GameEngine::Events::Type event;
         int entityId = 0;
@@ -40,6 +42,9 @@ namespace ECS::Systems {
                 break;
             case GameEngine::Events::Type::PLAYER_RIGHT:
                 playerInputs[entityId].right++;
+                break;
+            case GameEngine::Events::Type::PLAYER_SHOOT:
+                ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
                 break;
             default:
                 break;

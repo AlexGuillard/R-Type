@@ -10,6 +10,7 @@
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Systems/serverEventHandler.hpp"
 
 namespace GameEngine {
@@ -19,7 +20,7 @@ namespace GameEngine {
 
     static void initEntitiesRegistry(Containers::Registry &registry)
     {
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::serverEventHandler);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::serverEventHandler);
     }
 
     GameEngine createServerEngine()
