@@ -141,7 +141,7 @@ void Network::ServerNetwork::updateTicks()
             }
             _tickCount++;
             // host:ip -> {id, [RFC, ...]}
-            for (auto &&[client, data] : _clients) {
+            for (auto &&[client, data] : _ids) {
                 auto &&[id, inputs] = data;
                 for (auto &&input : inputs) {
                     switch (input) {
@@ -208,11 +208,13 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 {
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
-        _ids.push_back(std::pair(getActualClient(), clientData.entity));
+        _ids[getActualClient()].first = clientData.entity;
         if (_listUdpEndpoints.size() == _clients.size()) {
             _canPlay = true;
             SendClientsPlay();
         }
+        return true;
+    } else if (_listUdpEndpoints.size() == _clients.size()) {
         return true;
     }
     return false;
@@ -237,7 +239,9 @@ void Network::ServerNetwork::update()
 void Network::ServerNetwork::handleClientData(int num)
 {
     if (num >= 211 && num <= 216) {
-        _clients[getActualClient()].second.push_back(num);
+        if (_ids.count(getActualClient())) {
+            _ids[getActualClient()].second.push_back(num);
+        }
     }
 }
 
@@ -291,16 +295,17 @@ void Network::ServerNetwork::SendClientsPlay()
 {
     std::string res;
     Enums::PlayerColor color;
+    int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-    for (int i = 0; i < _ids.size(); i++) {
-        if (i == 0)
+    for (const auto& allIds : _ids) {
+        if (index == 0)
             color = Enums::PlayerColor::CYAN_COLOR;
-        else if (i == 1)
+        else if (index == 1)
             color = Enums::PlayerColor::PURPLE_COLOR;
-        else if (i == 2)
+        else if (index == 2)
             color = Enums::PlayerColor::LIME_COLOR;
-        else if (i == 3)
+        else if (index == 3)
             color = Enums::PlayerColor::RED_COLOR;
         else
             color = Enums::PlayerColor::BLUE_COLOR;
@@ -308,12 +313,12 @@ void Network::ServerNetwork::SendClientsPlay()
         ECS::Creator::createAlly(registry, entity, 50, 50, color);
         for (const auto& pair : _listUdpEndpoints) {
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-            if (pair.first == _ids[i].first) {
-                res = Send::makeHeader(311, _ids[i].second);
+            if (pair.first == allIds.first) {
+                res = Send::makeHeader(311, entity);
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(311));
             } else {
-                res = Send::makeHeader(312, _ids[i].second);
+                res = Send::makeHeader(312, entity);
                 res.append(Send::makeBodyAlly(50, 50, color));
                 res.append(Send::makeBodyNum(312));
             }
@@ -324,5 +329,6 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
+        index++;
     }
 }
