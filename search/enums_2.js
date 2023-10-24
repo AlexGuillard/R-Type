@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extratype_992',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]]
+  ['extratype_994',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]]
 ];
