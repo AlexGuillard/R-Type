@@ -77,6 +77,8 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="INetwork_8hpp_source.html">INetwork.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="PositionComponent_8hpp_source.html">ECS/Components/PositionComponent.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="VelocityComponent_8hpp_source.html">ECS/Components/VelocityComponent.hpp</a>&quot;</code><br />
 </div>
 <p><a href="sendCode_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -95,6 +97,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">Network::Send::makeBodyNum</a> (int num)</td></tr>
 <tr class="memdesc:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">More...</a><br /></td></tr>
 <tr class="separator:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e6c2ddda0cff623924f6890d51975a8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a4e6c2ddda0cff623924f6890d51975a8">Network::Send::makeBodyPosition</a> (<a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> pos)</td></tr>
+<tr class="memdesc:a4e6c2ddda0cff623924f6890d51975a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#a4e6c2ddda0cff623924f6890d51975a8">More...</a><br /></td></tr>
+<tr class="separator:a4e6c2ddda0cff623924f6890d51975a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af92ae388c376ec5250f07040b3acdae9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#af92ae388c376ec5250f07040b3acdae9">Network::Send::makeBodyVelocity</a> (<a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> vel)</td></tr>
+<tr class="memdesc:af92ae388c376ec5250f07040b3acdae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#af92ae388c376ec5250f07040b3acdae9">More...</a><br /></td></tr>
+<tr class="separator:af92ae388c376ec5250f07040b3acdae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">Network::Send::makeBodyMob</a> (int xMob, int yMob, <a class="el" href="namespaceEnums.html#a04ba6023509953c154816d888df61876">Enums::Position</a> pos)</td></tr>
 <tr class="memdesc:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a BodyMob struct in std::string  <a href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">More...</a><br /></td></tr>
 <tr class="separator:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>

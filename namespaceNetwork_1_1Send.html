@@ -83,6 +83,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">makeBodyNum</a> (int num)</td></tr>
 <tr class="memdesc:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#a0a5e1cee83569680f44c0c29ff8d7a9a">More...</a><br /></td></tr>
 <tr class="separator:a0a5e1cee83569680f44c0c29ff8d7a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e6c2ddda0cff623924f6890d51975a8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#a4e6c2ddda0cff623924f6890d51975a8">makeBodyPosition</a> (<a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> pos)</td></tr>
+<tr class="memdesc:a4e6c2ddda0cff623924f6890d51975a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#a4e6c2ddda0cff623924f6890d51975a8">More...</a><br /></td></tr>
+<tr class="separator:a4e6c2ddda0cff623924f6890d51975a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af92ae388c376ec5250f07040b3acdae9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#af92ae388c376ec5250f07040b3acdae9">makeBodyVelocity</a> (<a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> vel)</td></tr>
+<tr class="memdesc:af92ae388c376ec5250f07040b3acdae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string  <a href="namespaceNetwork_1_1Send.html#af92ae388c376ec5250f07040b3acdae9">More...</a><br /></td></tr>
+<tr class="separator:af92ae388c376ec5250f07040b3acdae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">makeBodyMob</a> (int xMob, int yMob, <a class="el" href="namespaceEnums.html#a04ba6023509953c154816d888df61876">Enums::Position</a> pos)</td></tr>
 <tr class="memdesc:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to create a BodyMob struct in std::string  <a href="namespaceNetwork_1_1Send.html#ae3f5deed5cf0e16bcf4a2ff3cdcad0a7">More...</a><br /></td></tr>
 <tr class="separator:ae3f5deed5cf0e16bcf4a2ff3cdcad0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -447,6 +453,60 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">num</td><td>number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
+<a id="a4e6c2ddda0cff623924f6890d51975a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e6c2ddda0cff623924f6890d51975a8">&#9670;&nbsp;</a></span>makeBodyPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network::Send::makeBodyPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>structure to put in string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
+<a id="af92ae388c376ec5250f07040b3acdae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af92ae388c376ec5250f07040b3acdae9">&#9670;&nbsp;</a></span>makeBodyVelocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Network::Send::makeBodyVelocity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a>&#160;</td>
+          <td class="paramname"><em>vel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>function to create a header <a class="el" href="structNetwork_1_1BodyNumber.html">BodyNumber</a> in std::string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vel</td><td>structure to put in string </td></tr>
   </table>
   </dd>
 </dl>
