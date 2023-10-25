@@ -119,9 +119,9 @@ void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
-        if (footer.number == 305) {
+        if (footer.number == 306) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createCancer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+            ECS::Creator::createBlaster(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
         std::cout << "Unexpected message received player" << std::endl;
@@ -181,7 +181,7 @@ void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::s
 
         if (footer.number == 302) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createBink(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+            ECS::Creator::createBink(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, 600, mobData.y);
         }
     } else {
         std::cout << "Unexpected message received player" << std::endl;
