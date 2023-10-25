@@ -134,6 +134,7 @@ namespace Network {
         void SendClientsInfo(std::vector<Info> scriptInfo);
         void SendClientsPlay();
         void updateGame();
+        void sendClientEntities();
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
