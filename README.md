@@ -29,11 +29,13 @@ Then you can build the project.
 ## How to play 🛝
 When you launch the executable, you will have connect to the server.
 For that you will have to enter the ip address of the server and the port here is what it have to looks.
+
 ⚠️⚠️ Make sure the Server is running before you try to connect to it ⚠️⚠️
 ![Alt text](assets/README/connexionPage.png)
 
 Once the connection is established, you will be placed on a waiting room where you will have to wait for the other players to connect.
 When all the players are connected, the game you should press the Play button on your screen like that.
+
 ⚠️⚠️ Make sure all the players are connected before you press the Play button because there is no comeback once the game started ⚠️⚠️
 ![Alt text](assets/README/waitingroomPage.png)
 
