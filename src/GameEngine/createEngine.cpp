@@ -91,6 +91,7 @@ namespace GameEngine {
         registry.emplaceComponent<Components::CollidableComponent>(wall);
         registry.emplaceComponent<Components::HitBoxComponent>(wall, width, height);
         registry.emplaceComponent<Components::TeamComponent>(wall, team);
+        registry.emplaceComponent<Components::SolidComponent>(wall);
         return wall;
     }
 

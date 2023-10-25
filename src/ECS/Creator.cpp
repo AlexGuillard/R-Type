@@ -6,6 +6,7 @@
 */
 
 #include <cstdint>
+#include <utility>
 #include "ECS/Creator.hpp"
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
@@ -89,6 +90,7 @@ namespace ECS {
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
         registry.emplaceComponent<Components::TeamComponent>(entity, team);
+        registry.emplaceComponent<Components::CollidableComponent>(entity);
         return entity;
     }
 
