@@ -166,18 +166,16 @@ void Network::ServerNetwork::sendClientEntities()
     std::string res = "";
 
     for (int i = 0; i < dataPositions.size(); i++) {
-        res.append(Send::makeHeader(331, i));
         if (dataPositions[i].has_value()) {
+            res.append(Send::makeHeader(331, i));
             res.append(Send::makeBodyPosition(dataPositions[i].value()));
-        } else {
-            res.append(Send::makeBodyPosition(static_cast<ECS::Components::PositionComponent>(-100, -100)));
+            if (dataVelocity[i].has_value()) {
+                res.append(Send::makeBodyVelocity(dataVelocity[i].value()));
+            } else {
+                res.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
+            }
+            res.append(Send::makeBodyNum(331));
         }
-        if (dataVelocity[i].has_value()) {
-            res.append(Send::makeBodyVelocity(dataVelocity[i].value()));
-        } else {
-            res.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
-        }
-        res.append(Send::makeBodyNum(331));
     }
     for (const auto& pair : _listUdpEndpoints) {
         const boost::asio::ip::udp::endpoint& endpoint = pair.second;
