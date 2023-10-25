@@ -297,8 +297,10 @@ void Screen::Display::mouseClickedMenu()
         _state = InputState::NONE;
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
-        std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
-        _menuState = MenuState::CONNECTING;
+        if (_port != "" && _hostName != "") {
+            std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
+            _menuState = MenuState::CONNECTING;
+        }
     }
 }
 
