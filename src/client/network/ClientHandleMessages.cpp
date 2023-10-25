@@ -74,7 +74,7 @@ void Network::ClientNetwork::handleClassicMissileSpawn(const header &messageHead
 
         if (footer.number == 321) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
-            // ECS::Creator::createClassicMissile(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
+            ECS::Creator::createMissile(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.team);
         }
     } else {
         std::cout << "Unexpected message received player" << std::endl;
