@@ -51,7 +51,9 @@ namespace ECS::Systems {
             }
         }
         for (auto &[entityId, input] : playerInputs) {
-            Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
+            if (velocities[entityId]) {
+                Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
+            }
         }
     }
 } // namespace ECS::Systems

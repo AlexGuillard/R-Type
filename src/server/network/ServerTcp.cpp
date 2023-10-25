@@ -5,6 +5,8 @@
 ** ServerTcp
 */
 
+#include <iostream>
+
 #include "server/network/ServerTcp.hpp"
 #include "server/network/sendCode.hpp"
 
@@ -79,21 +81,22 @@ void Network::ServerTcp::connection()
 
     std::cout << number.codeRfc << std::endl;
     if (number.codeRfc == CONNECTION_NB && _list.size() < 4) {
+        int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();
-        write(codeLogin(200));
-        send202(_list.size());
+        write(codeLogin(200, idNewClient));
+        send202(idNewClient);
     } else {
         write(code401());
     }
 }
 
-std::string Network::ServerTcp::codeLogin(int code)
+std::string Network::ServerTcp::codeLogin(int code, int entityId)
 {
     std::string res;
 
-    res = Network::Send::makeHeader(code, _list.size() - 1);
-    res.append(Network::Send::makeBodyNum(_list.size()));
+    res = Network::Send::makeHeader(code, entityId);
+    res.append(Network::Send::makeBodyNum(entityId + 1));
     res.append(Network::Send::makeBodyNum(code));
     return res;
 }
@@ -101,7 +104,10 @@ std::string Network::ServerTcp::codeLogin(int code)
 void Network::ServerTcp::send202(int indexClient)
 {
     for (int i = 0; i < _list.size(); i++) {
-        _list.getClient(i)->write(codeLogin(202));
+        if (i == indexClient) {
+            continue;
+        }
+        _list.getClient(i)->write(codeLogin(202, indexClient));
     }
 }
 
