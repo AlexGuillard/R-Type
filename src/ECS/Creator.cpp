@@ -6,6 +6,7 @@
 */
 
 #include <cstdint>
+#include <utility>
 #include "ECS/Creator.hpp"
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
@@ -90,6 +91,7 @@ namespace ECS {
         registry.emplaceComponent<Components::HPComponent>(entity, health);
         registry.emplaceComponent<Components::HitBoxComponent>(entity, width, height);
         registry.emplaceComponent<Components::TeamComponent>(entity, team);
+        registry.emplaceComponent<Components::CollidableComponent>(entity);
         return entity;
     }
 
@@ -130,9 +132,9 @@ namespace ECS {
         registry.emplaceComponent<Components::VelocityComponent>(shot, xDirection, yDirection);
         registry.emplaceComponent<Components::DrawableComponent>(shot,
             Assets::AssetsIndex::BYDO_SHOT_PNG,
-            Vector2(4, 1), // frameRatio
-            Vector2(0, 0), // start
-            Vector2(4, 0), // end
+            Utils::Vector2(4, 1), // frameRatio
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(4, 0), // end
             false, // boomerang
             4 // fps
         );
@@ -140,9 +142,28 @@ namespace ECS {
         return shot;
     }
 
+    Entity Creator::createMissile(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team)
+    {
+        const Utils::Vector2 missileFramePos(2, 0);
+        const uint8_t nbFrameInSpriteSheet = 6;
+
+        ECS::Entity missile = ECS::Creator::createCharacter(registry, team, 1, 1, 16, 16, id);
+        registry.getComponents<Components::PositionComponent>().at(missile)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(missile)->y = y;
+        registry.getComponents<Components::VelocityComponent>().at(missile)->x = Components::missileSpeed;
+        registry.getComponents<Components::VelocityComponent>().at(missile)->y = 0;
+        registry.emplaceComponent<Components::DrawableComponent>(missile,
+            Assets::AssetsIndex::MISSILE_PNG,
+            Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+            missileFramePos, // start
+            missileFramePos // end
+        );
+        return missile;
+    }
+
     Entity Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(16, 1);
+        const Utils::Vector2 nbFrameInSpriteSheet(16, 1);
         const uint8_t nbFrameInAnimation = 8;
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 20, 24, id);
@@ -150,140 +171,130 @@ namespace ECS {
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(enemyBasic,
             Assets::AssetsIndex::R_TYPESHEET5_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             true, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(enemyBasic, std::move(drawableComponent));
+        );
         return enemyBasic;
     }
 
     Entity Creator::createBink(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
+        const Utils::Vector2 nbFrameInSpriteSheet(6, 2);
         const uint8_t nbFrameInAnimation = 3;
 
         ECS::Entity bink = ECS::Creator::createGroundedCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 28, 33, id);
         registry.getComponents<Components::PositionComponent>().at(bink)->x = x;
         registry.getComponents<Components::PositionComponent>().at(bink)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(bink,
             Assets::AssetsIndex::R_TYPESHEET7_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             true, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(bink, std::move(drawableComponent));
+        );
         Creator::addWalkingAI(bink, registry, bink, std::make_pair(0.F, 500.F), 100, true, false);
         return bink;
     }
 
     Entity Creator::createScant(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(6, 1);
+        const Utils::Vector2 nbFrameInSpriteSheet(6, 1);
         const uint8_t nbFrameInAnimation = 3;
 
         ECS::Entity scant = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 58, 54, id);
         registry.getComponents<Components::PositionComponent>().at(scant)->x = x;
         registry.getComponents<Components::PositionComponent>().at(scant)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(scant,
             Assets::AssetsIndex::R_TYPESHEET9_2_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             false, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(scant, std::move(drawableComponent));
+        );
         return scant;
     }
 
     Entity Creator::createBug(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(8, 2);
+        const Utils::Vector2 nbFrameInSpriteSheet(8, 2);
         const uint8_t nbFrameInAnimation = 16;
 
         ECS::Entity bug = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 30, 23, id);
         registry.getComponents<Components::PositionComponent>().at(bug)->x = x;
         registry.getComponents<Components::PositionComponent>().at(bug)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(bug,
             Assets::AssetsIndex::R_TYPESHEET8_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             false, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(bug, std::move(drawableComponent));
+        );
         return bug;
     }
 
     Entity Creator::createCancer(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(6, 1);
+        const Utils::Vector2 nbFrameInSpriteSheet(6, 1);
         const uint8_t nbFrameInAnimation = 3;
 
         ECS::Entity cancer = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 32, 32, id);
         registry.getComponents<Components::PositionComponent>().at(cancer)->x = x;
         registry.getComponents<Components::PositionComponent>().at(cancer)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(cancer,
             Assets::AssetsIndex::R_TYPESHEET11_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             true, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(cancer, std::move(drawableComponent));
-        registry.emplaceComponent<Components::CollidableComponent>(cancer);
+        );
         return cancer;
     }
 
     Entity Creator::createBlaster(Containers::Registry &registry, size_t id, int x, int y)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(6, 2);
+        const Utils::Vector2 nbFrameInSpriteSheet(6, 2);
         const uint8_t nbFrameInAnimation = 6;
 
         ECS::Entity blaster = ECS::Creator::createGroundedCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 16, 15, id);
         registry.getComponents<Components::PositionComponent>().at(blaster)->x = x;
         registry.getComponents<Components::PositionComponent>().at(blaster)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(blaster,
             Assets::AssetsIndex::R_TYPESHEET12_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(0, 0), // start
-            Vector2(nbFrameInAnimation, 0), // end
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(nbFrameInAnimation, 0), // end
             true, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(blaster, std::move(drawableComponent));
-        registry.emplaceComponent<Components::CollidableComponent>(blaster);
+        );
         registry.emplaceComponent<Components::GravityComponent>(blaster, Creator::defaultGravity);
         return blaster;
     }
 
     Entity Creator::createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
     {
-        const Vector2 nbFrameInSpriteSheet = Vector2(5, 5);
+        const Utils::Vector2 nbFrameInSpriteSheet(5, 5);
         const uint8_t nbFrameInAnimation = 5;
 
         ECS::Entity ally = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ALLY, 1, 1, 33, 14, id);
         registry.getComponents<Components::PositionComponent>().at(ally)->x = x;
         registry.getComponents<Components::PositionComponent>().at(ally)->y = y;
-        Components::DrawableComponent drawableComponent = {
+        registry.emplaceComponent<Components::DrawableComponent>(ally,
             Assets::AssetsIndex::R_TYPESHEET42_PNG,
             nbFrameInSpriteSheet, // frameRatio
-            Vector2(nbFrameInAnimation * (int)color, 0), // start
-            Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
+            Utils::Vector2(nbFrameInAnimation * (int)color, 0), // start
+            Utils::Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
             true, // boomerang
             nbFrameInAnimation // fps
-        };
-        registry.addComponent<Components::DrawableComponent>(ally, std::move(drawableComponent));
-        registry.emplaceComponent<Components::CollidableComponent>(ally);
+        );
         return ally;
     }
 

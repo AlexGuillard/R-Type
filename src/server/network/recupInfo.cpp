@@ -44,11 +44,14 @@ void Network::RecupInfo::openFile() {
         if (element.size() > 3) {
             if (elements[3] == "down"){
                 data.extraType = Network::Info::SIDE;
-                data.extra.side = Network::Side::DOWN;
+                data.extra.side = Enums::Position::DOWN;
             } else if (elements[3] == "up") {
                 data.extraType = Network::Info::SIDE;
-                data.extra.side = Network::Side::UP;
+                data.extra.side = Enums::Position::UP;
             }
+        } else {
+            data.extra.side = Enums::Position::NONE;
+            data.extraType = Network::Info::NONE;
         }
         _data.push_back(data);
     }

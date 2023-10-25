@@ -11,21 +11,56 @@
 
 namespace Network {
 
-    bool startClientNetwork(const std::string &host, int port)
+    bool returnIsCoUDP()
+    {
+        return isCoUDP;
+    }
+
+    bool startClientNetwork(const std::string &host, int tcpPort, int udpPort, Network::ConnectionType type, GameEngine::GameEngine &engine)
     {
         //TODO:
         //connect return a bool to let us know if the connection was successful or not
-        std::cout << "Connecting to " << host << ":" << port << std::endl;
-        return ClientNetwork::getInstance().connect(host, port);
+        if (type == Network::ConnectionType::TCP) {
+            std::cout << "Connecting TCP " << host << ":" << tcpPort << std::endl;
+            return ClientNetwork::getInstance(engine).connect(host, tcpPort, true);
+        } else {
+            std::cout << "Connecting UDP " << host << ":" << udpPort << std::endl;
+            return ClientNetwork::getInstance(engine).connect(host, udpPort, false);
+        }
     }
 
-    void updateClientNetwork()
+    static bool firstTime = false;
+
+    void updateClientNetworkTCP(bool playButton)
+    {
+        ClientNetwork &clientNetwork = ClientNetwork::getInstance();
+
+        if (playButton && !firstTime) {
+            clientNetwork.send201();
+            firstTime = true;
+        }
+
+        if (clientNetwork.isConnectedUDP && !isCoUDP) {
+            isCoUDP = true;
+        }
+
+        clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());
+        clientNetwork.handleNetwork();
+    }
+
+    void setEngineToNetwork(GameEngine::GameEngine &engine)
+    {
+        ClientNetwork::getInstance().setEngine(engine);
+    }
+
+    void updateClientNetworkUDP()
     {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        clientNetwork.asyncReceive(Network::ClientNetwork::getInstance().getSocket());
+        clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
         clientNetwork.handleNetwork();
+
         while (GameEngine::Events::poll(type)) {
             switch (type) {
             case GameEngine::Events::Type::PLAYER_UP:

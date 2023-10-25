@@ -19,11 +19,17 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::HitBoxComponent> &hitBoxes,
         Containers::SparseArray<Components::CollisionComponent> &allCollisions,
         Containers::SparseArray<Components::PositionComponent> &positions,
-        Containers::SparseArray<Components::VelocityComponent> &velocities)
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
+        Containers::SparseArray<Components::TeamComponent> &teams)
     {
         for (auto &&[idx, solid, hitBox, collisions, position]
             : Containers::IndexedZipper(solids, hitBoxes, allCollisions, positions)) {
             for (auto &&entity : collisions->collisions) {
+                if (teams[idx].has_value() && teams[entity].has_value()) {
+                    if (teams[idx]->team == teams[entity]->team && teams[idx]->team != Enums::TeamGroup::NEUTRAL) {
+                        continue;
+                    }
+                }
                 auto &entityHitBox = hitBoxes.at(entity);
                 auto &entityPosition = positions.at(entity);
                 auto &entityVelocity = velocities.at(entity);

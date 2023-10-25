@@ -5,6 +5,8 @@
 ** ServerTcp
 */
 
+#include <iostream>
+
 #include "server/network/ServerTcp.hpp"
 #include "server/network/sendCode.hpp"
 
@@ -30,13 +32,13 @@ void Network::ServerTcp::waitRequest()
     auto self(shared_from_this());
     _data.resize(MAX_SIZE_BUFF);
     _socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, self](boost::system::error_code error, std::size_t bytes_transferred) {
-        BodyNumber number;
+        header dataClient;
 
         if (!error) {
             if (_list.findClient(shared_from_this()) == true) {
-                number = Network::Send::stringToBodyNum(_data);
-                std::cout << "[" << bytes_transferred << "] " << number.number << " from " << _socket.remote_endpoint().address() << std::endl;
-                if (number.number != 201) {
+                dataClient = Network::Send::stringToheader(_data);
+                std::cout << "[" << bytes_transferred << "] " << dataClient.codeRfc << " from " << _socket.remote_endpoint().address() << std::endl;
+                if (dataClient.codeRfc == 201) {
                     send201();
                     _isGame = true;
                 }
@@ -74,26 +76,27 @@ void Network::ServerTcp::write(std::string message)
 
 void Network::ServerTcp::connection()
 {
-    BodyNumber number = Network::Send::stringToBodyNum(_data);
+    header number = Network::Send::stringToheader(_data);
     std::string actualClient;
 
-    std::cout << number.number << std::endl;
-    if (number.number == CONNECTION_NB && _list.size() < 4) {
+    std::cout << number.codeRfc << std::endl;
+    if (number.codeRfc == CONNECTION_NB && _list.size() < 4) {
+        int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();
-        write(codeLogin(200));
-        send202(_list.size());
+        write(codeLogin(200, idNewClient));
+        send202(idNewClient);
     } else {
         write(code401());
     }
 }
 
-std::string Network::ServerTcp::codeLogin(int code)
+std::string Network::ServerTcp::codeLogin(int code, int entityId)
 {
     std::string res;
 
-    res = Network::Send::makeHeader(code, _list.size() - 1);
-    res.append(Network::Send::makeBodyNum(_list.size()));
+    res = Network::Send::makeHeader(code, entityId);
+    res.append(Network::Send::makeBodyNum(entityId + 1));
     res.append(Network::Send::makeBodyNum(code));
     return res;
 }
@@ -101,7 +104,10 @@ std::string Network::ServerTcp::codeLogin(int code)
 void Network::ServerTcp::send202(int indexClient)
 {
     for (int i = 0; i < _list.size(); i++) {
-        _list.getClient(i)->write(codeLogin(202));
+        if (i == indexClient) {
+            continue;
+        }
+        _list.getClient(i)->write(codeLogin(202, indexClient));
     }
 }
 

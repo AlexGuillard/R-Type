@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
+#include "constants.hpp"
 
 namespace Screen {
     /**
@@ -22,7 +23,8 @@ namespace Screen {
     public:
         enum class GameState {
             MENU,
-            GAME
+            GAME,
+            WAITINGROOM,             // play button waiting room
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -34,6 +36,14 @@ namespace Screen {
             EARTHQUAKE = 5,
             END_OF_THE_WORLD = 8
         };
+        static bool _playButton;
+        /**
+         * @brief Get the Play Button object
+         *
+         * @return true need to connect udp
+         * @return false tcp connection
+         */
+        static bool getPlayButton();
         /**
          * @brief Init the window with raylib
          * @param state set the starting state of the game
@@ -127,6 +137,11 @@ namespace Screen {
         static void drawGame(GameEngine::GameEngine &engine);
 
         /**
+         * @brief draw the waitingRoom
+         */
+        static void drawWaitingRoom(Rectangle playButtonRect);
+
+        /**
          * @brief Centers the window on screen
          * @return (*this) to allow chain calls
          */
@@ -176,6 +191,20 @@ namespace Screen {
          * @returns The size of the camera view
          */
         static Vector2 getCameraSize();
+
+        /**
+         * @brief Set the Game State object
+         *
+         * @param state
+         */
+        void setGameState(GameState state);
+        /**
+         * @brief detect the action in waiting room
+         *
+         * @param playButtonRect
+         */
+        void detectActionWaitingRoom(Rectangle playButtonRect);
+
     private:
         /**
          * @brief Toggles between fullscreen and windowed
@@ -215,8 +244,8 @@ namespace Screen {
         Vector2 _windowSize = { 0, 0 };
         const float _defaultWidthRatio = 0.5;
         const float _defaultHeightRatio = 0.5;
-        static const uint16_t defaultCameraWidth = 1920;
-        static const uint16_t defaultCameraHeight = 1080;
+        static const uint16_t defaultCameraWidth = Constants::cameraDefaultWidth;
+        static const uint16_t defaultCameraHeight = Constants::cameraDefaultHeight;
         static uint16_t cameraWidth;
         static uint16_t cameraHeight;
         float aspectRatio;

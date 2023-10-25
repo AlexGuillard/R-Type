@@ -25,6 +25,11 @@ namespace Assets {
         return AssetLoader::loadImage(index, ".png");
     }
 
+    Image AssetLoader::loadImageJpg(AssetsIndex index)
+    {
+        return AssetLoader::loadImage(index, ".jpg");
+    }
+
     Image AssetLoader::loadImageGif(AssetsIndex index)
     {
         return AssetLoader::loadImage(index, ".gif");
@@ -42,6 +47,11 @@ namespace Assets {
     Texture2D AssetLoader::loadTexturePng(AssetsIndex index)
     {
         return AssetLoader::loadTexture(index, ".png");
+    }
+
+    Texture2D AssetLoader::loadTextureJpg(AssetsIndex index)
+    {
+        return AssetLoader::loadTexture(index, ".jpg");
     }
 
     Texture2D AssetLoader::loadTextureGif(AssetsIndex index)

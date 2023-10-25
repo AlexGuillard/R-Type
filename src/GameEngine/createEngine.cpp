@@ -25,11 +25,13 @@
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "Assets/AssetLoader.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Systems/movement.hpp"
+#include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -80,22 +82,57 @@ namespace GameEngine {
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
-        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::solid);
+        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
     }
 
+    static ECS::Entity createInvisibleWall(Containers::Registry &registry, float x, float y, float width, float height, Enums::TeamGroup team = Enums::TeamGroup::NEUTRAL)
+    {
+        ECS::Entity wall = registry.spawnEntity();
+
+        registry.emplaceComponent<Components::PositionComponent>(wall, x, y);
+        registry.emplaceComponent<Components::CollidableComponent>(wall);
+        registry.emplaceComponent<Components::HitBoxComponent>(wall, width, height);
+        registry.emplaceComponent<Components::TeamComponent>(wall, team);
+        registry.emplaceComponent<Components::SolidComponent>(wall);
+        return wall;
+    }
+
     static void populateEntities(Containers::Registry &registry)
     {
-        // TODO: delete when client is ready
-        auto &&player = ECS::Creator::createPlayer(registry, registry.spawnEntity(), 500, 500, Enums::PlayerColor::CYAN_COLOR);
-        ECS::Creator::createBink(registry, registry.spawnEntity(), 1000, 500);
+        const double heightPercentage = 0.1;
+        const double widthPercentage = 0.05;
+        ECS::Entity floor = createInvisibleWall(registry,
+            Constants::cameraDefaultWidth * -0.5,
+            Constants::cameraDefaultHeight * (1 - heightPercentage),
+            Constants::cameraDefaultWidth * 2,
+            Constants::cameraDefaultHeight * heightPercentage);
+        ECS::Entity ceiling = createInvisibleWall(registry,
+            Constants::cameraDefaultWidth * -0.5,
+            0,
+            Constants::cameraDefaultWidth * 2,
+            Constants::cameraDefaultHeight * heightPercentage);
+        ECS::Entity leftWall = createInvisibleWall(registry,
+            0,
+            Constants::cameraDefaultHeight * heightPercentage + 1,
+            Constants::cameraDefaultWidth * widthPercentage,
+            Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
+            Enums::TeamGroup::ENEMY);
+        ECS::Entity rightWall = createInvisibleWall(registry,
+            Constants::cameraDefaultWidth * (1 - widthPercentage),
+            Constants::cameraDefaultHeight * heightPercentage + 1,
+            Constants::cameraDefaultWidth * widthPercentage,
+            Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
+            Enums::TeamGroup::ENEMY);
+
     }
+
 
     GameEngine createEngine()
     {
         GameEngine engine;
-        // engine.createRegistry(RegistryType::Background);
+        engine.createRegistry(registryTypeBackground);
         engine.createRegistry(registryTypeEntities);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));

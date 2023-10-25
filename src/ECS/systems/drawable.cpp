@@ -87,16 +87,18 @@ namespace ECS::Systems {
                 drawable->forward = drawer.isForward();
                 drawable->timeAtLastFrameChange = time;
             }
-            drawer.draw(Vector2(position->x, position->y));
-        #ifdef DEBUG
+            drawer.draw(Utils::Vector2(position->x, position->y));
+        }
+    #ifdef DEBUG
+        for (auto &&[eId, position, hitbox] : Containers::IndexedZipper(positions, hitboxes)) {
             debugDraw(
                 registry.entityFromIndex(eId),
                 *position,
-                hitboxes.at(eId),
+                *hitbox,
                 collisions.at(eId)
             );
-        #endif
         }
+    #endif
         Screen::Display::endDrawCamera();
     }
 

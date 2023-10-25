@@ -11,6 +11,7 @@
 
 #include "enums.hpp"
 #include "ECS/Entity.hpp"
+#include "ECS/Creator.hpp"
 #include "ECS/Containers/Registry.hpp"
 
 namespace ECS {
@@ -72,6 +73,17 @@ namespace ECS {
             std::size_t width,
             std::size_t height
         );
+        /**
+         * @brief create a base missile
+         *
+         * @param registry The registry to create the entity in
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         * @param team team of the missile
+         * @return Entity
+         */
+        static Entity createMissile(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team);
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in

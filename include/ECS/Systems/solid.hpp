@@ -14,6 +14,7 @@
 #include "ECS/Components/HitBoxComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 
 namespace ECS::Systems {
     /**
@@ -25,5 +26,6 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::HitBoxComponent> &,
         Containers::SparseArray<Components::CollisionComponent> &,
         Containers::SparseArray<Components::PositionComponent> &,
-        Containers::SparseArray<Components::VelocityComponent> &);
+        Containers::SparseArray<Components::VelocityComponent> &,
+        Containers::SparseArray<Components::TeamComponent> &);
 } // namespace ECS::Systems

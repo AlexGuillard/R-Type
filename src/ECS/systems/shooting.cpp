@@ -30,10 +30,10 @@ namespace ECS::Systems {
     static Components::DrawableComponent getDrawableForMissile()
     {
         const uint8_t nbFrameInSpriteSheet = 6;
-        const Vector2 missileFramePos = Vector2(2, 0);
+        const Utils::Vector2 missileFramePos(2, 0);
         Components::DrawableComponent drawable = {
                 Assets::AssetsIndex::MISSILE_PNG,
-                Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
                 missileFramePos, // start
                 missileFramePos // end
         };
@@ -91,12 +91,12 @@ namespace ECS::Systems {
     static Components::DrawableComponent getDrawableForWaveBeam(uint8_t strength)
     {
         const uint8_t nbFrameInSpriteSheet = 2;
-        const Vector2 waveBeamFrameStart = Vector2(0, 0);
-        const Vector2 waveBeamFrameEnd = Vector2(1, 0);
+        const Utils::Vector2 waveBeamFrameStart(0, 0);
+        const Utils::Vector2 waveBeamFrameEnd(1, 0);
         const Assets::AssetsIndex waveBeams[] = { Assets::AssetsIndex::WAVEBEAM_OUT1_PNG, Assets::AssetsIndex::WAVEBEAM_OUT2_PNG, Assets::AssetsIndex::WAVEBEAM_OUT3_PNG, Assets::AssetsIndex::WAVEBEAM_OUT4_PNG, Assets::AssetsIndex::WAVEBEAM_OUT5_PNG };
         Components::DrawableComponent drawable = {
                 .spriteSheetIndex = waveBeams[strength - 1],
-                .frameRatio = Vector2(nbFrameInSpriteSheet, 1),
+                .frameRatio = Utils::Vector2(nbFrameInSpriteSheet, 1),
                 .start = waveBeamFrameStart,
                 .end = waveBeamFrameEnd
         };
