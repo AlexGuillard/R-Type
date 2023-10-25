@@ -6,8 +6,8 @@
 */
 
 #include <cmath>
-#include <raylib.h>
 
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/target.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
 
@@ -24,7 +24,7 @@ namespace ECS::Systems {
             target->dX = targetPosition->x - position->x;
             target->dY = targetPosition->y - position->y;
             target->distance = std::sqrt(std::pow(target->dX, 2) + std::pow(target->dY, 2));
-            target->t += GetFrameTime();
+            target->t += GameEngine::GameEngine::getDeltaTime();
         }
     }
 }

@@ -17,6 +17,7 @@
 #include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "GameEngine/Events.hpp"
+#include "GameEngine/GameEngine.hpp"
 #include "constants.hpp"
 #include "Player/utils.hpp"
 
@@ -81,7 +82,7 @@ namespace ECS::Systems {
     {
         if (IsKeyDown(toRaylibKey(controllable.fire))) {
             GameEngine::Events::push(GameEngine::Events::Type::PLAYER_SHOOT);
-            controllable.timeFireButtonHeld += GetFrameTime();
+            controllable.timeFireButtonHeld += GameEngine::GameEngine::getDeltaTime();
             return;
         }
         if (controllable.timeFireButtonHeld > 0) {
