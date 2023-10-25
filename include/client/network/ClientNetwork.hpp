@@ -179,6 +179,20 @@ namespace Network {
          */
         void handleClassicMissileSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of create a wave missile when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleWaveBeamSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create a bydos missile when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleBydosShotSpawn(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Instance object
          *
          * @return ClientNetwork&

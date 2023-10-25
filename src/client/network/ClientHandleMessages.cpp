@@ -56,6 +56,12 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[321] = [this](const header &h, std::string &s) {
         handleClassicMissileSpawn(h, s);
         };
+    _responseHandlers[322] = [this](const header &h, std::string &s) {
+        handleWaveBeamSpawn(h, s);
+        };
+    _responseHandlers[323] = [this](const header &h, std::string &s) {
+        handleBydosShotSpawn(h, s);
+        };
 }
 
 //-----------------------------MISSILES--------------------------------------------//
@@ -69,6 +75,36 @@ void Network::ClientNetwork::handleClassicMissileSpawn(const header &messageHead
         if (footer.number == 321) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
             // ECS::Creator::createClassicMissile(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
+        }
+    } else {
+        std::cout << "Unexpected message received player" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleWaveBeamSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyMissile) + sizeof(BodyNumber)) {
+        bodyMissile missileData = getMissile(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 322) {
+            std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
+            // ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
+        }
+    } else {
+        std::cout << "Unexpected message received player" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyMissile) + sizeof(BodyNumber)) {
+        bodyMissile missileData = getMissile(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 323) {
+            std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
+            // ECS::Creator::createBydosShot(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
         }
     } else {
         std::cout << "Unexpected message received player" << std::endl;
