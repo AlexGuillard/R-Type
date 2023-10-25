@@ -64,23 +64,29 @@ void Network::ClientNetwork::initializeResponsehandler()
         };
     // entities
     _responseHandlers[331] = [this](const header &h, std::string &s) {
-        handleEntityDestruction(h, s);
+        handleEntityUpdate(h, s);
         };
 }
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//
 
-void Network::ClientNetwork::handleEntityDestruction(const header &messageHeader, std::string &str)
+void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyMissile) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(ECS::Components::PositionComponent) + sizeof(ECS::Components::VelocityComponent) + sizeof(BodyNumber)) {
         ECS::Components::PositionComponent positionData = getPosition(str);
         ECS::Components::VelocityComponent velocityData = getVelocity(str);
         BodyNumber footer = getBody(str);
 
         if (footer.number == 331) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << positionData.x << " Y: " << positionData.y << " VelocityX: " << velocityData.x << " VelocityY: " << velocityData.y << std::endl;
-            _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(_engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity));
+            ECS::Entity entityToUpdate = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity);
+
+            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
+            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
+        } else {
+            std::cout << "Wrong footer: " << footer.number << std::endl;
         }
+
     } else {
         std::cout << "Unexpected message received player" << std::endl;
     }

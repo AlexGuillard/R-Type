@@ -333,7 +333,7 @@ namespace Network {
          * @param messageHeader
          * @param str
          */
-        void handleEntityDestruction(const header &messageHeader, std::string &str);
+        void handleEntityUpdate(const header &messageHeader, std::string &str);
         /**
          * @brief Get the Velocity object
          *
