@@ -20,7 +20,6 @@ If your on Linux you need CMake, on root of the project, execute:
 ### Windows 🪟
 <img align="right" width="100" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/1024px-Windows_logo_-_2012.svg.png">
 
-If your on Windows, on root of the project, execute:
 You need CMakeGUI and visualStudio to build the project.
 With CMake GUI you have to select the root of the project and the build folder.
 Then you have to configure and generate the project.
