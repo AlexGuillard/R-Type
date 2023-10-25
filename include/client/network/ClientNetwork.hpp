@@ -16,6 +16,8 @@
 #include <memory>
 #include <queue>
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace Network {
 
@@ -325,6 +327,27 @@ namespace Network {
          * @param engine
          */
         void setEngine(GameEngine::GameEngine &engine);
+        /**
+         * @brief handle he fact of despawn entities from the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleEntityDestruction(const header &messageHeader, std::string &str);
+        /**
+         * @brief Get the Velocity object
+         *
+         * @param str
+         * @return ECS::Components::VelocityComponent
+         */
+        ECS::Components::VelocityComponent getVelocity(std::string &str);
+        /**
+         * @brief Get the Position object
+         *
+         * @param str
+         * @return ECS::Components::PositionComponent
+         */
+        ECS::Components::PositionComponent getPosition(std::string &str);
 
     private:
         //Port of the server
