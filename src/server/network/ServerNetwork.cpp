@@ -328,7 +328,7 @@ void Network::ServerNetwork::SendClientsPlay()
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-    for (const auto& allIds : _ids) {
+    for (auto &allIds : _ids) {
         if (index == 0)
             color = Enums::PlayerColor::CYAN_COLOR;
         else if (index == 1)
@@ -361,6 +361,7 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
+        allIds.second.first = entity;
         index++;
     }
 }
