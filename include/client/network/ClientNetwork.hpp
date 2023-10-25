@@ -172,6 +172,13 @@ namespace Network {
          */
         void handleAllySpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of create a classic missile when the server said it
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleClassicMissileSpawn(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Instance object
          *
          * @return ClientNetwork&
@@ -291,6 +298,13 @@ namespace Network {
          * @return Network::bodyMob
          */
         Network::bodyMob getMob(std::string &str);
+        /**
+         * @brief Get the Missile object
+         *
+         * @param str
+         * @return Network::bodyMissile
+         */
+        Network::bodyMissile getMissile(std::string &str);
         /**
          * @brief Set the Engine object
          *
