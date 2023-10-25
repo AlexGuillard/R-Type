@@ -62,6 +62,28 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[323] = [this](const header &h, std::string &s) {
         handleBydosShotSpawn(h, s);
         };
+    // entities
+    _responseHandlers[331] = [this](const header &h, std::string &s) {
+        handleEntityDestruction(h, s);
+        };
+}
+
+//-----------------------------ENTITIES DESTRUCTION----------------------------------//
+
+void Network::ClientNetwork::handleEntityDestruction(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyMissile) + sizeof(BodyNumber)) {
+        ECS::Components::PositionComponent positionData = getPosition(str);
+        ECS::Components::VelocityComponent velocityData = getVelocity(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 331) {
+            std::cout << "Entity: " << messageHeader.entity << " X: " << positionData.x << " Y: " << positionData.y << " VelocityX: " << velocityData.x << " VelocityY: " << velocityData.y << std::endl;
+            _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(_engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity));
+        }
+    } else {
+        std::cout << "Unexpected message received player" << std::endl;
+    }
 }
 
 //-----------------------------MISSILES--------------------------------------------//
