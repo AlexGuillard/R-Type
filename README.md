@@ -8,6 +8,7 @@ R-Type is a horizontally scrolling shooter arcade video game developed and relea
 This version of the game is played in networks of up to 4 people.
 
 ## How to build 🛠️
+### Linux 🐧
 <img align="right" width="100" height="120" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/NewTux.svg/150px-NewTux.svg.png">
 
 
@@ -15,6 +16,8 @@ If your on Linux you need CMake, on root of the project, execute:
 ```bash
 ./init.sh
 ```
+
+### Windows 🪟
 <img align="right" width="100" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/1024px-Windows_logo_-_2012.svg.png">
 
 If your on Windows, on root of the project, execute:
