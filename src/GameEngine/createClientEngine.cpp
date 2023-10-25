@@ -63,9 +63,9 @@ namespace GameEngine {
 
         std::vector<std::vector<double>> sizeAndSpeed = {
             {double(5.0), double(0.5), double(0.015)},
-            {double(1.5), double(1.0), double(0.010)},
-            {double(1.5), double(1.5), double(0.005)},
-            {double(7.0), double(2.0), double(0.002)}
+            {double(1.0), double(1.0), double(0.010)},
+            {double(1.0), double(1.5), double(0.005)},
+            {double(1.0), double(2.0), double(0.002)}
         };
 
         for (size_t i = 0; i < assetIndices.size(); ++i)
