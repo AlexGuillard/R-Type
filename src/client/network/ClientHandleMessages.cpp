@@ -9,6 +9,7 @@
 #include "server/network/sendCode.hpp"
 #include "ECS/Creator.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include <chrono>
 
 //-----------------------------HANDLE MESSAGES--------------------------------------------//
 
@@ -70,6 +71,29 @@ void Network::ClientNetwork::initializeResponsehandler()
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//
 
+double getCurrentTime() {
+    auto now = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(now.time_since_epoch());
+    return duration.count();
+}
+
+void Network::ClientNetwork::checkForDeadEntities() {
+    const double currentTime = getCurrentTime();
+    const double maxIdleTime = 3;
+
+    for (const auto& entityTimestampPair : _entityTimestamps) {
+        std::size_t entityId = entityTimestampPair.first;
+        double lastUpdateTimestamp = entityTimestampPair.second;
+
+        if (currentTime - lastUpdateTimestamp > maxIdleTime) {
+            std::cout << "Entity: " << entityId << " has been idle for too long, deleting it" << std::endl;
+            ECS::Entity entityToDelete = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(entityId);
+            _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(entityToDelete);
+            _entityTimestamps.erase(entityId);
+        }
+    }
+}
+
 void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std::string &str)
 {
     if (str.size() >= sizeof(ECS::Components::PositionComponent) + sizeof(ECS::Components::VelocityComponent) + sizeof(BodyNumber)) {
@@ -83,6 +107,8 @@ void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std
 
             _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
             _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
+            _entityTimestamps[messageHeader.entity] = getCurrentTime();
+            checkForDeadEntities();
         } else {
             std::cout << "Wrong footer: " << footer.number << std::endl;
         }

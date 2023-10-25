@@ -348,6 +348,12 @@ namespace Network {
          * @return ECS::Components::PositionComponent
          */
         ECS::Components::PositionComponent getPosition(std::string &str);
+        /**
+         * @brief Check if the entity is dead or not based on the timestamp
+         *
+         * @param entityId
+         */
+        void checkForDeadEntities();
 
     private:
         //Port of the server
@@ -378,6 +384,8 @@ namespace Network {
         int _indexPlayer = -1;
         //Engine of the game
         GameEngine::GameEngine &_engine;
+        //Map of the entities with the timestamp
+        std::unordered_map<std::size_t, double> _entityTimestamps;
     };
 }
 
