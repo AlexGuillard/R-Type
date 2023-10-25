@@ -14,8 +14,6 @@
 #include "enums.hpp"
 #include "constants.hpp"
 
-#include <iostream>
-
 namespace ECS::Systems {
     template<typename T>
     T max(T a, T b)
@@ -38,7 +36,6 @@ namespace ECS::Systems {
                 0.,
                 ai->_shootCooldownTimer - GameEngine::GameEngine::getDeltaTime());
             if (ai->_shootCooldownTimer == 0) {
-                std::cout << "shoot" << std::endl;
                 registry.emplaceComponent<Components::BydoShotComponent>(
                     registry.entityFromIndex(eId),
                     /* damage */ 1,
