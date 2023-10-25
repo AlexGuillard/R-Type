@@ -7,7 +7,7 @@ var searchData=
   ['clientnetwork_2ehpp_49',['ClientNetwork.hpp',['../ClientNetwork_8hpp.html',1,'']]],
   ['code401_50',['code401',['../classNetwork_1_1ServerTcp.html#a9244d2b879c32de02137bb88fb483d64',1,'Network::ServerTcp::code401()'],['../classNetwork_1_1IServerTcp.html#ada389ce1fd291e36dd351ee0a6ebedf9',1,'Network::IServerTcp::code401()']]],
   ['codeally_51',['codeAlly',['../namespaceNetwork_1_1Send.html#a8175a11c8d0d27b0962515c08ee11ba4',1,'Network::Send']]],
-  ['codelogin_52',['codeLogin',['../classNetwork_1_1ServerTcp.html#a828a643bc4e3d7dcb198183145f82931',1,'Network::ServerTcp::codeLogin()'],['../classNetwork_1_1IServerTcp.html#aaed12627e26bc12e3dbde320b14d1785',1,'Network::IServerTcp::codeLogin()']]],
+  ['codelogin_52',['codeLogin',['../classNetwork_1_1ServerTcp.html#a86d067aaa400d2f01f085f22cacc4910',1,'Network::ServerTcp::codeLogin()'],['../classNetwork_1_1IServerTcp.html#a08908f3d763fb6165b5d6d2e17eaccc1',1,'Network::IServerTcp::codeLogin()']]],
   ['codemissil_53',['codeMissil',['../namespaceNetwork_1_1Send.html#a6945bfdb86fb29e55abb98f9f7694dd1',1,'Network::Send']]],
   ['codemob_54',['codeMob',['../namespaceNetwork_1_1Send.html#a86199e383da2816bf1c7ce6cc043e6b8',1,'Network::Send']]],
   ['coderfc_55',['codeRfc',['../structNetwork_1_1header.html#aa56412b32b32617d2527de78e388554e',1,'Network::header']]],

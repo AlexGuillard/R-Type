@@ -102,9 +102,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a077cb74edee557b66989f11bb6cf77fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ea18a251a7dd76d38ac557ed97433ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0ea18a251a7dd76d38ac557ed97433ab">connection</a> ()</td></tr>
 <tr class="separator:a0ea18a251a7dd76d38ac557ed97433ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828a643bc4e3d7dcb198183145f82931"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a828a643bc4e3d7dcb198183145f82931">codeLogin</a> (int code)</td></tr>
-<tr class="separator:a828a643bc4e3d7dcb198183145f82931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d067aaa400d2f01f085f22cacc4910"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a86d067aaa400d2f01f085f22cacc4910">codeLogin</a> (int code, int entityId=-1)</td></tr>
+<tr class="memdesc:a86d067aaa400d2f01f085f22cacc4910"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a response with a header, a body number and footer.  <a href="classNetwork_1_1ServerTcp.html#a86d067aaa400d2f01f085f22cacc4910">More...</a><br /></td></tr>
+<tr class="separator:a86d067aaa400d2f01f085f22cacc4910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f31f5cff9082225c5af69f4b96feaba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a6f31f5cff9082225c5af69f4b96feaba">send202</a> (int indexClient)</td></tr>
+<tr class="memdesc:a6f31f5cff9082225c5af69f4b96feaba"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespaceNetwork_1_1Send.html">Send</a> 202 to all client.  <a href="classNetwork_1_1ServerTcp.html#a6f31f5cff9082225c5af69f4b96feaba">More...</a><br /></td></tr>
 <tr class="separator:a6f31f5cff9082225c5af69f4b96feaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9244d2b879c32de02137bb88fb483d64"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a9244d2b879c32de02137bb88fb483d64">code401</a> ()</td></tr>
 <tr class="separator:a9244d2b879c32de02137bb88fb483d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,8 +246,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a828a643bc4e3d7dcb198183145f82931"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a828a643bc4e3d7dcb198183145f82931">&#9670;&nbsp;</a></span>codeLogin()</h2>
+<a id="a86d067aaa400d2f01f085f22cacc4910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d067aaa400d2f01f085f22cacc4910">&#9670;&nbsp;</a></span>codeLogin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,8 +259,18 @@ Protected Attributes</h2></td></tr>
           <td class="memname">std::string Network::ServerTcp::codeLogin </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>entityId</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -268,7 +280,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classNetwork_1_1IServerTcp.html#aaed12627e26bc12e3dbde320b14d1785">Network::IServerTcp</a>.</p>
+<p>Create a response with a header, a body number and footer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>RFC code </td></tr>
+    <tr><td class="paramname">entityId</td><td>id of the entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::string response </dd></dl>
+
+<p>Implements <a class="el" href="classNetwork_1_1IServerTcp.html#a08908f3d763fb6165b5d6d2e17eaccc1">Network::IServerTcp</a>.</p>
 
 </div>
 </div>
@@ -383,6 +405,14 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="namespaceNetwork_1_1Send.html">Send</a> 202 to all client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indexClient</td><td>index of the new client </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classNetwork_1_1IServerTcp.html#ae1aa863669e60e3bc363c0ee06acbc2c">Network::IServerTcp</a>.</p>
 
