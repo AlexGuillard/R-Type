@@ -98,7 +98,7 @@ namespace GameEngine {
     static void populateEntities(Containers::Registry &registry)
     {
         const double heightPercentage = 0.1;
-        const double widthPercentage = 0.05;
+        const int width = 10;
         ECS::Entity floor = createInvisibleWall(registry,
             Constants::cameraDefaultWidth * -0.5,
             Constants::cameraDefaultHeight * (1 - heightPercentage),
@@ -110,15 +110,15 @@ namespace GameEngine {
             Constants::cameraDefaultWidth * 2,
             Constants::cameraDefaultHeight * heightPercentage);
         ECS::Entity leftWall = createInvisibleWall(registry,
-            0,
+            -width,
             Constants::cameraDefaultHeight * heightPercentage + 1,
-            Constants::cameraDefaultWidth * widthPercentage,
+            width,
             Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
             Enums::TeamGroup::ENEMY);
         ECS::Entity rightWall = createInvisibleWall(registry,
-            Constants::cameraDefaultWidth * (1 - widthPercentage),
+            Constants::cameraDefaultWidth,
             Constants::cameraDefaultHeight * heightPercentage + 1,
-            Constants::cameraDefaultWidth * widthPercentage,
+            width,
             Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
             Enums::TeamGroup::ENEMY);
 
