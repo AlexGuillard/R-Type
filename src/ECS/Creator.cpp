@@ -271,4 +271,23 @@ namespace ECS {
         return player;
     }
 
+    Entity Creator::createDobkeratops(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Utils::Vector2 nbFrameInSpriteSheet(4, 9);
+        const uint8_t nbFrameInAnimation = 28;
+
+        ECS::Entity dobkeratops = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 155, 205, id);
+        registry.getComponents<Components::PositionComponent>().at(dobkeratops)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(dobkeratops)->y = y;
+        registry.emplaceComponent<Components::DrawableComponent>(dobkeratops,
+            Assets::AssetsIndex::R_TYPESHEET30_2_PNG,
+            nbFrameInSpriteSheet, // frameRatio
+            Utils::Vector2(0, 2), // start
+            Utils::Vector2(3, 8), // end
+            true, // boomerang
+            nbFrameInAnimation / 4 // fps
+        );
+        return dobkeratops;
+    }
+
 }; // namespace ECS
