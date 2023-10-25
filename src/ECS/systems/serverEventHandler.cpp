@@ -10,6 +10,7 @@
 #include "ECS/Systems/serverEventHandler.hpp"
 #include "GameEngine/Events.hpp"
 #include "Player/utils.hpp"
+#include "ECS/Creator.hpp"
 
 namespace ECS::Systems {
     struct PlayerInput {
@@ -21,7 +22,8 @@ namespace ECS::Systems {
     void serverEventHandler(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
-        Containers::SparseArray<Components::VelocityComponent> &velocities)
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
+        Containers::SparseArray<Components::TeamComponent> &teams)
     {
         GameEngine::Events::Type event;
         int entityId = 0;
@@ -41,12 +43,17 @@ namespace ECS::Systems {
             case GameEngine::Events::Type::PLAYER_RIGHT:
                 playerInputs[entityId].right++;
                 break;
+            case GameEngine::Events::Type::PLAYER_SHOOT:
+                ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
+                break;
             default:
                 break;
             }
         }
         for (auto &[entityId, input] : playerInputs) {
-            Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
+            if (velocities[entityId]) {
+                Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
+            }
         }
     }
 } // namespace ECS::Systems
