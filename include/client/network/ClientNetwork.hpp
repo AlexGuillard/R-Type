@@ -352,7 +352,7 @@ namespace Network {
         //Size of the header of the message
         static constexpr std::size_t HEADER_SIZE = sizeof(header);
         //The Index of the player send by server for the color etc... (between 0 and 3)
-        int _indexPlayer;
+        int _indexPlayer = -1;
         //Engine of the game
         GameEngine::GameEngine &_engine;
     };

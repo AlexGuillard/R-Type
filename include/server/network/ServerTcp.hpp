@@ -20,7 +20,18 @@ namespace Network {
             void waitRequest();
             void write(std::string message);
             void connection();
-            std::string codeLogin(int code);
+            /**
+             * @brief Create a response with a header, a body number and footer
+             *
+             * @param code RFC code
+             * @param entityId id of the entity
+             * @return std::string response
+             */
+            std::string codeLogin(int code, int entityId = -1);
+            /**
+             * @brief Send 202 to all client
+             * @param indexClient index of the new client
+            */
             void send202(int indexClient);
             std::string code401();
             void send201();
