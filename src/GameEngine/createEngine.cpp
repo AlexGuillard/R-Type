@@ -78,7 +78,7 @@ namespace GameEngine {
 
         registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
+        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent, Components::BydoShotComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
