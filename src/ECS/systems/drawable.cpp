@@ -88,15 +88,17 @@ namespace ECS::Systems {
                 drawable->timeAtLastFrameChange = time;
             }
             drawer.draw(Utils::Vector2(position->x, position->y));
-        #ifdef DEBUG
+        }
+    #ifdef DEBUG
+        for (auto &&[eId, position, hitbox] : Containers::IndexedZipper(positions, hitboxes)) {
             debugDraw(
                 registry.entityFromIndex(eId),
                 *position,
-                hitboxes.at(eId),
+                *hitbox,
                 collisions.at(eId)
             );
-        #endif
         }
+    #endif
         Screen::Display::endDrawCamera();
     }
 

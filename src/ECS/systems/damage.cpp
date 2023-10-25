@@ -23,14 +23,17 @@ namespace ECS::Systems {
     {
         for (auto &&[entityId, hpComponent, team, collision] : Containers::IndexedZipper(hpComponents, teams, collision)) {
             for (auto eId : collision->collisions) {
-                if(teams.at(eId)->team != teams.at(entityId)->team) {
+                if (!(teams[eId] && teams[entityId] && damage[eId])) {
+                    continue;
+                }
+                if (teams[eId]->team != teams[entityId]->team) {
                     std::size_t damageOther = damage.at(eId)->damage;
-                    std::size_t hpEntity = hpComponents.at(entityId)->hp;
+                    std::size_t hpEntity = hpComponent->hp;
                     if (hpEntity == 0 || hpEntity <= damageOther) {
                         registry.killEntity(registry.entityFromIndex(entityId));
                         break;
                     }
-                    hpComponents.at(entityId)->hp -= damageOther;
+                    hpComponent->hp -= damageOther;
                 }
             }
         }

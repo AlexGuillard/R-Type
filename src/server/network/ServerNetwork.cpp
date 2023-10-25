@@ -13,6 +13,7 @@
 #include "server/network/sendCode.hpp"
 #include "GameEngine/Events.hpp"
 #include "enums.hpp"
+#include "constants.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
@@ -343,11 +344,11 @@ void Network::ServerNetwork::SendClientsPlay()
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(Constants::cameraDefaultWidth / 5, Constants::cameraDefaultHeight / 2, color));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(Constants::cameraDefaultWidth / 5, Constants::cameraDefaultHeight / 2, color));
                 res.append(Send::makeBodyNum(312));
             }
             #ifndef _WIN32
