@@ -18,6 +18,7 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::PositionComponent> &positions)
     {
         for (auto &&[target, position] : Containers::Zipper(targets, positions)) {
+            if (target->targetId == ECS::NullEntity()) { continue; }
             auto &targetPosition = positions[target->targetId];
             if (!targetPosition.has_value()) { continue; }
             target->dX = targetPosition->x - position->x;

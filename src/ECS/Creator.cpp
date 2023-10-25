@@ -26,12 +26,14 @@
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
+#include "constants.hpp"
 
 namespace ECS {
 
-    float Creator::mLevelScrollSpeed = Creator::defaultScrollSpeed;
+    float Creator::mLevelScrollSpeed = Constants::defaultScrollSpeed;
 
     Entity Creator::addWalkingAI(
         const Entity &entity,
@@ -46,6 +48,19 @@ namespace ECS {
         registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
         registry.emplaceComponent<Components::GravityComponent>(entity, Creator::defaultGravity);
         registry.emplaceComponent<Components::CollidableComponent>(entity);
+        return entity;
+    }
+
+    Entity Creator::addBydoShootingAI(
+        const Entity &entity,
+        Containers::Registry &registry,
+        const Entity &target,
+        float shootCooldown,
+        float shotSpeed
+    )
+    {
+        registry.emplaceComponent<Components::BydoShootingAIComponent>(entity, shootCooldown, shotSpeed);
+        registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
         return entity;
     }
 
@@ -120,6 +135,7 @@ namespace ECS {
         Enums::TeamGroup team
     )
     {
+        std::cout << "Creating bydo shot" << std::endl;
         Entity shot = Creator::createCharacter(
             registry,
             team,
@@ -198,7 +214,8 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
-        Creator::addWalkingAI(bink, registry, bink, std::make_pair(0.F, 500.F), 100, true, false);
+        Creator::addWalkingAI(bink, registry, ECS::NullEntity(), std::make_pair(0.F, 500.F), 100, true, false);
+        Creator::addBydoShootingAI(bink, registry, ECS::NullEntity(), 1, 100);
         return bink;
     }
 

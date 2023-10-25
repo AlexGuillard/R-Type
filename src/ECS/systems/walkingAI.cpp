@@ -53,6 +53,10 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::HitBoxComponent> &hitBoxes)
     {
         for (auto &&[eId, walkingAI, target, velocity, collisions, position, hitBox] : Containers::IndexedZipper(walkingAIs, targets, velocities, allCollisions, positions, hitBoxes)) {
+            if (target->targetId == std::size_t(ECS::NullEntity())) {
+                velocity->x = 0;
+                continue;
+            }
             // check if collision with ground
             bool isOnGround = false;
             for (const ECS::Entity &entityId : collisions->collisions) {

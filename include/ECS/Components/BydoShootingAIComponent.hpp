@@ -14,10 +14,14 @@ namespace ECS::Components {
      * each shot.
      * Entity must have a TargetComponent, a PositionComponent, an
      * InRangeComponent and (optionally), a TeamComponent (defaults to Enemy).
+     * @param shootCooldown time between each shot in seconds
+     * @param shotSpeed speed of the shot in pixels per second
+     * @param _shootCooldownTimer internal timer for the cooldown
      */
     struct BydoShootingAIComponent {
         float shootCooldown = 0.0F;
-        float shootCooldownMax = 0.0F;
+        float shotSpeed = 10.0F;
+        double _shootCooldownTimer = 0.;
     };
 
 } // namespace ECS::Components

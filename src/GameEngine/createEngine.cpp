@@ -31,7 +31,6 @@
 #include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Systems/movement.hpp"
-#include "ECS/Systems/drawable.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Creator.hpp"
@@ -42,6 +41,8 @@
 #include "ECS/Systems/gravity.hpp"
 #include "ECS/Systems/solid.hpp"
 #include "ECS/Systems/horizontalScroll.hpp"
+#include "ECS/Systems/bydoShootingAI.hpp"
+#include "ECS/Systems/findTarget.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -70,11 +71,12 @@ namespace GameEngine {
         registry.registerComponent<Components::TargetComponent>();
         registry.registerComponent<Components::SolidComponent>();
         registry.registerComponent<Components::GravityComponent>();
-        registry.registerComponent<Components::TargetComponent>();
         registry.registerComponent<Components::BydoShootingAIComponent>();
         registry.registerComponent<Components::BydoShotComponent>();
         registry.registerComponent<Components::HorizontalScrollComponent>();
+        registry.registerComponent<Components::InvincibleTimerComponent>();
 
+        registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
         registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent>(Systems::shooting);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
@@ -82,9 +84,10 @@ namespace GameEngine {
         registry.addSystem<Components::SinMovementComponent, Components::PositionComponent>(Systems::sinMovement);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
-        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
+        registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
+        registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
     }
 
     static ECS::Entity createInvisibleWall(Containers::Registry &registry, float x, float y, float width, float height, Enums::TeamGroup team = Enums::TeamGroup::NEUTRAL)

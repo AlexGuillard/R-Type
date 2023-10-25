@@ -18,7 +18,6 @@ namespace ECS {
 
     class Creator {
     public:
-        static constexpr std::size_t defaultScrollSpeed = 100;
         static constexpr float defaultGravity = 9.81F;
 
         Creator() = delete;
@@ -43,8 +42,8 @@ namespace ECS {
          * @param target Target of the AI
          * @param preferredDistance Pair of floats representing the preferred
          * @param speed Walking speed of the entity
-         * @param dropsDownLedge Whether the entity can drops down ledges
-         * @param jumpsOverObstacle Whether the entity can jump over obstacles
+         * @param dropsDownLedge Whether the entity can drops down ledges (not implemented yet)
+         * @param jumpsOverObstacle Whether the entity can jump over obstacles (not implemented yet)
          * @return Entity The entity with the AI
          */
         static Entity addWalkingAI(
@@ -55,6 +54,24 @@ namespace ECS {
             float speed,
             bool dropsDownLedge = false,
             bool jumpsOverObstacle = false);
+
+        /**
+         * @brief Adds a bydo shooting AI to an entity.
+         *
+         * @param entity Entity to add the AI to
+         * @param registry Registry the entity is in
+         * @param target Target of the AI
+         * @param shootCooldown Time between each shot in seconds
+         * @param shotSpeed Speed of the shot in pixels per second
+         * @return Entity The entity with the AI
+         */
+        static Entity addBydoShootingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            float shootCooldown,
+            float shotSpeed
+        );
 
         /**
          * @brief Create a base entity
