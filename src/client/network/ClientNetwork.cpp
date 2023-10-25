@@ -16,6 +16,7 @@ Network::ClientNetwork::ClientNetwork(GameEngine::GameEngine &engine)
     : _port(0), _socket(_ioService), _tcpSocket(_ioService), _engine(engine)
 {
     initializeResponsehandler();
+    initializeTCPResponsehandler();
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -119,7 +120,7 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code &erro
     if (!error && recvd_bytes > 0) {
         if (_data.size() >= (HEADER_SIZE)) {
             header packet = getHeader(_data);
-            handleMessageData(packet, _data);
+            handleTCPMessageData(packet, _data);
         }
         startAsyncReceiveTCP(tcpsocket);
     } else {

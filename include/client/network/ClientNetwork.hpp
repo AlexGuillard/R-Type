@@ -100,6 +100,11 @@ namespace Network {
          */
         void initializeResponsehandler();
         /**
+         * @brief Initialize the function to use the pointer to function for TCP
+         *
+         */
+        void initializeTCPResponsehandler();
+        /**
          * @brief Handle the Connection from server
          *
          * @param message message from the server
@@ -286,6 +291,13 @@ namespace Network {
          * @param str
          */
         void handleMessageData(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle messages from the server and call the right function attributed to the header rfc code for TCP
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleTCPMessageData(const header &messageHeader, std::string &str);
         //Use to know if the client is connected to the server
         bool isConnectedUDP = false;
         /**
@@ -366,7 +378,9 @@ namespace Network {
         boost::asio::ip::udp::socket _socket;
         //Data received
         std::string _dataReceived;
-        //Map to use the pointer on function
+        //Map to use the pointer on function for TCP messages
+        std::map<int, std::function<void(const header &, std::string &)>> _responseHandlersTCP;
+        //Map to use the pointer on function for UDP messages
         std::map<int, std::function<void(const header &, std::string &)>> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;

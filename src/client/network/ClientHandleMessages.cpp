@@ -13,19 +13,22 @@
 
 //-----------------------------HANDLE MESSAGES--------------------------------------------//
 
-void Network::ClientNetwork::initializeResponsehandler()
+void Network::ClientNetwork::initializeTCPResponsehandler()
 {
     // connection
-    _responseHandlers[200] = [this](const header &h, std::string &s) {
+    _responseHandlersTCP[200] = [this](const header &h, std::string &s) {
         handleConnection(h, s);
         };
-    _responseHandlers[201] = [this](const header &h, std::string &s) {
+    _responseHandlersTCP[201] = [this](const header &h, std::string &s) {
         handleLogin(h, s);
         };
-    _responseHandlers[202] = [this](const header &h, std::string &s) {
+    _responseHandlersTCP[202] = [this](const header &h, std::string &s) {
         handleLogout(h, s);
         };
+}
 
+void Network::ClientNetwork::initializeResponsehandler()
+{
     // players
     _responseHandlers[311] = [this](const header &h, std::string &s) {
         handlePlayerSpawn(h, s);
@@ -315,7 +318,6 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
 
     if (str.size() >= sizeof(BodyNumber)) {
         BodyNumber udpPort = getBody(str);
-        std::cout << "Im the player " << messageHeader.entity << " and this is the UDP port: " << udpPort.number << std::endl;
 
         if (!str.empty() && str.size() >= sizeof(BodyNumber)) {
 
@@ -353,6 +355,17 @@ void Network::ClientNetwork::handleMessageData(const header &messageHeader, std:
     auto responsehandlerIt = _responseHandlers.find(messageHeader.codeRfc);
 
     if (responsehandlerIt != _responseHandlers.end()) {
+        responsehandlerIt->second(messageHeader, str);
+    } else {
+        // std::cout << "Unexecepted message received message data" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleTCPMessageData(const header &messageHeader, std::string &str)
+{
+    auto responsehandlerIt = _responseHandlersTCP.find(messageHeader.codeRfc);
+
+    if (responsehandlerIt != _responseHandlersTCP.end()) {
         responsehandlerIt->second(messageHeader, str);
     } else {
         // std::cout << "Unexecepted message received message data" << std::endl;
