@@ -46,13 +46,14 @@ var searchData=
   ['createbug_88',['createBug',['../classECS_1_1Creator.html#a8b754ba13fb1ba9913c27f0b932652ff',1,'ECS::Creator']]],
   ['createcancer_89',['createCancer',['../classECS_1_1Creator.html#af9552792aacd8c1d72a7db5dfc05a5fd',1,'ECS::Creator']]],
   ['createcharacter_90',['createCharacter',['../classECS_1_1Creator.html#ae5aa85283544f68a814110c76c5d0b63',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, enum Enums::TeamGroup team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)'],['../classECS_1_1Creator.html#a3a41174f095438bff6deadc79285d488',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, enum Enums::TeamGroup team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)']]],
-  ['createenemybasic_91',['createEnemyBasic',['../classECS_1_1Creator.html#aac48eb829591ef5b478b3c69a807f769',1,'ECS::Creator']]],
-  ['creategroundedcharacter_92',['createGroundedCharacter',['../classECS_1_1Creator.html#a6a8be1878b668826910c25900ccd5098',1,'ECS::Creator']]],
-  ['createmissile_93',['createMissile',['../classECS_1_1Creator.html#a7d3aff8faf71a2042c104ae868f754d4',1,'ECS::Creator']]],
-  ['createplayer_94',['createPlayer',['../classECS_1_1Creator.html#ad2ffb0d8d3cbd6c7f2ab28517464e44a',1,'ECS::Creator']]],
-  ['createscant_95',['createScant',['../classECS_1_1Creator.html#abffa9178a226d3a77b932eea6b3754ee',1,'ECS::Creator']]],
-  ['creator_96',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
-  ['creator_2ehpp_97',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
-  ['cyan_5fcolor_98',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
-  ['registry_99',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
+  ['createdobkeratops_91',['createDobkeratops',['../classECS_1_1Creator.html#a995c257e645570654a44f0f3b4c3b11a',1,'ECS::Creator']]],
+  ['createenemybasic_92',['createEnemyBasic',['../classECS_1_1Creator.html#aac48eb829591ef5b478b3c69a807f769',1,'ECS::Creator']]],
+  ['creategroundedcharacter_93',['createGroundedCharacter',['../classECS_1_1Creator.html#a6a8be1878b668826910c25900ccd5098',1,'ECS::Creator']]],
+  ['createmissile_94',['createMissile',['../classECS_1_1Creator.html#a7d3aff8faf71a2042c104ae868f754d4',1,'ECS::Creator']]],
+  ['createplayer_95',['createPlayer',['../classECS_1_1Creator.html#ad2ffb0d8d3cbd6c7f2ab28517464e44a',1,'ECS::Creator']]],
+  ['createscant_96',['createScant',['../classECS_1_1Creator.html#abffa9178a226d3a77b932eea6b3754ee',1,'ECS::Creator']]],
+  ['creator_97',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
+  ['creator_2ehpp_98',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
+  ['cyan_5fcolor_99',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
+  ['registry_100',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
 ];
