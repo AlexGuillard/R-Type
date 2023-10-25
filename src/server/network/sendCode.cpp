@@ -6,6 +6,8 @@
 */
 
 #include "server/network/sendCode.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 std::string Network::Send::makeHeader(int code, int entityNb)
 {
@@ -27,6 +29,24 @@ std::string Network::Send::makeBodyNum(int num)
     str.resize(sizeof(Network::BodyNumber));
     res.number = num;
     std::memcpy(str.data(), &res, sizeof(Network::BodyNumber));
+    return str;
+}
+
+std::string Network::Send::makeBodyPosition(ECS::Components::PositionComponent pos)
+{
+    std::string str;
+
+    str.resize(sizeof(ECS::Components::PositionComponent));
+    std::memcpy(str.data(), &pos, sizeof(ECS::Components::PositionComponent));
+    return str;
+}
+
+std::string Network::Send::makeBodyVelocity(ECS::Components::VelocityComponent vel)
+{
+    std::string str;
+
+    str.resize(sizeof(ECS::Components::VelocityComponent));
+    std::memcpy(str.data(), &vel, sizeof(ECS::Components::VelocityComponent));
     return str;
 }
 
