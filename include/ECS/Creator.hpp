@@ -199,6 +199,15 @@ namespace ECS {
          * @param color color of the ship
          */
         static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        /**
+         * @brief Create a Dobkeratops object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static Entity createDobkeratops(Containers::Registry &registry, size_t id, int x, int y);
     private:
         static float mLevelScrollSpeed;
     };
