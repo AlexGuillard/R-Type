@@ -281,30 +281,31 @@ void Network::ServerNetwork::SpawnMob(Info script)
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         ECS::Entity entity = registry.spawnEntity();
+        const int x = Constants::cameraDefaultWidth - 10;
         switch (script.rfc) {
             case 301:
-                ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+                ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
                 break;
             case 302:
-                ECS::Creator::createBink(registry, entity, 1940, script.y);
+                ECS::Creator::createBink(registry, entity, x, script.y);
                 break;
             case 303:
-                ECS::Creator::createScant(registry, entity, 1940, script.y);
+                ECS::Creator::createScant(registry, entity, x, script.y);
                 break;
             case 304:
-                ECS::Creator::createBug(registry, entity, 1940, script.y);
+                ECS::Creator::createBug(registry, entity, x, script.y);
                 break;
             case 305:
-                ECS::Creator::createCancer(registry, entity, 1940, script.y);
+                ECS::Creator::createCancer(registry, entity, x, script.y);
                 break;
             case 306:
-                ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+                ECS::Creator::createBlaster(registry, entity, x, script.y);
                 break;
             default:
                 break;
         }
         res.append(Send::makeHeader(script.rfc, entity));
-        res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
+        res.append(Send::makeBodyMob(x, script.y, script.extra.side));
         res.append(Send::makeBodyNum(script.rfc));
     }
     for (const auto& pair : _listUdpEndpoints) {
