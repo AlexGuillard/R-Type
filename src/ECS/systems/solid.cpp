@@ -33,6 +33,7 @@ namespace ECS::Systems {
                 auto &entityHitBox = hitBoxes.at(entity);
                 auto &entityPosition = positions.at(entity);
                 auto &entityVelocity = velocities.at(entity);
+                if (!entityHitBox || !entityPosition || !entityVelocity) { continue; }
                 int overlapLeft = (entityPosition->x + entityHitBox->width) - position->x;
                 int overlapRight = (position->x + hitBox->width) - entityPosition->x;
                 int overlapTop = (entityPosition->y + entityHitBox->height) - position->y;
