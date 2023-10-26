@@ -112,6 +112,9 @@ $(function() {
 <li>_portUdp
 : <a class="el" href="classNetwork_1_1ServerNetwork.html#a44ffa2f7e9d741d492d00313b490b9ae">Network::ServerNetwork</a>
 </li>
+<li>_shootCooldownTimer
+: <a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#a3270a6e02fb103e445ef2d9386aa2db9">ECS::Components::BydoShootingAIComponent</a>
+</li>
 <li>_socket
 : <a class="el" href="classNetwork_1_1ServerTcp.html#a2c3234510db6aa279a27ee67d99d3c1a">Network::ServerTcp</a>
 </li>
@@ -159,15 +162,13 @@ $(function() {
 
 <h3><a id="index_d"></a>- d -</h3><ul>
 <li>damage
-: <a class="el" href="structECS_1_1Components_1_1DamageComponent.html#aeaf6bc0655d496c7078641d5247bc60d">ECS::Components::DamageComponent</a>
+: <a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#a9acea235c230a87478188b9f8e111165">ECS::Components::BydoShotComponent</a>
+, <a class="el" href="structECS_1_1Components_1_1DamageComponent.html#aeaf6bc0655d496c7078641d5247bc60d">ECS::Components::DamageComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1MissileComponent.html#af6bb6306d460bea71b5f5c563bb44fff">ECS::Components::MissileComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1WaveBeamComponent.html#ac4473a30ef629a60ab4ffbbddaf12744">ECS::Components::WaveBeamComponent</a>
 </li>
 <li>defaultGravity
 : <a class="el" href="classECS_1_1Creator.html#a872e2de427b4a2bf9a5ba42dd061c711">ECS::Creator</a>
-</li>
-<li>defaultScrollSpeed
-: <a class="el" href="classECS_1_1Creator.html#a27ef41a11292ecab32b17c02ef5484bf">ECS::Creator</a>
 </li>
 <li>distance
 : <a class="el" href="structECS_1_1Components_1_1TargetComponent.html#a0ce588c6e430757e9b3ba2099258565d">ECS::Components::TargetComponent</a>
@@ -310,11 +311,18 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>shootCooldown
+: <a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#ad8f1bf357707b171a8be6169a29de06c">ECS::Components::BydoShootingAIComponent</a>
+</li>
+<li>shotSpeed
+: <a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#a86d607c2a7342b4afa25cdfe559dfcfb">ECS::Components::BydoShootingAIComponent</a>
+</li>
 <li>side
 : <a class="el" href="unionNetwork_1_1Info_1_1Extra.html#aa74a147f856dbf8a0ca89fd178e8c7b0">Network::Info::Extra</a>
 </li>
 <li>speed
-: <a class="el" href="structECS_1_1Components_1_1HorizontalScrollComponent.html#ada22ce87bb1165f2550ad55becef4a7d">ECS::Components::HorizontalScrollComponent</a>
+: <a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#ada1d2f6634c12b03c05f30267e464ea7">ECS::Components::BydoShotComponent</a>
+, <a class="el" href="structECS_1_1Components_1_1HorizontalScrollComponent.html#ada22ce87bb1165f2550ad55becef4a7d">ECS::Components::HorizontalScrollComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1SinMovementComponent.html#acf1682aea7d3c8fa2d95180eb5e67953">ECS::Components::SinMovementComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1WalkingAIComponent.html#a7eac2b7a18bc421b358bca836d534d59">ECS::Components::WalkingAIComponent</a>
 </li>
@@ -341,7 +349,8 @@ $(function() {
 : <a class="el" href="structECS_1_1Components_1_1TargetComponent.html#a6106ae1465b9204f97de318819562b0f">ECS::Components::TargetComponent</a>
 </li>
 <li>team
-: <a class="el" href="structECS_1_1Components_1_1MissileComponent.html#a7f1183730bfe05da5179241b49f5d70a">ECS::Components::MissileComponent</a>
+: <a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#ad48038c863f6efe55bd9a2974d869389">ECS::Components::BydoShotComponent</a>
+, <a class="el" href="structECS_1_1Components_1_1MissileComponent.html#a7f1183730bfe05da5179241b49f5d70a">ECS::Components::MissileComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1TeamComponent.html#a314f2938aed50d6e65efc906639d0919">ECS::Components::TeamComponent</a>
 , <a class="el" href="structECS_1_1Components_1_1WaveBeamComponent.html#aac4249e5011fd0fd4feed7e8a1e75cce">ECS::Components::WaveBeamComponent</a>
 , <a class="el" href="structNetwork_1_1bodyMissile.html#ab61ecdd14bbce404e64c62dfe85bc2b3">Network::bodyMissile</a>
@@ -408,6 +417,9 @@ $(function() {
 , <a class="el" href="structUtils_1_1Vector3.html#a6c47a2504da8c59942873489062757bf">Utils::Vector3</a>
 , <a class="el" href="structUtils_1_1Vector4.html#ae6bbfb7c07598bd54bb88def571667ad">Utils::Vector4</a>
 </li>
+<li>xDirection
+: <a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#a534e7dc66ef84cbd3ba9dcea70dcf59a">ECS::Components::BydoShotComponent</a>
+</li>
 <li>xRange
 : <a class="el" href="classScreen_1_1Display.html#a0fe40a4022eed2ee9fd598074277fc9c">Screen::Display</a>
 </li>
@@ -427,6 +439,9 @@ $(function() {
 , <a class="el" href="structUtils_1_1Vector2.html#acfc28014132bf721d3f55a90bf415972">Utils::Vector2</a>
 , <a class="el" href="structUtils_1_1Vector3.html#a3ac163680df3cd7ae275e33f27666172">Utils::Vector3</a>
 , <a class="el" href="structUtils_1_1Vector4.html#a445b525684cd051626a937d6a297468a">Utils::Vector4</a>
+</li>
+<li>yDirection
+: <a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#adf7a6f5dd2b60e7371dac650d6c17974">ECS::Components::BydoShotComponent</a>
 </li>
 <li>yRange
 : <a class="el" href="classScreen_1_1Display.html#ae454a81d2d4d47b6d0ad3670008549e5">Screen::Display</a>

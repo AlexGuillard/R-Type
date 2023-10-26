@@ -93,12 +93,20 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc">   21</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classECS_1_1Entity.html">Entity</a>(std::size_t entity);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        std::size_t _entity;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classECS_1_1Entity.html#ad5469da9388ad0186d05b480cb86614c">   22</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classECS_1_1NullEntity.html">NullEntity</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classECS_1_1Entity.html">Entity</a>(std::size_t entity);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::size_t _entity;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classECS_1_1NullEntity.html">   30</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classECS_1_1NullEntity.html">NullEntity</a> : <span class="keyword">public</span> <a class="code" href="classECS_1_1Entity.html">Entity</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classECS_1_1NullEntity.html#ad5edc2e1b367458d22dc08f97ca387fc">   32</a></span>&#160;        <a class="code" href="classECS_1_1NullEntity.html#ad5edc2e1b367458d22dc08f97ca387fc">NullEntity</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
 <div class="ttc" id="aclassECS_1_1Containers_1_1Registry_html"><div class="ttname"><a href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a></div><div class="ttdef"><b>Definition:</b> Registry.hpp:23</div></div>
 <div class="ttc" id="aclassECS_1_1Entity_html"><div class="ttname"><a href="classECS_1_1Entity.html">ECS::Entity</a></div><div class="ttdef"><b>Definition:</b> Entity.hpp:16</div></div>
+<div class="ttc" id="aclassECS_1_1NullEntity_html"><div class="ttname"><a href="classECS_1_1NullEntity.html">ECS::NullEntity</a></div><div class="ttdoc">NullEntity is an entity that is not valid.</div><div class="ttdef"><b>Definition:</b> Entity.hpp:30</div></div>
+<div class="ttc" id="aclassECS_1_1NullEntity_html_ad5edc2e1b367458d22dc08f97ca387fc"><div class="ttname"><a href="classECS_1_1NullEntity.html#ad5edc2e1b367458d22dc08f97ca387fc">ECS::NullEntity::NullEntity</a></div><div class="ttdeci">NullEntity()</div></div>
 <div class="ttc" id="anamespaceECS_html"><div class="ttname"><a href="namespaceECS.html">ECS</a></div><div class="ttdef"><b>Definition:</b> Creator.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
