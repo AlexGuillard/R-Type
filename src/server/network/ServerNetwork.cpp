@@ -13,6 +13,7 @@
 #include "server/network/sendCode.hpp"
 #include "GameEngine/Events.hpp"
 #include "enums.hpp"
+#include "constants.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
@@ -277,33 +278,34 @@ void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
+    const int x = Constants::cameraDefaultWidth;
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         ECS::Entity entity = registry.spawnEntity();
         switch (script.rfc) {
             case 301:
-                ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+                ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
                 break;
             case 302:
-                ECS::Creator::createBink(registry, entity, 1940, script.y);
+                ECS::Creator::createBink(registry, entity, x, script.y);
                 break;
             case 303:
-                ECS::Creator::createScant(registry, entity, 1940, script.y);
+                ECS::Creator::createScant(registry, entity, x, script.y);
                 break;
             case 304:
-                ECS::Creator::createBug(registry, entity, 1940, script.y);
+                ECS::Creator::createBug(registry, entity, x, script.y);
                 break;
             case 305:
-                ECS::Creator::createCancer(registry, entity, 1940, script.y);
+                ECS::Creator::createCancer(registry, entity, x, script.y);
                 break;
             case 306:
-                ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+                ECS::Creator::createBlaster(registry, entity, x, script.y);
                 break;
             default:
                 break;
         }
         res.append(Send::makeHeader(script.rfc, entity));
-        res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
+        res.append(Send::makeBodyMob(x, script.y, script.extra.side));
         res.append(Send::makeBodyNum(script.rfc));
     }
     for (const auto& pair : _listUdpEndpoints) {
@@ -326,7 +328,7 @@ void Network::ServerNetwork::SendClientsPlay()
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-    for (const auto& allIds : _ids) {
+    for (auto &allIds : _ids) {
         if (index == 0)
             color = Enums::PlayerColor::CYAN_COLOR;
         else if (index == 1)
@@ -338,16 +340,18 @@ void Network::ServerNetwork::SendClientsPlay()
         else
             color = Enums::PlayerColor::BLUE_COLOR;
         ECS::Entity entity = registry.spawnEntity();
-        ECS::Creator::createAlly(registry, entity, 50, 50, color);
+        const int x = Constants::cameraDefaultWidth / 5;
+        const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
+        ECS::Creator::createAlly(registry, entity, x, y, color);
         for (const auto& pair : _listUdpEndpoints) {
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(312));
             }
             #ifndef _WIN32
@@ -357,6 +361,7 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
+        allIds.second.first = entity;
         index++;
     }
 }

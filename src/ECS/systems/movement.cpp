@@ -5,8 +5,7 @@
 ** movement
 */
 
-#include <raylib.h>
-
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
@@ -20,8 +19,8 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::VelocityComponent> &velocities)
     {
         for (auto &&[position, velocity] : Containers::Zipper(positions, velocities)) {
-            position->x += velocity->x * GetFrameTime();
-            position->y += velocity->y * GetFrameTime();
+            position->x += velocity->x * GameEngine::GameEngine::getDeltaTime();
+            position->y += velocity->y * GameEngine::GameEngine::getDeltaTime();
         }
     }
 
