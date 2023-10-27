@@ -339,7 +339,7 @@ void Network::ServerNetwork::SendClientsPlay()
             color = Enums::PlayerColor::RED_COLOR;
         else
             color = Enums::PlayerColor::BLUE_COLOR;
-        ECS::Entity entity = registry.spawnEntity();
+        ECS::Entity entity = registry.entityFromIndex(allIds.second.first);
         const int x = Constants::cameraDefaultWidth / 5;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
@@ -361,7 +361,6 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
-        allIds.second.first = entity;
         index++;
     }
 }

@@ -136,7 +136,7 @@ namespace GameEngine {
     {
         GameEngine engine;
         engine.createRegistry(registryTypeBackground);
-        engine.createRegistry(registryTypeEntities);
+        engine.createRegistry(registryTypeEntities, 4);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));
         return engine;
