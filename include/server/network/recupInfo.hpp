@@ -16,6 +16,7 @@
 #include <string>
 #include <sstream>
 #include "enums.hpp"
+#include "Assets/TextLoader.hpp"
 
 namespace Network {
 
@@ -54,7 +55,12 @@ namespace Network {
              * @brief
              *
              */
-            void openFile();
+            void openFile(Assets::AssetsIndex script);
+            /**
+             * @brief
+             *
+             */
+            void openLVL(int level);
             /**
              * @brief Construct a new Recup Info object
              *
