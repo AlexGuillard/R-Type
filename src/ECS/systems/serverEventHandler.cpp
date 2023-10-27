@@ -6,11 +6,26 @@
 */
 
 #include <unordered_map>
+#include <vector>
 
 #include "ECS/Systems/serverEventHandler.hpp"
 #include "GameEngine/Events.hpp"
+#include "GameEngine/GameEngine.hpp"
 #include "Player/utils.hpp"
 #include "ECS/Creator.hpp"
+#include "constants.hpp"
+#include "ECS/Systems/collision.hpp"
+#include "ECS/Systems/movement.hpp"
+#include "ECS/Systems/solid.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/HitBoxComponent.hpp"
+#include "ECS/Components/CollisionComponent.hpp"
+#include "ECS/Components/CollidableComponent.hpp"
+#include "ECS/Components/SolidComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
+
+#include <iostream>
 
 namespace ECS::Systems {
     struct PlayerInput {
@@ -51,8 +66,24 @@ namespace ECS::Systems {
             }
         }
         for (auto &[entityId, input] : playerInputs) {
-            if (velocities[entityId]) {
+            if (positions[entityId] && velocities[entityId]) {
+                auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
+                auto &&hitboxes = registry.getComponents<ECS::Components::HitBoxComponent>();
+                auto &&collidables = registry.getComponents<ECS::Components::CollidableComponent>();
+                auto &&collisions = registry.getComponents<ECS::Components::CollisionComponent>();
+                auto &&solids = registry.getComponents<ECS::Components::SolidComponent>();
+                auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
+                auto &&teams = registry.getComponents<ECS::Components::TeamComponent>();
+                auto &input = playerInputs[entityId];
+
                 Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
+                ECS::Systems::collision(registry, positions, velocities, hitboxes, collidables, collisions);
+                ECS::Systems::solid(registry, solids, hitboxes, collisions, positions, velocities, teams);
+                ECS::Systems::movement(registry, positions, velocities);
+            }
+            if (velocities[entityId]) {
+                velocities[entityId]->x = 0;
+                velocities[entityId]->y = 0;
             }
         }
     }
