@@ -87,8 +87,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf6d2edc79f97734e600209f82cba80b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structNetwork_1_1Info.html">Info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1RecupInfo.html#aaf6d2edc79f97734e600209f82cba80b">getTickScript</a> (std::size_t tick)</td></tr>
 <tr class="memdesc:aaf6d2edc79f97734e600209f82cba80b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Tick Script object.  <a href="classNetwork_1_1RecupInfo.html#aaf6d2edc79f97734e600209f82cba80b">More...</a><br /></td></tr>
 <tr class="separator:aaf6d2edc79f97734e600209f82cba80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04cd9c358905e5f8b8c2e2efbe47a01d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1RecupInfo.html#a04cd9c358905e5f8b8c2e2efbe47a01d">openFile</a> ()</td></tr>
-<tr class="separator:a04cd9c358905e5f8b8c2e2efbe47a01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3904694c4ba88271ba50af83d9d9b29f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1RecupInfo.html#a3904694c4ba88271ba50af83d9d9b29f">openFile</a> (Assets::AssetsIndex script)</td></tr>
+<tr class="memdesc:a3904694c4ba88271ba50af83d9d9b29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open the script file and make it understable for the game logic.  <a href="classNetwork_1_1RecupInfo.html#a3904694c4ba88271ba50af83d9d9b29f">More...</a><br /></td></tr>
+<tr class="separator:a3904694c4ba88271ba50af83d9d9b29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c27435de47d2ac8aff460fe6156e3af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1RecupInfo.html#a1c27435de47d2ac8aff460fe6156e3af">openLVL</a> (int level)</td></tr>
+<tr class="memdesc:a1c27435de47d2ac8aff460fe6156e3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open script depend on level.  <a href="classNetwork_1_1RecupInfo.html#a1c27435de47d2ac8aff460fe6156e3af">More...</a><br /></td></tr>
+<tr class="separator:a1c27435de47d2ac8aff460fe6156e3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab21abb679d953453988048c88fd2edc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1RecupInfo.html#ab21abb679d953453988048c88fd2edc2">RecupInfo</a> ()</td></tr>
 <tr class="memdesc:ab21abb679d953453988048c88fd2edc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Recup <a class="el" href="structNetwork_1_1Info.html">Info</a> object.  <a href="classNetwork_1_1RecupInfo.html#ab21abb679d953453988048c88fd2edc2">More...</a><br /></td></tr>
 <tr class="separator:ab21abb679d953453988048c88fd2edc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,8 +192,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a04cd9c358905e5f8b8c2e2efbe47a01d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04cd9c358905e5f8b8c2e2efbe47a01d">&#9670;&nbsp;</a></span>openFile()</h2>
+<a id="a3904694c4ba88271ba50af83d9d9b29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3904694c4ba88271ba50af83d9d9b29f">&#9670;&nbsp;</a></span>openFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,11 +201,34 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Network::RecupInfo::openFile </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Assets::AssetsIndex&#160;</td>
+          <td class="paramname"><em>script</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Open the script file and make it understable for the game logic. </p>
+
+</div>
+</div>
+<a id="a1c27435de47d2ac8aff460fe6156e3af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c27435de47d2ac8aff460fe6156e3af">&#9670;&nbsp;</a></span>openLVL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::RecupInfo::openLVL </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Open script depend on level. </p>
 
 </div>
 </div>
