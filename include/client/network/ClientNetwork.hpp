@@ -16,6 +16,7 @@
 #include <memory>
 #include <queue>
 #include "GameEngine/GameEngine.hpp"
+#include "constants.hpp"
 
 namespace Network {
 
@@ -24,6 +25,7 @@ namespace Network {
      *
      */
     enum class Movement {
+        NONE,
         UP,
         DOWN,
         LEFT,

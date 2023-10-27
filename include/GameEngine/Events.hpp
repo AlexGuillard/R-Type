@@ -14,6 +14,7 @@ namespace GameEngine {
     public:
         enum class Type {
             NONE = 0,
+            PLAYER_NO_MOVEMENT,             // player is not moving
             PLAYER_UP,
             PLAYER_DOWN,
             PLAYER_LEFT,

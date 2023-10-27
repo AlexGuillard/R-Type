@@ -57,6 +57,7 @@ namespace Network {
     {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
+        bool sentMovement = false;
 
         clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
         clientNetwork.handleNetwork();
@@ -65,15 +66,19 @@ namespace Network {
             switch (type) {
             case GameEngine::Events::Type::PLAYER_UP:
                 clientNetwork.sendMovement(Network::Movement::UP);
+                sentMovement = true;
                 break;
             case GameEngine::Events::Type::PLAYER_DOWN:
                 clientNetwork.sendMovement(Network::Movement::DOWN);
+                sentMovement = true;
                 break;
             case GameEngine::Events::Type::PLAYER_LEFT:
                 clientNetwork.sendMovement(Network::Movement::LEFT);
+                sentMovement = true;
                 break;
             case GameEngine::Events::Type::PLAYER_RIGHT:
                 clientNetwork.sendMovement(Network::Movement::RIGHT);
+                sentMovement = true;
                 break;
             case GameEngine::Events::Type::PLAYER_SHOOT:
                 clientNetwork.sendAction(Network::Action::SHOOT);
@@ -84,6 +89,9 @@ namespace Network {
             default:
                 break;
             }
+        }
+        if (!sentMovement) {
+            clientNetwork.sendMovement(Network::Movement::NONE);
         }
     }
 

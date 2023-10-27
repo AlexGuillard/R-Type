@@ -31,6 +31,7 @@ namespace Enums {
         CLIENT_CONNECT = 200,
         LAUNCH_GAME = 201,
         NEW_PLAYER = 202,
+        PLAYER_NO_MOVEMENT = 210,
         PLAYER_UP = 211,
         PLAYER_DOWN = 212,
         PLAYER_LEFT = 213,
