@@ -5,9 +5,9 @@
 ** sinMovement
 */
 
-#include <raylib.h>
 #include <cmath>
 
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/sinMovement.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
@@ -20,7 +20,7 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::PositionComponent> &positions)
     {
         for (auto &&[sinMovement, position] : Containers::Zipper(sinMovements, positions)) {
-            sinMovement->t += sinMovement->speed * GetFrameTime();
+            sinMovement->t += sinMovement->speed * GameEngine::GameEngine::getDeltaTime();
             position->x = sinMovement->horizontalOffset + sinMovement->t;
             position->y =
                 sinMovement->amplitude *

@@ -19,6 +19,7 @@
 #include "ECS/Components/HPComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
+#include "ECS/Creator.hpp"
 #include "Assets/generatedAssets.hpp"
 
 namespace ECS::Systems {
@@ -142,13 +143,35 @@ namespace ECS::Systems {
         }
     }
 
+    static void shootBydoMissiles(
+        Containers::Registry &registry,
+        Containers::SparseArray<Components::BydoShotComponent> &bydoShotRequests
+    )
+    {
+        auto &&positions = registry.getComponents<Components::PositionComponent>();
+        for (auto &&[eId, request] : Containers::IndexedZipper(bydoShotRequests)) {
+            if (!positions[eId]) { continue; }
+            ECS::Creator::createBydoShot(
+                registry,
+                positions[eId]->x,
+                positions[eId]->y,
+                request->xDirection * request->speed,
+                request->yDirection * request->speed,
+                request->team
+            );
+            registry.removeComponent<Components::BydoShotComponent>(registry.entityFromIndex(eId));
+        }
+    }
+
     void shooting(
         Containers::Registry &registry,
         Containers::SparseArray<Components::MissileComponent> &missileRequests,
-        Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests
+        Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests,
+        Containers::SparseArray<Components::BydoShotComponent> &bydoShotRequests
     )
     {
         shootMissiles(registry, missileRequests);
         shootWaveBeams(registry, waveBeamRequests);
+        shootBydoMissiles(registry, bydoShotRequests);
     }
 }; // namespace ECS::Systems

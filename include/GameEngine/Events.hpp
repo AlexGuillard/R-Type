@@ -18,9 +18,10 @@ namespace GameEngine {
             PLAYER_DOWN,
             PLAYER_LEFT,
             PLAYER_RIGHT,
-            PLAYER_SHOOT,
-            PLAYER_FORCE,
+            PLAYER_SHOOT,                   // player is holding the shoot button
+            PLAYER_FORCE,                   // player is holding the force button
             PLAYER_DROP = PLAYER_FORCE,
+            BYDO_SHOOT,                     // Something wants to shoot a bydo shot
             COUNT
         };
 
