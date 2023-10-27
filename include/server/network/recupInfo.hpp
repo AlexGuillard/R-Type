@@ -57,7 +57,7 @@ namespace Network {
              */
             void openFile(Assets::AssetsIndex script);
             /**
-             * @brief
+             * @brief Open script depend on level
              *
              */
             void openLVL(int level);
