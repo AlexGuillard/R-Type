@@ -58,6 +58,9 @@ namespace ECS::Systems {
         auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
         auto &&teams = registry.getComponents<ECS::Components::TeamComponent>();
 
+        if (!velocities[entityId]) {
+            return;
+        }
         if (rateDiff != 0) {
             velocities[entityId]->x = (inputs.right - inputs.left) * Constants::playerSpeed / rateDiff;
             velocities[entityId]->y = (inputs.down - inputs.up) * Constants::playerSpeed / rateDiff;
@@ -99,7 +102,9 @@ namespace ECS::Systems {
                 playerInputs[entityId].right++;
                 break;
             case PLAYER_SHOOT:
-                ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
+                if (teams[entityId] && positions[entityId]) {
+                    ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
+                }
                 break;
             default:
                 break;
