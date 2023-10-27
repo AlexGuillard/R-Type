@@ -7,10 +7,12 @@
 
 #pragma once
 
+#include "constants.hpp"
+
 namespace ECS::Components {
-    const int defaultSinXSpeed = -100;
-    const int defaultSinAmplitude = 100;
-    const int defaultSinFrequency = 100;
+    const int defaultSinXSpeed = Constants::cameraDefaultWidth / 10 * -1; // takes 10 seconds to go right to left
+    const int defaultSinAmplitude = Constants::cameraDefaultHeight / 10;
+    const float defaultSinFrequency = 0.01;
     /**
      * @brief Component that makes the entity move in a sine wave.
      * Every value is in pixels per second.

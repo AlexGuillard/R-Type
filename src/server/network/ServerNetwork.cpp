@@ -278,7 +278,7 @@ void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
-    const int x = Constants::cameraDefaultWidth;
+    const int x = Constants::cameraDefaultWidth - 10;
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         ECS::Entity entity = registry.spawnEntity();
