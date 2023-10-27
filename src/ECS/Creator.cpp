@@ -187,7 +187,7 @@ namespace ECS {
         return missile;
     }
 
-    Entity Creator::createWaveBeam(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team)
+    Entity Creator::createWaveBeam(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team, int strengh)
     {
         const Utils::Vector2 missileFramePos(2, 0);
         const uint8_t nbFrameInSpriteSheet = 2;
@@ -198,20 +198,92 @@ namespace ECS {
         registry.getComponents<Components::VelocityComponent>().at(wavebeam)->y = 0;
         if (Enums::TeamGroup::ALLY == team) {
             registry.getComponents<Components::VelocityComponent>().at(wavebeam)->x = Components::missileSpeed;
-            registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
-                Assets::AssetsIndex::WAVEBEAM_OUT2_PNG,
-                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
-                missileFramePos, // start
-                missileFramePos // end
-            );
+            switch (strengh) {
+            case 2:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT2_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 3:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT3_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 4:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT4_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 5:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT5_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            default:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT1_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            }
         } else {
             registry.getComponents<Components::VelocityComponent>().at(wavebeam)->x = -Components::missileSpeed;
-            registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
-                Assets::AssetsIndex::WAVEBEAM_FLARE2_PNG,
-                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
-                missileFramePos, // start
-                missileFramePos // end
-            );
+            switch (strengh) {
+            case 2:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE2_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 3:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE3_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 4:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE4_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 5:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE5_PNG,
+                    Utils::Vector2(3, 1), // frameRatio
+                    Utils::Vector2(0, 0), // start
+                    Utils::Vector2(0, 0) // end
+                );
+                break;
+            default:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE1_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            }
         }
         return wavebeam;
     }
