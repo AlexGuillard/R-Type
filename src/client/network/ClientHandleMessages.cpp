@@ -344,7 +344,7 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
 void Network::ClientNetwork::handleLogout(const header &messageHeader, std::string &str)
 {
     if (messageHeader.codeRfc == 202) {
-        // std::cout << "Logged out as entity: " << entity << std::endl;
+        std::cout << "new player " << std::endl;
     } else {
         std::cout << "Unexpected message received logout" << std::endl;
     }

@@ -87,9 +87,6 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
     header res;
 
     std::memcpy(&res, str.data(), HEADER_SIZE);
-    if (res.codeRfc != 0) {
-        std::cout << "\nHeader -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
-    }
     str.erase(0, HEADER_SIZE);
     return res;
 }

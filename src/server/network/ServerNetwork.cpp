@@ -238,7 +238,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         _ids[getActualClient()].first = clientData.entity;
-        if (_listUdpEndpoints.size() == _clients.size()) {
+        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false) {
             _canPlay = true;
             SendClientsPlay();
         }
@@ -310,7 +310,8 @@ void Network::ServerNetwork::SpawnMob(Info script)
     }
     for (const auto& pair : _listUdpEndpoints) {
         const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        for (int i = 0; i < 10; i++)
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
     }
 }
 
@@ -323,7 +324,7 @@ void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 
 void Network::ServerNetwork::SendClientsPlay()
 {
-    std::string res;
+    std::string res = "";
     Enums::PlayerColor color;
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
@@ -344,6 +345,7 @@ void Network::ServerNetwork::SendClientsPlay()
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
         for (const auto& pair : _listUdpEndpoints) {
+            res.clear();
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
@@ -354,12 +356,8 @@ void Network::ServerNetwork::SendClientsPlay()
                 res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(312));
             }
-            #ifndef _WIN32
-                sleep(1);
-            #else
-                Sleep(1000);
-            #endif
-            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+            for (int i = 0; i < 10; i++)
+                _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
         allIds.second.first = entity;
         index++;
