@@ -19,8 +19,8 @@ namespace Constants {
     const std::size_t bydoMissileSpeed = 50; // pixels per second
 
     // Camera
-    const std::size_t cameraDefaultWidth = 1920;
-    const std::size_t cameraDefaultHeight = 1080;
+    const std::size_t cameraDefaultWidth = 960;
+    const std::size_t cameraDefaultHeight = 540;
 
     // Game
     static constexpr std::size_t defaultScrollSpeed = 0;

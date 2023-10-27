@@ -102,6 +102,17 @@ namespace ECS {
          */
         static Entity createMissile(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team);
         /**
+         * @brief create a base wave beam
+         *
+         * @param registry The registry to create the entity in
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         * @param team team of the wave beam
+         * @return Entity
+         */
+        static Entity createWaveBeam(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team, int strengh);
+        /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
          * @param team The team the entity belongs to

@@ -16,6 +16,7 @@
 #include <string>
 #include <sstream>
 #include "enums.hpp"
+#include "Assets/TextLoader.hpp"
 
 namespace Network {
 
@@ -51,10 +52,15 @@ namespace Network {
              */
             std::vector<Info> getTickScript(std::size_t tick);
             /**
-             * @brief
+             * @brief Open the script file and make it understable for the game logic
              *
              */
-            void openFile();
+            void openFile(Assets::AssetsIndex script);
+            /**
+             * @brief Open script depend on level
+             *
+             */
+            void openLVL(int level);
             /**
              * @brief Construct a new Recup Info object
              *
