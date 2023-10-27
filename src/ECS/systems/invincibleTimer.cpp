@@ -5,7 +5,7 @@
 ** invincibleTimer
 */
 
-#include <raylib.h>
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/invincibleTimer.hpp"
 #include "ECS/Components/InvincibleTimerComponent.hpp"
 #include "ECS/Containers/zipper/Zipper.hpp"
@@ -18,7 +18,7 @@ namespace ECS::Systems {
     {
         for (auto &&[invincibleTimer] : ECS::Containers::Zipper(invincibleTimer)) {
             auto &timer = invincibleTimer->timer;
-            timer -= GetFrameTime();
+            timer -= GameEngine::GameEngine::getDeltaTime();
         }
     }
 

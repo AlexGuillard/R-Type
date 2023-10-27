@@ -19,7 +19,16 @@ namespace ECS {
 
     private:
         friend class Containers::Registry;
+        friend class NullEntity;
         explicit Entity(std::size_t entity);
         std::size_t _entity;
+    };
+
+    /**
+     * @brief NullEntity is an entity that is not valid.
+     */
+    class NullEntity : public Entity {
+    public:
+        NullEntity();
     };
 }

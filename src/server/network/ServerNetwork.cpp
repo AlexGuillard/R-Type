@@ -278,10 +278,10 @@ void Network::ServerNetwork::SpawnMob(Info script)
 {
     std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
+    const int x = Constants::cameraDefaultWidth - 10;
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         ECS::Entity entity = registry.spawnEntity();
-        const int x = Constants::cameraDefaultWidth - 10;
         switch (script.rfc) {
             case 301:
                 ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
@@ -328,7 +328,7 @@ void Network::ServerNetwork::SendClientsPlay()
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-    for (const auto& allIds : _ids) {
+    for (auto &allIds : _ids) {
         if (index == 0)
             color = Enums::PlayerColor::CYAN_COLOR;
         else if (index == 1)
@@ -340,16 +340,18 @@ void Network::ServerNetwork::SendClientsPlay()
         else
             color = Enums::PlayerColor::BLUE_COLOR;
         ECS::Entity entity = registry.spawnEntity();
-        ECS::Creator::createAlly(registry, entity, 50, 50, color);
+        const int x = Constants::cameraDefaultWidth / 5;
+        const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
+        ECS::Creator::createAlly(registry, entity, x, y, color);
         for (const auto& pair : _listUdpEndpoints) {
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(Constants::cameraDefaultWidth / 5, Constants::cameraDefaultHeight / 2, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(Constants::cameraDefaultWidth / 5, Constants::cameraDefaultHeight / 2, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(312));
             }
             #ifndef _WIN32
@@ -359,6 +361,7 @@ void Network::ServerNetwork::SendClientsPlay()
             #endif
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
+        allIds.second.first = entity;
         index++;
     }
 }
