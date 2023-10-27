@@ -53,8 +53,9 @@ var searchData=
   ['createmissile_104',['createMissile',['../classECS_1_1Creator.html#a7d3aff8faf71a2042c104ae868f754d4',1,'ECS::Creator']]],
   ['createplayer_105',['createPlayer',['../classECS_1_1Creator.html#ad2ffb0d8d3cbd6c7f2ab28517464e44a',1,'ECS::Creator']]],
   ['createscant_106',['createScant',['../classECS_1_1Creator.html#abffa9178a226d3a77b932eea6b3754ee',1,'ECS::Creator']]],
-  ['creator_107',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
-  ['creator_2ehpp_108',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
-  ['cyan_5fcolor_109',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
-  ['registry_110',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
+  ['createwavebeam_107',['createWaveBeam',['../classECS_1_1Creator.html#a5edf62269b7be8e51a9f70b316b7351e',1,'ECS::Creator']]],
+  ['creator_108',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
+  ['creator_2ehpp_109',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
+  ['cyan_5fcolor_110',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
+  ['registry_111',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['commit_20convention_1204',['Commit Convention',['../index.html',1,'']]]
+  ['commit_20convention_1206',['Commit Convention',['../index.html',1,'']]]
 ];
