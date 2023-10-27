@@ -6,7 +6,7 @@ var searchData=
   ['damagecomponent_2ehpp_114',['DamageComponent.hpp',['../DamageComponent_8hpp.html',1,'']]],
   ['defaultgravity_115',['defaultGravity',['../classECS_1_1Creator.html#a872e2de427b4a2bf9a5ba42dd061c711',1,'ECS::Creator']]],
   ['defaultsinamplitude_116',['defaultSinAmplitude',['../namespaceECS_1_1Components.html#a8efccd438e60e3dd4aaddeefe893984b',1,'ECS::Components']]],
-  ['defaultsinfrequency_117',['defaultSinFrequency',['../namespaceECS_1_1Components.html#aae424e9a3df246145d92e1f91ddb46e9',1,'ECS::Components']]],
+  ['defaultsinfrequency_117',['defaultSinFrequency',['../namespaceECS_1_1Components.html#a08532d4df26e9bb5f0dd3bbe37d984ce',1,'ECS::Components']]],
   ['defaultsinxspeed_118',['defaultSinXSpeed',['../namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db',1,'ECS::Components']]],
   ['detectactionmenu_119',['detectActionMenu',['../classScreen_1_1Display.html#a27acb7cd8548ddd74c562e2aa4e6d979',1,'Screen::Display']]],
   ['detectactionwaitingroom_120',['detectActionWaitingRoom',['../classScreen_1_1Display.html#ae70c19f639b00bc564d03e5b84157c0a',1,'Screen::Display']]],

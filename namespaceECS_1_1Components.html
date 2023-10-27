@@ -154,12 +154,12 @@ Classes</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a9cda1abd218c2e15157401cb1850c430"><td class="memItemLeft" align="right" valign="top">const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430">maxTexturePathSize</a> = 256</td></tr>
 <tr class="separator:a9cda1abd218c2e15157401cb1850c430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7423839cb3263a2aef0f8e556e9a86db"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db">defaultSinXSpeed</a> = -100</td></tr>
+<tr class="memitem:a7423839cb3263a2aef0f8e556e9a86db"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db">defaultSinXSpeed</a> = <a class="el" href="namespaceConstants.html#aeea70fb0ecb6f58c4d8052138761d0d0">Constants::cameraDefaultWidth</a> / 10 * -1</td></tr>
 <tr class="separator:a7423839cb3263a2aef0f8e556e9a86db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8efccd438e60e3dd4aaddeefe893984b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a8efccd438e60e3dd4aaddeefe893984b">defaultSinAmplitude</a> = 100</td></tr>
+<tr class="memitem:a8efccd438e60e3dd4aaddeefe893984b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a8efccd438e60e3dd4aaddeefe893984b">defaultSinAmplitude</a> = <a class="el" href="namespaceConstants.html#af3f78414188e5d44a438a1cd90b9679b">Constants::cameraDefaultHeight</a> / 10</td></tr>
 <tr class="separator:a8efccd438e60e3dd4aaddeefe893984b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae424e9a3df246145d92e1f91ddb46e9"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#aae424e9a3df246145d92e1f91ddb46e9">defaultSinFrequency</a> = 100</td></tr>
-<tr class="separator:aae424e9a3df246145d92e1f91ddb46e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08532d4df26e9bb5f0dd3bbe37d984ce"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a08532d4df26e9bb5f0dd3bbe37d984ce">defaultSinFrequency</a> = 0.01</td></tr>
+<tr class="separator:a08532d4df26e9bb5f0dd3bbe37d984ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d9796f42c8d90ec515f7da8075ae0c9"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#a1d9796f42c8d90ec515f7da8075ae0c9">maxWaveBeamStrength</a> = 5</td></tr>
 <tr class="separator:a1d9796f42c8d90ec515f7da8075ae0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f1900bb3fb8fa6bfc286b2aca4f990"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Components.html#ae1f1900bb3fb8fa6bfc286b2aca4f990">waveBeamSpeed</a> = 500</td></tr>
@@ -175,21 +175,21 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int ECS::Components::defaultSinAmplitude = 100</td>
+          <td class="memname">const int ECS::Components::defaultSinAmplitude = <a class="el" href="namespaceConstants.html#af3f78414188e5d44a438a1cd90b9679b">Constants::cameraDefaultHeight</a> / 10</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aae424e9a3df246145d92e1f91ddb46e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae424e9a3df246145d92e1f91ddb46e9">&#9670;&nbsp;</a></span>defaultSinFrequency</h2>
+<a id="a08532d4df26e9bb5f0dd3bbe37d984ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08532d4df26e9bb5f0dd3bbe37d984ce">&#9670;&nbsp;</a></span>defaultSinFrequency</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int ECS::Components::defaultSinFrequency = 100</td>
+          <td class="memname">const float ECS::Components::defaultSinFrequency = 0.01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -203,7 +203,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int ECS::Components::defaultSinXSpeed = -100</td>
+          <td class="memname">const int ECS::Components::defaultSinXSpeed = <a class="el" href="namespaceConstants.html#aeea70fb0ecb6f58c4d8052138761d0d0">Constants::cameraDefaultWidth</a> / 10 * -1</td>
         </tr>
       </table>
 </div><div class="memdoc">
