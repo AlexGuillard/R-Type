@@ -5,6 +5,7 @@
 ** collision
 */
 
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Containers/SparseArray.hpp"
@@ -97,10 +98,10 @@ namespace ECS::Systems {
                     Components::PositionComponent giverPositionCopy = *giverPosition;
                     Components::VelocityComponent giverVelocityCopy = velocities[giverId].has_value() ? *velocities[giverId] : Components::VelocityComponent(0, 0);
                     for (std::size_t i = 0; i < 100; i++) {
-                        receiverPositionCopy.x += receiverVelocityCopy.x / 100.;
-                        receiverPositionCopy.y += receiverVelocityCopy.y / 100.;
-                        giverPositionCopy.x += giverVelocityCopy.x / 100.;
-                        giverPositionCopy.y += giverVelocityCopy.y / 100.;
+                        receiverPositionCopy.x += (receiverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        receiverPositionCopy.y += (receiverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        giverPositionCopy.x += (giverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        giverPositionCopy.y += (giverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
                         if (collidesWith(*receiverHitbox, receiverPositionCopy, *giverHitbox, giverPositionCopy)) {
                             addToCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
                             break;

@@ -11,7 +11,7 @@
 
 namespace Constants {
     // Player
-    const std::size_t playerMaxSpeed = 500;
+    const std::size_t playerSpeed = 500;
     const std::size_t playerNbFrameToMaxSpeed = 5;
     const std::size_t playerNbFrameToStop = 5;
 

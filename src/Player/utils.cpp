@@ -35,31 +35,21 @@ namespace Player {
         std::size_t left,
         std::size_t right)
     {
-        const float acceleration = Constants::playerMaxSpeed / (float)Constants::playerNbFrameToMaxSpeed;
-        const float deceleration = Constants::playerMaxSpeed / (float)Constants::playerNbFrameToStop;
         if (up > 0) {
-            velY -= up * acceleration;
+            velY -= up * Constants::playerSpeed;
         } else if (down > 0) {
-            velY += down * acceleration;
+            velY += down * Constants::playerSpeed;
         } else {
-            if (abs(velY) < deceleration) {
-                velY = 0;
-            } else {
-                velY += (velY > 0 ? -1 : 1) * deceleration;
-            }
+            velY = 0;
         }
         if (left > 0) {
-            velX -= left * acceleration;
+            velX -= left * Constants::playerSpeed;
         } else if (right > 0) {
-            velX += right * acceleration;
+            velX += right * Constants::playerSpeed;
         } else {
-            if (abs(velX) < deceleration) {
-                velX = 0;
-            } else {
-                velX += (velX > 0 ? -1 : 1) * deceleration;
-            }
+            velX = 0;
         }
-        velX = clamp(velX, -(float)Constants::playerMaxSpeed, (float)Constants::playerMaxSpeed);
-        velY = clamp(velY, -(float)Constants::playerMaxSpeed, (float)Constants::playerMaxSpeed);
+        velX = clamp(velX, -(float)Constants::playerSpeed, (float)Constants::playerSpeed);
+        velY = clamp(velY, -(float)Constants::playerSpeed, (float)Constants::playerSpeed);
     }
 } // namespace Player

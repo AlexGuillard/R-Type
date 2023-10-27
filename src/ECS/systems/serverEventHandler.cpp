@@ -29,11 +29,46 @@
 
 namespace ECS::Systems {
     struct PlayerInput {
-        std::size_t up = 0;
-        std::size_t down = 0;
-        std::size_t left = 0;
-        std::size_t right = 0;
+        float up = 0.;
+        float down = 0.;
+        float left = 0.;
+        float right = 0.;
     };
+
+    /**
+     * @brief Applies the velocity to the position by using the inputs of the
+     * player and staying in sync with the client.
+     * @param registry The ECS registry containing all entities and their components.
+     * @param inputs Inputs of the player.
+     * @param dt Delta time on the server.
+    */
+    static void applyVelocity(
+        Containers::Registry &registry,
+        int entityId,
+        const PlayerInput &inputs)
+    {
+        const float dt = GameEngine::GameEngine::getDeltaTime();
+        const float clientDt = 1. / Constants::frameRate;
+        const float rateDiff = dt / clientDt;
+        auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
+        auto &&hitboxes = registry.getComponents<ECS::Components::HitBoxComponent>();
+        auto &&collidables = registry.getComponents<ECS::Components::CollidableComponent>();
+        auto &&collisions = registry.getComponents<ECS::Components::CollisionComponent>();
+        auto &&solids = registry.getComponents<ECS::Components::SolidComponent>();
+        auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
+        auto &&teams = registry.getComponents<ECS::Components::TeamComponent>();
+
+        if (rateDiff != 0) {
+            velocities[entityId]->x = (inputs.right - inputs.left) * Constants::playerSpeed / rateDiff;
+            velocities[entityId]->y = (inputs.down - inputs.up) * Constants::playerSpeed / rateDiff;
+        }
+        ECS::Systems::collision(registry, positions, velocities, hitboxes, collidables, collisions);
+        ECS::Systems::solid(registry, solids, hitboxes, collisions, positions, velocities, teams);
+        ECS::Systems::movement(registry, positions, velocities);
+        velocities[entityId]->x = 0;
+        velocities[entityId]->y = 0;
+    }
+
     void serverEventHandler(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
@@ -46,44 +81,33 @@ namespace ECS::Systems {
 
         while (GameEngine::Events::poll(event, entityId)) {
             switch (event) {
-            case GameEngine::Events::Type::PLAYER_UP:
+            using enum GameEngine::Events::Type;
+            case PLAYER_NO_MOVEMENT:
+                applyVelocity(registry, entityId, playerInputs[entityId]);
+                playerInputs[entityId] = PlayerInput();
+                break;
+            case PLAYER_UP:
                 playerInputs[entityId].up++;
                 break;
-            case GameEngine::Events::Type::PLAYER_DOWN:
+            case PLAYER_DOWN:
                 playerInputs[entityId].down++;
                 break;
-            case GameEngine::Events::Type::PLAYER_LEFT:
+            case PLAYER_LEFT:
                 playerInputs[entityId].left++;
                 break;
-            case GameEngine::Events::Type::PLAYER_RIGHT:
+            case PLAYER_RIGHT:
                 playerInputs[entityId].right++;
                 break;
-            case GameEngine::Events::Type::PLAYER_SHOOT:
+            case PLAYER_SHOOT:
                 ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
                 break;
             default:
                 break;
             }
         }
-        for (auto &[entityId, input] : playerInputs) {
-            if (positions[entityId] && velocities[entityId]) {
-                auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
-                auto &&hitboxes = registry.getComponents<ECS::Components::HitBoxComponent>();
-                auto &&collidables = registry.getComponents<ECS::Components::CollidableComponent>();
-                auto &&collisions = registry.getComponents<ECS::Components::CollisionComponent>();
-                auto &&solids = registry.getComponents<ECS::Components::SolidComponent>();
-                auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
-                auto &&teams = registry.getComponents<ECS::Components::TeamComponent>();
-                auto &input = playerInputs[entityId];
-
-                Player::updateVelocity(velocities[entityId]->x, velocities[entityId]->y, input.up, input.down, input.left, input.right);
-                ECS::Systems::collision(registry, positions, velocities, hitboxes, collidables, collisions);
-                ECS::Systems::solid(registry, solids, hitboxes, collisions, positions, velocities, teams);
-                ECS::Systems::movement(registry, positions, velocities);
-            }
-            if (velocities[entityId]) {
-                velocities[entityId]->x = 0;
-                velocities[entityId]->y = 0;
+        for (const auto &[id, inputs] : playerInputs) {
+            if (positions[id] && velocities[id]) {
+                applyVelocity(registry, id, inputs);
             }
         }
     }
