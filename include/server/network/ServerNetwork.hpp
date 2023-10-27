@@ -113,6 +113,8 @@ namespace Network {
         std::unordered_map<std::string, boost::asio::ip::udp::endpoint> _listUdpEndpoints;
         // contain the string of client (address + port) and the id
         std::unordered_map<std::string, std::pair<int, std::vector<int>>> _ids;
+        // data to send to clients
+        std::string _dataToSend;
     private:
         Participants _list;
         /**

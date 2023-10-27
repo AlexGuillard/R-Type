@@ -168,20 +168,22 @@ void Network::ServerNetwork::sendClientEntities()
 
     for (int i = 0; i < dataPositions.size(); i++) {
         if (dataPositions[i].has_value()) {
-            res.append(Send::makeHeader(331, i));
-            res.append(Send::makeBodyPosition(dataPositions[i].value()));
+            _dataToSend.append(Send::makeHeader(331, i));
+            _dataToSend.append(Send::makeBodyPosition(dataPositions[i].value()));
             if (dataVelocity[i].has_value()) {
-                res.append(Send::makeBodyVelocity(dataVelocity[i].value()));
+                _dataToSend.append(Send::makeBodyVelocity(dataVelocity[i].value()));
             } else {
-                res.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
+                _dataToSend.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
             }
-            res.append(Send::makeBodyNum(331));
+            _dataToSend.append(Send::makeBodyNum(_tickCount));
+            _dataToSend.append(Send::makeBodyNum(331));
         }
     }
     for (const auto& pair : _listUdpEndpoints) {
         const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
     }
+    _dataToSend.clear();
 }
 
 void Network::ServerNetwork::updateTicks()
@@ -276,7 +278,6 @@ void Network::ServerNetwork::handleClientData(int num)
 
 void Network::ServerNetwork::SpawnMob(Info script)
 {
-    std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
     const int x = Constants::cameraDefaultWidth - 10;
 
@@ -304,15 +305,15 @@ void Network::ServerNetwork::SpawnMob(Info script)
             default:
                 break;
         }
-        res.append(Send::makeHeader(script.rfc, entity));
-        res.append(Send::makeBodyMob(x, script.y, script.extra.side));
-        res.append(Send::makeBodyNum(script.rfc));
+        _dataToSend.append(Send::makeHeader(script.rfc, entity));
+        _dataToSend.append(Send::makeBodyMob(x, script.y, script.extra.side));
+        _dataToSend.append(Send::makeBodyNum(script.rfc));
     }
-    for (const auto& pair : _listUdpEndpoints) {
-        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        for (int i = 0; i < 10; i++)
-            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
-    }
+    // for (const auto& pair : _listUdpEndpoints) {
+    //     const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+    //     for (int i = 0; i < 10; i++)
+    //         _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
+    // }
 }
 
 void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)

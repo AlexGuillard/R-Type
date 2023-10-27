@@ -117,7 +117,8 @@ void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std
         }
 
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 331" << std::endl;
+        str.clear();
     }
 }
 
@@ -134,7 +135,8 @@ void Network::ClientNetwork::handleClassicMissileSpawn(const header &messageHead
             ECS::Creator::createMissile(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.team);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 321" << std::endl;
+        str.clear();
     }
 }
 
@@ -149,7 +151,8 @@ void Network::ClientNetwork::handleWaveBeamSpawn(const header &messageHeader, st
             // ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 322" << std::endl;
+        str.clear();
     }
 }
 
@@ -164,7 +167,8 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
             // ECS::Creator::createBydosShot(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 323" << std::endl;
+        str.clear();
     }
 }
 
@@ -181,7 +185,8 @@ void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std
             ECS::Creator::createBlaster(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 306" << std::endl;
+        str.clear();
     }
 }
 
@@ -196,7 +201,8 @@ void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std:
             ECS::Creator::createCancer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 305" << std::endl;
+        str.clear();
     }
 }
 
@@ -211,7 +217,8 @@ void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::st
             ECS::Creator::createBug(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 304" << std::endl;
+        str.clear();
     }
 }
 
@@ -226,7 +233,8 @@ void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::
             ECS::Creator::createScant(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 303" << std::endl;
+        str.clear();
     }
 }
 
@@ -241,7 +249,8 @@ void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::s
             ECS::Creator::createBink(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, 600, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 302" << std::endl;
+        str.clear();
     }
 }
 
@@ -256,7 +265,8 @@ void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, st
             ECS::Creator::createEnemyBasic(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 301" << std::endl;
+        str.clear();
     }
 }
 
@@ -273,7 +283,8 @@ void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std:
             ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
         }
     } else {
-        std::cout << "Unexpected message received player" << std::endl;
+        std::cout << "Unexpected message received player 311" << std::endl;
+        str.clear();
     }
 }
 
@@ -283,7 +294,6 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
         bodyAlly allyData = getAlly(str);
         BodyNumber footer = getBody(str);
 
-        std::cout << "received " << footer.number << std::endl;
         if (footer.number == 312) {
             std::cout << "Ally : " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
             ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
