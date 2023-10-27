@@ -135,10 +135,10 @@ namespace ECS {
         const uint8_t nbFrameInAnimation = 8;
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 20, 24, id);
+        registry.emplaceComponent<Components::PositionComponent>(enemyBasic, x, y);
         registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
-        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
         registry.emplaceComponent<Components::DrawableComponent>(enemyBasic,
             Assets::AssetsIndex::R_TYPESHEET5_PNG,
             nbFrameInSpriteSheet, // frameRatio
