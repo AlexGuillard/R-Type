@@ -189,7 +189,7 @@ void Network::ServerNetwork::sendClientEntities()
 
 void Network::ServerNetwork::updateTicks()
 {
-    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
+    _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
         std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;

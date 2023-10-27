@@ -23,6 +23,11 @@ namespace Constants {
     const std::size_t cameraDefaultHeight = 540;
 
     // Game
+    const std::size_t frameRate = 30;
     static constexpr std::size_t defaultScrollSpeed = 0;
+
+    // Server
+    // in milliseconds
+    const std::size_t tickUpdate = 1000 / 10;
 
 } // namespace Constants
