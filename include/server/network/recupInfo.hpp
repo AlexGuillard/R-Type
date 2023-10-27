@@ -52,7 +52,7 @@ namespace Network {
              */
             std::vector<Info> getTickScript(std::size_t tick);
             /**
-             * @brief
+             * @brief Open the script file and make it understable for the game logic
              *
              */
             void openFile(Assets::AssetsIndex script);
