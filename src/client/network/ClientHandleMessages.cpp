@@ -81,7 +81,7 @@ double getCurrentTime() {
 }
 
 void Network::ClientNetwork::checkForDeadEntities(std::size_t tick) {
-    std::size_t maxIdleTime = 3;
+    std::size_t maxIdleTime = 100;
     std::vector<std::size_t> listToDelete;
 
     for (const auto& entityTimestampPair : _entityTimestamps) {

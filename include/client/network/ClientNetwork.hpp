@@ -366,7 +366,7 @@ namespace Network {
          * @param entityId
          */
         void checkForDeadEntities(std::size_t tick);
-
+        void threadUpdate();
     private:
         //Port of the server
         int _port;

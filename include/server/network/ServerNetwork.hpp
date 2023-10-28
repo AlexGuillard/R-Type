@@ -20,7 +20,7 @@
 #include "server/network/Participants.hpp"
 #include "server/network/ServerTcp.hpp"
 #include "server/network/recupInfo.hpp"
-#define TICKS_UPDATE 200
+#define TICKS_UPDATE 17
 
 namespace Network {
     enum class Connection {
