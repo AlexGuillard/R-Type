@@ -310,11 +310,6 @@ void Network::ServerNetwork::SpawnMob(Info script)
         _dataToSend.append(Send::makeBodyMob(x, script.y, script.extra.side));
         _dataToSend.append(Send::makeBodyNum(script.rfc));
     }
-    // for (const auto& pair : _listUdpEndpoints) {
-    //     const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-    //     for (int i = 0; i < 10; i++)
-    //         _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
-    // }
 }
 
 void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
