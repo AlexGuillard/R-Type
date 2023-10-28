@@ -80,38 +80,44 @@ double getCurrentTime() {
     return duration.count();
 }
 
-void Network::ClientNetwork::checkForDeadEntities() {
-    const double currentTime = getCurrentTime();
-    const double maxIdleTime = 3;
+void Network::ClientNetwork::checkForDeadEntities(std::size_t tick) {
+    std::size_t maxIdleTime = 3;
+    std::vector<std::size_t> listToDelete;
 
     for (const auto& entityTimestampPair : _entityTimestamps) {
         std::size_t entityId = entityTimestampPair.first;
-        double lastUpdateTimestamp = entityTimestampPair.second;
+        std::size_t lastUpdateTimestamp = entityTimestampPair.second;
 
-        if (currentTime - lastUpdateTimestamp > maxIdleTime) {
+        if (tick - lastUpdateTimestamp > maxIdleTime) {
             std::cout << "Entity: " << entityId << " has been idle for too long, deleting it" << std::endl;
             ECS::Entity entityToDelete = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(entityId);
             _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(entityToDelete);
-            _entityTimestamps.erase(entityId);
+            listToDelete.push_back(entityId);
         }
     }
+    for (const auto&id : listToDelete) {
+        _entityTimestamps.erase(id);
+    }
+    listToDelete.clear();
 }
 
 void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(ECS::Components::PositionComponent) + sizeof(ECS::Components::VelocityComponent) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(ECS::Components::PositionComponent) + sizeof(ECS::Components::VelocityComponent)
+        + sizeof(BodyNumber) + sizeof(BodyNumber)) {
         ECS::Components::PositionComponent positionData = getPosition(str);
         ECS::Components::VelocityComponent velocityData = getVelocity(str);
+        BodyNumber tick = getBody(str);
         BodyNumber footer = getBody(str);
 
         if (footer.number == 331) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << positionData.x << " Y: " << positionData.y << " VelocityX: " << velocityData.x << " VelocityY: " << velocityData.y << std::endl;
+            // std::cout << "entityToUpdate: " << messageHeader.entity << " X: " << velocityData.x << " Y: " << velocityData.y << std::endl;
             ECS::Entity entityToUpdate = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity);
 
             _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
             _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
-            _entityTimestamps[messageHeader.entity] = getCurrentTime();
-            checkForDeadEntities();
+            _entityTimestamps[messageHeader.entity] = tick.number;
+            checkForDeadEntities(tick.number);
         } else {
             std::cout << "Wrong footer: " << footer.number << std::endl;
         }
@@ -279,7 +285,7 @@ void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std:
         BodyNumber footer = getBody(str);
 
         if (footer.number == 311) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
+            std::cout << "Me: " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
             ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
         }
     } else {
@@ -301,6 +307,7 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
 
     } else {
         std::cout << "Unexpected message received ally" << std::endl;
+        str.clear();
     }
 }
 

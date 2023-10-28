@@ -157,7 +157,8 @@ void Network::ServerNetwork::updateGame()
         data.second.clear();
     }
     _engine.run();
-    sendClientEntities();
+    if (_tickCount > 2)
+        sendClientEntities();
 }
 
 void Network::ServerNetwork::sendClientEntities()

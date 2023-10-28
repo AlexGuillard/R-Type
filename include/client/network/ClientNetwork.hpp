@@ -365,7 +365,7 @@ namespace Network {
          *
          * @param entityId
          */
-        void checkForDeadEntities();
+        void checkForDeadEntities(std::size_t tick);
 
     private:
         //Port of the server
@@ -399,7 +399,7 @@ namespace Network {
         //Engine of the game
         GameEngine::GameEngine &_engine;
         //Map of the entities with the timestamp
-        std::unordered_map<std::size_t, double> _entityTimestamps;
+        std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
     };
 }
 
