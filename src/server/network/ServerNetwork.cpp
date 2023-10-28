@@ -225,10 +225,8 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
             }
         }
         _data.clear();
-        asyncReceive(_asyncSocket);
-    } else {
-        asyncReceive(_asyncSocket);
     }
+    asyncReceive(_asyncSocket);
 }
 
 std::string Network::ServerNetwork::getActualClient() const
@@ -254,7 +252,9 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    asyncReceive(_asyncSocket);
+    if (error) {
+        std::cerr << "Error sending data: " << error.message() << std::endl;
+    }
 }
 
 bool Network::ServerNetwork::isGameRunning() const
@@ -265,7 +265,6 @@ bool Network::ServerNetwork::isGameRunning() const
 void Network::ServerNetwork::update()
 {
     _ioService.poll();
-    _ioService.reset();
 }
 
 void Network::ServerNetwork::handleClientData(int num)

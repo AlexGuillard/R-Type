@@ -58,7 +58,6 @@ namespace Network {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
         clientNetwork.handleNetwork();
 
         while (GameEngine::Events::poll(type)) {

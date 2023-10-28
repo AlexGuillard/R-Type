@@ -102,6 +102,7 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
             std::string res;
             res = Network::Send::makeHeader(217, _indexPlayer);
+            asyncReceive(_socket);
             asyncSend(_socket, res);
         }
 
@@ -133,8 +134,7 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code &erro
 
 void Network::ClientNetwork::handleNetwork()
 {
-    _ioService.reset();
-    _ioService.poll_one();
+    _ioService.poll();
 }
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -155,7 +155,9 @@ void Network::ClientNetwork::handleReceive(boost::system::error_code error, std:
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    asyncReceive(_socket);
+    if (error) {
+        std::cerr << "Error sending data: " << error.message() << std::endl;
+    }
 }
 
 void Network::ClientNetwork::stopIOService()
