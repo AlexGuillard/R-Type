@@ -135,7 +135,6 @@ namespace ECS {
         Enums::TeamGroup team
     )
     {
-        std::cout << "Creating bydo shot" << std::endl;
         Entity shot = Creator::createCharacter(
             registry,
             team,
