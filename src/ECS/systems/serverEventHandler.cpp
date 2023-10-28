@@ -29,10 +29,10 @@
 
 namespace ECS::Systems {
     struct PlayerInput {
-        float up = 0.;
-        float down = 0.;
-        float left = 0.;
-        float right = 0.;
+        float up = 0.F;
+        float down = 0.F;
+        float left = 0.F;
+        float right = 0.F;
     };
 
     /**
