@@ -37,9 +37,6 @@ void Network::ClientNetwork::sendMovement(Movement movement)
     int message = 0;
 
     switch (movement) {
-    case Movement::NONE:
-        message = static_cast<int>(Enums::RFCCode::PLAYER_NO_MOVEMENT);
-        break;
     case Movement::UP:
         message = static_cast<int>(Enums::RFCCode::PLAYER_UP);
         break;
@@ -141,7 +138,7 @@ void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
-        if (footer.number == 305) {
+        if (footer.number == 306) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
             ECS::Creator::createCancer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }

@@ -83,7 +83,6 @@ In case of errors, the UDP protocol uses the following error codes:
 
 ### 210 Commands
 
-- `210: NONE`: This code is used when the client hasn't touched any movement key
 - `211: UP`: This code is used when the client move up
 - `212: DOWN`: This code is used when the client move down
 - `213: LEFT`: This code is used when the client move left

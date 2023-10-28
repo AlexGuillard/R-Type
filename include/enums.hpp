@@ -28,16 +28,36 @@ namespace Enums {
         NONE
     };
     enum class RFCCode {
+        // 20X TCP
         CLIENT_CONNECT = 200,
         LAUNCH_GAME = 201,
         NEW_PLAYER = 202,
-        PLAYER_NO_MOVEMENT = 210,
+        // 21X+ UDP
+        // 21X PLAYER ACTIONS
         PLAYER_UP = 211,
         PLAYER_DOWN = 212,
         PLAYER_LEFT = 213,
         PLAYER_RIGHT = 214,
         PLAYER_SHOOT = 215,
         PLAYER_DROP = 216,
+        CLIENT_CONFIRM_CONNECTION = 217,
+        // 3XX SERVER -> CLIENT
+        // 30X Enemies
+        SPAWN_PATA_PATA = 301,
+        SPAWN_BINK = 302,
+        SPAWN_SCANT = 303,
+        SPAWN_BUG = 304,
+        SPAWN_CANCER = 305,
+        SPAWN_BLASTER = 306,
+        // 31X Spawn Allies
+        SPAWN_PLAYER = 311,
+        SPAWN_ALLY = 312,
+        // 32X Spawn Missiles
+        SPAWN_PLAYER_MISSILE = 321,
+        SPAWN_WAVE_BEAM = 322,
+        SPAWN_BYDO_SHOT = 323,
+        // 33X Data
+        UPDATE_STATE = 331, // update position and velocity
     };
 
     // Copy of raylib KeyboardKey enum

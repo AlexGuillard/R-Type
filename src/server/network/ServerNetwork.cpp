@@ -132,9 +132,6 @@ void Network::ServerNetwork::updateGame()
         auto &&[id, inputs] = data;
         for (auto &&input : inputs) {
             switch (input) {
-            case static_cast<int>(Enums::RFCCode::PLAYER_NO_MOVEMENT):
-                GameEngine::Events::push(GameEngine::Events::Type::PLAYER_NO_MOVEMENT, id);
-                break;
             case static_cast<int>(Enums::RFCCode::PLAYER_UP):
                 GameEngine::Events::push(GameEngine::Events::Type::PLAYER_UP, id);
                 break;

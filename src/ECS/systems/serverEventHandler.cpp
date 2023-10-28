@@ -85,10 +85,6 @@ namespace ECS::Systems {
         while (GameEngine::Events::poll(event, entityId)) {
             switch (event) {
             using enum GameEngine::Events::Type;
-            case PLAYER_NO_MOVEMENT:
-                applyVelocity(registry, entityId, playerInputs[entityId]);
-                playerInputs[entityId] = PlayerInput();
-                break;
             case PLAYER_UP:
                 playerInputs[entityId].up++;
                 break;

@@ -25,7 +25,6 @@ namespace Network {
      *
      */
     enum class Movement {
-        NONE,
         UP,
         DOWN,
         LEFT,
