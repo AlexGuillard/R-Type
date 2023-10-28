@@ -23,7 +23,7 @@ void Network::ClientNetwork::initializeTCPResponsehandler()
         handleLogin(h, s);
         };
     _responseHandlersTCP[202] = [this](const header &h, std::string &s) {
-        handleLogout(h, s);
+        handleNewPlayer(h, s);
         };
 }
 
@@ -74,17 +74,19 @@ void Network::ClientNetwork::initializeResponsehandler()
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//
 
-double getCurrentTime() {
+double getCurrentTime()
+{
     auto now = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(now.time_since_epoch());
     return duration.count();
 }
 
-void Network::ClientNetwork::checkForDeadEntities(std::size_t tick) {
+void Network::ClientNetwork::checkForDeadEntities(std::size_t tick)
+{
     std::size_t maxIdleTime = 100;
     std::vector<std::size_t> listToDelete;
 
-    for (const auto& entityTimestampPair : _entityTimestamps) {
+    for (const auto &entityTimestampPair : _entityTimestamps) {
         std::size_t entityId = entityTimestampPair.first;
         std::size_t lastUpdateTimestamp = entityTimestampPair.second;
 
@@ -94,7 +96,7 @@ void Network::ClientNetwork::checkForDeadEntities(std::size_t tick) {
             listToDelete.push_back(entityId);
         }
     }
-    for (const auto&id : listToDelete) {
+    for (const auto &id : listToDelete) {
         _entityTimestamps.erase(id);
     }
     listToDelete.clear();
@@ -333,7 +335,7 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
     }
 }
 
-void Network::ClientNetwork::handleLogout(const header &messageHeader, std::string &str)
+void Network::ClientNetwork::handleNewPlayer(const header &messageHeader, std::string &str)
 {
     if (messageHeader.codeRfc == 202) {
         std::cout << "new player " << std::endl;

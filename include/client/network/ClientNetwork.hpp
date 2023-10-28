@@ -121,7 +121,7 @@ namespace Network {
          *
          * @param message message from the server
          */
-        void handleLogout(const header &messageHeader, std::string &str);
+        void handleNewPlayer(const header &messageHeader, std::string &str);
         /**
          * @brief Handle the player spawn
          *
