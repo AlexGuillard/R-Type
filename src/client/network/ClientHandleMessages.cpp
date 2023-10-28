@@ -154,7 +154,7 @@ void Network::ClientNetwork::handleWaveBeamSpawn(const header &messageHeader, st
 
         if (footer.number == 322) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
-            // ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
+            ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.team, missileData.strength);
         }
     } else {
         std::cout << "Unexpected message received player 322" << std::endl;
@@ -170,7 +170,7 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
 
         if (footer.number == 323) {
             std::cout << "Entity: " << messageHeader.entity << " X: " << missileData.x << " Y: " << missileData.y << " VelocityX: " << missileData.velocityX << " VelocityY: " << missileData.velocityY << " Team: " << static_cast<int>(missileData.team) << " Strength: " << missileData.strength << std::endl;
-            // ECS::Creator::createBydosShot(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team, missileData.strength);
+            ECS::Creator::createBydoShot(_engine.getRegistry(GameEngine::registryTypeEntities), missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team);
         }
     } else {
         std::cout << "Unexpected message received player 323" << std::endl;
