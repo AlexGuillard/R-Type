@@ -16,6 +16,7 @@ Network::ClientNetwork::ClientNetwork(GameEngine::GameEngine &engine)
     : _port(0), _socket(_ioService), _tcpSocket(_ioService), _engine(engine)
 {
     initializeResponsehandler();
+    initializeTCPResponsehandler();
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -85,244 +86,6 @@ void Network::ClientNetwork::send201()
     send(_tcpSocket, res);
 }
 
-//-----------------------------HANDLE MESSAGES--------------------------------------------//
-
-void Network::ClientNetwork::initializeResponsehandler()
-{
-    // connection
-    _responseHandlers[200] = [this](const header &h, std::string &s) {
-        handleConnection(h, s);
-        };
-    _responseHandlers[201] = [this](const header &h, std::string &s) {
-        handleLogin(h, s);
-        };
-    _responseHandlers[202] = [this](const header &h, std::string &s) {
-        handleLogout(h, s);
-        };
-
-    // players
-    _responseHandlers[311] = [this](const header &h, std::string &s) {
-        handlePlayerSpawn(h, s);
-        };
-    _responseHandlers[312] = [this](const header &h, std::string &s) {
-        handleAllySpawn(h, s);
-        };
-
-    // mobs
-    _responseHandlers[301] = [this](const header &h, std::string &s) {
-        handlePataPataSpawn(h, s);
-        };
-    _responseHandlers[302] = [this](const header &h, std::string &s) {
-        handleBinkSpawn(h, s);
-        };
-    _responseHandlers[303] = [this](const header &h, std::string &s) {
-        handleScantSpawn(h, s);
-        };
-    _responseHandlers[304] = [this](const header &h, std::string &s) {
-        handleBugSpawn(h, s);
-        };
-    _responseHandlers[305] = [this](const header &h, std::string &s) {
-        handleCancerSpawn(h, s);
-        };
-    _responseHandlers[306] = [this](const header &h, std::string &s) {
-        handleBlasterSpawn(h, s);
-        };
-}
-
-//-----------------------------MOBS--------------------------------------------//
-
-void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 305) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createCancer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 305) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createCancer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 304) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createBug(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 303) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createScant(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 302) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createBink(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyMob mobData = getMob(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 301) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
-            ECS::Creator::createEnemyBasic(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-//-----------------------------PLAYERS--------------------------------------------//
-
-void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyAlly allyData = getAlly(str);
-        BodyNumber footer = getBody(str);
-
-        if (footer.number == 311) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
-            ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
-        }
-    } else {
-        std::cout << "Unexpected message received player" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::string &str)
-{
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
-        bodyAlly allyData = getAlly(str);
-        BodyNumber footer = getBody(str);
-
-        std::cout << "received " << footer.number << std::endl;
-        if (footer.number == 312) {
-            std::cout << "Ally : " << messageHeader.entity << " X: " << allyData.x << " Y: " << allyData.y << " Color: " << static_cast<int>(allyData.color) << std::endl;
-            ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
-        }
-
-    } else {
-        std::cout << "Unexpected message received ally" << std::endl;
-    }
-}
-
-//-----------------------------CONNECTION--------------------------------------------//
-
-void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
-{
-    if (messageHeader.codeRfc != 0)
-        std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
-
-    if (str.size() >= sizeof(BodyNumber) + sizeof(BodyNumber)) {
-        BodyNumber numClients = getBody(str);
-        BodyNumber footer = getBody(str);
-        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients.number << " players including you." << std::endl;
-        std::cout << "footer" << footer.number << std::endl;
-        _indexPlayer = messageHeader.entity;
-    } else {
-        std::cout << "Unexpected message received connection" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleLogin(const header &messageHeader, std::string &str)
-{
-    static bool firstTime = false;
-
-    if (str.size() >= sizeof(BodyNumber)) {
-        BodyNumber udpPort = getBody(str);
-        std::cout << "Im the player " << messageHeader.entity << " and this is the UDP port: " << udpPort.number << std::endl;
-
-        if (!str.empty() && str.size() >= sizeof(BodyNumber)) {
-
-            BodyNumber footer = getBody(str);
-            std::cout << "Additional code: " << footer.number << std::endl;
-
-            if (footer.number == 201 && !firstTime) {
-                if (connect(_host, udpPort.number, false)) {
-                    firstTime = true;
-                    isConnectedUDP = true;
-                    std::cout << "jme suis co en udp\n";
-                } else {
-                    std::cout << "jme suis pas co en udp\n";
-                }
-            }
-        } else {
-            std::cout << "Only header found" << std::endl;
-        }
-    } else {
-        std::cout << "Unexpected message received on login" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleLogout(const header &messageHeader, std::string &str)
-{
-    if (messageHeader.codeRfc == 202) {
-        // std::cout << "Logged out as entity: " << entity << std::endl;
-    } else {
-        std::cout << "Unexpected message received logout" << std::endl;
-    }
-}
-
-void Network::ClientNetwork::handleMessageData(const header &messageHeader, std::string &str)
-{
-    auto responsehandlerIt = _responseHandlers.find(messageHeader.codeRfc);
-
-    if (responsehandlerIt != _responseHandlers.end()) {
-        responsehandlerIt->second(messageHeader, str);
-    } else {
-        // std::cout << "Unexecepted message received message data" << std::endl;
-    }
-}
-
 bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP)
 {
     if (isTCP) {
@@ -350,96 +113,22 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
     }
 }
 
-//-------------------------------GETTERS------------------------------------------//
-
-Network::ClientNetwork &Network::ClientNetwork::getInstance()
-{
-    if (_instance == nullptr) {
-        throw std::runtime_error("ClientNetwork not initialized");
-    }
-    return *_instance;
-}
-
-Network::ClientNetwork &Network::ClientNetwork::getInstance(GameEngine::GameEngine &engine)
-{
-    if (_instance == nullptr) {
-        _instance.reset(new ClientNetwork(engine));
-    }
-    return *_instance;
-}
-
-boost::asio::ip::udp::socket &Network::ClientNetwork::getUDPSocket()
-{
-    return _socket;
-}
-
-boost::asio::ip::tcp::socket &Network::ClientNetwork::getTCPSocket()
-{
-    return _tcpSocket;
-}
-
-Network::bodyMob Network::ClientNetwork::getMob(std::string &str)
-{
-    bodyMob res;
-
-    std::memcpy(&res, str.data(), sizeof(bodyMob));
-    str.erase(0, sizeof(bodyMob));
-    return res;
-}
-
-Network::BodyNumber Network::ClientNetwork::getBody(std::string &str)
-{
-    BodyNumber res;
-
-    std::memcpy(&res, str.data(), sizeof(BodyNumber));
-    str.erase(0, sizeof(BodyNumber));
-    return res;
-}
-
-Network::bodyAlly Network::ClientNetwork::getAlly(std::string &str)
-{
-    bodyAlly res;
-
-    std::memcpy(&res, str.data(), sizeof(bodyAlly));
-    str.erase(0, sizeof(bodyAlly));
-    return res;
-}
-
-boost::asio::ip::udp::endpoint Network::ClientNetwork::getLocalUDPEndpoint()
-{
-    return _socket.local_endpoint();
-}
-
-boost::asio::ip::tcp::endpoint Network::ClientNetwork::getLocalTCPEndpoint()
-{
-    return _tcpSocket.local_endpoint();
-}
-
-Network::header Network::ClientNetwork::getHeader(std::string &str)
-{
-    header res;
-
-    std::memcpy(&res, str.data(), HEADER_SIZE);
-    if (res.codeRfc != 0) {
-        std::cout << "Header -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
-    }
-    str.erase(0, HEADER_SIZE);
-    return res;
-}
-
 //-----------------------------HANDLE NETWORK--------------------------------------------//
 
 void Network::ClientNetwork::handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket)
 {
-    if (!error && recvd_bytes > 0) {
-        if (_data.size() >= (HEADER_SIZE)) {
-            header packet = getHeader(_data);
-            handleMessageData(packet, _data);
+    std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    _data.erase(0, recvd_bytes);
+    if (!error && recvd_bytes > HEADER_SIZE) {
+        while (received.size() > HEADER_SIZE) {
+            header packet = getHeader(received);
+            handleTCPMessageData(packet, received);
         }
-        startAsyncReceiveTCP(tcpsocket);
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
     }
+    received.clear();
+    startAsyncReceiveTCP(tcpsocket);
 }
 
 void Network::ClientNetwork::handleNetwork()
@@ -450,12 +139,16 @@ void Network::ClientNetwork::handleNetwork()
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    if (!error && recvd_bytes > 0) {
-        while (_data.size() >= HEADER_SIZE) {
+    _data = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    if (!error && recvd_bytes > HEADER_SIZE) {
+        while (_data.size() > HEADER_SIZE) {
             header packet = getHeader(_data);
             handleMessageData(packet, _data);
         }
-        // _data.clear();
+        _data.clear();
+    } else {
+        std::cerr << "Error receiving data: " << error.message() << std::endl;
+        _data.clear();
     }
     asyncReceive(_socket);
 }
