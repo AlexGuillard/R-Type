@@ -16,6 +16,8 @@
 #include <memory>
 #include <queue>
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace Network {
 
@@ -98,6 +100,11 @@ namespace Network {
          */
         void initializeResponsehandler();
         /**
+         * @brief Initialize the function to use the pointer to function for TCP
+         *
+         */
+        void initializeTCPResponsehandler();
+        /**
          * @brief Handle the Connection from server
          *
          * @param message message from the server
@@ -114,7 +121,7 @@ namespace Network {
          *
          * @param message message from the server
          */
-        void handleLogout(const header &messageHeader, std::string &str);
+        void handleNewPlayer(const header &messageHeader, std::string &str);
         /**
          * @brief Handle the player spawn
          *
@@ -284,6 +291,13 @@ namespace Network {
          * @param str
          */
         void handleMessageData(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle messages from the server and call the right function attributed to the header rfc code for TCP
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleTCPMessageData(const header &messageHeader, std::string &str);
         //Use to know if the client is connected to the server
         bool isConnectedUDP = false;
         /**
@@ -325,7 +339,33 @@ namespace Network {
          * @param engine
          */
         void setEngine(GameEngine::GameEngine &engine);
-
+        /**
+         * @brief handle he fact of despawn entities from the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleEntityUpdate(const header &messageHeader, std::string &str);
+        /**
+         * @brief Get the Velocity object
+         *
+         * @param str
+         * @return ECS::Components::VelocityComponent
+         */
+        ECS::Components::VelocityComponent getVelocity(std::string &str);
+        /**
+         * @brief Get the Position object
+         *
+         * @param str
+         * @return ECS::Components::PositionComponent
+         */
+        ECS::Components::PositionComponent getPosition(std::string &str);
+        /**
+         * @brief Check if the entity is dead or not based on the timestamp
+         *
+         * @param entityId
+         */
+        void checkForDeadEntities(std::size_t tick);
     private:
         //Port of the server
         int _port;
@@ -337,7 +377,9 @@ namespace Network {
         boost::asio::ip::udp::socket _socket;
         //Data received
         std::string _dataReceived;
-        //Map to use the pointer on function
+        //Map to use the pointer on function for TCP messages
+        std::map<int, std::function<void(const header &, std::string &)>> _responseHandlersTCP;
+        //Map to use the pointer on function for UDP messages
         std::map<int, std::function<void(const header &, std::string &)>> _responseHandlers;
         //Stock class for SingleTon
         static std::unique_ptr<ClientNetwork> _instance;
@@ -355,6 +397,8 @@ namespace Network {
         int _indexPlayer = -1;
         //Engine of the game
         GameEngine::GameEngine &_engine;
+        //Map of the entities with the timestamp
+        std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
     };
 }
 

@@ -65,6 +65,7 @@ int rtype_client()
         }
         Screen::Display::endUpdate();
     }
-    Network::stopClientNetwork();
+    //actually make the client crash on Windows
+    // Network::stopClientNetwork();
     return 0;
 }

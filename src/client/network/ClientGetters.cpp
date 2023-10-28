@@ -87,9 +87,24 @@ Network::header Network::ClientNetwork::getHeader(std::string &str)
     header res;
 
     std::memcpy(&res, str.data(), HEADER_SIZE);
-    if (res.codeRfc != 0) {
-        std::cout << "\nHeader -> code: " << res.codeRfc << " nb: " << res.entity << std::endl;
-    }
     str.erase(0, HEADER_SIZE);
+    return res;
+}
+
+ECS::Components::PositionComponent Network::ClientNetwork::getPosition(std::string &str)
+{
+    ECS::Components::PositionComponent res;
+
+    std::memcpy(&res, str.data(), sizeof(ECS::Components::PositionComponent));
+    str.erase(0, sizeof(ECS::Components::PositionComponent));
+    return res;
+}
+
+ECS::Components::VelocityComponent Network::ClientNetwork::getVelocity(std::string &str)
+{
+    ECS::Components::VelocityComponent res;
+
+    std::memcpy(&res, str.data(), sizeof(ECS::Components::VelocityComponent));
+    str.erase(0, sizeof(ECS::Components::VelocityComponent));
     return res;
 }

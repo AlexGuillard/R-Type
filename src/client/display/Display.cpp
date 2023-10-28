@@ -143,12 +143,6 @@ void Screen::Display::update()
             _gameState = GameState::GAME;
         }
     }
-    for (auto it = GameEngine::Events::begin(); it != GameEngine::Events::end(); ++it) {
-        GameEngine::Events::Type type = *it;
-        if (type == GameEngine::Events::Type::PLAYER_SHOOT) {
-            this->shake();
-        }
-    }
     this->updateShake();
 }
 

@@ -16,6 +16,7 @@ Network::ClientNetwork::ClientNetwork(GameEngine::GameEngine &engine)
     : _port(0), _socket(_ioService), _tcpSocket(_ioService), _engine(engine)
 {
     initializeResponsehandler();
+    initializeTCPResponsehandler();
 }
 
 Network::ClientNetwork::~ClientNetwork()
@@ -116,15 +117,18 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
 void Network::ClientNetwork::handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket)
 {
-    if (!error && recvd_bytes > 0) {
-        if (_data.size() >= (HEADER_SIZE)) {
-            header packet = getHeader(_data);
-            handleMessageData(packet, _data);
+    std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    _data.erase(0, recvd_bytes);
+    if (!error && recvd_bytes > HEADER_SIZE) {
+        while (received.size() > HEADER_SIZE) {
+            header packet = getHeader(received);
+            handleTCPMessageData(packet, received);
         }
-        startAsyncReceiveTCP(tcpsocket);
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
     }
+    received.clear();
+    startAsyncReceiveTCP(tcpsocket);
 }
 
 void Network::ClientNetwork::handleNetwork()
@@ -135,12 +139,16 @@ void Network::ClientNetwork::handleNetwork()
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    if (!error && recvd_bytes > 0) {
-        while (_data.size() >= HEADER_SIZE) {
+    _data = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    if (!error && recvd_bytes > HEADER_SIZE) {
+        while (_data.size() > HEADER_SIZE) {
             header packet = getHeader(_data);
             handleMessageData(packet, _data);
         }
-        // _data.clear();
+        _data.clear();
+    } else {
+        std::cerr << "Error receiving data: " << error.message() << std::endl;
+        _data.clear();
     }
     asyncReceive(_socket);
 }
