@@ -137,21 +137,15 @@ void Network::ClientNetwork::handleNetwork()
     _ioService.poll_one();
 }
 
-void Network::ClientNetwork::threadUpdate()
-{
-    while (_data.size() > HEADER_SIZE) {
-        header packet = getHeader(_data);
-        handleMessageData(packet, _data);
-    }
-    _data.clear();
-}
-
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
     _data = std::string(_data.begin(), _data.begin() + recvd_bytes);
     if (!error && recvd_bytes > HEADER_SIZE) {
-        std::thread thread(&Network::ClientNetwork::threadUpdate, this);
-        thread.join();
+        while (_data.size() > HEADER_SIZE) {
+            header packet = getHeader(_data);
+            handleMessageData(packet, _data);
+        }
+        _data.clear();
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
         _data.clear();
