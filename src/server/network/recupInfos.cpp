@@ -42,7 +42,7 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
         data.rfc = std::stoull(elements[0]);
         data.y = std::stoull(elements[1]);
         data.tick = std::stoull(elements[2]);
-        if (element.size() > 3) {
+        if (elements.size() > 3) {
             if (elements[3] == "down"){
                 data.extraType = Network::Info::SIDE;
                 data.extra.side = Enums::Position::DOWN;
