@@ -4,7 +4,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/Participants.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ServerTcp.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ServerNetwork.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/recupInfo.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/recupInfos.cpp
 )
 add_library(ServerNetwork STATIC ${SRC})
 target_include_directories(ServerNetwork PUBLIC ${INCROOT})

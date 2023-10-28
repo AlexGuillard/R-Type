@@ -5,7 +5,7 @@
 ** recupInfo
 */
 
-#include "server/network/recupInfo.hpp"
+#include "server/network/recupInfos.hpp"
 #include "Assets/TextLoader.hpp"
 
 std::vector<Network::Info> Network::RecupInfo::getScript() {
