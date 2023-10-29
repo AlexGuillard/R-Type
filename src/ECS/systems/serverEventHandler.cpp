@@ -58,7 +58,7 @@ namespace ECS::Systems {
         auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
         auto &&teams = registry.getComponents<ECS::Components::TeamComponent>();
 
-        if (!velocities[entityId]) {
+        if (!velocities[entityId] || !positions[entityId]) {
             return;
         }
         if (rateDiff != 0) {
@@ -67,7 +67,7 @@ namespace ECS::Systems {
         }
         ECS::Systems::collision(registry, positions, velocities, hitboxes, collidables, collisions);
         ECS::Systems::solid(registry, solids, hitboxes, collisions, positions, velocities, teams);
-        ECS::Systems::movement(registry, positions, velocities);
+        ECS::Systems::movement(registry, *positions[entityId], *velocities[entityId]);
         velocities[entityId]->x = 0;
         velocities[entityId]->y = 0;
     }

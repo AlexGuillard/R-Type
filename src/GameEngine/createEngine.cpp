@@ -89,7 +89,7 @@ namespace GameEngine {
         // Movement systems (must be called after collision system)
         registry.addSystem<Components::SinMovementComponent, Components::VelocityComponent>(Systems::sinMovement);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(static_cast<void (*)(Containers::Registry &, Containers::SparseArray<Components::PositionComponent> &, Containers::SparseArray<Components::VelocityComponent> &)>(&Systems::movement));
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
         // Solid system (called after movement system to prevent entities from being stuck in walls)
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
