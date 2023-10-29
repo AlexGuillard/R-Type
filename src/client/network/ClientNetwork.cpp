@@ -27,7 +27,7 @@ Network::ClientNetwork::~ClientNetwork()
 
 void Network::ClientNetwork::sendHello()
 {
-    std::string res;
+    std::string res = "";
 
     res = Network::Send::makeHeader(CONNECTION_NB, 5);
     send(_tcpSocket, res);
@@ -54,8 +54,8 @@ void Network::ClientNetwork::sendMovement(Movement movement)
         break;
     }
 
-    std::string res;
-    res.append(Network::Send::makeBodyNum(message));
+    std::string res = "";
+    res.append(Network::Send::makeHeader(message, _indexPlayer));
 
     asyncSend(_socket, res);
 }
@@ -74,14 +74,14 @@ void Network::ClientNetwork::sendAction(Action action)
     default:
         break;
     }
-    std::string res;
-    res.append(Network::Send::makeBodyNum(message));
+    std::string res = "";
+    res.append(Network::Send::makeHeader(message, _indexPlayer));
     asyncSend(_socket, res);
 }
 
 void Network::ClientNetwork::send201()
 {
-    std::string res;
+    std::string res = "";
 
     res = Network::Send::makeHeader(201, _indexPlayer);
     send(_tcpSocket, res);
@@ -101,7 +101,7 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
             _socket.open(_endpoint.protocol());
             std::cout << "Connected to server by udp" << std::endl;
 
-            std::string res;
+            std::string res = "";
             res = Network::Send::makeHeader(217, _indexPlayer);
             asyncSend(_socket, res);
         }
