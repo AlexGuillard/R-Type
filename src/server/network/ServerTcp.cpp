@@ -39,9 +39,7 @@ void Network::ServerTcp::waitRequest()
                 dataClient = Network::Send::stringToheader(_data);
                 std::cout << "[" << bytes_transferred << "] " << dataClient.codeRfc << " from " << _socket.remote_endpoint().address() << std::endl;
                 if (dataClient.codeRfc == 201) {
-                    for (int i = 0; i < _list.size(); i++) {
-                        _list.getClient(i)->send201();
-                    }
+                    send201();
                     _isGame = true;
                 }
             } else {
