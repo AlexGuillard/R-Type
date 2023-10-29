@@ -8,15 +8,20 @@
 #include <csignal>
 #include <iostream>
 #include <thread>
+#include <mutex>
 
 #include "GameEngine/GameEngine.hpp"
 #include "server/network/ServerNetwork.hpp"
 
 bool isServerRunning = true;
+boost::asio::io_service ioService;
+std::mutex ioServiceMutex;
 
 void signalHandler(int signum)
 {
+    std::lock_guard<std::mutex> lock(ioServiceMutex);
     isServerRunning = false;
+    ioService.stop();
 }
 
 int main(int argc, char **argv)
@@ -28,8 +33,7 @@ int main(int argc, char **argv)
     // catch CTRL-C
     signal(SIGINT, signalHandler);
     try {
-        boost::asio::io_service ioService;
-        Network::ServerNetwork network(ioService, port, portUdp);
+        Network::ServerNetwork network(ioService, ioServiceMutex, port, portUdp);
         while (isServerRunning) {
             network.update();
         }

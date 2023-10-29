@@ -11,6 +11,8 @@
 #include <algorithm>
 #include <thread>
 #include <memory>
+#include <mutex>
+#include <vector>
 
 #include "ANetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
@@ -33,7 +35,7 @@ namespace Network {
      */
     class ServerNetwork : public ANetwork {
     public:
-        ServerNetwork(boost::asio::io_service& io_service, int portTcp, int portUdp);
+        ServerNetwork(boost::asio::io_service &io_service, std::mutex &ioServiceMutex, int portTcp, int portUdp);
         ~ServerNetwork();
         /**
          * @brief used when making the connections from the clients
@@ -116,6 +118,7 @@ namespace Network {
         // data to send to clients
         std::string _dataToSend;
     private:
+        std::mutex &_ioServiceMutex;
         Participants _list;
         /**
          * @brief Set the Udp Socket object

@@ -15,10 +15,11 @@
 #include "enums.hpp"
 #include "constants.hpp"
 
-Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
+Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, std::mutex &ioServiceMutex, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
-    _timer(io_service), _portUdp(portUdp), _engine(GameEngine::createServerEngine())
+    _timer(io_service), _portUdp(portUdp), _engine(GameEngine::createServerEngine()), _ioServiceMutex(std::ref(ioServiceMutex))
 {
+    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
     boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
@@ -41,6 +42,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
 
 Network::ServerNetwork::~ServerNetwork()
 {
+    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     _acceptor.close();
     _asyncSocket.close();
     _tcp->join();
@@ -191,14 +193,11 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code &error) {
-        std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
-            updateTicks();
-            return;
-        }
-        if (_canPlay) {
+        } else if (_canPlay) {
+            std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 std::cout << "info to add in game" << std::endl;
@@ -239,7 +238,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         _ids[getActualClient()].first = clientData.entity;
-        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false) {
+        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false && _isGame) {
             _canPlay = true;
             SendClientsPlay();
         }
@@ -264,6 +263,7 @@ bool Network::ServerNetwork::isGameRunning() const
 
 void Network::ServerNetwork::update()
 {
+    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     _ioService.poll();
 }
 

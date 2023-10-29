@@ -39,7 +39,9 @@ void Network::ServerTcp::waitRequest()
                 dataClient = Network::Send::stringToheader(_data);
                 std::cout << "[" << bytes_transferred << "] " << dataClient.codeRfc << " from " << _socket.remote_endpoint().address() << std::endl;
                 if (dataClient.codeRfc == 201) {
-                    send201();
+                    for (int i = 0; i < _list.size(); i++) {
+                        _list.getClient(i)->send201();
+                    }
                     _isGame = true;
                 }
             } else {
@@ -65,9 +67,7 @@ void Network::ServerTcp::write(std::string message)
     _socket.async_write_some(boost::asio::buffer(message.data(), message.size()),
     [this, self](boost::system::error_code error, std::size_t /*length*/)
     {
-        if (!error) {
-            waitRequest();
-        } else {
+            if (error) {
             _list.leave(shared_from_this());
             removeClient();
         }
@@ -85,7 +85,7 @@ void Network::ServerTcp::connection()
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200, idNewClient));
-        send202(0);
+        send202(idNewClient);
     } else {
         write(code401());
     }

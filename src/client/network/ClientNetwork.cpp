@@ -89,7 +89,9 @@ void Network::ClientNetwork::send201()
 bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP)
 {
     if (isTCP) {
-        connectTCP(host, port);
+        if (!connectTCP(host, port)) {
+            return false;
+        }
         sendHello();
         _host = host;
         return (true);
