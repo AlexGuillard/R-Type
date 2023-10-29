@@ -135,23 +135,24 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code &erro
 void Network::ClientNetwork::handleNetwork()
 {
     _ioService.reset();
-    _ioService.poll_one();
+    _ioService.poll();
 }
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    _data = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    _data.erase(0, recvd_bytes);
+    asyncReceive(_socket);
     if (!error && recvd_bytes > HEADER_SIZE) {
-        while (_data.size() > HEADER_SIZE) {
-            header packet = getHeader(_data);
-            handleMessageData(packet, _data);
+        while (received.size() > HEADER_SIZE) {
+            header packet = getHeader(received);
+            handleMessageData(packet, received);
         }
-        _data.clear();
+        received.clear();
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
-        _data.clear();
+        received.clear();
     }
-    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
