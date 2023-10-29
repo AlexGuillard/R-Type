@@ -190,7 +190,7 @@ void Network::ServerNetwork::sendClientEntities()
 
 void Network::ServerNetwork::updateTicks()
 {
-    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
+    _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
         // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
@@ -270,7 +270,7 @@ void Network::ServerNetwork::update()
 
 void Network::ServerNetwork::handleClientData(int num)
 {
-    if (num >= 211 && num <= 216) {
+    if (num >= 210 && num <= 216) {
         if (_ids.count(getActualClient())) {
             _ids[getActualClient()].second.push_back(num);
         }
@@ -337,7 +337,7 @@ void Network::ServerNetwork::SendClientsPlay()
             color = Enums::PlayerColor::RED_COLOR;
         else
             color = Enums::PlayerColor::BLUE_COLOR;
-        ECS::Entity entity = registry.spawnEntity();
+        ECS::Entity entity = registry.entityFromIndex(allIds.second.first);
         const int x = Constants::cameraDefaultWidth / 5;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
@@ -356,7 +356,6 @@ void Network::ServerNetwork::SendClientsPlay()
             for (int i = 0; i < 10; i++)
                 _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
-        allIds.second.first = entity;
         index++;
     }
 }

@@ -84,11 +84,11 @@ In case of errors, the UDP protocol uses the following error codes:
 ### 210 Commands
 
 - `211: UP`: This code is used when the client move up
-- `212: UP`: This code is used when the client move down
-- `213: UP`: This code is used when the client move left
-- `214: UP`: This code is used when the client move right
-- `215: UP`: This code is used when the client shoot
-- `216: UP`: This code is used when the client drop the force pod
+- `212: DOWN`: This code is used when the client move down
+- `213: LEFT`: This code is used when the client move left
+- `214: RIGHT`: This code is used when the client move right
+- `215: SHOOT`: This code is used when the client shoot
+- `216: DROP`: This code is used when the client drop the force pod
 
 ## Server Codes
 ### 300 Infos

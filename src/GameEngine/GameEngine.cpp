@@ -32,6 +32,12 @@ namespace GameEngine {
         return m_registries.back().second;
     }
 
+    Registry &GameEngine::createRegistry(const std::string &type, std::size_t reservedIds)
+    {
+        m_registries.push_back(std::make_pair(type, Registry(reservedIds)));
+        return m_registries.back().second;
+    }
+
     Registry &GameEngine::getRegistry(const std::string &type)
     {
         auto registryIterator = std::find_if(m_registries.begin(), m_registries.end(),

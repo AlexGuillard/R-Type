@@ -9,6 +9,7 @@
 #include "server/network/sendCode.hpp"
 #include "ECS/Creator.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "enums.hpp"
 
 //-----------------------------CONSTRUCTOR / DESTRUCTOR--------------------------------------------//
 
@@ -38,16 +39,16 @@ void Network::ClientNetwork::sendMovement(Movement movement)
 
     switch (movement) {
     case Movement::UP:
-        message = 211;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_UP);
         break;
     case Movement::DOWN:
-        message = 212;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_DOWN);
         break;
     case Movement::LEFT:
-        message = 213;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_LEFT);
         break;
     case Movement::RIGHT:
-        message = 214;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_RIGHT);
         break;
     default:
         break;

@@ -76,17 +76,22 @@ namespace GameEngine {
         registry.registerComponent<Components::HorizontalScrollComponent>();
         registry.registerComponent<Components::InvincibleTimerComponent>();
 
-        registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(Systems::movement);
-        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent, Components::BydoShotComponent>(Systems::shooting);
-        registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
+        // Systems (order matters)
+        // Collision systems
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
-        registry.addSystem<Components::SinMovementComponent, Components::VelocityComponent>(Systems::sinMovement);
+        // Shooting systems
+        registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
+        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent, Components::BydoShotComponent>(Systems::shooting);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
+        // Movement systems (must be called after collision system)
+        registry.addSystem<Components::SinMovementComponent, Components::VelocityComponent>(Systems::sinMovement);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(static_cast<void (*)(Containers::Registry &, Containers::SparseArray<Components::PositionComponent> &, Containers::SparseArray<Components::VelocityComponent> &)>(&Systems::movement));
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
+        // Solid system (called after movement system to prevent entities from being stuck in walls)
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
     }
 
@@ -106,26 +111,27 @@ namespace GameEngine {
     {
         const double heightPercentage = 0.1;
         const int width = 10;
+        const int padding = 500;
         ECS::Entity floor = createInvisibleWall(registry,
             Constants::cameraDefaultWidth * -0.5,
             Constants::cameraDefaultHeight * (1 - heightPercentage),
             Constants::cameraDefaultWidth * 2,
-            Constants::cameraDefaultHeight * heightPercentage);
+            Constants::cameraDefaultHeight * heightPercentage + padding);
         ECS::Entity ceiling = createInvisibleWall(registry,
             Constants::cameraDefaultWidth * -0.5,
-            0,
+            0 - padding,
             Constants::cameraDefaultWidth * 2,
-            Constants::cameraDefaultHeight * heightPercentage);
+            Constants::cameraDefaultHeight * heightPercentage + padding);
         ECS::Entity leftWall = createInvisibleWall(registry,
-            -width,
+            -width - padding,
             Constants::cameraDefaultHeight * heightPercentage + 1,
-            width,
+            width + padding,
             Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
             Enums::TeamGroup::ENEMY);
         ECS::Entity rightWall = createInvisibleWall(registry,
             Constants::cameraDefaultWidth,
             Constants::cameraDefaultHeight * heightPercentage + 1,
-            width,
+            width + padding,
             Constants::cameraDefaultHeight * (1 - 2 * heightPercentage) - 2,
             Enums::TeamGroup::ENEMY);
 
@@ -136,7 +142,7 @@ namespace GameEngine {
     {
         GameEngine engine;
         engine.createRegistry(registryTypeBackground);
-        engine.createRegistry(registryTypeEntities);
+        engine.createRegistry(registryTypeEntities, 4);
         initEntitiesRegistry(engine.getRegistry(registryTypeEntities));
         populateEntities(engine.getRegistry(registryTypeEntities));
         return engine;
