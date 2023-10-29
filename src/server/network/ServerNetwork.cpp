@@ -157,8 +157,9 @@ void Network::ServerNetwork::updateGame()
         data.second.clear();
     }
     _engine.run();
-    if (_tickCount > 2)
+    if (_tickCount > 2) {
         sendClientEntities();
+    }
 }
 
 void Network::ServerNetwork::sendClientEntities()
@@ -191,7 +192,7 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
     _timer.async_wait([this](const boost::system::error_code &error) {
-        std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
+        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
@@ -201,7 +202,6 @@ void Network::ServerNetwork::updateTicks()
         if (_canPlay) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
-                std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
             updateGame();
