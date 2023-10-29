@@ -159,8 +159,9 @@ void Network::ServerNetwork::updateGame()
         data.second.clear();
     }
     _engine.run();
-    if (_tickCount > 2)
+    if (_tickCount > 2) {
         sendClientEntities();
+    }
 }
 
 void Network::ServerNetwork::sendClientEntities()
@@ -197,10 +198,8 @@ void Network::ServerNetwork::updateTicks()
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
         } else if (_canPlay) {
-            std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
-                std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
             updateGame();
