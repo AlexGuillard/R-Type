@@ -101,6 +101,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">gravity</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &gt; &amp;velocities, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1GravityComponent.html">Components::GravityComponent</a> &gt; &amp;gravity)</td></tr>
 <tr class="memdesc:a7eba9fe2c53f2961afcb042d833bc78b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add gravity to velocity.  <a href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">More...</a><br /></td></tr>
 <tr class="separator:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9c175505ce9359565f343f9e657bb10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#af9c175505ce9359565f343f9e657bb10">ground</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1LevelComponent.html">Components::LevelComponent</a> &gt; &amp;levels, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1GroundComponent.html">Components::GroundComponent</a> &gt; &amp;grounds)</td></tr>
+<tr class="memdesc:af9c175505ce9359565f343f9e657bb10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws the background with a level and a background component.  <a href="namespaceECS_1_1Systems.html#af9c175505ce9359565f343f9e657bb10">More...</a><br /></td></tr>
+<tr class="separator:af9c175505ce9359565f343f9e657bb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a091005440e184366810d6dc33730587a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a091005440e184366810d6dc33730587a">horizontalScroll</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HorizontalScrollComponent.html">ECS::Components::HorizontalScrollComponent</a> &gt; &amp;horizontalScrolls, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &gt; &amp;positions)</td></tr>
 <tr class="memdesc:a091005440e184366810d6dc33730587a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add horizontal scroll to position.  <a href="namespaceECS_1_1Systems.html#a091005440e184366810d6dc33730587a">More...</a><br /></td></tr>
 <tr class="separator:a091005440e184366810d6dc33730587a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -520,6 +523,48 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add gravity to velocity. </p>
+
+</div>
+</div>
+<a id="af9c175505ce9359565f343f9e657bb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c175505ce9359565f343f9e657bb10">&#9670;&nbsp;</a></span>ground()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ECS::Systems::ground </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1LevelComponent.html">Components::LevelComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>levels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1GroundComponent.html">Components::GroundComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>grounds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws the background with a level and a background component. </p>
 
 </div>
 </div>
