@@ -75,6 +75,40 @@ namespace Network {
         velocities[entityId]->y = 0;
     }
 
+    static void resetHeldInfo(std::unordered_map<int, std::pair<bool, float>> &timeSinceShootHeld)
+    {
+        for (auto &&[id, heldInfo] : timeSinceShootHeld) {
+            auto &&[isHeld, _] = heldInfo;
+            isHeld = false;
+        }
+    }
+
+    static void shootMissile(
+        GameEngine::GameEngine &_engine,
+        ECS::Containers::Registry &registry,
+        const ECS::Components::PositionComponent &position,
+        ECS::Components::VelocityComponent &velocity,
+        const Enums::TeamGroup &team,
+        const std::unordered_map<std::string, boost::asio::ip::udp::endpoint> &listUdpEndpoints,
+        boost::asio::ip::udp::socket &asyncSocket
+    )
+    {
+        std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
+        auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+        auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
+        std::string res = "";
+        int pos[2] = { (int)position.x, (int)position.y };
+        int vel[2] = { (int)velocity.x, (int)velocity.y };
+
+        res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId));
+        res.append(Send::makeBodyMissile(pos, vel, team, 1));
+        res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE));
+        for (const auto &[_, endpoint] : listUdpEndpoints) {
+            asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
+        }
+        res.clear();
+    }
+
     void ServerNetwork::serverEventHandler(
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
@@ -84,7 +118,10 @@ namespace Network {
         GameEngine::Events::Type event;
         int entityId = 0;
         std::unordered_map<int, PlayerInput> playerInputs;
+        // id -> (isHeld, timeHeld)
+        static std::unordered_map<int, std::pair<bool, float>> timeSinceShootHeld;
 
+        resetHeldInfo(timeSinceShootHeld);
         while (GameEngine::Events::poll(event, entityId)) {
             switch (event) {
                 using enum GameEngine::Events::Type;
@@ -101,30 +138,36 @@ namespace Network {
                 playerInputs[entityId].right++;
                 break;
             case PLAYER_SHOOT:
-                if (teams[entityId] && positions[entityId]) {
-                    std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
-
-                    auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
-                    auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
-                    std::string res = "";
-                    int pos[2] = {(int)positions[entityId]->x, (int)positions[entityId]->y};
-                    int velocity[2] = {(int)velocities[entityId]->x, (int)velocities[entityId]->y};
-                    Enums::TeamGroup team = teams[entityId]->team;
-
-                    _dataToSend.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId));
-                    _dataToSend.append(Send::makeBodyMissile(pos, velocity, team, 1));
-                    _dataToSend.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE));
-                    for (const auto &pair : _listUdpEndpoints) {
-                        const boost::asio::ip::udp::endpoint &endpoint = pair.second;
-                        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()), endpoint);
-                    }
-                    _dataToSend.clear();
+                if (timeSinceShootHeld.contains(entityId)) {
+                    timeSinceShootHeld[entityId].second += GameEngine::GameEngine::getDeltaTime();
+                    timeSinceShootHeld[entityId].first = true;
+                } else {
+                    timeSinceShootHeld.emplace(entityId, std::make_pair(true, 0.F));
                 }
                 break;
             default:
                 break;
             }
         }
+        std::vector<int> toDelete;
+        for (auto &[id, heldInfo] : timeSinceShootHeld) {
+            auto &[isHeld, timeHeld] = heldInfo;
+            if (isHeld) { continue; } // only shoot when the button is released
+            if (timeHeld > 0) {
+                if (positions[id] && velocities[id] && teams[id]) {
+                    shootMissile(
+                        _engine, registry, *positions[id], *velocities[id],
+                        teams[id]->team, _listUdpEndpoints, _asyncSocket
+                    );
+                }
+
+                toDelete.push_back(id);
+            }
+        }
+        for (const auto &id : toDelete) {
+            timeSinceShootHeld.erase(id);
+        }
+
         for (const auto &[id, inputs] : playerInputs) {
             if (positions[id] && velocities[id]) {
                 applyVelocity(registry, id, inputs);
