@@ -172,17 +172,13 @@ void Network::ClientNetwork::stopIOService()
 bool Network::ClientNetwork::connectTCP(const std::string &host, int port)
 {
     try {
-        boost::asio::ip::tcp::resolver resolver(_ioService);
-        boost::asio::ip::tcp::resolver::query query(host, std::to_string(port));
-        boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-        boost::asio::connect(_tcpSocket, endpoint_iterator);
+        boost::asio::ip::tcp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
+        _tcpSocket.connect(serverEndpoint);
 
         std::cout << "Connected to server by tcp" << std::endl;
 
         return (true);
-    }
-
-    catch (std::exception &e) {
+    } catch (std::exception &e) {
         std::cerr << "Error connecting to TCP server: " << e.what() << std::endl;
         return (false);
     }
