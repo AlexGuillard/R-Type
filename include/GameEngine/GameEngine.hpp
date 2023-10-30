@@ -27,7 +27,19 @@ namespace GameEngine {
         Registry &operator[](const std::string &type);
         const Registry &operator[](const std::string &type) const;
 
+        /**
+         * @brief Creates a registry of the given type
+         * @param type type of the registry
+         * @return The registry
+        */
         Registry &createRegistry(const std::string &type);
+        /**
+         * @brief Creates a registry of the given type
+         * @param type type of the registry
+         * @param reservedIds number of ids to reserve
+         * @return The registry
+        */
+        Registry &createRegistry(const std::string &type, std::size_t reservedIds);
 
         /**
          * @brief Returns the registry of the given type

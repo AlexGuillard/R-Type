@@ -8,6 +8,8 @@
 #pragma once
 #include <iostream>
 #include "INetwork.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace Network::Send {
     /**
@@ -25,6 +27,20 @@ namespace Network::Send {
      * @return std::string
      */
     std::string makeBodyNum(int num);
+    /**
+     * @brief function to create a header BodyNumber in std::string
+     *
+     * @param pos structure to put in string
+     * @return std::string
+     */
+    std::string makeBodyPosition(ECS::Components::PositionComponent pos);
+    /**
+     * @brief function to create a header BodyNumber in std::string
+     *
+     * @param vel structure to put in string
+     * @return std::string
+     */
+    std::string makeBodyVelocity(ECS::Components::VelocityComponent vel);
     /**
      * @brief function to create a BodyMob struct in std::string
      *

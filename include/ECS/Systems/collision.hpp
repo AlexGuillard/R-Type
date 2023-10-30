@@ -9,6 +9,7 @@
 
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/HitBoxComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
 #include "ECS/Components/CollidableComponent.hpp"
@@ -31,6 +32,7 @@ namespace ECS::Systems {
     void collision(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
         Containers::SparseArray<Components::HitBoxComponent> &hitboxes,
         Containers::SparseArray<Components::CollidableComponent> &collidables,
         Containers::SparseArray<Components::CollisionComponent> &collisions);
