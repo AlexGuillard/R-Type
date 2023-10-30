@@ -161,6 +161,12 @@ namespace Network {
             const ECS::Components::PositionComponent &position,
             const ECS::Components::VelocityComponent &velocity,
             const Enums::TeamGroup team);
+        void _shootWaveBeam(
+            ECS::Containers::Registry &registry,
+            const ECS::Components::PositionComponent &position,
+            const ECS::Components::VelocityComponent &velocity,
+            const Enums::TeamGroup team,
+            const int strength);
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

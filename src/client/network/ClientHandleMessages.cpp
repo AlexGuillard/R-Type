@@ -149,7 +149,7 @@ void Network::ClientNetwork::handleWaveBeamSpawn(const header &messageHeader, st
         BodyNumber footer = getBody(str);
 
         if (footer.number == 322) {
-            // ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.team, missileData.strength);
+            ECS::Creator::createWaveBeam(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.team, missileData.strength);
         }
     } else {
         str.clear();

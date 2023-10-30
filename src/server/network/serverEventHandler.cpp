@@ -106,6 +106,31 @@ namespace Network {
         res.clear();
     }
 
+    void ServerNetwork::_shootWaveBeam(
+        ECS::Containers::Registry &registry,
+        const ECS::Components::PositionComponent &position,
+        const ECS::Components::VelocityComponent &velocity,
+        const Enums::TeamGroup team,
+        const int strength
+    )
+    {
+        std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
+        auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+        auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
+        std::string res = "";
+        int pos[2] = { (int)position.x, (int)position.y };
+        int vel[2] = { (int)velocity.x, (int)velocity.y };
+
+        std::cout << strength << std::endl;
+        res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId));
+        res.append(Send::makeBodyMissile(pos, vel, team, strength));
+        res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_WAVE_BEAM));
+        for (const auto &[_, endpoint] : _listUdpEndpoints) {
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
+        }
+        res.clear();
+    }
+
     void ServerNetwork::serverEventHandler(
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
@@ -150,10 +175,14 @@ namespace Network {
         for (auto &[id, heldInfo] : timeSinceShootHeld) {
             auto &[isHeld, timeHeld] = heldInfo;
             if (isHeld) { continue; } // only shoot when the button is released
-            if (timeHeld > 0) {
-                if (positions[id] && velocities[id] && teams[id]) {
+            if (timeHeld > 0 && positions[id] && velocities[id] && teams[id]) {
+                if (timeHeld < Constants::timeNeededForWaveBeam) {
                     this->_shootMissile(
                         registry, *positions[id], *velocities[id], teams[id]->team
+                    );
+                } else {
+                    this->_shootWaveBeam(
+                        registry, *positions[id], *velocities[id], teams[id]->team, Player::calculateWaveBeamStrength(timeHeld)
                     );
                 }
 

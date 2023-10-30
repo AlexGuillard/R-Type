@@ -14,8 +14,6 @@
 #include "ECS/Components/ControllableComponent.hpp"
 
 namespace ECS::Systems {
-    // time (in s) player need to hold the fire button to shoot a wave beam
-    const double timeNeededForWaveBeam = 1;
     /**
      * @brief Handles the input of the player
      */

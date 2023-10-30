@@ -27,4 +27,9 @@ namespace Player {
         std::size_t down,
         std::size_t left,
         std::size_t right);
+
+    /**
+     * @brief Calculate Wave beam strength based on the time the button was held
+     */
+    int calculateWaveBeamStrength(double timeButtonHeld);
 } // namespace Player
