@@ -156,6 +156,11 @@ namespace Network {
             ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
             ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
             ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams);
+        void _shootMissile(
+            ECS::Containers::Registry &registry,
+            const ECS::Components::PositionComponent &position,
+            const ECS::Components::VelocityComponent &velocity,
+            const Enums::TeamGroup team);
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

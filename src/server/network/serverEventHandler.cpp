@@ -83,14 +83,11 @@ namespace Network {
         }
     }
 
-    static void shootMissile(
-        GameEngine::GameEngine &_engine,
+    void ServerNetwork::_shootMissile(
         ECS::Containers::Registry &registry,
         const ECS::Components::PositionComponent &position,
-        ECS::Components::VelocityComponent &velocity,
-        const Enums::TeamGroup &team,
-        const std::unordered_map<std::string, boost::asio::ip::udp::endpoint> &listUdpEndpoints,
-        boost::asio::ip::udp::socket &asyncSocket
+        const ECS::Components::VelocityComponent &velocity,
+        const Enums::TeamGroup team
     )
     {
         std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
@@ -103,8 +100,8 @@ namespace Network {
         res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId));
         res.append(Send::makeBodyMissile(pos, vel, team, 1));
         res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE));
-        for (const auto &[_, endpoint] : listUdpEndpoints) {
-            asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
+        for (const auto &[_, endpoint] : _listUdpEndpoints) {
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
         res.clear();
     }
@@ -155,9 +152,8 @@ namespace Network {
             if (isHeld) { continue; } // only shoot when the button is released
             if (timeHeld > 0) {
                 if (positions[id] && velocities[id] && teams[id]) {
-                    shootMissile(
-                        _engine, registry, *positions[id], *velocities[id],
-                        teams[id]->team, _listUdpEndpoints, _asyncSocket
+                    this->_shootMissile(
+                        registry, *positions[id], *velocities[id], teams[id]->team
                     );
                 }
 
