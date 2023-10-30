@@ -15,11 +15,9 @@
 
 bool isServerRunning = true;
 boost::asio::io_service ioService;
-std::mutex ioServiceMutex;
 
 void signalHandler(int signum)
 {
-    std::lock_guard<std::mutex> lock(ioServiceMutex);
     isServerRunning = false;
     ioService.stop();
 }
@@ -33,7 +31,7 @@ int main(int argc, char **argv)
     // catch CTRL-C
     signal(SIGINT, signalHandler);
     try {
-        Network::ServerNetwork network(ioService, ioServiceMutex, port, portUdp);
+        Network::ServerNetwork network(ioService, port, portUdp);
         while (isServerRunning) {
             network.update();
         }
