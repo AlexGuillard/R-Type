@@ -94,8 +94,8 @@ Inheritance diagram for Network::ServerNetwork:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17b2e7de81cbc55d7d36f4ee18c05bce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a17b2e7de81cbc55d7d36f4ee18c05bce">ServerNetwork</a> (boost::asio::io_service &amp;io_service, int portTcp, int portUdp)</td></tr>
-<tr class="separator:a17b2e7de81cbc55d7d36f4ee18c05bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac60a8a89641cf80ffd0c9c5f8fd8b504"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#ac60a8a89641cf80ffd0c9c5f8fd8b504">ServerNetwork</a> (boost::asio::io_service &amp;io_service, std::mutex &amp;ioServiceMutex, int portTcp, int portUdp)</td></tr>
+<tr class="separator:ac60a8a89641cf80ffd0c9c5f8fd8b504"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a735dd788ec03403b118f0947561e6327"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a735dd788ec03403b118f0947561e6327">~ServerNetwork</a> ()</td></tr>
 <tr class="separator:a735dd788ec03403b118f0947561e6327"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a917ccff23db3cb6c6019988a9e7a86fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerNetwork.html#a917ccff23db3cb6c6019988a9e7a86fb">tcpConnection</a> ()</td></tr>
@@ -183,8 +183,8 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespaceNetwork.html">Network</a> class for server. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a17b2e7de81cbc55d7d36f4ee18c05bce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17b2e7de81cbc55d7d36f4ee18c05bce">&#9670;&nbsp;</a></span>ServerNetwork()</h2>
+<a id="ac60a8a89641cf80ffd0c9c5f8fd8b504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac60a8a89641cf80ffd0c9c5f8fd8b504">&#9670;&nbsp;</a></span>ServerNetwork()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,6 +194,12 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">boost::asio::io_service &amp;&#160;</td>
           <td class="paramname"><em>io_service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mutex &amp;&#160;</td>
+          <td class="paramname"><em>ioServiceMutex</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
