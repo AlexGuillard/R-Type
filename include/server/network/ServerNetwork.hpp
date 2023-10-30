@@ -87,6 +87,8 @@ namespace Network {
          * @brief Runs the io service of asio
         */
         void update();
+        // variable to stage number of the actuel stage
+        int _stage;
     protected:
         // int for udp port to send when tcp connection
         int _portUdp;
