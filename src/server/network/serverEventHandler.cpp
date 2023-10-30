@@ -8,7 +8,10 @@
 #include <unordered_map>
 #include <vector>
 
-#include "ECS/Systems/serverEventHandler.hpp"
+#include "enums.hpp"
+#include "server/network/sendCode.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "server/network/ServerNetwork.hpp"
 #include "GameEngine/Events.hpp"
 #include "GameEngine/GameEngine.hpp"
 #include "Player/utils.hpp"
@@ -27,7 +30,7 @@
 
 #include <iostream>
 
-namespace ECS::Systems {
+namespace Network {
     struct PlayerInput {
         float up = 0.F;
         float down = 0.F;
@@ -43,12 +46,12 @@ namespace ECS::Systems {
      * @param dt Delta time on the server.
     */
     static void applyVelocity(
-        Containers::Registry &registry,
+        ECS::Containers::Registry &registry,
         int entityId,
         const PlayerInput &inputs)
     {
-        const float dt = GameEngine::GameEngine::getDeltaTime();
-        const float clientDt = 1. / Constants::frameRate;
+        const float dt = (float)GameEngine::GameEngine::getDeltaTime();
+        const float clientDt = 1.F / Constants::frameRate;
         const float rateDiff = dt / clientDt;
         auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
         auto &&hitboxes = registry.getComponents<ECS::Components::HitBoxComponent>();
@@ -72,11 +75,11 @@ namespace ECS::Systems {
         velocities[entityId]->y = 0;
     }
 
-    void serverEventHandler(
-        Containers::Registry &registry,
-        Containers::SparseArray<Components::PositionComponent> &positions,
-        Containers::SparseArray<Components::VelocityComponent> &velocities,
-        Containers::SparseArray<Components::TeamComponent> &teams)
+    void ServerNetwork::serverEventHandler(
+        ECS::Containers::Registry &registry,
+        ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
+        ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams)
     {
         GameEngine::Events::Type event;
         int entityId = 0;
@@ -84,7 +87,7 @@ namespace ECS::Systems {
 
         while (GameEngine::Events::poll(event, entityId)) {
             switch (event) {
-            using enum GameEngine::Events::Type;
+                using enum GameEngine::Events::Type;
             case PLAYER_UP:
                 playerInputs[entityId].up++;
                 break;
@@ -99,7 +102,23 @@ namespace ECS::Systems {
                 break;
             case PLAYER_SHOOT:
                 if (teams[entityId] && positions[entityId]) {
-                    ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
+                    std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), positions[entityId]->x, positions[entityId]->y, teams[entityId]->team);
+
+                    auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+                    auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
+                    std::string res = "";
+                    int pos[2] = {(int)positions[entityId]->x, (int)positions[entityId]->y};
+                    int velocity[2] = {(int)velocities[entityId]->x, (int)velocities[entityId]->y};
+                    Enums::TeamGroup team = teams[entityId]->team;
+
+                    _dataToSend.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId));
+                    _dataToSend.append(Send::makeBodyMissile(pos, velocity, team, 1));
+                    _dataToSend.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE));
+                    for (const auto &pair : _listUdpEndpoints) {
+                        const boost::asio::ip::udp::endpoint &endpoint = pair.second;
+                        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()), endpoint);
+                    }
+                    _dataToSend.clear();
                 }
                 break;
             default:
@@ -112,4 +131,4 @@ namespace ECS::Systems {
             }
         }
     }
-} // namespace ECS::Systems
+} // namespace Network::ServerNetwork

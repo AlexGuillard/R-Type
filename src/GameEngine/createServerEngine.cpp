@@ -5,29 +5,28 @@
 ** createServerEngine
 */
 
-#include "GameEngine/GameEngine.hpp"
+#include <functional>
 
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
-#include "ECS/Systems/serverEventHandler.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
     namespace Components = ECS::Components;
-    namespace Systems = ECS::Systems;
 
-    static void initEntitiesRegistry(Containers::Registry &registry)
+    static void initEntitiesRegistry(Containers::Registry &registry, ServerEventHandler serverEventHandler)
     {
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::serverEventHandler);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(serverEventHandler);
     }
 
-    GameEngine createServerEngine()
+    GameEngine createServerEngine(ServerEventHandler serverEventHandler)
     {
         GameEngine engine = createEngine();
 
-        initEntitiesRegistry(engine[registryTypeEntities]);
+        initEntitiesRegistry(engine[registryTypeEntities], serverEventHandler);
         return engine;
     }
 

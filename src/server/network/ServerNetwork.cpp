@@ -17,7 +17,9 @@
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, std::mutex &ioServiceMutex, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
-    _timer(io_service), _portUdp(portUdp), _engine(GameEngine::createServerEngine()), _ioServiceMutex(std::ref(ioServiceMutex))
+    _timer(io_service), _portUdp(portUdp),
+    _engine(GameEngine::createServerEngine(std::bind(&Network::ServerNetwork::serverEventHandler, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4))),
+    _ioServiceMutex(std::ref(ioServiceMutex))
 {
     std::lock_guard<std::mutex> lock(_ioServiceMutex);
     boost::asio::ip::tcp::resolver resolver(_ioService);

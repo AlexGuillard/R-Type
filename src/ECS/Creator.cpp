@@ -30,6 +30,7 @@
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
+#include "GameEngine/Events.hpp"
 
 namespace ECS {
 
@@ -183,6 +184,7 @@ namespace ECS {
                 Utils::Vector2(3, 0) // end
             );
         }
+        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_MISSILE, id);
         return missile;
     }
 
