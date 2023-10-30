@@ -92,24 +92,6 @@ namespace ECS::Systems {
                 Components::maxWaveBeamStrength
             );
             auto missileEntity = registry.spawnEntity();
-            if (strength > 1) {
-                registry.emplaceComponent<ECS::Components::WaveBeamComponent>(
-                    missileEntity,
-                    position.x,
-                    position.y,
-                    team,
-                    static_cast<std::size_t>(strength * Components::waveBeamBaseDamage),
-                    strength
-                );
-            } else {
-                registry.emplaceComponent<ECS::Components::MissileComponent>(
-                    missileEntity,
-                    position.x,
-                    position.y,
-                    team,
-                    static_cast<std::size_t>(strength * Components::missileBaseDamage)
-                );
-            }
             controllable.timeFireButtonHeld = 0;
         }
     }
