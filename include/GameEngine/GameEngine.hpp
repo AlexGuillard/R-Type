@@ -63,7 +63,8 @@ namespace GameEngine {
          * @return The delta time
          */
         static double getDeltaTime();
-
+        //add list id of boss
+        std::vector<ECS::Entity> _listIdBoss;
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
