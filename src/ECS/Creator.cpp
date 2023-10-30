@@ -135,7 +135,6 @@ namespace ECS {
         Enums::TeamGroup team
     )
     {
-        std::cout << "Creating bydo shot" << std::endl;
         Entity shot = Creator::createCharacter(
             registry,
             team,
@@ -166,15 +165,126 @@ namespace ECS {
         ECS::Entity missile = ECS::Creator::createCharacter(registry, team, 1, 1, 16, 16, id);
         registry.getComponents<Components::PositionComponent>().at(missile)->x = x;
         registry.getComponents<Components::PositionComponent>().at(missile)->y = y;
-        registry.getComponents<Components::VelocityComponent>().at(missile)->x = Components::missileSpeed;
         registry.getComponents<Components::VelocityComponent>().at(missile)->y = 0;
-        registry.emplaceComponent<Components::DrawableComponent>(missile,
-            Assets::AssetsIndex::MISSILE_PNG,
-            Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
-            missileFramePos, // start
-            missileFramePos // end
-        );
+        if (Enums::TeamGroup::ALLY == team) {
+            registry.getComponents<Components::VelocityComponent>().at(missile)->x = Components::missileSpeed;
+            registry.emplaceComponent<Components::DrawableComponent>(missile,
+                Assets::AssetsIndex::MISSILE_PNG,
+                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                missileFramePos, // start
+                missileFramePos // end
+            );
+        } else {
+            registry.getComponents<Components::VelocityComponent>().at(missile)->x = -Components::missileSpeed;
+            registry.emplaceComponent<Components::DrawableComponent>(missile,
+                Assets::AssetsIndex::MISSILE_PNG,
+                Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                Utils::Vector2(3, 0), // start
+                Utils::Vector2(3, 0) // end
+            );
+        }
         return missile;
+    }
+
+    Entity Creator::createWaveBeam(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team, int strengh)
+    {
+        const Utils::Vector2 missileFramePos(2, 0);
+        const uint8_t nbFrameInSpriteSheet = 2;
+
+        ECS::Entity wavebeam = ECS::Creator::createCharacter(registry, team, 1, 1, 27, 12, id);
+        registry.getComponents<Components::PositionComponent>().at(wavebeam)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(wavebeam)->y = y;
+        registry.getComponents<Components::VelocityComponent>().at(wavebeam)->y = 0;
+        if (Enums::TeamGroup::ALLY == team) {
+            registry.getComponents<Components::VelocityComponent>().at(wavebeam)->x = Components::missileSpeed;
+            switch (strengh) {
+            case 2:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT2_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 3:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT3_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 4:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT4_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 5:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT5_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            default:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_OUT1_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            }
+        } else {
+            registry.getComponents<Components::VelocityComponent>().at(wavebeam)->x = -Components::missileSpeed;
+            switch (strengh) {
+            case 2:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE2_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 3:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE3_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 4:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE4_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            case 5:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE5_PNG,
+                    Utils::Vector2(3, 1), // frameRatio
+                    Utils::Vector2(0, 0), // start
+                    Utils::Vector2(0, 0) // end
+                );
+                break;
+            default:
+                registry.emplaceComponent<Components::DrawableComponent>(wavebeam,
+                    Assets::AssetsIndex::WAVEBEAM_FLARE1_PNG,
+                    Utils::Vector2(nbFrameInSpriteSheet, 1), // frameRatio
+                    missileFramePos, // start
+                    missileFramePos // end
+                );
+                break;
+            }
+        }
+        return wavebeam;
     }
 
     Entity Creator::createEnemyBasic(Containers::Registry &registry, size_t id, int x, int y)
@@ -183,10 +293,10 @@ namespace ECS {
         const uint8_t nbFrameInAnimation = 8;
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 20, 24, id);
+        registry.emplaceComponent<Components::PositionComponent>(enemyBasic, x, y);
         registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
         registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
-        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->frequency = 0.01;
         registry.emplaceComponent<Components::DrawableComponent>(enemyBasic,
             Assets::AssetsIndex::R_TYPESHEET5_PNG,
             nbFrameInSpriteSheet, // frameRatio

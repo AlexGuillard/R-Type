@@ -23,6 +23,7 @@ namespace ECS::Containers {
     class Registry {
     public:
         Registry() = default;
+        Registry(std::size_t reservedIds) : m_nbEntities(reservedIds) {};
         /**
          * @brief Adds a new component array to our associative container
          * @tparam Component type of the component to register

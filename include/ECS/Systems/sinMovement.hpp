@@ -9,7 +9,7 @@
 
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/SinMovementComponent.hpp"
-#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
 
 namespace ECS::Systems {
     /**
@@ -18,5 +18,5 @@ namespace ECS::Systems {
     void sinMovement(
         Containers::Registry &registry,
         Containers::SparseArray<Components::SinMovementComponent> &sinMovements,
-        Containers::SparseArray<Components::PositionComponent> &positions);
+        Containers::SparseArray<Components::VelocityComponent> &velocities);
 } // namespace ECS::Systems

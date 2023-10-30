@@ -169,7 +169,9 @@ void Network::ServerNetwork::updateGame()
         }
     }
     _engine.run();
-    sendClientEntities();
+    if (_tickCount > 2) {
+        sendClientEntities();
+    }
 }
 
 void Network::ServerNetwork::sendClientEntities()
@@ -180,27 +182,29 @@ void Network::ServerNetwork::sendClientEntities()
 
     for (int i = 0; i < dataPositions.size(); i++) {
         if (dataPositions[i].has_value()) {
-            res.append(Send::makeHeader(331, i));
-            res.append(Send::makeBodyPosition(dataPositions[i].value()));
+            _dataToSend.append(Send::makeHeader(331, i));
+            _dataToSend.append(Send::makeBodyPosition(dataPositions[i].value()));
             if (dataVelocity[i].has_value()) {
-                res.append(Send::makeBodyVelocity(dataVelocity[i].value()));
+                _dataToSend.append(Send::makeBodyVelocity(dataVelocity[i].value()));
             } else {
-                res.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
+                _dataToSend.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
             }
-            res.append(Send::makeBodyNum(331));
+            _dataToSend.append(Send::makeBodyNum(_tickCount));
+            _dataToSend.append(Send::makeBodyNum(331));
         }
     }
     for (const auto& pair : _listUdpEndpoints) {
         const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
     }
+    _dataToSend.clear();
 }
 
 void Network::ServerNetwork::updateTicks()
 {
-    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
+    _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
-        std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
+        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
@@ -210,7 +214,6 @@ void Network::ServerNetwork::updateTicks()
         if (_canPlay) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
-                std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
             updateGame();
@@ -234,10 +237,8 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
             }
         }
         _data.clear();
-        asyncReceive(_asyncSocket);
-    } else {
-        asyncReceive(_asyncSocket);
     }
+    asyncReceive(_asyncSocket);
 }
 
 std::string Network::ServerNetwork::getActualClient() const
@@ -250,7 +251,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         _ids[getActualClient()].first = clientData.entity;
-        if (_listUdpEndpoints.size() == _clients.size()) {
+        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false && _isGame) {
             _canPlay = true;
             SendClientsPlay();
         }
@@ -263,6 +264,9 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
+    if (error) {
+        std::cerr << "Error sending data: " << error.message() << std::endl;
+    }
     asyncReceive(_asyncSocket);
 }
 
@@ -279,7 +283,7 @@ void Network::ServerNetwork::update()
 
 void Network::ServerNetwork::handleClientData(int num)
 {
-    if (num >= 211 && num <= 216) {
+    if (num >= 210 && num <= 216) {
         if (_ids.count(getActualClient())) {
             _ids[getActualClient()].second.push_back(num);
         }
@@ -288,9 +292,8 @@ void Network::ServerNetwork::handleClientData(int num)
 
 void Network::ServerNetwork::SpawnMob(Info script)
 {
-    std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
-    const int x = Constants::cameraDefaultWidth;
+    const int x = Constants::cameraDefaultWidth - 10;
 
     if (script.rfc >= 301 && script.rfc <= 307) {
         ECS::Entity entity = registry.spawnEntity();
@@ -320,13 +323,9 @@ void Network::ServerNetwork::SpawnMob(Info script)
             default:
                 break;
         }
-        res.append(Send::makeHeader(script.rfc, entity));
-        res.append(Send::makeBodyMob(x, script.y, script.extra.side));
-        res.append(Send::makeBodyNum(script.rfc));
-    }
-    for (const auto& pair : _listUdpEndpoints) {
-        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        _dataToSend.append(Send::makeHeader(script.rfc, entity));
+        _dataToSend.append(Send::makeBodyMob(x, script.y, script.extra.side));
+        _dataToSend.append(Send::makeBodyNum(script.rfc));
     }
 }
 
@@ -339,7 +338,7 @@ void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 
 void Network::ServerNetwork::SendClientsPlay()
 {
-    std::string res;
+    std::string res = "";
     Enums::PlayerColor color;
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
@@ -355,11 +354,12 @@ void Network::ServerNetwork::SendClientsPlay()
             color = Enums::PlayerColor::RED_COLOR;
         else
             color = Enums::PlayerColor::BLUE_COLOR;
-        ECS::Entity entity = registry.spawnEntity();
+        ECS::Entity entity = registry.entityFromIndex(allIds.second.first);
         const int x = Constants::cameraDefaultWidth / 5;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
         for (const auto& pair : _listUdpEndpoints) {
+            res.clear();
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
@@ -370,14 +370,9 @@ void Network::ServerNetwork::SendClientsPlay()
                 res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(312));
             }
-            #ifndef _WIN32
-                sleep(1);
-            #else
-                Sleep(1000);
-            #endif
-            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+            for (int i = 0; i < 10; i++)
+                _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
-        allIds.second.first = entity;
         index++;
     }
 }
