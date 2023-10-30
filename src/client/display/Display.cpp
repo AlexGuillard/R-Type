@@ -181,6 +181,7 @@ void Screen::Display::displayHostNameInput()
             color = _buttonFocusedKO;
         } else {
             color = _buttonUnfocusedKO;
+            DrawText("Host Name", posXText - 30, posYText + 0.08 * _hostNameclickableZone.height, fontSizeText, LIGHTGRAY);
         }
     } else {
         if (_state == InputState::HOSTNAME) {
@@ -213,6 +214,7 @@ void Screen::Display::displayPortInput()
             color = _buttonFocusedKO;
         } else {
             color = _buttonUnfocusedKO;
+            DrawText("Port", posXText - 30, posYText + 0.08 * _portclickableZone.height, fontSizeText, LIGHTGRAY);
         }
     } else {
         if (_state == InputState::PORT) {
