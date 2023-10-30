@@ -121,7 +121,6 @@ namespace Network {
         int pos[2] = { (int)position.x, (int)position.y };
         int vel[2] = { (int)velocity.x, (int)velocity.y };
 
-        std::cout << strength << std::endl;
         res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId));
         res.append(Send::makeBodyMissile(pos, vel, team, strength));
         res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_WAVE_BEAM));

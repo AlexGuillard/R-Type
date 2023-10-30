@@ -15,13 +15,11 @@
 #include "enums.hpp"
 #include "constants.hpp"
 
-Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, std::mutex &ioServiceMutex, int portTCP, int portUdp)
+Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
     _timer(io_service), _portUdp(portUdp),
-    _engine(GameEngine::createServerEngine(std::bind(&Network::ServerNetwork::serverEventHandler, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4))),
-    _ioServiceMutex(std::ref(ioServiceMutex))
+    _engine(GameEngine::createServerEngine(std::bind(&Network::ServerNetwork::serverEventHandler, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)))
 {
-    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
     boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
@@ -44,7 +42,6 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, std::
 
 Network::ServerNetwork::~ServerNetwork()
 {
-    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     _acceptor.close();
     _asyncSocket.close();
     _tcp->join();
@@ -196,10 +193,14 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
+        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
-        } else if (_canPlay) {
+            updateTicks();
+            return;
+        }
+        if (_canPlay) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 SendClientsInfo(scriptInfo);
@@ -255,6 +256,7 @@ void Network::ServerNetwork::handleSend(boost::system::error_code error, std::si
     if (error) {
         std::cerr << "Error sending data: " << error.message() << std::endl;
     }
+    asyncReceive(_asyncSocket);
 }
 
 bool Network::ServerNetwork::isGameRunning() const
@@ -264,8 +266,8 @@ bool Network::ServerNetwork::isGameRunning() const
 
 void Network::ServerNetwork::update()
 {
-    std::lock_guard<std::mutex> lock(_ioServiceMutex);
     _ioService.poll();
+    _ioService.reset();
 }
 
 void Network::ServerNetwork::handleClientData(int num)
