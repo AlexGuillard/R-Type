@@ -46,9 +46,9 @@ namespace GameEngine {
     {
         Components::BackgroundComponent backgroundComponent = {
             index,
+            1,
             sizeSpeed[0],
-            sizeSpeed[1],
-            sizeSpeed[2]
+            sizeSpeed[1]
         };
         return backgroundComponent;
     }
@@ -78,22 +78,22 @@ namespace GameEngine {
         };
 
         std::vector<std::vector<double>> sizeAndSpeed = {
-            {double(5.0), double(0.5), double(0.015)},
-            {double(1.0), double(1.0), double(0.010)},
-            {double(1.0), double(1.5), double(0.005)},
-            {double(1.0), double(2.0), double(0.002)}
+            {double(0.5), double(0.015)},
+            {double(0.5), double(0.010)},
+            {double(1.5), double(0.005)},
+            {double(2.0), double(0.002)}
         };
 
         for (size_t i = 0; i < assetIndices.size(); ++i)
         {
             Components::BackgroundComponent background = createBackground(assetIndices[i], sizeAndSpeed[i]);
-            Components::GroundComponent ground = createGround(Assets::AssetsIndex::GROUND1_PNG,  {double(5.0), double(1.0), double(0.020)});
+            Components::GroundComponent ground = createGround(Assets::AssetsIndex::GROUND1_PNG,  {double(3.0), double(1.0), double(0.020)});
             ECS::Entity level = registry.spawnEntity();
             registry.emplaceComponent<Components::BackgroundComponent>(level, background);
             registry.emplaceComponent<Components::LevelComponent>(level, _level);
             registry.emplaceComponent<Components::PositionComponent>(level, 0, 0);
             registry.emplaceComponent<Components::GroundComponent>(level, ground);
-            registry.emplaceComponent<Components::PositionComponent>(level, 0, 950);
+            registry.emplaceComponent<Components::PositionComponent>(level, 0, Constants::cameraDefaultHeight * (1 - 0.1));
         }
     }
 
