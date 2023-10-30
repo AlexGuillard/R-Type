@@ -65,7 +65,9 @@ void Network::ServerTcp::write(std::string message)
     _socket.async_write_some(boost::asio::buffer(message.data(), message.size()),
     [this, self](boost::system::error_code error, std::size_t /*length*/)
     {
-            if (error) {
+        if (!error) {
+            waitRequest();
+        } else {
             _list.leave(shared_from_this());
             removeClient();
         }
