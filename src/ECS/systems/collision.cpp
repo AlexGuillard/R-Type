@@ -5,6 +5,7 @@
 ** collision
 */
 
+#include "GameEngine/GameEngine.hpp"
 #include "ECS/Systems/collision.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Containers/SparseArray.hpp"
@@ -81,6 +82,7 @@ namespace ECS::Systems {
     void collision(
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
+        Containers::SparseArray<Components::VelocityComponent> &velocities,
         Containers::SparseArray<Components::HitBoxComponent> &hitboxes,
         Containers::SparseArray<Components::CollidableComponent> &collidables,
         Containers::SparseArray<Components::CollisionComponent> &collisions)
@@ -91,11 +93,23 @@ namespace ECS::Systems {
             for (auto &&[giverId, giverPosition, giverHitbox, giverCollidable] : Containers::IndexedZipper(positions, hitboxes, collidables)) {
                 // collision giver
                 if (receiverId == giverId) { continue; }
-                if (collidesWith(*receiverHitbox, *receiverPosition, *giverHitbox, *giverPosition)) {
-                    addToCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
-                } else {
-                    removeFromCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
-                }
+                    Components::PositionComponent receiverPositionCopy = *receiverPosition;
+                    Components::VelocityComponent receiverVelocityCopy = velocities[receiverId].has_value() ? *velocities[receiverId] : Components::VelocityComponent(0, 0);
+                    Components::PositionComponent giverPositionCopy = *giverPosition;
+                    Components::VelocityComponent giverVelocityCopy = velocities[giverId].has_value() ? *velocities[giverId] : Components::VelocityComponent(0, 0);
+                    for (std::size_t i = 0; i < 100; i++) {
+                        receiverPositionCopy.x += (receiverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        receiverPositionCopy.y += (receiverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        giverPositionCopy.x += (giverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        giverPositionCopy.y += (giverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                        if (collidesWith(*receiverHitbox, receiverPositionCopy, *giverHitbox, giverPositionCopy)) {
+                            addToCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
+                            break;
+                        } else {
+                            removeFromCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
+                        }
+                    }
+                //}
             }
         }
     }

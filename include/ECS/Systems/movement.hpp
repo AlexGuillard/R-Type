@@ -17,4 +17,9 @@ namespace ECS::Systems {
         Containers::Registry &registry,
         Containers::SparseArray<Components::PositionComponent> &positions,
         Containers::SparseArray<Components::VelocityComponent> &velocities);
+
+    void movement(
+        Containers::Registry &registry,
+        Components::PositionComponent &position,
+        Components::VelocityComponent &velocity);
 };

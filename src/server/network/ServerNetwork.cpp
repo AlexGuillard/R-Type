@@ -13,6 +13,7 @@
 #include "server/network/sendCode.hpp"
 #include "GameEngine/Events.hpp"
 #include "enums.hpp"
+#include "constants.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
@@ -28,7 +29,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     _portUdp = setUdpSocket(portUdp);
     if (_portUdp == -1)
         throw std::runtime_error("Can not set server udp");
-    _script.openFile();
+    _script.openLVL(1);
     std::cout << "tcp on " << portTCP << std::endl;
     std::cout << "udp on " << _portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
@@ -156,13 +157,42 @@ void Network::ServerNetwork::updateGame()
         data.second.clear();
     }
     _engine.run();
-    auto &&data = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+    if (_tickCount > 2) {
+        sendClientEntities();
+    }
+}
+
+void Network::ServerNetwork::sendClientEntities()
+{
+    auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
+    auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
+    std::string res = "";
+
+    for (int i = 0; i < dataPositions.size(); i++) {
+        if (dataPositions[i].has_value()) {
+            _dataToSend.append(Send::makeHeader(331, i));
+            _dataToSend.append(Send::makeBodyPosition(dataPositions[i].value()));
+            if (dataVelocity[i].has_value()) {
+                _dataToSend.append(Send::makeBodyVelocity(dataVelocity[i].value()));
+            } else {
+                _dataToSend.append(Send::makeBodyVelocity(static_cast<ECS::Components::VelocityComponent>(0, 0)));
+            }
+            _dataToSend.append(Send::makeBodyNum(_tickCount));
+            _dataToSend.append(Send::makeBodyNum(331));
+        }
+    }
+    for (const auto& pair : _listUdpEndpoints) {
+        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
+    }
+    _dataToSend.clear();
 }
 
 void Network::ServerNetwork::updateTicks()
 {
-    _timer.expires_from_now(boost::posix_time::millisec(TICKS_UPDATE));
+    _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
+        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
@@ -172,7 +202,6 @@ void Network::ServerNetwork::updateTicks()
         if (_canPlay) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
-                std::cout << "info to add in game" << std::endl;
                 SendClientsInfo(scriptInfo);
             }
             updateGame();
@@ -196,10 +225,8 @@ void Network::ServerNetwork::handleReceive(boost::system::error_code error, std:
             }
         }
         _data.clear();
-        asyncReceive(_asyncSocket);
-    } else {
-        asyncReceive(_asyncSocket);
     }
+    asyncReceive(_asyncSocket);
 }
 
 std::string Network::ServerNetwork::getActualClient() const
@@ -212,7 +239,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         _ids[getActualClient()].first = clientData.entity;
-        if (_listUdpEndpoints.size() == _clients.size()) {
+        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false && _isGame) {
             _canPlay = true;
             SendClientsPlay();
         }
@@ -225,6 +252,9 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
 
 void Network::ServerNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
+    if (error) {
+        std::cerr << "Error sending data: " << error.message() << std::endl;
+    }
     asyncReceive(_asyncSocket);
 }
 
@@ -241,7 +271,7 @@ void Network::ServerNetwork::update()
 
 void Network::ServerNetwork::handleClientData(int num)
 {
-    if (num >= 211 && num <= 216) {
+    if (num >= 210 && num <= 216) {
         if (_ids.count(getActualClient())) {
             _ids[getActualClient()].second.push_back(num);
         }
@@ -250,40 +280,36 @@ void Network::ServerNetwork::handleClientData(int num)
 
 void Network::ServerNetwork::SpawnMob(Info script)
 {
-    std::string res = "";
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
+    const int x = Constants::cameraDefaultWidth - 10;
 
     if (script.rfc >= 301 && script.rfc <= 306) {
         ECS::Entity entity = registry.spawnEntity();
         switch (script.rfc) {
             case 301:
-                ECS::Creator::createEnemyBasic(registry, entity, 1940, script.y);
+                ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
                 break;
             case 302:
-                ECS::Creator::createBink(registry, entity, 1940, script.y);
+                ECS::Creator::createBink(registry, entity, x, script.y);
                 break;
             case 303:
-                ECS::Creator::createScant(registry, entity, 1940, script.y);
+                ECS::Creator::createScant(registry, entity, x, script.y);
                 break;
             case 304:
-                ECS::Creator::createBug(registry, entity, 1940, script.y);
+                ECS::Creator::createBug(registry, entity, x, script.y);
                 break;
             case 305:
-                ECS::Creator::createCancer(registry, entity, 1940, script.y);
+                ECS::Creator::createCancer(registry, entity, x, script.y);
                 break;
             case 306:
-                ECS::Creator::createBlaster(registry, entity, 1940, script.y);
+                ECS::Creator::createBlaster(registry, entity, x, script.y);
                 break;
             default:
                 break;
         }
-        res.append(Send::makeHeader(script.rfc, entity));
-        res.append(Send::makeBodyMob(1940, script.y, script.extra.side));
-        res.append(Send::makeBodyNum(script.rfc));
-    }
-    for (const auto& pair : _listUdpEndpoints) {
-        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+        _dataToSend.append(Send::makeHeader(script.rfc, entity));
+        _dataToSend.append(Send::makeBodyMob(x, script.y, script.extra.side));
+        _dataToSend.append(Send::makeBodyNum(script.rfc));
     }
 }
 
@@ -296,12 +322,12 @@ void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
 
 void Network::ServerNetwork::SendClientsPlay()
 {
-    std::string res;
+    std::string res = "";
     Enums::PlayerColor color;
     int index = 0;
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
 
-    for (const auto& allIds : _ids) {
+    for (auto &allIds : _ids) {
         if (index == 0)
             color = Enums::PlayerColor::CYAN_COLOR;
         else if (index == 1)
@@ -312,25 +338,24 @@ void Network::ServerNetwork::SendClientsPlay()
             color = Enums::PlayerColor::RED_COLOR;
         else
             color = Enums::PlayerColor::BLUE_COLOR;
-        ECS::Entity entity = registry.spawnEntity();
-        ECS::Creator::createAlly(registry, entity, 50, 50, color);
+        ECS::Entity entity = registry.entityFromIndex(allIds.second.first);
+        const int x = Constants::cameraDefaultWidth / 5;
+        const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
+        ECS::Creator::createAlly(registry, entity, x, y, color);
         for (const auto& pair : _listUdpEndpoints) {
+            res.clear();
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(50, 50, color));
+                res.append(Send::makeBodyAlly(x, y, color));
                 res.append(Send::makeBodyNum(312));
             }
-            #ifndef _WIN32
-                sleep(1);
-            #else
-                Sleep(1000);
-            #endif
-            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+            for (int i = 0; i < 10; i++)
+                _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
         }
         index++;
     }

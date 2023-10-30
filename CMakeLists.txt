@@ -11,7 +11,10 @@ set(CMAKE_CXX_STANDARD 20)
 # add -DDEBUG and -g3 to compiler flags in debug mode
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     add_compile_definitions(DEBUG)
-    add_compile_options(-g3)
+
+    if(NOT WIN32)
+        add_compile_options(-g3)
+    endif()
 endif()
 
 if(WIN32)

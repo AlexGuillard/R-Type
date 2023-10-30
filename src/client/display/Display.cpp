@@ -24,13 +24,12 @@ bool Screen::Display::_playButton = false;
 Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
-    const int fps = 60;
 
     //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
     // We will remove this when the game will be finished or for presentation
     this->resizeWindow(1920, 1080).center();
     // this->toggleFullScreen();
-    // SetTargetFPS(fps);
+    SetTargetFPS(Constants::frameRate);
 }
 
 Screen::Display::~Display()
@@ -141,12 +140,6 @@ void Screen::Display::update()
         if (_menuState == MenuState::CONNECTED) {
             _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
             _gameState = GameState::GAME;
-        }
-    }
-    for (auto it = GameEngine::Events::begin(); it != GameEngine::Events::end(); ++it) {
-        GameEngine::Events::Type type = *it;
-        if (type == GameEngine::Events::Type::PLAYER_SHOOT) {
-            this->shake();
         }
     }
     this->updateShake();

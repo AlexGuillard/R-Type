@@ -28,10 +28,14 @@ namespace ECS::Systems {
         Screen::Display::beginDrawCamera();
         for (auto &&[eId, position, level, background] : Containers::IndexedZipper(positions, levels, backgrounds)) {
             if (eId == (level->level - 1)) {
+                const double time = GetTime();
                 auto &&texture = Assets::AssetLoader::loadTexturePng(background->texture);
-                position->x -= background->paralaxSpeed;
-                if(position->x <= (-(texture.width) * background->frameScale)) {
-                    position->x = 0;
+                if ((time - background->timeAtLastFrameChange) > background->fps) {
+                    background->timeAtLastFrameChange = time;
+                     position->x -= background->paralaxSpeed;
+                        if(position->x <= (-(texture.width) * background->frameScale)) {
+                            position->x = 0;
+                        }
                 }
                 DrawTextureEx(texture,
                 Vector2(position->x, 0),

@@ -18,7 +18,6 @@ namespace ECS {
 
     class Creator {
     public:
-        static constexpr std::size_t defaultScrollSpeed = 100;
         static constexpr float defaultGravity = 9.81F;
 
         Creator() = delete;
@@ -43,8 +42,8 @@ namespace ECS {
          * @param target Target of the AI
          * @param preferredDistance Pair of floats representing the preferred
          * @param speed Walking speed of the entity
-         * @param dropsDownLedge Whether the entity can drops down ledges
-         * @param jumpsOverObstacle Whether the entity can jump over obstacles
+         * @param dropsDownLedge Whether the entity can drops down ledges (not implemented yet)
+         * @param jumpsOverObstacle Whether the entity can jump over obstacles (not implemented yet)
          * @return Entity The entity with the AI
          */
         static Entity addWalkingAI(
@@ -55,6 +54,24 @@ namespace ECS {
             float speed,
             bool dropsDownLedge = false,
             bool jumpsOverObstacle = false);
+
+        /**
+         * @brief Adds a bydo shooting AI to an entity.
+         *
+         * @param entity Entity to add the AI to
+         * @param registry Registry the entity is in
+         * @param target Target of the AI
+         * @param shootCooldown Time between each shot in seconds
+         * @param shotSpeed Speed of the shot in pixels per second
+         * @return Entity The entity with the AI
+         */
+        static Entity addBydoShootingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            float shootCooldown,
+            float shotSpeed
+        );
 
         /**
          * @brief Create a base entity
@@ -85,6 +102,17 @@ namespace ECS {
          */
         static Entity createMissile(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team);
         /**
+         * @brief create a base wave beam
+         *
+         * @param registry The registry to create the entity in
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         * @param team team of the wave beam
+         * @return Entity
+         */
+        static Entity createWaveBeam(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team, int strengh);
+        /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
          * @param team The team the entity belongs to
@@ -102,6 +130,26 @@ namespace ECS {
             std::size_t width,
             std::size_t height,
             std::size_t id
+        );
+
+        /**
+         * @brief Create a bydo shot
+         *
+         * @param registry The registry to create the entity in
+         * @param x The x position of the entity
+         * @param y The y position of the entity
+         * @param xDirection The x direction of the entity
+         * @param yDirection The y direction of the entity
+         * @param team The team the entity belongs to
+         * @return Entity The entity created
+         */
+        static Entity createBydoShot(
+            Containers::Registry &registry,
+            float x,
+            float y,
+            float xDirection,
+            float yDirection,
+            Enums::TeamGroup team = Enums::TeamGroup::ENEMY
         );
 
         /**
@@ -199,6 +247,15 @@ namespace ECS {
          * @param color color of the ship
          */
         static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        /**
+         * @brief Create a Dobkeratops object
+         *
+         * @param registry registre entity
+         * @param id id of entity
+         * @param x position X
+         * @param y position y
+         */
+        static Entity createDobkeratops(Containers::Registry &registry, size_t id, int x, int y);
     private:
         static float mLevelScrollSpeed;
     };
