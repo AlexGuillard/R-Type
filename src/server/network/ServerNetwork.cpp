@@ -167,22 +167,25 @@ void Network::ServerNetwork::updateGame()
             break;
         }
     }
-    if (allyAlive == true && _engine._listIdBoss.size() > 0) {
-        for (int i = 0; i < _engine._listIdBoss.size(); i++) {
-            if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
-                _stage += 1;
-                _tickCount = 1;
-                if (_script.openLVL(_stage) == -1) {
-                    _dataToSend.append(Send::makeHeader(221, 0));
-                    _dataToSend.append(Send::makeBodyNum(221));
-                } else {
-                    _dataToSend.append(Send::makeHeader(231, _stage));
-                    _dataToSend.append(Send::makeBodyNum(231));
+    if (allyAlive == true) {
+        if (_engine._listIdBoss.size() > 0) {
+            for (int i = 0; i < _engine._listIdBoss.size(); i++) {
+                if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
+                    _stage += 1;
+                    _tickCount = 1;
+                    if (_script.openLVL(_stage) == 0) {
+                        _dataToSend.append(Send::makeHeader(221, 0));
+                        _dataToSend.append(Send::makeBodyNum(221));
+                    } else {
+                        _dataToSend.append(Send::makeHeader(231, _stage));
+                        _dataToSend.append(Send::makeBodyNum(231));
+                    }
+                    _engine._listIdBoss.clear();
                 }
-                _engine._listIdBoss.clear();
             }
         }
     } else {
+        std::cout << "all dead" << std::endl;
         _dataToSend.append(Send::makeHeader(222, 0));
         _dataToSend.append(Send::makeBodyNum(222));
     }
