@@ -30,6 +30,7 @@ Screen::Display::Display(GameState state) : _gameState(state)
     this->resizeWindow(1920, 1080).center();
     // this->toggleFullScreen();
     SetTargetFPS(Constants::frameRate);
+    _errorConnection = false;
 }
 
 Screen::Display::~Display()
@@ -85,7 +86,10 @@ void Screen::Display::beginUpdate()
     this->detectActionMenu();
     this->update();
     BeginDrawing();
-    ClearBackground(RAYWHITE);
+    if (!_errorConnection)
+        ClearBackground(RAYWHITE);
+    else
+        ClearBackground(ORANGE);
 }
 
 void Screen::Display::endUpdate()
@@ -151,6 +155,22 @@ bool Screen::Display::getPlayButton()
 }
 
 ///// Menu
+
+void Screen::Display::setErrorConnection(bool error)
+{
+    _errorConnection = error;
+}
+
+bool Screen::Display::getErrorConnection()const
+{
+    return _errorConnection;
+}
+
+void Screen::Display::displayErrorConnection()
+{
+    DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
+}
+
 static Rectangle getInputRect(int posX, int posY)
 {
     const int screenWidth = GetScreenWidth();
@@ -181,6 +201,7 @@ void Screen::Display::displayHostNameInput()
             color = _buttonFocusedKO;
         } else {
             color = _buttonUnfocusedKO;
+            DrawText("Host Name", posXText - 30, posYText + 0.08 * _hostNameclickableZone.height, fontSizeText, LIGHTGRAY);
         }
     } else {
         if (_state == InputState::HOSTNAME) {
@@ -213,6 +234,7 @@ void Screen::Display::displayPortInput()
             color = _buttonFocusedKO;
         } else {
             color = _buttonUnfocusedKO;
+            DrawText("Port", posXText - 30, posYText + 0.08 * _portclickableZone.height, fontSizeText, LIGHTGRAY);
         }
     } else {
         if (_state == InputState::PORT) {
