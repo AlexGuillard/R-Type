@@ -171,6 +171,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae70c19f639b00bc564d03e5b84157c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ae70c19f639b00bc564d03e5b84157c0a">detectActionWaitingRoom</a> (Rectangle playButtonRect)</td></tr>
 <tr class="memdesc:ae70c19f639b00bc564d03e5b84157c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">detect the action in waiting room  <a href="classScreen_1_1Display.html#ae70c19f639b00bc564d03e5b84157c0a">More...</a><br /></td></tr>
 <tr class="separator:ae70c19f639b00bc564d03e5b84157c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf02e862e7e5b69cf732bcc8e63222cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#aaf02e862e7e5b69cf732bcc8e63222cc">displayErrorConnection</a> ()</td></tr>
+<tr class="memdesc:aaf02e862e7e5b69cf732bcc8e63222cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Error Connection when the port or just connection just failed.  <a href="classScreen_1_1Display.html#aaf02e862e7e5b69cf732bcc8e63222cc">More...</a><br /></td></tr>
+<tr class="separator:aaf02e862e7e5b69cf732bcc8e63222cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a793d70c13accfb0d65c85b3bf0969965"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a793d70c13accfb0d65c85b3bf0969965">setErrorConnection</a> (bool error)</td></tr>
+<tr class="memdesc:a793d70c13accfb0d65c85b3bf0969965"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Error Connection object.  <a href="classScreen_1_1Display.html#a793d70c13accfb0d65c85b3bf0969965">More...</a><br /></td></tr>
+<tr class="separator:a793d70c13accfb0d65c85b3bf0969965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3762cb44fa64372887d65b7cc1ba2df1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a3762cb44fa64372887d65b7cc1ba2df1">getErrorConnection</a> () const</td></tr>
+<tr class="memdesc:a3762cb44fa64372887d65b7cc1ba2df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Error Connection object.  <a href="classScreen_1_1Display.html#a3762cb44fa64372887d65b7cc1ba2df1">More...</a><br /></td></tr>
+<tr class="separator:a3762cb44fa64372887d65b7cc1ba2df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -475,6 +484,25 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aaf02e862e7e5b69cf732bcc8e63222cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf02e862e7e5b69cf732bcc8e63222cc">&#9670;&nbsp;</a></span>displayErrorConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::displayErrorConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write Error Connection when the port or just connection just failed. </p>
+
+</div>
+</div>
 <a id="ac42929166bf61b69b06791e02142ce15"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac42929166bf61b69b06791e02142ce15">&#9670;&nbsp;</a></span>displayHostNameInput()</h2>
 
@@ -669,6 +697,28 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The size of the camera view </dd></dl>
+
+</div>
+</div>
+<a id="a3762cb44fa64372887d65b7cc1ba2df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3762cb44fa64372887d65b7cc1ba2df1">&#9670;&nbsp;</a></span>getErrorConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Screen::Display::getErrorConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Error Connection object. </p>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
 
 </div>
 </div>
@@ -983,6 +1033,32 @@ false tcp connection </dd></dl>
 
 <p>Sets the position of the camera. </p>
 <dl class="section return"><dt>Returns</dt><dd>(*this) to allow chain calls </dd></dl>
+
+</div>
+</div>
+<a id="a793d70c13accfb0d65c85b3bf0969965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793d70c13accfb0d65c85b3bf0969965">&#9670;&nbsp;</a></span>setErrorConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::setErrorConnection </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the Error Connection object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
