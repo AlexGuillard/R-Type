@@ -74,6 +74,43 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[231] = [this](const header &h, std::string &s) {
         handleStagesUpdate(h, s);
         };
+    // End game
+    _responseHandlers[221] = [this](const header &h, std::string &s) {
+        handleWinGame(h, s);
+        };
+    _responseHandlers[222] = [this](const header &h, std::string &s) {
+        handleLooseGame(h, s);
+        };
+}
+
+//-----------------------------END GAME--------------------------------------------//
+
+void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 222) {
+            //TODO: handle loose game
+        }
+
+    } else {
+        str.clear();
+    }
+}
+
+void Network::ClientNetwork::handleWinGame(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 221) {
+            //TODO: handle win game
+        }
+
+    } else {
+        str.clear();
+    }
 }
 
 //-----------------------------STAGES--------------------------------------------//

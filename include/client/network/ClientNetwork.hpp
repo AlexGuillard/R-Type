@@ -348,6 +348,20 @@ namespace Network {
          */
         void handleEntityUpdate(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the win conditions of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleWinGame(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the loose conditions of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleLooseGame(const header &messageHeader, std::string &str);
+        /**
          * @brief handle the fact of update the stages of the game
          *
          * @param messageHeader
