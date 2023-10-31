@@ -17,8 +17,9 @@ var searchData=
   ['_5fportudp_14',['_portUdp',['../classNetwork_1_1ServerNetwork.html#a44ffa2f7e9d741d492d00313b490b9ae',1,'Network::ServerNetwork']]],
   ['_5fshootcooldowntimer_15',['_shootCooldownTimer',['../structECS_1_1Components_1_1BydoShootingAIComponent.html#a3270a6e02fb103e445ef2d9386aa2db9',1,'ECS::Components::BydoShootingAIComponent']]],
   ['_5fsocket_16',['_socket',['../classNetwork_1_1ServerTcp.html#a2c3234510db6aa279a27ee67d99d3c1a',1,'Network::ServerTcp']]],
-  ['_5fstarttime_17',['_startTime',['../classScreen_1_1Display.html#ae19c3b6114de79f88a482346aa1c3ba2',1,'Screen::Display']]],
-  ['_5ftickcount_18',['_tickCount',['../classNetwork_1_1ServerNetwork.html#a89b663de091b01c8a177260a13570d44',1,'Network::ServerNetwork']]],
-  ['_5ftimer_19',['_timer',['../classNetwork_1_1ServerNetwork.html#a7a1e3984020e2d8e2030350f5f1016a3',1,'Network::ServerNetwork']]],
-  ['_5fudpport_20',['_udpPort',['../classNetwork_1_1ServerTcp.html#a0ccf97c39156d544ea97d4f008b52129',1,'Network::ServerTcp']]]
+  ['_5fstage_17',['_stage',['../classNetwork_1_1ServerNetwork.html#a61576bac0055393855b69bb3b9082587',1,'Network::ServerNetwork']]],
+  ['_5fstarttime_18',['_startTime',['../classScreen_1_1Display.html#ae19c3b6114de79f88a482346aa1c3ba2',1,'Screen::Display']]],
+  ['_5ftickcount_19',['_tickCount',['../classNetwork_1_1ServerNetwork.html#a89b663de091b01c8a177260a13570d44',1,'Network::ServerNetwork']]],
+  ['_5ftimer_20',['_timer',['../classNetwork_1_1ServerNetwork.html#a7a1e3984020e2d8e2030350f5f1016a3',1,'Network::ServerNetwork']]],
+  ['_5fudpport_21',['_udpPort',['../classNetwork_1_1ServerTcp.html#a0ccf97c39156d544ea97d4f008b52129',1,'Network::ServerTcp']]]
 ];
