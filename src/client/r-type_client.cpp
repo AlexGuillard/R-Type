@@ -34,6 +34,13 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
     Network::updateClientNetworkUDP();
     Screen::Display::drawGame(engine);
+    if (Network::getLoosingCondition()) {
+        window.setGameState(Screen::Display::GameState::LOOSING);
+    }
+    if (Network::getWinningCondition()) {
+        window.setGameState(Screen::Display::GameState::WINNING);
+    }
+
 }
 
 static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
