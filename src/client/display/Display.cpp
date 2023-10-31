@@ -9,6 +9,7 @@
 
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
+#include <cstring>
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
 uint16_t Screen::Display::cameraHeight = Screen::Display::defaultCameraHeight;
@@ -86,12 +87,12 @@ void Screen::Display::beginUpdate()
     this->detectActionMenu();
     this->update();
     BeginDrawing();
-    if (!_errorConnection)
-        ClearBackground(RAYWHITE);
+    if (_errorConnection)
+        ClearBackground(ORANGE);
     else if (_gameState == Screen::Display::GameState::LOOSING)
         ClearBackground(BLACK);
     else
-        ClearBackground(ORANGE);
+        ClearBackground(RAYWHITE);
 }
 
 void Screen::Display::endUpdate()
@@ -481,5 +482,34 @@ Vector2 Screen::Display::getCameraSize()
 
 void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
 {
-    DrawText("GAME OVER", 150, 100, 64, RAYWHITE);
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = (Color){RAYWHITE.r, RAYWHITE.g, RAYWHITE.b, (unsigned char)(alpha * 255)};
+        float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
+        float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
+        float rotation = 360.0f * (elapsedTime / animationDuration);
+
+        ClearBackground(BLACK);
+
+        Vector2 startPosition = {(screenWidth - MeasureText("GAME OVER", 20)) / 2.4, screenHeight / 2.5 + 50 * yOffset};
+        Vector2 textPosition = startPosition;
+
+        const char* text = "GAME OVER";
+        int letterSpacing = 30;
+
+        for (int i = 0; i < strlen(text); i++) {
+            char character[2] = {text[i], '\0'};
+            DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
+            textPosition.x += MeasureText(character, 30) + letterSpacing;
+        }
+
+        EndDrawing();
+    }
 }
