@@ -384,6 +384,8 @@ void Network::ServerNetwork::SendClientsPlay()
         ECS::Creator::createAlly(registry, entity, x, y, color);
         if (_typeMod == 243) {
             registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::NEUTRAL;
+        } else if (_typeMod == 244 && index % 2 != 0) {
+            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::ENEMY;
         }
         for (const auto& pair : _listUdpEndpoints) {
             res.clear();
