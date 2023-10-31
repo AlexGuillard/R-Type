@@ -187,6 +187,7 @@ void Network::ServerNetwork::updateGame()
         _dataToSend.append(Send::makeHeader(222, 0));
         _dataToSend.append(Send::makeBodyNum(222));
     }
+    _engine.run();
     if (_tickCount > 2) {
         sendClientEntities();
     }
