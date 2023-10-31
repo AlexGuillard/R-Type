@@ -402,18 +402,6 @@ namespace Network {
          * @return false
          */
         bool getLooseCondition() const;
-        /**
-         * @brief Set the Win Condition object
-         *
-         * @param winCondition
-         */
-        void setWinCondition(bool winCondition);
-        /**
-         * @brief Set the Loose Condition object
-         *
-         * @param looseCondition
-         */
-        void setLooseCondition(bool looseCondition);
 
     private:
         //Port of the server
