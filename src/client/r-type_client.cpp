@@ -19,6 +19,7 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
             window.setMenuState(Screen::Display::MenuState::CONNECTED);
         } else {
             window.setMenuState(Screen::Display::MenuState::WAITING_FOR_PLAYER_INPUT);
+            window.displayErrorConnection();
         }
     }
 }

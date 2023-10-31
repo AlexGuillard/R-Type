@@ -204,6 +204,11 @@ namespace Screen {
          * @param playButtonRect
          */
         void detectActionWaitingRoom(Rectangle playButtonRect);
+        /**
+         * @brief Write Error Connection when the port or just connection just failed
+         *
+         */
+        void displayErrorConnection();
 
     private:
         /**

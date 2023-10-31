@@ -151,6 +151,12 @@ bool Screen::Display::getPlayButton()
 }
 
 ///// Menu
+
+void Screen::Display::displayErrorConnection()
+{
+    DrawText("Error while the connection with server, try again", 0, 0, 32, RED);
+}
+
 static Rectangle getInputRect(int posX, int posY)
 {
     const int screenWidth = GetScreenWidth();
