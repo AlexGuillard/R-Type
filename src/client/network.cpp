@@ -57,6 +57,16 @@ namespace Network {
         ClientNetwork::getInstance().setEngine(engine);
     }
 
+    bool getWinningCondition()
+    {
+        return ClientNetwork::getInstance().getWinCondition();
+    }
+
+    bool getLoosingCondition()
+    {
+        return ClientNetwork::getInstance().getLooseCondition();
+    }
+
     void updateClientNetworkUDP()
     {
         GameEngine::Events::Type type;
