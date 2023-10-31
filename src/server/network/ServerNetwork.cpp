@@ -159,15 +159,32 @@ void Network::ServerNetwork::updateGame()
         }
         data.second.clear();
     }
-    if (_engine._listIdBoss.size() > 0) {
+    auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
+    bool allyAlive = false;
+    for (const auto &ide : teams) {
+        if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+            allyAlive = true;
+            break;
+        }
+    }
+    if (allyAlive == true && _engine._listIdBoss.size() > 0) {
         for (int i = 0; i < _engine._listIdBoss.size(); i++) {
             if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
                 _stage += 1;
                 _tickCount = 1;
-                _script.openLVL(_stage);
+                if (_script.openLVL(_stage) == -1) {
+                    _dataToSend.append(Send::makeHeader(221, 0));
+                    _dataToSend.append(Send::makeBodyNum(221));
+                } else {
+                    _dataToSend.append(Send::makeHeader(231, _stage));
+                    _dataToSend.append(Send::makeBodyNum(231));
+                }
                 _engine._listIdBoss.clear();
             }
         }
+    } else {
+        _dataToSend.append(Send::makeHeader(222, 0));
+        _dataToSend.append(Send::makeBodyNum(222));
     }
     _engine.run();
     if (_tickCount > 2) {
