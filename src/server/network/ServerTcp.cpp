@@ -11,8 +11,8 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list,
-    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients, bool &isGame)
-    : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients), _isGame(isGame)
+    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod)
+    : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients), _isGame(isGame), _typeMod(mod)
 {
 }
 
@@ -25,6 +25,18 @@ void Network::ServerTcp::start()
     waitRequest();
 }
 
+void Network::ServerTcp::chooseMod()
+{
+    header dataClient = Network::Send::stringToheader(_data);
+
+    if (dataClient.codeRfc == 201 || dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
+    || dataClient.codeRfc == 241 || dataClient.codeRfc == 242) {
+        _typeMod = dataClient.codeRfc;
+        send201();
+        _isGame = true;
+    }
+}
+
 void Network::ServerTcp::waitRequest()
 {
     int res = 0;
@@ -32,16 +44,10 @@ void Network::ServerTcp::waitRequest()
     auto self(shared_from_this());
     _data.resize(MAX_SIZE_BUFF);
     _socket.async_read_some(boost::asio::buffer(_data.data(), _data.size()), [this, self](boost::system::error_code error, std::size_t bytes_transferred) {
-        header dataClient;
 
         if (!error) {
             if (_list.findClient(shared_from_this()) == true) {
-                dataClient = Network::Send::stringToheader(_data);
-                std::cout << "[" << bytes_transferred << "] " << dataClient.codeRfc << " from " << _socket.remote_endpoint().address() << std::endl;
-                if (dataClient.codeRfc == 201) {
-                    send201();
-                    _isGame = true;
-                }
+                chooseMod();
             } else {
                 connection();
             }

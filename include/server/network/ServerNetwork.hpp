@@ -172,5 +172,6 @@ namespace Network {
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
         RecupInfo _script;
+        int _typeMod = 241;
     };
 }

@@ -116,7 +116,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code &erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame)->start();
+        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame, _typeMod)->start();
     }
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -379,6 +379,9 @@ void Network::ServerNetwork::SendClientsPlay()
         const int x = Constants::cameraDefaultWidth / 5;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
+        if (_typeMod == 243) {
+            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::NEUTRAL;
+        }
         for (const auto& pair : _listUdpEndpoints) {
             res.clear();
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
