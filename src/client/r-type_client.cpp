@@ -17,11 +17,14 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
         if (Network::startClientNetwork(window.getHostName(), window.getPort(), 0, Network::ConnectionType::TCP, engine)) {
             window.setGameState(Screen::Display::GameState::WAITINGROOM);
             window.setMenuState(Screen::Display::MenuState::CONNECTED);
+            window.setErrorConnection(false);
         } else {
             window.setMenuState(Screen::Display::MenuState::WAITING_FOR_PLAYER_INPUT);
-            window.displayErrorConnection();
+            window.setErrorConnection(true);
         }
     }
+    if (window.getErrorConnection())
+        window.displayErrorConnection();
 }
 
 static bool isConnected = false;
