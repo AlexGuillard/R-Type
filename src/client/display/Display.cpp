@@ -88,6 +88,8 @@ void Screen::Display::beginUpdate()
     BeginDrawing();
     if (!_errorConnection)
         ClearBackground(RAYWHITE);
+    else if (_gameState == Screen::Display::GameState::LOOSING)
+        ClearBackground(BLACK);
     else
         ClearBackground(ORANGE);
 }
@@ -473,4 +475,11 @@ void Screen::Display::endDrawCamera()
 Vector2 Screen::Display::getCameraSize()
 {
     return Vector2(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
+}
+
+///// Loose
+
+void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
+{
+    DrawText("GAME OVER", 150, 100, 64, RAYWHITE);
 }

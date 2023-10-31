@@ -25,6 +25,8 @@ namespace Screen {
             MENU,
             GAME,
             WAITINGROOM,             // play button waiting room
+            WINNING,
+            LOOSING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -135,6 +137,13 @@ namespace Screen {
          * @param engine GameEngine
          */
         static void drawGame(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief draw the loose screen
+         *
+         * @param engine
+         */
+        static void drawLoose(GameEngine::GameEngine &engine);
 
         /**
          * @brief draw the waitingRoom
