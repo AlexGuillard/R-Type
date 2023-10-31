@@ -85,7 +85,7 @@ void Network::ServerTcp::connection()
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200, idNewClient));
-        send202(0);
+        send202(idNewClient);
     } else {
         write(code401());
     }

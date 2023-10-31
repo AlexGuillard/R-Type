@@ -12,11 +12,19 @@
 #include <utility> // std::pair
 
 #include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 
 namespace GameEngine {
     // Registry type
     const std::string registryTypeEntities = "Entities";
     const std::string registryTypeBackground = "Background";
+
+    typedef std::function<void(ECS::Containers::Registry &registry,
+        ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
+        ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams)> ServerEventHandler;
 
     class GameEngine {
         using Registry = ECS::Containers::Registry;
@@ -27,7 +35,19 @@ namespace GameEngine {
         Registry &operator[](const std::string &type);
         const Registry &operator[](const std::string &type) const;
 
+        /**
+         * @brief Creates a registry of the given type
+         * @param type type of the registry
+         * @return The registry
+        */
         Registry &createRegistry(const std::string &type);
+        /**
+         * @brief Creates a registry of the given type
+         * @param type type of the registry
+         * @param reservedIds number of ids to reserve
+         * @return The registry
+        */
+        Registry &createRegistry(const std::string &type, std::size_t reservedIds);
 
         /**
          * @brief Returns the registry of the given type
@@ -63,7 +83,8 @@ namespace GameEngine {
          * @return The delta time
          */
         static double getDeltaTime();
-
+        //add list id of boss
+        std::vector<ECS::Entity> _listIdBoss;
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
@@ -82,5 +103,5 @@ namespace GameEngine {
     /**
      * @brief Create the game engine that will run the game on the server side
      */
-    GameEngine createServerEngine();
+    GameEngine createServerEngine(ServerEventHandler serverEventHandler);
 }; // namespace ECS::GameEngine

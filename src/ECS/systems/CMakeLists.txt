@@ -13,7 +13,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/walkingAI.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/solid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/background.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/serverEventHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ground.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/horizontalScroll.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/bydoShootingAI.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/findTarget.cpp

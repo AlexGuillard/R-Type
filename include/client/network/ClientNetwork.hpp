@@ -16,6 +16,7 @@
 #include <memory>
 #include <queue>
 #include "GameEngine/GameEngine.hpp"
+#include "constants.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 

@@ -9,6 +9,7 @@
 #include "server/network/sendCode.hpp"
 #include "ECS/Creator.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "enums.hpp"
 
 //-----------------------------CONSTRUCTOR / DESTRUCTOR--------------------------------------------//
 
@@ -38,16 +39,16 @@ void Network::ClientNetwork::sendMovement(Movement movement)
 
     switch (movement) {
     case Movement::UP:
-        message = 211;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_UP);
         break;
     case Movement::DOWN:
-        message = 212;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_DOWN);
         break;
     case Movement::LEFT:
-        message = 213;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_LEFT);
         break;
     case Movement::RIGHT:
-        message = 214;
+        message = static_cast<int>(Enums::RFCCode::PLAYER_RIGHT);
         break;
     default:
         break;
@@ -89,7 +90,9 @@ void Network::ClientNetwork::send201()
 bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP)
 {
     if (isTCP) {
-        connectTCP(host, port);
+        if (!connectTCP(host, port)) {
+            return false;
+        }
         sendHello();
         _host = host;
         return (true);
@@ -102,6 +105,7 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
             std::string res = "";
             res = Network::Send::makeHeader(217, _indexPlayer);
+            asyncReceive(_socket);
             asyncSend(_socket, res);
         }
 
@@ -133,29 +137,31 @@ void Network::ClientNetwork::handleTCPData(const boost::system::error_code &erro
 
 void Network::ClientNetwork::handleNetwork()
 {
-    _ioService.reset();
-    _ioService.poll_one();
+    _ioService.poll();
 }
 
 void Network::ClientNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    _data = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
+    _data.erase(0, recvd_bytes);
+    asyncReceive(_socket);
     if (!error && recvd_bytes > HEADER_SIZE) {
-        while (_data.size() > HEADER_SIZE) {
-            header packet = getHeader(_data);
-            handleMessageData(packet, _data);
+        while (received.size() > HEADER_SIZE) {
+            header packet = getHeader(received);
+            handleMessageData(packet, received);
         }
-        _data.clear();
+        received.clear();
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
-        _data.clear();
+        received.clear();
     }
-    asyncReceive(_socket);
 }
 
 void Network::ClientNetwork::handleSend(boost::system::error_code error, std::size_t recvd_bytes)
 {
-    asyncReceive(_socket);
+    if (error) {
+        std::cerr << "Error sending data: " << error.message() << std::endl;
+    }
 }
 
 void Network::ClientNetwork::stopIOService()
@@ -166,17 +172,13 @@ void Network::ClientNetwork::stopIOService()
 bool Network::ClientNetwork::connectTCP(const std::string &host, int port)
 {
     try {
-        boost::asio::ip::tcp::resolver resolver(_ioService);
-        boost::asio::ip::tcp::resolver::query query(host, std::to_string(port));
-        boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-        boost::asio::connect(_tcpSocket, endpoint_iterator);
+        boost::asio::ip::tcp::endpoint serverEndpoint(boost::asio::ip::address::from_string(host), port);
+        _tcpSocket.connect(serverEndpoint);
 
         std::cout << "Connected to server by tcp" << std::endl;
 
         return (true);
-    }
-
-    catch (std::exception &e) {
+    } catch (std::exception &e) {
         std::cerr << "Error connecting to TCP server: " << e.what() << std::endl;
         return (false);
     }

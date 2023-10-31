@@ -33,8 +33,13 @@ namespace Network {
 
     void updateClientNetworkTCP(bool playButton)
     {
+        static bool asyncReceiveStarted = false;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
+        if (!asyncReceiveStarted) {
+            clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());
+            asyncReceiveStarted = true;
+        }
         if (playButton && !firstTime) {
             clientNetwork.send201();
             firstTime = true;
@@ -44,7 +49,6 @@ namespace Network {
             isCoUDP = true;
         }
 
-        clientNetwork.startAsyncReceiveTCP(clientNetwork.getTCPSocket());
         clientNetwork.handleNetwork();
     }
 
@@ -58,7 +62,6 @@ namespace Network {
         GameEngine::Events::Type type;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
 
-        clientNetwork.asyncReceive(clientNetwork.getUDPSocket());
         clientNetwork.handleNetwork();
 
         while (GameEngine::Events::poll(type)) {
