@@ -21,7 +21,10 @@ namespace GameEngine {
             PLAYER_SHOOT,                   // player is holding the shoot button
             PLAYER_FORCE,                   // player is holding the force button
             PLAYER_DROP = PLAYER_FORCE,
+            PLAYER_MISSILE,                 // A player missile has been created
+            PLAYER_WAVE_BEAM,               // A player wave beam has been created
             BYDO_SHOOT,                     // Something wants to shoot a bydo shot
+            BYDO_MISSILE,                   // A bydo missile has been created
             COUNT
         };
 
