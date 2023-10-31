@@ -148,9 +148,9 @@ void Network::ClientNetwork::checkForDeadEntities(std::size_t tick)
 
     for (const auto &entityTimestampPair : _entityTimestamps) {
         std::size_t entityId = entityTimestampPair.first;
-        std::size_t lastUpdateTimestamp = entityTimestampPair.second;
+        int lastUpdateTimestamp = static_cast<int>(entityTimestampPair.second);
 
-        if (tick - lastUpdateTimestamp > maxIdleTime) {
+        if (static_cast<int>(tick) - lastUpdateTimestamp > maxIdleTime) {
             ECS::Entity entityToDelete = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(entityId);
             _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(entityToDelete);
             listToDelete.push_back(entityId);
