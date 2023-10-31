@@ -70,6 +70,29 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[331] = [this](const header &h, std::string &s) {
         handleEntityUpdate(h, s);
         };
+    // stages
+    _responseHandlers[231] = [this](const header &h, std::string &s) {
+        handleStagesUpdate(h, s);
+        };
+}
+
+//-----------------------------STAGES--------------------------------------------//
+
+void Network::ClientNetwork::handleStagesUpdate(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 231) {
+            std::cout << "entityToUpdate: " << messageHeader.entity << " stage: " << messageHeader.entity << std::endl;
+            _engine.setLevel(messageHeader.entity);
+            // _engine.getRegistry(GameEngine::registryTypeStages).get<ECS::Components::StageComponent>(0).stage = static_cast<ECS::Components::StageComponent::Stage>(messageHeader.entity);
+            // _engine.getRegistry(GameEngine::registryTypeBackground).getComponent<ECS::Components::BackgroundComponent>(messageHeader.entity)->
+        }
+
+    } else {
+        str.clear();
+    }
 }
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//

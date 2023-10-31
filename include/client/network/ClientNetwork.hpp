@@ -348,6 +348,13 @@ namespace Network {
          */
         void handleEntityUpdate(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of update the stages of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleStagesUpdate(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Velocity object
          *
          * @param str
