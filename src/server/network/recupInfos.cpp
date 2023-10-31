@@ -61,10 +61,13 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
 void Network::RecupInfo::openLVL(int level) {
     if (level == 1) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
+        return;
     }
     if (level == 2) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_2_TXT);
+        return;
     }
+    openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
 }
 
 Network::RecupInfo::RecupInfo() {

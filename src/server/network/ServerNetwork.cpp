@@ -14,11 +14,13 @@
 #include "GameEngine/Events.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
+#include "ECS/Components/HPComponent.hpp"
 
 Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int portTCP, int portUdp)
     : _ioService(std::ref(io_service)), _acceptor(_ioService), _asyncSocket(_ioService),
     _timer(io_service), _portUdp(portUdp), _engine(GameEngine::createServerEngine())
 {
+    _stage = 1;
     boost::asio::ip::tcp::resolver resolver(_ioService);
     boost::asio::ip::tcp::resolver::query query(boost::asio::ip::host_name(), "");
     boost::asio::ip::tcp::resolver::iterator endpoints = resolver.resolve(query);
@@ -29,7 +31,7 @@ Network::ServerNetwork::ServerNetwork(boost::asio::io_service &io_service, int p
     _portUdp = setUdpSocket(portUdp);
     if (_portUdp == -1)
         throw std::runtime_error("Can not set server udp");
-    _script.openLVL(1);
+    _script.openLVL(_stage);
     std::cout << "tcp on " << portTCP << std::endl;
     std::cout << "udp on " << _portUdp << std::endl;
     for (boost::asio::ip::tcp::resolver::iterator it = endpoints; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
@@ -155,6 +157,16 @@ void Network::ServerNetwork::updateGame()
             }
         }
         data.second.clear();
+    }
+    if (_engine._listIdBoss.size() > 0) {
+        for (int i = 0; i < _engine._listIdBoss.size(); i++) {
+            if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
+                _stage += 1;
+                _tickCount = 1;
+                _script.openLVL(_stage);
+                _engine._listIdBoss.clear();
+            }
+        }
     }
     _engine.run();
     if (_tickCount > 2) {
@@ -283,7 +295,7 @@ void Network::ServerNetwork::SpawnMob(Info script)
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
     const int x = Constants::cameraDefaultWidth - 10;
 
-    if (script.rfc >= 301 && script.rfc <= 306) {
+    if (script.rfc >= 301 && script.rfc <= 307) {
         ECS::Entity entity = registry.spawnEntity();
         switch (script.rfc) {
             case 301:
@@ -303,6 +315,10 @@ void Network::ServerNetwork::SpawnMob(Info script)
                 break;
             case 306:
                 ECS::Creator::createBlaster(registry, entity, x, script.y);
+                break;
+            case 307:
+                _engine._listIdBoss.push_back(entity);
+                ECS::Creator::createDobkeratops(registry, entity, x, script.y);
                 break;
             default:
                 break;
