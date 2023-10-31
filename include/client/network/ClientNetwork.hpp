@@ -388,6 +388,33 @@ namespace Network {
          * @param entityId
          */
         void checkForDeadEntities(std::size_t tick);
+        /**
+         * @brief Get the Win Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getWinCondition() const;
+        /**
+         * @brief Get the Loose Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getLooseCondition() const;
+        /**
+         * @brief Set the Win Condition object
+         *
+         * @param winCondition
+         */
+        void setWinCondition(bool winCondition);
+        /**
+         * @brief Set the Loose Condition object
+         *
+         * @param looseCondition
+         */
+        void setLooseCondition(bool looseCondition);
+
     private:
         //Port of the server
         int _port;
@@ -421,6 +448,10 @@ namespace Network {
         GameEngine::GameEngine &_engine;
         //Map of the entities with the timestamp
         std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
+        //If true they won
+        bool _winCondition = false;
+        //If true they lost
+        bool _looseCondition = false;
     };
 }
 

@@ -108,3 +108,23 @@ ECS::Components::VelocityComponent Network::ClientNetwork::getVelocity(std::stri
     str.erase(0, sizeof(ECS::Components::VelocityComponent));
     return res;
 }
+
+bool Network::ClientNetwork::getWinCondition()const
+{
+    return _winCondition;
+}
+
+void Network::ClientNetwork::setWinCondition(bool winCondition)
+{
+    _winCondition = winCondition;
+}
+
+bool Network::ClientNetwork::getLooseCondition()const
+{
+    return _looseCondition;
+}
+
+void Network::ClientNetwork::setLooseCondition(bool looseCondition)
+{
+    _looseCondition = looseCondition;
+}
