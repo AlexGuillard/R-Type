@@ -209,6 +209,19 @@ namespace Screen {
          *
          */
         void displayErrorConnection();
+        /**
+         * @brief Set the Error Connection object
+         *
+         * @param error
+         */
+        void setErrorConnection(bool error);
+        /**
+         * @brief Get the Error Connection object
+         *
+         * @return true
+         * @return false
+         */
+        bool getErrorConnection() const;
 
     private:
         /**
@@ -244,6 +257,7 @@ namespace Screen {
         Rectangle _connectionclickableZone;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
+        bool _errorConnection;
 
         // Camera
         Vector2 _windowSize = { 0, 0 };
