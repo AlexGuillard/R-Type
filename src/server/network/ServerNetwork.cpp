@@ -172,7 +172,7 @@ void Network::ServerNetwork::updateGame()
             for (int i = 0; i < _engine._listIdBoss.size(); i++) {
                 if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
                     _stage += 1;
-                    _tickCount = 1;
+                    _tickCount = 0;
                     if (_script.openLVL(_stage) == 0) {
                         _dataToSend.append(Send::makeHeader(221, 0));
                         _dataToSend.append(Send::makeBodyNum(221));
@@ -181,6 +181,7 @@ void Network::ServerNetwork::updateGame()
                         _dataToSend.append(Send::makeBodyNum(231));
                     }
                     _engine._listIdBoss.clear();
+                    break;
                 }
             }
         }
@@ -225,7 +226,6 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
-        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
