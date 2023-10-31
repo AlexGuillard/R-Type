@@ -104,6 +104,7 @@ namespace GameEngine {
         registry.emplaceComponent<Components::HitBoxComponent>(wall, width, height);
         registry.emplaceComponent<Components::TeamComponent>(wall, team);
         registry.emplaceComponent<Components::SolidComponent>(wall);
+        registry.emplaceComponent<Components::DamageComponent>(wall, 0); // destroy missiles on contact
         return wall;
     }
 

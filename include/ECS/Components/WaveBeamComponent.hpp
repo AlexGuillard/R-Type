@@ -9,13 +9,12 @@
 
 #include <cstddef>
 #include <sys/types.h>
-#include "ECS/Components/TeamComponent.hpp"
 #include <cstdint>
 
+#include "ECS/Components/TeamComponent.hpp"
+#include "constants.hpp"
+
 namespace ECS::Components {
-    const uint8_t maxWaveBeamStrength = 5;
-    const float waveBeamSpeed = 500;
-    const std::size_t waveBeamBaseDamage = 2;
     /**
      * @brief Component for entities that request to spawn a wave beam
      * @param x Position on the x axis
@@ -25,7 +24,7 @@ namespace ECS::Components {
         float x;
         float y;
         TeamComponent team;
-        std::size_t damage = waveBeamBaseDamage;
+        std::size_t damage = Constants::waveBeamBaseDamage;
         uint8_t strength = 1;
     };
 }; // namespace ECS::Components

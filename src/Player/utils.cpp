@@ -5,6 +5,8 @@
 ** utils
 */
 
+#include <cstdint>
+
 #include "Player/utils.hpp"
 #include "constants.hpp"
 
@@ -52,4 +54,14 @@ namespace Player {
         velX = clamp(velX, -(float)Constants::playerSpeed, (float)Constants::playerSpeed);
         velY = clamp(velY, -(float)Constants::playerSpeed, (float)Constants::playerSpeed);
     }
+
+    int calculateWaveBeamStrength(double timeButtonHeld)
+    {
+        return clamp(
+            static_cast<uint8_t>(timeButtonHeld),
+            static_cast<uint8_t>(1),
+            Constants::maxWaveBeamStrength
+        );
+    }
+
 } // namespace Player
