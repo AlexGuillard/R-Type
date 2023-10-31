@@ -90,8 +90,8 @@ void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::s
     if (str.size() >= sizeof(BodyNumber)) {
         BodyNumber footer = getBody(str);
 
-        if (footer.number == 222) {
-            //TODO: handle loose game
+        if (footer.number == 222 && !_looseCondition) {
+            _looseCondition = true;
         }
 
     } else {
@@ -104,8 +104,8 @@ void Network::ClientNetwork::handleWinGame(const header &messageHeader, std::str
     if (str.size() >= sizeof(BodyNumber)) {
         BodyNumber footer = getBody(str);
 
-        if (footer.number == 221) {
-            //TODO: handle win game
+        if (footer.number == 221 && !_winCondition) {
+            _winCondition = true;
         }
 
     } else {
