@@ -186,7 +186,6 @@ void Network::ServerNetwork::updateGame()
             }
         }
     } else {
-        std::cout << "all dead" << std::endl;
         _dataToSend.append(Send::makeHeader(222, 0));
         _dataToSend.append(Send::makeBodyNum(222));
     }
@@ -232,11 +231,13 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        if (_canPlay) {
+        if (_canPlay && _typeMod != 244) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 SendClientsInfo(scriptInfo);
             }
+            updateGame();
+        } else if (_canPlay) {
             updateGame();
         }
         updateTicks();
