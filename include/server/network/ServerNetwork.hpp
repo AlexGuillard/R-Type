@@ -16,7 +16,11 @@
 
 #include "ANetwork.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "ECS/Containers/SparseArray.hpp"
 #include "ECS/Components/PositionComponent.hpp"
+#include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Creator.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "server/network/Participants.hpp"
@@ -140,6 +144,30 @@ namespace Network {
         void SendClientsPlay();
         void updateGame();
         void sendClientEntities();
+        /**
+         * @brief Function that handle the event from the client and the game
+         *
+         * @param registry Registry of the game
+         * @param positions Positions of the entities
+         * @param velocities Velocities of the entities
+         * @param teams Teams of the entities
+         */
+        void serverEventHandler(
+            ECS::Containers::Registry &registry,
+            ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
+            ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
+            ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams);
+        void _shootMissile(
+            ECS::Containers::Registry &registry,
+            const ECS::Components::PositionComponent &position,
+            const ECS::Components::VelocityComponent &velocity,
+            const Enums::TeamGroup team);
+        void _shootWaveBeam(
+            ECS::Containers::Registry &registry,
+            const ECS::Components::PositionComponent &position,
+            const ECS::Components::VelocityComponent &velocity,
+            const Enums::TeamGroup team,
+            const int strength);
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;
