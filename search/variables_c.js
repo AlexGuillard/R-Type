@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['maxtexturepathsize_1028',['maxTexturePathSize',['../namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430',1,'ECS::Components']]],
-  ['maxwavebeamstrength_1029',['maxWaveBeamStrength',['../namespaceECS_1_1Components.html#a1d9796f42c8d90ec515f7da8075ae0c9',1,'ECS::Components']]]
+  ['maxtexturepathsize_1024',['maxTexturePathSize',['../namespaceECS_1_1Components.html#a9cda1abd218c2e15157401cb1850c430',1,'ECS::Components']]],
+  ['maxwavebeamstrength_1025',['maxWaveBeamStrength',['../namespaceConstants.html#a7a9369d46ac48ca6b2e3174a87709c08',1,'Constants']]]
 ];
