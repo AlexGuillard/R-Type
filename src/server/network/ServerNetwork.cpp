@@ -116,7 +116,7 @@ void Network::ServerNetwork::acceptHandler(const boost::system::error_code &erro
 {
     if (!error) {
         std::cout << "acceptation success" << std::endl;
-        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame)->start();
+        std::make_shared<Network::ServerTcp>(std::move(socket), _list, _portUdp, _clients, _isGame, _typeMod)->start();
     }
     _acceptor.async_accept(std::bind(&Network::ServerNetwork::acceptHandler, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -167,20 +167,22 @@ void Network::ServerNetwork::updateGame()
             break;
         }
     }
-    if (allyAlive == true && _engine._listIdBoss.size() > 0) {
-        for (int i = 0; i < _engine._listIdBoss.size(); i++) {
-            if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
-                _stage += 1;
-                _tickCount = 0;
-                if (_script.openLVL(_stage) == -1) {
-                    _dataToSend.append(Send::makeHeader(221, 0));
-                    _dataToSend.append(Send::makeBodyNum(221));
-                } else {
-                    _dataToSend.append(Send::makeHeader(231, _stage));
-                    _dataToSend.append(Send::makeBodyNum(231));
+    if (allyAlive == true) {
+        if (_engine._listIdBoss.size() > 0) {
+            for (int i = 0; i < _engine._listIdBoss.size(); i++) {
+                if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
+                    _stage += 1;
+                    _tickCount = 0;
+                    if (_script.openLVL(_stage) == 0) {
+                        _dataToSend.append(Send::makeHeader(221, 0));
+                        _dataToSend.append(Send::makeBodyNum(221));
+                    } else {
+                        _dataToSend.append(Send::makeHeader(231, _stage));
+                        _dataToSend.append(Send::makeBodyNum(231));
+                    }
+                    _engine._listIdBoss.clear();
+                    break;
                 }
-                _engine._listIdBoss.clear();
-                break;
             }
         }
     } else {
@@ -229,11 +231,13 @@ void Network::ServerNetwork::updateTicks()
             updateTicks();
             return;
         }
-        if (_canPlay) {
+        if (_canPlay && _typeMod != 244) {
             scriptInfo = _script.getTickScript(_tickCount);
             if (!scriptInfo.empty()) {
                 SendClientsInfo(scriptInfo);
             }
+            updateGame();
+        } else if (_canPlay) {
             updateGame();
         }
         updateTicks();
@@ -373,9 +377,16 @@ void Network::ServerNetwork::SendClientsPlay()
         else
             color = Enums::PlayerColor::BLUE_COLOR;
         ECS::Entity entity = registry.entityFromIndex(allIds.second.first);
-        const int x = Constants::cameraDefaultWidth / 5;
+        int x = Constants::cameraDefaultWidth / 5;
+        if (_typeMod == 244 && index % 2 != 0)
+            x = Constants::cameraDefaultWidth / 1.4;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         ECS::Creator::createAlly(registry, entity, x, y, color);
+        if (_typeMod == 243) {
+            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::NEUTRAL;
+        } else if (_typeMod == 244 && index % 2 != 0) {
+            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::ENEMY;
+        }
         for (const auto& pair : _listUdpEndpoints) {
             res.clear();
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
