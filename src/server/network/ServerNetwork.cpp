@@ -159,17 +159,18 @@ void Network::ServerNetwork::updateGame()
         }
         data.second.clear();
     }
+    _engine.run();
     if (_engine._listIdBoss.size() > 0) {
         for (int i = 0; i < _engine._listIdBoss.size(); i++) {
             if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
                 _stage += 1;
-                _tickCount = 1;
+                _tickCount = 0;
                 _script.openLVL(_stage);
                 _engine._listIdBoss.clear();
+                break;
             }
         }
     }
-    _engine.run();
     if (_tickCount > 2) {
         sendClientEntities();
     }
@@ -205,7 +206,6 @@ void Network::ServerNetwork::updateTicks()
 {
     _timer.expires_from_now(boost::posix_time::millisec(Constants::tickUpdate));
     _timer.async_wait([this](const boost::system::error_code &error) {
-        // std::cout << "\rtick[" << _tickCount << "]: " << std::flush;
         std::vector<Info> scriptInfo;
         if (error) {
             std::cerr << "_timer error: " << error.message() << std::endl;
