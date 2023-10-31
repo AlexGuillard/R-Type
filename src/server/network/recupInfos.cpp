@@ -58,16 +58,15 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
     }
 }
 
-void Network::RecupInfo::openLVL(int level) {
+int Network::RecupInfo::openLVL(int level) {
     if (level == 1) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
-        return;
-    }
-    if (level == 2) {
+    } else if (level == 2) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_2_TXT);
-        return;
+    } else {
+        return -1;
     }
-    openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
+    return 0;
 }
 
 Network::RecupInfo::RecupInfo() {

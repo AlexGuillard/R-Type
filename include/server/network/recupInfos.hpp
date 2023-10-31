@@ -60,7 +60,7 @@ namespace Network {
              * @brief Open script depend on level
              *
              */
-            void openLVL(int level);
+            int openLVL(int level);
             /**
              * @brief Construct a new Recup Info object
              *
