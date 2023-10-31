@@ -70,6 +70,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classNetwork_1_1ServerTcp-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -90,8 +91,8 @@ Inheritance diagram for Network::ServerTcp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ada4a6e7030b802295219a7cbc7b4e242"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ada4a6e7030b802295219a7cbc7b4e242">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients, bool &amp;isGame)</td></tr>
-<tr class="separator:ada4a6e7030b802295219a7cbc7b4e242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfd873e0ba7a1a5817c2acee28c19a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a7cfd873e0ba7a1a5817c2acee28c19a8">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients, bool &amp;isGame, int &amp;mod)</td></tr>
+<tr class="separator:a7cfd873e0ba7a1a5817c2acee28c19a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0752c15cfc11aeea93cfb84696ebcab2">~ServerTcp</a> ()</td></tr>
 <tr class="separator:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac68750b642bc19424b165de2f19422eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ac68750b642bc19424b165de2f19422eb">start</a> ()</td></tr>
@@ -122,8 +123,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aed40252eb0b462c5c156ce15b3f4bbb6 inherit pub_methods_classNetwork_1_1IServerTcp"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#aed40252eb0b462c5c156ce15b3f4bbb6">~IServerTcp</a> ()=default</td></tr>
 <tr class="separator:aed40252eb0b462c5c156ce15b3f4bbb6 inherit pub_methods_classNetwork_1_1IServerTcp"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a715d06fee87f2dc8c0c9ae1a546625f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a715d06fee87f2dc8c0c9ae1a546625f9">chooseMod</a> ()</td></tr>
+<tr class="separator:a715d06fee87f2dc8c0c9ae1a546625f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a2dd9f4b7d454b354f17ef0809f0c10a6"><td class="memItemLeft" align="right" valign="top">int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a2dd9f4b7d454b354f17ef0809f0c10a6">_typeMod</a></td></tr>
+<tr class="separator:a2dd9f4b7d454b354f17ef0809f0c10a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ccf97c39156d544ea97d4f008b52129"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0ccf97c39156d544ea97d4f008b52129">_udpPort</a></td></tr>
 <tr class="separator:a0ccf97c39156d544ea97d4f008b52129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c3234510db6aa279a27ee67d99d3c1a"><td class="memItemLeft" align="right" valign="top">boost::asio::ip::tcp::socket&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a2c3234510db6aa279a27ee67d99d3c1a">_socket</a></td></tr>
@@ -138,8 +146,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7f94eb207654d5d3d657ae3204fde9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ada4a6e7030b802295219a7cbc7b4e242"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada4a6e7030b802295219a7cbc7b4e242">&#9670;&nbsp;</a></span>ServerTcp()</h2>
+<a id="a7cfd873e0ba7a1a5817c2acee28c19a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfd873e0ba7a1a5817c2acee28c19a8">&#9670;&nbsp;</a></span>ServerTcp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,7 +180,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>isGame</em>&#160;</td>
+          <td class="paramname"><em>isGame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>mod</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -215,6 +229,31 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a715d06fee87f2dc8c0c9ae1a546625f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a715d06fee87f2dc8c0c9ae1a546625f9">&#9670;&nbsp;</a></span>chooseMod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ServerTcp::chooseMod </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -600,6 +639,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">boost::asio::ip::tcp::socket Network::ServerTcp::_socket</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2dd9f4b7d454b354f17ef0809f0c10a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dd9f4b7d454b354f17ef0809f0c10a6">&#9670;&nbsp;</a></span>_typeMod</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int&amp; Network::ServerTcp::_typeMod</td>
         </tr>
       </table>
   </td>
