@@ -76,7 +76,7 @@ std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor
     return str;
 }
 
-std::string Network::Send::makeBodyMissile(const int posXY[2], const int velocityXY[2], Enums::TeamGroup team, int strenght)
+std::string Network::Send::makeBodyMissile(const std::array<float, 2> &posXY, const std::array<float, 2> &velocityXY, Enums::TeamGroup team, int strenght)
 {
     Network::bodyMissile res;
     std::string str;
@@ -112,7 +112,7 @@ std::string Network::Send::codeAlly(int code, int ide, int xMob, int yMob, Enums
     return str;
 }
 
-std::string Network::Send::codeMissil(const int header[2], const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght)
+std::string Network::Send::codeMissile(const std::array<int, 2> &header, const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght)
 {
     std::string str;
 

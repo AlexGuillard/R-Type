@@ -42,8 +42,8 @@ namespace Network {
     };
 
     struct bodyMissile {
-        int x;
-        int y;
+        float x;
+        float y;
         double velocityX;
         double velocityY;
         Enums::TeamGroup team;
