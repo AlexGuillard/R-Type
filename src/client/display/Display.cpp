@@ -9,6 +9,7 @@
 
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
+#include <cstring>
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
 uint16_t Screen::Display::cameraHeight = Screen::Display::defaultCameraHeight;
@@ -86,10 +87,12 @@ void Screen::Display::beginUpdate()
     this->detectActionMenu();
     this->update();
     BeginDrawing();
-    if (!_errorConnection)
-        ClearBackground(RAYWHITE);
-    else
+    if (_errorConnection)
         ClearBackground(ORANGE);
+    else if (_gameState == Screen::Display::GameState::LOOSING)
+        ClearBackground(BLACK);
+    else
+        ClearBackground(RAYWHITE);
 }
 
 void Screen::Display::endUpdate()
@@ -473,4 +476,99 @@ void Screen::Display::endDrawCamera()
 Vector2 Screen::Display::getCameraSize()
 {
     return Vector2(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
+}
+
+///// End Game
+
+Color GetRandomColor() {
+    return (Color){
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    };
+}
+
+void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = (Color){RAYWHITE.r, RAYWHITE.g, RAYWHITE.b, (unsigned char)(alpha * 255)};
+        float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
+        float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
+        float rotation = 360.0f * (elapsedTime / animationDuration);
+
+        ClearBackground(BLACK);
+
+        Vector2 startPosition = {(float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset)};
+        Vector2 textPosition = startPosition;
+
+        const char* text = "GAME OVER";
+        int letterSpacing = 30;
+
+        for (int i = 0; i < strlen(text); i++) {
+            char character[2] = {text[i], '\0'};
+            DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
+            textPosition.x += MeasureText(character, 30) + letterSpacing;
+        }
+
+        EndDrawing();
+    }
+}
+
+void Screen::Display::drawWin(GameEngine::GameEngine &engine)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+    const int maxParticles = 200;
+    Particle fireworks[maxParticles];
+
+    for (int i = 0; i < maxParticles; i++) {
+        fireworks[i].active = false;
+    }
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = (Color){GREEN.r, GREEN.g, GREEN.b, (unsigned char)(alpha * 255)};
+        ClearBackground(BLACK);
+
+        for (int i = 0; i < maxParticles; i++) {
+
+            if (!fireworks[i].active) {
+                fireworks[i].position = (Vector2){(float)GetRandomValue(0, screenWidth), (float)GetRandomValue(0, screenHeight)};
+                fireworks[i].color = GetRandomColor();
+                fireworks[i].radius = GetRandomValue(2, 4);
+                fireworks[i].speed = GetRandomValue(5, 15);
+                fireworks[i].active = true;
+            }
+
+            if (fireworks[i].active) {
+                fireworks[i].position.y -= fireworks[i].speed;
+                fireworks[i].position.x += GetRandomValue(-2, 2);
+
+                if (fireworks[i].position.y < 0) {
+                    fireworks[i].active = false;
+                }
+
+                DrawCircleV(fireworks[i].position, fireworks[i].radius, fireworks[i].color);
+            }
+        }
+
+        const char* text = "Y O U   W I N";
+        Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};
+        DrawTextEx(GetFontDefault(), text, textPosition, 60, 0, textColor);
+
+        EndDrawing();
+    }
 }

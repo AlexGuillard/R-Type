@@ -25,6 +25,8 @@ namespace Screen {
             MENU,
             GAME,
             WAITINGROOM,             // play button waiting room
+            WINNING,
+            LOOSING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -135,6 +137,32 @@ namespace Screen {
          * @param engine GameEngine
          */
         static void drawGame(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief draw the loose screen
+         *
+         * @param engine
+         */
+        static void drawLoose(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief Particles for win screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
+
+        /**
+         * @brief draw the win screen
+         *
+         * @param engine
+         */
+        static void drawWin(GameEngine::GameEngine &engine);
 
         /**
          * @brief draw the waitingRoom

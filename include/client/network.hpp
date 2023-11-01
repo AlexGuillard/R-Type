@@ -46,4 +46,18 @@ namespace Network {
      * @param engine
      */
     void setEngineToNetwork(GameEngine::GameEngine &engine);
+    /**
+     * @brief Get the Winning Condition object
+     *
+     * @return true won
+     * @return false
+     */
+    bool getWinningCondition();
+    /**
+     * @brief Get the Loosing Condition object
+     *
+     * @return true lose
+     * @return false
+     */
+    bool getLoosingCondition();
 } // namespace Network

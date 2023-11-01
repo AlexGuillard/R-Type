@@ -34,6 +34,23 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
     Network::updateClientNetworkUDP();
     Screen::Display::drawGame(engine);
+    if (Network::getLoosingCondition()) {
+        window.setGameState(Screen::Display::GameState::LOOSING);
+    }
+    if (Network::getWinningCondition()) {
+        window.setGameState(Screen::Display::GameState::WINNING);
+    }
+
+}
+
+static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
+{
+    Screen::Display::drawLoose(engine);
+}
+
+static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
+{
+    Screen::Display::drawWin(engine);
 }
 
 //Sizes of the button Play dont want to put it on the function caus its a loop
@@ -65,6 +82,12 @@ int rtype_client()
             break;
         case Screen::Display::GameState::GAME:
             gameLoop(window, engine, Network::ConnectionType::UDP);
+            break;
+        case Screen::Display::GameState::LOOSING:
+            looseLoop(window, engine);
+            break;
+        case Screen::Display::GameState::WINNING:
+            winLoop(window, engine);
             break;
         }
         Screen::Display::endUpdate();
