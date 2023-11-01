@@ -173,12 +173,15 @@ void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std
         BodyNumber footer = getBody(str);
 
         if (footer.number == 331) {
-            // std::cout << "entityToUpdate: " << messageHeader.entity << " X: " << velocityData.x << " Y: " << velocityData.y << std::endl;
             ECS::Entity entityToUpdate = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity);
 
-            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
-            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
+            if (positionData.x != -100 && positionData.y != -100)
+                _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
+
+            if (velocityData.x != 0 && velocityData.y != 0)
+                _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
             _entityTimestamps[messageHeader.entity] = tick.number;
+
             checkForDeadEntities(tick.number);
         }
 
