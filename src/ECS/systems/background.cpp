@@ -30,6 +30,8 @@ namespace ECS::Systems {
             if (eId == (level->level - 1)) {
                 const double time = GetTime();
                 auto &&texture = Assets::AssetLoader::loadTexturePng(background->texture);
+                const double tempScale = double((Constants::cameraDefaultWidth * 2) / double(texture.width));
+                background->frameScale = (tempScale * double(texture.width) < Constants::cameraDefaultWidth * 2) ? tempScale + 0.1 : tempScale;
                 if ((time - background->timeAtLastFrameChange) > background->fps) {
                     background->timeAtLastFrameChange = time;
                      position->x -= background->paralaxSpeed;
