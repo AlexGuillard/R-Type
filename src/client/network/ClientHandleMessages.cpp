@@ -56,6 +56,9 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[306] = [this](const header &h, std::string &s) {
         handleBlasterSpawn(h, s);
         };
+    _responseHandlers[307] = [this](const header &h, std::string &s) {
+        handleDobkeratopsSpawn(h, s);
+        };
     // missiles
     _responseHandlers[321] = [this](const header &h, std::string &s) {
         handleClassicMissileSpawn(h, s);
@@ -230,6 +233,21 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
 
 //-----------------------------MOBS--------------------------------------------//
 
+void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+        bodyMob mobData = getMob(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 307) {
+            std::cout << "Dobkeratops spawned at" << mobData.x << " " << mobData.y << std::endl;
+            ECS::Creator::createDobkeratops(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+        }
+    } else {
+        str.clear();
+    }
+}
+
 void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std::string &str)
 {
     if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
@@ -307,7 +325,6 @@ void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, st
         BodyNumber footer = getBody(str);
 
         if (footer.number == 301) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
             ECS::Creator::createEnemyBasic(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {

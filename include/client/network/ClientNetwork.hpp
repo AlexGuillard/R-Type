@@ -173,6 +173,13 @@ namespace Network {
          */
         void handleBlasterSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of create dobkeratops ennemies when the server said it (boss)
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleDobkeratopsSpawn(const header &messageHeader, std::string &str);
+        /**
          * @brief handle the fact of creat allies when the server said it
          *
          * @param messageHeader
