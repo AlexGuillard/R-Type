@@ -46,6 +46,7 @@ namespace ECS::Systems {
                 );
                 GameEngine::Events::push(GameEngine::Events::Type::BYDO_SHOOT, eId);
                 ai->_shootCooldownTimer = ai->shootCooldown;
+                target->targetId = ECS::NullEntity();
             }
         }
     }
