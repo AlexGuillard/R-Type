@@ -391,7 +391,7 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         addSinMovementAI(bug, registry, x, y, Components::defaultSinFrequency * 2, Components::defaultSinXSpeed * 2, Components::defaultSinAmplitude * 2);
-        addBydoShootingAI(bug, registry, ECS::NullEntity(), 1, 100);
+        addBydoShootingAI(bug, registry, ECS::NullEntity(), 1.5F, 100);
         registry.emplaceComponent<Components::InRangeComponent>(bug);
         return bug;
     }
