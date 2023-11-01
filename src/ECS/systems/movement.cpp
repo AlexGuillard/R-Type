@@ -9,7 +9,8 @@
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
-#include "ECS/Containers/zipper/Zipper.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
+#include "constants.hpp"
 
 namespace ECS::Systems {
 
@@ -27,8 +28,19 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::PositionComponent> &positions,
         Containers::SparseArray<Components::VelocityComponent> &velocities)
     {
-        for (auto &&[position, velocity] : Containers::Zipper(positions, velocities)) {
+        std::vector<std::size_t> toDelete;
+        for (auto &&[eId, position, velocity] : Containers::IndexedZipper(positions, velocities)) {
             movement(registry, *position, *velocity);
+
+            if (position->x < -Constants::deathZone ||
+                position->x >(Constants::cameraDefaultWidth + Constants::deathZone) ||
+                position->y < -Constants::deathZone ||
+                position->y >(Constants::cameraDefaultHeight + Constants::deathZone)) {
+                toDelete.push_back(eId);
+            }
+        }
+        for (auto &&entityId : toDelete) {
+            registry.killEntity(registry.entityFromIndex(entityId));
         }
     }
 

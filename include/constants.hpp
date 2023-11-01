@@ -20,6 +20,7 @@ namespace Constants {
 
     // Game
     const std::size_t frameRate = 120;
+    const int deathZone = 75; // how far from the edge of the screen an entity can go before being killed
     static constexpr std::size_t defaultScrollSpeed = 0;
     // time (in s) player need to hold the fire button to shoot a wave beam
     const double timeNeededForWaveBeam = 1.;
