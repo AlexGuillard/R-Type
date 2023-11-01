@@ -27,6 +27,7 @@
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/BydoShootingAIComponent.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -390,6 +391,8 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         addSinMovementAI(bug, registry, x, y, Components::defaultSinFrequency * 2, Components::defaultSinXSpeed * 2, Components::defaultSinAmplitude * 2);
+        addBydoShootingAI(bug, registry, ECS::NullEntity(), 1, 100);
+        registry.emplaceComponent<Components::InRangeComponent>(bug);
         return bug;
     }
 
