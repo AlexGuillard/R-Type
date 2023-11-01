@@ -100,10 +100,10 @@ Pr's title convention</h1>
 </ul>
 <p>**/!\ don't forget to assign the ticket to the person who need to work on it.**</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
-UDP Protocol Documentation</h1>
+TCP/UDP Protocol Documentation</h1>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Introduction</h2>
-<p>This document provides an overview of the UDP protocol used in our project.</p>
+<p>This document provides an overview of the TCP and UDP protocol used in our project.</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Protocol Overview</h2>
 <h3><a class="anchor" id="autotoc_md5"></a>
@@ -111,28 +111,77 @@ Purpose</h3>
 <p>The UDP protocol is designed for fast and lightweight communication.</p>
 <h3><a class="anchor" id="autotoc_md6"></a>
 Packet Structure</h3>
-<p>UDP packets have a simple structure consisting of:</p>
+<p>packets send by the server have a simple structure consisting of:</p>
 <ul>
-<li>Header</li>
-<li>Data</li>
+<li>Header struct with: <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">  int RFC; // RFC code</div>
+<div class="line">  int id; // id of the concerned entity in the registry</div>
+<div class="line">};</div>
+</div><!-- fragment --></li>
+<li>structure body depending of the RFC number</li>
+<li>int of the RFC code to finish the sended data</li>
 </ul>
+<p>packets sends by the client are the header struct with the RFC code and the id of the client.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
-Error Codes</h2>
-<p>In case of errors, the UDP protocol uses the following error codes:</p>
+Connection</h2>
 <ul>
-<li><code>500: Internal Error</code>: This code indicates that the server have an internal error</li>
-<li><code>404: Not Found</code>: This code is used when the sever isnt found</li>
+<li>The connection part is in TCP</li>
+<li>When a client is connecting to the server, the client need to send the magic number 81732 in the rfcCode variable of the header. Then the connection can be established</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md8"></a>
-Client Codes</h2>
+Error Codes</h2>
+<p>In case of errors, the protocol uses the following error codes:</p>
 <ul>
-<li><code>200: Connection</code>: This code is used when the client connect to the server</li>
-<li><code>201: Login</code>: This code is used when the client login to the server</li>
-<li><code>202: Logout</code>: This code is used when the client logout to the server</li>
+<li><code>401: Forbidden</code>: This code is used when the server refuse the connection in the format: <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 401;</div>
+<div class="line">    entity: -1;</div>
+<div class="line">};</div>
+<div class="line">401</div>
+</div><!-- fragment --></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md9"></a>
-210 Commands</h3>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Client Codes</h2>
+<h3><a class="anchor" id="autotoc_md10"></a>
+TCP</h3>
 <ul>
+<li>Connection: The client connect to the server and send the magic number (81732). Then the server respond with this: <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 200;</div>
+<div class="line">    entity: index of the player;</div>
+<div class="line">};</div>
+<div class="line">number of clients connected (including you)</div>
+<div class="line">200</div>
+</div><!-- fragment --></li>
+<li><code>201: Lauch game</code>: this made the server change to udp and send to every clients: <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 201;</div>
+<div class="line">    entity: index of the player;</div>
+<div class="line">};</div>
+<div class="line">port to connect on udp</div>
+<div class="line">201</div>
+</div><!-- fragment --></li>
+<li><code>202: new player</code>: sended by the server when new client is connected <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 202;</div>
+<div class="line">    entity: your index of player;</div>
+<div class="line">};</div>
+<div class="line">number of players</div>
+<div class="line">202</div>
+</div><!-- fragment --></li>
+<li><code>203: solo</code></li>
+<li><code>204: multi</code></li>
+</ul>
+<h3><a class="anchor" id="autotoc_md11"></a>
+210 Commands</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 21X;</div>
+<div class="line">    indexPlayer: 0;</div>
+<div class="line">};</div>
+</div><!-- fragment --><ul>
+<li><code>217: CONNECTED</code>: This code is used when the client connect to udp and confirm to server he is on udp</li>
 <li><code>211: UP</code>: This code is used when the client move up</li>
 <li><code>212: DOWN</code>: This code is used when the client move down</li>
 <li><code>213: LEFT</code>: This code is used when the client move left</li>
@@ -140,42 +189,132 @@ Client Codes</h2>
 <li><code>215: SHOOT</code>: This code is used when the client shoot</li>
 <li><code>216: DROP</code>: This code is used when the client drop the force pod</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md10"></a>
-Server Codes</h2>
-<h3><a class="anchor" id="autotoc_md11"></a>
-300 Infos</h3>
-<ul>
-<li><code>301: Accept</code>: This code is used when the server accept the client</li>
-<li><code>302: Accept</code>: This code is used to communicate the life</li>
-<li><code>303: Accept</code>: This code is used to communicate the score</li>
-<li><code>304: Accept</code>: This code is used to communicate the level</li>
-<li><code>305: Accept</code>: This code is used to communicate the scoll speed</li>
-</ul>
 <h3><a class="anchor" id="autotoc_md12"></a>
-31X Entity</h3>
-<ul>
-<li><code>310: Start Components</code>: This code is used to let know when we start sending components</li>
-<li><code>311: Stop Components</code>: This code is used to let know when we stop sending components</li>
-<li><code>313: Type Component</code>: This code is used to let know the component's type</li>
-<li><code>314: Infos Component</code>: This code is used to let know component's infos</li>
-<li><code>315: Kill Entity</code>: This code is used to let know that an entity is killed</li>
+22X Win/Lose</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 22X;</div>
+<div class="line">    entity: 0;</div>
+<div class="line">};</div>
+<div class="line">22X</div>
+</div><!-- fragment --><ul>
+<li><code>221: WIN</code>: this code is send to indicate win</li>
+<li><code>222: LOSE</code>: this code is send to indicate lose</li>
+<li><code>223: RIGHT</code>: this code is send to indicate that the team on the RIGHT won (PVP)</li>
+<li><code>224: LEFT</code>: this code is send to indicate that the team on the LEFT won (PVP)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Usage</h2>
-<p>Here's an example of how to use the UDP protocol in your application:</p>
-<div class="fragment"><div class="line">ici fausse doc mais faudra la faire</div>
-<div class="line"><span class="preprocessor"># Sample code snippet</span></div>
-<div class="line"><span class="keyword">import</span> udp_protocol</div>
+<h3><a class="anchor" id="autotoc_md13"></a>
+23X Stage</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 231;</div>
+<div class="line">    entity: stage level;</div>
+<div class="line">};</div>
+<div class="line">231</div>
+</div><!-- fragment --><ul>
+<li><code>231: [Stage]</code>: this code indicate the new stage</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md14"></a>
+24X Mode</h3>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">struct header {</div>
+<div class="line">    code: 24X;</div>
+<div class="line">    entity: 0;</div>
+<div class="line">};</div>
+<div class="line">24X</div>
+</div><!-- fragment --><ul>
+<li><code>241</code>: this code indicate the classic mode</li>
+<li><code>242</code>: this code indicate the infini mode</li>
+<li><code>243</code>: this code indicate the friendly fire mode</li>
+<li><code>244</code>: this code indicate the pvp mode</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Server Codes</h2>
+<h3><a class="anchor" id="autotoc_md16"></a>
+3XX: entity</h3>
+<h4><a class="anchor" id="autotoc_md17"></a>
+30X: spawn mob</h4>
+<ul>
+<li>301: (<a href="https://rtype.fandom.com/wiki/Pata-Pata">Pata-Pata</a>) [X, Y]</li>
+<li>302: (<a href="https://rtype.fandom.com/wiki/Bink">Bink</a>) [X, Y]</li>
+<li>303: (<a href="https://rtype.fandom.com/wiki/Scant">Scant</a>) [X, Y]</li>
+<li>304: (<a href="https://rtype.fandom.com/wiki/Bug">Bug</a>) [X, Y]</li>
+<li>305: (<a href="https://rtype.fandom.com/wiki/Cancer">Cancer</a>) [X, Y]</li>
+<li>306: (<a href="https://rtype.fandom.com/wiki/Blaster">Blaster</a>) [X, Y]</li>
+<li>307: (<a href="https://rtype.fandom.com/wiki/Dobkeratops">Dobkeratops</a>) [X, Y] </li>
+</ul>
+<h4><a class="anchor" id="autotoc_md18"></a>
+31X: spawn ally</h4>
+<ul>
+<li>311: (Player) [X, Y, Enum: Color]</li>
+<li>312: (Ally) [X, Y, Enum: Color] </li>
+</ul>
+<h4><a class="anchor" id="autotoc_md19"></a>
+32X: spawn missile</h4>
+<ul>
+<li>321: (Classic) [X, Y, VelocityX, VelocityY, Enum: Team]</li>
+<li>322: (Wave Beam) [X, Y, VelocityX, VelocityY, Enum: Team, Force]</li>
+<li>323: (<a href="https://rtype.fandom.com/wiki/Bydo_Shot">Bydo Shot</a>) [X, Y, VelocityX, VelocityY, Enum: Team]</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md20"></a>
+33X: existing entities</h4>
+<p>The server send 331 and 332 of the same entity just after to avoid a shift</p><ul>
+<li>331: positions of the entities (id of entity in the header and use for body PositionComponent) and velocity of the entities (id of entity in the header and use for body VelocityComponent)</li>
+<li>If the entity don't have a PositionComponent, the server send a PositionComponent with -1 and -1 inside, same for VelocityComponent <div class="fragment"><div class="line"> {c++}</div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor"># Create a UDP socket</span></div>
-<div class="line">sock = udp_protocol.create_socket()</div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor"># Send a message</span></div>
-<div class="line">udp_protocol.send_message(sock, <span class="stringliteral">&quot;Hello, UDP!&quot;</span>)</div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor"># Receive a message</span></div>
-<div class="line"><span class="preprocessor">message = udp_protocol.receive_message(sock)</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
+<div class="line">struct header {</div>
+<div class="line">    code: 331;</div>
+<div class="line">    entity: index of the entity;</div>
+<div class="line">};</div>
+<div class="line">struct PositionComponent &quot;((-100, -100) if not defined)&quot;</div>
+<div class="line">struct VelocityComponent &quot;((0, 0) if not defined)&quot;</div>
+<div class="line">number of tick from server</div>
+<div class="line">331</div>
+</div><!-- fragment --> </li>
+</ul>
+<h3><a class="anchor" id="autotoc_md21"></a>
+Legend</h3>
+<ul>
+<li>ID: size_t</li>
+<li>X: int</li>
+<li>Y: int</li>
+<li>Velocity*: float</li>
+<li>Enum: Color <div class="fragment"><div class="line"> {c++}</div>
+<div class="line">enum class PlayerColor {</div>
+<div class="line">  CYAN = 0,</div>
+<div class="line">  PURPLE,</div>
+<div class="line">  LIME,</div>
+<div class="line">  RED,</div>
+<div class="line">  BLUE,</div>
+<div class="line">  COUNT // keep last</div>
+<div class="line">};</div>
+</div><!-- fragment --></li>
+<li>Enum: Team <div class="fragment"><div class="line">enum ECS::Components::TeamGroup {</div>
+<div class="line">  ALLY,</div>
+<div class="line">  ENEMY</div>
+<div class="line">};</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Usage of the UDP protocol to send and receive data</h2>
+<h3><a class="anchor" id="autotoc_md23"></a>
+Example with missiles, each data transferred has at least a header and a footer</h3>
+<h4><a class="anchor" id="autotoc_md24"></a>
+Example to receive</h4>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">header packet = getHeader(received);</div>
+<div class="line">bodyMissile missileData = getMissile(str);</div>
+<div class="line">BodyNumber footer = getBody(str);</div>
+</div><!-- fragment --><p> Each type of body has a structure and a getters to extract that structures</p>
+<h4><a class="anchor" id="autotoc_md25"></a>
+Example to send</h4>
+<div class="fragment"><div class="line"> {c++}</div>
+<div class="line">std::string res = &quot;&quot;;</div>
+<div class="line">res.append(Send::makeHeader(321, eId));</div>
+<div class="line">res.append(Send::makeBodyMissile(pos, vel, team, 1));</div>
+<div class="line">res.append(Send::makeBodyNum(321);</div>
+</div><!-- fragment --><p> Here you firstly create a Headerwith rfc code and entity, then fill a bodyMissile structure with X/Y position/velocity, teams and strength</p>
+<h1><a class="anchor" id="autotoc_md26"></a>
 How to use Clang-tidy Config on VScode ?</h1>
 <p>Firstly Open Vscode and go to <b>Settings</b></p>
 <p>Then go to <b>Workspace</b></p>
@@ -183,7 +322,17 @@ How to use Clang-tidy Config on VScode ?</h1>
 <p>After that type "**code analysis**" turn <code>C_Cpp &gt; Code Analysis &gt; Clang Tidy : Enabled</code> to True</p>
 <p><img src="https://github.com/AlexGuillard/R-Type/assets/91668926/5d4c6b83-e050-4857-84a0-c0229fc043db" alt="image" class="inline"/></p>
 <p>And specify the path to .clang-tidy from our source file for example <code>/home/YourName/SourceFolderWhere.clang-tidy</code></p>
-<p><img src="https://github.com/AlexGuillard/R-Type/assets/91668926/2c035b8b-50a6-4d2f-bb49-8a19eaf4bfad" alt="image" class="inline"/> </p>
+<p><img src="https://github.com/AlexGuillard/R-Type/assets/91668926/2c035b8b-50a6-4d2f-bb49-8a19eaf4bfad" alt="image" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+How to use Editor Config on VScode ?</h1>
+<ol type="1">
+<li>Start by running <div class="fragment"><div class="line">npm i -g editorconfig</div>
+</div><!-- fragment --> in your terminal to make sure the extension will work.</li>
+<li>Then, open your VScode and go to the settings (<code>File &gt; Preferences &gt; Settings</code>)</li>
+<li>Search for <code>format on</code> and check <code>Editor:Format on Save</code></li>
+<li>If you use autosave, you need to also check <code>Editor:Format on Type</code></li>
+<li>Then search for the <code>EditorConfig.EditorConfig</code> extension and install it </li>
+</ol>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
