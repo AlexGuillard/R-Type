@@ -48,6 +48,11 @@ static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::Game
     Screen::Display::drawLoose(engine);
 }
 
+static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
+{
+    Screen::Display::drawWin(engine);
+}
+
 //Sizes of the button Play dont want to put it on the function caus its a loop
 Rectangle playButtonRect = { 320, 240, 160, 60 };
 
@@ -80,6 +85,9 @@ int rtype_client()
             break;
         case Screen::Display::GameState::LOOSING:
             looseLoop(window, engine);
+            break;
+        case Screen::Display::GameState::WINNING:
+            winLoop(window, engine);
             break;
         }
         Screen::Display::endUpdate();
