@@ -60,7 +60,7 @@ namespace Network::Send {
      * @param actualColor enum of color of ally
      * @return std::string
      */
-    std::string makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor);
+    std::string makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor, Enums::TeamGroup team);
     /**
      * @brief function to create a BodyMissile struct in std::string
      *
@@ -82,17 +82,6 @@ namespace Network::Send {
      * @return std::string
      */
     std::string codeMob(int code, int ide, int xMob, int yMob, Enums::Position pos);
-    /**
-     * @brief called when spawn a ally
-     *
-     * @param code rfc code of mob (311 - 312)
-     * @param ide number for entity to put in header
-     * @param xAlly position x of ally
-     * @param yAlly position y of ally
-     * @param color enum for color of the ally
-     * @return std::string
-     */
-    std::string codeAlly(int code, int ide, int xAlly, int yAlly, Enums::PlayerColor color);
     /**
      * @brief called when spawn a missile
      *

@@ -392,11 +392,11 @@ void Network::ServerNetwork::SendClientsPlay()
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(x, y, color));
+                res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(x, y, color));
+                res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(312));
             }
             for (int i = 0; i < 10; i++)
