@@ -24,26 +24,6 @@
 
 namespace ECS::Systems {
 
-    static void shootBydoMissiles(
-        Containers::Registry &registry,
-        Containers::SparseArray<Components::BydoShotComponent> &bydoShotRequests
-    )
-    {
-        auto &&positions = registry.getComponents<Components::PositionComponent>();
-        for (auto &&[eId, request] : Containers::IndexedZipper(bydoShotRequests)) {
-            if (!positions[eId]) { continue; }
-            ECS::Creator::createBydoShot(
-                registry,
-                positions[eId]->x,
-                positions[eId]->y,
-                request->xDirection * request->speed,
-                request->yDirection * request->speed,
-                request->team
-            );
-            registry.removeComponent<Components::BydoShotComponent>(registry.entityFromIndex(eId));
-        }
-    }
-
     void shooting(
         Containers::Registry &registry,
         Containers::SparseArray<Components::MissileComponent> &missileRequests,
@@ -51,6 +31,5 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::BydoShotComponent> &bydoShotRequests
     )
     {
-        shootBydoMissiles(registry, bydoShotRequests);
     }
 }; // namespace ECS::Systems

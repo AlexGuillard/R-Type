@@ -7,6 +7,8 @@
 
 #pragma once
 #include <iostream>
+#include <array>
+
 #include "INetwork.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
@@ -68,7 +70,7 @@ namespace Network::Send {
      * @param strenght power of the missile (-1 if not set)
      * @return std::string
      */
-    std::string makeBodyMissile(const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
+    std::string makeBodyMissile(const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght);
     /**
      * @brief called when spawn a mob
      *
@@ -101,7 +103,7 @@ namespace Network::Send {
      * @param strenght power of the missile (-1 if not set)
      * @return std::string
      */
-    std::string codeMissil(const int header[2], const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
+    std::string codeMissile(const std::array<int, 2> &header, const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght);
     /**
      * @brief transform string send by client to int
      *
