@@ -227,13 +227,6 @@ namespace Screen {
          * @return false
          */
         bool getErrorConnection() const;
-        /**
-         * @brief Get the Error401 object
-         *
-         * @return true
-         * @return false
-         */
-        bool getError401() const;
 
     private:
         /**
@@ -270,7 +263,6 @@ namespace Screen {
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         bool _errorConnection;
-        bool _error401;
 
         // Camera
         Vector2 _windowSize = { 0, 0 };

@@ -31,7 +31,6 @@ Screen::Display::Display(GameState state) : _gameState(state)
     // this->toggleFullScreen();
     SetTargetFPS(Constants::frameRate);
     _errorConnection = false;
-    _error401 = false;
 }
 
 Screen::Display::~Display()
@@ -165,11 +164,6 @@ void Screen::Display::setErrorConnection(bool error)
 bool Screen::Display::getErrorConnection()const
 {
     return _errorConnection;
-}
-
-bool Screen::Display::getError401()const
-{
-    return _error401;
 }
 
 void Screen::Display::displayErrorConnection()
