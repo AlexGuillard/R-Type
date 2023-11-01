@@ -10,7 +10,7 @@
 #include "constants.hpp"
 
 namespace ECS::Components {
-    const int defaultSinXSpeed = Constants::cameraDefaultWidth / 10 * -1; // takes 10 seconds to go right to left
+    const int defaultSinXSpeed = static_cast<int>(Constants::cameraDefaultWidth / 10) * -1; // takes 10 seconds to go right to left
     const int defaultSinAmplitude = Constants::cameraDefaultHeight / 10;
     const float defaultSinFrequency = 0.01;
     /**
