@@ -146,6 +146,25 @@ namespace Screen {
         static void drawLoose(GameEngine::GameEngine &engine);
 
         /**
+         * @brief Particles for win screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
+
+        /**
+         * @brief draw the win screen
+         *
+         * @param engine
+         */
+        static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
          * @brief draw the waitingRoom
          */
         static void drawWaitingRoom(Rectangle playButtonRect);
