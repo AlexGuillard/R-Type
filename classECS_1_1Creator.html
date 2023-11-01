@@ -94,6 +94,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a826dd1ee770aee8d9c67e1623373447c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056b4970258f56e6c69a198cbbded11a"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a056b4970258f56e6c69a198cbbded11a">getLevelScrollSpeed</a> ()</td></tr>
 <tr class="separator:a056b4970258f56e6c69a198cbbded11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d3fc5f603375e84a0356bbfc9d178c4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a7d3fc5f603375e84a0356bbfc9d178c4">addSinMovementAI</a> (const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;entity, <a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, float x, float y, float frequency=-1, float speed=<a class="el" href="namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db">Components::defaultSinXSpeed</a>, float amplitude=-1)</td></tr>
+<tr class="memdesc:a7d3fc5f603375e84a0356bbfc9d178c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the sin movement AI to an entity.  <a href="classECS_1_1Creator.html#a7d3fc5f603375e84a0356bbfc9d178c4">More...</a><br /></td></tr>
+<tr class="separator:a7d3fc5f603375e84a0356bbfc9d178c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">addWalkingAI</a> (const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;entity, <a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;target, std::pair&lt; float, float &gt; preferredDistance, float speed, bool dropsDownLedge=false, bool jumpsOverObstacle=false)</td></tr>
 <tr class="memdesc:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a walking AI to an entity. Assumes the entity already has a position, velocity and hitbox.  <a href="classECS_1_1Creator.html#a7e07f21cacd1f2f944c09a3a2d64378a">More...</a><br /></td></tr>
 <tr class="separator:a7e07f21cacd1f2f944c09a3a2d64378a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -267,6 +270,87 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classECS_1_1Entity.html">Entity</a> The entity with the AI </dd></dl>
+
+</div>
+</div>
+<a id="a7d3fc5f603375e84a0356bbfc9d178c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d3fc5f603375e84a0356bbfc9d178c4">&#9670;&nbsp;</a></span>addSinMovementAI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classECS_1_1Entity.html">Entity</a> ECS::Creator::addSinMovementAI </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classECS_1_1Entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>frequency</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em> = <code><a class="el" href="namespaceECS_1_1Components.html#a7423839cb3263a2aef0f8e556e9a86db">Components::defaultSinXSpeed</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>amplitude</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds the sin movement AI to an entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classECS_1_1Entity.html">Entity</a> to add the AI to </td></tr>
+    <tr><td class="paramname">registry</td><td>Registry to add the AI to </td></tr>
+    <tr><td class="paramname">x</td><td>position X </td></tr>
+    <tr><td class="paramname">y</td><td>position Y </td></tr>
+    <tr><td class="paramname">speed</td><td>speed of the entity on the X axis (in px/s) (0 = default) </td></tr>
+    <tr><td class="paramname">amplitude</td><td></td></tr>
+    <tr><td class="paramname">frequency</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classECS_1_1Entity.html">Entity</a> </dd></dl>
 
 </div>
 </div>
