@@ -13,6 +13,7 @@
 #include "GameEngine/Events.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
+#include "ECS/Entity.hpp"
 
 namespace ECS::Systems {
     template<typename T>
@@ -35,11 +36,11 @@ namespace ECS::Systems {
             ai->_shootCooldownTimer = max(
                 0.,
                 ai->_shootCooldownTimer - GameEngine::GameEngine::getDeltaTime());
-            if (ai->_shootCooldownTimer == 0) {
+            if (ai->_shootCooldownTimer == 0 && target->targetId != ECS::NullEntity()) {
                 registry.emplaceComponent<Components::BydoShotComponent>(
                     registry.entityFromIndex(eId),
                     /* damage */ 1,
-                    /* speed */ Constants::bydoMissileSpeed,
+                    /* speed */ ai->shotSpeed,
                     /* xDirection */ target->dX / target->distance,
                     /* yDirection */ target->dY / target->distance
                 );

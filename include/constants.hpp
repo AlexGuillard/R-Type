@@ -12,12 +12,7 @@
 
 namespace Constants {
     // Player
-    const std::size_t playerSpeed = 500;
-    const std::size_t playerNbFrameToMaxSpeed = 5;
-    const std::size_t playerNbFrameToStop = 5;
-
-    // Missile
-    const std::size_t bydoMissileSpeed = 50; // pixels per second
+    const float playerSpeed = 500;
 
     // Camera
     const std::size_t cameraDefaultWidth = 960;
