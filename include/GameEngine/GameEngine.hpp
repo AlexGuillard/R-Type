@@ -79,7 +79,7 @@ namespace GameEngine {
     private:
         // Registry type and registry sorted by insertion order
         std::vector<std::pair<std::string, Registry>> m_registries;
-        int _level = 4;
+        int _level = 1;
         static double mDeltaTime;
     };
 
