@@ -23,8 +23,12 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
             window.setErrorConnection(true);
         }
     }
+
     if (window.getErrorConnection())
         window.displayErrorConnection();
+
+    if (window.getErrorConnection())
+        window.displayError401();
 }
 
 static bool isConnected = false;
@@ -47,6 +51,9 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
     if (Network::returnIsCoUDP()) {
         window.setGameState(Screen::Display::GameState::GAME);
     }
+
+    if (Network::check401Error())
+        window.displayError401();
 }
 
 int rtype_client()

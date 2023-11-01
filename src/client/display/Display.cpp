@@ -31,6 +31,7 @@ Screen::Display::Display(GameState state) : _gameState(state)
     // this->toggleFullScreen();
     SetTargetFPS(Constants::frameRate);
     _errorConnection = false;
+    _error401 = false;
 }
 
 Screen::Display::~Display()
@@ -166,9 +167,19 @@ bool Screen::Display::getErrorConnection()const
     return _errorConnection;
 }
 
+bool Screen::Display::getError401()const
+{
+    return _error401;
+}
+
 void Screen::Display::displayErrorConnection()
 {
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
+}
+
+void Screen::Display::displayError401()
+{
+    DrawText("Error the room is already full or is already running", 120, 100, 64, BLACK);
 }
 
 static Rectangle getInputRect(int posX, int posY)
