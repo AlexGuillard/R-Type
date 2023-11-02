@@ -63,7 +63,7 @@ std::string Network::Send::makeBodyMob(int xMob, int yMob, Enums::Position pos)
     return str;
 }
 
-std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor)
+std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor, Enums::TeamGroup team)
 {
     Network::bodyAlly res;
     std::string str;
@@ -72,6 +72,7 @@ std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor
     res.x = xAlly;
     res.y = yAlly;
     res.color = actualColor;
+    res.team = team;
     std::memcpy(&str.data()[0], &res, sizeof(Network::bodyAlly));
     return str;
 }
@@ -98,16 +99,6 @@ std::string Network::Send::codeMob(int code, int ide, int xPata, int yPata, Enum
 
     str = makeHeader(code, ide);
     str.append(makeBodyMob(xPata, yPata, pos));
-    str.append(makeBodyNum(code));
-    return str;
-}
-
-std::string Network::Send::codeAlly(int code, int ide, int xMob, int yMob, Enums::PlayerColor color)
-{
-    std::string str;
-
-    str = makeHeader(code, ide);
-    str.append(makeBodyAlly(xMob, yMob, color));
     str.append(makeBodyNum(code));
     return str;
 }

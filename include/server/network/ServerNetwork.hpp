@@ -144,6 +144,8 @@ namespace Network {
         void SendClientsPlay();
         void updateGame();
         void sendClientEntities();
+        int pvpWin();
+        void campaignEnd();
         /**
          * @brief Function that handle the event from the client and the game
          *

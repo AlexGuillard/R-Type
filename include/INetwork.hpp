@@ -39,6 +39,7 @@ namespace Network {
         int x;
         int y;
         Enums::PlayerColor color;
+        Enums::TeamGroup team;
     };
 
     struct bodyMissile {
