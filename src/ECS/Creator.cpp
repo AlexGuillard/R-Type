@@ -429,6 +429,7 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
+        addFlyingAI(cancer, registry, ECS::NullEntity(), std::make_pair(-10.F, 10.F), std::make_pair(-10.F, 10.F), 100);
         return cancer;
     }
 
