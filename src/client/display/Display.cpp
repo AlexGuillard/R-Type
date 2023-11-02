@@ -247,6 +247,28 @@ void Screen::Display::displayPortInput()
     DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
+void Screen::Display::displayConnectionStateButton()
+{
+    _soloclickableZone = { 700, 675, 160, 60 };
+    _multiclickableZone = { 1000, 675, 160, 60 };
+
+
+    DrawRectangleRec({ 690, 665, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 990, 665, 180, 80 }, SKYBLUE);
+
+    if (_multiState == MultiState::SOLO)
+        DrawRectangleRec(_soloclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_soloclickableZone, LIGHTGRAY);
+    DrawText("Solo", _soloclickableZone.x + 45, _soloclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_multiState == MultiState::MULTI)
+        DrawRectangleRec(_multiclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_multiclickableZone, LIGHTGRAY);
+    DrawText("Multi", _multiclickableZone.x + 40, _multiclickableZone.y + 15, 32, RAYWHITE);
+}
+
 void Screen::Display::displayConnectionButton()
 {
     const int screenWidth = GetScreenWidth();
@@ -311,6 +333,12 @@ void Screen::Display::mouseClickedMenu()
     } else {
         _state = InputState::NONE;
     }
+    if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
+        _multiState = MultiState::SOLO;
+    }
+    if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
+        _multiState = MultiState::MULTI;
+    }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
             std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
@@ -356,6 +384,7 @@ void Screen::Display::drawMenu()
 {
     displayHostNameInput();
     displayPortInput();
+    displayConnectionStateButton();
     displayConnectionButton();
 }
 
