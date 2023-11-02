@@ -403,9 +403,9 @@ void Screen::Display::drawWaitingRoom()
     DrawText("PVP", _pvpclickableZone.x + 45, _pvpclickableZone.y + 15, 32, RAYWHITE);
 
     if (_modeState == ModeSelect::FRIENDLYFIRE)
-        DrawRectangleRec(_pvpclickableZone, SKYBLUE);
+        DrawRectangleRec(_friendlyFireclickableZone, SKYBLUE);
     else
-        DrawRectangleRec(_pvpclickableZone, LIGHTGRAY);
+        DrawRectangleRec(_friendlyFireclickableZone, LIGHTGRAY);
     DrawText("Friendly fire", _friendlyFireclickableZone.x + 10, _friendlyFireclickableZone.y + 15, 32, RAYWHITE);
 }
 
