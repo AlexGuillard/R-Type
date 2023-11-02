@@ -103,16 +103,6 @@ std::string Network::Send::codeMob(int code, int ide, int xPata, int yPata, Enum
     return str;
 }
 
-std::string Network::Send::codeAlly(int code, int ide, int xMob, int yMob, Enums::PlayerColor color)
-{
-    std::string str;
-
-    str = makeHeader(code, ide);
-    str.append(makeBodyAlly(xMob, yMob, color));
-    str.append(makeBodyNum(code));
-    return str;
-}
-
 std::string Network::Send::codeMissile(const std::array<int, 2> &header, const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght)
 {
     std::string str;
