@@ -147,6 +147,17 @@ namespace Screen {
          */
         Display &center();
         /**
+         * @brief Particles for win screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
+        /**
          * @brief Resizes the window
          * @return (*this) to allow chain calls
          */

@@ -180,14 +180,6 @@ Color GetRandomColor() {
     };
 }
 
-struct Particle {
-    Vector2 position;
-    Color color;
-    float radius;
-    float speed;
-    bool active;
-};
-
 void Screen::Display::displayError401()
 {
     const int screenWidth = GetScreenWidth();
@@ -213,10 +205,11 @@ void Screen::Display::displayError401()
         }
     }
 
-    const char* text = "Error the room is already full or is already running please wait...";
-    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 3.5, (float)(screenHeight / 2 - 20)};
+    const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
+    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
-    DrawTextEx(GetFontDefault(), text, textPosition, 40, 0, textColor);
+    float letterSpacing = 10.0f;
+    DrawTextEx(GetFontDefault(), text, textPosition, 40, letterSpacing, textColor);
     static float spinnerAngle = 0.0f;
     Vector2 spinnerPosition = {(float)(screenWidth / 2), (float)(screenHeight / 2 + 50)};
     float spinnerRadius = 30.0f;
