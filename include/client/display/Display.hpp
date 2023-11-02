@@ -31,6 +31,12 @@ namespace Screen {
             CONNECTING,               // waiting for connection to server to be established
             CONNECTED,                // connected to server
         };
+        enum class ModeSelect {
+            REGULAR,
+            PVP,
+            FRIENDLYFIRE,
+            INFINI,
+        };
         enum class CameraShakeIntensity {
             RUMBLE = 3,
             EARTHQUAKE = 5,
@@ -263,6 +269,7 @@ namespace Screen {
         Rectangle _pvpclickableZone;
         // Set the rectangle clickable for friendly Fire mode button
         Rectangle _friendlyFireclickableZone;
+        ModeSelect _modeState = ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         bool _errorConnection;
