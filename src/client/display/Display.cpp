@@ -172,12 +172,12 @@ void Screen::Display::displayErrorConnection()
 }
 
 Color GetRandomColor() {
-    return (Color){
+    return Color(
         (unsigned char)GetRandomValue(0, 255),
         (unsigned char)GetRandomValue(0, 255),
         (unsigned char)GetRandomValue(0, 255),
         255
-    };
+    );
 }
 
 void Screen::Display::displayError401()
