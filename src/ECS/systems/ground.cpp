@@ -30,20 +30,27 @@ namespace ECS::Systems {
             if (eId == (level->level - 1)) {
                   const double time = GetTime();
                 auto &&texture = Assets::AssetLoader::loadTexturePng(ground->texture);
+                int limitScreen = -static_cast<int>(Constants::cameraDefaultWidth * 2);
                 if ((time - ground->timeAtLastFrameChange) > ground->fps) {
                     ground->timeAtLastFrameChange = time;
                      position->x -= ground->paralaxSpeed;
-                        if(position->x <= (-(texture.width) * ground->frameScale)) {
+                        if(position->x <= limitScreen) {
                             position->x = 0;
                         }
                 }
+                Rectangle sourceRec = { 0, 0, float(texture.width), float(texture.height) };
+                Rectangle destRecOne = { position->x, position->y,
+                Constants::cameraDefaultWidth * 2,
+                Constants::cameraDefaultHeight * 0.1};
+                 Rectangle destRecTwo = {
+                    Constants::cameraDefaultWidth * 2 + position->x,
+                    position->y,
+                    Constants::cameraDefaultWidth * 2,
+                    Constants::cameraDefaultHeight * 0.1
+                 };
+                DrawTexturePro(texture, sourceRec, destRecOne, {0, 0}, 0.0f, WHITE);
+                DrawTexturePro(texture, sourceRec, destRecTwo, {0, 0}, 0.0f, WHITE);
 
-                DrawTextureEx(texture,
-                Vector2(position->x, position->y),
-                double(0.0), ground->frameScale, WHITE);
-                DrawTextureEx(texture,
-                Vector2(texture.width * ground->frameScale + position->x, position->y),
-                double(0.0), ground->frameScale, WHITE);
             }
         }
         Screen::Display::endDrawCamera();

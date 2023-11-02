@@ -27,6 +27,7 @@
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/BydoShootingAIComponent.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -35,6 +36,31 @@
 namespace ECS {
 
     float Creator::mLevelScrollSpeed = Constants::defaultScrollSpeed;
+
+    Entity Creator::addSinMovementAI(
+        const Entity &entity,
+        Containers::Registry &registry,
+        float x,
+        float y,
+        float frequency,
+        float speed,
+        float amplitude
+    )
+    {
+        registry.emplaceComponent<Components::SinMovementComponent>(entity);
+        registry.getComponents<Components::SinMovementComponent>().at(entity)->horizontalOffset = x;
+        registry.getComponents<Components::SinMovementComponent>().at(entity)->verticalOffset = y;
+        if (frequency >= 0) {
+            registry.getComponents<Components::SinMovementComponent>().at(entity)->frequency = frequency;
+        }
+        if (speed >= 0) {
+            registry.getComponents<Components::SinMovementComponent>().at(entity)->speed = speed;
+        }
+        if (amplitude >= 0) {
+            registry.getComponents<Components::SinMovementComponent>().at(entity)->amplitude = amplitude;
+        }
+        return entity;
+    }
 
     Entity Creator::addWalkingAI(
         const Entity &entity,
@@ -296,9 +322,7 @@ namespace ECS {
 
         ECS::Entity enemyBasic = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 20, 24, id);
         registry.emplaceComponent<Components::PositionComponent>(enemyBasic, x, y);
-        registry.emplaceComponent<Components::SinMovementComponent>(enemyBasic);
-        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->horizontalOffset = x;
-        registry.getComponents<Components::SinMovementComponent>().at(enemyBasic)->verticalOffset = y;
+        addSinMovementAI(enemyBasic, registry, x, y);
         registry.emplaceComponent<Components::DrawableComponent>(enemyBasic,
             Assets::AssetsIndex::R_TYPESHEET5_PNG,
             nbFrameInSpriteSheet, // frameRatio
@@ -366,6 +390,9 @@ namespace ECS {
             false, // boomerang
             nbFrameInAnimation // fps
         );
+        addSinMovementAI(bug, registry, x, y, Components::defaultSinFrequency * 2, Components::defaultSinXSpeed * 2, Components::defaultSinAmplitude * 2);
+        addBydoShootingAI(bug, registry, ECS::NullEntity(), 1.5F, 100);
+        registry.emplaceComponent<Components::InRangeComponent>(bug);
         return bug;
     }
 

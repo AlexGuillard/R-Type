@@ -87,6 +87,7 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::CollidableComponent> &collidables,
         Containers::SparseArray<Components::CollisionComponent> &collisions)
     {
+        const float precision = 10;
         removeEmptyCollisionComponents(registry, collisions);
         for (auto &&[receiverId, receiverPosition, receiverHitbox, receiverCollidable] : Containers::IndexedZipper(positions, hitboxes, collidables)) {
             // collision receiver
@@ -97,11 +98,11 @@ namespace ECS::Systems {
                     Components::VelocityComponent receiverVelocityCopy = velocities[receiverId].has_value() ? *velocities[receiverId] : Components::VelocityComponent(0, 0);
                     Components::PositionComponent giverPositionCopy = *giverPosition;
                     Components::VelocityComponent giverVelocityCopy = velocities[giverId].has_value() ? *velocities[giverId] : Components::VelocityComponent(0, 0);
-                    for (std::size_t i = 0; i < 100; i++) {
-                        receiverPositionCopy.x += (receiverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
-                        receiverPositionCopy.y += (receiverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
-                        giverPositionCopy.x += (giverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / 100.;
-                        giverPositionCopy.y += (giverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / 100.;
+                    for (std::size_t i = 0; i < precision; i++) {
+                        receiverPositionCopy.x += (receiverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / precision;
+                        receiverPositionCopy.y += (receiverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / precision;
+                        giverPositionCopy.x += (giverVelocityCopy.x * GameEngine::GameEngine::getDeltaTime()) / precision;
+                        giverPositionCopy.y += (giverVelocityCopy.y * GameEngine::GameEngine::getDeltaTime()) / precision;
                         if (collidesWith(*receiverHitbox, receiverPositionCopy, *giverHitbox, giverPositionCopy)) {
                             addToCollisionComponent(registry, collisions.at(receiverId), receiverId, giverId);
                             break;

@@ -144,6 +144,8 @@ namespace Network {
         void SendClientsPlay();
         void updateGame();
         void sendClientEntities();
+        int pvpWin();
+        void campaignEnd();
         /**
          * @brief Function that handle the event from the client and the game
          *
@@ -168,6 +170,12 @@ namespace Network {
             const ECS::Components::VelocityComponent &velocity,
             const Enums::TeamGroup team,
             const int strength);
+        void _shootBydoShot(
+            ECS::Containers::Registry &registry,
+            int entityId,
+            const ECS::Components::PositionComponent &position,
+            const Enums::TeamGroup team
+        );
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

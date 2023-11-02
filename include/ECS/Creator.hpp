@@ -13,6 +13,7 @@
 #include "ECS/Entity.hpp"
 #include "ECS/Creator.hpp"
 #include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/SinMovementComponent.hpp"
 
 namespace ECS {
 
@@ -32,6 +33,28 @@ namespace ECS {
          * @returns The global horizontal scroll speed in pixels per second
          */
         static float getLevelScrollSpeed();
+
+        /**
+         * @brief Adds the sin movement AI to an entity.
+         *
+         * @param entity Entity to add the AI to
+         * @param registry Registry to add the AI to
+         * @param x position X
+         * @param y position Y
+         * @param speed speed of the entity on the X axis (in px/s) (0 = default)
+         * @param amplitude
+         * @param frequency
+         * @return Entity
+         */
+        static Entity addSinMovementAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            float x,
+            float y,
+            float frequency = -1,
+            float speed = Components::defaultSinXSpeed,
+            float amplitude = -1
+            );
 
         /**
          * @brief Add a walking AI to an entity.
