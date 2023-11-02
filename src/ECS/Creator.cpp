@@ -28,6 +28,7 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
+#include "ECS/Components/FlyingAIComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -87,6 +88,19 @@ namespace ECS {
     )
     {
         registry.emplaceComponent<Components::BydoShootingAIComponent>(entity, shootCooldown, shotSpeed);
+        registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
+        return entity;
+    }
+
+    Entity Creator::addFlyingAI(
+        const Entity &entity,
+        Containers::Registry &registry,
+        const Entity &target,
+        std::pair<float, float> preferredXDistance,
+        std::pair<float, float> preferredYDistance,
+        float speed)
+    {
+        registry.emplaceComponent<Components::FlyingAIComponent>(entity, preferredXDistance, preferredYDistance, speed);
         registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
         return entity;
     }
@@ -360,7 +374,7 @@ namespace ECS {
         const Utils::Vector2 nbFrameInSpriteSheet(6, 1);
         const uint8_t nbFrameInAnimation = 3;
 
-        ECS::Entity scant = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 58, 54, id);
+        ECS::Entity scant = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 20, 58, 54, id);
         registry.getComponents<Components::PositionComponent>().at(scant)->x = x;
         registry.getComponents<Components::PositionComponent>().at(scant)->y = y;
         registry.emplaceComponent<Components::DrawableComponent>(scant,
@@ -371,6 +385,8 @@ namespace ECS {
             false, // boomerang
             nbFrameInAnimation // fps
         );
+        addFlyingAI(scant, registry, ECS::NullEntity(), std::make_pair(-300.F, -750.F), std::make_pair(-10.F, 10.F), 100);
+        addBydoShootingAI(scant, registry, ECS::NullEntity(), 1, 100);
         return scant;
     }
 

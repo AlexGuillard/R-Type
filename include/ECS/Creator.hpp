@@ -96,6 +96,15 @@ namespace ECS {
             float shotSpeed
         );
 
+        static Entity addFlyingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            std::pair<float, float> preferredXDistance,
+            std::pair<float, float> preferredYDistance,
+            float speed
+        );
+
         /**
          * @brief Create a base entity
          * @param registry The registry to create the entity in
