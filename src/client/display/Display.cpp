@@ -285,14 +285,14 @@ void Screen::Display::detectActionMenu()
         keyPressededMenu(keyPressed, key);
     }
     if (_gameState == Display::GameState::WAITINGROOM) {
-        detectActionWaitingRoom({ 320, 240, 160, 60 });
+        detectActionWaitingRoom();
     }
 }
 
-void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::detectActionWaitingRoom()
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect) && !_playButton) {
+        if (CheckCollisionPointRec(GetMousePosition(), _playclickableZone) && !_playButton) {
             _playButton = true;
         }
     }
@@ -367,10 +367,14 @@ void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 
 }
 
-void Screen::Display::drawWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::drawWaitingRoom()
 {
-    DrawRectangleRec(playButtonRect, SKYBLUE);
-    DrawText("Play", playButtonRect.x + 45, playButtonRect.y + 10, 32, RAYWHITE);
+    _playclickableZone = { 850, 450, 160, 60 };
+    _regularclickableZone = { 300, 275, 160, 60 };
+
+    DrawRectangleRec(_playclickableZone, SKYBLUE);
+    DrawText("Play", _playclickableZone.x + 45, _playclickableZone.y + 10, 32, RAYWHITE);
+    DrawRectangleRec(_regularclickableZone, SKYBLUE);
 }
 
 Screen::Display &Screen::Display::center()
