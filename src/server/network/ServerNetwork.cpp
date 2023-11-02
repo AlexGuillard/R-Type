@@ -127,6 +127,65 @@ void Network::ServerNetwork::udpConnection()
     asyncReceive(_asyncSocket);
 }
 
+int Network::ServerNetwork::pvpWin()
+{
+    if (_typeMod == 244) {
+        auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
+        bool leftAlive = false;
+        bool rightAlive = false;
+        for (const auto &ide : teams) {
+            if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+                leftAlive = true;
+            } else if (ide.has_value() && ide->team == Enums::TeamGroup::ENEMY) {
+                rightAlive = true;
+            }
+        }
+        if (leftAlive == false) {
+            _dataToSend.append(Send::makeHeader(223, 0));
+            _dataToSend.append(Send::makeBodyNum(223));
+        } else if (rightAlive == false) {
+            _dataToSend.append(Send::makeHeader(224, 0));
+            _dataToSend.append(Send::makeBodyNum(224));
+        }
+        return 1;
+    }
+    return 0;
+}
+
+void Network::ServerNetwork::campaignEnd()
+{
+    auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
+    bool allyAlive = false;
+    for (const auto &ide : teams) {
+        if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+            allyAlive = true;
+            break;
+        }
+    }
+    if (allyAlive == true) {
+        if (_engine._listIdBoss.size() > 0) {
+            for (int i = 0; i < _engine._listIdBoss.size(); i++) {
+                if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
+                    _stage += 1;
+                    _tickCount = 0;
+                    if (_script.openLVL(_stage) == 0) {
+                        _dataToSend.append(Send::makeHeader(221, 0));
+                        _dataToSend.append(Send::makeBodyNum(221));
+                    } else {
+                        _dataToSend.append(Send::makeHeader(231, _stage));
+                        _dataToSend.append(Send::makeBodyNum(231));
+                    }
+                    _engine._listIdBoss.clear();
+                    break;
+                }
+            }
+        }
+    } else {
+        _dataToSend.append(Send::makeHeader(222, 0));
+        _dataToSend.append(Send::makeBodyNum(222));
+    }
+}
+
 void Network::ServerNetwork::updateGame()
 {
     _tickCount++;
@@ -159,34 +218,8 @@ void Network::ServerNetwork::updateGame()
         }
         data.second.clear();
     }
-    auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
-    bool allyAlive = false;
-    for (const auto &ide : teams) {
-        if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
-            allyAlive = true;
-            break;
-        }
-    }
-    if (allyAlive == true) {
-        if (_engine._listIdBoss.size() > 0) {
-            for (int i = 0; i < _engine._listIdBoss.size(); i++) {
-                if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
-                    _stage += 1;
-                    _tickCount = 0;
-                    if (_script.openLVL(_stage) == -1) {                        _dataToSend.append(Send::makeHeader(221, 0));
-                        _dataToSend.append(Send::makeBodyNum(221));
-                    } else {
-                        _dataToSend.append(Send::makeHeader(231, _stage));
-                        _dataToSend.append(Send::makeBodyNum(231));
-                    }
-                    _engine._listIdBoss.clear();
-                    break;
-                }
-            }
-        }
-    } else {
-        _dataToSend.append(Send::makeHeader(222, 0));
-        _dataToSend.append(Send::makeBodyNum(222));
+    if (pvpWin() == 0) {
+        campaignEnd();
     }
     _engine.run();
     if (_tickCount > 2) {
@@ -391,11 +424,11 @@ void Network::ServerNetwork::SendClientsPlay()
             const boost::asio::ip::udp::endpoint& endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
-                res.append(Send::makeBodyAlly(x, y, color));
+                res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(311));
             } else {
                 res = Send::makeHeader(312, entity);
-                res.append(Send::makeBodyAlly(x, y, color));
+                res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(312));
             }
             for (int i = 0; i < 10; i++)
