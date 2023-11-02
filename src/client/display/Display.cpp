@@ -192,21 +192,21 @@ void Screen::Display::displayError401()
         if (particles[i].active) {
             particles[i].position.y += particles[i].speed;
             if (particles[i].position.y > screenHeight) {
-                particles[i].position = (Vector2){GetRandomValue(0, screenWidth), -10};
-                particles[i].speed = GetRandomValue(1, 5);
+                particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0f};
+                particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
             }
             DrawCircleV(particles[i].position, particles[i].radius, particles[i].color);
         } else {
-            particles[i].position = (Vector2){GetRandomValue(0, screenWidth), -10};
+            particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0f};
             particles[i].color = GetRandomColor();
-            particles[i].radius = GetRandomValue(1, 3);
-            particles[i].speed = GetRandomValue(1, 5);
+            particles[i].radius = static_cast<float>(GetRandomValue(1, 3));
+            particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
             particles[i].active = true;
         }
     }
 
     const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
-    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5, (float)(screenHeight / 2 - 300)};
+    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
     float letterSpacing = 10.0f;
     DrawTextEx(GetFontDefault(), text, textPosition, 40, letterSpacing, textColor);
