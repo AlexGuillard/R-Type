@@ -26,9 +26,6 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 
     if (window.getErrorConnection())
         window.displayErrorConnection();
-
-    if (window.getErrorConnection())
-        window.displayError401();
 }
 
 static bool isConnected = false;
@@ -46,14 +43,17 @@ Rectangle playButtonRect = { 320, 240, 160, 60 };
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
-    Screen::Display::drawWaitingRoom(playButtonRect);
+
+    if (!Network::check401Error()) {
+        Screen::Display::drawWaitingRoom(playButtonRect);
+    } else {
+        window.displayError401();
+    }
 
     if (Network::returnIsCoUDP()) {
         window.setGameState(Screen::Display::GameState::GAME);
     }
 
-    if (Network::check401Error())
-        window.displayError401();
 }
 
 int rtype_client()
