@@ -192,12 +192,12 @@ void Screen::Display::displayError401()
         if (particles[i].active) {
             particles[i].position.y += particles[i].speed;
             if (particles[i].position.y > screenHeight) {
-                particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0f};
+                particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0};
                 particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
             }
             DrawCircleV(particles[i].position, particles[i].radius, particles[i].color);
         } else {
-            particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0f};
+            particles[i].position = (Vector2){static_cast<float>(GetRandomValue(0, screenWidth)), -10.0};
             particles[i].color = GetRandomColor();
             particles[i].radius = static_cast<float>(GetRandomValue(1, 3));
             particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
