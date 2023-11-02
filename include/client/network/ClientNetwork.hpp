@@ -416,7 +416,7 @@ namespace Network {
         //Map of the entities with the timestamp
         std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
         //Error from the server use for 401 RFC Code (room full or room playing)
-        bool _errorServer = false;
+        bool _errorServer;
     };
 }
 
