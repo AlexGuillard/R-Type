@@ -171,9 +171,63 @@ void Screen::Display::displayErrorConnection()
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
 }
 
+Color GetRandomColor() {
+    return (Color){
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    };
+}
+
+struct Particle {
+    Vector2 position;
+    Color color;
+    float radius;
+    float speed;
+    bool active;
+};
+
 void Screen::Display::displayError401()
 {
-    DrawText("Error the room is already full or is already running", 120, 100, 64, BLACK);
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    ClearBackground(BLACK);
+    const int maxParticles = 100;
+    static std::vector<Particle> particles(maxParticles);
+
+    for (int i = 0; i < maxParticles; i++) {
+        if (particles[i].active) {
+            particles[i].position.y += particles[i].speed;
+            if (particles[i].position.y > screenHeight) {
+                particles[i].position = (Vector2){GetRandomValue(0, screenWidth), -10};
+                particles[i].speed = GetRandomValue(1, 5);
+            }
+            DrawCircleV(particles[i].position, particles[i].radius, particles[i].color);
+        } else {
+            particles[i].position = (Vector2){GetRandomValue(0, screenWidth), -10};
+            particles[i].color = GetRandomColor();
+            particles[i].radius = GetRandomValue(1, 3);
+            particles[i].speed = GetRandomValue(1, 5);
+            particles[i].active = true;
+        }
+    }
+
+    const char* text = "Error the room is already full or is already running please wait...";
+    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 3.5, (float)(screenHeight / 2 - 20)};
+    Color textColor = WHITE;
+    DrawTextEx(GetFontDefault(), text, textPosition, 40, 0, textColor);
+    static float spinnerAngle = 0.0f;
+    Vector2 spinnerPosition = {(float)(screenWidth / 2), (float)(screenHeight / 2 + 50)};
+    float spinnerRadius = 30.0f;
+    spinnerAngle += 5.0f;
+
+    if (spinnerAngle >= 360.0f)
+        spinnerAngle = 0.0f;
+
+    DrawCircleLines(spinnerPosition.x, spinnerPosition.y, spinnerRadius, RAYWHITE);
+    DrawCircleSector(spinnerPosition, spinnerRadius, 90, 90 + spinnerAngle, 24, GREEN);
+    EndDrawing();
 }
 
 static Rectangle getInputRect(int posX, int posY)
