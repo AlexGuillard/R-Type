@@ -5,6 +5,8 @@
 ** FlyingAI
 */
 
+#include <cmath>
+
 #include "ECS/Systems/flyingAI.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
@@ -22,6 +24,11 @@ static bool inRange(T value, std::pair<T, T> range)
         value >= range.first && value <= range.second ||
         value >= range.second && value <= range.first
         );
+}
+
+static float length(float x, float y)
+{
+    return sqrt(x * x + y * y);
 }
 
 void ECS::Systems::flyingAI(
@@ -60,6 +67,12 @@ void ECS::Systems::flyingAI(
             velocity->y = ai->speed;
         } else {
             velocity->y = 0;
+        }
+        // make sure velocity vector doesn't exceed speed
+        if (length(velocity->x, velocity->y) > ai->speed) {
+            float ratio = ai->speed / length(velocity->x, velocity->y);
+            velocity->x *= ratio;
+            velocity->y *= ratio;
         }
     }
 }
