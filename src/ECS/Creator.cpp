@@ -84,10 +84,11 @@ namespace ECS {
         Containers::Registry &registry,
         const Entity &target,
         float shootCooldown,
-        float shotSpeed
+        float shotSpeed,
+        Enums::ShotType shotType
     )
     {
-        registry.emplaceComponent<Components::BydoShootingAIComponent>(entity, shootCooldown, shotSpeed);
+        registry.emplaceComponent<Components::BydoShootingAIComponent>(entity, shootCooldown, shotSpeed, shotType);
         registry.emplaceComponent<Components::TargetComponent>(entity, static_cast<std::size_t>(target));
         return entity;
     }
@@ -386,7 +387,7 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         addFlyingAI(scant, registry, ECS::NullEntity(), std::make_pair(-300.F, -750.F), std::make_pair(-10.F, 10.F), 100);
-        addBydoShootingAI(scant, registry, ECS::NullEntity(), 1, 100);
+        addBydoShootingAI(scant, registry, ECS::NullEntity(), 1, 100, Enums::ShotType::WAVE_BEAM);
         return scant;
     }
 
