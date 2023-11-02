@@ -481,12 +481,12 @@ Vector2 Screen::Display::getCameraSize()
 ///// End Game
 
 Color GetRandomColor() {
-    return (Color){
+    return Color(
         (unsigned char)GetRandomValue(0, 255),
         (unsigned char)GetRandomValue(0, 255),
         (unsigned char)GetRandomValue(0, 255),
         255
-    };
+    );
 }
 
 void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
@@ -500,7 +500,7 @@ void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
     while (elapsedTime < animationDuration) {
         elapsedTime += GetFrameTime();
         float alpha = (elapsedTime / animationDuration);
-        textColor = (Color){RAYWHITE.r, RAYWHITE.g, RAYWHITE.b, (unsigned char)(alpha * 255)};
+        textColor = Color{static_cast<unsigned char>(RAYWHITE.r), static_cast<unsigned char>(RAYWHITE.g), static_cast<unsigned char>(RAYWHITE.b), static_cast<unsigned char>(alpha * 255)};
         float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
         float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
         float rotation = 360.0f * (elapsedTime / animationDuration);
@@ -540,13 +540,13 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
     while (elapsedTime < animationDuration) {
         elapsedTime += GetFrameTime();
         float alpha = (elapsedTime / animationDuration);
-        textColor = (Color){GREEN.r, GREEN.g, GREEN.b, (unsigned char)(alpha * 255)};
+        textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
         ClearBackground(BLACK);
 
         for (int i = 0; i < maxParticles; i++) {
 
             if (!fireworks[i].active) {
-                fireworks[i].position = (Vector2){(float)GetRandomValue(0, screenWidth), (float)GetRandomValue(0, screenHeight)};
+                fireworks[i].position = Vector2{static_cast<float>(GetRandomValue(0, screenWidth)), static_cast<float>(GetRandomValue(0, screenHeight))};
                 fireworks[i].color = GetRandomColor();
                 fireworks[i].radius = GetRandomValue(2, 4);
                 fireworks[i].speed = GetRandomValue(5, 15);
