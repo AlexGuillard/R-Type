@@ -166,6 +166,16 @@ bool Screen::Display::getErrorConnection()const
     return _errorConnection;
 }
 
+Screen::Display::MultiState Screen::Display::getMultiState() const
+{
+    return _multiState;
+}
+
+Screen::Display::ModeSelect Screen::Display::getModeState() const
+{
+    return _modeState;
+}
+
 void Screen::Display::displayErrorConnection()
 {
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);

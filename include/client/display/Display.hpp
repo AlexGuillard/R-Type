@@ -254,6 +254,10 @@ namespace Screen {
          */
         bool getErrorConnection() const;
 
+        MultiState getMultiState() const;
+
+        ModeSelect getModeState() const;
+
     private:
         /**
          * @brief Toggles between fullscreen and windowed
