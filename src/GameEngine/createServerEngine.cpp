@@ -12,6 +12,7 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
 
 namespace GameEngine {
     namespace Containers = ECS::Containers;
@@ -19,7 +20,7 @@ namespace GameEngine {
 
     static void initEntitiesRegistry(Containers::Registry &registry, ServerEventHandler serverEventHandler)
     {
-        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(serverEventHandler);
+        registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent, Components::WaveBeamComponent>(serverEventHandler);
     }
 
     GameEngine createServerEngine(ServerEventHandler serverEventHandler)
