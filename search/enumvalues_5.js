@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['game_1115',['GAME',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13',1,'Screen::Display']]]
+  ['friendlyfire_1121',['FRIENDLYFIRE',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070ad4b4faa6ff00af233bc120e29cb8e06a',1,'Screen::Display']]]
 ];

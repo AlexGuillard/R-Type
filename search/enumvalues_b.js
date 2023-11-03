@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['red_5fcolor_1242',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums']]],
-  ['right_1243',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]],
-  ['rumble_1244',['RUMBLE',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9a8704ee6755aa31b8b12c493a816757fb',1,'Screen::Display']]]
+  ['neutral_1239',['NEUTRAL',['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a31ba17aa58cdb681423f07ca21a6efc7',1,'Enums']]],
+  ['new_5fplayer_1240',['NEW_PLAYER',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ad4f5148ace6252399e4d60ce75602ae8',1,'Enums']]],
+  ['none_1241',['NONE',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932acaffa8ca3fbbe74ac2c536b2a077f0ecf5',1,'Network::Info::NONE()'],['../namespaceEnums.html#a04ba6023509953c154816d888df61876ab50339a10e1de285ac99d4c3990b8693',1,'Enums::NONE()']]],
+  ['not_5fconnected_1242',['NOT_CONNECTED',['../namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677ad91be9b5ceb9fe0af02b9b02413eccf8',1,'Network']]]
 ];

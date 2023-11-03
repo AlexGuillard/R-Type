@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['launch_5fgame_1226',['LAUNCH_GAME',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a46750841cdc7e2c45bdab55ef1e22b1c',1,'Enums']]],
-  ['left_1227',['LEFT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a684d325a7303f52e64011467ff5c5758',1,'Network']]],
-  ['lime_5fcolor_1228',['LIME_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ab0cfff57bcf7d2576164aed380d07a0b',1,'Enums']]]
+  ['infini_1123',['INFINI',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070a9d5fca2e2c4c9927bc7c0f39c1d66411',1,'Screen::Display']]]
 ];

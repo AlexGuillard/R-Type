@@ -1,16 +1,11 @@
 var searchData=
 [
-  ['shoot_1245',['SHOOT',['../namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0a0504ea30baff7b670a10cb44f8e5cca2',1,'Network']]],
-  ['side_1246',['SIDE',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932aca916e53b1daa968675e0e39ca4d68ec7f',1,'Network::Info']]],
-  ['spawn_5fally_1247',['SPAWN_ALLY',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ae559f3ac5226e6b41fdc6f611ce5f110',1,'Enums']]],
-  ['spawn_5fbink_1248',['SPAWN_BINK',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ac58ca73395c85d159b1302602da19ea7',1,'Enums']]],
-  ['spawn_5fblaster_1249',['SPAWN_BLASTER',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a2f3dd780fd1808a518d478cfaa19e6ab',1,'Enums']]],
-  ['spawn_5fbug_1250',['SPAWN_BUG',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a1804866fd6b5c12db2c95458991f63ab',1,'Enums']]],
-  ['spawn_5fbydo_5fshot_1251',['SPAWN_BYDO_SHOT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a94ffb1e2e175a0e8d56165cf174e183d',1,'Enums']]],
-  ['spawn_5fcancer_1252',['SPAWN_CANCER',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a58586f490d911e382c718b97928996bb',1,'Enums']]],
-  ['spawn_5fpata_5fpata_1253',['SPAWN_PATA_PATA',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527add565d291f66bd708601adf39f25141b',1,'Enums']]],
-  ['spawn_5fplayer_1254',['SPAWN_PLAYER',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a7fe38390de92300aca4c7f3e581b41ac',1,'Enums']]],
-  ['spawn_5fplayer_5fmissile_1255',['SPAWN_PLAYER_MISSILE',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a99af978d744250716018d347f746de0d',1,'Enums']]],
-  ['spawn_5fscant_1256',['SPAWN_SCANT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527adc669d87b6c65a2af4ec9f0cfe734072',1,'Enums']]],
-  ['spawn_5fwave_5fbeam_1257',['SPAWN_WAVE_BEAM',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ae1f4b898fac6c13f7bc0f769ea96ac38',1,'Enums']]]
+  ['player_5fdown_1243',['PLAYER_DOWN',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ac74660f5d9acc6796f4e7988fcd81e7a',1,'Enums']]],
+  ['player_5fdrop_1244',['PLAYER_DROP',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a343fa25895663b14ab5b0a3b946516d9',1,'Enums']]],
+  ['player_5fleft_1245',['PLAYER_LEFT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527a87cdb9e462b232158ce1860f18f87a77',1,'Enums']]],
+  ['player_5fright_1246',['PLAYER_RIGHT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527ae32aeba6af61e69051269fb9e4541537',1,'Enums']]],
+  ['player_5fshoot_1247',['PLAYER_SHOOT',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527afe4988a800f011ba5a87de48d5b3747a',1,'Enums']]],
+  ['player_5fup_1248',['PLAYER_UP',['../namespaceEnums.html#aa6a4aecd8bdfbd95e2db376dc0baf527aafee4a4340023016ed2b66993bdfa470',1,'Enums']]],
+  ['purple_5fcolor_1249',['PURPLE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783ae9acca2d6222b6c7b6e23f78473d45cc',1,'Enums']]],
+  ['pvp_1250',['PVP',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070aac340782e01cb82b5f2442b775992939',1,'Screen::Display']]]
 ];
