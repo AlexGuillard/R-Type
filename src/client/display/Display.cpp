@@ -178,6 +178,16 @@ bool Screen::Display::getErrorConnection()const
     return _errorConnection;
 }
 
+Enums::MultiState Screen::Display::getMultiState() const
+{
+    return _multiState;
+}
+
+Enums::ModeSelect Screen::Display::getModeState() const
+{
+    return _modeState;
+}
+
 void Screen::Display::displayErrorConnection()
 {
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
@@ -311,13 +321,13 @@ void Screen::Display::displayConnectionStateButton()
     DrawRectangleRec({ 690, 665, 180, 80 }, SKYBLUE);
     DrawRectangleRec({ 990, 665, 180, 80 }, SKYBLUE);
 
-    if (_multiState == MultiState::SOLO)
+    if (_multiState == Enums::MultiState::SOLO)
         DrawRectangleRec(_soloclickableZone, SKYBLUE);
     else
         DrawRectangleRec(_soloclickableZone, LIGHTGRAY);
     DrawText("Solo", _soloclickableZone.x + 45, _soloclickableZone.y + 15, 32, RAYWHITE);
 
-    if (_multiState == MultiState::MULTI)
+    if (_multiState == Enums::MultiState::MULTI)
         DrawRectangleRec(_multiclickableZone, SKYBLUE);
     else
         DrawRectangleRec(_multiclickableZone, LIGHTGRAY);
@@ -373,13 +383,13 @@ void Screen::Display::detectActionWaitingRoom()
             _playButton = true;
         }
         if (CheckCollisionPointRec(GetMousePosition(), _regularclickableZone)) {
-            _modeState = ModeSelect::REGULAR;
+            _modeState = Enums::ModeSelect::REGULAR;
         }
         if (CheckCollisionPointRec(GetMousePosition(), _pvpclickableZone)) {
-            _modeState = ModeSelect::PVP;
+            _modeState = Enums::ModeSelect::PVP;
         }
         if (CheckCollisionPointRec(GetMousePosition(), _friendlyFireclickableZone)) {
-            _modeState = ModeSelect::FRIENDLYFIRE;
+            _modeState = Enums::ModeSelect::FRIENDLYFIRE;
         }
     }
 }
@@ -398,10 +408,10 @@ void Screen::Display::mouseClickedMenu()
         _state = InputState::NONE;
     }
     if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
-        _multiState = MultiState::SOLO;
+        _multiState = Enums::MultiState::SOLO;
     }
     if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
-        _multiState = MultiState::MULTI;
+        _multiState = Enums::MultiState::MULTI;
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
@@ -474,19 +484,19 @@ void Screen::Display::drawWaitingRoom()
     DrawRectangleRec(_playclickableZone, SKYBLUE);
     DrawText("Play", _playclickableZone.x + 45, _playclickableZone.y + 10, 32, RAYWHITE);
 
-    if (_modeState == ModeSelect::REGULAR)
+    if (_modeState == Enums::ModeSelect::REGULAR)
         DrawRectangleRec(_regularclickableZone, SKYBLUE);
     else
         DrawRectangleRec(_regularclickableZone, LIGHTGRAY);
     DrawText("Regular", _regularclickableZone.x + 20, _regularclickableZone.y + 15, 32, RAYWHITE);
 
-    if (_modeState == ModeSelect::PVP)
+    if (_modeState == Enums::ModeSelect::PVP)
         DrawRectangleRec(_pvpclickableZone, SKYBLUE);
     else
         DrawRectangleRec(_pvpclickableZone, LIGHTGRAY);
     DrawText("PVP", _pvpclickableZone.x + 45, _pvpclickableZone.y + 15, 32, RAYWHITE);
 
-    if (_modeState == ModeSelect::FRIENDLYFIRE)
+    if (_modeState == Enums::ModeSelect::FRIENDLYFIRE)
         DrawRectangleRec(_friendlyFireclickableZone, SKYBLUE);
     else
         DrawRectangleRec(_friendlyFireclickableZone, LIGHTGRAY);

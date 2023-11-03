@@ -154,10 +154,9 @@ int Network::ServerNetwork::pvpWin()
 
 void Network::ServerNetwork::campaignEnd()
 {
-    auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
     bool allyAlive = false;
-    for (const auto &ide : teams) {
-        if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+    for (const auto &ide : _ids) {
+        if (_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>().at(ide.second.first).has_value()) {
             allyAlive = true;
             break;
         }
@@ -435,6 +434,7 @@ void Network::ServerNetwork::SendClientsPlay()
             for (int i = 0; i < 10; i++)
                 _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
+        allIds.second.first = entity;
         index++;
     }
 }

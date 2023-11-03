@@ -100,5 +100,5 @@ namespace Network::Send {
      * @return int
      */
     BodyNumber stringToBodyNum(std::string &code);
-    Network::header stringToheader(std::string code);
+    Network::header stringToheader(std::string &code);
 };
