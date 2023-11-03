@@ -42,7 +42,7 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
 
     if (!Network::check401Error()) {
-        Screen::Display::drawWaitingRoom();
+        window.drawWaitingRoom();
     } else {
         window.displayError401();
     }

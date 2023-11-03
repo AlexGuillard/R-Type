@@ -204,8 +204,8 @@ void Screen::Display::displayError401()
             particles[i].active = true;
         }
     }
-
-    const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
+    const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
+    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
     Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
     float letterSpacing = 10.0f;
