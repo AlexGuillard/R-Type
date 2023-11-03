@@ -14,7 +14,7 @@ var searchData=
   ['connection_829',['connection',['../classNetwork_1_1IServerTcp.html#a65ab68539ac3a68633af2eee83f67c24',1,'Network::IServerTcp::connection()'],['../classNetwork_1_1ServerTcp.html#a0ea18a251a7dd76d38ac557ed97433ab',1,'Network::ServerTcp::connection()']]],
   ['connecttcp_830',['connectTCP',['../classNetwork_1_1ClientNetwork.html#a600bba6035ffef24e96700e54d759fbb',1,'Network::ClientNetwork']]],
   ['controller_831',['controller',['../namespaceECS_1_1Systems.html#a42ee55d8169460032935b6578a109bb6',1,'ECS::Systems']]],
-  ['createally_832',['createAlly',['../classECS_1_1Creator.html#aa476a1baf11d5db617dd872a6d65d453',1,'ECS::Creator']]],
+  ['createally_832',['createAlly',['../classECS_1_1Creator.html#a9837a8ab7091f114ef5d0fd16634d3f8',1,'ECS::Creator']]],
   ['createbink_833',['createBink',['../classECS_1_1Creator.html#a55e023e6e0287c03ac4046899636228f',1,'ECS::Creator']]],
   ['createblaster_834',['createBlaster',['../classECS_1_1Creator.html#a4788dcd5bf7171fda3675205e48b85d1',1,'ECS::Creator']]],
   ['createbosscharacter_835',['createBossCharacter',['../classECS_1_1Creator.html#a1c63c4522bdcbea42b5b953733be2ec1',1,'ECS::Creator']]],
@@ -26,7 +26,7 @@ var searchData=
   ['createenemybasic_841',['createEnemyBasic',['../classECS_1_1Creator.html#aac48eb829591ef5b478b3c69a807f769',1,'ECS::Creator']]],
   ['creategroundedcharacter_842',['createGroundedCharacter',['../classECS_1_1Creator.html#a6a8be1878b668826910c25900ccd5098',1,'ECS::Creator']]],
   ['createmissile_843',['createMissile',['../classECS_1_1Creator.html#a7d3aff8faf71a2042c104ae868f754d4',1,'ECS::Creator']]],
-  ['createplayer_844',['createPlayer',['../classECS_1_1Creator.html#ad2ffb0d8d3cbd6c7f2ab28517464e44a',1,'ECS::Creator']]],
+  ['createplayer_844',['createPlayer',['../classECS_1_1Creator.html#a91738cd48cf7029e7bd51abf8a6ffd05',1,'ECS::Creator']]],
   ['createscant_845',['createScant',['../classECS_1_1Creator.html#abffa9178a226d3a77b932eea6b3754ee',1,'ECS::Creator']]],
   ['createwavebeam_846',['createWaveBeam',['../classECS_1_1Creator.html#a5edf62269b7be8e51a9f70b316b7351e',1,'ECS::Creator']]],
   ['creator_847',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator']]]
