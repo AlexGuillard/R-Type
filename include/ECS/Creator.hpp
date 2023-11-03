@@ -208,7 +208,7 @@ namespace ECS {
 
         /**
          * @brief Create a base boss entity. It has an intro animation, during which it is invincible.
-         * 
+         *
          * @param registry The registry to create the entity in
          * @param id Id of the entity
          * @param team Team of the entity
@@ -292,7 +292,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Player object
          *
@@ -302,7 +302,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Dobkeratops object
          *

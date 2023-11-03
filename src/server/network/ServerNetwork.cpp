@@ -413,11 +413,12 @@ void Network::ServerNetwork::SendClientsPlay()
         if (_typeMod == 244 && index % 2 != 0)
             x = Constants::cameraDefaultWidth / 1.4;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
-        ECS::Creator::createAlly(registry, entity, x, y, color);
         if (_typeMod == 243) {
-            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::NEUTRAL;
+            ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::NEUTRAL);
         } else if (_typeMod == 244 && index % 2 != 0) {
-            registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team = Enums::TeamGroup::ENEMY;
+            ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::ENEMY);
+        } else {
+            ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::ALLY);
         }
         for (const auto& pair : _listUdpEndpoints) {
             res.clear();

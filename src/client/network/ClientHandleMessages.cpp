@@ -286,7 +286,7 @@ void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std:
         BodyNumber footer = getBody(str);
 
         if (footer.number == 311) {
-            ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
+            ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color, allyData.team);
         }
     } else {
         str.clear();
@@ -300,7 +300,7 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
         BodyNumber footer = getBody(str);
 
         if (footer.number == 312) {
-            ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
+            ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color, allyData.team);
         }
 
     } else {
