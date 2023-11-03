@@ -19,6 +19,7 @@
 #include "constants.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "enums.hpp"
 
 namespace Network {
 
@@ -70,7 +71,7 @@ namespace Network {
          * @brief This function is used to send a hello to the server to connect to it
          *
          */
-        void sendHello();
+        void sendHello(Enums::MultiState state);
         /**
          * @brief This function is used to send a movement from the player to the server
          *
@@ -89,7 +90,7 @@ namespace Network {
          * @param host
          * @param port
          */
-        bool connect(const std::string &host, int port, bool isTCP);
+        bool connect(const std::string &host, int port, bool isTCP, Enums::MultiState state);
         /**
          * @brief Is contained on the map of funciton to use the pointer on function
          *
@@ -291,7 +292,7 @@ namespace Network {
          * @brief send a 201 to the server on binary format with a header struct
          *
          */
-        void send201();
+        void send201(Enums::ModeSelect mode);
         /**
          * @brief handle messages from the server and call the right function attributed to the header rfc code
          *

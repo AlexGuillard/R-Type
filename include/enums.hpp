@@ -17,6 +17,17 @@ namespace Enums {
         COUNT // keep last
     };
 
+    enum class MultiState {
+        SOLO,
+        MULTI,
+    };
+    enum class ModeSelect {
+        REGULAR,
+        PVP,
+        FRIENDLYFIRE,
+        INFINI,
+    };
+
     enum class TeamGroup {
         NEUTRAL,
         ALLY,

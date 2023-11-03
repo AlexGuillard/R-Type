@@ -13,6 +13,7 @@
 
 #include "GameEngine/GameEngine.hpp"
 #include "constants.hpp"
+#include "enums.hpp"
 
 namespace Screen {
     /**
@@ -30,16 +31,6 @@ namespace Screen {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
             CONNECTING,               // waiting for connection to server to be established
             CONNECTED,                // connected to server
-        };
-        enum class MultiState {
-            SOLO,
-            MULTI,
-        };
-        enum class ModeSelect {
-            REGULAR,
-            PVP,
-            FRIENDLYFIRE,
-            INFINI,
         };
         enum class CameraShakeIntensity {
             RUMBLE = 3,
@@ -254,6 +245,10 @@ namespace Screen {
          */
         bool getErrorConnection() const;
 
+        Enums::MultiState getMultiState() const;
+
+        Enums::ModeSelect getModeState() const;
+
     private:
         /**
          * @brief Toggles between fullscreen and windowed
@@ -298,10 +293,10 @@ namespace Screen {
         Rectangle _pvpclickableZone;
         // Set the rectangle clickable for friendly Fire mode button
         Rectangle _friendlyFireclickableZone;
-        ModeSelect _modeState = ModeSelect::REGULAR;
+        Enums::ModeSelect _modeState = Enums::ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
-        MultiState _multiState = MultiState::MULTI;
+        Enums::MultiState _multiState = Enums::MultiState::MULTI;
         bool _errorConnection;
 
         // Camera

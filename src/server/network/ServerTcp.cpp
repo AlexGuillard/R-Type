@@ -29,7 +29,7 @@ void Network::ServerTcp::chooseMod()
 {
     header dataClient = Network::Send::stringToheader(_data);
 
-    if (dataClient.codeRfc == 201 || dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
+    if (dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
     || dataClient.codeRfc == 241 || dataClient.codeRfc == 242) {
         _typeMod = dataClient.codeRfc;
         send201();
@@ -83,15 +83,24 @@ void Network::ServerTcp::write(std::string message)
 void Network::ServerTcp::connection()
 {
     header number = Network::Send::stringToheader(_data);
+    header typeMod = Network::Send::stringToheader(_data);
     std::string actualClient;
 
     std::cout << number.codeRfc << std::endl;
-    if (number.codeRfc == CONNECTION_NB && _list.size() < 1) {
+    if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 204 && _list.size() < 4 && _isGame == false) {
         int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200, idNewClient));
         send202(idNewClient);
+    } else if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 203 && _list.size() < 1  && _isGame == false) {
+        int idNewClient = _list.size();
+        _list.join(shared_from_this());
+        addClient();
+        write(codeLogin(200, idNewClient));
+        _typeMod = 241;
+        send201();
+        _isGame = true;
     } else {
         write(code401());
     }
