@@ -16,7 +16,7 @@ namespace Network {
         return isCoUDP;
     }
 
-    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, GameEngine::GameEngine &engine)
+    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, Enums::MultiState multi, Enums::ModeSelect mode, GameEngine::GameEngine &engine)
     {
         //TODO:
         //connect return a bool to let us know if the connection was successful or not

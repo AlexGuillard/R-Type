@@ -9,6 +9,7 @@
 
 #include <string>
 #include "GameEngine/GameEngine.hpp"
+#include "enums.hpp"
 
 namespace Network {
     /**
@@ -25,7 +26,7 @@ namespace Network {
      * @brief Start running the client
      * @returns True if the client successfully started, false otherwise
      */
-    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, GameEngine::GameEngine &engine);
+    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, Enums::MultiState multi, Enums::ModeSelect mode, GameEngine::GameEngine &engine);
     /**
      * @brief Update the client.
      * Fetches the server information then answers from the server
