@@ -29,7 +29,7 @@ void Network::ServerTcp::chooseMod()
 {
     header dataClient = Network::Send::stringToheader(_data);
 
-    if (dataClient.codeRfc == 201 || dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
+    if (dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
     || dataClient.codeRfc == 241 || dataClient.codeRfc == 242) {
         _typeMod = dataClient.codeRfc;
         send201();

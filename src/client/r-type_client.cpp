@@ -39,7 +39,7 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
-    Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
+    Network::updateClientNetworkTCP(Screen::Display::getPlayButton(), window.getModeState());
 
     if (!Network::check401Error()) {
         window.drawWaitingRoom();

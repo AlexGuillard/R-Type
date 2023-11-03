@@ -43,7 +43,7 @@ namespace Network {
      * @brief Update the TCP client.
      * Fetches the server information then answers from the server
      */
-    void updateClientNetworkTCP(bool playButton);
+    void updateClientNetworkTCP(bool playButton, Enums::ModeSelect mode);
     /**
      * @brief Cleanup the client
      */

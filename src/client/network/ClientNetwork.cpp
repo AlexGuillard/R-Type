@@ -84,11 +84,26 @@ void Network::ClientNetwork::sendAction(Action action)
     asyncSend(_socket, res);
 }
 
-void Network::ClientNetwork::send201()
+void Network::ClientNetwork::send201(Enums::ModeSelect mode)
 {
     std::string res = "";
 
-    res = Network::Send::makeHeader(201, _indexPlayer);
+    switch (mode) {
+        case Enums::ModeSelect::REGULAR:
+            res.append(Network::Send::makeHeader(241, _indexPlayer));
+            break;
+        case Enums::ModeSelect::INFINI:
+            res.append(Network::Send::makeHeader(242, _indexPlayer));
+            break;
+        case Enums::ModeSelect::FRIENDLYFIRE:
+            res.append(Network::Send::makeHeader(243, _indexPlayer));
+            break;
+        case Enums::ModeSelect::PVP:
+            res.append(Network::Send::makeHeader(244, _indexPlayer));
+            break;
+        default:
+            break;
+    }
     send(_tcpSocket, res);
 }
 

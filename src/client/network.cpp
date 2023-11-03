@@ -31,7 +31,7 @@ namespace Network {
 
     static bool firstTime = false;
 
-    void updateClientNetworkTCP(bool playButton)
+    void updateClientNetworkTCP(bool playButton, Enums::ModeSelect mode)
     {
         static bool asyncReceiveStarted = false;
         ClientNetwork &clientNetwork = ClientNetwork::getInstance();
@@ -41,7 +41,7 @@ namespace Network {
             asyncReceiveStarted = true;
         }
         if (playButton && !firstTime) {
-            clientNetwork.send201();
+            clientNetwork.send201(mode);
             firstTime = true;
         }
 
