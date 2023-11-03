@@ -22,10 +22,10 @@ namespace Network {
         //connect return a bool to let us know if the connection was successful or not
         if (type == Network::ConnectionType::TCP) {
             std::cout << "Connecting TCP " << host << ":" << port << std::endl;
-            return ClientNetwork::getInstance(engine).connect(host, port, true);
+            return ClientNetwork::getInstance(engine).connect(host, port, true, multi);
         } else {
             std::cout << "Connecting UDP " << host << ":" << port << std::endl;
-            return ClientNetwork::getInstance(engine).connect(host, port, false);
+            return ClientNetwork::getInstance(engine).connect(host, port, false, multi);
         }
     }
 

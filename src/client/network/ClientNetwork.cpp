@@ -9,7 +9,6 @@
 #include "server/network/sendCode.hpp"
 #include "ECS/Creator.hpp"
 #include "GameEngine/GameEngine.hpp"
-#include "enums.hpp"
 
 //-----------------------------CONSTRUCTOR / DESTRUCTOR--------------------------------------------//
 
@@ -26,11 +25,16 @@ Network::ClientNetwork::~ClientNetwork()
 
 //-----------------------------SEND--------------------------------------------//
 
-void Network::ClientNetwork::sendHello()
+void Network::ClientNetwork::sendHello(Enums::MultiState state)
 {
     std::string res = "";
 
     res = Network::Send::makeHeader(CONNECTION_NB, 5);
+    if (state == Enums::MultiState::SOLO) {
+        res.append(Network::Send::makeHeader(203, 5));
+    } else {
+        res.append(Network::Send::makeHeader(204, 5));
+    }
     send(_tcpSocket, res);
 }
 
@@ -88,13 +92,13 @@ void Network::ClientNetwork::send201()
     send(_tcpSocket, res);
 }
 
-bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP)
+bool Network::ClientNetwork::connect(const std::string &host, int port, bool isTCP, Enums::MultiState state)
 {
     if (isTCP) {
         if (!connectTCP(host, port)) {
             return false;
         }
-        sendHello();
+        sendHello(state);
         _host = host;
         return (true);
     } else {

@@ -87,13 +87,13 @@ void Network::ServerTcp::connection()
     std::string actualClient;
 
     std::cout << number.codeRfc << std::endl;
-    if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 203 && _list.size() < 4 && _isGame == false) {
+    if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 204 && _list.size() < 4 && _isGame == false) {
         int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200, idNewClient));
         send202(idNewClient);
-    } else if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 204 && _list.size() < 1  && _isGame == false) {
+    } else if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 203 && _list.size() < 1  && _isGame == false) {
         int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();

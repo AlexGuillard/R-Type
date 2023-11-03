@@ -122,7 +122,7 @@ Network::BodyNumber Network::Send::stringToBodyNum(std::string &code)
     return res;
 }
 
-Network::header Network::Send::stringToheader(std::string code)
+Network::header Network::Send::stringToheader(std::string &code)
 {
     header res;
 

@@ -339,7 +339,7 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
             std::cout << "Additional code: " << footer.number << std::endl;
 
             if (footer.number == 201 && !firstTime) {
-                if (connect(_host, udpPort.number, false)) {
+                if (connect(_host, udpPort.number, false, Enums::MultiState::MULTI)) {
                     firstTime = true;
                     isConnectedUDP = true;
                     std::cout << "jme suis co en udp\n";
