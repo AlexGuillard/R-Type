@@ -269,7 +269,6 @@ void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, st
         BodyNumber footer = getBody(str);
 
         if (footer.number == 301) {
-            std::cout << "Entity: " << messageHeader.entity << " X: " << mobData.x << " Y: " << mobData.y << " Color: " << static_cast<int>(mobData.pos) << std::endl;
             ECS::Creator::createEnemyBasic(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
