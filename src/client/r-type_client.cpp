@@ -23,6 +23,7 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
             window.setErrorConnection(true);
         }
     }
+
     if (window.getErrorConnection())
         window.displayErrorConnection();
 }
@@ -36,17 +37,20 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
     Screen::Display::drawGame(engine);
 }
 
-//Sizes of the button Play dont want to put it on the function caus its a loop
-Rectangle playButtonRect = { 320, 240, 160, 60 };
-
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
-    Screen::Display::drawWaitingRoom(playButtonRect);
+
+    if (!Network::check401Error()) {
+        window.drawWaitingRoom();
+    } else {
+        window.displayError401();
+    }
 
     if (Network::returnIsCoUDP()) {
         window.setGameState(Screen::Display::GameState::GAME);
     }
+
 }
 
 int rtype_client()

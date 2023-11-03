@@ -30,6 +30,7 @@
 #include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
+#include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -43,6 +44,7 @@
 #include "ECS/Systems/horizontalScroll.hpp"
 #include "ECS/Systems/bydoShootingAI.hpp"
 #include "ECS/Systems/findTarget.hpp"
+#include "ECS/Systems/bossIntro.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -75,11 +77,12 @@ namespace GameEngine {
         registry.registerComponent<Components::BydoShotComponent>();
         registry.registerComponent<Components::HorizontalScrollComponent>();
         registry.registerComponent<Components::InvincibleTimerComponent>();
+        registry.registerComponent<Components::BossIntroComponent>();
 
         // Systems (order matters)
         // Collision systems
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
-        registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent>(Systems::damage);
+        registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
         // Shooting systems
         registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
@@ -91,6 +94,7 @@ namespace GameEngine {
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(static_cast<void (*)(Containers::Registry &, Containers::SparseArray<Components::PositionComponent> &, Containers::SparseArray<Components::VelocityComponent> &)>(&Systems::movement));
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
+        registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::BossIntroComponent>(Systems::bossIntro);
         // Solid system (called after movement system to prevent entities from being stuck in walls)
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
     }
