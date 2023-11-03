@@ -9,6 +9,7 @@
 
 #include "ECS/Containers/Registry.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 using namespace ECS::Containers;
 
@@ -118,7 +119,8 @@ TEST(Registry, registryCanCreateEntityFromIndex)
 
 TEST(Registry, killEntityDoesntPreventGettingEntityFromIndex)
 {
-	Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
 
 	ECS::Entity entity0 = registry.spawnEntity();
 	ECS::Entity entity1 = registry.spawnEntity();
@@ -137,7 +139,8 @@ TEST(Registry, killEntityDoesntPreventGettingEntityFromIndex)
 
 TEST(Registry, killEntityRemovesItsComponents)
 {
-	Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
 
 	registry.registerComponent<int>();
 	registry.registerComponent<std::string>();

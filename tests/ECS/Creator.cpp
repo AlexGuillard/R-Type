@@ -16,6 +16,7 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 using namespace ECS;
 
