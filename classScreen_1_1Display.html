@@ -96,6 +96,10 @@ Public Types</h2></td></tr>
 , <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2aa5afd6edd5336d91316964e493936858">CONNECTED</a>
  }</td></tr>
 <tr class="separator:a3f3dd09842c4b6a8d306234dc9f582b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f91a3084952a7bd335c2f9abbf96d6d"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a1f91a3084952a7bd335c2f9abbf96d6d">MultiState</a> { <a class="el" href="classScreen_1_1Display.html#a1f91a3084952a7bd335c2f9abbf96d6daca17c443abc74bd2419fbc922fc0c32e">SOLO</a>
+, <a class="el" href="classScreen_1_1Display.html#a1f91a3084952a7bd335c2f9abbf96d6daf26be970aac1b06fa62b87562bc73deb">MULTI</a>
+ }</td></tr>
+<tr class="separator:a1f91a3084952a7bd335c2f9abbf96d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66f81ea3bd183d8e4ec2e465f070c070"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070">ModeSelect</a> { <a class="el" href="classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070a820ead78f0fa32544c7ba38fe7ff53d9">REGULAR</a>
 , <a class="el" href="classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070aac340782e01cb82b5f2442b775992939">PVP</a>
 , <a class="el" href="classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070ad4b4faa6ff00af233bc120e29cb8e06a">FRIENDLYFIRE</a>
@@ -138,6 +142,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac34480ccb952935e929960f6ccf5b4a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4">displayPortInput</a> ()</td></tr>
 <tr class="memdesc:ac34480ccb952935e929960f6ccf5b4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">display an input for port  <a href="classScreen_1_1Display.html#ac34480ccb952935e929960f6ccf5b4a4">More...</a><br /></td></tr>
 <tr class="separator:ac34480ccb952935e929960f6ccf5b4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d16a629a693a217844fea35775b9f5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a4d16a629a693a217844fea35775b9f5a">displayConnectionStateButton</a> ()</td></tr>
+<tr class="memdesc:a4d16a629a693a217844fea35775b9f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">display button to choose connection state  <a href="classScreen_1_1Display.html#a4d16a629a693a217844fea35775b9f5a">More...</a><br /></td></tr>
+<tr class="separator:a4d16a629a693a217844fea35775b9f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abece99144d353c4b7db937fd9b51131a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a">displayConnectionButton</a> ()</td></tr>
 <tr class="memdesc:abece99144d353c4b7db937fd9b51131a"><td class="mdescLeft">&#160;</td><td class="mdescRight">display button for connection  <a href="classScreen_1_1Display.html#abece99144d353c4b7db937fd9b51131a">More...</a><br /></td></tr>
 <tr class="separator:abece99144d353c4b7db937fd9b51131a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,11 +249,11 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9ac85ef02f46a0ea1268d6a28e5cb26ef9"></a>EARTHQUAKE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9a9d308f7229b335d40c4273ee9588c849"></a>END_OF_THE_WORLD&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                        {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            RUMBLE = 3,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            EARTHQUAKE = 5,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            END_OF_THE_WORLD = 8</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                        {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            RUMBLE = 3,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            EARTHQUAKE = 5,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            END_OF_THE_WORLD = 8</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -340,12 +347,42 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a66f81ea3bd183d8e4ec2e465f070c070ad4b4faa6ff00af233bc120e29cb8e06a"></a>FRIENDLYFIRE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a66f81ea3bd183d8e4ec2e465f070c070a9d5fca2e2c4c9927bc7c0f39c1d66411"></a>INFINI&#160;</td><td class="fielddoc"></td></tr>
 </table>
+<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                              {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            REGULAR,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            PVP,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            FRIENDLYFIRE,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            INFINI,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        };</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1f91a3084952a7bd335c2f9abbf96d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f91a3084952a7bd335c2f9abbf96d6d">&#9670;&nbsp;</a></span>MultiState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classScreen_1_1Display.html#a1f91a3084952a7bd335c2f9abbf96d6d">Screen::Display::MultiState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1f91a3084952a7bd335c2f9abbf96d6daca17c443abc74bd2419fbc922fc0c32e"></a>SOLO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1f91a3084952a7bd335c2f9abbf96d6daf26be970aac1b06fa62b87562bc73deb"></a>MULTI&#160;</td><td class="fielddoc"></td></tr>
+</table>
 <div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                              {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            REGULAR,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            PVP,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            FRIENDLYFIRE,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            INFINI,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            SOLO,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            MULTI,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -520,6 +557,25 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>display button for connection </p>
+
+</div>
+</div>
+<a id="a4d16a629a693a217844fea35775b9f5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d16a629a693a217844fea35775b9f5a">&#9670;&nbsp;</a></span>displayConnectionStateButton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::displayConnectionStateButton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>display button to choose connection state </p>
 
 </div>
 </div>
