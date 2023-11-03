@@ -1,4 +1,46 @@
-301 500 10
-301 450 13
-302 1000 15
-306 200 17 down
+# Wave 0 (0 ticks after Wave 0)
+# 2: Bink Formation
+302 240 10
+# Scant assault
+303 240 40
+303 190 50
+303 290 50
+303 140 60
+303 340 60
+303 90 70
+303 390 70
+# Mirror Wave 0
+# 2: Bink Formation (Mirror)
+302 240 110
+# Scant assault (Mirror)
+303 240 140
+303 190 150
+303 290 150
+303 140 160
+303 340 160
+303 90 170
+303 390 170
+# Wave 1 (400 ticks after Wave 0)
+# 2: Bink Formation
+302 240 410
+# Scant assault
+303 240 440
+303 190 450
+303 290 450
+303 140 460
+303 340 460
+303 90 470
+303 390 470
+# Mirror Wave 1
+# 2: Bink Formation (Mirror)
+302 240 510
+# Scant assault (Mirror)
+303 240 540
+303 190 550
+303 290 550
+303 140 560
+303 340 560
+303 90 570
+303 390 570
+# Dobkeratops (boss)
+307 200 700
