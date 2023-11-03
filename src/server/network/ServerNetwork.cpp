@@ -167,7 +167,7 @@ void Network::ServerNetwork::campaignEnd()
                 if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
                     _stage += 1;
                     _tickCount = 0;
-                    if (_script.openLVL(_stage) == 0) {
+                    if (_script.openLVL(_stage) == -1) {
                         _dataToSend.append(Send::makeHeader(221, 0));
                         _dataToSend.append(Send::makeBodyNum(221));
                     } else {
