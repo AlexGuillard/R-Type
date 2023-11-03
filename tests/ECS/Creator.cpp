@@ -22,7 +22,8 @@ using namespace ECS;
 
 TEST(Creator, createCharacter)
 {
-    Containers::Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Containers::Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
     registry.registerComponent<Components::DamageComponent>();
     registry.registerComponent<Components::HPComponent>();
     registry.registerComponent<Components::HitBoxComponent>();
