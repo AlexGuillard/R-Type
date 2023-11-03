@@ -207,6 +207,29 @@ namespace ECS {
         );
 
         /**
+         * @brief Create a base boss entity. It has an intro animation, during which it is invincible.
+         * 
+         * @param registry The registry to create the entity in
+         * @param id Id of the entity
+         * @param team Team of the entity
+         * @param damage Damage the entity deals to the other team on collision
+         * @param health Health of the entity
+         * @param width Width of the entity's hitbox/texture
+         * @param height Height of the entity's hitbox/texture
+         * @param introLength Length of the intro animation in seconds
+        */
+        static Entity createBossCharacter(
+            Containers::Registry &registry,
+            std::size_t id,
+            enum Enums::TeamGroup team,
+            std::size_t damage,
+            std::size_t health,
+            std::size_t width,
+            std::size_t height,
+            double introLength
+        );
+
+        /**
          * @brief Create a Enemy Basic object
          *
          * @param registry registre entity

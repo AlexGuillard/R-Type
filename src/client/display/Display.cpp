@@ -247,6 +247,28 @@ void Screen::Display::displayPortInput()
     DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
+void Screen::Display::displayConnectionStateButton()
+{
+    _soloclickableZone = { 700, 675, 160, 60 };
+    _multiclickableZone = { 1000, 675, 160, 60 };
+
+
+    DrawRectangleRec({ 690, 665, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 990, 665, 180, 80 }, SKYBLUE);
+
+    if (_multiState == MultiState::SOLO)
+        DrawRectangleRec(_soloclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_soloclickableZone, LIGHTGRAY);
+    DrawText("Solo", _soloclickableZone.x + 45, _soloclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_multiState == MultiState::MULTI)
+        DrawRectangleRec(_multiclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_multiclickableZone, LIGHTGRAY);
+    DrawText("Multi", _multiclickableZone.x + 40, _multiclickableZone.y + 15, 32, RAYWHITE);
+}
+
 void Screen::Display::displayConnectionButton()
 {
     const int screenWidth = GetScreenWidth();
@@ -285,15 +307,24 @@ void Screen::Display::detectActionMenu()
         keyPressededMenu(keyPressed, key);
     }
     if (_gameState == Display::GameState::WAITINGROOM) {
-        detectActionWaitingRoom({ 320, 240, 160, 60 });
+        detectActionWaitingRoom();
     }
 }
 
-void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::detectActionWaitingRoom()
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect) && !_playButton) {
+        if (CheckCollisionPointRec(GetMousePosition(), _playclickableZone) && !_playButton) {
             _playButton = true;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _regularclickableZone)) {
+            _modeState = ModeSelect::REGULAR;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _pvpclickableZone)) {
+            _modeState = ModeSelect::PVP;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _friendlyFireclickableZone)) {
+            _modeState = ModeSelect::FRIENDLYFIRE;
         }
     }
 }
@@ -310,6 +341,12 @@ void Screen::Display::mouseClickedMenu()
         _state = InputState::PORT;
     } else {
         _state = InputState::NONE;
+    }
+    if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
+        _multiState = MultiState::SOLO;
+    }
+    if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
+        _multiState = MultiState::MULTI;
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
@@ -356,6 +393,7 @@ void Screen::Display::drawMenu()
 {
     displayHostNameInput();
     displayPortInput();
+    displayConnectionStateButton();
     displayConnectionButton();
 }
 
@@ -367,10 +405,37 @@ void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 
 }
 
-void Screen::Display::drawWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::drawWaitingRoom()
 {
-    DrawRectangleRec(playButtonRect, SKYBLUE);
-    DrawText("Play", playButtonRect.x + 45, playButtonRect.y + 10, 32, RAYWHITE);
+    _playclickableZone = { 850, 450, 160, 60 };
+    _regularclickableZone = { 600, 275, 160, 60 };
+    _pvpclickableZone = { 850, 275, 160, 60 };
+    _friendlyFireclickableZone = { 1100, 275, 220, 60 };
+
+    DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 1090, 265, 240, 80 }, SKYBLUE);
+
+    DrawRectangleRec(_playclickableZone, SKYBLUE);
+    DrawText("Play", _playclickableZone.x + 45, _playclickableZone.y + 10, 32, RAYWHITE);
+
+    if (_modeState == ModeSelect::REGULAR)
+        DrawRectangleRec(_regularclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_regularclickableZone, LIGHTGRAY);
+    DrawText("Regular", _regularclickableZone.x + 20, _regularclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_modeState == ModeSelect::PVP)
+        DrawRectangleRec(_pvpclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_pvpclickableZone, LIGHTGRAY);
+    DrawText("PVP", _pvpclickableZone.x + 45, _pvpclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_modeState == ModeSelect::FRIENDLYFIRE)
+        DrawRectangleRec(_friendlyFireclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_friendlyFireclickableZone, LIGHTGRAY);
+    DrawText("Friendly fire", _friendlyFireclickableZone.x + 10, _friendlyFireclickableZone.y + 15, 32, RAYWHITE);
 }
 
 Screen::Display &Screen::Display::center()

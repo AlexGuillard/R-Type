@@ -29,6 +29,8 @@
 #include "ECS/Components/BydoShootingAIComponent.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/FlyingAIComponent.hpp"
+#include "ECS/Components/BossIntroComponent.hpp"
+#include "ECS/Components/InvincibleTimerComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -165,6 +167,24 @@ namespace ECS {
         Entity entity = Creator::createCharacter(registry, team, damage, health, width, height, id);
 
         registry.emplaceComponent<Components::HorizontalScrollComponent>(entity, mLevelScrollSpeed);
+        return entity;
+    }
+
+    Entity Creator::createBossCharacter(
+        Containers::Registry &registry,
+        std::size_t id,
+        enum Enums::TeamGroup team,
+        std::size_t damage,
+        std::size_t health,
+        std::size_t width,
+        std::size_t height,
+        double introLength
+    )
+    {
+        Entity entity = Creator::createCharacter(registry, team, damage, health, width, height, id);
+
+        registry.emplaceComponent<Components::BossIntroComponent>(entity, introLength);
+        registry.emplaceComponent<Components::InvincibleTimerComponent>(entity, introLength);
         return entity;
     }
 
@@ -484,7 +504,7 @@ namespace ECS {
         const Utils::Vector2 nbFrameInSpriteSheet(4, 9);
         const uint8_t nbFrameInAnimation = 28;
 
-        ECS::Entity dobkeratops = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ENEMY, 1, 1, 155, 205, id);
+        ECS::Entity dobkeratops = ECS::Creator::createBossCharacter(registry, id, Enums::TeamGroup::ENEMY, 1, 100, 155, 205, 5);
         registry.getComponents<Components::PositionComponent>().at(dobkeratops)->x = x;
         registry.getComponents<Components::PositionComponent>().at(dobkeratops)->y = y;
         registry.emplaceComponent<Components::DrawableComponent>(dobkeratops,
@@ -495,6 +515,7 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation / 4 // fps
         );
+
         return dobkeratops;
     }
 
