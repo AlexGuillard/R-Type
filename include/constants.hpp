@@ -12,12 +12,7 @@
 
 namespace Constants {
     // Player
-    const std::size_t playerSpeed = 500;
-    const std::size_t playerNbFrameToMaxSpeed = 5;
-    const std::size_t playerNbFrameToStop = 5;
-
-    // Missile
-    const std::size_t bydoMissileSpeed = 50; // pixels per second
+    const float playerSpeed = 500;
 
     // Camera
     const std::size_t cameraDefaultWidth = 960;
@@ -25,7 +20,8 @@ namespace Constants {
 
     // Game
     const std::size_t frameRate = 120;
-    static constexpr std::size_t defaultScrollSpeed = 0;
+    const int deathZone = 75; // how far from the edge of the screen an entity can go before being killed
+    static constexpr std::size_t defaultScrollSpeed = 100;
     // time (in s) player need to hold the fire button to shoot a wave beam
     const double timeNeededForWaveBeam = 1.;
     const uint8_t maxWaveBeamStrength = 5;

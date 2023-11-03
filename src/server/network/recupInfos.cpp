@@ -29,7 +29,9 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
     std::string line;
     std::vector<std::string> lines;
     while (std::getline(ss, line, '\n')) {
-        lines.push_back(line);
+        if (!line.starts_with("#")) {
+            lines.push_back(line);
+        }
     }
     for (int i = 0; i < lines.size(); i++) {
         Network::Info data;
@@ -63,6 +65,8 @@ int Network::RecupInfo::openLVL(int level) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
     } else if (level == 2) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_2_TXT);
+    } else if (level == 3) {
+        openFile(Assets::AssetsIndex::SCRIPT_STAGE_3_TXT);
     } else {
         return -1;
     }

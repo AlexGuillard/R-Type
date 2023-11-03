@@ -19,6 +19,7 @@
 #include "constants.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "enums.hpp"
 
 namespace Network {
 
@@ -70,7 +71,7 @@ namespace Network {
          * @brief This function is used to send a hello to the server to connect to it
          *
          */
-        void sendHello();
+        void sendHello(Enums::MultiState state);
         /**
          * @brief This function is used to send a movement from the player to the server
          *
@@ -89,7 +90,7 @@ namespace Network {
          * @param host
          * @param port
          */
-        bool connect(const std::string &host, int port, bool isTCP);
+        bool connect(const std::string &host, int port, bool isTCP, Enums::MultiState state);
         /**
          * @brief Is contained on the map of funciton to use the pointer on function
          *
@@ -201,6 +202,13 @@ namespace Network {
          */
         void handleBydosShotSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle error from the server
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleErrorServer(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Instance object
          *
          * @return ClientNetwork&
@@ -284,7 +292,7 @@ namespace Network {
          * @brief send a 201 to the server on binary format with a header struct
          *
          */
-        void send201();
+        void send201(Enums::ModeSelect mode);
         /**
          * @brief handle messages from the server and call the right function attributed to the header rfc code
          *
@@ -367,6 +375,14 @@ namespace Network {
          * @param entityId
          */
         void checkForDeadEntities(std::size_t tick);
+        /**
+         * @brief Get the Error Server object
+         *
+         * @return true receive a 401 from the server
+         * @return false no error
+         */
+        bool getErrorServer() const;
+
     private:
         //Port of the server
         int _port;
@@ -400,6 +416,8 @@ namespace Network {
         GameEngine::GameEngine &_engine;
         //Map of the entities with the timestamp
         std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
+        //Error from the server use for 401 RFC Code (room full or room playing)
+        bool _errorServer;
     };
 }
 

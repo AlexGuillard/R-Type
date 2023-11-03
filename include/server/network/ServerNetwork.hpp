@@ -21,6 +21,7 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
 #include "ECS/Creator.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "server/network/Participants.hpp"
@@ -144,6 +145,8 @@ namespace Network {
         void SendClientsPlay();
         void updateGame();
         void sendClientEntities();
+        int pvpWin();
+        void campaignEnd();
         /**
          * @brief Function that handle the event from the client and the game
          *
@@ -156,7 +159,8 @@ namespace Network {
             ECS::Containers::Registry &registry,
             ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
             ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
-            ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams);
+            ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
+            ECS::Containers::SparseArray<ECS::Components::WaveBeamComponent> &waveBeamsInfos);
         void _shootMissile(
             ECS::Containers::Registry &registry,
             const ECS::Components::PositionComponent &position,
@@ -168,6 +172,15 @@ namespace Network {
             const ECS::Components::VelocityComponent &velocity,
             const Enums::TeamGroup team,
             const int strength);
+        void _shootWaveBeam(
+            ECS::Containers::Registry &registry,
+            const ECS::Components::WaveBeamComponent &waveInfo);
+        void _shootBydoShot(
+            ECS::Containers::Registry &registry,
+            int entityId,
+            const ECS::Components::PositionComponent &position,
+            const Enums::TeamGroup team
+        );
         GameEngine::GameEngine _engine;
         std::unique_ptr<std::thread> _tcp;
         std::unique_ptr<std::thread> _udp;

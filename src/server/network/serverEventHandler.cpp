@@ -27,6 +27,8 @@
 #include "ECS/Components/SolidComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/BydoShotComponent.hpp"
+#include "ECS/Creator.hpp"
 
 #include <iostream>
 
@@ -90,20 +92,39 @@ namespace Network {
         const Enums::TeamGroup team
     )
     {
-        std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
+        int eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
         auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
         auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
         std::string res = "";
-        int pos[2] = { (int)position.x, (int)position.y };
-        int vel[2] = { (int)velocity.x, (int)velocity.y };
 
-        res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId));
-        res.append(Send::makeBodyMissile(pos, vel, team, 1));
-        res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_PLAYER_MISSILE));
+        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId}, {position.x, position.y}, {velocity.x, velocity.y}, team, 0);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
         res.clear();
+    }
+
+    void ServerNetwork::_shootBydoShot(
+        ECS::Containers::Registry &registry,
+        int entityId,
+        const ECS::Components::PositionComponent &position,
+        const Enums::TeamGroup team
+    )
+    {
+        auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
+        auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
+        auto &&bydoShotRequest = registry.getComponent<ECS::Components::BydoShotComponent>(registry.entityFromIndex(entityId));
+        if (!bydoShotRequest) { return; };
+        std::array<float, 2> pos = { position.x, position.y };
+        std::array<float, 2> vel = { bydoShotRequest->xDirection * bydoShotRequest->speed, bydoShotRequest->yDirection * bydoShotRequest->speed};
+        std::size_t eId = ECS::Creator::createBydoShot(registry, pos[0], pos[1], vel[0], vel[1]);
+        std::array<int, 2> header({ (int)Enums::RFCCode::SPAWN_BYDO_SHOT, (int)eId });
+        std::string res = Send::codeMissile(header, pos, vel, team, 0);
+
+        for (const auto &[_, endpoint] : _listUdpEndpoints) {
+            _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
+        }
+        registry.removeComponent<ECS::Components::BydoShotComponent>(registry.entityFromIndex(entityId));
     }
 
     void ServerNetwork::_shootWaveBeam(
@@ -114,27 +135,33 @@ namespace Network {
         const int strength
     )
     {
-        std::size_t eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
+        int eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
         auto &&dataPositions = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::PositionComponent>();
         auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
         std::string res = "";
-        int pos[2] = { (int)position.x, (int)position.y };
-        int vel[2] = { (int)velocity.x, (int)velocity.y };
 
-        res.append(Send::makeHeader((int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId));
-        res.append(Send::makeBodyMissile(pos, vel, team, strength));
-        res.append(Send::makeBodyNum((int)Enums::RFCCode::SPAWN_WAVE_BEAM));
+        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId}, {position.x, position.y}, {velocity.x, velocity.y}, team, strength);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
         res.clear();
     }
 
+    void ServerNetwork::_shootWaveBeam(
+        ECS::Containers::Registry &registry,
+        const ECS::Components::WaveBeamComponent &waveInfo)
+    {
+        ECS::Components::PositionComponent position(waveInfo.x, waveInfo.y);
+        ECS::Components::VelocityComponent velocity(0, 0);
+        _shootWaveBeam(registry, position, velocity, waveInfo.team, waveInfo.strength);
+    }
+
     void ServerNetwork::serverEventHandler(
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
-        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams)
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
+        ECS::Containers::SparseArray<ECS::Components::WaveBeamComponent> &waveBeamsInfos)
     {
         GameEngine::Events::Type event;
         int entityId = 0;
@@ -164,6 +191,20 @@ namespace Network {
                     timeSinceShootHeld[entityId].first = true;
                 } else {
                     timeSinceShootHeld.emplace(entityId, std::make_pair(true, 0.F));
+                }
+                break;
+            case BYDO_SHOOT_MISSILE:
+                if (positions[entityId] && velocities[entityId] && teams[entityId]) {
+                    this->_shootBydoShot(
+                        registry, entityId, *positions[entityId], teams[entityId]->team
+                    );
+                }
+                break;
+            case BYDO_SHOOT_WAVE_BEAM:
+                if (positions[entityId] && velocities[entityId] && teams[entityId] && waveBeamsInfos[entityId]) {
+                    this->_shootWaveBeam(
+                        registry, *waveBeamsInfos[entityId]
+                    );
                 }
                 break;
             default:

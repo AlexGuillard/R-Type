@@ -13,6 +13,7 @@
 #include "ECS/Entity.hpp"
 #include "ECS/Creator.hpp"
 #include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/SinMovementComponent.hpp"
 
 namespace ECS {
 
@@ -32,6 +33,28 @@ namespace ECS {
          * @returns The global horizontal scroll speed in pixels per second
          */
         static float getLevelScrollSpeed();
+
+        /**
+         * @brief Adds the sin movement AI to an entity.
+         *
+         * @param entity Entity to add the AI to
+         * @param registry Registry to add the AI to
+         * @param x position X
+         * @param y position Y
+         * @param speed speed of the entity on the X axis (in px/s) (0 = default)
+         * @param amplitude
+         * @param frequency
+         * @return Entity
+         */
+        static Entity addSinMovementAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            float x,
+            float y,
+            float frequency = -1,
+            float speed = Components::defaultSinXSpeed,
+            float amplitude = -1
+            );
 
         /**
          * @brief Add a walking AI to an entity.
@@ -70,7 +93,17 @@ namespace ECS {
             Containers::Registry &registry,
             const Entity &target,
             float shootCooldown,
-            float shotSpeed
+            float shotSpeed,
+            Enums::ShotType shotType = Enums::ShotType::BYDO_SHOT
+        );
+
+        static Entity addFlyingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            std::pair<float, float> preferredXDistance,
+            std::pair<float, float> preferredYDistance,
+            float speed
         );
 
         /**
@@ -174,6 +207,29 @@ namespace ECS {
         );
 
         /**
+         * @brief Create a base boss entity. It has an intro animation, during which it is invincible.
+         *
+         * @param registry The registry to create the entity in
+         * @param id Id of the entity
+         * @param team Team of the entity
+         * @param damage Damage the entity deals to the other team on collision
+         * @param health Health of the entity
+         * @param width Width of the entity's hitbox/texture
+         * @param height Height of the entity's hitbox/texture
+         * @param introLength Length of the intro animation in seconds
+        */
+        static Entity createBossCharacter(
+            Containers::Registry &registry,
+            std::size_t id,
+            enum Enums::TeamGroup team,
+            std::size_t damage,
+            std::size_t health,
+            std::size_t width,
+            std::size_t height,
+            double introLength
+        );
+
+        /**
          * @brief Create a Enemy Basic object
          *
          * @param registry registre entity
@@ -236,7 +292,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Player object
          *
@@ -246,7 +302,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Dobkeratops object
          *

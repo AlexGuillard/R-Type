@@ -63,7 +63,7 @@ std::string Network::Send::makeBodyMob(int xMob, int yMob, Enums::Position pos)
     return str;
 }
 
-std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor)
+std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor, Enums::TeamGroup team)
 {
     Network::bodyAlly res;
     std::string str;
@@ -72,11 +72,12 @@ std::string Network::Send::makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor
     res.x = xAlly;
     res.y = yAlly;
     res.color = actualColor;
+    res.team = team;
     std::memcpy(&str.data()[0], &res, sizeof(Network::bodyAlly));
     return str;
 }
 
-std::string Network::Send::makeBodyMissile(const int posXY[2], const int velocityXY[2], Enums::TeamGroup team, int strenght)
+std::string Network::Send::makeBodyMissile(const std::array<float, 2> &posXY, const std::array<float, 2> &velocityXY, Enums::TeamGroup team, int strenght)
 {
     Network::bodyMissile res;
     std::string str;
@@ -102,17 +103,7 @@ std::string Network::Send::codeMob(int code, int ide, int xPata, int yPata, Enum
     return str;
 }
 
-std::string Network::Send::codeAlly(int code, int ide, int xMob, int yMob, Enums::PlayerColor color)
-{
-    std::string str;
-
-    str = makeHeader(code, ide);
-    str.append(makeBodyAlly(xMob, yMob, color));
-    str.append(makeBodyNum(code));
-    return str;
-}
-
-std::string Network::Send::codeMissil(const int header[2], const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght)
+std::string Network::Send::codeMissile(const std::array<int, 2> &header, const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght)
 {
     std::string str;
 
@@ -131,7 +122,7 @@ Network::BodyNumber Network::Send::stringToBodyNum(std::string &code)
     return res;
 }
 
-Network::header Network::Send::stringToheader(std::string code)
+Network::header Network::Send::stringToheader(std::string &code)
 {
     header res;
 

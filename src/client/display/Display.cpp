@@ -166,9 +166,71 @@ bool Screen::Display::getErrorConnection()const
     return _errorConnection;
 }
 
+Enums::MultiState Screen::Display::getMultiState() const
+{
+    return _multiState;
+}
+
+Enums::ModeSelect Screen::Display::getModeState() const
+{
+    return _modeState;
+}
+
 void Screen::Display::displayErrorConnection()
 {
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
+}
+
+Color GetRandomColor() {
+    return Color(
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    );
+}
+
+void Screen::Display::displayError401()
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    ClearBackground(BLACK);
+    const int maxParticles = 100;
+    static std::vector<Particle> particles(maxParticles);
+
+    for (int i = 0; i < maxParticles; i++) {
+        if (particles[i].active) {
+            particles[i].position.y += particles[i].speed;
+            if (particles[i].position.y > screenHeight) {
+                particles[i].position = Vector2(static_cast<float>(GetRandomValue(0, screenWidth)), -10.0);
+                particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
+            }
+            DrawCircleV(particles[i].position, particles[i].radius, particles[i].color);
+        } else {
+            particles[i].position = Vector2(static_cast<float>(GetRandomValue(0, screenWidth)), -10.0);
+            particles[i].color = GetRandomColor();
+            particles[i].radius = static_cast<float>(GetRandomValue(1, 3));
+            particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
+            particles[i].active = true;
+        }
+    }
+    const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
+    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
+    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
+    Color textColor = WHITE;
+    float letterSpacing = 10.0f;
+    DrawTextEx(GetFontDefault(), text, textPosition, 40, letterSpacing, textColor);
+    static float spinnerAngle = 0.0f;
+    Vector2 spinnerPosition = {(float)(screenWidth / 2), (float)(screenHeight / 2 + 50)};
+    float spinnerRadius = 30.0f;
+    spinnerAngle += 5.0f;
+
+    if (spinnerAngle >= 360.0f)
+        spinnerAngle = 0.0f;
+
+    DrawCircleLines(spinnerPosition.x, spinnerPosition.y, spinnerRadius, RAYWHITE);
+    DrawCircleSector(spinnerPosition, spinnerRadius, 90, 90 + spinnerAngle, 24, GREEN);
+    EndDrawing();
 }
 
 static Rectangle getInputRect(int posX, int posY)
@@ -247,6 +309,28 @@ void Screen::Display::displayPortInput()
     DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
+void Screen::Display::displayConnectionStateButton()
+{
+    _soloclickableZone = { 700, 675, 160, 60 };
+    _multiclickableZone = { 1000, 675, 160, 60 };
+
+
+    DrawRectangleRec({ 690, 665, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 990, 665, 180, 80 }, SKYBLUE);
+
+    if (_multiState == Enums::MultiState::SOLO)
+        DrawRectangleRec(_soloclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_soloclickableZone, LIGHTGRAY);
+    DrawText("Solo", _soloclickableZone.x + 45, _soloclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_multiState == Enums::MultiState::MULTI)
+        DrawRectangleRec(_multiclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_multiclickableZone, LIGHTGRAY);
+    DrawText("Multi", _multiclickableZone.x + 40, _multiclickableZone.y + 15, 32, RAYWHITE);
+}
+
 void Screen::Display::displayConnectionButton()
 {
     const int screenWidth = GetScreenWidth();
@@ -285,15 +369,24 @@ void Screen::Display::detectActionMenu()
         keyPressededMenu(keyPressed, key);
     }
     if (_gameState == Display::GameState::WAITINGROOM) {
-        detectActionWaitingRoom({ 320, 240, 160, 60 });
+        detectActionWaitingRoom();
     }
 }
 
-void Screen::Display::detectActionWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::detectActionWaitingRoom()
 {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        if (CheckCollisionPointRec(GetMousePosition(), playButtonRect) && !_playButton) {
+        if (CheckCollisionPointRec(GetMousePosition(), _playclickableZone) && !_playButton) {
             _playButton = true;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _regularclickableZone)) {
+            _modeState = Enums::ModeSelect::REGULAR;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _pvpclickableZone)) {
+            _modeState = Enums::ModeSelect::PVP;
+        }
+        if (CheckCollisionPointRec(GetMousePosition(), _friendlyFireclickableZone)) {
+            _modeState = Enums::ModeSelect::FRIENDLYFIRE;
         }
     }
 }
@@ -310,6 +403,12 @@ void Screen::Display::mouseClickedMenu()
         _state = InputState::PORT;
     } else {
         _state = InputState::NONE;
+    }
+    if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
+        _multiState = Enums::MultiState::SOLO;
+    }
+    if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
+        _multiState = Enums::MultiState::MULTI;
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
@@ -356,6 +455,7 @@ void Screen::Display::drawMenu()
 {
     displayHostNameInput();
     displayPortInput();
+    displayConnectionStateButton();
     displayConnectionButton();
 }
 
@@ -367,10 +467,37 @@ void Screen::Display::drawGame(GameEngine::GameEngine &engine)
 
 }
 
-void Screen::Display::drawWaitingRoom(Rectangle playButtonRect)
+void Screen::Display::drawWaitingRoom()
 {
-    DrawRectangleRec(playButtonRect, SKYBLUE);
-    DrawText("Play", playButtonRect.x + 45, playButtonRect.y + 10, 32, RAYWHITE);
+    _playclickableZone = { 850, 450, 160, 60 };
+    _regularclickableZone = { 600, 275, 160, 60 };
+    _pvpclickableZone = { 850, 275, 160, 60 };
+    _friendlyFireclickableZone = { 1100, 275, 220, 60 };
+
+    DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 1090, 265, 240, 80 }, SKYBLUE);
+
+    DrawRectangleRec(_playclickableZone, SKYBLUE);
+    DrawText("Play", _playclickableZone.x + 45, _playclickableZone.y + 10, 32, RAYWHITE);
+
+    if (_modeState == Enums::ModeSelect::REGULAR)
+        DrawRectangleRec(_regularclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_regularclickableZone, LIGHTGRAY);
+    DrawText("Regular", _regularclickableZone.x + 20, _regularclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_modeState == Enums::ModeSelect::PVP)
+        DrawRectangleRec(_pvpclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_pvpclickableZone, LIGHTGRAY);
+    DrawText("PVP", _pvpclickableZone.x + 45, _pvpclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_modeState == Enums::ModeSelect::FRIENDLYFIRE)
+        DrawRectangleRec(_friendlyFireclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_friendlyFireclickableZone, LIGHTGRAY);
+    DrawText("Friendly fire", _friendlyFireclickableZone.x + 10, _friendlyFireclickableZone.y + 15, 32, RAYWHITE);
 }
 
 Screen::Display &Screen::Display::center()

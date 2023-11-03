@@ -17,6 +17,17 @@ namespace Enums {
         COUNT // keep last
     };
 
+    enum class MultiState {
+        SOLO,
+        MULTI,
+    };
+    enum class ModeSelect {
+        REGULAR,
+        PVP,
+        FRIENDLYFIRE,
+        INFINI,
+    };
+
     enum class TeamGroup {
         NEUTRAL,
         ALLY,
@@ -58,6 +69,13 @@ namespace Enums {
         SPAWN_BYDO_SHOT = 323,
         // 33X Data
         UPDATE_STATE = 331, // update position and velocity
+    };
+
+    enum class ShotType {
+        BASIC,          // basic small missile shot by player
+        WAVE_BEAM,      // chargeable beam
+        BYDO_SHOT,      // small shot fired by enemies
+        COUNT // keep last
     };
 
     // Copy of raylib KeyboardKey enum

@@ -7,6 +7,8 @@
 
 #pragma once
 #include <iostream>
+#include <array>
+
 #include "INetwork.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
@@ -58,7 +60,7 @@ namespace Network::Send {
      * @param actualColor enum of color of ally
      * @return std::string
      */
-    std::string makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor);
+    std::string makeBodyAlly(int xAlly, int yAlly, Enums::PlayerColor actualColor, Enums::TeamGroup team);
     /**
      * @brief function to create a BodyMissile struct in std::string
      *
@@ -68,7 +70,7 @@ namespace Network::Send {
      * @param strenght power of the missile (-1 if not set)
      * @return std::string
      */
-    std::string makeBodyMissile(const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
+    std::string makeBodyMissile(const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght);
     /**
      * @brief called when spawn a mob
      *
@@ -81,17 +83,6 @@ namespace Network::Send {
      */
     std::string codeMob(int code, int ide, int xMob, int yMob, Enums::Position pos);
     /**
-     * @brief called when spawn a ally
-     *
-     * @param code rfc code of mob (311 - 312)
-     * @param ide number for entity to put in header
-     * @param xAlly position x of ally
-     * @param yAlly position y of ally
-     * @param color enum for color of the ally
-     * @return std::string
-     */
-    std::string codeAlly(int code, int ide, int xAlly, int yAlly, Enums::PlayerColor color);
-    /**
      * @brief called when spawn a missile
      *
      * @param header contain code rfc and entity for header struct
@@ -101,7 +92,7 @@ namespace Network::Send {
      * @param strenght power of the missile (-1 if not set)
      * @return std::string
      */
-    std::string codeMissil(const int header[2], const int pos[2], const int velocity[2], Enums::TeamGroup team, int strenght);
+    std::string codeMissile(const std::array<int, 2> &header, const std::array<float, 2> &pos, const std::array<float, 2> &velocity, Enums::TeamGroup team, int strenght);
     /**
      * @brief transform string send by client to int
      *
@@ -109,5 +100,5 @@ namespace Network::Send {
      * @return int
      */
     BodyNumber stringToBodyNum(std::string &code);
-    Network::header stringToheader(std::string code);
+    Network::header stringToheader(std::string &code);
 };
