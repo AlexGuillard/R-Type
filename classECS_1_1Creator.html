@@ -121,6 +121,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a6a8be1878b668826910c25900ccd5098"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a6a8be1878b668826910c25900ccd5098">createGroundedCharacter</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, enum <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)</td></tr>
 <tr class="memdesc:a6a8be1878b668826910c25900ccd5098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a base entity that moves with the background.  <a href="classECS_1_1Creator.html#a6a8be1878b668826910c25900ccd5098">More...</a><br /></td></tr>
 <tr class="separator:a6a8be1878b668826910c25900ccd5098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c63c4522bdcbea42b5b953733be2ec1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#a1c63c4522bdcbea42b5b953733be2ec1">createBossCharacter</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, std::size_t id, enum <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, double introLength)</td></tr>
+<tr class="memdesc:a1c63c4522bdcbea42b5b953733be2ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a base boss entity. It has an intro animation, during which it is invincible.  <a href="classECS_1_1Creator.html#a1c63c4522bdcbea42b5b953733be2ec1">More...</a><br /></td></tr>
+<tr class="separator:a1c63c4522bdcbea42b5b953733be2ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac48eb829591ef5b478b3c69a807f769"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classECS_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Creator.html#aac48eb829591ef5b478b3c69a807f769">createEnemyBasic</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, size_t id, int x, int y)</td></tr>
 <tr class="memdesc:aac48eb829591ef5b478b3c69a807f769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Enemy Basic object.  <a href="classECS_1_1Creator.html#aac48eb829591ef5b478b3c69a807f769">More...</a><br /></td></tr>
 <tr class="separator:aac48eb829591ef5b478b3c69a807f769"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -613,6 +616,93 @@ Static Public Attributes</h2></td></tr>
     <tr><td class="paramname">id</td><td>id of entity </td></tr>
     <tr><td class="paramname">x</td><td>position X </td></tr>
     <tr><td class="paramname">y</td><td>position y </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1c63c4522bdcbea42b5b953733be2ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c63c4522bdcbea42b5b953733be2ec1">&#9670;&nbsp;</a></span>createBossCharacter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classECS_1_1Entity.html">Entity</a> ECS::Creator::createBossCharacter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a>&#160;</td>
+          <td class="paramname"><em>team</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>damage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>health</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>introLength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a base boss entity. It has an intro animation, during which it is invincible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">registry</td><td>The registry to create the entity in </td></tr>
+    <tr><td class="paramname">id</td><td>Id of the entity </td></tr>
+    <tr><td class="paramname">team</td><td>Team of the entity </td></tr>
+    <tr><td class="paramname">damage</td><td>Damage the entity deals to the other team on collision </td></tr>
+    <tr><td class="paramname">health</td><td>Health of the entity </td></tr>
+    <tr><td class="paramname">width</td><td>Width of the entity's hitbox/texture </td></tr>
+    <tr><td class="paramname">height</td><td>Height of the entity's hitbox/texture </td></tr>
+    <tr><td class="paramname">introLength</td><td>Length of the intro animation in seconds </td></tr>
   </table>
   </dd>
 </dl>
