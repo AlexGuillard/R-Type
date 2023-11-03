@@ -142,6 +142,7 @@ namespace ECS {
         std::size_t id
     )
     {
+        registry.killEntity(registry.entityFromIndex(id));
         Entity entity = registry.entityFromIndex(id);
 
         registry.emplaceComponent<Components::PositionComponent>(entity, 0, 0);
@@ -470,6 +471,8 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         registry.emplaceComponent<Components::GravityComponent>(blaster, Creator::defaultGravity);
+        addBydoShootingAI(blaster, registry, ECS::NullEntity(), 1, 100);
+        registry.emplaceComponent<Components::InRangeComponent>(blaster);
         return blaster;
     }
 
