@@ -22,6 +22,15 @@ Camera2D Screen::Display::camera = {
 
 bool Screen::Display::_playButton = false;
 
+Color GetRandomColor() {
+    return Color(
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    );
+}
+
 Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
@@ -172,15 +181,6 @@ bool Screen::Display::getErrorConnection()const
 void Screen::Display::displayErrorConnection()
 {
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
-}
-
-Color GetRandomColor() {
-    return Color(
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        255
-    );
 }
 
 void Screen::Display::displayError401()
@@ -596,15 +596,6 @@ Vector2 Screen::Display::getCameraSize()
 }
 
 ///// End Game
-
-Color GetRandomColor() {
-    return Color(
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        255
-    );
-}
 
 void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
 {

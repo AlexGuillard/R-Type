@@ -161,7 +161,7 @@ namespace Screen {
         static void drawLoose(GameEngine::GameEngine &engine);
 
         /**
-         * @brief Particles for win screen
+         * @brief Particles struct used for the win/401 screen
          *
          */
         struct Particle {
@@ -189,17 +189,7 @@ namespace Screen {
          * @return (*this) to allow chain calls
          */
         Display &center();
-        /**
-         * @brief Particles for win screen
-         *
-         */
-        struct Particle {
-            Vector2 position;
-            Color color;
-            float radius;
-            float speed;
-            bool active;
-        };
+
         /**
          * @brief Resizes the window
          * @return (*this) to allow chain calls
