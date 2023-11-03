@@ -14,7 +14,7 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 {
     window.drawMenu();
     if (window.getMenuState() == Screen::Display::MenuState::CONNECTING) {
-        if (Network::startClientNetwork(window.getHostName(), window.getPort(), 0, Network::ConnectionType::TCP, engine)) {
+        if (Network::startClientNetwork(window.getHostName(), window.getPort(),Network::ConnectionType::TCP, window.getMultiState(), window.getModeState(), engine)) {
             window.setGameState(Screen::Display::GameState::WAITINGROOM);
             window.setMenuState(Screen::Display::MenuState::CONNECTED);
             window.setErrorConnection(false);
@@ -39,7 +39,7 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
-    Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
+    Network::updateClientNetworkTCP(Screen::Display::getPlayButton(), window.getModeState());
 
     if (!Network::check401Error()) {
         window.drawWaitingRoom();

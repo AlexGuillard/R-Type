@@ -32,6 +32,7 @@
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
+#include "ECS/Components/ImmortalComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -47,6 +48,7 @@
 #include "ECS/Systems/findTarget.hpp"
 #include "ECS/Systems/flyingAI.hpp"
 #include "ECS/Systems/bossIntro.hpp"
+#include "ECS/Systems/invincibleTimer.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -81,8 +83,11 @@ namespace GameEngine {
         registry.registerComponent<Components::InvincibleTimerComponent>();
         registry.registerComponent<Components::FlyingAIComponent>();
         registry.registerComponent<Components::BossIntroComponent>();
+        registry.registerComponent<Components::ImmortalComponent>();
 
         // Systems (order matters)
+        // timer systems
+        registry.addSystem<Components::InvincibleTimerComponent>(Systems::invincibleTimer);
         // Collision systems
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
@@ -113,6 +118,7 @@ namespace GameEngine {
         registry.emplaceComponent<Components::TeamComponent>(wall, team);
         registry.emplaceComponent<Components::SolidComponent>(wall);
         registry.emplaceComponent<Components::DamageComponent>(wall, 0); // destroy missiles on contact
+        registry.emplaceComponent<Components::ImmortalComponent>(wall);
         return wall;
     }
 

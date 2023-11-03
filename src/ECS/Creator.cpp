@@ -142,6 +142,7 @@ namespace ECS {
         std::size_t id
     )
     {
+        registry.killEntity(registry.entityFromIndex(id));
         Entity entity = registry.entityFromIndex(id);
 
         registry.emplaceComponent<Components::PositionComponent>(entity, 0, 0);
@@ -470,31 +471,44 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         registry.emplaceComponent<Components::GravityComponent>(blaster, Creator::defaultGravity);
+        addBydoShootingAI(blaster, registry, ECS::NullEntity(), 1, 100);
+        registry.emplaceComponent<Components::InRangeComponent>(blaster);
         return blaster;
     }
 
-    Entity Creator::createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
+    Entity Creator::createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team)
     {
         const Utils::Vector2 nbFrameInSpriteSheet(5, 5);
         const uint8_t nbFrameInAnimation = 5;
 
-        ECS::Entity ally = ECS::Creator::createCharacter(registry, Enums::TeamGroup::ALLY, 1, 1, 33, 14, id);
+        ECS::Entity ally = ECS::Creator::createCharacter(registry, team, 1, 1, 33, 14, id);
         registry.getComponents<Components::PositionComponent>().at(ally)->x = x;
         registry.getComponents<Components::PositionComponent>().at(ally)->y = y;
-        registry.emplaceComponent<Components::DrawableComponent>(ally,
-            Assets::AssetsIndex::R_TYPESHEET42_PNG,
-            nbFrameInSpriteSheet, // frameRatio
-            Utils::Vector2(nbFrameInAnimation * (int)color, 0), // start
-            Utils::Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
-            true, // boomerang
-            nbFrameInAnimation // fps
-        );
+        if (team == Enums::TeamGroup::ALLY || team == Enums::TeamGroup::NEUTRAL) {
+            registry.emplaceComponent<Components::DrawableComponent>(ally,
+                Assets::AssetsIndex::R_TYPESHEET42_PNG,
+                nbFrameInSpriteSheet, // frameRatio
+                Utils::Vector2(nbFrameInAnimation * (int)color, 0), // start
+                Utils::Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
+                true, // boomerang
+                nbFrameInAnimation // fps
+            );
+        } else {
+            registry.emplaceComponent<Components::DrawableComponent>(ally,
+                Assets::AssetsIndex::R_TYPESHEET42_2_PNG,
+                nbFrameInSpriteSheet, // frameRatio
+                Utils::Vector2(nbFrameInAnimation * (int)color, 0), // start
+                Utils::Vector2(nbFrameInAnimation + (nbFrameInAnimation * (int)color), 0), // end
+                true, // boomerang
+                nbFrameInAnimation // fps
+            );
+        }
         return ally;
     }
 
-    Entity Creator::createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color)
+    Entity Creator::createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team)
     {
-        Entity player = Creator::createAlly(registry, id, x, y, color);
+        Entity player = Creator::createAlly(registry, id, x, y, color, team);
         registry.emplaceComponent<Components::ControllableComponent>(player);
         return player;
     }

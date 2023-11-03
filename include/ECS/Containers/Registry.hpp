@@ -18,6 +18,7 @@
 #include "ECS/Containers/SparseArray.hpp"
 #include "ECS/Entity.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
+#include "ECS/Components/ImmortalComponent.hpp"
 
 namespace ECS::Containers {
     class Registry {
@@ -139,6 +140,9 @@ namespace ECS::Containers {
         }
         void killEntity(Entity const &entity)
         {
+            if (this->getComponent<Components::ImmortalComponent>(entity)) {
+                return;
+            }
             for (auto &[_, pair] : m_componentsArrays) {
                 auto &deleter = pair.second;
                 deleter(*this, entity);
