@@ -19,11 +19,13 @@ namespace ECS::Systems {
         ECS::Containers::SparseArray<ECS::Components::CollisionComponent> &collision,
         ECS::Containers::SparseArray<ECS::Components::DamageComponent> &damage,
         ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
-        ECS::Containers::SparseArray<ECS::Components::HPComponent> &hpComponents)
+        ECS::Containers::SparseArray<ECS::Components::HPComponent> &hpComponents,
+        Containers::SparseArray<Components::InvincibleTimerComponent> &invincibleTimers)
     {
         std::vector<std::size_t> toDelete;
 
         for (auto &&[entityId, hpComponent, collision] : Containers::IndexedZipper(hpComponents, collision)) {
+            if (invincibleTimers[entityId] && invincibleTimers[entityId]->timer > 0) { continue; }
             auto &&team = teams.at(entityId);
             for (auto eId : collision->collisions) {
                 if (!(teams[eId] && teams[entityId] && damage[eId])) {
