@@ -25,7 +25,7 @@ namespace Network {
      * @brief Start running the client
      * @returns True if the client successfully started, false otherwise
      */
-    bool startClientNetwork(const std::string &host, int tcpPort, int udpPort, Network::ConnectionType type, GameEngine::GameEngine &engine);
+    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, GameEngine::GameEngine &engine);
     /**
      * @brief Update the client.
      * Fetches the server information then answers from the server

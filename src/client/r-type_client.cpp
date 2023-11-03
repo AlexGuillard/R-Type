@@ -14,7 +14,7 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 {
     window.drawMenu();
     if (window.getMenuState() == Screen::Display::MenuState::CONNECTING) {
-        if (Network::startClientNetwork(window.getHostName(), window.getPort(), 0, Network::ConnectionType::TCP, engine)) {
+        if (Network::startClientNetwork(window.getHostName(), window.getPort(), Network::ConnectionType::TCP, engine)) {
             window.setGameState(Screen::Display::GameState::WAITINGROOM);
             window.setMenuState(Screen::Display::MenuState::CONNECTED);
             window.setErrorConnection(false);

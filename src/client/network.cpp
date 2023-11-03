@@ -16,16 +16,16 @@ namespace Network {
         return isCoUDP;
     }
 
-    bool startClientNetwork(const std::string &host, int tcpPort, int udpPort, Network::ConnectionType type, GameEngine::GameEngine &engine)
+    bool startClientNetwork(const std::string &host, int port, Network::ConnectionType type, GameEngine::GameEngine &engine)
     {
         //TODO:
         //connect return a bool to let us know if the connection was successful or not
         if (type == Network::ConnectionType::TCP) {
-            std::cout << "Connecting TCP " << host << ":" << tcpPort << std::endl;
-            return ClientNetwork::getInstance(engine).connect(host, tcpPort, true);
+            std::cout << "Connecting TCP " << host << ":" << port << std::endl;
+            return ClientNetwork::getInstance(engine).connect(host, port, true);
         } else {
-            std::cout << "Connecting UDP " << host << ":" << udpPort << std::endl;
-            return ClientNetwork::getInstance(engine).connect(host, udpPort, false);
+            std::cout << "Connecting UDP " << host << ":" << port << std::endl;
+            return ClientNetwork::getInstance(engine).connect(host, port, false);
         }
     }
 
