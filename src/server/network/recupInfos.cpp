@@ -29,7 +29,9 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
     std::string line;
     std::vector<std::string> lines;
     while (std::getline(ss, line, '\n')) {
-        lines.push_back(line);
+        if (!line.starts_with("#")) {
+            lines.push_back(line);
+        }
     }
     for (int i = 0; i < lines.size(); i++) {
         Network::Info data;

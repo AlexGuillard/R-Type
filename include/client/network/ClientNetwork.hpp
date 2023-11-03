@@ -208,6 +208,13 @@ namespace Network {
          */
         void handleBydosShotSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle error from the server
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleErrorServer(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Instance object
          *
          * @return ClientNetwork&
@@ -396,6 +403,14 @@ namespace Network {
          */
         void checkForDeadEntities(std::size_t tick);
         /**
+         * @brief Get the Error Server object
+         *
+         * @return true receive a 401 from the server
+         * @return false no error
+         */
+        bool getErrorServer() const;
+
+        /**
          * @brief Get the Win Condition object
          *
          * @return true
@@ -443,6 +458,8 @@ namespace Network {
         GameEngine::GameEngine &_engine;
         //Map of the entities with the timestamp
         std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
+        //Error from the server use for 401 RFC Code (room full or room playing)
+        bool _errorServer;
         //If true they won
         bool _winCondition = false;
         //If true they lost

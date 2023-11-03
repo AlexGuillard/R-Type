@@ -347,7 +347,7 @@ void Network::ServerNetwork::handleClientData(int num)
 void Network::ServerNetwork::SpawnMob(Info script)
 {
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
-    const int x = Constants::cameraDefaultWidth - 10;
+    const int x = Constants::cameraDefaultWidth + 10;
 
     if (script.rfc >= 301 && script.rfc <= 307) {
         ECS::Entity entity = registry.spawnEntity();

@@ -109,6 +109,11 @@ ECS::Components::VelocityComponent Network::ClientNetwork::getVelocity(std::stri
     return res;
 }
 
+bool Network::ClientNetwork::getErrorServer() const
+{
+    return _errorServer;
+}
+
 bool Network::ClientNetwork::getWinCondition()const
 {
     return _winCondition;
