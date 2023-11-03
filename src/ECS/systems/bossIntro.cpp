@@ -8,6 +8,7 @@
 #include "ECS/Systems/bossIntro.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "ECS/Components/InRangeComponent.hpp"
 
 
 void ECS::Systems::bossIntro(
@@ -34,5 +35,6 @@ void ECS::Systems::bossIntro(
     }
     for (auto &&e : toRemoveIntros) {
         registry.removeComponent<Components::BossIntroComponent>(e);
+        registry.emplaceComponent<Components::InRangeComponent>(e);
     }
 }
