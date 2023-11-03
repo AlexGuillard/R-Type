@@ -108,3 +108,8 @@ ECS::Components::VelocityComponent Network::ClientNetwork::getVelocity(std::stri
     str.erase(0, sizeof(ECS::Components::VelocityComponent));
     return res;
 }
+
+bool Network::ClientNetwork::getErrorServer() const
+{
+    return _errorServer;
+}

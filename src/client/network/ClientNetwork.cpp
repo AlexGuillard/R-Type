@@ -16,6 +16,7 @@
 Network::ClientNetwork::ClientNetwork(GameEngine::GameEngine &engine)
     : _port(0), _socket(_ioService), _tcpSocket(_ioService), _engine(engine)
 {
+    _errorServer = false;
     initializeResponsehandler();
     initializeTCPResponsehandler();
 }

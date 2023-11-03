@@ -162,6 +162,17 @@ namespace Screen {
          */
         Display &center();
         /**
+         * @brief Particles for win screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
+        /**
          * @brief Resizes the window
          * @return (*this) to allow chain calls
          */
@@ -224,6 +235,11 @@ namespace Screen {
          *
          */
         void displayErrorConnection();
+        /**
+         * @brief Make understand the user the room is full or already started
+         *
+         */
+        void displayError401();
         /**
          * @brief Set the Error Connection object
          *
