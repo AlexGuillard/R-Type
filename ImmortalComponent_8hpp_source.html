@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-Type: Registry.hpp File Reference</title>
+<title>R-Type: ImmortalComponent.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,44 +64,30 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_08881d6529c367d028dd020fd36dee2e.html">Containers</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_073402b06d831bb0ea44664935cf1ebd.html">ECS</a></li><li class="navelem"><a class="el" href="dir_7b52d6202c19af6951914df083df759a.html">Components</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">Registry.hpp File Reference</div>  </div>
+<div class="title">ImmortalComponent.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;unordered_map&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;any&gt;</code><br />
-<code>#include &lt;typeindex&gt;</code><br />
-<code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;tuple&gt;</code><br />
-<code>#include &quot;<a class="el" href="SparseArray_8hpp_source.html">ECS/Containers/SparseArray.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Entity_8hpp_source.html">ECS/Entity.hpp</a>&quot;</code><br />
-<code>#include &quot;Errors/ComponentNotRegisteredException.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="ImmortalComponent_8hpp_source.html">ECS/Components/ImmortalComponent.hpp</a>&quot;</code><br />
-</div>
-<p><a href="Registry_8hpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespaceECS"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS.html">ECS</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceECS_1_1Containers"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Containers.html">ECS::Containers</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<a href="ImmortalComponent_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">** EPITECH PROJECT, 2023</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">** R-Type</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">** File description:</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">** ImmortalComponent</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceECS_1_1Components.html">ECS::Components</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structECS_1_1Components_1_1ImmortalComponent.html">   15</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structECS_1_1Components_1_1ImmortalComponent.html">ImmortalComponent</a> {};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace ECS::Components</span></div>
+<div class="ttc" id="anamespaceECS_1_1Components_html"><div class="ttname"><a href="namespaceECS_1_1Components.html">ECS::Components</a></div><div class="ttdef"><b>Definition:</b> BackgroundComponent.hpp:14</div></div>
+<div class="ttc" id="astructECS_1_1Components_1_1ImmortalComponent_html"><div class="ttname"><a href="structECS_1_1Components_1_1ImmortalComponent.html">ECS::Components::ImmortalComponent</a></div><div class="ttdoc">Component owned by entities that cannot be killed.</div><div class="ttdef"><b>Definition:</b> ImmortalComponent.hpp:15</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
