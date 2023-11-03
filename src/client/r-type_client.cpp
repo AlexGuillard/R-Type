@@ -23,6 +23,7 @@ static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
             window.setErrorConnection(true);
         }
     }
+
     if (window.getErrorConnection())
         window.displayErrorConnection();
 }
@@ -39,11 +40,17 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton());
-    window.drawWaitingRoom();
+
+    if (!Network::check401Error()) {
+        window.drawWaitingRoom();
+    } else {
+        window.displayError401();
+    }
 
     if (Network::returnIsCoUDP()) {
         window.setGameState(Screen::Display::GameState::GAME);
     }
+
 }
 
 int rtype_client()

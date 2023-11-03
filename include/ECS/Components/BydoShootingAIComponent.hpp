@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "enums.hpp"
+
 namespace ECS::Components {
     /**
      * @brief Component for the BydoShootingAI system.
@@ -14,13 +16,14 @@ namespace ECS::Components {
      * each shot.
      * Entity must have a TargetComponent, a PositionComponent, an
      * InRangeComponent and (optionally), a TeamComponent (defaults to Enemy).
-     * @param shootCooldown time between each shot in seconds
-     * @param shotSpeed speed of the shot in pixels per second
+     * @param shootCooldown time between each shot in seconds (def: 0)
+     * @param shotSpeed speed of the shot in pixels per second (def: 10)
      * @param _shootCooldownTimer internal timer for the cooldown
      */
     struct BydoShootingAIComponent {
         float shootCooldown = 0.0F;
         float shotSpeed = 10.0F;
+        Enums::ShotType shotType = Enums::ShotType::BASIC;
         double _shootCooldownTimer = 0.;
     };
 

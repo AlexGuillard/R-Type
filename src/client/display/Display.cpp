@@ -171,6 +171,58 @@ void Screen::Display::displayErrorConnection()
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
 }
 
+Color GetRandomColor() {
+    return Color(
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    );
+}
+
+void Screen::Display::displayError401()
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    ClearBackground(BLACK);
+    const int maxParticles = 100;
+    static std::vector<Particle> particles(maxParticles);
+
+    for (int i = 0; i < maxParticles; i++) {
+        if (particles[i].active) {
+            particles[i].position.y += particles[i].speed;
+            if (particles[i].position.y > screenHeight) {
+                particles[i].position = Vector2(static_cast<float>(GetRandomValue(0, screenWidth)), -10.0);
+                particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
+            }
+            DrawCircleV(particles[i].position, particles[i].radius, particles[i].color);
+        } else {
+            particles[i].position = Vector2(static_cast<float>(GetRandomValue(0, screenWidth)), -10.0);
+            particles[i].color = GetRandomColor();
+            particles[i].radius = static_cast<float>(GetRandomValue(1, 3));
+            particles[i].speed = static_cast<float>(GetRandomValue(1, 5));
+            particles[i].active = true;
+        }
+    }
+    const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
+    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
+    Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
+    Color textColor = WHITE;
+    float letterSpacing = 10.0f;
+    DrawTextEx(GetFontDefault(), text, textPosition, 40, letterSpacing, textColor);
+    static float spinnerAngle = 0.0f;
+    Vector2 spinnerPosition = {(float)(screenWidth / 2), (float)(screenHeight / 2 + 50)};
+    float spinnerRadius = 30.0f;
+    spinnerAngle += 5.0f;
+
+    if (spinnerAngle >= 360.0f)
+        spinnerAngle = 0.0f;
+
+    DrawCircleLines(spinnerPosition.x, spinnerPosition.y, spinnerRadius, RAYWHITE);
+    DrawCircleSector(spinnerPosition, spinnerRadius, 90, 90 + spinnerAngle, 24, GREEN);
+    EndDrawing();
+}
+
 static Rectangle getInputRect(int posX, int posY)
 {
     const int screenWidth = GetScreenWidth();
@@ -247,6 +299,28 @@ void Screen::Display::displayPortInput()
     DrawText(_port.c_str(), posXText, posYText, fontSizeText, LIGHTGRAY);
 }
 
+void Screen::Display::displayConnectionStateButton()
+{
+    _soloclickableZone = { 700, 675, 160, 60 };
+    _multiclickableZone = { 1000, 675, 160, 60 };
+
+
+    DrawRectangleRec({ 690, 665, 180, 80 }, SKYBLUE);
+    DrawRectangleRec({ 990, 665, 180, 80 }, SKYBLUE);
+
+    if (_multiState == MultiState::SOLO)
+        DrawRectangleRec(_soloclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_soloclickableZone, LIGHTGRAY);
+    DrawText("Solo", _soloclickableZone.x + 45, _soloclickableZone.y + 15, 32, RAYWHITE);
+
+    if (_multiState == MultiState::MULTI)
+        DrawRectangleRec(_multiclickableZone, SKYBLUE);
+    else
+        DrawRectangleRec(_multiclickableZone, LIGHTGRAY);
+    DrawText("Multi", _multiclickableZone.x + 40, _multiclickableZone.y + 15, 32, RAYWHITE);
+}
+
 void Screen::Display::displayConnectionButton()
 {
     const int screenWidth = GetScreenWidth();
@@ -320,6 +394,12 @@ void Screen::Display::mouseClickedMenu()
     } else {
         _state = InputState::NONE;
     }
+    if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
+        _multiState = MultiState::SOLO;
+    }
+    if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
+        _multiState = MultiState::MULTI;
+    }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
             std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
@@ -365,6 +445,7 @@ void Screen::Display::drawMenu()
 {
     displayHostNameInput();
     displayPortInput();
+    displayConnectionStateButton();
     displayConnectionButton();
 }
 

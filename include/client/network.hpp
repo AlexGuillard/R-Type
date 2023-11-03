@@ -32,6 +32,13 @@ namespace Network {
      */
     void updateClientNetworkUDP();
     /**
+     * @brief Check if the client has a 401 error
+     *
+     * @return true if the client has a 401 error
+     * @return false
+     */
+    bool check401Error();
+    /**
      * @brief Update the TCP client.
      * Fetches the server information then answers from the server
      */

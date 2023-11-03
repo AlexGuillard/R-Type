@@ -25,6 +25,11 @@ void Network::ClientNetwork::initializeTCPResponsehandler()
     _responseHandlersTCP[202] = [this](const header &h, std::string &s) {
         handleNewPlayer(h, s);
         };
+
+    // error
+    _responseHandlersTCP[401] = [this](const header &h, std::string &s) {
+        handleErrorServer(h, s);
+        };
 }
 
 void Network::ClientNetwork::initializeResponsehandler()
@@ -70,6 +75,21 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[331] = [this](const header &h, std::string &s) {
         handleEntityUpdate(h, s);
         };
+}
+
+//-----------------------------ERRORS--------------------------------------------//
+
+void Network::ClientNetwork::handleErrorServer(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 401 && !_errorServer) {
+            _errorServer = true;
+        }
+    } else {
+        str.clear();
+    }
 }
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//

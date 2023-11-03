@@ -93,7 +93,17 @@ namespace ECS {
             Containers::Registry &registry,
             const Entity &target,
             float shootCooldown,
-            float shotSpeed
+            float shotSpeed,
+            Enums::ShotType shotType = Enums::ShotType::BYDO_SHOT
+        );
+
+        static Entity addFlyingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            std::pair<float, float> preferredXDistance,
+            std::pair<float, float> preferredYDistance,
+            float speed
         );
 
         /**
