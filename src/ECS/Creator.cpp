@@ -497,7 +497,7 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation / 4 // fps
         );
-
+        addBydoShootingAI(dobkeratops, registry, ECS::NullEntity(), 1, 100);
         return dobkeratops;
     }
 
