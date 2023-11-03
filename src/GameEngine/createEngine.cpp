@@ -45,6 +45,7 @@
 #include "ECS/Systems/bydoShootingAI.hpp"
 #include "ECS/Systems/findTarget.hpp"
 #include "ECS/Systems/bossIntro.hpp"
+#include "ECS/Systems/invincibleTimer.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -80,6 +81,8 @@ namespace GameEngine {
         registry.registerComponent<Components::BossIntroComponent>();
 
         // Systems (order matters)
+        // timer systems
+        registry.addSystem<Components::InvincibleTimerComponent>(Systems::invincibleTimer);
         // Collision systems
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
