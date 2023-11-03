@@ -25,6 +25,11 @@ void Network::ClientNetwork::initializeTCPResponsehandler()
     _responseHandlersTCP[202] = [this](const header &h, std::string &s) {
         handleNewPlayer(h, s);
         };
+
+    // error
+    _responseHandlersTCP[401] = [this](const header &h, std::string &s) {
+        handleErrorServer(h, s);
+        };
 }
 
 void Network::ClientNetwork::initializeResponsehandler()
@@ -70,6 +75,21 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[331] = [this](const header &h, std::string &s) {
         handleEntityUpdate(h, s);
         };
+}
+
+//-----------------------------ERRORS--------------------------------------------//
+
+void Network::ClientNetwork::handleErrorServer(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 401 && !_errorServer) {
+            _errorServer = true;
+        }
+    } else {
+        str.clear();
+    }
 }
 
 //-----------------------------ENTITIES DESTRUCTION----------------------------------//
@@ -266,7 +286,7 @@ void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std:
         BodyNumber footer = getBody(str);
 
         if (footer.number == 311) {
-            ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
+            ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color, allyData.team);
         }
     } else {
         str.clear();
@@ -280,7 +300,7 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
         BodyNumber footer = getBody(str);
 
         if (footer.number == 312) {
-            ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color);
+            ECS::Creator::createAlly(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color, allyData.team);
         }
 
     } else {

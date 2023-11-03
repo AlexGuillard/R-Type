@@ -93,7 +93,17 @@ namespace ECS {
             Containers::Registry &registry,
             const Entity &target,
             float shootCooldown,
-            float shotSpeed
+            float shotSpeed,
+            Enums::ShotType shotType = Enums::ShotType::BYDO_SHOT
+        );
+
+        static Entity addFlyingAI(
+            const Entity &entity,
+            Containers::Registry &registry,
+            const Entity &target,
+            std::pair<float, float> preferredXDistance,
+            std::pair<float, float> preferredYDistance,
+            float speed
         );
 
         /**
@@ -197,6 +207,29 @@ namespace ECS {
         );
 
         /**
+         * @brief Create a base boss entity. It has an intro animation, during which it is invincible.
+         *
+         * @param registry The registry to create the entity in
+         * @param id Id of the entity
+         * @param team Team of the entity
+         * @param damage Damage the entity deals to the other team on collision
+         * @param health Health of the entity
+         * @param width Width of the entity's hitbox/texture
+         * @param height Height of the entity's hitbox/texture
+         * @param introLength Length of the intro animation in seconds
+        */
+        static Entity createBossCharacter(
+            Containers::Registry &registry,
+            std::size_t id,
+            enum Enums::TeamGroup team,
+            std::size_t damage,
+            std::size_t health,
+            std::size_t width,
+            std::size_t height,
+            double introLength
+        );
+
+        /**
          * @brief Create a Enemy Basic object
          *
          * @param registry registre entity
@@ -259,7 +292,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createAlly(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Player object
          *
@@ -269,7 +302,7 @@ namespace ECS {
          * @param y position y
          * @param color color of the ship
          */
-        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color);
+        static Entity createPlayer(Containers::Registry &registry, size_t id, int x, int y, Enums::PlayerColor color, Enums::TeamGroup team);
         /**
          * @brief Create a Dobkeratops object
          *

@@ -31,6 +31,16 @@ namespace Screen {
             CONNECTING,               // waiting for connection to server to be established
             CONNECTED,                // connected to server
         };
+        enum class MultiState {
+            SOLO,
+            MULTI,
+        };
+        enum class ModeSelect {
+            REGULAR,
+            PVP,
+            FRIENDLYFIRE,
+            INFINI,
+        };
         enum class CameraShakeIntensity {
             RUMBLE = 3,
             EARTHQUAKE = 5,
@@ -104,6 +114,11 @@ namespace Screen {
          */
         void displayPortInput();
         /**
+         * @brief display button to choose connection state
+         *
+         */
+        void displayConnectionStateButton();
+        /**
          * @brief display button for connection
          *
          */
@@ -139,13 +154,24 @@ namespace Screen {
         /**
          * @brief draw the waitingRoom
          */
-        static void drawWaitingRoom(Rectangle playButtonRect);
+        void drawWaitingRoom();
 
         /**
          * @brief Centers the window on screen
          * @return (*this) to allow chain calls
          */
         Display &center();
+        /**
+         * @brief Particles for win screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
         /**
          * @brief Resizes the window
          * @return (*this) to allow chain calls
@@ -203,12 +229,17 @@ namespace Screen {
          *
          * @param playButtonRect
          */
-        void detectActionWaitingRoom(Rectangle playButtonRect);
+        void detectActionWaitingRoom();
         /**
          * @brief Write Error Connection when the port or just connection just failed
          *
          */
         void displayErrorConnection();
+        /**
+         * @brief Make understand the user the room is full or already started
+         *
+         */
+        void displayError401();
         /**
          * @brief Set the Error Connection object
          *
@@ -253,10 +284,24 @@ namespace Screen {
         Rectangle _hostNameclickableZone;
         // Set the rectangle clickable for port input
         Rectangle _portclickableZone;
+        // Set the rectangle clickable for solo button
+        Rectangle _soloclickableZone;
+        // Set the rectangle clickable for solo button
+        Rectangle _multiclickableZone;
         // Set the rectangle clickable for conection button
         Rectangle _connectionclickableZone;
+        // Set the rectangle clickable for play button
+        Rectangle _playclickableZone;
+        // Set the rectangle clickable for regular mode button
+        Rectangle _regularclickableZone;
+        // Set the rectangle clickable for pvp mode button
+        Rectangle _pvpclickableZone;
+        // Set the rectangle clickable for friendly Fire mode button
+        Rectangle _friendlyFireclickableZone;
+        ModeSelect _modeState = ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
+        MultiState _multiState = MultiState::MULTI;
         bool _errorConnection;
 
         // Camera

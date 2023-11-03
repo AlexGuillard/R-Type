@@ -94,4 +94,9 @@ namespace Network {
     {
         Network::ClientNetwork::getInstance().stopIOService();
     }
+
+    bool check401Error()
+    {
+        return ClientNetwork::getInstance().getErrorServer();
+    }
 }

@@ -86,7 +86,7 @@ void Network::ServerTcp::connection()
     std::string actualClient;
 
     std::cout << number.codeRfc << std::endl;
-    if (number.codeRfc == CONNECTION_NB && _list.size() < 4) {
+    if (number.codeRfc == CONNECTION_NB && _list.size() < 1) {
         int idNewClient = _list.size();
         _list.join(shared_from_this());
         addClient();

@@ -15,6 +15,7 @@
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
+#include "ECS/Components/WaveBeamComponent.hpp"
 
 namespace GameEngine {
     // Registry type
@@ -24,7 +25,9 @@ namespace GameEngine {
     typedef std::function<void(ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
-        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams)> ServerEventHandler;
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
+        ECS::Containers::SparseArray<ECS::Components::WaveBeamComponent> &waveBeams
+        )> ServerEventHandler;
 
     class GameEngine {
         using Registry = ECS::Containers::Registry;

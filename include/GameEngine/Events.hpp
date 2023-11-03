@@ -23,8 +23,8 @@ namespace GameEngine {
             PLAYER_DROP = PLAYER_FORCE,
             PLAYER_MISSILE,                 // A player missile has been created
             PLAYER_WAVE_BEAM,               // A player wave beam has been created
-            BYDO_SHOOT,                     // Something wants to shoot a bydo shot
-            BYDO_MISSILE,                   // A bydo missile has been created
+            BYDO_SHOOT_MISSILE,             // Something wants to shoot a bydo shot
+            BYDO_SHOOT_WAVE_BEAM,           // Something wants to shoot a bydo wave beam
             COUNT
         };
 
