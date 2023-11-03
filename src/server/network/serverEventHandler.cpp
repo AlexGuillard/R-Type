@@ -147,11 +147,21 @@ namespace Network {
         res.clear();
     }
 
+    void ServerNetwork::_shootWaveBeam(
+        ECS::Containers::Registry &registry,
+        const ECS::Components::WaveBeamComponent &waveInfo)
+    {
+        ECS::Components::PositionComponent position(waveInfo.x, waveInfo.y);
+        ECS::Components::VelocityComponent velocity(0, 0);
+        _shootWaveBeam(registry, position, velocity, waveInfo.team, waveInfo.strength);
+    }
+
     void ServerNetwork::serverEventHandler(
         ECS::Containers::Registry &registry,
         ECS::Containers::SparseArray<ECS::Components::PositionComponent> &positions,
         ECS::Containers::SparseArray<ECS::Components::VelocityComponent> &velocities,
-        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams)
+        ECS::Containers::SparseArray<ECS::Components::TeamComponent> &teams,
+        ECS::Containers::SparseArray<ECS::Components::WaveBeamComponent> &waveBeamsInfos)
     {
         GameEngine::Events::Type event;
         int entityId = 0;
@@ -183,10 +193,17 @@ namespace Network {
                     timeSinceShootHeld.emplace(entityId, std::make_pair(true, 0.F));
                 }
                 break;
-            case BYDO_SHOOT:
+            case BYDO_SHOOT_MISSILE:
                 if (positions[entityId] && velocities[entityId] && teams[entityId]) {
                     this->_shootBydoShot(
                         registry, entityId, *positions[entityId], teams[entityId]->team
+                    );
+                }
+                break;
+            case BYDO_SHOOT_WAVE_BEAM:
+                if (positions[entityId] && velocities[entityId] && teams[entityId] && waveBeamsInfos[entityId]) {
+                    this->_shootWaveBeam(
+                        registry, *waveBeamsInfos[entityId]
                     );
                 }
                 break;

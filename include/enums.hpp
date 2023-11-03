@@ -71,6 +71,13 @@ namespace Enums {
         UPDATE_STATE = 331, // update position and velocity
     };
 
+    enum class ShotType {
+        BASIC,          // basic small missile shot by player
+        WAVE_BEAM,      // chargeable beam
+        BYDO_SHOT,      // small shot fired by enemies
+        COUNT // keep last
+    };
+
     // Copy of raylib KeyboardKey enum
     typedef enum class KeyBoardKey {
     KEY_NULL            = 0,        // Key: NULL, used for no key pressed
