@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['friendlyfire_1181',['FRIENDLYFIRE',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070ad4b4faa6ff00af233bc120e29cb8e06a',1,'Screen::Display']]]
+  ['friendlyfire_1185',['FRIENDLYFIRE',['../namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14ad4b4faa6ff00af233bc120e29cb8e06a',1,'Enums']]]
 ];

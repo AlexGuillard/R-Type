@@ -111,18 +111,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad2c37d8bd96c0247865253971ee433f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">handleSend</a> (boost::system::error_code error, std::size_t recvd_bytes)</td></tr>
 <tr class="memdesc:ad2c37d8bd96c0247865253971ee433f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send data to the server.  <a href="classNetwork_1_1ClientNetwork.html#ad2c37d8bd96c0247865253971ee433f3">More...</a><br /></td></tr>
 <tr class="separator:ad2c37d8bd96c0247865253971ee433f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac54e57b42ddb3dc434cff4b9ec48e85f">sendHello</a> ()</td></tr>
-<tr class="memdesc:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send a hello to the server to connect to it.  <a href="classNetwork_1_1ClientNetwork.html#ac54e57b42ddb3dc434cff4b9ec48e85f">More...</a><br /></td></tr>
-<tr class="separator:ac54e57b42ddb3dc434cff4b9ec48e85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff49097be836ad03acba5422266af812"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#aff49097be836ad03acba5422266af812">sendHello</a> (<a class="el" href="namespaceEnums.html#af0add96e2ea6b97fb0efac1d057e5c28">Enums::MultiState</a> state)</td></tr>
+<tr class="memdesc:aff49097be836ad03acba5422266af812"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send a hello to the server to connect to it.  <a href="classNetwork_1_1ClientNetwork.html#aff49097be836ad03acba5422266af812">More...</a><br /></td></tr>
+<tr class="separator:aff49097be836ad03acba5422266af812"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5528b575454b2e3d2edb1a6087e0d455"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a5528b575454b2e3d2edb1a6087e0d455">sendMovement</a> (<a class="el" href="namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5">Movement</a> movement)</td></tr>
 <tr class="memdesc:a5528b575454b2e3d2edb1a6087e0d455"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send a movement from the player to the server.  <a href="classNetwork_1_1ClientNetwork.html#a5528b575454b2e3d2edb1a6087e0d455">More...</a><br /></td></tr>
 <tr class="separator:a5528b575454b2e3d2edb1a6087e0d455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72ff2994fd96d432616a605217cd28a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">sendAction</a> (<a class="el" href="namespaceNetwork.html#a939d5767ba0bbba93169571343fb14c0">Action</a> action)</td></tr>
 <tr class="memdesc:a72ff2994fd96d432616a605217cd28a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to send an action from the player to the server.  <a href="classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9">More...</a><br /></td></tr>
 <tr class="separator:a72ff2994fd96d432616a605217cd28a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a8ec46aefa10c3f98894f17bfbe0112c4">connect</a> (const std::string &amp;host, int port, bool isTCP)</td></tr>
-<tr class="memdesc:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to connect to the server if the server return 301 then the connection and return true else false.  <a href="classNetwork_1_1ClientNetwork.html#a8ec46aefa10c3f98894f17bfbe0112c4">More...</a><br /></td></tr>
-<tr class="separator:a8ec46aefa10c3f98894f17bfbe0112c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8a6a45752aec76a11411f181788108"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#aed8a6a45752aec76a11411f181788108">connect</a> (const std::string &amp;host, int port, bool isTCP, <a class="el" href="namespaceEnums.html#af0add96e2ea6b97fb0efac1d057e5c28">Enums::MultiState</a> state)</td></tr>
+<tr class="memdesc:aed8a6a45752aec76a11411f181788108"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to connect to the server if the server return 301 then the connection and return true else false.  <a href="classNetwork_1_1ClientNetwork.html#aed8a6a45752aec76a11411f181788108">More...</a><br /></td></tr>
+<tr class="separator:aed8a6a45752aec76a11411f181788108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac35bd3772f195137325d4802f65c9166"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ac35bd3772f195137325d4802f65c9166">initializeResponsehandler</a> ()</td></tr>
 <tr class="memdesc:ac35bd3772f195137325d4802f65c9166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the function to use the pointer to function.  <a href="classNetwork_1_1ClientNetwork.html#ac35bd3772f195137325d4802f65c9166">More...</a><br /></td></tr>
 <tr class="separator:ac35bd3772f195137325d4802f65c9166"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,9 +207,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af57855e12720c7d44d91684ee1961a9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNetwork_1_1bodyAlly.html">bodyAlly</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#af57855e12720c7d44d91684ee1961a9c">getAlly</a> (std::string &amp;str)</td></tr>
 <tr class="memdesc:af57855e12720c7d44d91684ee1961a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Ally object.  <a href="classNetwork_1_1ClientNetwork.html#af57855e12720c7d44d91684ee1961a9c">More...</a><br /></td></tr>
 <tr class="separator:af57855e12720c7d44d91684ee1961a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5dc60a2bedb86dbcc167131af62c35d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad5dc60a2bedb86dbcc167131af62c35d">send201</a> ()</td></tr>
-<tr class="memdesc:ad5dc60a2bedb86dbcc167131af62c35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">send a 201 to the server on binary format with a header struct  <a href="classNetwork_1_1ClientNetwork.html#ad5dc60a2bedb86dbcc167131af62c35d">More...</a><br /></td></tr>
-<tr class="separator:ad5dc60a2bedb86dbcc167131af62c35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9420c2e8b865a7bcd6e34f994eb15f14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a9420c2e8b865a7bcd6e34f994eb15f14">send201</a> (<a class="el" href="namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14">Enums::ModeSelect</a> mode)</td></tr>
+<tr class="memdesc:a9420c2e8b865a7bcd6e34f994eb15f14"><td class="mdescLeft">&#160;</td><td class="mdescRight">send a 201 to the server on binary format with a header struct  <a href="classNetwork_1_1ClientNetwork.html#a9420c2e8b865a7bcd6e34f994eb15f14">More...</a><br /></td></tr>
+<tr class="separator:a9420c2e8b865a7bcd6e34f994eb15f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeb4b06e5a2bd164ad433ea228f87632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#abeb4b06e5a2bd164ad433ea228f87632">handleMessageData</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
 <tr class="memdesc:abeb4b06e5a2bd164ad433ea228f87632"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle messages from the server and call the right function attributed to the header rfc code  <a href="classNetwork_1_1ClientNetwork.html#abeb4b06e5a2bd164ad433ea228f87632">More...</a><br /></td></tr>
 <tr class="separator:abeb4b06e5a2bd164ad433ea228f87632"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -378,8 +378,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a8ec46aefa10c3f98894f17bfbe0112c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ec46aefa10c3f98894f17bfbe0112c4">&#9670;&nbsp;</a></span>connect()</h2>
+<a id="aed8a6a45752aec76a11411f181788108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8a6a45752aec76a11411f181788108">&#9670;&nbsp;</a></span>connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -400,7 +400,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isTCP</em>&#160;</td>
+          <td class="paramname"><em>isTCP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceEnums.html#af0add96e2ea6b97fb0efac1d057e5c28">Enums::MultiState</a>&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1686,8 +1692,8 @@ false no error </dd></dl>
 
 </div>
 </div>
-<a id="ad5dc60a2bedb86dbcc167131af62c35d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5dc60a2bedb86dbcc167131af62c35d">&#9670;&nbsp;</a></span>send201()</h2>
+<a id="a9420c2e8b865a7bcd6e34f994eb15f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9420c2e8b865a7bcd6e34f994eb15f14">&#9670;&nbsp;</a></span>send201()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1695,7 +1701,8 @@ false no error </dd></dl>
         <tr>
           <td class="memname">void Network::ClientNetwork::send201 </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14">Enums::ModeSelect</a>&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1731,8 +1738,8 @@ false no error </dd></dl>
 
 </div>
 </div>
-<a id="ac54e57b42ddb3dc434cff4b9ec48e85f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac54e57b42ddb3dc434cff4b9ec48e85f">&#9670;&nbsp;</a></span>sendHello()</h2>
+<a id="aff49097be836ad03acba5422266af812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff49097be836ad03acba5422266af812">&#9670;&nbsp;</a></span>sendHello()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1740,7 +1747,8 @@ false no error </dd></dl>
         <tr>
           <td class="memname">void Network::ClientNetwork::sendHello </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespaceEnums.html#af0add96e2ea6b97fb0efac1d057e5c28">Enums::MultiState</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

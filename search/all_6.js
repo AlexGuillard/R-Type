@@ -16,5 +16,5 @@ var searchData=
   ['frameratio_201',['frameRatio',['../structECS_1_1Components_1_1DrawableComponent.html#a18d9c19b115cae7582315143d0d511c2',1,'ECS::Components::DrawableComponent']]],
   ['framescale_202',['frameScale',['../structECS_1_1Components_1_1BackgroundComponent.html#a8d0926b30b62042d972b858f074d79bf',1,'ECS::Components::BackgroundComponent::frameScale()'],['../structECS_1_1Components_1_1GroundComponent.html#aa5a3493bf40213dfc5f1b35c0e187756',1,'ECS::Components::GroundComponent::frameScale()']]],
   ['frequency_203',['frequency',['../structECS_1_1Components_1_1SinMovementComponent.html#a5bae16b3ddb78899db8216176e8e42c1',1,'ECS::Components::SinMovementComponent']]],
-  ['friendlyfire_204',['FRIENDLYFIRE',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070ad4b4faa6ff00af233bc120e29cb8e06a',1,'Screen::Display']]]
+  ['friendlyfire_204',['FRIENDLYFIRE',['../namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14ad4b4faa6ff00af233bc120e29cb8e06a',1,'Enums']]]
 ];

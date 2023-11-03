@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['infini_1183',['INFINI',['../classScreen_1_1Display.html#a66f81ea3bd183d8e4ec2e465f070c070a9d5fca2e2c4c9927bc7c0f39c1d66411',1,'Screen::Display']]]
+  ['infini_1187',['INFINI',['../namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14a9d5fca2e2c4c9927bc7c0f39c1d66411',1,'Enums']]]
 ];

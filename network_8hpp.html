@@ -78,6 +78,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &quot;GameEngine/GameEngine.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="enums_8hpp_source.html">enums.hpp</a>&quot;</code><br />
 </div>
 <p><a href="network_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -98,18 +99,18 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a69ea9e410d3b8f9f0db2223916f542be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a69ea9e410d3b8f9f0db2223916f542be">Network::returnIsCoUDP</a> ()</td></tr>
 <tr class="separator:a69ea9e410d3b8f9f0db2223916f542be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a578bc4deb6c7c18bd2b54e2f36346c1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a578bc4deb6c7c18bd2b54e2f36346c1d">Network::startClientNetwork</a> (const std::string &amp;host, int tcpPort, int udpPort, <a class="el" href="namespaceNetwork.html#a08857128f6a52e9cedc9aa85c91e9e69">Network::ConnectionType</a> type, GameEngine::GameEngine &amp;engine)</td></tr>
-<tr class="memdesc:a578bc4deb6c7c18bd2b54e2f36346c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start running the client.  <a href="namespaceNetwork.html#a578bc4deb6c7c18bd2b54e2f36346c1d">More...</a><br /></td></tr>
-<tr class="separator:a578bc4deb6c7c18bd2b54e2f36346c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a92b8fcc8059cdda2467da0596d91c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a8a92b8fcc8059cdda2467da0596d91c5">Network::startClientNetwork</a> (const std::string &amp;host, int port, <a class="el" href="namespaceNetwork.html#a08857128f6a52e9cedc9aa85c91e9e69">Network::ConnectionType</a> type, <a class="el" href="namespaceEnums.html#af0add96e2ea6b97fb0efac1d057e5c28">Enums::MultiState</a> multi, <a class="el" href="namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14">Enums::ModeSelect</a> mode, GameEngine::GameEngine &amp;engine)</td></tr>
+<tr class="memdesc:a8a92b8fcc8059cdda2467da0596d91c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start running the client.  <a href="namespaceNetwork.html#a8a92b8fcc8059cdda2467da0596d91c5">More...</a><br /></td></tr>
+<tr class="separator:a8a92b8fcc8059cdda2467da0596d91c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86c9a174aa67444c08046cd8c7ba1124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a86c9a174aa67444c08046cd8c7ba1124">Network::updateClientNetworkUDP</a> ()</td></tr>
 <tr class="memdesc:a86c9a174aa67444c08046cd8c7ba1124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the client. Fetches the server information then answers from the server.  <a href="namespaceNetwork.html#a86c9a174aa67444c08046cd8c7ba1124">More...</a><br /></td></tr>
 <tr class="separator:a86c9a174aa67444c08046cd8c7ba1124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac40b922e9a57509855f590ae57410ebc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#ac40b922e9a57509855f590ae57410ebc">Network::check401Error</a> ()</td></tr>
 <tr class="memdesc:ac40b922e9a57509855f590ae57410ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the client has a 401 error.  <a href="namespaceNetwork.html#ac40b922e9a57509855f590ae57410ebc">More...</a><br /></td></tr>
 <tr class="separator:ac40b922e9a57509855f590ae57410ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fddd0d9fe5fab13f7a353ef61c3a341"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#a4fddd0d9fe5fab13f7a353ef61c3a341">Network::updateClientNetworkTCP</a> (bool playButton)</td></tr>
-<tr class="memdesc:a4fddd0d9fe5fab13f7a353ef61c3a341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the TCP client. Fetches the server information then answers from the server.  <a href="namespaceNetwork.html#a4fddd0d9fe5fab13f7a353ef61c3a341">More...</a><br /></td></tr>
-<tr class="separator:a4fddd0d9fe5fab13f7a353ef61c3a341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc35c840be93a7e9423851c16f436eea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#adc35c840be93a7e9423851c16f436eea">Network::updateClientNetworkTCP</a> (bool playButton, <a class="el" href="namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14">Enums::ModeSelect</a> mode)</td></tr>
+<tr class="memdesc:adc35c840be93a7e9423851c16f436eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the TCP client. Fetches the server information then answers from the server.  <a href="namespaceNetwork.html#adc35c840be93a7e9423851c16f436eea">More...</a><br /></td></tr>
+<tr class="separator:adc35c840be93a7e9423851c16f436eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8458e76dfdf40cb81b0f19e93a82654"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654">Network::stopClientNetwork</a> ()</td></tr>
 <tr class="memdesc:aa8458e76dfdf40cb81b0f19e93a82654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the client.  <a href="namespaceNetwork.html#aa8458e76dfdf40cb81b0f19e93a82654">More...</a><br /></td></tr>
 <tr class="separator:aa8458e76dfdf40cb81b0f19e93a82654"><td class="memSeparator" colspan="2">&#160;</td></tr>
