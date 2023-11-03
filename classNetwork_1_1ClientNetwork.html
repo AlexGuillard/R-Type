@@ -171,6 +171,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2c9fb3693e8b40f44429a4fa7497b3f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a2c9fb3693e8b40f44429a4fa7497b3f0">handleBydosShotSpawn</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
 <tr class="memdesc:a2c9fb3693e8b40f44429a4fa7497b3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle the fact of create a bydos missile when the server said it  <a href="classNetwork_1_1ClientNetwork.html#a2c9fb3693e8b40f44429a4fa7497b3f0">More...</a><br /></td></tr>
 <tr class="separator:a2c9fb3693e8b40f44429a4fa7497b3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a9b1d41f18d6ec6d052ca338b6e9c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#ad4a9b1d41f18d6ec6d052ca338b6e9c7">handleErrorServer</a> (const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;messageHeader, std::string &amp;str)</td></tr>
+<tr class="memdesc:ad4a9b1d41f18d6ec6d052ca338b6e9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">handle error from the server  <a href="classNetwork_1_1ClientNetwork.html#ad4a9b1d41f18d6ec6d052ca338b6e9c7">More...</a><br /></td></tr>
+<tr class="separator:ad4a9b1d41f18d6ec6d052ca338b6e9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fb44555661268ef4e347998ce797b50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a0fb44555661268ef4e347998ce797b50">ClientNetwork</a> (GameEngine::GameEngine &amp;engine)</td></tr>
 <tr class="memdesc:a0fb44555661268ef4e347998ce797b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Client <a class="el" href="namespaceNetwork.html">Network</a> object without parameters.  <a href="classNetwork_1_1ClientNetwork.html#a0fb44555661268ef4e347998ce797b50">More...</a><br /></td></tr>
 <tr class="separator:a0fb44555661268ef4e347998ce797b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,6 +246,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb01416bd7599475f9631d8ffaf96ce5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#aeb01416bd7599475f9631d8ffaf96ce5">checkForDeadEntities</a> (std::size_t tick)</td></tr>
 <tr class="memdesc:aeb01416bd7599475f9631d8ffaf96ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the entity is dead or not based on the timestamp.  <a href="classNetwork_1_1ClientNetwork.html#aeb01416bd7599475f9631d8ffaf96ce5">More...</a><br /></td></tr>
 <tr class="separator:aeb01416bd7599475f9631d8ffaf96ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89dce0149745d1ac305d1e19b312d20b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ClientNetwork.html#a89dce0149745d1ac305d1e19b312d20b">getErrorServer</a> () const</td></tr>
+<tr class="memdesc:a89dce0149745d1ac305d1e19b312d20b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classNetwork_1_1Error.html" title="Error class for ClientNetwork issues.">Error</a> Server object.  <a href="classNetwork_1_1ClientNetwork.html#a89dce0149745d1ac305d1e19b312d20b">More...</a><br /></td></tr>
+<tr class="separator:a89dce0149745d1ac305d1e19b312d20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classNetwork_1_1ANetwork"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classNetwork_1_1ANetwork')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classNetwork_1_1ANetwork.html">Network::ANetwork</a></td></tr>
 <tr class="memitem:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ANetwork.html#a41e1972c68bb4c09dfa0f9ecb32f344f">~ANetwork</a> ()=default</td></tr>
 <tr class="separator:a41e1972c68bb4c09dfa0f9ecb32f344f inherit pub_methods_classNetwork_1_1ANetwork"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -525,6 +531,28 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structNetwork_1_1BodyNumber.html">Network::BodyNumber</a> </dd></dl>
+
+</div>
+</div>
+<a id="a89dce0149745d1ac305d1e19b312d20b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89dce0149745d1ac305d1e19b312d20b">&#9670;&nbsp;</a></span>getErrorServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Network::ClientNetwork::getErrorServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="classNetwork_1_1Error.html" title="Error class for ClientNetwork issues.">Error</a> Server object. </p>
+<dl class="section return"><dt>Returns</dt><dd>true receive a 401 from the server </dd>
+<dd>
+false no error </dd></dl>
 
 </div>
 </div>
@@ -1122,6 +1150,43 @@ false </dd></dl>
 </div><div class="memdoc">
 
 <p>handle he fact of despawn entities from the game </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">messageHeader</td><td></td></tr>
+    <tr><td class="paramname">str</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad4a9b1d41f18d6ec6d052ca338b6e9c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a9b1d41f18d6ec6d052ca338b6e9c7">&#9670;&nbsp;</a></span>handleErrorServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Network::ClientNetwork::handleErrorServer </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structNetwork_1_1header.html">header</a> &amp;&#160;</td>
+          <td class="paramname"><em>messageHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>handle error from the server </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">messageHeader</td><td></td></tr>
