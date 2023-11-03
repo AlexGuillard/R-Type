@@ -16,12 +16,14 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/CollidableComponent.hpp"
 #include "ECS/Components/CollisionComponent.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 using namespace ECS;
 
 TEST(Creator, createCharacter)
 {
-    Containers::Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Containers::Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
     registry.registerComponent<Components::DamageComponent>();
     registry.registerComponent<Components::HPComponent>();
     registry.registerComponent<Components::HitBoxComponent>();
