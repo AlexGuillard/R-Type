@@ -31,6 +31,10 @@ namespace Screen {
             CONNECTING,               // waiting for connection to server to be established
             CONNECTED,                // connected to server
         };
+        enum class MultiState {
+            SOLO,
+            MULTI,
+        };
         enum class ModeSelect {
             REGULAR,
             PVP,
@@ -109,6 +113,11 @@ namespace Screen {
          *
          */
         void displayPortInput();
+        /**
+         * @brief display button to choose connection state
+         *
+         */
+        void displayConnectionStateButton();
         /**
          * @brief display button for connection
          *
@@ -259,6 +268,10 @@ namespace Screen {
         Rectangle _hostNameclickableZone;
         // Set the rectangle clickable for port input
         Rectangle _portclickableZone;
+        // Set the rectangle clickable for solo button
+        Rectangle _soloclickableZone;
+        // Set the rectangle clickable for solo button
+        Rectangle _multiclickableZone;
         // Set the rectangle clickable for conection button
         Rectangle _connectionclickableZone;
         // Set the rectangle clickable for play button
@@ -272,6 +285,7 @@ namespace Screen {
         ModeSelect _modeState = ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
+        MultiState _multiState = MultiState::MULTI;
         bool _errorConnection;
 
         // Camera
