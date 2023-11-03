@@ -35,6 +35,12 @@ namespace Screen {
             SOLO,
             MULTI,
         };
+        enum class ModeSelect {
+            REGULAR,
+            PVP,
+            FRIENDLYFIRE,
+            INFINI,
+        };
         enum class CameraShakeIntensity {
             RUMBLE = 3,
             EARTHQUAKE = 5,
@@ -148,7 +154,7 @@ namespace Screen {
         /**
          * @brief draw the waitingRoom
          */
-        static void drawWaitingRoom(Rectangle playButtonRect);
+        void drawWaitingRoom();
 
         /**
          * @brief Centers the window on screen
@@ -212,7 +218,7 @@ namespace Screen {
          *
          * @param playButtonRect
          */
-        void detectActionWaitingRoom(Rectangle playButtonRect);
+        void detectActionWaitingRoom();
         /**
          * @brief Write Error Connection when the port or just connection just failed
          *
@@ -268,6 +274,15 @@ namespace Screen {
         Rectangle _multiclickableZone;
         // Set the rectangle clickable for conection button
         Rectangle _connectionclickableZone;
+        // Set the rectangle clickable for play button
+        Rectangle _playclickableZone;
+        // Set the rectangle clickable for regular mode button
+        Rectangle _regularclickableZone;
+        // Set the rectangle clickable for pvp mode button
+        Rectangle _pvpclickableZone;
+        // Set the rectangle clickable for friendly Fire mode button
+        Rectangle _friendlyFireclickableZone;
+        ModeSelect _modeState = ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         MultiState _multiState = MultiState::MULTI;
