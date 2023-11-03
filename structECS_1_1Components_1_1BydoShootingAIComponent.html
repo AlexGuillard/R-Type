@@ -87,6 +87,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad8f1bf357707b171a8be6169a29de06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d607c2a7342b4afa25cdfe559dfcfb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#a86d607c2a7342b4afa25cdfe559dfcfb">shotSpeed</a> = 10.0F</td></tr>
 <tr class="separator:a86d607c2a7342b4afa25cdfe559dfcfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef27fcc509371f2bdea3f9e6c72deede"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceEnums.html#af35d66f1fd4f545f621fe77416230810">Enums::ShotType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#aef27fcc509371f2bdea3f9e6c72deede">shotType</a> = <a class="el" href="namespaceEnums.html#af35d66f1fd4f545f621fe77416230810ae4ac03f6c9f00665644e868dd1fb9f1e">Enums::ShotType::BASIC</a></td></tr>
+<tr class="separator:aef27fcc509371f2bdea3f9e6c72deede"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3270a6e02fb103e445ef2d9386aa2db9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShootingAIComponent.html#a3270a6e02fb103e445ef2d9386aa2db9">_shootCooldownTimer</a> = 0.</td></tr>
 <tr class="separator:a3270a6e02fb103e445ef2d9386aa2db9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -94,8 +96,8 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Component for the BydoShootingAI system. Defines the ability to shoot for a Bydo entity and the cooldown between each shot. <a class="el" href="classECS_1_1Entity.html">Entity</a> must have a <a class="el" href="structECS_1_1Components_1_1TargetComponent.html">TargetComponent</a>, a <a class="el" href="structECS_1_1Components_1_1PositionComponent.html" title="Component that contains the position of an entity.">PositionComponent</a>, an <a class="el" href="structECS_1_1Components_1_1InRangeComponent.html" title="Component owned by entities whose target is in range.">InRangeComponent</a> and (optionally), a <a class="el" href="structECS_1_1Components_1_1TeamComponent.html" title="Component that contains the type of team.">TeamComponent</a> (defaults to Enemy). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shootCooldown</td><td>time between each shot in seconds </td></tr>
-    <tr><td class="paramname">shotSpeed</td><td>speed of the shot in pixels per second </td></tr>
+    <tr><td class="paramname">shootCooldown</td><td>time between each shot in seconds (def: 0) </td></tr>
+    <tr><td class="paramname">shotSpeed</td><td>speed of the shot in pixels per second (def: 10) </td></tr>
     <tr><td class="paramname">_shootCooldownTimer</td><td>internal timer for the cooldown </td></tr>
   </table>
   </dd>
@@ -137,6 +139,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">float ECS::Components::BydoShootingAIComponent::shotSpeed = 10.0F</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef27fcc509371f2bdea3f9e6c72deede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef27fcc509371f2bdea3f9e6c72deede">&#9670;&nbsp;</a></span>shotType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceEnums.html#af35d66f1fd4f545f621fe77416230810">Enums::ShotType</a> ECS::Components::BydoShootingAIComponent::shotType = <a class="el" href="namespaceEnums.html#af35d66f1fd4f545f621fe77416230810ae4ac03f6c9f00665644e868dd1fb9f1e">Enums::ShotType::BASIC</a></td>
         </tr>
       </table>
 </div><div class="memdoc">

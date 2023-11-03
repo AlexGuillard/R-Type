@@ -99,6 +99,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a9c503ca78d52f8565f36cfb9af7096b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a9c503ca78d52f8565f36cfb9af7096b8">findTarget</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1TargetComponent.html">ECS::Components::TargetComponent</a> &gt; &amp;targets, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1HPComponent.html">ECS::Components::HPComponent</a> &gt; &amp;hpComponents, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1InvincibleTimerComponent.html">ECS::Components::InvincibleTimerComponent</a> &gt; &amp;invincibleTimers, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1TeamComponent.html">ECS::Components::TeamComponent</a> &gt; &amp;teams)</td></tr>
 <tr class="memdesc:a9c503ca78d52f8565f36cfb9af7096b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a new target for entities that target the <a class="el" href="classECS_1_1NullEntity.html" title="NullEntity is an entity that is not valid.">NullEntity</a>. The new target is the first entity that is not in the same team as the entity and can be hurt.  <a href="namespaceECS_1_1Systems.html#a9c503ca78d52f8565f36cfb9af7096b8">More...</a><br /></td></tr>
 <tr class="separator:a9c503ca78d52f8565f36cfb9af7096b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7454349fe6378701a055e7905eb8cd7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a7454349fe6378701a055e7905eb8cd7e">flyingAI</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1FlyingAIComponent.html">Components::FlyingAIComponent</a> &gt; &amp;AIs, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1TargetComponent.html">Components::TargetComponent</a> &gt; &amp;targets, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;positions, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">Components::VelocityComponent</a> &gt; &amp;velocities)</td></tr>
+<tr class="separator:a7454349fe6378701a055e7905eb8cd7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">gravity</a> (<a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;registry, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">ECS::Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &gt; &amp;velocities, <a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1GravityComponent.html">Components::GravityComponent</a> &gt; &amp;gravity)</td></tr>
 <tr class="memdesc:a7eba9fe2c53f2961afcb042d833bc78b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add gravity to velocity.  <a href="namespaceECS_1_1Systems.html#a7eba9fe2c53f2961afcb042d833bc78b">More...</a><br /></td></tr>
 <tr class="separator:a7eba9fe2c53f2961afcb042d833bc78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -534,6 +536,52 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Finds a new target for entities that target the <a class="el" href="classECS_1_1NullEntity.html" title="NullEntity is an entity that is not valid.">NullEntity</a>. The new target is the first entity that is not in the same team as the entity and can be hurt. </p>
+
+</div>
+</div>
+<a id="a7454349fe6378701a055e7905eb8cd7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7454349fe6378701a055e7905eb8cd7e">&#9670;&nbsp;</a></span>flyingAI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ECS::Systems::flyingAI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1Registry.html">Containers::Registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>registry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1FlyingAIComponent.html">Components::FlyingAIComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>AIs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1TargetComponent.html">Components::TargetComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>targets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1PositionComponent.html">Components::PositionComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classECS_1_1Containers_1_1SparseArray.html">Containers::SparseArray</a>&lt; <a class="el" href="structECS_1_1Components_1_1VelocityComponent.html">Components::VelocityComponent</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>velocities</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
