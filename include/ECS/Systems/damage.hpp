@@ -12,6 +12,7 @@
 #include "ECS/Components/DamageComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/HPComponent.hpp"
+#include "ECS/Components/InvincibleTimerComponent.hpp"
 
 namespace ECS::Systems {
 
@@ -29,7 +30,8 @@ namespace ECS::Systems {
         Containers::SparseArray<Components::CollisionComponent> &collision,
         Containers::SparseArray<Components::DamageComponent> &damage,
         Containers::SparseArray<Components::TeamComponent> &team,
-        Containers::SparseArray<Components::HPComponent> &hpComponents
+        Containers::SparseArray<Components::HPComponent> &hpComponents,
+        Containers::SparseArray<Components::InvincibleTimerComponent> &invincibleTimers
     );
 
 } // namespace ECS::Systems
