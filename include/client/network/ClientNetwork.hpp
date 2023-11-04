@@ -174,6 +174,20 @@ namespace Network {
          */
         void handleBlasterSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of create dobkeratops ennemies when the server said it (boss)
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleDobkeratopsSpawn(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of create Pod
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handlePodSpawn(const header &messageHeader, std::string &str);
+        /**
          * @brief handle the fact of creat allies when the server said it
          *
          * @param messageHeader
@@ -356,6 +370,27 @@ namespace Network {
          */
         void handleEntityUpdate(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the win conditions of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleWinGame(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the loose conditions of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleLooseGame(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact of update the stages of the game
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleStagesUpdate(const header &messageHeader, std::string &str);
+        /**
          * @brief Get the Velocity object
          *
          * @param str
@@ -382,6 +417,21 @@ namespace Network {
          * @return false no error
          */
         bool getErrorServer() const;
+
+        /**
+         * @brief Get the Win Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getWinCondition() const;
+        /**
+         * @brief Get the Loose Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getLooseCondition() const;
 
     private:
         //Port of the server
@@ -418,6 +468,10 @@ namespace Network {
         std::unordered_map<std::size_t, std::size_t> _entityTimestamps;
         //Error from the server use for 401 RFC Code (room full or room playing)
         bool _errorServer;
+        //If true they won
+        bool _winCondition = false;
+        //If true they lost
+        bool _looseCondition = false;
     };
 }
 

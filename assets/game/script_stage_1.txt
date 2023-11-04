@@ -1,4 +1,5 @@
 # Wave 0 (0 ticks after Wave 0)
+308 240 5
 # 1: Pata-Pata Formation (Diamond Shape)
 301 240 10
 301 190 20
@@ -114,4 +115,4 @@
 301 90 1330
 301 390 1330
 # Dobkeratops (boss)
-307 200 300
+307 200 1500

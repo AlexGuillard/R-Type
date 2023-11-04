@@ -32,6 +32,8 @@
 #include "ECS/Components/HorizontalScrollComponent.hpp"
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
+#include "ECS/Components/ImmortalComponent.hpp"
+#include "ECS/Components/MissileSpawnPointComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -82,6 +84,8 @@ namespace GameEngine {
         registry.registerComponent<Components::InvincibleTimerComponent>();
         registry.registerComponent<Components::FlyingAIComponent>();
         registry.registerComponent<Components::BossIntroComponent>();
+        registry.registerComponent<Components::ImmortalComponent>();
+        registry.registerComponent<Components::MissileSpawnPointComponent>();
 
         // Systems (order matters)
         // timer systems
@@ -116,6 +120,7 @@ namespace GameEngine {
         registry.emplaceComponent<Components::TeamComponent>(wall, team);
         registry.emplaceComponent<Components::SolidComponent>(wall);
         registry.emplaceComponent<Components::DamageComponent>(wall, 0); // destroy missiles on contact
+        registry.emplaceComponent<Components::ImmortalComponent>(wall);
         return wall;
     }
 

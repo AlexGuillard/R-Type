@@ -61,6 +61,12 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[306] = [this](const header &h, std::string &s) {
         handleBlasterSpawn(h, s);
         };
+    _responseHandlers[307] = [this](const header &h, std::string &s) {
+        handleDobkeratopsSpawn(h, s);
+        };
+    _responseHandlers[308] = [this](const header &h, std::string &s) {
+        handlePodSpawn(h, s);
+        };
     // missiles
     _responseHandlers[321] = [this](const header &h, std::string &s) {
         handleClassicMissileSpawn(h, s);
@@ -75,6 +81,63 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[331] = [this](const header &h, std::string &s) {
         handleEntityUpdate(h, s);
         };
+    // stages
+    _responseHandlers[231] = [this](const header &h, std::string &s) {
+        handleStagesUpdate(h, s);
+        };
+    // End game
+    _responseHandlers[221] = [this](const header &h, std::string &s) {
+        handleWinGame(h, s);
+        };
+    _responseHandlers[222] = [this](const header &h, std::string &s) {
+        handleLooseGame(h, s);
+        };
+}
+
+//-----------------------------END GAME--------------------------------------------//
+
+void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 222 && !_looseCondition) {
+            _looseCondition = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
+
+void Network::ClientNetwork::handleWinGame(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 221 && !_winCondition) {
+            _winCondition = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
+
+//-----------------------------STAGES--------------------------------------------//
+
+void Network::ClientNetwork::handleStagesUpdate(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 231) {
+            _engine.setLevel(messageHeader.entity);
+        }
+
+    } else {
+        str.clear();
+    }
 }
 
 //-----------------------------ERRORS--------------------------------------------//
@@ -103,14 +166,15 @@ double getCurrentTime()
 
 void Network::ClientNetwork::checkForDeadEntities(std::size_t tick)
 {
-    std::size_t maxIdleTime = 20;
+    int maxIdleTime = 20;
     std::vector<std::size_t> listToDelete;
 
     for (const auto &entityTimestampPair : _entityTimestamps) {
         std::size_t entityId = entityTimestampPair.first;
         int lastUpdateTimestamp = static_cast<int>(entityTimestampPair.second);
+        int difference = static_cast<int>(tick) - lastUpdateTimestamp;
 
-        if (static_cast<int>(tick) - lastUpdateTimestamp > maxIdleTime) {
+        if (difference > maxIdleTime) {
             ECS::Entity entityToDelete = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(entityId);
             _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(entityToDelete);
             listToDelete.push_back(entityId);
@@ -132,12 +196,15 @@ void Network::ClientNetwork::handleEntityUpdate(const header &messageHeader, std
         BodyNumber footer = getBody(str);
 
         if (footer.number == 331) {
-            // std::cout << "entityToUpdate: " << messageHeader.entity << " X: " << velocityData.x << " Y: " << velocityData.y << std::endl;
             ECS::Entity entityToUpdate = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(messageHeader.entity);
 
-            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
-            _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
+            if (positionData.x != -100 && positionData.y != -100)
+                _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::PositionComponent>(entityToUpdate, positionData.x, positionData.y); //position
+
+            if (velocityData.x != 0 && velocityData.y != 0)
+                _engine.getRegistry(GameEngine::registryTypeEntities).emplaceComponent<ECS::Components::VelocityComponent>(entityToUpdate, velocityData.x, velocityData.y); //velocity
             _entityTimestamps[messageHeader.entity] = tick.number;
+
             checkForDeadEntities(tick.number);
         }
 
@@ -192,9 +259,39 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
 
 //-----------------------------MOBS--------------------------------------------//
 
+void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
+        bodyMob mobData = getMob(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 308) {
+            std::cout << "Pod spawned at" << mobData.x << " " << mobData.y << std::endl;
+            ECS::Creator::createPod(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+        }
+    } else {
+        str.clear();
+    }
+}
+
+void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
+        bodyMob mobData = getMob(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 307) {
+            std::cout << "Dobkeratops spawned at" << mobData.x << " " << mobData.y << std::endl;
+            ECS::Creator::createDobkeratops(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+        }
+    } else {
+        str.clear();
+    }
+}
+
 void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -208,7 +305,7 @@ void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std
 
 void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -222,7 +319,7 @@ void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std:
 
 void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -236,7 +333,7 @@ void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::st
 
 void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -250,7 +347,7 @@ void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::
 
 void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -264,7 +361,7 @@ void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 

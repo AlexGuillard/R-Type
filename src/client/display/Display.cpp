@@ -9,6 +9,7 @@
 
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
+#include <cstring>
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
 uint16_t Screen::Display::cameraHeight = Screen::Display::defaultCameraHeight;
@@ -20,6 +21,15 @@ Camera2D Screen::Display::camera = {
 };
 
 bool Screen::Display::_playButton = false;
+
+Color GetRandomColor() {
+    return Color(
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        (unsigned char)GetRandomValue(0, 255),
+        255
+    );
+}
 
 Screen::Display::Display(GameState state) : _gameState(state)
 {
@@ -89,10 +99,12 @@ void Screen::Display::beginUpdate()
     this->detectActionMenu();
     this->update();
     BeginDrawing();
-    if (!_errorConnection)
-        ClearBackground(RAYWHITE);
-    else
+    if (_errorConnection)
         ClearBackground(ORANGE);
+    else if (_gameState == Screen::Display::GameState::LOOSING)
+        ClearBackground(BLACK);
+    else
+        ClearBackground(RAYWHITE);
 }
 
 void Screen::Display::endUpdate()
@@ -184,15 +196,6 @@ void Screen::Display::displayErrorConnection()
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
 }
 
-Color GetRandomColor() {
-    return Color(
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        (unsigned char)GetRandomValue(0, 255),
-        255
-    );
-}
-
 void Screen::Display::displayError401()
 {
     const int screenWidth = GetScreenWidth();
@@ -218,7 +221,6 @@ void Screen::Display::displayError401()
         }
     }
     const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
-    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
     Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
     float letterSpacing = 10.0f;
@@ -458,8 +460,77 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 }
 
+void Screen::Display::setSpaceBackground(bool menu)
+{
+    ClearBackground(BLACK);
+
+    for (int i = 0; i < 10; i++) {
+        Color nebulaColor = {
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(150, 255)),
+            static_cast<unsigned char>(GetRandomValue(50, 200))
+        };
+        DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
+    }
+
+    for (int i = 0; i < 200; i++) {
+        Color starColor = {
+            255,
+            255,
+            255,
+            static_cast<unsigned char>(GetRandomValue(200, 255))
+        };
+        int starSize = GetRandomValue(1, 3);
+        float starSpeed = 5000;
+        float starX = GetRandomValue(0, GetScreenWidth());
+        float starY = GetRandomValue(0, GetScreenHeight());
+        DrawCircle(starX, starY, starSize, starColor);
+        starX -= starSpeed;
+
+        if (starX < 0) {
+            starX = GetScreenWidth();
+            starY = GetRandomValue(0, GetScreenHeight());
+        }
+    }
+
+    if (menu)
+        DrawText("R-Type", 730, 250, 120, WHITE);
+
+    for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
+        if (_dustParticles[i].position.x <= 0) {
+            _dustParticles[i].position.x = GetScreenWidth();
+            _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+            _dustParticles[i].color = {
+                255,
+                255,
+                255,
+                static_cast<unsigned char>(GetRandomValue(50, 100))
+            };
+        } else {
+            _dustParticles[i].position.x -= _dustParticles[i].speed;
+
+            if (_dustParticles[i].position.x + 20 < 0) {
+                _dustParticles[i].position.x = GetScreenWidth();
+                _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+                _dustParticles[i].color = {
+                    255,
+                    255,
+                    255,
+                    static_cast<unsigned char>(GetRandomValue(50, 100))
+                };
+            }
+        }
+
+        DrawRectangleV(_dustParticles[i].position, {20, 40}, _dustParticles[i].color);
+    }
+}
+
 void Screen::Display::drawMenu()
 {
+    setSpaceBackground(true);
     displayHostNameInput();
     displayPortInput();
     displayConnectionStateButton();
@@ -480,6 +551,8 @@ void Screen::Display::drawWaitingRoom()
     _regularclickableZone = { 600, 275, 160, 60 };
     _pvpclickableZone = { 850, 275, 160, 60 };
     _friendlyFireclickableZone = { 1100, 275, 220, 60 };
+
+    setSpaceBackground(false);
 
     DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
     DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);
@@ -607,4 +680,90 @@ void Screen::Display::endDrawCamera()
 Vector2 Screen::Display::getCameraSize()
 {
     return Vector2(Screen::Display::cameraWidth, Screen::Display::cameraHeight);
+}
+
+///// End Game
+
+void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = Color{static_cast<unsigned char>(RAYWHITE.r), static_cast<unsigned char>(RAYWHITE.g), static_cast<unsigned char>(RAYWHITE.b), static_cast<unsigned char>(alpha * 255)};
+        float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
+        float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
+        float rotation = 360.0f * (elapsedTime / animationDuration);
+
+        ClearBackground(BLACK);
+
+        Vector2 startPosition = {(float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset)};
+        Vector2 textPosition = startPosition;
+
+        const char* text = "GAME OVER";
+        int letterSpacing = 30;
+
+        for (int i = 0; i < strlen(text); i++) {
+            char character[2] = {text[i], '\0'};
+            DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
+            textPosition.x += MeasureText(character, 30) + letterSpacing;
+        }
+
+        EndDrawing();
+    }
+}
+
+void Screen::Display::drawWin(GameEngine::GameEngine &engine)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+    const int maxParticles = 200;
+    Particle fireworks[maxParticles];
+
+    for (int i = 0; i < maxParticles; i++) {
+        fireworks[i].active = false;
+    }
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
+        ClearBackground(BLACK);
+
+        for (int i = 0; i < maxParticles; i++) {
+
+            if (!fireworks[i].active) {
+                fireworks[i].position = Vector2{static_cast<float>(GetRandomValue(0, screenWidth)), static_cast<float>(GetRandomValue(0, screenHeight))};
+                fireworks[i].color = GetRandomColor();
+                fireworks[i].radius = GetRandomValue(2, 4);
+                fireworks[i].speed = GetRandomValue(5, 15);
+                fireworks[i].active = true;
+            }
+
+            if (fireworks[i].active) {
+                fireworks[i].position.y -= fireworks[i].speed;
+                fireworks[i].position.x += GetRandomValue(-2, 2);
+
+                if (fireworks[i].position.y < 0) {
+                    fireworks[i].active = false;
+                }
+
+                DrawCircleV(fireworks[i].position, fireworks[i].radius, fireworks[i].color);
+            }
+        }
+
+        const char* text = "Y O U   W I N";
+        Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};
+        DrawTextEx(GetFontDefault(), text, textPosition, 60, 0, textColor);
+
+        EndDrawing();
+    }
 }

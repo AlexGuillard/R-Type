@@ -61,6 +61,9 @@ void Network::RecupInfo::openFile(Assets::AssetsIndex script) {
 }
 
 int Network::RecupInfo::openLVL(int level) {
+    if (level > 3) {
+        return -1;
+    }
     if (level == 1) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
     } else if (level == 2) {
@@ -70,7 +73,7 @@ int Network::RecupInfo::openLVL(int level) {
     } else {
         return -1;
     }
-    return 0;
+    return level;
 }
 
 Network::RecupInfo::RecupInfo() {

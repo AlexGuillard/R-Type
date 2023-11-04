@@ -11,6 +11,9 @@
 
 #include "GameEngine/GameEngine.hpp"
 #include "Errors/RegistryNotFound.hpp"
+#include "ECS/Containers/Registry.hpp"
+#include "ECS/Components/LevelComponent.hpp"
+#include "ECS/Containers/zipper/IndexedZipper.hpp"
 
 namespace GameEngine {
 
@@ -62,9 +65,16 @@ namespace GameEngine {
         return registryIterator->second;
     }
 
+    void GameEngine::changeStageRegistryBkgr(ECS::Containers::SparseArray<ECS::Components::LevelComponent> &levels) const {
+        for (auto &&[eId, level] : ECS::Containers::IndexedZipper(levels)) {
+            level->level = this->getLevel();
+        }
+    }
+
     void GameEngine::setLevel(int level)
     {
         this->_level = level;
+        changeStageRegistryBkgr(getRegistry(registryTypeBackground).getComponents<ECS::Components::LevelComponent>());
     }
 
     int GameEngine::getLevel() const

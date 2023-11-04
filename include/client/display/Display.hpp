@@ -16,6 +16,8 @@
 #include "constants.hpp"
 #include "enums.hpp"
 
+#define MAX_DUST_PARTICLES 10
+
 namespace Screen {
     /**
      * @brief Display contain fonction for the graphic of the client
@@ -27,6 +29,8 @@ namespace Screen {
             MENU,
             GAME,
             WAITINGROOM,             // play button waiting room
+            WINNING,
+            LOOSING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -144,6 +148,32 @@ namespace Screen {
         static void drawGame(GameEngine::GameEngine &engine);
 
         /**
+         * @brief draw the loose screen
+         *
+         * @param engine
+         */
+        static void drawLoose(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief Particles struct used for the win/401 screen
+         *
+         */
+        struct Particle {
+            Vector2 position;
+            Color color;
+            float radius;
+            float speed;
+            bool active;
+        };
+
+        /**
+         * @brief draw the win screen
+         *
+         * @param engine
+         */
+        static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
          * @brief draw the waitingRoom
          */
         void drawWaitingRoom();
@@ -153,16 +183,15 @@ namespace Screen {
          * @return (*this) to allow chain calls
          */
         Display &center();
+
         /**
-         * @brief Particles for win screen
+         * @brief particles used on menu
          *
          */
-        struct Particle {
+        struct DustParticle {
             Vector2 position;
             Color color;
-            float radius;
             float speed;
-            bool active;
         };
         /**
          * @brief Resizes the window
@@ -186,6 +215,12 @@ namespace Screen {
          * @return (*this) to allow chain calls
          */
         Display &setCameraPosition(int16_t posX, int16_t posY);
+
+        /**
+         * @brief Set the Space Background object for the menu
+         *
+         */
+        void setSpaceBackground(bool menu);
 
         /**
          * @brief Camera shake option
@@ -299,6 +334,8 @@ namespace Screen {
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         Enums::MultiState _multiState = Enums::MultiState::MULTI;
         bool _errorConnection;
+        // Particles of dust for menu and waiting room
+        DustParticle _dustParticles[MAX_DUST_PARTICLES];
 
         // Camera
         Vector2 _windowSize = { 0, 0 };

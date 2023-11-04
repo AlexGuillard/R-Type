@@ -9,6 +9,7 @@
 
 #include "ECS/Containers/Registry.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 using namespace ECS::Containers;
 
@@ -118,26 +119,29 @@ TEST(Registry, registryCanCreateEntityFromIndex)
 
 TEST(Registry, killEntityDoesntPreventGettingEntityFromIndex)
 {
-	Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
 
-	ECS::Entity entity0 = registry.spawnEntity();
-	ECS::Entity entity1 = registry.spawnEntity();
-	ECS::Entity entity2 = registry.spawnEntity();
+    // warning, entities starts at 8 because first 4 are reserved and next 4 are walls
+	ECS::Entity entity8 = registry.spawnEntity(); // 8
+	ECS::Entity entity9 = registry.spawnEntity(); // 9
+	ECS::Entity entity10 = registry.spawnEntity(); // 10
 
-	ASSERT_EQ(entity0, registry.entityFromIndex(0));
-	ASSERT_EQ(entity1, registry.entityFromIndex(1));
-	ASSERT_EQ(entity2, registry.entityFromIndex(2));
+	ASSERT_EQ(entity8, registry.entityFromIndex(8));
+	ASSERT_EQ(entity9, registry.entityFromIndex(9));
+	ASSERT_EQ(entity10, registry.entityFromIndex(10));
 
-	registry.killEntity(entity1);
+	registry.killEntity(entity9);
 
-	ASSERT_EQ(entity0, registry.entityFromIndex(0));
-	ASSERT_EQ(entity1, registry.entityFromIndex(1));
-	ASSERT_EQ(entity2, registry.entityFromIndex(2));
+	ASSERT_EQ(entity8, registry.entityFromIndex(8));
+	ASSERT_EQ(entity9, registry.entityFromIndex(9));
+	ASSERT_EQ(entity10, registry.entityFromIndex(10));
 }
 
 TEST(Registry, killEntityRemovesItsComponents)
 {
-	Registry registry;
+    GameEngine::GameEngine engine = GameEngine::createEngine();
+    Registry &registry = engine.getRegistry(GameEngine::registryTypeEntities);
 
 	registry.registerComponent<int>();
 	registry.registerComponent<std::string>();
