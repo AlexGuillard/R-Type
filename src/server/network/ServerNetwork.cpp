@@ -133,10 +133,11 @@ int Network::ServerNetwork::pvpWin()
         auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
         bool leftAlive = false;
         bool rightAlive = false;
-        for (const auto &ide : teams) {
-            if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+        for (const auto &ide : _ids) {
+            auto entity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>().at(ide.second.first);
+            if (entity.has_value() && entity->team == Enums::TeamGroup::ALLY) {
                 leftAlive = true;
-            } else if (ide.has_value() && ide->team == Enums::TeamGroup::ENEMY) {
+            } else if (entity.has_value() && entity->team == Enums::TeamGroup::ENEMY) {
                 rightAlive = true;
             }
         }
