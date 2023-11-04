@@ -32,7 +32,7 @@ namespace Network {
              * @brief Send 202 to all client
              * @param indexClient index of the new client
             */
-            void send202(int indexClient);
+            void send202(std::shared_ptr<IServerTcp> participant);
             std::string code401();
             void send201();
             std::string getActualClient();
