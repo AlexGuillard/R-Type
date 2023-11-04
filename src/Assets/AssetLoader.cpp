@@ -9,6 +9,8 @@
 namespace Assets {
     std::unordered_map<AssetsIndex, Image> AssetLoader::imageCache;
     std::unordered_map<AssetsIndex, Texture2D> AssetLoader::textureCache;
+    std::unordered_map<AssetsIndex, Music> AssetLoader::musicCache;
+    std::unordered_map<AssetsIndex, Sound> AssetLoader::soundCache;
 
     Image AssetLoader::loadImage(AssetsIndex index, const std::string &extension)
     {
@@ -59,6 +61,57 @@ namespace Assets {
         return AssetLoader::loadTexture(index, ".gif");
     }
 
+    Music AssetLoader::loadMusic(AssetsIndex index, const std::string &extension)
+    {
+        if (AssetLoader::musicCache.contains(index)) {
+            return AssetLoader::musicCache[index];
+        }
+        auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
+        AssetLoader::musicCache[index] = LoadMusicStreamFromMemory(extension.c_str(),*data, dataSize);
+        return AssetLoader::musicCache[index];
+    }
+
+    Music AssetLoader::loadMusicWav(AssetsIndex index)
+    {
+        return AssetLoader::loadMusic(index, ".wav");
+    }
+
+    Music AssetLoader::loadMusicOgg(AssetsIndex index)
+    {
+        return AssetLoader::loadMusic(index, ".ogg");
+    }
+
+    Music AssetLoader::loadMusicMp3(AssetsIndex index)
+    {
+        return AssetLoader::loadMusic(index, ".mp3");
+    }
+
+    Sound AssetLoader::loadSound(AssetsIndex index, const std::string &extension)
+    {
+        if (AssetLoader::soundCache.contains(index)) {
+            return AssetLoader::soundCache[index];
+        }
+        auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
+        Wave wave = LoadWaveFromMemory(extension.c_str(),*data, dataSize);
+        AssetLoader::soundCache[index] = LoadSoundFromWave(wave);
+        return AssetLoader::soundCache[index];
+    }
+
+    Sound AssetLoader::loadSoundWav(AssetsIndex index)
+    {
+        return AssetLoader::loadSound(index, ".wav");
+    }
+
+    Sound AssetLoader::loadSoundOgg(AssetsIndex index)
+    {
+        return AssetLoader::loadSound(index, ".ogg");
+    }
+
+    Sound AssetLoader::loadSoundMp3(AssetsIndex index)
+    {
+        return AssetLoader::loadSound(index, ".mp3");
+    }
+
     void AssetLoader::clearImageCache()
     {
         AssetLoader::imageCache.clear();
@@ -69,9 +122,21 @@ namespace Assets {
         AssetLoader::textureCache.clear();
     }
 
+    void AssetLoader::clearMusicCache()
+    {
+        AssetLoader::musicCache.clear();
+    }
+
+    void AssetLoader::clearSoundCache()
+    {
+        AssetLoader::soundCache.clear();
+    }
+
     void AssetLoader::clearCache()
     {
         AssetLoader::clearImageCache();
         AssetLoader::clearTextureCache();
+        AssetLoader::clearMusicCache();
+        AssetLoader::clearSoundCache();
     }
 }

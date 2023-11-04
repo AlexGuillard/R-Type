@@ -74,6 +74,64 @@ namespace Assets {
          * @returns A raylib texture
         */
         static Texture2D loadTextureGif(AssetsIndex index);
+         /**
+         * @brief Loads an music from the one embeded in the executable.
+         * Music loaded from this function are cached.
+         * @param index index of the music
+         * @param extension The extension of the file (ex: '.wav', 'mp3')
+         * @returns A raylib music
+        */
+        static Music loadMusic(AssetsIndex index, const std::string &extension);
+        /**
+         * @brief Loads a wav music from the one embeded in the executable.
+         * Musics loaded from this function are cached.
+         * @param index index of the music
+         * @returns A raylib music
+        */
+        static Music loadMusicWav(AssetsIndex index);
+        /**
+         * @brief Loads a ogg music from the one embeded in the executable.
+         * Musics loaded from this function are cached.
+         * @param index index of the music
+         * @returns A raylib music
+        */
+        static Music loadMusicOgg(AssetsIndex index);
+        /**
+         * @brief Loads a mp3 music from the one embeded in the executable.
+         * Musics loaded from this function are cached.
+         * @param index index of the music
+         * @returns A raylib music
+        */
+        static Music loadMusicMp3(AssetsIndex index);
+        /**
+         * @brief Loads an sound from the one embeded in the executable.
+         * Sounds loaded from this function are cached.
+         * @param index index of the sound
+         * @param extension The extension of the file (ex: '.wav', '.mp3', '.ogg')
+         * @returns A raylib sound
+        */
+        static Sound loadSound(AssetsIndex index, const std::string &extension);
+        /**
+         * @brief Loads a wav sound from the one embeded in the executable.
+         * Sounds loaded from this function are cached.
+         * @param index index of the sound
+         * @returns A raylib sound
+        */
+        static Sound loadSoundWav(AssetsIndex index);
+        /**
+         * @brief Loads a ogg sound from the one embeded in the executable.
+         * Sounds loaded from this function are cached.
+         * @param index index of the sound
+         * @returns A raylib sound
+        */
+        static Sound loadSoundOgg(AssetsIndex index);
+        /**
+         * @brief Loads a mp3 sound from the one embeded in the executable.
+         * Sounds loaded from this function are cached.
+         * @param index index of the sound
+         * @returns A raylib sound
+        */
+        static Sound loadSoundMp3(AssetsIndex index);
         /**
          * @brief Clears the cache of images
         */
@@ -83,7 +141,15 @@ namespace Assets {
         */
         static void clearTextureCache();
         /**
-         * @brief Clears the cache of images and textures
+        * @brief Clears the cache of music
+        */
+        static void clearMusicCache();
+        /**
+        * @brief Clears the cache of sound
+        */
+        static void clearSoundCache();
+        /**
+         * @brief Clears the cache of images, textures, musics and sounds
         */
         static void clearCache();
 
@@ -92,5 +158,9 @@ namespace Assets {
         static std::unordered_map<AssetsIndex, Image> imageCache;
         // Cache of Textures. Used to avoid having to reload the same image thousands of time
         static std::unordered_map<AssetsIndex, Texture2D> textureCache;
+        // Cache of Musics. Used to avoid having to reload the same music thousands of time
+        static std::unordered_map<AssetsIndex, Music> musicCache;
+        // Cache of Sounds. Used to avoid having to reload the same sound thousands of time
+        static std::unordered_map<AssetsIndex, Sound> soundCache;
     };
 }
