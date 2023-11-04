@@ -218,7 +218,6 @@ void Screen::Display::displayError401()
         }
     }
     const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
-    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
     Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
     float letterSpacing = 10.0f;
@@ -454,8 +453,77 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 }
 
+void Screen::Display::setSpaceBackground(bool menu)
+{
+    ClearBackground(BLACK);
+
+    for (int i = 0; i < 10; i++) {
+        Color nebulaColor = {
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(150, 255)),
+            static_cast<unsigned char>(GetRandomValue(50, 200))
+        };
+        DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
+    }
+
+    for (int i = 0; i < 200; i++) {
+        Color starColor = {
+            255,
+            255,
+            255,
+            static_cast<unsigned char>(GetRandomValue(200, 255))
+        };
+        int starSize = GetRandomValue(1, 3);
+        float starSpeed = 5000;
+        float starX = GetRandomValue(0, GetScreenWidth());
+        float starY = GetRandomValue(0, GetScreenHeight());
+        DrawCircle(starX, starY, starSize, starColor);
+        starX -= starSpeed;
+
+        if (starX < 0) {
+            starX = GetScreenWidth();
+            starY = GetRandomValue(0, GetScreenHeight());
+        }
+    }
+
+    if (menu)
+        DrawText("R-Type", 730, 250, 120, WHITE);
+
+    for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
+        if (_dustParticles[i].position.x <= 0) {
+            _dustParticles[i].position.x = GetScreenWidth();
+            _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+            _dustParticles[i].color = {
+                255,
+                255,
+                255,
+                static_cast<unsigned char>(GetRandomValue(50, 100))
+            };
+        } else {
+            _dustParticles[i].position.x -= _dustParticles[i].speed;
+
+            if (_dustParticles[i].position.x + 20 < 0) {
+                _dustParticles[i].position.x = GetScreenWidth();
+                _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+                _dustParticles[i].color = {
+                    255,
+                    255,
+                    255,
+                    static_cast<unsigned char>(GetRandomValue(50, 100))
+                };
+            }
+        }
+
+        DrawRectangleV(_dustParticles[i].position, {20, 40}, _dustParticles[i].color);
+    }
+}
+
 void Screen::Display::drawMenu()
 {
+    setSpaceBackground(true);
     displayHostNameInput();
     displayPortInput();
     displayConnectionStateButton();
@@ -476,6 +544,8 @@ void Screen::Display::drawWaitingRoom()
     _regularclickableZone = { 600, 275, 160, 60 };
     _pvpclickableZone = { 850, 275, 160, 60 };
     _friendlyFireclickableZone = { 1100, 275, 220, 60 };
+
+    setSpaceBackground(false);
 
     DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
     DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);
