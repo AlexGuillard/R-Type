@@ -42,13 +42,13 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
         registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::GroundComponent>(Systems::ground);
     }
-    static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, std::vector<double> sizeSpeed)
+    static Components::BackgroundComponent createBackground(Assets::AssetsIndex index, double fps)
     {
         Components::BackgroundComponent backgroundComponent = {
             index,
             1,
-            sizeSpeed[0],
-            sizeSpeed[1]
+            1.0,
+            fps
         };
         return backgroundComponent;
     }
@@ -77,16 +77,16 @@ namespace GameEngine {
             Assets::AssetsIndex::BACKGROUND4_PNG,
         };
 
-        std::vector<std::vector<double>> sizeAndSpeed = {
-            {double(0.5), double(0.015)},
-            {double(0.5), double(0.010)},
-            {double(1.5), double(0.005)},
-            {double(2.0), double(0.002)}
+        std::vector<double> fps = {
+            double(0.015),
+            double(0.010),
+            double(0.005),
+            double(0.002)
         };
 
         for (size_t i = 0; i < assetIndices.size(); ++i)
         {
-            Components::BackgroundComponent background = createBackground(assetIndices[i], sizeAndSpeed[i]);
+            Components::BackgroundComponent background = createBackground(assetIndices[i], fps[i]);
             Components::GroundComponent ground = createGround(Assets::AssetsIndex::GROUND1_PNG,  {double(3.0), double(1.0), double(0.020)});
             ECS::Entity level = registry.spawnEntity();
             registry.emplaceComponent<Components::BackgroundComponent>(level, background);
