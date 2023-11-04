@@ -162,5 +162,10 @@ void Network::ServerTcp::addClient()
 
 void Network::ServerTcp::removeClient()
 {
-    _listClient.erase(getActualClient());
+    std::string actual = getActualClient();
+    auto iterator = _listClient.find(actual);
+
+    if (_listClient.contains(actual)) {
+        _listClient.erase(iterator);
+    }
 }

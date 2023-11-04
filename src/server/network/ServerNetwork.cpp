@@ -309,7 +309,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
             SendClientsPlay();
         }
         return true;
-    } else if (_listUdpEndpoints.size() == _clients.size()) {
+    } else if (clientData.entity >= 0 && clientData.entity <= 4) {
         return true;
     }
     return false;
