@@ -457,48 +457,15 @@ void Screen::Display::setSpaceBackground(bool menu)
 {
     ClearBackground(BLACK);
 
-    for (int i = 0; i < 10; i++) {
-        Color nebulaColor = {
-            static_cast<unsigned char>(GetRandomValue(50, 200)),
-            static_cast<unsigned char>(GetRandomValue(50, 200)),
-            static_cast<unsigned char>(GetRandomValue(150, 255)),
-            static_cast<unsigned char>(GetRandomValue(50, 200))
-        };
-        DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
-    }
-
-    for (int i = 0; i < 200; i++) {
-        Color starColor = {
-            255,
-            255,
-            255,
-            static_cast<unsigned char>(GetRandomValue(200, 255))
-        };
-        int starSize = GetRandomValue(1, 3);
-        float starSpeed = 5000;
-        float starX = GetRandomValue(0, GetScreenWidth());
-        float starY = GetRandomValue(0, GetScreenHeight());
-        DrawCircle(starX, starY, starSize, starColor);
-        starX -= starSpeed;
-
-        if (starX < 0) {
-            starX = GetScreenWidth();
-            starY = GetRandomValue(0, GetScreenHeight());
-        }
-    }
-
-    if (menu)
-        DrawText("R-Type", 730, 250, 120, WHITE);
-
     for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
         if (_dustParticles[i].position.x <= 0) {
             _dustParticles[i].position.x = GetScreenWidth();
-            _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            _dustParticles[i].position.y = GetRandomValue(20, GetScreenHeight() - 20);
             _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
             _dustParticles[i].color = {
-                255,
-                255,
-                255,
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
                 static_cast<unsigned char>(GetRandomValue(50, 100))
             };
         } else {
@@ -506,12 +473,12 @@ void Screen::Display::setSpaceBackground(bool menu)
 
             if (_dustParticles[i].position.x + 20 < 0) {
                 _dustParticles[i].position.x = GetScreenWidth();
-                _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                _dustParticles[i].position.y = GetRandomValue(20, GetScreenHeight() - 20);
                 _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
                 _dustParticles[i].color = {
-                    255,
-                    255,
-                    255,
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
                     static_cast<unsigned char>(GetRandomValue(50, 100))
                 };
             }
@@ -519,7 +486,41 @@ void Screen::Display::setSpaceBackground(bool menu)
 
         DrawRectangleV(_dustParticles[i].position, {20, 40}, _dustParticles[i].color);
     }
+
+    for (int i = 0; i < MAX_NEBULA_PARTICLES; i++) {
+        if (_nebulaParticles[i].position.y >= GetScreenHeight()) {
+            _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+            _nebulaParticles[i].position.y = 0;
+            _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+            _nebulaParticles[i].color = {
+                static_cast<unsigned char>(GetRandomValue(50, 200)),
+                static_cast<unsigned char>(GetRandomValue(50, 200)),
+                static_cast<unsigned char>(GetRandomValue(150, 255)),
+                static_cast<unsigned char>(GetRandomValue(50, 200))
+            };
+        } else {
+            _nebulaParticles[i].position.y += _nebulaParticles[i].speed;
+
+            if (_nebulaParticles[i].position.y - 60 > GetScreenHeight()) {
+                _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+                _nebulaParticles[i].position.y = 0;
+                _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+                _nebulaParticles[i].color = {
+                    static_cast<unsigned char>(GetRandomValue(50, 200)),
+                    static_cast<unsigned char>(GetRandomValue(50, 200)),
+                    static_cast<unsigned char>(GetRandomValue(150, 255)),
+                    static_cast<unsigned char>(GetRandomValue(50, 200))
+                };
+            }
+        }
+
+        DrawRectangleV(_nebulaParticles[i].position, {20, 40}, _nebulaParticles[i].color);
+    }
+
+    if (menu)
+        DrawText("R-Type", 730, 250, 120, WHITE);
 }
+
 
 void Screen::Display::drawMenu()
 {
