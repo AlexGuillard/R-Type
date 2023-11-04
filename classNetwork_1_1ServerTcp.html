@@ -91,8 +91,8 @@ Inheritance diagram for Network::ServerTcp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7cfd873e0ba7a1a5817c2acee28c19a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a7cfd873e0ba7a1a5817c2acee28c19a8">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients, bool &amp;isGame, int &amp;mod)</td></tr>
-<tr class="separator:a7cfd873e0ba7a1a5817c2acee28c19a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada192f3c0d4d29ac43954dd551787dd1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ada192f3c0d4d29ac43954dd551787dd1">ServerTcp</a> (boost::asio::ip::tcp::socket socket, <a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;list, int udpPort, std::unordered_map&lt; std::shared_ptr&lt; <a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a> &gt;, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;_clients, bool &amp;isGame, int &amp;mod)</td></tr>
+<tr class="separator:ada192f3c0d4d29ac43954dd551787dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0752c15cfc11aeea93cfb84696ebcab2">~ServerTcp</a> ()</td></tr>
 <tr class="separator:a0752c15cfc11aeea93cfb84696ebcab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac68750b642bc19424b165de2f19422eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ac68750b642bc19424b165de2f19422eb">start</a> ()</td></tr>
@@ -113,8 +113,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9244d2b879c32de02137bb88fb483d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a47d1a9eee7afe7d0c1b4ec704131bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a9a47d1a9eee7afe7d0c1b4ec704131bf">send201</a> ()</td></tr>
 <tr class="separator:a9a47d1a9eee7afe7d0c1b4ec704131bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e47e7a935e0268f875054aeb9b7a027"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a5e47e7a935e0268f875054aeb9b7a027">getActualClient</a> ()</td></tr>
-<tr class="separator:a5e47e7a935e0268f875054aeb9b7a027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa427147e6c596ca1f7987ccf62f20f8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#aa427147e6c596ca1f7987ccf62f20f8f">addClient</a> ()</td></tr>
 <tr class="separator:aa427147e6c596ca1f7987ccf62f20f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e7d4621f2d2e2411ddfa58097e96b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#ad9e7d4621f2d2e2411ddfa58097e96b7">removeClient</a> ()</td></tr>
@@ -138,16 +136,16 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a2c3234510db6aa279a27ee67d99d3c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89cd1145f4d176735f7fea3ef123df7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNetwork_1_1Participants.html">Network::Participants</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a89cd1145f4d176735f7fea3ef123df7c">_list</a></td></tr>
 <tr class="separator:a89cd1145f4d176735f7fea3ef123df7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56a74a45f3c42902f054857c33a209b3"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a56a74a45f3c42902f054857c33a209b3">_listClient</a></td></tr>
-<tr class="separator:a56a74a45f3c42902f054857c33a209b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0454ba2d6ad779a9b76045e950b2d12f"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::shared_ptr&lt; <a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a> &gt;, std::pair&lt; int, std::vector&lt; int &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a0454ba2d6ad779a9b76045e950b2d12f">_listClient</a></td></tr>
+<tr class="separator:a0454ba2d6ad779a9b76045e950b2d12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1334a17961622dd1501be5e677fa0543"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a1334a17961622dd1501be5e677fa0543">_data</a></td></tr>
 <tr class="separator:a1334a17961622dd1501be5e677fa0543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f94eb207654d5d3d657ae3204fde9db"><td class="memItemLeft" align="right" valign="top">bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1ServerTcp.html#a7f94eb207654d5d3d657ae3204fde9db">_isGame</a></td></tr>
 <tr class="separator:a7f94eb207654d5d3d657ae3204fde9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7cfd873e0ba7a1a5817c2acee28c19a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cfd873e0ba7a1a5817c2acee28c19a8">&#9670;&nbsp;</a></span>ServerTcp()</h2>
+<a id="ada192f3c0d4d29ac43954dd551787dd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada192f3c0d4d29ac43954dd551787dd1">&#9670;&nbsp;</a></span>ServerTcp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,7 +171,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::unordered_map&lt; std::string, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;&#160;</td>
+          <td class="paramtype">std::unordered_map&lt; std::shared_ptr&lt; <a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a> &gt;, std::pair&lt; int, std::vector&lt; int &gt;&gt;&gt; &amp;&#160;</td>
           <td class="paramname"><em>_clients</em>, </td>
         </tr>
         <tr>
@@ -357,23 +355,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classNetwork_1_1IServerTcp.html#a65ab68539ac3a68633af2eee83f67c24">Network::IServerTcp</a>.</p>
-
-</div>
-</div>
-<a id="a5e47e7a935e0268f875054aeb9b7a027"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e47e7a935e0268f875054aeb9b7a027">&#9670;&nbsp;</a></span>getActualClient()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Network::ServerTcp::getActualClient </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -606,8 +587,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a56a74a45f3c42902f054857c33a209b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56a74a45f3c42902f054857c33a209b3">&#9670;&nbsp;</a></span>_listClient</h2>
+<a id="a0454ba2d6ad779a9b76045e950b2d12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0454ba2d6ad779a9b76045e950b2d12f">&#9670;&nbsp;</a></span>_listClient</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -616,7 +597,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;std::string, std::pair&lt;int, std::vector&lt;int&gt; &gt; &gt;&amp; Network::ServerTcp::_listClient</td>
+          <td class="memname">std::unordered_map&lt;std::shared_ptr&lt;<a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a>&gt;, std::pair&lt;int, std::vector&lt;int&gt; &gt; &gt;&amp; Network::ServerTcp::_listClient</td>
         </tr>
       </table>
   </td>

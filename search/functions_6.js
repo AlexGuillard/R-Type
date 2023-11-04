@@ -1,7 +1,7 @@
 var searchData=
 [
   ['gamelogic_917',['GameLogic',['../classGame_1_1GameLogic.html#a02fead792c9b64134044653ff5c64aa0',1,'Game::GameLogic']]],
-  ['getactualclient_918',['getActualClient',['../classNetwork_1_1ServerNetwork.html#a43e849cb597f4c0e6eaa2495d7720d08',1,'Network::ServerNetwork::getActualClient()'],['../classNetwork_1_1ServerTcp.html#a5e47e7a935e0268f875054aeb9b7a027',1,'Network::ServerTcp::getActualClient()']]],
+  ['getactualclient_918',['getActualClient',['../classNetwork_1_1ServerNetwork.html#a43e849cb597f4c0e6eaa2495d7720d08',1,'Network::ServerNetwork']]],
   ['getally_919',['getAlly',['../classNetwork_1_1ClientNetwork.html#af57855e12720c7d44d91684ee1961a9c',1,'Network::ClientNetwork']]],
   ['getbody_920',['getBody',['../classNetwork_1_1ClientNetwork.html#ac0e8008ea8fdee184a23e5e19932b2a2',1,'Network::ClientNetwork']]],
   ['getcamerasize_921',['getCameraSize',['../classScreen_1_1Display.html#a4a83b77d9809158152fe82dd537f70b2',1,'Screen::Display']]],
