@@ -126,11 +126,17 @@ namespace Assets {
 
     void AssetLoader::clearMusicCache()
     {
+        for (auto &&[index, music] : AssetLoader::musicCache) {
+            UnloadMusicStream(music);
+        }
         AssetLoader::musicCache.clear();
     }
 
     void AssetLoader::clearSoundCache()
     {
+        for (auto &&[index, sound] : AssetLoader::soundCache) {
+            UnloadSound(sound);
+        }
         AssetLoader::soundCache.clear();
     }
 

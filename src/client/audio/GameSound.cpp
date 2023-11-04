@@ -8,43 +8,36 @@
 #include "client/audio/GameSound.hpp"
 #include "Assets/AssetLoader.hpp"
 
-GameSound::GameSound(Assets::AssetsIndex index, const std::string &extension, double volume)
+void GameSound::playSound(Assets::AssetsIndex index, const std::string &extension)
 {
-    initSound(index, extension);
+    PlaySound(Assets::AssetLoader::loadSound(index, extension));
 }
 
-GameSound::~GameSound()
+void GameSound::playMusic(Assets::AssetsIndex index, const std::string &extension)
 {
-    UnloadSound(this->getSound());
+    PlayMusicStream(Assets::AssetLoader::loadMusic(index, extension));
+    _musicPlaying = true;
+    _musicIndex = index;
+    _musicExtension = extension;
+}
+void GameSound::updateMusicStream()
+{
+    if (!_musicPlaying)
+        return;
+    UpdateMusicStream(Assets::AssetLoader::loadMusic(_musicIndex, _musicExtension));
 }
 
-Sound &GameSound::getSound()
+void GameSound::stopMusic()
 {
-    return this->sound;
-}
-
-void GameSound::setSound(Sound sound)
-{
-    this->sound = sound;
-}
-
-void GameSound::initSound(Assets::AssetsIndex index, const std::string &extension)
-{
-    if (extension == ".wav") {
-        this->setSound(Assets::AssetLoader::loadSoundWav(index));
-    } else if (extension == ".ogg") {
-        this->setSound(Assets::AssetLoader::loadSoundOgg(index));
-    } else if (extension == ".mp3") {
-        this->setSound(Assets::AssetLoader::loadSoundMp3(index));
-    }
-}
-
-void GameSound::playSound()
-{
-    PlaySound(this->getSound());
+    StopMusicStream(Assets::AssetLoader::loadMusic(_musicIndex, _musicExtension));
+    _musicPlaying = false;
 }
 
 void GameSound::setVolume(double volume)
 {
-    SetSoundVolume(this->getSound(), volume);
+    if (volume < 0.0 || volume > 1.0)
+        return;
+    if (_musicPlaying) {
+        SetMusicVolume(Assets::AssetLoader::loadMusic(_musicIndex, _musicExtension), volume);
+    }
 }
