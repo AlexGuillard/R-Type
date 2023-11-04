@@ -106,7 +106,7 @@ namespace Network {
          */
         boost::asio::ip::udp::socket _asyncSocket;
         // hmap for the list of client on the server with string of client and pair with entity of client + list of commands send
-        std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
+        std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> _clients;
         // variable for the timer and the ticks
         boost::asio::deadline_timer _timer;
         // necessary for acceptation tcp clients
