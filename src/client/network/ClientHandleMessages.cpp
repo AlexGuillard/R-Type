@@ -64,6 +64,9 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[307] = [this](const header &h, std::string &s) {
         handleDobkeratopsSpawn(h, s);
         };
+    _responseHandlers[308] = [this](const header &h, std::string &s) {
+        handlePodSpawn(h, s);
+        };
     // missiles
     _responseHandlers[321] = [this](const header &h, std::string &s) {
         handleClassicMissileSpawn(h, s);
@@ -255,6 +258,21 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
 }
 
 //-----------------------------MOBS--------------------------------------------//
+
+void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+        bodyMob mobData = getMob(str);
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 308) {
+            std::cout << "Pod spawned at" << mobData.x << " " << mobData.y << std::endl;
+            ECS::Creator::createPod(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
+        }
+    } else {
+        str.clear();
+    }
+}
 
 void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader, std::string &str)
 {

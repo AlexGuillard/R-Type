@@ -181,6 +181,13 @@ namespace Network {
          */
         void handleDobkeratopsSpawn(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact of create Pod
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handlePodSpawn(const header &messageHeader, std::string &str);
+        /**
          * @brief handle the fact of creat allies when the server said it
          *
          * @param messageHeader
