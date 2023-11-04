@@ -767,3 +767,59 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
         EndDrawing();
     }
 }
+
+void Screen::Display::drawLeftRightWin(GameEngine::GameEngine &engine, bool left)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+    const int maxParticles = 200;
+    Particle fireworks[maxParticles];
+
+    for (int i = 0; i < maxParticles; i++) {
+        fireworks[i].active = false;
+    }
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
+        ClearBackground(BLACK);
+
+        for (int i = 0; i < maxParticles; i++) {
+
+            if (!fireworks[i].active) {
+                fireworks[i].position = Vector2{static_cast<float>(GetRandomValue(0, screenWidth)), static_cast<float>(GetRandomValue(0, screenHeight))};
+                fireworks[i].color = GetRandomColor();
+                fireworks[i].radius = GetRandomValue(2, 4);
+                fireworks[i].speed = GetRandomValue(5, 15);
+                fireworks[i].active = true;
+            }
+
+            if (fireworks[i].active) {
+                fireworks[i].position.y -= fireworks[i].speed;
+                fireworks[i].position.x += GetRandomValue(-2, 2);
+
+                if (fireworks[i].position.y < 0) {
+                    fireworks[i].active = false;
+                }
+
+                DrawCircleV(fireworks[i].position, fireworks[i].radius, fireworks[i].color);
+            }
+        }
+
+        const char* text;
+
+        if (left)
+            text = "L E F T  W I N";
+        else
+            text = "R I G H T  W I N";
+
+        Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};
+        DrawTextEx(GetFontDefault(), text, textPosition, 60, 0, textColor);
+
+        EndDrawing();
+    }
+}

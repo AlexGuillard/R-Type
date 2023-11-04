@@ -62,6 +62,20 @@ namespace Network {
      */
     bool getWinningCondition();
     /**
+     * @brief Get the Left Winning Condition object
+     *
+     * @return true
+     * @return false
+     */
+    bool getLeftWinningCondition();
+    /**
+     * @brief Get the Right Winning Condition object
+     *
+     * @return true
+     * @return false
+     */
+    bool getRightWinningCondition();
+    /**
      * @brief Get the Loosing Condition object
      *
      * @return true lose

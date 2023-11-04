@@ -119,6 +119,16 @@ bool Network::ClientNetwork::getWinCondition()const
     return _winCondition;
 }
 
+bool Network::ClientNetwork::getLeftWinCondition()const
+{
+    return _winLeft;
+}
+
+bool Network::ClientNetwork::getRightWinCondition()const
+{
+    return _winRight;
+}
+
 bool Network::ClientNetwork::getLooseCondition()const
 {
     return _looseCondition;
