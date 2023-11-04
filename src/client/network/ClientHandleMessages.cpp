@@ -442,14 +442,9 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
 {
-    if (messageHeader.codeRfc != 0)
-        std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
-
     if (str.size() >= sizeof(BodyNumber) + sizeof(BodyNumber)) {
         BodyNumber numClients = getBody(str);
         BodyNumber footer = getBody(str);
-        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients.number << " players including you." << std::endl;
-        std::cout << "footer" << footer.number << std::endl;
         _indexPlayer = messageHeader.entity;
     } else {
         std::cout << "Unexpected message received connection" << std::endl;
