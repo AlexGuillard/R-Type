@@ -458,19 +458,31 @@ void Screen::Display::setSpaceBackground(bool menu)
     ClearBackground(BLACK);
 
     for (int i = 0; i < 10; i++) {
-        Color nebulaColor = (Color){GetRandomValue(50, 200), GetRandomValue(50, 200), GetRandomValue(150, 255), GetRandomValue(50, 200)};
+        Color nebulaColor = (Color){
+            (unsigned char)GetRandomValue(50, 200),
+            (unsigned char)GetRandomValue(50, 200),
+            (unsigned char)GetRandomValue(150, 255),
+            (unsigned char)GetRandomValue(50, 200)
+        };
         DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
     }
 
     for (int i = 0; i < 200; i++) {
+
+        Color starColor = (Color){
+            255,
+            255,
+            255,
+            (unsigned char)GetRandomValue(200, 255)
+        };
+
         int starSize = GetRandomValue(1, 3);
-        Color starColor = (Color){255, 255, 255, GetRandomValue(200, 255)};
         float starSpeed = 5000;
         float starX = GetRandomValue(0, GetScreenWidth());
         float starY = GetRandomValue(0, GetScreenHeight());
         DrawCircle(starX, starY, starSize, starColor);
-
         starX -= starSpeed;
+
         if (starX < 0) {
             starX = GetScreenWidth();
             starY = GetRandomValue(0, GetScreenHeight());
@@ -481,18 +493,31 @@ void Screen::Display::setSpaceBackground(bool menu)
         DrawText("R-Type", 730, 250, 120, WHITE);
 
     for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
+
         if (_dustParticles[i].position.x <= 0) {
             _dustParticles[i].position.x = GetScreenWidth();
             _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
             _dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
-            _dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+            _dustParticles[i].color = (Color){
+                255,
+                255,
+                255,
+                (unsigned char)GetRandomValue(50, 100)
+            };
+
         } else {
             _dustParticles[i].position.x -= _dustParticles[i].speed;
+
             if (_dustParticles[i].position.x + 20 < 0) {
                 _dustParticles[i].position.x = GetScreenWidth();
                 _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
                 _dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
-                _dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+                _dustParticles[i].color = (Color){
+                    255,
+                    255,
+                    255,
+                    (unsigned char)GetRandomValue(50, 100)
+                };
             }
         }
 
