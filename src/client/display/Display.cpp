@@ -450,10 +450,8 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 }
 
-
-void Screen::Display::setSpaceBackground() {
-
-    DustParticle dustParticles[MAX_DUST_PARTICLES];
+void Screen::Display::setSpaceBackground()
+{
     ClearBackground(BLACK);
 
     for (int i = 0; i < 10; i++) {
@@ -476,24 +474,25 @@ void Screen::Display::setSpaceBackground() {
         }
     }
 
-    DrawText("R-Type", 710, 200, 150, WHITE);
+    DrawText("R-Type", 730, 250, 120, WHITE);
 
     for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
-        if (dustParticles[i].position.x <= 0) {
-            dustParticles[i].position.x = GetScreenWidth();
-            dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
-            dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
-            dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+        if (_dustParticles[i].position.x <= 0) {
+            _dustParticles[i].position.x = GetScreenWidth();
+            _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            _dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
+            _dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
         } else {
-            dustParticles[i].position.x -= dustParticles[i].speed;
-            if (dustParticles[i].position.x + 20 < 0) {
-                dustParticles[i].position.x = GetScreenWidth();
-                dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
-                dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
-                dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+            _dustParticles[i].position.x -= _dustParticles[i].speed;
+            if (_dustParticles[i].position.x + 20 < 0) {
+                _dustParticles[i].position.x = GetScreenWidth();
+                _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                _dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
+                _dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
             }
-            DrawRectangleV(dustParticles[i].position, (Vector2){20, 40}, dustParticles[i].color);
         }
+
+        DrawRectangleV(_dustParticles[i].position, (Vector2){20, 40}, _dustParticles[i].color);
     }
 }
 
@@ -520,6 +519,8 @@ void Screen::Display::drawWaitingRoom()
     _regularclickableZone = { 600, 275, 160, 60 };
     _pvpclickableZone = { 850, 275, 160, 60 };
     _friendlyFireclickableZone = { 1100, 275, 220, 60 };
+
+    setSpaceBackground();
 
     DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
     DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);

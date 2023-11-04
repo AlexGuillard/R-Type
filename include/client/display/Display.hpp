@@ -315,6 +315,8 @@ namespace Screen {
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         Enums::MultiState _multiState = Enums::MultiState::MULTI;
         bool _errorConnection;
+        // Particles of dust for menu and waiting room
+        DustParticle _dustParticles[MAX_DUST_PARTICLES];
 
         // Camera
         Vector2 _windowSize = { 0, 0 };
