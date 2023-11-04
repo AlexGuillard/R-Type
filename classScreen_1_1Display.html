@@ -88,14 +88,19 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structScreen_1_1Display_1_1Particle.html">Particle</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Particles for win screen.  <a href="structScreen_1_1Display_1_1Particle.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Particles struct used for the win/401 screen.  <a href="structScreen_1_1Display_1_1Particle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a2d87c8007b598cb87597aaaca031d6c6"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> { <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">MENU</a>
+<tr class="memitem:a2d87c8007b598cb87597aaaca031d6c6"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6">GameState</a> { <br />
+&#160;&#160;<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf">MENU</a>
 , <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13">GAME</a>
 , <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6ab0e1829e0217a661114d66d54d1a2dec">WAITINGROOM</a>
+, <a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a2b105b39d4901b3dcfa233132ac3b505">WINNING</a>
+, <br />
+&#160;&#160;<a class="el" href="classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6a5b1dd9e9a3e92f485d4628e8afe4faa2">LOOSING</a>
+<br />
  }</td></tr>
 <tr class="separator:a2d87c8007b598cb87597aaaca031d6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f3dd09842c4b6a8d306234dc9f582b2"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2">MenuState</a> { <a class="el" href="classScreen_1_1Display.html#a3f3dd09842c4b6a8d306234dc9f582b2a6b8c757fb752d3730720ccbf3d73cd56">WAITING_FOR_PLAYER_INPUT</a>
@@ -214,6 +219,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae77dec198d6605e604a6f5b249353461"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ae77dec198d6605e604a6f5b249353461">drawGame</a> (GameEngine::GameEngine &amp;engine)</td></tr>
 <tr class="memdesc:ae77dec198d6605e604a6f5b249353461"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the game  <a href="classScreen_1_1Display.html#ae77dec198d6605e604a6f5b249353461">More...</a><br /></td></tr>
 <tr class="separator:ae77dec198d6605e604a6f5b249353461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a991b1799daf684d33d35dc8c1ca3ceda"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a991b1799daf684d33d35dc8c1ca3ceda">drawLoose</a> (GameEngine::GameEngine &amp;engine)</td></tr>
+<tr class="memdesc:a991b1799daf684d33d35dc8c1ca3ceda"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the loose screen  <a href="classScreen_1_1Display.html#a991b1799daf684d33d35dc8c1ca3ceda">More...</a><br /></td></tr>
+<tr class="separator:a991b1799daf684d33d35dc8c1ca3ceda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f43c4c9ef150f55da633495380ee034"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a9f43c4c9ef150f55da633495380ee034">drawWin</a> (GameEngine::GameEngine &amp;engine)</td></tr>
+<tr class="memdesc:a9f43c4c9ef150f55da633495380ee034"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the win screen  <a href="classScreen_1_1Display.html#a9f43c4c9ef150f55da633495380ee034">More...</a><br /></td></tr>
+<tr class="separator:a9f43c4c9ef150f55da633495380ee034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3c030239a63dab755a7b5a743ccbfd3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ae3c030239a63dab755a7b5a743ccbfd3">beginDrawCamera</a> ()</td></tr>
 <tr class="separator:ae3c030239a63dab755a7b5a743ccbfd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a631777905b9ebd62fccf49d82541a6fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a631777905b9ebd62fccf49d82541a6fb">endDrawCamera</a> ()</td></tr>
@@ -253,11 +264,11 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9ac85ef02f46a0ea1268d6a28e5cb26ef9"></a>EARTHQUAKE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9a9d308f7229b335d40c4273ee9588c849"></a>END_OF_THE_WORLD&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            RUMBLE = 3,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            EARTHQUAKE = 5,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            END_OF_THE_WORLD = 8</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            RUMBLE = 3,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            EARTHQUAKE = 5,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            END_OF_THE_WORLD = 8</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -284,12 +295,16 @@ Static Public Attributes</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a3ed53fbeb1eab0443561b68ca0c0b5cf"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a4504e1ed59cd9732b8a844e5424e6f13"></a>GAME&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6ab0e1829e0217a661114d66d54d1a2dec"></a>WAITINGROOM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a2b105b39d4901b3dcfa233132ac3b505"></a>WINNING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a5b1dd9e9a3e92f485d4628e8afe4faa2"></a>LOOSING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 <div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                             {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            MENU,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            GAME,</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            WAITINGROOM,             <span class="comment">// play button waiting room</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            WINNING,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            LOOSING,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -317,11 +332,11 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2a9a14f95e151eec641316e7c784ce832d"></a>CONNECTING&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2aa5afd6edd5336d91316964e493936858"></a>CONNECTED&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                             {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            WAITING_FOR_PLAYER_INPUT, <span class="comment">// waiting for player input</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            CONNECTING,               <span class="comment">// waiting for connection to server to be established</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <a class="code" href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">CONNECTED</a>,                <span class="comment">// connected to server</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                             {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            WAITING_FOR_PLAYER_INPUT, <span class="comment">// waiting for player input</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            CONNECTING,               <span class="comment">// waiting for connection to server to be established</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">CONNECTED</a>,                <span class="comment">// connected to server</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        };</div>
 <div class="ttc" id="anamespaceNetwork_html_a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858"><div class="ttname"><a href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">Network::Connection::CONNECTED</a></div><div class="ttdeci">@ CONNECTED</div></div>
 </div><!-- fragment -->
 </div>
@@ -629,6 +644,40 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a991b1799daf684d33d35dc8c1ca3ceda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a991b1799daf684d33d35dc8c1ca3ceda">&#9670;&nbsp;</a></span>drawLoose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Screen::Display::drawLoose </td>
+          <td>(</td>
+          <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
+          <td class="paramname"><em>engine</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>draw the loose screen </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">engine</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aca4c5f6b99d0f519977442f70661cdf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca4c5f6b99d0f519977442f70661cdf0">&#9670;&nbsp;</a></span>drawMenu()</h2>
 
@@ -664,6 +713,40 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>draw the waitingRoom </p>
+
+</div>
+</div>
+<a id="a9f43c4c9ef150f55da633495380ee034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f43c4c9ef150f55da633495380ee034">&#9670;&nbsp;</a></span>drawWin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Screen::Display::drawWin </td>
+          <td>(</td>
+          <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
+          <td class="paramname"><em>engine</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>draw the win screen </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">engine</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
