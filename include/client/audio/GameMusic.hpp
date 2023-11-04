@@ -16,7 +16,7 @@ class GameMusic {
         /**
          * @brief create a GameMusic Object
         */
-        GameMusic(Assets::AssetsIndex index = Assets::AssetsIndex::MAIN_MUSIC_WAV, const std::string &extension = ".wav", double volume = 1.0);
+        GameMusic(Assets::AssetsIndex index = Assets::AssetsIndex::MUSIC_WAV, const std::string &extension = ".wav", double volume = 1.0);
         /**
          * @brief destroy the Music object and unload Music
         */

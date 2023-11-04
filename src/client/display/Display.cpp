@@ -25,7 +25,7 @@ Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
     InitAudioDevice();
-    _sound.playMusic(Assets::AssetsIndex::MAIN_MUSIC_WAV, ".wav");
+    _sound.playMusic(Assets::AssetsIndex::MUSIC_WAV, ".wav");
     //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
     // We will remove this when the game will be finished or for presentation
     this->resizeWindow(1920, 1080).center();
@@ -360,8 +360,7 @@ void Screen::Display::detectActionMenu()
     int key = 0;
 
     if (IsKeyPressed(KEY_SPACE)) {
-        this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_WAV, ".wav");
-        std::cout << "play sound" << std::endl;
+        this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
     }
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
