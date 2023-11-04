@@ -538,7 +538,7 @@ namespace ECS {
         const Utils::Vector2 nbFrameInSpriteSheet(12, 1);
         const uint8_t nbFrameInAnimation = 12;
 
-        ECS::Entity pod = ECS::Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 1, 0, 16, 14, id);
+        ECS::Entity pod = ECS::Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 0, 0, 16, 14, id);
         registry.getComponents<Components::PositionComponent>().at(pod)->x = x;
         registry.getComponents<Components::PositionComponent>().at(pod)->y = y;
         registry.emplaceComponent<Components::DrawableComponent>(pod,
