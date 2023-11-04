@@ -8,7 +8,7 @@
 #include <raylib.h>
 #include "Assets/generatedAssets.hpp"
 
-class GameSound {
+class GameAudio {
     /**
      * @brief Sound class, to use a raylib sound
     */

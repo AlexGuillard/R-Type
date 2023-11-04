@@ -12,8 +12,7 @@
 #include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
-#include "client/audio/GameMusic.hpp"
-#include "client/audio/GameSound.hpp"
+#include "client/audio/GameAudio.hpp"
 #include "constants.hpp"
 #include "enums.hpp"
 
@@ -328,6 +327,6 @@ namespace Screen {
             double _startTime = 0;
         } _cameraShake;
 
-        GameSound _sound;
+        GameAudio _sound;
     };
 }
