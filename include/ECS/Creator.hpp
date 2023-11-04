@@ -319,10 +319,9 @@ namespace ECS {
          * @param id id of entity
          * @param x position X
          * @param y position y
-         * @param team team of the pod
          * @return Entity
          */
-        static Entity createPod(Containers::Registry &registry, size_t id, int x, int y, Enums::TeamGroup team);
+        static Entity createPod(Containers::Registry &registry, size_t id, int x, int y);
     private:
         static float mLevelScrollSpeed;
     };
