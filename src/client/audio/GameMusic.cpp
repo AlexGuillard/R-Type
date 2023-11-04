@@ -5,8 +5,9 @@
 ** Music.cpp
 */
 
-#include "client/audio/Music.hpp"
+#include "client/audio/GameMusic.hpp"
 #include "Assets/AssetLoader.hpp"
+#include <iostream>
 
 GameMusic::GameMusic(Assets::AssetsIndex index, const std::string &extension, double volume)
 {
@@ -20,13 +21,12 @@ GameMusic::~GameMusic()
     UnloadMusicStream(this->getMusic());
 }
 
-Music GameMusic::getMusic() const
+Music &GameMusic::getMusic()
 {
     return this->music;
-
 }
 
-bool GameMusic::getIsPlaying() const
+bool GameMusic::getIsPlaying()
 {
     return this->isPlaying;
 }
@@ -52,33 +52,34 @@ void GameMusic::initMusic(Assets::AssetsIndex index, const std::string &extensio
     }
 }
 
-void GameMusic::playMusic() const
+void GameMusic::playMusic()
 {
     PlayMusicStream(this->getMusic());
+    this->setIsPlaying(true);
 }
 
-void GameMusic::setVolume(double volume) const
+void GameMusic::setVolume(double volume)
 {
     SetMusicVolume(this->getMusic(), volume);
 }
 
-void GameMusic::updateMusic() const
+void GameMusic::updateMusic()
 {
     UpdateMusicStream(this->getMusic());
 }
 
 void GameMusic::pauseMusic()
 {
-    this->setisPlaying(!this->getisPlaying());
+    this->setIsPlaying(!this->getIsPlaying());
 
-    if (this->getisPlaying()) {
+    if (this->getIsPlaying()) {
         PauseMusicStream(this->getMusic());
     } else {
         ResumeMusicStream(this->getMusic());
     }
 }
 
-void GameMusic::restartMusic() const
+void GameMusic::restartMusic()
 {
     StopMusicStream(this->getMusic());
     PlayMusicStream(this->getMusic());

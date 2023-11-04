@@ -19,3 +19,4 @@ install(TARGETS r-type_client RUNTIME DESTINATION bin)
 
 add_subdirectory(display)
 add_subdirectory(network)
+add_subdirectory(audio)

@@ -5,13 +5,12 @@
 ** Sound.cpp
 */
 
-#include "client/audio/Sound.hpp"
+#include "client/audio/GameSound.hpp"
 #include "Assets/AssetLoader.hpp"
 
 GameSound::GameSound(Assets::AssetsIndex index, const std::string &extension, double volume)
 {
     initSound(index, extension);
-    this->setVolume(volume);
 }
 
 GameSound::~GameSound()
@@ -19,7 +18,7 @@ GameSound::~GameSound()
     UnloadSound(this->getSound());
 }
 
-Sound GameSound::getSound() const
+Sound &GameSound::getSound()
 {
     return this->sound;
 }
@@ -40,12 +39,12 @@ void GameSound::initSound(Assets::AssetsIndex index, const std::string &extensio
     }
 }
 
-void GameSound::playSound() const
+void GameSound::playSound()
 {
     PlaySound(this->getSound());
 }
 
-void GameSound::setVolume(double volume) const
+void GameSound::setVolume(double volume)
 {
     SetSoundVolume(this->getSound(), volume);
 }

@@ -16,7 +16,7 @@ class GameMusic {
         /**
          * @brief create a GameMusic Object
         */
-        GameMusic(Assets::AssetsIndex index = Assets::AssetsIndex::MAIN_MUSIC_WAV, const std::string &extension = ".wav", double volume = 0.5);
+        GameMusic(Assets::AssetsIndex index = Assets::AssetsIndex::MAIN_MUSIC_WAV, const std::string &extension = ".wav", double volume = 1.0);
         /**
          * @brief destroy the Music object and unload Music
         */
@@ -24,11 +24,11 @@ class GameMusic {
         /**
          * @brief get music variable
         */
-        Music getMusic() const;
+        Music &getMusic();
         /**
          * @brief get isPlaying variable, allows to know if music is playing
         */
-        bool getIsPlaying() const;
+        bool getIsPlaying();
         /**
          * @brief set isPlaying variable
          * @param isPlaying boolean
@@ -49,17 +49,17 @@ class GameMusic {
         /**
          * @brief play raylib music
          **/
-        void playMusic() const;
+        void playMusic();
         /**
          * @brief set volume of the music
          * @param volume volume of the music
          * volume must be between 0.0 and 1.0
         **/
-        void setVolume(double volume) const;
+        void setVolume(double volume);
         /**
          * @brief update raylib music stream
         **/
-        void updateMusic() const;
+        void updateMusic();
         /**
          * @brief pause raylib music
         **/
@@ -67,7 +67,7 @@ class GameMusic {
         /**
          * @brief resume raylib music
         **/
-        void restartMusic() const;
+        void restartMusic();
 
     private:
         Music music;

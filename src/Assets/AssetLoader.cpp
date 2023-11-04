@@ -6,6 +6,8 @@
 
 #include "Assets/AssetLoader.hpp"
 
+
+
 namespace Assets {
     std::unordered_map<AssetsIndex, Image> AssetLoader::imageCache;
     std::unordered_map<AssetsIndex, Texture2D> AssetLoader::textureCache;

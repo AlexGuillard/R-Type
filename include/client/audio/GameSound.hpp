@@ -16,7 +16,7 @@ class GameSound {
         /**
           * @brief create a GameSound
         **/
-        GameSound(Assets::AssetsIndex index = Assets::AssetsIndex::MAIN_MUSIC_WAV, const std::string &extension = ".wav", double volume = 0.5);
+        GameSound(Assets::AssetsIndex index = Assets::AssetsIndex::SPACESHIP_SHOTTING_WAV, const std::string &extension = ".wav", double volume = 1.0);
         /**
          * @brief destroy the GameSound object and unload Sound
         **/
@@ -24,7 +24,7 @@ class GameSound {
         /**
          * @brief get sound variable
         **/
-        Sound getSound() const;
+        Sound &getSound();
         /**
          * @brief set sound variable
          * @param sound raylib sound
@@ -40,13 +40,13 @@ class GameSound {
         /**
          * @brief play raylib sound
         **/
-        void playSound() const;
+        void playSound();
         /**
          * @brief set volume of the sound
          * @param volume volume of the sound
          * volume must be between 0.0 and 1.0
         **/
-        void setVolume(double volume) const;
+        void setVolume(double volume);
 
     private:
         Sound sound;

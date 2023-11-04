@@ -24,7 +24,7 @@ bool Screen::Display::_playButton = false;
 Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
-
+    InitAudioDevice();
     //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
     // We will remove this when the game will be finished or for presentation
     this->resizeWindow(1920, 1080).center();
@@ -40,6 +40,7 @@ Screen::Display::~Display()
     BeginMode2D(Screen::Display::camera);
     EndMode2D();
     EndDrawing();
+    CloseAudioDevice();
     CloseWindow();
 }
 
@@ -355,6 +356,11 @@ void Screen::Display::detectActionMenu()
 {
     int keyPressed = 0;
     int key = 0;
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        this->_sound.playSound();
+        std::cout << "play sound" << std::endl;
+    }
 
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         mouseClickedMenu();
