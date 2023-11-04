@@ -14,6 +14,7 @@
 #include "ECS/Containers/Registry.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/VelocityComponent.hpp"
+#include "ECS/Components/LevelComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/WaveBeamComponent.hpp"
 
@@ -72,6 +73,10 @@ namespace GameEngine {
          * inserted.
          */
         void run();
+        /**
+         * @brief set the levels of background registry to the current level
+         */
+        void changeStageRegistryBkgr(ECS::Containers::SparseArray<ECS::Components::LevelComponent> &levels) const;
         /**
          * @brief set the level of the game
          */
