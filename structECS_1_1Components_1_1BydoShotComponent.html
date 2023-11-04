@@ -87,10 +87,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a9acea235c230a87478188b9f8e111165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1d2f6634c12b03c05f30267e464ea7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#ada1d2f6634c12b03c05f30267e464ea7">speed</a></td></tr>
 <tr class="separator:ada1d2f6634c12b03c05f30267e464ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a534e7dc66ef84cbd3ba9dcea70dcf59a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#a534e7dc66ef84cbd3ba9dcea70dcf59a">xDirection</a></td></tr>
-<tr class="separator:a534e7dc66ef84cbd3ba9dcea70dcf59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf7a6f5dd2b60e7371dac650d6c17974"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#adf7a6f5dd2b60e7371dac650d6c17974">yDirection</a></td></tr>
-<tr class="separator:adf7a6f5dd2b60e7371dac650d6c17974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ede6416e62554fb76b45853b258e51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUtils_1_1Vector2.html">Utils::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#ab5ede6416e62554fb76b45853b258e51">position</a></td></tr>
+<tr class="separator:ab5ede6416e62554fb76b45853b258e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9a81e0b4d2a0e34c068c9829a8a55e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUtils_1_1Vector2.html">Utils::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#a1d9a81e0b4d2a0e34c068c9829a8a55e">direction</a></td></tr>
+<tr class="separator:a1d9a81e0b4d2a0e34c068c9829a8a55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48038c863f6efe55bd9a2974d869389"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structECS_1_1Components_1_1BydoShotComponent.html#ad48038c863f6efe55bd9a2974d869389">team</a> = <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a92b09d1635332c90ae8508618a174244">Enums::TeamGroup::ENEMY</a></td></tr>
 <tr class="separator:ad48038c863f6efe55bd9a2974d869389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -100,8 +100,8 @@ Public Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">damage</td><td>The damage of the shot. </td></tr>
     <tr><td class="paramname">speed</td><td>The speed of the shot (in pixels per second). </td></tr>
-    <tr><td class="paramname">xDirection</td><td>The x direction of the shot (direction must be normalized). </td></tr>
-    <tr><td class="paramname">yDirection</td><td>The y direction of the shot (direction must be normalized). </td></tr>
+    <tr><td class="paramname">position</td><td>The position of the shot. </td></tr>
+    <tr><td class="paramname">direction</td><td>The direction of the shot. (unit vector) </td></tr>
     <tr><td class="paramname">team</td><td>The team of the shot (defaults to Enemy). </td></tr>
   </table>
   </dd>
@@ -115,6 +115,34 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::size_t ECS::Components::BydoShotComponent::damage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d9a81e0b4d2a0e34c068c9829a8a55e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9a81e0b4d2a0e34c068c9829a8a55e">&#9670;&nbsp;</a></span>direction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUtils_1_1Vector2.html">Utils::Vector2</a> ECS::Components::BydoShotComponent::direction</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5ede6416e62554fb76b45853b258e51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ede6416e62554fb76b45853b258e51">&#9670;&nbsp;</a></span>position</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUtils_1_1Vector2.html">Utils::Vector2</a> ECS::Components::BydoShotComponent::position</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -143,34 +171,6 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> ECS::Components::BydoShotComponent::team = <a class="el" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a92b09d1635332c90ae8508618a174244">Enums::TeamGroup::ENEMY</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a534e7dc66ef84cbd3ba9dcea70dcf59a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a534e7dc66ef84cbd3ba9dcea70dcf59a">&#9670;&nbsp;</a></span>xDirection</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ECS::Components::BydoShotComponent::xDirection</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adf7a6f5dd2b60e7371dac650d6c17974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf7a6f5dd2b60e7371dac650d6c17974">&#9670;&nbsp;</a></span>yDirection</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ECS::Components::BydoShotComponent::yDirection</td>
         </tr>
       </table>
 </div><div class="memdoc">
