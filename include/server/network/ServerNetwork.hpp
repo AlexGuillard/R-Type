@@ -164,8 +164,9 @@ namespace Network {
         void _shootMissile(
             ECS::Containers::Registry &registry,
             const ECS::Components::PositionComponent &position,
-            const ECS::Components::VelocityComponent &velocity,
-            const Enums::TeamGroup team);
+            const Enums::TeamGroup team,
+            const float xVelocity,
+            const float yVelocity = 0.F);
         void _shootWaveBeam(
             ECS::Containers::Registry &registry,
             const ECS::Components::PositionComponent &position,

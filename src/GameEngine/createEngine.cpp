@@ -100,7 +100,7 @@ namespace GameEngine {
         // Shooting systems
         registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
-        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent, Components::BydoShotComponent>(Systems::shooting);
+        registry.addSystem<Components::ShootingTimerComponent, Components::PositionComponent>(Systems::shooting);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
         // Movement systems (must be called after collision system)

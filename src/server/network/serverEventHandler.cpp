@@ -28,6 +28,7 @@
 #include "ECS/Components/VelocityComponent.hpp"
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/BydoShotComponent.hpp"
+#include "ECS/Components/MissileComponent.hpp"
 #include "ECS/Creator.hpp"
 
 #include <iostream>
@@ -88,8 +89,9 @@ namespace Network {
     void ServerNetwork::_shootMissile(
         ECS::Containers::Registry &registry,
         const ECS::Components::PositionComponent &position,
-        const ECS::Components::VelocityComponent &velocity,
-        const Enums::TeamGroup team
+        const Enums::TeamGroup team,
+        const float xVelocity,
+        const float yVelocity
     )
     {
         int eId = ECS::Creator::createMissile(registry, registry.spawnEntity(), position.x, position.y, team);
@@ -97,7 +99,7 @@ namespace Network {
         auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
         std::string res = "";
 
-        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId}, {position.x, position.y}, {velocity.x, velocity.y}, team, 0);
+        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId}, {position.x, position.y}, {xVelocity, 0}, team, 0);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
@@ -171,6 +173,7 @@ namespace Network {
 
         resetHeldInfo(timeSinceShootHeld);
         while (GameEngine::Events::poll(event, entityId)) {
+            ECS::Entity entity = registry.entityFromIndex(entityId);
             switch (event) {
                 using enum GameEngine::Events::Type;
             case PLAYER_UP:
@@ -207,6 +210,13 @@ namespace Network {
                     );
                 }
                 break;
+            case POD_SHOOT:
+                if (positions[entity] && velocities[entity] && teams[entity] && registry.getComponent<ECS::Components::MissileComponent>(entity)) {
+                    this->_shootMissile(
+                        registry, *positions[entity], teams[entity]->team, Constants::waveBeamSpeed
+                    );
+                }
+                break;
             default:
                 break;
             }
@@ -218,7 +228,7 @@ namespace Network {
             if (timeHeld > 0 && positions[id] && velocities[id] && teams[id]) {
                 if (timeHeld < Constants::timeNeededForWaveBeam) {
                     this->_shootMissile(
-                        registry, *positions[id], *velocities[id], teams[id]->team
+                        registry, *positions[id], teams[id]->team, Constants::waveBeamSpeed
                     );
                 } else {
                     this->_shootWaveBeam(
