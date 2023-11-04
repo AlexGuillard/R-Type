@@ -61,6 +61,6 @@ var searchData=
   ['createwavebeam_125',['createWaveBeam',['../classECS_1_1Creator.html#a5edf62269b7be8e51a9f70b316b7351e',1,'ECS::Creator']]],
   ['creator_126',['Creator',['../classECS_1_1Creator.html#a688bff176c01a4dcef9a101dd06523fd',1,'ECS::Creator::Creator()'],['../classECS_1_1Creator.html',1,'ECS::Creator']]],
   ['creator_2ehpp_127',['Creator.hpp',['../Creator_8hpp.html',1,'']]],
-  ['cyan_5fcolor_128',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums']]],
+  ['cyan_5fcolor_128',['CYAN_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums::CYAN_COLOR()'],['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7abf0f7f02b157dc2608ccbe2636ebe437',1,'Enums::CYAN_COLOR()']]],
   ['registry_129',['Registry',['../classECS_1_1Entity.html#af6b37ba1dca1fff4b862d065f660b9cc',1,'ECS::Entity']]]
 ];

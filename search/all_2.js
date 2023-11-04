@@ -8,7 +8,7 @@ var searchData=
   ['begin_47',['begin',['../classECS_1_1Containers_1_1Zipper.html#aba9da41154de17116f5ec0d3aca0da0d',1,'ECS::Containers::Zipper::begin()'],['../classECS_1_1Containers_1_1IndexedZipper.html#ae27c29ea2d0cecacceb6eff78f3d8b03',1,'ECS::Containers::IndexedZipper::begin()']]],
   ['begindrawcamera_48',['beginDrawCamera',['../classScreen_1_1Display.html#ae3c030239a63dab755a7b5a743ccbfd3',1,'Screen::Display']]],
   ['beginupdate_49',['beginUpdate',['../classScreen_1_1Display.html#aac64937cc03e09c21c04c30358ba2e0c',1,'Screen::Display']]],
-  ['blue_5fcolor_50',['BLUE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a6afbf6c79a1413494d060fb4a356debd',1,'Enums']]],
+  ['blue_5fcolor_50',['BLUE_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a6afbf6c79a1413494d060fb4a356debd',1,'Enums::BLUE_COLOR()'],['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a6afbf6c79a1413494d060fb4a356debd',1,'Enums::BLUE_COLOR()']]],
   ['bodyally_51',['bodyAlly',['../structNetwork_1_1bodyAlly.html',1,'Network']]],
   ['bodymissile_52',['bodyMissile',['../structNetwork_1_1bodyMissile.html',1,'Network']]],
   ['bodymob_53',['bodyMob',['../structNetwork_1_1bodyMob.html',1,'Network']]],

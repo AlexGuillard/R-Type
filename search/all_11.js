@@ -5,7 +5,7 @@ var searchData=
   ['receive_514',['receive',['../classNetwork_1_1ANetwork.html#a28962e51bbc227023a0958be4f79b230',1,'Network::ANetwork::receive()'],['../classNetwork_1_1INetwork.html#a20777828dbf085184f64f61ecc30eeed',1,'Network::INetwork::receive()']]],
   ['recupinfo_515',['RecupInfo',['../classNetwork_1_1RecupInfo.html',1,'Network::RecupInfo'],['../classNetwork_1_1RecupInfo.html#ab21abb679d953453988048c88fd2edc2',1,'Network::RecupInfo::RecupInfo()']]],
   ['recupinfos_2ehpp_516',['recupInfos.hpp',['../recupInfos_8hpp.html',1,'']]],
-  ['red_5fcolor_517',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums']]],
+  ['red_5fcolor_517',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()'],['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()']]],
   ['reference_5ftype_518',['reference_type',['../classECS_1_1Containers_1_1SparseArray.html#a0ffdfe882b3cb7e5ca81c61eaa1dffa1',1,'ECS::Containers::SparseArray']]],
   ['registercomponent_519',['registerComponent',['../classECS_1_1Containers_1_1Registry.html#af42c4a04aa087c068fec139c28022b2f',1,'ECS::Containers::Registry']]],
   ['registry_520',['Registry',['../classECS_1_1Containers_1_1Registry.html',1,'ECS::Containers::Registry'],['../classECS_1_1Containers_1_1Registry.html#a308ed79784d5e86bcd32ade24b9a17a7',1,'ECS::Containers::Registry::Registry()=default'],['../classECS_1_1Containers_1_1Registry.html#a0675c7da284c15f3f415f3bc25b2c4cc',1,'ECS::Containers::Registry::Registry(std::size_t reservedIds)']]],
