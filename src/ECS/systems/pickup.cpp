@@ -5,8 +5,6 @@
 ** pickup
 */
 
-#pragma once
-
 #include "ECS/Systems/pickup.hpp"
 #include "ECS/Components/ShootingTimerComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
