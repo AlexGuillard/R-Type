@@ -92,9 +92,43 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[222] = [this](const header &h, std::string &s) {
         handleLooseGame(h, s);
         };
+    _responseHandlers[223] = [this](const header &h, std::string &s) {
+        handleRightWon(h, s);
+        };
+    _responseHandlers[224] = [this](const header &h, std::string &s) {
+        handleLeftWon(h, s);
+        };
 }
 
 //-----------------------------END GAME--------------------------------------------//
+
+void Network::ClientNetwork::handleLeftWon(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 224 && !_winLeft) {
+            _winLeft = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
+
+void Network::ClientNetwork::handleRightWon(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 223 && !_winRight) {
+            _winRight = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
 
 void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::string &str)
 {
