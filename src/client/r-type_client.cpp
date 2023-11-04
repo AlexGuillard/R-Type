@@ -41,6 +41,12 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
     if (Network::getWinningCondition()) {
         window.setGameState(Screen::Display::GameState::WINNING);
     }
+    if (Network::getLeftWinningCondition()) {
+        window.setGameState(Screen::Display::GameState::LEFT_WINNING);
+    }
+    if (Network::getRightWinningCondition()) {
+        window.setGameState(Screen::Display::GameState::RIGHT_WINNING);
+    }
 
 }
 
@@ -50,6 +56,16 @@ static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::Game
 }
 
 static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
+{
+    Screen::Display::drawWin(engine);
+}
+
+static void leftWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
+{
+    Screen::Display::drawWin(engine);
+}
+
+static void rightWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
     Screen::Display::drawWin(engine);
 }
@@ -92,6 +108,12 @@ int rtype_client()
             break;
         case Screen::Display::GameState::WINNING:
             winLoop(window, engine);
+            break;
+        case Screen::Display::GameState::LEFT_WINNING:
+            leftWinLoop(window, engine);
+            break;
+        case Screen::Display::GameState::RIGHT_WINNING:
+            rightWinLoop(window, engine);
             break;
         }
         Screen::Display::endUpdate();

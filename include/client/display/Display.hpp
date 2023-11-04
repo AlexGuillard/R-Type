@@ -30,6 +30,8 @@ namespace Screen {
             WAITINGROOM,             // play button waiting room
             WINNING,
             LOOSING,
+            LEFT_WINNING,
+            RIGHT_WINNING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -171,6 +173,14 @@ namespace Screen {
          * @param engine
          */
         static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief Draw winnig screen for left or right in pvp mode
+         *
+         * @param engine
+         * @param left
+         */
+        static void drawLeftRightWin(GameEngine::GameEngine &engine, bool left);
 
         /**
          * @brief draw the waitingRoom
