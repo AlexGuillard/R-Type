@@ -201,7 +201,7 @@ namespace Screen {
          * @brief Set the Space Background object for the menu
          *
          */
-        void setSpaceBackground();
+        void setSpaceBackground(bool menu);
 
         /**
          * @brief Camera shake option

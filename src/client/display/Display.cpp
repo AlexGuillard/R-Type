@@ -450,7 +450,7 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 }
 
-void Screen::Display::setSpaceBackground()
+void Screen::Display::setSpaceBackground(bool menu)
 {
     ClearBackground(BLACK);
 
@@ -474,7 +474,8 @@ void Screen::Display::setSpaceBackground()
         }
     }
 
-    DrawText("R-Type", 730, 250, 120, WHITE);
+    if (menu)
+        DrawText("R-Type", 730, 250, 120, WHITE);
 
     for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
         if (_dustParticles[i].position.x <= 0) {
@@ -498,7 +499,7 @@ void Screen::Display::setSpaceBackground()
 
 void Screen::Display::drawMenu()
 {
-    setSpaceBackground();
+    setSpaceBackground(true);
     displayHostNameInput();
     displayPortInput();
     displayConnectionStateButton();
@@ -520,7 +521,7 @@ void Screen::Display::drawWaitingRoom()
     _pvpclickableZone = { 850, 275, 160, 60 };
     _friendlyFireclickableZone = { 1100, 275, 220, 60 };
 
-    setSpaceBackground();
+    setSpaceBackground(false);
 
     DrawRectangleRec({ 590, 265, 180, 80 }, SKYBLUE);
     DrawRectangleRec({ 840, 265, 180, 80 }, SKYBLUE);
