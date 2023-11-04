@@ -300,7 +300,6 @@ void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::st
         BodyNumber footer = getBody(str);
 
         if (footer.number == 308) {
-            std::cout << "Pod spawned at" << mobData.x << " " << mobData.y << std::endl;
             ECS::Creator::createPod(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
@@ -315,7 +314,6 @@ void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader,
         BodyNumber footer = getBody(str);
 
         if (footer.number == 307) {
-            std::cout << "Dobkeratops spawned at" << mobData.x << " " << mobData.y << std::endl;
             ECS::Creator::createDobkeratops(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
