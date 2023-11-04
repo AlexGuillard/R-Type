@@ -359,7 +359,7 @@ void Screen::Display::detectActionMenu()
     int keyPressed = 0;
     int key = 0;
 
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (IsKeyPressed(KEY_SPACE) && getGameState() == GameState::GAME) {
         this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
     }
 
