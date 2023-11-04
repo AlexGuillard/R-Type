@@ -101,8 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a65ab68539ac3a68633af2eee83f67c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08908f3d763fb6165b5d6d2e17eaccc1"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#a08908f3d763fb6165b5d6d2e17eaccc1">codeLogin</a> (int code, int entityId=-1)=0</td></tr>
 <tr class="separator:a08908f3d763fb6165b5d6d2e17eaccc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1aa863669e60e3bc363c0ee06acbc2c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#ae1aa863669e60e3bc363c0ee06acbc2c">send202</a> (int indexClient)=0</td></tr>
-<tr class="separator:ae1aa863669e60e3bc363c0ee06acbc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6978c1fc278d24d7274c065ff49096"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#a8d6978c1fc278d24d7274c065ff49096">send202</a> (std::shared_ptr&lt; <a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a> &gt; participant)=0</td></tr>
+<tr class="separator:a8d6978c1fc278d24d7274c065ff49096"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada389ce1fd291e36dd351ee0a6ebedf9"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#ada389ce1fd291e36dd351ee0a6ebedf9">code401</a> ()=0</td></tr>
 <tr class="separator:ada389ce1fd291e36dd351ee0a6ebedf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591cb7973e121f1f218b47b57f58fb7d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork_1_1IServerTcp.html#a591cb7973e121f1f218b47b57f58fb7d">send201</a> ()=0</td></tr>
@@ -254,8 +254,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae1aa863669e60e3bc363c0ee06acbc2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1aa863669e60e3bc363c0ee06acbc2c">&#9670;&nbsp;</a></span>send202()</h2>
+<a id="a8d6978c1fc278d24d7274c065ff49096"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d6978c1fc278d24d7274c065ff49096">&#9670;&nbsp;</a></span>send202()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,8 +266,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Network::IServerTcp::send202 </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>indexClient</em></td><td>)</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classNetwork_1_1IServerTcp.html">IServerTcp</a> &gt;&#160;</td>
+          <td class="paramname"><em>participant</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -278,7 +278,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classNetwork_1_1ServerTcp.html#a6f31f5cff9082225c5af69f4b96feaba">Network::ServerTcp</a>.</p>
+<p>Implemented in <a class="el" href="classNetwork_1_1ServerTcp.html#ad842b1a332ea929a7803e1b703b63764">Network::ServerTcp</a>.</p>
 
 </div>
 </div>

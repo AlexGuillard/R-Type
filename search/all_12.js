@@ -3,7 +3,7 @@ var searchData=
   ['screen_542',['Screen',['../namespaceScreen.html',1,'']]],
   ['send_543',['send',['../classNetwork_1_1INetwork.html#a65186e9aa6e12b09228649bddd63a95a',1,'Network::INetwork::send()'],['../classNetwork_1_1ANetwork.html#af5b60566fc6146693737336f3d159685',1,'Network::ANetwork::send()']]],
   ['send201_544',['send201',['../classNetwork_1_1ServerTcp.html#a9a47d1a9eee7afe7d0c1b4ec704131bf',1,'Network::ServerTcp::send201()'],['../classNetwork_1_1IServerTcp.html#a591cb7973e121f1f218b47b57f58fb7d',1,'Network::IServerTcp::send201()'],['../classNetwork_1_1ClientNetwork.html#a9420c2e8b865a7bcd6e34f994eb15f14',1,'Network::ClientNetwork::send201()']]],
-  ['send202_545',['send202',['../classNetwork_1_1ServerTcp.html#a6f31f5cff9082225c5af69f4b96feaba',1,'Network::ServerTcp::send202()'],['../classNetwork_1_1IServerTcp.html#ae1aa863669e60e3bc363c0ee06acbc2c',1,'Network::IServerTcp::send202()']]],
+  ['send202_545',['send202',['../classNetwork_1_1ServerTcp.html#ad842b1a332ea929a7803e1b703b63764',1,'Network::ServerTcp::send202()'],['../classNetwork_1_1IServerTcp.html#a8d6978c1fc278d24d7274c065ff49096',1,'Network::IServerTcp::send202()']]],
   ['sendaction_546',['sendAction',['../classNetwork_1_1ClientNetwork.html#a72ff2994fd96d432616a605217cd28a9',1,'Network::ClientNetwork']]],
   ['sendcode_2ehpp_547',['sendCode.hpp',['../sendCode_8hpp.html',1,'']]],
   ['sendhello_548',['sendHello',['../classNetwork_1_1ClientNetwork.html#aff49097be836ad03acba5422266af812',1,'Network::ClientNetwork']]],
