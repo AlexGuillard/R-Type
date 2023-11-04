@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
+#include "client/audio/GameAudio.hpp"
 #include "constants.hpp"
 #include "enums.hpp"
 
@@ -362,5 +363,7 @@ namespace Screen {
             enum CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE;
             double _startTime = 0;
         } _cameraShake;
+
+        GameAudio _sound;
     };
 }
