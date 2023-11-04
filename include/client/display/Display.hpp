@@ -28,6 +28,8 @@ namespace Screen {
             MENU,
             GAME,
             WAITINGROOM,             // play button waiting room
+            WINNING,
+            LOOSING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -145,17 +147,14 @@ namespace Screen {
         static void drawGame(GameEngine::GameEngine &engine);
 
         /**
-         * @brief draw the waitingRoom
+         * @brief draw the loose screen
+         *
+         * @param engine
          */
-        void drawWaitingRoom();
+        static void drawLoose(GameEngine::GameEngine &engine);
 
         /**
-         * @brief Centers the window on screen
-         * @return (*this) to allow chain calls
-         */
-        Display &center();
-        /**
-         * @brief Particles for win screen
+         * @brief Particles struct used for the win/401 screen
          *
          */
         struct Particle {
@@ -165,6 +164,25 @@ namespace Screen {
             float speed;
             bool active;
         };
+
+        /**
+         * @brief draw the win screen
+         *
+         * @param engine
+         */
+        static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief draw the waitingRoom
+         */
+        void drawWaitingRoom();
+
+        /**
+         * @brief Centers the window on screen
+         * @return (*this) to allow chain calls
+         */
+        Display &center();
+
         /**
          * @brief particles used on menu
          *

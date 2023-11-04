@@ -113,3 +113,13 @@ bool Network::ClientNetwork::getErrorServer() const
 {
     return _errorServer;
 }
+
+bool Network::ClientNetwork::getWinCondition()const
+{
+    return _winCondition;
+}
+
+bool Network::ClientNetwork::getLooseCondition()const
+{
+    return _looseCondition;
+}
