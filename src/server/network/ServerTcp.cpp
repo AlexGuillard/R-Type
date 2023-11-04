@@ -11,7 +11,7 @@
 #include "server/network/sendCode.hpp"
 
 Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list,
-    int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod)
+    int udpPort, std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod)
     : _socket(std::move(socket)), _list(list), _udpPort(udpPort), _listClient(_clients), _isGame(isGame), _typeMod(mod)
 {
 }
@@ -54,14 +54,17 @@ void Network::ServerTcp::waitRequest()
             _data.clear();
             waitRequest();
         } else {
+            _data.clear();
             if ((boost::asio::error::eof != error) &&
             (boost::asio::error::connection_reset != error)) {
                 waitRequest();
             } else {
-                _list.leave(shared_from_this());
-                removeClient();
-                for (int i = 0; i < _list.size(); i++) {
-                    _list.getClient(i)->write(codeLogin(200, i));
+                if (_list.findClient(shared_from_this())) {
+                    removeClient();
+                    _list.leave(shared_from_this());
+                    for (int i = 0; i < _list.size(); i++) {
+                        _list.getClient(i)->write(codeLogin(200, i));
+                    }
                 }
             }
         }
@@ -77,8 +80,8 @@ void Network::ServerTcp::write(std::string message)
         if (!error) {
             waitRequest();
         } else {
-            _list.leave(shared_from_this());
             removeClient();
+            _list.leave(shared_from_this());
             for (int i = 0; i < _list.size(); i++) {
                 _list.getClient(i)->write(codeLogin(200, i));
             }
@@ -153,25 +156,15 @@ void Network::ServerTcp::send201()
     }
 }
 
-std::string Network::ServerTcp::getActualClient()
-{
-    return _socket.remote_endpoint().address().to_string() + ":" + std::to_string(_socket.remote_endpoint().port());
-}
-
 void Network::ServerTcp::addClient()
 {
     std::string actualClient;
 
     actualClient = _socket.remote_endpoint().address().to_string() + ":" + std::to_string(_socket.remote_endpoint().port());
-    _listClient[actualClient].first = _listClient.size();
+    _listClient[shared_from_this()].first = _listClient.size();
 }
 
 void Network::ServerTcp::removeClient()
 {
-    std::string actual = getActualClient();
-    auto iterator = _listClient.find(actual);
-
-    if (_listClient.contains(actual)) {
-        _listClient.erase(iterator);
-    }
+    _listClient.erase(shared_from_this());
 }
