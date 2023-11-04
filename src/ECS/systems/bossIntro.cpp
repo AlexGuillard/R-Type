@@ -11,7 +11,6 @@
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/DrawableComponent.hpp"
 
-#include <iostream>
 void ECS::Systems::bossIntro(
     Containers::Registry &registry,
     Containers::SparseArray<Components::PositionComponent> &positions,
