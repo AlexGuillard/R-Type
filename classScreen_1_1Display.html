@@ -87,6 +87,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structScreen_1_1Display_1_1DustParticle.html">DustParticle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">particles used on menu  <a href="structScreen_1_1Display_1_1DustParticle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structScreen_1_1Display_1_1Particle.html">Particle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Particles struct used for the win/401 screen.  <a href="structScreen_1_1Display_1_1Particle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,6 +183,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad6e5a4e58d0ddd525d368f660b5f45f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScreen_1_1Display.html">Display</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ad6e5a4e58d0ddd525d368f660b5f45f2">setCameraPosition</a> (int16_t posX, int16_t posY)</td></tr>
 <tr class="memdesc:ad6e5a4e58d0ddd525d368f660b5f45f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the position of the camera.  <a href="classScreen_1_1Display.html#ad6e5a4e58d0ddd525d368f660b5f45f2">More...</a><br /></td></tr>
 <tr class="separator:ad6e5a4e58d0ddd525d368f660b5f45f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adabe091fb31de9f22431035763ffb7f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#adabe091fb31de9f22431035763ffb7f7">setSpaceBackground</a> (bool menu)</td></tr>
+<tr class="memdesc:adabe091fb31de9f22431035763ffb7f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Space Background object for the menu.  <a href="classScreen_1_1Display.html#adabe091fb31de9f22431035763ffb7f7">More...</a><br /></td></tr>
+<tr class="separator:adabe091fb31de9f22431035763ffb7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab726c3a3b2d93b6a1c16c8f0a96bba23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScreen_1_1Display.html">Display</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ab726c3a3b2d93b6a1c16c8f0a96bba23">shake</a> (float time=0.2, enum <a class="el" href="classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9">CameraShakeIntensity</a> <a class="el" href="classScreen_1_1Display.html#ac0028f6d4b68e6baad3818e6c8b21994">intensity</a>=<a class="el" href="classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9ac85ef02f46a0ea1268d6a28e5cb26ef9">CameraShakeIntensity::EARTHQUAKE</a>, float <a class="el" href="classScreen_1_1Display.html#a0fe40a4022eed2ee9fd598074277fc9c">xRange</a>=0.01, float <a class="el" href="classScreen_1_1Display.html#ae454a81d2d4d47b6d0ad3670008549e5">yRange</a>=0.01)</td></tr>
 <tr class="memdesc:ab726c3a3b2d93b6a1c16c8f0a96bba23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Camera shake option.  <a href="classScreen_1_1Display.html#ab726c3a3b2d93b6a1c16c8f0a96bba23">More...</a><br /></td></tr>
 <tr class="separator:ab726c3a3b2d93b6a1c16c8f0a96bba23"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,11 +270,11 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9ac85ef02f46a0ea1268d6a28e5cb26ef9"></a>EARTHQUAKE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4c3bc3270fe4f9a138fb1bccb59c8ce9a9d308f7229b335d40c4273ee9588c849"></a>END_OF_THE_WORLD&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                        {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            RUMBLE = 3,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            EARTHQUAKE = 5,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            END_OF_THE_WORLD = 8</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                        {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            RUMBLE = 3,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            EARTHQUAKE = 5,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            END_OF_THE_WORLD = 8</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -298,13 +304,13 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a2b105b39d4901b3dcfa233132ac3b505"></a>WINNING&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a2d87c8007b598cb87597aaaca031d6c6a5b1dd9e9a3e92f485d4628e8afe4faa2"></a>LOOSING&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                             {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            MENU,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            GAME,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            WAITINGROOM,             <span class="comment">// play button waiting room</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            WINNING,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            LOOSING,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                             {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            MENU,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            GAME,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            WAITINGROOM,             <span class="comment">// play button waiting room</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            WINNING,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            LOOSING,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -332,11 +338,11 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2a9a14f95e151eec641316e7c784ce832d"></a>CONNECTING&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a3f3dd09842c4b6a8d306234dc9f582b2aa5afd6edd5336d91316964e493936858"></a>CONNECTED&#160;</td><td class="fielddoc"></td></tr>
 </table>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                             {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            WAITING_FOR_PLAYER_INPUT, <span class="comment">// waiting for player input</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            CONNECTING,               <span class="comment">// waiting for connection to server to be established</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">CONNECTED</a>,                <span class="comment">// connected to server</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        };</div>
+<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                             {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            WAITING_FOR_PLAYER_INPUT, <span class="comment">// waiting for player input</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            CONNECTING,               <span class="comment">// waiting for connection to server to be established</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">CONNECTED</a>,                <span class="comment">// connected to server</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        };</div>
 <div class="ttc" id="anamespaceNetwork_html_a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858"><div class="ttname"><a href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">Network::Connection::CONNECTED</a></div><div class="ttdeci">@ CONNECTED</div></div>
 </div><!-- fragment -->
 </div>
@@ -1273,6 +1279,26 @@ false tcp connection </dd></dl>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="adabe091fb31de9f22431035763ffb7f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adabe091fb31de9f22431035763ffb7f7">&#9670;&nbsp;</a></span>setSpaceBackground()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Screen::Display::setSpaceBackground </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>menu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the Space Background object for the menu. </p>
 
 </div>
 </div>
