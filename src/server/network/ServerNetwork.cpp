@@ -167,7 +167,7 @@ void Network::ServerNetwork::campaignEnd()
                 if (!_engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::HPComponent>().at(_engine._listIdBoss[i])) {
                     _stage += 1;
                     _tickCount = 0;
-                    if (_script.openLVL(_stage) == 0) {
+                    if (_script.openLVL(_stage) == -1) {
                         _dataToSend.append(Send::makeHeader(221, 0));
                         _dataToSend.append(Send::makeBodyNum(221));
                     } else {
@@ -243,13 +243,13 @@ void Network::ServerNetwork::sendClientEntities()
             }
             _dataToSend.append(Send::makeBodyNum(_tickCount));
             _dataToSend.append(Send::makeBodyNum(331));
+            for (const auto& pair : _listUdpEndpoints) {
+                const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+                _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
+            }
+            _dataToSend.clear();
         }
     }
-    for (const auto& pair : _listUdpEndpoints) {
-        const boost::asio::ip::udp::endpoint& endpoint = pair.second;
-        _asyncSocket.send_to(boost::asio::buffer(_dataToSend.c_str(), _dataToSend.length()) , endpoint);
-    }
-    _dataToSend.clear();
 }
 
 void Network::ServerNetwork::updateTicks()
@@ -272,7 +272,7 @@ void Network::ServerNetwork::updateTicks()
             updateGame();
         }
         updateTicks();
-    });
+        });
 }
 
 void Network::ServerNetwork::handleReceive(boost::system::error_code error, std::size_t recvd_bytes)
@@ -309,7 +309,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
             SendClientsPlay();
         }
         return true;
-    } else if (_listUdpEndpoints.size() == _clients.size()) {
+    } else if (clientData.entity >= 0 && clientData.entity <= 4) {
         return true;
     }
     return false;
@@ -422,9 +422,9 @@ void Network::ServerNetwork::SendClientsPlay()
         } else {
             ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::ALLY);
         }
-        for (const auto& pair : _listUdpEndpoints) {
+        for (const auto &pair : _listUdpEndpoints) {
             res.clear();
-            const boost::asio::ip::udp::endpoint& endpoint = pair.second;
+            const boost::asio::ip::udp::endpoint &endpoint = pair.second;
             if (pair.first == allIds.first) {
                 res = Send::makeHeader(311, entity);
                 res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
@@ -435,7 +435,7 @@ void Network::ServerNetwork::SendClientsPlay()
                 res.append(Send::makeBodyNum(312));
             }
             for (int i = 0; i < 10; i++)
-                _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()) , endpoint);
+                _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
         allIds.second.first = entity;
         index++;
