@@ -229,7 +229,7 @@ namespace ECS {
         registry.getComponents<Components::PositionComponent>().at(missile)->x = x;
         registry.getComponents<Components::PositionComponent>().at(missile)->y = y;
         registry.getComponents<Components::VelocityComponent>().at(missile)->y = 0;
-        if (Enums::TeamGroup::ALLY == team) {
+        if (Enums::TeamGroup::ENEMY != team) {
             registry.getComponents<Components::VelocityComponent>().at(missile)->x = Components::missileSpeed;
             registry.emplaceComponent<Components::DrawableComponent>(missile,
                 Assets::AssetsIndex::MISSILE_PNG,
@@ -259,7 +259,7 @@ namespace ECS {
         registry.getComponents<Components::PositionComponent>().at(wavebeam)->x = x;
         registry.getComponents<Components::PositionComponent>().at(wavebeam)->y = y;
         registry.getComponents<Components::VelocityComponent>().at(wavebeam)->y = 0;
-        if (Enums::TeamGroup::ALLY == team) {
+        if (Enums::TeamGroup::ENEMY != team) {
             registry.getComponents<Components::VelocityComponent>().at(wavebeam)->x = Components::missileSpeed;
             switch (strength) {
             case 2:
@@ -484,7 +484,7 @@ namespace ECS {
         ECS::Entity ally = ECS::Creator::createCharacter(registry, team, 1, 1, 33, 14, id);
         registry.getComponents<Components::PositionComponent>().at(ally)->x = x;
         registry.getComponents<Components::PositionComponent>().at(ally)->y = y;
-        if (team == Enums::TeamGroup::ALLY || team == Enums::TeamGroup::NEUTRAL) {
+        if (Enums::TeamGroup::ENEMY != team) {
             registry.emplaceComponent<Components::DrawableComponent>(ally,
                 Assets::AssetsIndex::R_TYPESHEET42_PNG,
                 nbFrameInSpriteSheet, // frameRatio

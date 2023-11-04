@@ -392,6 +392,30 @@ void Network::ServerNetwork::SendClientsInfo(std::vector<Info> scriptInfo)
     }
 }
 
+Enums::TeamGroup teamFriendlyFire(int index)
+{
+    Enums::TeamGroup team;
+
+    switch (index) {
+        case 0:
+            team = Enums::TeamGroup::CYAN_COLOR;
+            break;
+        case 1:
+            team = Enums::TeamGroup::PURPLE_COLOR;
+            break;
+        case 2:
+            team = Enums::TeamGroup::LIME_COLOR;
+            break;
+        case 3:
+            team = Enums::TeamGroup::RED_COLOR;
+            break;
+        default:
+            team = Enums::TeamGroup::BLUE_COLOR;
+            break;
+    }
+    return team;
+}
+
 void Network::ServerNetwork::SendClientsPlay()
 {
     std::string res = "";
@@ -416,7 +440,7 @@ void Network::ServerNetwork::SendClientsPlay()
             x = Constants::cameraDefaultWidth / 1.4;
         const int y = Constants::cameraDefaultHeight / (_ids.size() + 1) * (index + 1);
         if (_typeMod == 243) {
-            ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::NEUTRAL);
+            ECS::Creator::createAlly(registry, entity, x, y, color, teamFriendlyFire(index));
         } else if (_typeMod == 244 && index % 2 != 0) {
             ECS::Creator::createAlly(registry, entity, x, y, color, Enums::TeamGroup::ENEMY);
         } else {
