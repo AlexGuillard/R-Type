@@ -33,6 +33,7 @@
 #include "ECS/Components/InvincibleTimerComponent.hpp"
 #include "ECS/Components/PickupComponent.hpp"
 #include "ECS/Components/MissileSpawnPointComponent.hpp"
+#include "ECS/Components/SolidComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -569,6 +570,7 @@ namespace ECS {
                 }
             }
         };
+        registry.emplaceComponent<Components::SolidComponent>(pod);
         registry.addComponent<Components::PickupComponent>(pod, std::move(pickupComponent));
         return pod;
     }
