@@ -348,7 +348,7 @@ void Network::ServerNetwork::SpawnMob(Info script)
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
     const int x = Constants::cameraDefaultWidth + 10;
 
-    if (script.rfc >= 301 && script.rfc <= 307) {
+    if (script.rfc >= 301 && script.rfc <= 308) {
         ECS::Entity entity = registry.spawnEntity();
         switch (script.rfc) {
             case 301:
@@ -372,6 +372,9 @@ void Network::ServerNetwork::SpawnMob(Info script)
             case 307:
                 _engine._listIdBoss.push_back(entity);
                 ECS::Creator::createDobkeratops(registry, entity, x, script.y);
+                break;
+            case 308:
+                ECS::Creator::createPod(registry, entity, x, script.y);
                 break;
             default:
                 break;
