@@ -33,6 +33,8 @@
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/ImmortalComponent.hpp"
+#include "ECS/Components/PickupComponent.hpp"
+#include "ECS/Components/ShootingTimerComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -84,6 +86,8 @@ namespace GameEngine {
         registry.registerComponent<Components::FlyingAIComponent>();
         registry.registerComponent<Components::BossIntroComponent>();
         registry.registerComponent<Components::ImmortalComponent>();
+        registry.registerComponent<Components::PickupComponent>();
+        registry.registerComponent<Components::ShootingTimerComponent>();
 
         // Systems (order matters)
         // timer systems
