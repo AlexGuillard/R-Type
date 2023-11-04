@@ -13,6 +13,13 @@
 #include "ECS/Components/PositionComponent.hpp"
 
 namespace ECS::Systems {
+    void updateTarget(
+        Containers::Registry &registry,
+        std::size_t eId,
+        Components::TargetComponent &target,
+        Components::PositionComponent &position,
+        ECS::Containers::SparseArray<Components::PositionComponent> &positions);
+
     void target(
         Containers::Registry &registry,
         Containers::SparseArray<Components::TargetComponent> &targets,

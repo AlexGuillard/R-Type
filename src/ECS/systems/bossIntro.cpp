@@ -9,8 +9,9 @@
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "GameEngine/GameEngine.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
+#include "ECS/Components/DrawableComponent.hpp"
 
-
+#include <iostream>
 void ECS::Systems::bossIntro(
     Containers::Registry &registry,
     Containers::SparseArray<Components::PositionComponent> &positions,
@@ -36,5 +37,9 @@ void ECS::Systems::bossIntro(
     for (auto &&e : toRemoveIntros) {
         registry.removeComponent<Components::BossIntroComponent>(e);
         registry.emplaceComponent<Components::InRangeComponent>(e);
+        auto &&drawable = registry.getComponent<Components::DrawableComponent>(e);
+        if (drawable) {
+            drawable->frame = 0;
+        }
     }
 }

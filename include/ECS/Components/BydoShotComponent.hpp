@@ -10,6 +10,7 @@
 #include <cstddef>
 
 #include "enums.hpp"
+#include "Utils.hpp"
 
 namespace ECS::Components {
 
@@ -19,18 +20,16 @@ namespace ECS::Components {
      * shot.
      * @param damage The damage of the shot.
      * @param speed The speed of the shot (in pixels per second).
-     * @param xDirection The x direction of the shot (direction must be
-     * normalized).
-     * @param yDirection The y direction of the shot (direction must be
-     * normalized).
+     * @param position The position of the shot.
+     * @param direction The direction of the shot. (unit vector)
      * @param team The team of the shot (defaults to Enemy).
      */
     struct BydoShotComponent
     {
         std::size_t damage;
         float speed;
-        float xDirection;
-        float yDirection;
+        Utils::Vector2 position;
+        Utils::Vector2 direction;
         Enums::TeamGroup team = Enums::TeamGroup::ENEMY;
     };
 
