@@ -60,6 +60,9 @@ void Network::ServerTcp::waitRequest()
             } else {
                 _list.leave(shared_from_this());
                 removeClient();
+                for (int i = 0; i < _list.size(); i++) {
+                    _list.getClient(i)->write(codeLogin(200, i));
+                }
             }
         }
     });
@@ -76,6 +79,9 @@ void Network::ServerTcp::write(std::string message)
         } else {
             _list.leave(shared_from_this());
             removeClient();
+            for (int i = 0; i < _list.size(); i++) {
+                _list.getClient(i)->write(codeLogin(200, i));
+            }
         }
     });
 }
@@ -92,7 +98,7 @@ void Network::ServerTcp::connection()
         _list.join(shared_from_this());
         addClient();
         write(codeLogin(200, idNewClient));
-        send202(idNewClient);
+        send202(shared_from_this());
     } else if (number.codeRfc == CONNECTION_NB && typeMod.codeRfc == 203 && _list.size() < 1  && _isGame == false) {
         int idNewClient = _list.size();
         _list.join(shared_from_this());
@@ -116,13 +122,13 @@ std::string Network::ServerTcp::codeLogin(int code, int entityId)
     return res;
 }
 
-void Network::ServerTcp::send202(int indexClient)
+void Network::ServerTcp::send202(std::shared_ptr<IServerTcp> participant)
 {
     for (int i = 0; i < _list.size(); i++) {
-        if (i == indexClient) {
+        if (_list.getClient(i) == participant) {
             continue;
         }
-        _list.getClient(i)->write(codeLogin(202, indexClient));
+        _list.getClient(i)->write(codeLogin(202, 0));
     }
 }
 

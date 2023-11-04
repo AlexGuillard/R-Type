@@ -29,9 +29,8 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/BydoShotComponent.hpp"
 #include "ECS/Components/MissileComponent.hpp"
+#include "ECS/Components/MissileSpawnPointComponent.hpp"
 #include "ECS/Creator.hpp"
-
-#include <iostream>
 
 namespace Network {
     struct PlayerInput {
@@ -99,7 +98,7 @@ namespace Network {
         auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
         std::string res = "";
 
-        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId}, {position.x, position.y}, {xVelocity, 0}, team, 0);
+        res = Send::codeMissile({ (int)Enums::RFCCode::SPAWN_PLAYER_MISSILE, eId }, { position.x, position.y }, { xVelocity, 0 }, team, 0);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
@@ -109,20 +108,19 @@ namespace Network {
     void ServerNetwork::_shootBydoShot(
         ECS::Containers::Registry &registry,
         int entityId,
-        const ECS::Components::PositionComponent &position,
         const Enums::TeamGroup team
     )
     {
-        auto &&positions = registry.getComponents<ECS::Components::PositionComponent>();
-        auto &&velocities = registry.getComponents<ECS::Components::VelocityComponent>();
         auto &&bydoShotRequest = registry.getComponent<ECS::Components::BydoShotComponent>(registry.entityFromIndex(entityId));
         if (!bydoShotRequest) { return; };
-        std::array<float, 2> pos = { position.x, position.y };
-        std::array<float, 2> vel = { bydoShotRequest->xDirection * bydoShotRequest->speed, bydoShotRequest->yDirection * bydoShotRequest->speed};
+        std::array<float, 2> pos = { bydoShotRequest->position.x, bydoShotRequest->position.y };
+        std::array<float, 2> vel = { bydoShotRequest->direction.x * bydoShotRequest->speed, bydoShotRequest->direction.y * bydoShotRequest->speed };
+        auto &&spawnPoints = registry.getComponents<ECS::Components::MissileSpawnPointComponent>();
+        auto &&hitBoxes = registry.getComponents<ECS::Components::HitBoxComponent>();
+
         std::size_t eId = ECS::Creator::createBydoShot(registry, pos[0], pos[1], vel[0], vel[1]);
         std::array<int, 2> header({ (int)Enums::RFCCode::SPAWN_BYDO_SHOT, (int)eId });
         std::string res = Send::codeMissile(header, pos, vel, team, 0);
-
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
@@ -142,7 +140,7 @@ namespace Network {
         auto &&dataVelocity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::VelocityComponent>();
         std::string res = "";
 
-        res = Send::codeMissile({(int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId}, {position.x, position.y}, {velocity.x, velocity.y}, team, strength);
+        res = Send::codeMissile({ (int)Enums::RFCCode::SPAWN_WAVE_BEAM, eId }, { position.x, position.y }, { velocity.x, velocity.y }, team, strength);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {
             _asyncSocket.send_to(boost::asio::buffer(res.c_str(), res.length()), endpoint);
         }
@@ -197,9 +195,9 @@ namespace Network {
                 }
                 break;
             case BYDO_SHOOT_MISSILE:
-                if (positions[entityId] && velocities[entityId] && teams[entityId]) {
+                if (velocities[entityId] && teams[entityId]) {
                     this->_shootBydoShot(
-                        registry, entityId, *positions[entityId], teams[entityId]->team
+                        registry, entityId, teams[entityId]->team
                     );
                 }
                 break;

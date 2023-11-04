@@ -15,6 +15,8 @@
 #include "constants.hpp"
 #include "enums.hpp"
 
+#define MAX_DUST_PARTICLES 10
+
 namespace Screen {
     /**
      * @brief Display contain fonction for the graphic of the client
@@ -182,6 +184,15 @@ namespace Screen {
         Display &center();
 
         /**
+         * @brief particles used on menu
+         *
+         */
+        struct DustParticle {
+            Vector2 position;
+            Color color;
+            float speed;
+        };
+        /**
          * @brief Resizes the window
          * @return (*this) to allow chain calls
          */
@@ -203,6 +214,12 @@ namespace Screen {
          * @return (*this) to allow chain calls
          */
         Display &setCameraPosition(int16_t posX, int16_t posY);
+
+        /**
+         * @brief Set the Space Background object for the menu
+         *
+         */
+        void setSpaceBackground(bool menu);
 
         /**
          * @brief Camera shake option
@@ -316,6 +333,8 @@ namespace Screen {
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
         Enums::MultiState _multiState = Enums::MultiState::MULTI;
         bool _errorConnection;
+        // Particles of dust for menu and waiting room
+        DustParticle _dustParticles[MAX_DUST_PARTICLES];
 
         // Camera
         Vector2 _windowSize = { 0, 0 };

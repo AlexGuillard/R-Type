@@ -32,6 +32,11 @@ namespace Enums {
     };
 
     enum class TeamGroup {
+        CYAN_COLOR,
+        PURPLE_COLOR,
+        LIME_COLOR,
+        RED_COLOR,
+        BLUE_COLOR,
         NEUTRAL,
         ALLY,
         ENEMY

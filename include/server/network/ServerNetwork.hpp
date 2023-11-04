@@ -179,7 +179,6 @@ namespace Network {
         void _shootBydoShot(
             ECS::Containers::Registry &registry,
             int entityId,
-            const ECS::Components::PositionComponent &position,
             const Enums::TeamGroup team
         );
         GameEngine::GameEngine _engine;

@@ -36,6 +36,7 @@
 #include "ECS/Components/PickupComponent.hpp"
 #include "ECS/Components/ShootingTimerComponent.hpp"
 #include "ECS/Components/AdaptiveFlyingAIComponent.hpp"
+#include "ECS/Components/MissileSpawnPointComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -92,6 +93,7 @@ namespace GameEngine {
         registry.registerComponent<Components::PickupComponent>();
         registry.registerComponent<Components::ShootingTimerComponent>();
         registry.registerComponent<Components::AdaptiveFlyingAIComponent>();
+        registry.registerComponent<Components::MissileSpawnPointComponent>();
 
         // Systems (order matters)
         // timer systems
