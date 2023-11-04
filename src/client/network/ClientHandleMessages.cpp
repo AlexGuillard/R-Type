@@ -129,7 +129,6 @@ void Network::ClientNetwork::handleStagesUpdate(const header &messageHeader, std
         BodyNumber footer = getBody(str);
 
         if (footer.number == 231) {
-            std::cout << "entityToUpdate: " << messageHeader.entity << " stage: " << messageHeader.entity << std::endl;
             _engine.setLevel(messageHeader.entity);
         }
 
@@ -164,14 +163,15 @@ double getCurrentTime()
 
 void Network::ClientNetwork::checkForDeadEntities(std::size_t tick)
 {
-    std::size_t maxIdleTime = 20;
+    int maxIdleTime = 20;
     std::vector<std::size_t> listToDelete;
 
     for (const auto &entityTimestampPair : _entityTimestamps) {
         std::size_t entityId = entityTimestampPair.first;
         int lastUpdateTimestamp = static_cast<int>(entityTimestampPair.second);
+        int difference = static_cast<int>(tick) - lastUpdateTimestamp;
 
-        if (static_cast<int>(tick) - lastUpdateTimestamp > maxIdleTime) {
+        if (difference > maxIdleTime) {
             ECS::Entity entityToDelete = _engine.getRegistry(GameEngine::registryTypeEntities).entityFromIndex(entityId);
             _engine.getRegistry(GameEngine::registryTypeEntities).killEntity(entityToDelete);
             listToDelete.push_back(entityId);
