@@ -20,6 +20,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/flyingAI.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/bossIntro.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/pickup.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/adaptiveFlyingAI.cpp
 )
 add_library(systems STATIC ${SRC})
 target_include_directories(ECS PUBLIC ${INCROOT})

@@ -35,6 +35,7 @@
 #include "ECS/Components/ImmortalComponent.hpp"
 #include "ECS/Components/PickupComponent.hpp"
 #include "ECS/Components/ShootingTimerComponent.hpp"
+#include "ECS/Components/AdaptiveFlyingAIComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -52,6 +53,7 @@
 #include "ECS/Systems/bossIntro.hpp"
 #include "ECS/Systems/invincibleTimer.hpp"
 #include "ECS/Systems/pickup.hpp"
+#include "ECS/Systems/adaptiveFlyingAI.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -89,6 +91,7 @@ namespace GameEngine {
         registry.registerComponent<Components::ImmortalComponent>();
         registry.registerComponent<Components::PickupComponent>();
         registry.registerComponent<Components::ShootingTimerComponent>();
+        registry.registerComponent<Components::AdaptiveFlyingAIComponent>();
 
         // Systems (order matters)
         // timer systems
@@ -108,6 +111,7 @@ namespace GameEngine {
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(static_cast<void (*)(Containers::Registry &, Containers::SparseArray<Components::PositionComponent> &, Containers::SparseArray<Components::VelocityComponent> &)>(&Systems::movement));
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
+        registry.addSystem<Components::AdaptiveFlyingAIComponent, Components::FlyingAIComponent, Components::TargetComponent>(Systems::adaptiveFlyingAI);
         registry.addSystem<Components::FlyingAIComponent, Components::TargetComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::flyingAI);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::BossIntroComponent>(Systems::bossIntro);
         // Solid system (called after movement system to prevent entities from being stuck in walls)

@@ -15,6 +15,7 @@
 #include "ECS/Components/TeamComponent.hpp"
 #include "ECS/Components/PositionComponent.hpp"
 #include "ECS/Components/HorizontalScrollComponent.hpp"
+#include "ECS/Components/AdaptiveFlyingAIComponent.hpp"
 
 static void addPodAI(ECS::Containers::Registry &registry, ECS::Entity self, ECS::Entity other,
     const ECS::Components::PickupComponent &pickup)
@@ -25,10 +26,17 @@ static void addPodAI(ECS::Containers::Registry &registry, ECS::Entity self, ECS:
     registry.removeComponent<ECS::Components::HorizontalScrollComponent>(self);
     registry.emplaceComponent<ECS::Components::FlyingAIComponent>(
         self,
-        std::make_pair(-50.F, 50.F),
-        std::make_pair(25.F, 75.1F),
+        std::make_pair(-5.F, 5.F),
+        std::make_pair(45.F, 55.1F),
         100);
     registry.emplaceComponent<ECS::Components::TargetComponent>(self, other);
+    registry.emplaceComponent<ECS::Components::AdaptiveFlyingAIComponent>(self,
+        ECS::Components::AdaptiveFlyingAIComponent({ {
+            { 10.F, 1.F },
+            { 100.F, 50.F },
+            { 1000.F, 400.F }
+        } })
+    );
     registry.emplaceComponent<ECS::Components::ShootingTimerComponent>(
         self, pickup.data.shootingTimer.shootCooldown, pickup.data.shootingTimer.shotType);
     if (team) {
