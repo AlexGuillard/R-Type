@@ -364,7 +364,6 @@ void Network::ClientNetwork::handlePlayerSpawn(const header &messageHeader, std:
         BodyNumber footer = getBody(str);
 
         if (footer.number == 311) {
-            std::cout << "creat ally " << messageHeader.entity << std::endl;
             ECS::Creator::createPlayer(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, allyData.x, allyData.y, allyData.color, allyData.team);
         }
     } else {
