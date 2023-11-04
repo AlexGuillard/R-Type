@@ -121,8 +121,8 @@ namespace ECS::Systems {
                             registry.entityFromIndex(eId),
                             /* damage */ 1,
                             /* speed */ ai->shotSpeed,
-                            /* xDirection */ target->dX / target->distance,
-                            /* yDirection */ target->dY / target->distance
+                            /* position */ Utils::Vector2(position->x, position->y),
+                            /* direction */ Utils::Vector2(target->dX / target->distance, target->dY / target->distance)
                         );
                         GameEngine::Events::push(GameEngine::Events::Type::BYDO_SHOOT_MISSILE, eId);
                     } else if (ai->shotType == Enums::ShotType::WAVE_BEAM) {
