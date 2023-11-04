@@ -261,7 +261,7 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
 
 void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
