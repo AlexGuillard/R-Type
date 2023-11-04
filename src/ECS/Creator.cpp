@@ -31,6 +31,7 @@
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/InvincibleTimerComponent.hpp"
+#include "ECS/Components/PickupComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -538,7 +539,8 @@ namespace ECS {
         const Utils::Vector2 nbFrameInSpriteSheet(12, 1);
         const uint8_t nbFrameInAnimation = 12;
 
-        ECS::Entity pod = ECS::Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 0, 0, 16, 14, id);
+        ECS::Entity pod = ECS::Creator::createGroundedCharacter(registry, Enums::TeamGroup::NEUTRAL, 0, 0, 16, 14, id);
+        registry.removeComponent<Components::HPComponent>(pod);
         registry.getComponents<Components::PositionComponent>().at(pod)->x = x;
         registry.getComponents<Components::PositionComponent>().at(pod)->y = y;
         registry.emplaceComponent<Components::DrawableComponent>(pod,
@@ -549,7 +551,16 @@ namespace ECS {
             false, // boomerang
             nbFrameInAnimation // fps
         );
-        registry.removeComponent<Components::HPComponent>(pod);
+        Components::PickupComponent pickupComponent = {
+            .type = Enums::PickupType::POD,
+            .data = {
+                .shootingTimer = {
+                    .shootCooldown = 1.F,
+                    .shotType = Enums::ShotType::BASIC
+                }
+            }
+        };
+        registry.addComponent<Components::PickupComponent>(pod, std::move(pickupComponent));
         return pod;
     }
 }; // namespace ECS

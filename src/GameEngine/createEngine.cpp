@@ -51,6 +51,7 @@
 #include "ECS/Systems/flyingAI.hpp"
 #include "ECS/Systems/bossIntro.hpp"
 #include "ECS/Systems/invincibleTimer.hpp"
+#include "ECS/Systems/pickup.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -95,6 +96,7 @@ namespace GameEngine {
         // Collision systems
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
+        registry.addSystem<Components::PickupComponent, Components::CollisionComponent>(Systems::pickup);
         // Shooting systems
         registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
