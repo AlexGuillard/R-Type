@@ -31,6 +31,7 @@
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/InvincibleTimerComponent.hpp"
+#include "ECS/Components/MissileSpawnPointComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -517,8 +518,10 @@ namespace ECS {
     {
         const Utils::Vector2 nbFrameInSpriteSheet(4, 9);
         const uint8_t nbFrameInAnimation = 28;
+        float introLength = 3.F;
+        float lengthAnimation = 2.F;
 
-        ECS::Entity dobkeratops = ECS::Creator::createBossCharacter(registry, id, Enums::TeamGroup::ENEMY, 1, 100, 155, 205, 5);
+        ECS::Entity dobkeratops = ECS::Creator::createBossCharacter(registry, id, Enums::TeamGroup::ENEMY, 1, 50, 155, 205, introLength);
         registry.getComponents<Components::PositionComponent>().at(dobkeratops)->x = x;
         registry.getComponents<Components::PositionComponent>().at(dobkeratops)->y = y;
         registry.emplaceComponent<Components::DrawableComponent>(dobkeratops,
@@ -527,9 +530,15 @@ namespace ECS {
             Utils::Vector2(0, 2), // start
             Utils::Vector2(3, 8), // end
             true, // boomerang
-            nbFrameInAnimation / 4 // fps
+            nbFrameInAnimation / lengthAnimation // fps
         );
-
+        addBydoShootingAI(dobkeratops, registry, ECS::NullEntity(), 1, 100);
+        registry.addComponent<Components::MissileSpawnPointComponent>(dobkeratops,
+            { {
+                {{.5F, .5F}, Enums::ShotType::WAVE_BEAM, 2.F * lengthAnimation, lengthAnimation * .75F + 0.F},
+                {{.1F, .3F}, Enums::ShotType::BYDO_SHOT, .25F * lengthAnimation, .0F}
+            } }
+        );
         return dobkeratops;
     }
 
