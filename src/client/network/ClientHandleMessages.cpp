@@ -276,7 +276,7 @@ void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::st
 
 void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -291,7 +291,7 @@ void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader,
 
 void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -305,7 +305,7 @@ void Network::ClientNetwork::handleBlasterSpawn(const header &messageHeader, std
 
 void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -319,7 +319,7 @@ void Network::ClientNetwork::handleCancerSpawn(const header &messageHeader, std:
 
 void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -333,7 +333,7 @@ void Network::ClientNetwork::handleBugSpawn(const header &messageHeader, std::st
 
 void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -347,7 +347,7 @@ void Network::ClientNetwork::handleScantSpawn(const header &messageHeader, std::
 
 void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
@@ -361,7 +361,7 @@ void Network::ClientNetwork::handleBinkSpawn(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handlePataPataSpawn(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(bodyAlly) + sizeof(BodyNumber)) {
+    if (str.size() >= sizeof(bodyMob) + sizeof(BodyNumber)) {
         bodyMob mobData = getMob(str);
         BodyNumber footer = getBody(str);
 
