@@ -348,33 +348,36 @@ void Network::ServerNetwork::SpawnMob(Info script)
     auto &&registry = _engine.getRegistry(GameEngine::registryTypeEntities);
     const int x = Constants::cameraDefaultWidth + 10;
 
-    if (script.rfc >= 301 && script.rfc <= 307) {
+    if (script.rfc >= 301 && script.rfc <= 308) {
         ECS::Entity entity = registry.spawnEntity();
         switch (script.rfc) {
-        case 301:
-            ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
-            break;
-        case 302:
-            ECS::Creator::createBink(registry, entity, x, script.y);
-            break;
-        case 303:
-            ECS::Creator::createScant(registry, entity, x, script.y);
-            break;
-        case 304:
-            ECS::Creator::createBug(registry, entity, x, script.y);
-            break;
-        case 305:
-            ECS::Creator::createCancer(registry, entity, x, script.y);
-            break;
-        case 306:
-            ECS::Creator::createBlaster(registry, entity, x, script.y);
-            break;
-        case 307:
-            _engine._listIdBoss.push_back(entity);
-            ECS::Creator::createDobkeratops(registry, entity, x, script.y);
-            break;
-        default:
-            break;
+            case 301:
+                ECS::Creator::createEnemyBasic(registry, entity, x, script.y);
+                break;
+            case 302:
+                ECS::Creator::createBink(registry, entity, x, script.y);
+                break;
+            case 303:
+                ECS::Creator::createScant(registry, entity, x, script.y);
+                break;
+            case 304:
+                ECS::Creator::createBug(registry, entity, x, script.y);
+                break;
+            case 305:
+                ECS::Creator::createCancer(registry, entity, x, script.y);
+                break;
+            case 306:
+                ECS::Creator::createBlaster(registry, entity, x, script.y);
+                break;
+            case 307:
+                _engine._listIdBoss.push_back(entity);
+                ECS::Creator::createDobkeratops(registry, entity, x, script.y);
+                break;
+            case 308:
+                ECS::Creator::createPod(registry, entity, x, script.y);
+                break;
+            default:
+                break;
         }
         _dataToSend.append(Send::makeHeader(script.rfc, entity));
         _dataToSend.append(Send::makeBodyMob(x, script.y, script.extra.side));

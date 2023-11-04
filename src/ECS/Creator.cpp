@@ -533,4 +533,23 @@ namespace ECS {
         return dobkeratops;
     }
 
+    Entity Creator::createPod(Containers::Registry &registry, size_t id, int x, int y)
+    {
+        const Utils::Vector2 nbFrameInSpriteSheet(12, 1);
+        const uint8_t nbFrameInAnimation = 12;
+
+        ECS::Entity pod = ECS::Creator::createCharacter(registry, Enums::TeamGroup::NEUTRAL, 0, 0, 16, 14, id);
+        registry.getComponents<Components::PositionComponent>().at(pod)->x = x;
+        registry.getComponents<Components::PositionComponent>().at(pod)->y = y;
+        registry.emplaceComponent<Components::DrawableComponent>(pod,
+            Assets::AssetsIndex::R_TYPESHEET3_PNG,
+            nbFrameInSpriteSheet, // frameRatio
+            Utils::Vector2(0, 0), // start
+            Utils::Vector2(0, 11), // end
+            false, // boomerang
+            nbFrameInAnimation // fps
+        );
+        registry.removeComponent<Components::HPComponent>(pod);
+        return pod;
+    }
 }; // namespace ECS
