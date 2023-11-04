@@ -215,7 +215,6 @@ void Screen::Display::displayError401()
         }
     }
     const char* text = "Error :\nRoom already full or is already running,\nthe server can handle only one room at a time,\nplease wait the game end to restart the server...";
-    // const char* text = "Error :\nthe room is already full or is already running,\nplease wait the game end to restart the server...";
     Vector2 textPosition = {(float)(screenWidth - MeasureText(text, 20)) / 4.5f, (float)(screenHeight / 2 - 300)};
     Color textColor = WHITE;
     float letterSpacing = 10.0f;
@@ -451,8 +450,56 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
     }
 }
 
+
+void Screen::Display::setSpaceBackground() {
+
+    DustParticle dustParticles[MAX_DUST_PARTICLES];
+    ClearBackground(BLACK);
+
+    for (int i = 0; i < 10; i++) {
+        Color nebulaColor = (Color){GetRandomValue(50, 200), GetRandomValue(50, 200), GetRandomValue(150, 255), GetRandomValue(50, 200)};
+        DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
+    }
+
+    for (int i = 0; i < 200; i++) {
+        int starSize = GetRandomValue(1, 3);
+        Color starColor = (Color){255, 255, 255, GetRandomValue(200, 255)};
+        float starSpeed = 5000;
+        float starX = GetRandomValue(0, GetScreenWidth());
+        float starY = GetRandomValue(0, GetScreenHeight());
+        DrawCircle(starX, starY, starSize, starColor);
+
+        starX -= starSpeed;
+        if (starX < 0) {
+            starX = GetScreenWidth();
+            starY = GetRandomValue(0, GetScreenHeight());
+        }
+    }
+
+    DrawText("R-Type", 710, 200, 150, WHITE);
+
+    for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
+        if (dustParticles[i].position.x <= 0) {
+            dustParticles[i].position.x = GetScreenWidth();
+            dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
+            dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+        } else {
+            dustParticles[i].position.x -= dustParticles[i].speed;
+            if (dustParticles[i].position.x + 20 < 0) {
+                dustParticles[i].position.x = GetScreenWidth();
+                dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                dustParticles[i].speed = (float)GetRandomValue(1, 5) * 5;
+                dustParticles[i].color = (Color){255, 255, 255, GetRandomValue(50, 100)};
+            }
+            DrawRectangleV(dustParticles[i].position, (Vector2){20, 40}, dustParticles[i].color);
+        }
+    }
+}
+
 void Screen::Display::drawMenu()
 {
+    setSpaceBackground();
     displayHostNameInput();
     displayPortInput();
     displayConnectionStateButton();
