@@ -16,7 +16,8 @@
 #include "constants.hpp"
 #include "enums.hpp"
 
-#define MAX_DUST_PARTICLES 10
+#define MAX_DUST_PARTICLES 50
+#define MAX_NEBULA_PARTICLES 25
 
 namespace Screen {
     /**
@@ -346,6 +347,7 @@ namespace Screen {
         bool _errorConnection;
         // Particles of dust for menu and waiting room
         DustParticle _dustParticles[MAX_DUST_PARTICLES];
+        DustParticle _nebulaParticles[MAX_NEBULA_PARTICLES];
 
         // Camera
         Vector2 _windowSize = { 0, 0 };
