@@ -118,7 +118,7 @@ namespace Network {
         auto &&spawnPoints = registry.getComponents<ECS::Components::MissileSpawnPointComponent>();
         auto &&hitBoxes = registry.getComponents<ECS::Components::HitBoxComponent>();
 
-        std::size_t eId = ECS::Creator::createBydoShot(registry, pos[0], pos[1], vel[0], vel[1]);
+        std::size_t eId = ECS::Creator::createBydoShot(registry, registry.spawnEntity(), pos[0], pos[1], vel[0], vel[1]);
         std::array<int, 2> header({ (int)Enums::RFCCode::SPAWN_BYDO_SHOT, (int)eId });
         std::string res = Send::codeMissile(header, pos, vel, team, 0);
         for (const auto &[_, endpoint] : _listUdpEndpoints) {

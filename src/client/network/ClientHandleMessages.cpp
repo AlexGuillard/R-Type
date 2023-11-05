@@ -288,7 +288,7 @@ void Network::ClientNetwork::handleBydosShotSpawn(const header &messageHeader, s
         BodyNumber footer = getBody(str);
 
         if (footer.number == 323) {
-            ECS::Creator::createBydoShot(_engine.getRegistry(GameEngine::registryTypeEntities), missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team);
+            ECS::Creator::createBydoShot(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, missileData.x, missileData.y, missileData.velocityX, missileData.velocityY, missileData.team);
         }
     } else {
         str.clear();
