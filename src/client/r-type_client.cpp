@@ -87,6 +87,10 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
         window.setGameState(Screen::Display::GameState::GAME);
     }
 
+    if (Network::getServerDisconnect()) {
+        window.displayServerDisconnect();
+    }
+
 }
 
 int rtype_client()
