@@ -125,6 +125,12 @@ namespace Network {
          */
         void handleNewPlayer(const header &messageHeader, std::string &str);
         /**
+         * @brief Handle the rfc code to return menu
+         *
+         * @param message message from the server
+         */
+        void handleMenu(const header &messageHeader, std::string &str);
+        /**
          * @brief Handle the player spawn
          *
          * @param messageHeader header

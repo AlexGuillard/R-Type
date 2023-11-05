@@ -25,6 +25,9 @@ void Network::ClientNetwork::initializeTCPResponsehandler()
     _responseHandlersTCP[202] = [this](const header &h, std::string &s) {
         handleNewPlayer(h, s);
         };
+    _responseHandlersTCP[205] = [this](const header &h, std::string &s) {
+        handleMenu(h, s);
+        };
 
     // error
     _responseHandlersTCP[401] = [this](const header &h, std::string &s) {
@@ -482,6 +485,20 @@ void Network::ClientNetwork::handleNewPlayer(const header &messageHeader, std::s
 {
     if (messageHeader.codeRfc == 202) {
         std::cout << "new player " << std::endl;
+    } else {
+        std::cout << "Unexpected message received logout" << std::endl;
+    }
+}
+
+void Network::ClientNetwork::handleMenu(const header &messageHeader, std::string &str)
+{
+    if (messageHeader.codeRfc == 205) {
+        BodyNumber footer = getBody(str);
+        if (footer.number == 205) {
+            _engine.reset(GameEngine::registryTypeEntities);
+            _engine.reset(GameEngine::registryTypeBackground);
+            // TODO: change status to return menu
+        }
     } else {
         std::cout << "Unexpected message received logout" << std::endl;
     }
