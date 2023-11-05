@@ -20,8 +20,20 @@ If your on Linux you need CMake, on root of the project, execute:
 ### Windows 🪟
 <img align="right" width="100" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/1024px-Windows_logo_-_2012.svg.png">
 
-You need CMakeGUI and visualStudio to build the project.
-With CMake GUI you have to select the root of the project and the build folder.
+#### Requirements
+* CMakeGUI
+* Visual Studio 2022 with workload '[Desktop development with C++](https://learn.microsoft.com/en-us/cpp/ide/using-the-visual-studio-ide-for-cpp-desktop-development?view=msvc-170)'
+
+In CMakeGUI:
+  1. Set 'Where is the source code' as the root of the repository
+  2. Set 'Where to build the binaries' wherevere you want (we recommend making a build/ directory in the repository)
+  3. Press 'Configure', 'Generate' and 'Open Project' buttons in succession
+In Visual Studio:
+  1. Click here ![image](https://github.com/AlexGuillard/R-Type/assets/91672539/abfa7647-48ad-4e3a-87e7-168cf46a3d7d)
+  2. Then select multiple start-up project and set `r-type_client` and `r-type_server` to Start ![image](https://github.com/AlexGuillard/R-Type/assets/91672539/25604bf4-d4e2-4513-b846-c27e8979340b) and click OK
+  3. 🎉 You can now run the project by clicking the Green Start button at the top 👍
+
+
 Then you have to configure and generate the project.
 After that you can open the project with visualStudio and setup the startup project to the client and the server.
 Then you can build the project.
@@ -31,13 +43,13 @@ When you launch the executable, you will have connect to the server.
 For that you will have to enter the ip address of the server and the port here is what it have to looks.
 
 ⚠️⚠️ Make sure the Server is running before you try to connect to it ⚠️⚠️
-![Alt text](assets/README/connexionPage.png)
+![image](https://github.com/AlexGuillard/R-Type/assets/91672539/81afc5af-2823-4a9c-828c-0c71d4497f65)
 
-Once the connection is established, you will be placed on a waiting room where you will have to wait for the other players to connect.
-When all the players are connected, the game you should press the Play button on your screen like that.
+If you chose `solo` you will be brought to the game otherwise, you will need to choose you game mode.
 
-⚠️⚠️ Make sure all the players are connected before you press the Play button because there is no comeback once the game started ⚠️⚠️
-![Alt text](assets/README/waitingroomPage.png)
+⚠️⚠️ Make sure all the players are connected before you choose a game mode because there is no comeback once the game started ⚠️⚠️
+![image](https://github.com/AlexGuillard/R-Type/assets/91672539/52807eb4-9cca-4a04-b568-caa228227ef5)
+
 
 After that, the game will start and you will have to destroy all the enemies to win the game. Good luck soldier 🫡🫡🫡!
 
