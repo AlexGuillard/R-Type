@@ -23,7 +23,7 @@ var searchData=
   ['error_2ehpp_195',['Error.hpp',['../Error_8hpp.html',1,'']]],
   ['extra_196',['extra',['../structNetwork_1_1Info.html#acb99fc879db915fca7db9fa28d9d3513',1,'Network::Info']]],
   ['extra_197',['Extra',['../unionNetwork_1_1Info_1_1Extra.html',1,'Network::Info']]],
-  ['extratype_198',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]],
-  ['extratype_199',['extraType',['../structNetwork_1_1Info.html#a72aa4ff1139b56a12333c559455447e5',1,'Network::Info']]],
+  ['extratype_198',['extraType',['../structNetwork_1_1Info.html#a72aa4ff1139b56a12333c559455447e5',1,'Network::Info']]],
+  ['extratype_199',['ExtraType',['../structNetwork_1_1Info.html#a063f317d7aaf75e3a64650c55e8932ac',1,'Network::Info']]],
   ['systems_200',['Systems',['../namespaceECS_1_1Systems.html',1,'ECS']]]
 ];
