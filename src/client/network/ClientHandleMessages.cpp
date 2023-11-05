@@ -92,9 +92,43 @@ void Network::ClientNetwork::initializeResponsehandler()
     _responseHandlers[222] = [this](const header &h, std::string &s) {
         handleLooseGame(h, s);
         };
+    _responseHandlers[223] = [this](const header &h, std::string &s) {
+        handleRightWon(h, s);
+        };
+    _responseHandlers[224] = [this](const header &h, std::string &s) {
+        handleLeftWon(h, s);
+        };
 }
 
 //-----------------------------END GAME--------------------------------------------//
+
+void Network::ClientNetwork::handleLeftWon(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 224 && !_winLeft) {
+            _winLeft = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
+
+void Network::ClientNetwork::handleRightWon(const header &messageHeader, std::string &str)
+{
+    if (str.size() >= sizeof(BodyNumber)) {
+        BodyNumber footer = getBody(str);
+
+        if (footer.number == 223 && !_winRight) {
+            _winRight = true;
+        }
+
+    } else {
+        str.clear();
+    }
+}
 
 void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::string &str)
 {
@@ -266,7 +300,6 @@ void Network::ClientNetwork::handlePodSpawn(const header &messageHeader, std::st
         BodyNumber footer = getBody(str);
 
         if (footer.number == 308) {
-            std::cout << "Pod spawned at" << mobData.x << " " << mobData.y << std::endl;
             ECS::Creator::createPod(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
@@ -281,7 +314,6 @@ void Network::ClientNetwork::handleDobkeratopsSpawn(const header &messageHeader,
         BodyNumber footer = getBody(str);
 
         if (footer.number == 307) {
-            std::cout << "Dobkeratops spawned at" << mobData.x << " " << mobData.y << std::endl;
             ECS::Creator::createDobkeratops(_engine.getRegistry(GameEngine::registryTypeEntities), messageHeader.entity, mobData.x, mobData.y);
         }
     } else {
@@ -408,14 +440,9 @@ void Network::ClientNetwork::handleAllySpawn(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handleConnection(const header &messageHeader, std::string &str)
 {
-    if (messageHeader.codeRfc != 0)
-        std::cout << "code: " << messageHeader.codeRfc << " entity: " << messageHeader.entity << std::endl;
-
     if (str.size() >= sizeof(BodyNumber) + sizeof(BodyNumber)) {
         BodyNumber numClients = getBody(str);
         BodyNumber footer = getBody(str);
-        std::cout << "Im the player " << messageHeader.entity << " and there are " << numClients.number << " players including you." << std::endl;
-        std::cout << "footer" << footer.number << std::endl;
         _indexPlayer = messageHeader.entity;
     } else {
         std::cout << "Unexpected message received connection" << std::endl;

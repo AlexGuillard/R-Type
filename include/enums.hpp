@@ -8,6 +8,9 @@
 #pragma once
 
 namespace Enums {
+    enum class PickupType {
+        POD,
+    };
     enum class PlayerColor {
         CYAN_COLOR,
         PURPLE_COLOR,

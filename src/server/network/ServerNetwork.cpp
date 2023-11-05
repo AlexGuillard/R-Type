@@ -133,10 +133,11 @@ int Network::ServerNetwork::pvpWin()
         auto &&teams = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>();
         bool leftAlive = false;
         bool rightAlive = false;
-        for (const auto &ide : teams) {
-            if (ide.has_value() && ide->team == Enums::TeamGroup::ALLY) {
+        for (const auto &ide : _ids) {
+            auto entity = _engine.getRegistry(GameEngine::registryTypeEntities).getComponents<ECS::Components::TeamComponent>().at(ide.second.first);
+            if (entity.has_value() && entity->team == Enums::TeamGroup::ALLY) {
                 leftAlive = true;
-            } else if (ide.has_value() && ide->team == Enums::TeamGroup::ENEMY) {
+            } else if (entity.has_value() && entity->team == Enums::TeamGroup::ENEMY) {
                 rightAlive = true;
             }
         }
@@ -304,7 +305,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
     if (clientData.entity >= 0 && clientData.entity <= 4 && clientData.codeRfc == 217) {
         _listUdpEndpoints[getActualClient()] = _endpoint;
         _ids[getActualClient()].first = clientData.entity;
-        if (_listUdpEndpoints.size() == _clients.size() && _canPlay == false && _isGame) {
+        if (_listUdpEndpoints.size() >= _clients.size() && _canPlay == false && _isGame) {
             _canPlay = true;
             SendClientsPlay();
         }

@@ -106,7 +106,7 @@ namespace Network {
          */
         boost::asio::ip::udp::socket _asyncSocket;
         // hmap for the list of client on the server with string of client and pair with entity of client + list of commands send
-        std::unordered_map<std::string, std::pair<int, std::vector<int>>> _clients;
+        std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> _clients;
         // variable for the timer and the ticks
         boost::asio::deadline_timer _timer;
         // necessary for acceptation tcp clients
@@ -164,8 +164,9 @@ namespace Network {
         void _shootMissile(
             ECS::Containers::Registry &registry,
             const ECS::Components::PositionComponent &position,
-            const ECS::Components::VelocityComponent &velocity,
-            const Enums::TeamGroup team);
+            const Enums::TeamGroup team,
+            const float xVelocity,
+            const float yVelocity = 0.F);
         void _shootWaveBeam(
             ECS::Containers::Registry &registry,
             const ECS::Components::PositionComponent &position,

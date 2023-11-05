@@ -5,31 +5,38 @@
 ** shooting
 */
 
-#include <string>
-#include <cstring>
-#include <sys/types.h>
-#include <cstdint>
-
-#include <raylib.h>
-
-#include "ECS/Systems/shooting.hpp"
-#include "ECS/Components/PositionComponent.hpp"
-#include "ECS/Components/VelocityComponent.hpp"
-#include "ECS/Components/DamageComponent.hpp"
-#include "ECS/Components/HPComponent.hpp"
-#include "ECS/Components/DrawableComponent.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
-#include "ECS/Creator.hpp"
-#include "Assets/generatedAssets.hpp"
+#include "ECS/Components/MissileComponent.hpp"
+#include "ECS/Systems/shooting.hpp"
+#include "GameEngine/Events.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 namespace ECS::Systems {
 
-    void shooting(
-        Containers::Registry &registry,
-        Containers::SparseArray<Components::MissileComponent> &missileRequests,
-        Containers::SparseArray<Components::WaveBeamComponent> &waveBeamRequests,
-        Containers::SparseArray<Components::BydoShotComponent> &bydoShotRequests
+	template <typename T>
+	static T max(T a, T b)
+	{
+		return a > b ? a : b;
+	}
+
+	void shooting(
+		Containers::Registry &registry,
+		Containers::SparseArray<Components::ShootingTimerComponent> &shootingTimers,
+		Containers::SparseArray<Components::PositionComponent> &positions
     )
     {
+		for (auto &&[entity, timer, position] : ECS::Containers::IndexedZipper(shootingTimers, positions)) {
+			timer->_shootCooldownTimer = max<float>(0.F, timer->_shootCooldownTimer - GameEngine::GameEngine::getDeltaTime());
+			if (timer->_shootCooldownTimer > 0) { continue; }
+            timer->_shootCooldownTimer = timer->shootCooldown;
+			switch (timer->shotType) {
+			case Enums::ShotType::BASIC:
+				registry.emplaceComponent<ECS::Components::MissileComponent>(registry.entityFromIndex(entity), position->x, position->y);
+				GameEngine::Events::push(GameEngine::Events::Type::POD_SHOOT, entity);
+                break;
+			default:
+                break;
+			}
+		}
     }
 }; // namespace ECS::Systems

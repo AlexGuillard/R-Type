@@ -42,6 +42,28 @@ Screen::Display::Display(GameState state) : _gameState(state)
     // this->toggleFullScreen();
     SetTargetFPS(Constants::frameRate);
     _errorConnection = false;
+    for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
+        _dustParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+        _dustParticles[i].position.y = GetRandomValue(-20, 0);
+        _dustParticles[i].speed = static_cast<float>(GetRandomValue(5, 50));
+        _dustParticles[i].color = {
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(150, 255)),
+            static_cast<unsigned char>(GetRandomValue(50, 200))
+        };
+    }
+    for (int i = 0; i < MAX_NEBULA_PARTICLES; i++) {
+        _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+        _nebulaParticles[i].position.y = GetRandomValue(-20, 0);
+        _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(5, 50));
+        _nebulaParticles[i].color = {
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(150, 255)),
+            static_cast<unsigned char>(GetRandomValue(50, 200))
+        };
+    }
 }
 
 Screen::Display::~Display()
@@ -486,48 +508,15 @@ void Screen::Display::setSpaceBackground(bool menu)
 {
     ClearBackground(BLACK);
 
-    for (int i = 0; i < 10; i++) {
-        Color nebulaColor = {
-            static_cast<unsigned char>(GetRandomValue(50, 200)),
-            static_cast<unsigned char>(GetRandomValue(50, 200)),
-            static_cast<unsigned char>(GetRandomValue(150, 255)),
-            static_cast<unsigned char>(GetRandomValue(50, 200))
-        };
-        DrawRectangle(GetRandomValue(0, GetScreenWidth()), GetRandomValue(0, GetScreenHeight()), GetRandomValue(10, 50), GetRandomValue(10, 50), nebulaColor);
-    }
-
-    for (int i = 0; i < 200; i++) {
-        Color starColor = {
-            255,
-            255,
-            255,
-            static_cast<unsigned char>(GetRandomValue(200, 255))
-        };
-        int starSize = GetRandomValue(1, 3);
-        float starSpeed = 5000;
-        float starX = GetRandomValue(0, GetScreenWidth());
-        float starY = GetRandomValue(0, GetScreenHeight());
-        DrawCircle(starX, starY, starSize, starColor);
-        starX -= starSpeed;
-
-        if (starX < 0) {
-            starX = GetScreenWidth();
-            starY = GetRandomValue(0, GetScreenHeight());
-        }
-    }
-
-    if (menu)
-        DrawText("R-Type", 730, 250, 120, WHITE);
-
     for (int i = 0; i < MAX_DUST_PARTICLES; i++) {
         if (_dustParticles[i].position.x <= 0) {
             _dustParticles[i].position.x = GetScreenWidth();
-            _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+            _dustParticles[i].position.y = GetRandomValue(20, GetScreenHeight() - 20);
             _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
             _dustParticles[i].color = {
-                255,
-                255,
-                255,
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
+                static_cast<unsigned char>(GetRandomValue(200, 255)),
                 static_cast<unsigned char>(GetRandomValue(50, 100))
             };
         } else {
@@ -535,20 +524,54 @@ void Screen::Display::setSpaceBackground(bool menu)
 
             if (_dustParticles[i].position.x + 20 < 0) {
                 _dustParticles[i].position.x = GetScreenWidth();
-                _dustParticles[i].position.y = GetRandomValue(0, GetScreenHeight());
+                _dustParticles[i].position.y = GetRandomValue(20, GetScreenHeight() - 20);
                 _dustParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
                 _dustParticles[i].color = {
-                    255,
-                    255,
-                    255,
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
+                    static_cast<unsigned char>(GetRandomValue(200, 255)),
                     static_cast<unsigned char>(GetRandomValue(50, 100))
                 };
             }
         }
 
-        DrawRectangleV(_dustParticles[i].position, {20, 40}, _dustParticles[i].color);
+        DrawRectangleV(_dustParticles[i].position, {40, 10}, _dustParticles[i].color);
     }
+
+    for (int i = 0; i < MAX_NEBULA_PARTICLES; i++) {
+        if (_nebulaParticles[i].position.y >= GetScreenHeight()) {
+            _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+            _nebulaParticles[i].position.y = 0;
+            _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+            _nebulaParticles[i].color = {
+                static_cast<unsigned char>(GetRandomValue(50, 200)),
+                static_cast<unsigned char>(GetRandomValue(50, 200)),
+                static_cast<unsigned char>(GetRandomValue(150, 255)),
+                static_cast<unsigned char>(GetRandomValue(50, 200))
+            };
+        } else {
+            _nebulaParticles[i].position.y += _nebulaParticles[i].speed;
+
+            if (_nebulaParticles[i].position.y - 60 > GetScreenHeight()) {
+                _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+                _nebulaParticles[i].position.y = 0;
+                _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(1, 5) * 5);
+                _nebulaParticles[i].color = {
+                    static_cast<unsigned char>(GetRandomValue(50, 200)),
+                    static_cast<unsigned char>(GetRandomValue(50, 200)),
+                    static_cast<unsigned char>(GetRandomValue(150, 255)),
+                    static_cast<unsigned char>(GetRandomValue(50, 200))
+                };
+            }
+        }
+
+        DrawRectangleV(_nebulaParticles[i].position, {10, 40}, _nebulaParticles[i].color);
+    }
+
+    if (menu)
+        DrawText("R-Type", 730, 250, 120, WHITE);
 }
+
 
 void Screen::Display::drawMenu()
 {
@@ -783,6 +806,62 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
         }
 
         const char* text = "Y O U   W I N";
+        Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};
+        DrawTextEx(GetFontDefault(), text, textPosition, 60, 0, textColor);
+
+        EndDrawing();
+    }
+}
+
+void Screen::Display::drawLeftRightWin(GameEngine::GameEngine &engine, bool left)
+{
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
+    float animationDuration = 2.0f;
+    float elapsedTime = 0.0f;
+    Color textColor = BLANK;
+    const int maxParticles = 200;
+    Particle fireworks[maxParticles];
+
+    for (int i = 0; i < maxParticles; i++) {
+        fireworks[i].active = false;
+    }
+
+    while (elapsedTime < animationDuration) {
+        elapsedTime += GetFrameTime();
+        float alpha = (elapsedTime / animationDuration);
+        textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
+        ClearBackground(BLACK);
+
+        for (int i = 0; i < maxParticles; i++) {
+
+            if (!fireworks[i].active) {
+                fireworks[i].position = Vector2{static_cast<float>(GetRandomValue(0, screenWidth)), static_cast<float>(GetRandomValue(0, screenHeight))};
+                fireworks[i].color = GetRandomColor();
+                fireworks[i].radius = GetRandomValue(2, 4);
+                fireworks[i].speed = GetRandomValue(5, 15);
+                fireworks[i].active = true;
+            }
+
+            if (fireworks[i].active) {
+                fireworks[i].position.y -= fireworks[i].speed;
+                fireworks[i].position.x += GetRandomValue(-2, 2);
+
+                if (fireworks[i].position.y < 0) {
+                    fireworks[i].active = false;
+                }
+
+                DrawCircleV(fireworks[i].position, fireworks[i].radius, fireworks[i].color);
+            }
+        }
+
+        const char* text;
+
+        if (left)
+            text = "L E F T  W I N";
+        else
+            text = "R I G H T  W I N";
+
         Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};
         DrawTextEx(GetFontDefault(), text, textPosition, 60, 0, textColor);
 

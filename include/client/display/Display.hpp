@@ -16,7 +16,8 @@
 #include "constants.hpp"
 #include "enums.hpp"
 
-#define MAX_DUST_PARTICLES 10
+#define MAX_DUST_PARTICLES 50
+#define MAX_NEBULA_PARTICLES 25
 
 namespace Screen {
     /**
@@ -31,6 +32,8 @@ namespace Screen {
             WAITINGROOM,             // play button waiting room
             WINNING,
             LOOSING,
+            LEFT_WINNING,
+            RIGHT_WINNING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -173,6 +176,14 @@ namespace Screen {
          * @param engine
          */
         static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief Draw winnig screen for left or right in pvp mode
+         *
+         * @param engine
+         * @param left
+         */
+        static void drawLeftRightWin(GameEngine::GameEngine &engine, bool left);
 
         /**
          * @brief draw the waitingRoom
@@ -337,6 +348,7 @@ namespace Screen {
         bool _errorConnection;
         // Particles of dust for menu and waiting room
         DustParticle _dustParticles[MAX_DUST_PARTICLES];
+        DustParticle _nebulaParticles[MAX_NEBULA_PARTICLES];
 
         // Camera
         Vector2 _windowSize = { 0, 0 };
