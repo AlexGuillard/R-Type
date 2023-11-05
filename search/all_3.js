@@ -48,7 +48,7 @@ var searchData=
   ['createblaster_117',['createBlaster',['../classECS_1_1Creator.html#a4788dcd5bf7171fda3675205e48b85d1',1,'ECS::Creator']]],
   ['createbosscharacter_118',['createBossCharacter',['../classECS_1_1Creator.html#a1c63c4522bdcbea42b5b953733be2ec1',1,'ECS::Creator']]],
   ['createbug_119',['createBug',['../classECS_1_1Creator.html#a8b754ba13fb1ba9913c27f0b932652ff',1,'ECS::Creator']]],
-  ['createbydoshot_120',['createBydoShot',['../classECS_1_1Creator.html#a08026e77590718b3f71d416f940e94b8',1,'ECS::Creator']]],
+  ['createbydoshot_120',['createBydoShot',['../classECS_1_1Creator.html#a93cfc7fb0de48252c94f43ab4f805ae8',1,'ECS::Creator']]],
   ['createcancer_121',['createCancer',['../classECS_1_1Creator.html#af9552792aacd8c1d72a7db5dfc05a5fd',1,'ECS::Creator']]],
   ['createcharacter_122',['createCharacter',['../classECS_1_1Creator.html#ae5aa85283544f68a814110c76c5d0b63',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, enum Enums::TeamGroup team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height, std::size_t id)'],['../classECS_1_1Creator.html#a3a41174f095438bff6deadc79285d488',1,'ECS::Creator::createCharacter(Containers::Registry &amp;registry, enum Enums::TeamGroup team, std::size_t damage, std::size_t health, std::size_t width, std::size_t height)']]],
   ['createdobkeratops_123',['createDobkeratops',['../classECS_1_1Creator.html#a995c257e645570654a44f0f3b4c3b11a',1,'ECS::Creator']]],
