@@ -21,5 +21,6 @@ namespace Network {
             virtual void send202(std::shared_ptr<IServerTcp> participant) = 0;
             virtual std::string code401() = 0;
             virtual void send201() = 0;
+            virtual void send205() = 0;
     };
 }

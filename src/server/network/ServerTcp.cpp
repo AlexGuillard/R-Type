@@ -8,7 +8,6 @@
 #include <iostream>
 
 #include "server/network/ServerTcp.hpp"
-#include "server/network/sendCode.hpp"
 
 Network::ServerTcp::ServerTcp(boost::asio::ip::tcp::socket socket, Participants &list,
     int udpPort, std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod)
@@ -25,15 +24,22 @@ void Network::ServerTcp::start()
     waitRequest();
 }
 
-void Network::ServerTcp::chooseMod()
+void Network::ServerTcp::chooseMod(header dataClient)
 {
-    header dataClient = Network::Send::stringToheader(_data);
-
     if (dataClient.codeRfc == 243 || dataClient.codeRfc == 244 \
     || dataClient.codeRfc == 241 || dataClient.codeRfc == 242) {
         _typeMod = dataClient.codeRfc;
         send201();
         _isGame = true;
+    }
+}
+
+void Network::ServerTcp::returnMenu(header dataClient)
+{
+    if (dataClient.codeRfc == 205) {
+        _isGame = false;
+        _typeMod = 0;
+        send205();
     }
 }
 
@@ -47,7 +53,9 @@ void Network::ServerTcp::waitRequest()
 
         if (!error) {
             if (_list.findClient(shared_from_this()) == true) {
-                chooseMod();
+                header dataClient = Network::Send::stringToheader(_data);
+                chooseMod(dataClient);
+                returnMenu(dataClient);
             } else {
                 connection();
             }
@@ -151,6 +159,17 @@ void Network::ServerTcp::send201()
     res = Network::Send::makeHeader(201, -1);
     res.append(Network::Send::makeBodyNum(_udpPort));
     res.append(Network::Send::makeBodyNum(201));
+    for (int i = 0; i < _list.size(); i++) {
+        _list.getClient(i)->write(res);
+    }
+}
+
+void Network::ServerTcp::send205()
+{
+    std::string res;
+
+    res = Network::Send::makeHeader(205, -1);
+    res.append(Network::Send::makeBodyNum(205));
     for (int i = 0; i < _list.size(); i++) {
         _list.getClient(i)->write(res);
     }

@@ -8,6 +8,7 @@
 #pragma once
 #include "server/network/IServerTcp.hpp"
 #include "server/network/Participants.hpp"
+#include "server/network/sendCode.hpp"
 
 namespace Network {
     class ServerTcp : public IServerTcp,
@@ -35,10 +36,12 @@ namespace Network {
             void send202(std::shared_ptr<IServerTcp> participant);
             std::string code401();
             void send201();
+            void send205();
             void addClient();
             void removeClient();
         protected:
-            void chooseMod();
+            void chooseMod(header dataClient);
+            void returnMenu(header dataClient);
             int &_typeMod;
             int _udpPort;
             boost::asio::ip::tcp::socket _socket;
