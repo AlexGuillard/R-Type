@@ -154,7 +154,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawLoose(GameEngine::GameEngine &engine);
+        static void drawLoose([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
 
         /**
          * @brief draw the back to menu button

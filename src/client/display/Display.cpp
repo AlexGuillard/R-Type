@@ -687,13 +687,13 @@ Vector2 Screen::Display::getCameraSize()
 
 void Screen::Display::drawBackToMenu(GameEngine::GameEngine &engine)
 {
-    _backToMenuClickableZone = { 850, 450, 160, 60 };
+    _backToMenuClickableZone = { 1660, 900, 230, 60 };
 
     DrawRectangleRec(_backToMenuClickableZone, _buttonFocusedOK);
     DrawText("Back to menu", _backToMenuClickableZone.x + 10, _backToMenuClickableZone.y + 15, 32, RAYWHITE);
 }
 
-void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
+void Screen::Display::drawLoose([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -710,6 +710,8 @@ void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
         float rotation = 360.0f * (elapsedTime / animationDuration);
 
         ClearBackground(BLACK);
+
+        window.drawBackToMenu(engine);
 
         Vector2 startPosition = {(float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset)};
         Vector2 textPosition = startPosition;
