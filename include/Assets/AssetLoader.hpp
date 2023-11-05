@@ -79,30 +79,10 @@ namespace Assets {
          * Music loaded from this function are cached.
          * @param index index of the music
          * @param extension The extension of the file (ex: '.wav', 'mp3')
+         * @param loop indicates if the music should loop
          * @returns A raylib music
         */
-        static Music loadMusic(AssetsIndex index, const std::string &extension);
-        /**
-         * @brief Loads a wav music from the one embeded in the executable.
-         * Musics loaded from this function are cached.
-         * @param index index of the music
-         * @returns A raylib music
-        */
-        static Music loadMusicWav(AssetsIndex index);
-        /**
-         * @brief Loads a ogg music from the one embeded in the executable.
-         * Musics loaded from this function are cached.
-         * @param index index of the music
-         * @returns A raylib music
-        */
-        static Music loadMusicOgg(AssetsIndex index);
-        /**
-         * @brief Loads a mp3 music from the one embeded in the executable.
-         * Musics loaded from this function are cached.
-         * @param index index of the music
-         * @returns A raylib music
-        */
-        static Music loadMusicMp3(AssetsIndex index);
+        static Music loadMusic(AssetsIndex index, const std::string &extension, bool loop);
         /**
          * @brief Loads an sound from the one embeded in the executable.
          * Sounds loaded from this function are cached.

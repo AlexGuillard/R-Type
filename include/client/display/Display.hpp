@@ -99,6 +99,7 @@ namespace Screen {
          */
         static void endUpdate();
 
+        void updateAudio();
         /**
          * @brief display an input for hostname
          *
