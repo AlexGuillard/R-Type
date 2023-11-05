@@ -195,6 +195,7 @@ namespace ECS {
 
     Entity Creator::createBydoShot(
         Containers::Registry &registry,
+        std::size_t id,
         float x,
         float y,
         float xDirection,
@@ -208,7 +209,8 @@ namespace ECS {
             1, // damage
             0, // hp: dies on collision
             7, // width
-            7 // height
+            7, // height
+            id
         );
         registry.emplaceComponent<Components::PositionComponent>(shot, x, y);
         registry.emplaceComponent<Components::VelocityComponent>(shot, xDirection, yDirection);
