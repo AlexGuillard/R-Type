@@ -16,13 +16,14 @@ var searchData=
   ['_5flistudpendpoints_13',['_listUdpEndpoints',['../classNetwork_1_1ServerNetwork.html#ab987709c91f075b980e5c0e80656e24f',1,'Network::ServerNetwork']]],
   ['_5fplaybutton_14',['_playButton',['../classScreen_1_1Display.html#ab69cfc98bba23319252bce094cfb36b5',1,'Screen::Display']]],
   ['_5fportudp_15',['_portUdp',['../classNetwork_1_1ServerNetwork.html#a44ffa2f7e9d741d492d00313b490b9ae',1,'Network::ServerNetwork']]],
-  ['_5fshootcooldowntimer_16',['_shootCooldownTimer',['../structECS_1_1Components_1_1BydoShootingAIComponent.html#a3270a6e02fb103e445ef2d9386aa2db9',1,'ECS::Components::BydoShootingAIComponent::_shootCooldownTimer()'],['../structECS_1_1Components_1_1ShootingTimerComponent.html#a25ecf83bc87d12f665305b7f072788a1',1,'ECS::Components::ShootingTimerComponent::_shootCooldownTimer()']]],
-  ['_5fsocket_17',['_socket',['../classNetwork_1_1ServerTcp.html#a2c3234510db6aa279a27ee67d99d3c1a',1,'Network::ServerTcp']]],
-  ['_5fstage_18',['_stage',['../classNetwork_1_1ServerNetwork.html#a61576bac0055393855b69bb3b9082587',1,'Network::ServerNetwork']]],
-  ['_5fstarttime_19',['_startTime',['../classScreen_1_1Display.html#ae19c3b6114de79f88a482346aa1c3ba2',1,'Screen::Display']]],
-  ['_5fstartx_20',['_startX',['../structECS_1_1Components_1_1BossIntroComponent.html#af3b35f5aca24abcbc9724ba2d060a832',1,'ECS::Components::BossIntroComponent']]],
-  ['_5ftickcount_21',['_tickCount',['../classNetwork_1_1ServerNetwork.html#a89b663de091b01c8a177260a13570d44',1,'Network::ServerNetwork']]],
-  ['_5ftimer_22',['_timer',['../structECS_1_1Components_1_1BossIntroComponent.html#ad3df23623bf7e02c6726fdf31e1b2636',1,'ECS::Components::BossIntroComponent::_timer()'],['../classNetwork_1_1ServerNetwork.html#a7a1e3984020e2d8e2030350f5f1016a3',1,'Network::ServerNetwork::_timer()']]],
-  ['_5ftypemod_23',['_typeMod',['../classNetwork_1_1ServerTcp.html#a2dd9f4b7d454b354f17ef0809f0c10a6',1,'Network::ServerTcp']]],
-  ['_5fudpport_24',['_udpPort',['../classNetwork_1_1ServerTcp.html#a0ccf97c39156d544ea97d4f008b52129',1,'Network::ServerTcp']]]
+  ['_5fscore_16',['_score',['../classNetwork_1_1ClientNetwork.html#a73ec76e5df12e5bdfd81ad5df3a4c1c6',1,'Network::ClientNetwork::_score()'],['../classECS_1_1Containers_1_1Registry.html#aae828c32091fba5f4134ab9428856f58',1,'ECS::Containers::Registry::_score()']]],
+  ['_5fshootcooldowntimer_17',['_shootCooldownTimer',['../structECS_1_1Components_1_1BydoShootingAIComponent.html#a3270a6e02fb103e445ef2d9386aa2db9',1,'ECS::Components::BydoShootingAIComponent::_shootCooldownTimer()'],['../structECS_1_1Components_1_1ShootingTimerComponent.html#a25ecf83bc87d12f665305b7f072788a1',1,'ECS::Components::ShootingTimerComponent::_shootCooldownTimer()']]],
+  ['_5fsocket_18',['_socket',['../classNetwork_1_1ServerTcp.html#a2c3234510db6aa279a27ee67d99d3c1a',1,'Network::ServerTcp']]],
+  ['_5fstage_19',['_stage',['../classNetwork_1_1ServerNetwork.html#a61576bac0055393855b69bb3b9082587',1,'Network::ServerNetwork']]],
+  ['_5fstarttime_20',['_startTime',['../classScreen_1_1Display.html#ae19c3b6114de79f88a482346aa1c3ba2',1,'Screen::Display']]],
+  ['_5fstartx_21',['_startX',['../structECS_1_1Components_1_1BossIntroComponent.html#af3b35f5aca24abcbc9724ba2d060a832',1,'ECS::Components::BossIntroComponent']]],
+  ['_5ftickcount_22',['_tickCount',['../classNetwork_1_1ServerNetwork.html#a89b663de091b01c8a177260a13570d44',1,'Network::ServerNetwork']]],
+  ['_5ftimer_23',['_timer',['../structECS_1_1Components_1_1BossIntroComponent.html#ad3df23623bf7e02c6726fdf31e1b2636',1,'ECS::Components::BossIntroComponent::_timer()'],['../classNetwork_1_1ServerNetwork.html#a7a1e3984020e2d8e2030350f5f1016a3',1,'Network::ServerNetwork::_timer()']]],
+  ['_5ftypemod_24',['_typeMod',['../classNetwork_1_1ServerTcp.html#a2dd9f4b7d454b354f17ef0809f0c10a6',1,'Network::ServerTcp']]],
+  ['_5fudpport_25',['_udpPort',['../classNetwork_1_1ServerTcp.html#a0ccf97c39156d544ea97d4f008b52129',1,'Network::ServerTcp']]]
 ];

@@ -232,12 +232,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae77dec198d6605e604a6f5b249353461"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#ae77dec198d6605e604a6f5b249353461">drawGame</a> (GameEngine::GameEngine &amp;engine)</td></tr>
 <tr class="memdesc:ae77dec198d6605e604a6f5b249353461"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the game  <a href="classScreen_1_1Display.html#ae77dec198d6605e604a6f5b249353461">More...</a><br /></td></tr>
 <tr class="separator:ae77dec198d6605e604a6f5b249353461"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a991b1799daf684d33d35dc8c1ca3ceda"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a991b1799daf684d33d35dc8c1ca3ceda">drawLoose</a> (GameEngine::GameEngine &amp;engine)</td></tr>
-<tr class="memdesc:a991b1799daf684d33d35dc8c1ca3ceda"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the loose screen  <a href="classScreen_1_1Display.html#a991b1799daf684d33d35dc8c1ca3ceda">More...</a><br /></td></tr>
-<tr class="separator:a991b1799daf684d33d35dc8c1ca3ceda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f43c4c9ef150f55da633495380ee034"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a9f43c4c9ef150f55da633495380ee034">drawWin</a> (GameEngine::GameEngine &amp;engine)</td></tr>
-<tr class="memdesc:a9f43c4c9ef150f55da633495380ee034"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the win screen  <a href="classScreen_1_1Display.html#a9f43c4c9ef150f55da633495380ee034">More...</a><br /></td></tr>
-<tr class="separator:a9f43c4c9ef150f55da633495380ee034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35cfc1349e94e9f26a027c96a393f6fa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a35cfc1349e94e9f26a027c96a393f6fa">drawLoose</a> (GameEngine::GameEngine &amp;engine, int score)</td></tr>
+<tr class="memdesc:a35cfc1349e94e9f26a027c96a393f6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the loose screen  <a href="classScreen_1_1Display.html#a35cfc1349e94e9f26a027c96a393f6fa">More...</a><br /></td></tr>
+<tr class="separator:a35cfc1349e94e9f26a027c96a393f6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582b078e16d0174d8a7f5cd130ba7815"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#a582b078e16d0174d8a7f5cd130ba7815">drawWin</a> (GameEngine::GameEngine &amp;engine, int score)</td></tr>
+<tr class="memdesc:a582b078e16d0174d8a7f5cd130ba7815"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the win screen  <a href="classScreen_1_1Display.html#a582b078e16d0174d8a7f5cd130ba7815">More...</a><br /></td></tr>
+<tr class="separator:a582b078e16d0174d8a7f5cd130ba7815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa699302cff4cca51ba6564d0f954c6a7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScreen_1_1Display.html#aa699302cff4cca51ba6564d0f954c6a7">drawLeftRightWin</a> (GameEngine::GameEngine &amp;engine, bool left)</td></tr>
 <tr class="memdesc:aa699302cff4cca51ba6564d0f954c6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw winnig screen for left or right in pvp mode.  <a href="classScreen_1_1Display.html#aa699302cff4cca51ba6564d0f954c6a7">More...</a><br /></td></tr>
 <tr class="separator:aa699302cff4cca51ba6564d0f954c6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -728,8 +728,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a991b1799daf684d33d35dc8c1ca3ceda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a991b1799daf684d33d35dc8c1ca3ceda">&#9670;&nbsp;</a></span>drawLoose()</h2>
+<a id="a35cfc1349e94e9f26a027c96a393f6fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35cfc1349e94e9f26a027c96a393f6fa">&#9670;&nbsp;</a></span>drawLoose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -741,8 +741,18 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">static void Screen::Display::drawLoose </td>
           <td>(</td>
           <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
-          <td class="paramname"><em>engine</em></td><td>)</td>
+          <td class="paramname"><em>engine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -800,8 +810,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9f43c4c9ef150f55da633495380ee034"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f43c4c9ef150f55da633495380ee034">&#9670;&nbsp;</a></span>drawWin()</h2>
+<a id="a582b078e16d0174d8a7f5cd130ba7815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582b078e16d0174d8a7f5cd130ba7815">&#9670;&nbsp;</a></span>drawWin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -813,8 +823,18 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">static void Screen::Display::drawWin </td>
           <td>(</td>
           <td class="paramtype">GameEngine::GameEngine &amp;&#160;</td>
-          <td class="paramname"><em>engine</em></td><td>)</td>
+          <td class="paramname"><em>engine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
