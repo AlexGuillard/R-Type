@@ -40,12 +40,12 @@ namespace GameEngine {
         const Registry &operator[](const std::string &type) const;
 
         /**
-         * @brief Kills all the entities that are not immortal and not reserved
+         * @brief Kills all the entities that are not immortal
          * in the registries
         */
         void reset();
         /**
-         * @brief Kills all the entities that are not immortal and not reserved
+         * @brief Kills all the entities that are not immortal
          * in the specified registry
          * @param type Registry type
         */

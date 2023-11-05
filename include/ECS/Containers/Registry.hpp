@@ -151,7 +151,7 @@ namespace ECS::Containers {
 
         void killAll()
         {
-            for (std::size_t i = m_reserved; i < m_nbEntities; i++) {
+            for (std::size_t i = 0; i < m_nbEntities; i++) {
                 this->killEntity(Entity(i));
             }
         }
