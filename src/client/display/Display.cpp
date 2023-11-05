@@ -64,6 +64,11 @@ Screen::Display::Display(GameState state) : _gameState(state)
             static_cast<unsigned char>(GetRandomValue(50, 200))
         };
     }
+    GameEngine::Events::registerEvent(GameEngine::Events::Type::GO_BACK_TO_MENU,
+        [this]([[maybe_unused]] int id) {
+            this->setGameState(Screen::Display::GameState::WAITINGROOM);
+        }
+    );
 }
 
 Screen::Display::~Display()

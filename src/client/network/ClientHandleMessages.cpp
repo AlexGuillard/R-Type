@@ -9,6 +9,7 @@
 #include "server/network/sendCode.hpp"
 #include "ECS/Creator.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "GameEngine/Events.hpp"
 #include <chrono>
 
 //-----------------------------HANDLE MESSAGES--------------------------------------------//
@@ -497,7 +498,7 @@ void Network::ClientNetwork::handleMenu(const header &messageHeader, std::string
         if (footer.number == 205) {
             _engine.reset(GameEngine::registryTypeEntities);
             _engine.reset(GameEngine::registryTypeBackground);
-            // TODO: change status to return menu
+            GameEngine::Events::push(GameEngine::Events::Type::GO_BACK_TO_MENU);
         }
     } else {
         std::cout << "Unexpected message received logout" << std::endl;
