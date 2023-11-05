@@ -497,7 +497,6 @@ void Network::ClientNetwork::handleMenu(const header &messageHeader, std::string
         BodyNumber footer = getBody(str);
         if (footer.number == 205) {
             _engine.reset(GameEngine::registryTypeEntities);
-            _engine.reset(GameEngine::registryTypeBackground);
             GameEngine::Events::push(GameEngine::Events::Type::GO_BACK_TO_MENU);
         }
     } else {

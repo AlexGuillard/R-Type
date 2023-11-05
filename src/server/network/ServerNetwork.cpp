@@ -455,13 +455,15 @@ void Network::ServerNetwork::SendClientsPlay()
         }
         for (const auto &pair : _listUdpEndpoints) {
             res.clear();
+            res = Send::makeHeader(231, _stage);
+            res.append(Send::makeBodyNum(231));
             const boost::asio::ip::udp::endpoint &endpoint = pair.second;
             if (pair.first == allIds.first) {
-                res = Send::makeHeader(311, entity);
+                res.append(Send::makeHeader(311, entity));
                 res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(311));
             } else {
-                res = Send::makeHeader(312, entity);
+                res.append(Send::makeHeader(312, entity));
                 res.append(Send::makeBodyAlly(x, y, color, registry.getComponents<ECS::Components::TeamComponent>().at(entity)->team));
                 res.append(Send::makeBodyNum(312));
             }
