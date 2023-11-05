@@ -142,7 +142,6 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 void Network::ClientNetwork::handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket) {
     if (error == boost::asio::error::eof) {
         _serverDisconnected = true;
-        std::cout << "Server disconnected" << std::endl;
     } else if (!error && recvd_bytes > HEADER_SIZE) {
         std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
         _data.erase(0, recvd_bytes);
