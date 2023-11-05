@@ -8,6 +8,8 @@
 #pragma once
 
 #include <vector>
+#include <functional>
+#include <unordered_map>
 
 namespace GameEngine {
     class Events {
@@ -59,6 +61,16 @@ namespace GameEngine {
          * @return True if an event was polled, false otherwise
          */
         static bool poll(Type &event, int &idx);
+        /**
+         * @brief Register a callback for a specific event
+         *
+         * @param event Event to register
+         * @param callback Function to call when the event is polled.
+         * The function takes an int as parameter,
+         * which is the id of the player that triggered the event or -1 if the
+         * event is not player-related.
+         */
+        static void registerEvent(Type event, std::function<void(int)> callback);
 
         static std::vector<Type>::iterator begin();
         static std::vector<Type>::iterator end();
@@ -67,6 +79,7 @@ namespace GameEngine {
         friend class Iterator;
         static std::vector<Type> mQueue;
         static std::vector<int> mQueueId;
+        static std::unordered_map<Type, std::vector<std::function<void(int)>>> mCallbacks;
         Events() = default;
         ~Events() = default;
         Events(const Events &) = delete;
