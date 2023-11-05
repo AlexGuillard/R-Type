@@ -453,11 +453,6 @@ void Screen::Display::keyPressededMenu(int KeyPressed, int key)
             _port += KeyPressed;
         }
     }
-
-    if (KeyPressed == 'j') {
-        std::cout << "j'appuis sur j\n";
-        setGameState(GameState::GAME);
-    }
 }
 
 void Screen::Display::setSpaceBackground(bool menu)
