@@ -169,29 +169,30 @@ $(function() {
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordtype">void</span> _shootMissile(</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &amp;position,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &amp;velocity,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordtype">void</span> _shootWaveBeam(</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &amp;position,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &amp;velocity,</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span> strength);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordtype">void</span> _shootWaveBeam(</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1WaveBeamComponent.html">ECS::Components::WaveBeamComponent</a> &amp;waveInfo);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordtype">void</span> _shootBydoShot(</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="keywordtype">int</span> entityId,</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        );</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        GameEngine::GameEngine _engine;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        std::unique_ptr&lt;std::thread&gt; _tcp;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        std::unique_ptr&lt;std::thread&gt; _udp;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <a class="code" href="classNetwork_1_1RecupInfo.html">RecupInfo</a> _script;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordtype">int</span> _typeMod = 241;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    };</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> xVelocity,</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> yVelocity = 0.F);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordtype">void</span> _shootWaveBeam(</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1PositionComponent.html">ECS::Components::PositionComponent</a> &amp;position,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1VelocityComponent.html">ECS::Components::VelocityComponent</a> &amp;velocity,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span> strength);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordtype">void</span> _shootWaveBeam(</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keyword">const</span> <a class="code" href="structECS_1_1Components_1_1WaveBeamComponent.html">ECS::Components::WaveBeamComponent</a> &amp;waveInfo);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordtype">void</span> _shootBydoShot(</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <a class="code" href="classECS_1_1Containers_1_1Registry.html">ECS::Containers::Registry</a> &amp;registry,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordtype">int</span> entityId,</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a> team</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        );</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        GameEngine::GameEngine _engine;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        std::unique_ptr&lt;std::thread&gt; _tcp;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        std::unique_ptr&lt;std::thread&gt; _udp;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <a class="code" href="classNetwork_1_1RecupInfo.html">RecupInfo</a> _script;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordtype">int</span> _typeMod = 241;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    };</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
 <div class="ttc" id="aANetwork_8hpp_html"><div class="ttname"><a href="ANetwork_8hpp.html">ANetwork.hpp</a></div></div>
 <div class="ttc" id="aCreator_8hpp_html"><div class="ttname"><a href="Creator_8hpp.html">Creator.hpp</a></div></div>
 <div class="ttc" id="aParticipants_8hpp_html"><div class="ttname"><a href="Participants_8hpp.html">Participants.hpp</a></div></div>
@@ -233,7 +234,7 @@ $(function() {
 <div class="ttc" id="aclassNetwork_1_1ServerNetwork_html_ac2c17d2eada2cd2396b0da80ef600a91"><div class="ttname"><a href="classNetwork_1_1ServerNetwork.html#ac2c17d2eada2cd2396b0da80ef600a91">Network::ServerNetwork::findClient</a></div><div class="ttdeci">bool findClient(Network::header clientData)</div><div class="ttdoc">find a client in the vector by sending a id, if can not find, return &quot;&quot;</div></div>
 <div class="ttc" id="aclassNetwork_1_1ServerNetwork_html_ad0adddbd71cad80c4550f2ccc717a3c1"><div class="ttname"><a href="classNetwork_1_1ServerNetwork.html#ad0adddbd71cad80c4550f2ccc717a3c1">Network::ServerNetwork::isGameRunning</a></div><div class="ttdeci">bool isGameRunning() const</div></div>
 <div class="ttc" id="aclassNetwork_1_1ServerNetwork_html_ae0901360f541a52a05d1c200f0acfaf5"><div class="ttname"><a href="classNetwork_1_1ServerNetwork.html#ae0901360f541a52a05d1c200f0acfaf5">Network::ServerNetwork::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Runs the io service of asio.</div></div>
-<div class="ttc" id="anamespaceEnums_html_aadc0589bb07f0adac6c10791fc2511d7"><div class="ttname"><a href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a></div><div class="ttdeci">TeamGroup</div><div class="ttdef"><b>Definition:</b> enums.hpp:31</div></div>
+<div class="ttc" id="anamespaceEnums_html_aadc0589bb07f0adac6c10791fc2511d7"><div class="ttname"><a href="namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7">Enums::TeamGroup</a></div><div class="ttdeci">TeamGroup</div><div class="ttdef"><b>Definition:</b> enums.hpp:34</div></div>
 <div class="ttc" id="anamespaceNetwork_html"><div class="ttname"><a href="namespaceNetwork.html">Network</a></div><div class="ttdef"><b>Definition:</b> ANetwork.hpp:15</div></div>
 <div class="ttc" id="anamespaceNetwork_html_a97a023e3916060ca06e3330fb937b677"><div class="ttname"><a href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677">Network::Connection</a></div><div class="ttdeci">Connection</div><div class="ttdef"><b>Definition:</b> ServerNetwork.hpp:32</div></div>
 <div class="ttc" id="anamespaceNetwork_html_a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858"><div class="ttname"><a href="namespaceNetwork.html#a97a023e3916060ca06e3330fb937b677aa5afd6edd5336d91316964e493936858">Network::Connection::CONNECTED</a></div><div class="ttdeci">@ CONNECTED</div></div>
