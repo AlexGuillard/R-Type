@@ -708,9 +708,7 @@ void Screen::Display::drawLoose([[maybe_unused]] Screen::Display &window, GameEn
         float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
         float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
         float rotation = 360.0f * (elapsedTime / animationDuration);
-
         ClearBackground(BLACK);
-
         window.drawBackToMenu(engine);
 
         Vector2 startPosition = {(float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset)};
@@ -729,7 +727,7 @@ void Screen::Display::drawLoose([[maybe_unused]] Screen::Display &window, GameEn
     }
 }
 
-void Screen::Display::drawWin(GameEngine::GameEngine &engine)
+void Screen::Display::drawWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -748,6 +746,7 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
         float alpha = (elapsedTime / animationDuration);
         textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
         ClearBackground(BLACK);
+        window.drawBackToMenu(engine);
 
         for (int i = 0; i < maxParticles; i++) {
 
@@ -779,7 +778,7 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
     }
 }
 
-void Screen::Display::drawLeftRightWin(GameEngine::GameEngine &engine, bool left)
+void Screen::Display::drawLeftRightWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, bool left)
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -798,6 +797,7 @@ void Screen::Display::drawLeftRightWin(GameEngine::GameEngine &engine, bool left
         float alpha = (elapsedTime / animationDuration);
         textColor = Color{static_cast<unsigned char>(GREEN.r), static_cast<unsigned char>(GREEN.g), static_cast<unsigned char>(GREEN.b), static_cast<unsigned char>(alpha * 255)};
         ClearBackground(BLACK);
+        window.drawBackToMenu(engine);
 
         for (int i = 0; i < maxParticles; i++) {
 

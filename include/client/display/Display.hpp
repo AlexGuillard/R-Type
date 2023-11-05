@@ -179,7 +179,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawWin(GameEngine::GameEngine &engine);
+        static void drawWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
 
         /**
          * @brief Draw winnig screen for left or right in pvp mode
@@ -187,7 +187,7 @@ namespace Screen {
          * @param engine
          * @param left
          */
-        static void drawLeftRightWin(GameEngine::GameEngine &engine, bool left);
+        static void drawLeftRightWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, bool left);
 
         /**
          * @brief draw the waitingRoom

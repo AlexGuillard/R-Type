@@ -57,17 +57,17 @@ static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::Game
 
 static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    Screen::Display::drawWin(engine);
+    Screen::Display::drawWin(window, engine);
 }
 
 static void leftWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    Screen::Display::drawLeftRightWin(engine, true);
+    Screen::Display::drawLeftRightWin(window, engine, true);
 }
 
 static void rightWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    Screen::Display::drawLeftRightWin(engine, false);
+    Screen::Display::drawLeftRightWin(window, engine, false);
 }
 
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
