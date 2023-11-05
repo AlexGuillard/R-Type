@@ -9,6 +9,7 @@
 #include "client/display/Display.hpp"
 #include "client/network.hpp"
 #include "GameEngine/GameEngine.hpp"
+#include "GameEngine/Events.hpp"
 
 static void menuLoop(Screen::Display &window, GameEngine::GameEngine &engine)
 {
@@ -52,21 +53,25 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
 static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
+    while (GameEngine::Events::poll(type));
     Screen::Display::drawLoose(window, engine);
 }
 
 static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
+    while (GameEngine::Events::poll(type));
     Screen::Display::drawWin(window, engine);
 }
 
 static void leftWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
+    while (GameEngine::Events::poll(type));
     Screen::Display::drawLeftRightWin(window, engine, true);
 }
 
 static void rightWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
+    while (GameEngine::Events::poll(type));
     Screen::Display::drawLeftRightWin(window, engine, false);
 }
 
@@ -74,6 +79,7 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton(), window.getModeState());
 
+    while (GameEngine::Events::poll(type));
     if (!Network::check401Error()) {
         window.drawWaitingRoom();
     } else {
