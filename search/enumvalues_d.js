@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['red_5fcolor_1410',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()'],['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()']]],
-  ['regular_1411',['REGULAR',['../namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14a820ead78f0fa32544c7ba38fe7ff53d9',1,'Enums']]],
-  ['right_1412',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]],
-  ['right_5fwinning_1413',['RIGHT_WINNING',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6add92fa1c37b2564e55d0d40dabc4d486',1,'Screen::Display']]],
-  ['rumble_1414',['RUMBLE',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9a8704ee6755aa31b8b12c493a816757fb',1,'Screen::Display']]]
+  ['red_5fcolor_1416',['RED_COLOR',['../namespaceEnums.html#ad3d0b9095db88e589a841a3e41c4d783a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()'],['../namespaceEnums.html#aadc0589bb07f0adac6c10791fc2511d7a944b7e191c1ef006c36659b22221eada',1,'Enums::RED_COLOR()']]],
+  ['regular_1417',['REGULAR',['../namespaceEnums.html#acf74a58d7a7f29c7f254730ec506dc14a820ead78f0fa32544c7ba38fe7ff53d9',1,'Enums']]],
+  ['right_1418',['RIGHT',['../namespaceNetwork.html#ab561f9296aca4b15f602698e052b25b5a21507b40c80068eda19865706fdc2403',1,'Network']]],
+  ['right_5fwinning_1419',['RIGHT_WINNING',['../classScreen_1_1Display.html#a2d87c8007b598cb87597aaaca031d6c6add92fa1c37b2564e55d0d40dabc4d486',1,'Screen::Display']]],
+  ['rumble_1420',['RUMBLE',['../classScreen_1_1Display.html#a4c3bc3270fe4f9a138fb1bccb59c8ce9a8704ee6755aa31b8b12c493a816757fb',1,'Screen::Display']]]
 ];
