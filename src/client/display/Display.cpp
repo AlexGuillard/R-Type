@@ -684,6 +684,15 @@ Vector2 Screen::Display::getCameraSize()
 
 ///// End Game
 
+
+void Screen::Display::drawBackToMenu(GameEngine::GameEngine &engine)
+{
+    _backToMenuClickableZone = { 850, 450, 160, 60 };
+
+    DrawRectangleRec(_backToMenuClickableZone, _buttonFocusedOK);
+    DrawText("Back to menu", _backToMenuClickableZone.x + 10, _backToMenuClickableZone.y + 15, 32, RAYWHITE);
+}
+
 void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
 {
     const int screenWidth = GetScreenWidth();

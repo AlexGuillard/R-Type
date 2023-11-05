@@ -157,6 +157,12 @@ namespace Screen {
         static void drawLoose(GameEngine::GameEngine &engine);
 
         /**
+         * @brief draw the back to menu button
+         *
+         */
+        void drawBackToMenu(GameEngine::GameEngine &engine);
+
+        /**
          * @brief Particles struct used for the win/401 screen
          *
          */
@@ -339,6 +345,8 @@ namespace Screen {
         Rectangle _pvpclickableZone;
         // Set the rectangle clickable for friendly Fire mode button
         Rectangle _friendlyFireclickableZone;
+        // Set the rectangle clickable for back to menu button
+        Rectangle _backToMenuClickableZone;
         Enums::ModeSelect _modeState = Enums::ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
