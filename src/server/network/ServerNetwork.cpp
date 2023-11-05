@@ -312,7 +312,7 @@ bool Network::ServerNetwork::findClient(Network::header clientData)
         _ids[getActualClient()].first = clientData.entity;
         if (_listUdpEndpoints.size() >= _clients.size() && _canPlay == false && _isGame) {
             _canPlay = true;
-            _engine = GameEngine::createServerEngine(std::bind_front(&Network::ServerNetwork::serverEventHandler, this));
+            _engine.reset(GameEngine::registryTypeEntities);
             SendClientsPlay();
         }
         return true;

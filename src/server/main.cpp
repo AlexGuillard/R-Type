@@ -30,15 +30,15 @@ int main(int argc, char **argv)
 
     // catch CTRL-C
     signal(SIGINT, signalHandler);
-    try {
-        Network::ServerNetwork network(ioService, port, portUdp);
-        while (isServerRunning) {
-            network.update();
-        }
-    } catch (const std::exception &e) {
-        std::cout << e.what() << std::endl;
-        return error;
-    }
+     try {
+         Network::ServerNetwork network(ioService, port, portUdp);
+         while (isServerRunning) {
+             network.update();
+         }
+     } catch (const std::exception &e) {
+         std::cout << e.what() << std::endl;
+         return error;
+     }
     std::cout << "Server closed" << std::endl;
     return (0);
 }

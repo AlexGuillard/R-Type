@@ -29,6 +29,18 @@ namespace GameEngine {
         return this->getRegistry(type);
     }
 
+    void GameEngine::reset()
+    {
+        for (auto &[_, registry] : m_registries) {
+            registry.killAll();
+        }
+    }
+
+    void GameEngine::reset(const std::string &type)
+    {
+        this->getRegistry(type).killAll();
+    }
+
     Registry &GameEngine::createRegistry(const std::string &type)
     {
         m_registries.push_back(std::make_pair(type, Registry()));

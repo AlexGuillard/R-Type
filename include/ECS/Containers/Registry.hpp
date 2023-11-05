@@ -24,7 +24,7 @@ namespace ECS::Containers {
     class Registry {
     public:
         Registry() = default;
-        Registry(std::size_t reservedIds) : m_nbEntities(reservedIds) {};
+        Registry(std::size_t reservedIds) : m_reserved(reservedIds), m_nbEntities(reservedIds) {};
         /**
          * @brief Adds a new component array to our associative container
          * @tparam Component type of the component to register
@@ -148,6 +148,14 @@ namespace ECS::Containers {
                 deleter(*this, entity);
             }
         }
+
+        void killAll()
+        {
+            for (std::size_t i = m_reserved; i < m_nbEntities; i++) {
+                this->killEntity(Entity(i));
+            }
+        }
+
         std::size_t size() const
         {
             return m_nbEntities;
@@ -209,7 +217,7 @@ namespace ECS::Containers {
             m_componentsArrays;
 
         // ENTITY MANAGER
-
+        std::size_t m_reserved = 0;
         std::size_t m_nbEntities = 0;
 
         // SYSTEM MANAGER
