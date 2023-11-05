@@ -196,6 +196,11 @@ void Screen::Display::displayErrorConnection()
     DrawText("Error while the connection with server, try again", 150, 100, 64, RAYWHITE);
 }
 
+void Screen::Display::displayServerDisconnect()
+{
+    DrawText("Error: Connection with server lost", 1100, 920, 45, RED);
+}
+
 void Screen::Display::displayError401()
 {
     const int screenWidth = GetScreenWidth();
