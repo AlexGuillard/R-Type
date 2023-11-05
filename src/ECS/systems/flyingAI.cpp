@@ -10,6 +10,7 @@
 #include "ECS/Systems/flyingAI.hpp"
 #include "ECS/Containers/zipper/IndexedZipper.hpp"
 #include "ECS/Components/InRangeComponent.hpp"
+#include "GameEngine/GameEngine.hpp"
 
 template <typename T>
 static T abs(T value)
@@ -54,16 +55,17 @@ void ECS::Systems::flyingAI(
             continue;
         }
         registry.removeComponent<ECS::Components::InRangeComponent>(entity);
-        if (target->dX < ai->preferedXDistance.first) {
+        float willMove = ai->speed * GameEngine::GameEngine::getDeltaTime();
+        if (target->dX < ai->preferedXDistance.first && willMove < abs(target->dX)) {
             velocity->x = -ai->speed;
-        } else if (target->dX > ai->preferedXDistance.second) {
+        } else if (target->dX > ai->preferedXDistance.second && willMove < abs(target->dX)) {
             velocity->x = ai->speed;
         } else {
             velocity->x = 0;
         }
-        if (target->dY < ai->preferedYDistance.first) {
+        if (target->dY < ai->preferedYDistance.first && willMove < abs(target->dY)) {
             velocity->y = -ai->speed;
-        } else if (target->dY > ai->preferedYDistance.second) {
+        } else if (target->dY > ai->preferedYDistance.second && willMove < abs(target->dY)) {
             velocity->y = ai->speed;
         } else {
             velocity->y = 0;
