@@ -35,7 +35,7 @@ Screen::Display::Display(GameState state) : _gameState(state)
 {
     InitWindow(0, 0, "R-Type");
     InitAudioDevice();
-    _sound.playMusic(Assets::AssetsIndex::MUSIC_WAV, ".wav");
+    _sound.playMusic(Assets::AssetsIndex::MENU_WAV, ".wav", true, 0.2);
     //This is for developing caus its anoying to switch between fullscreen and windowed and it make crash my linux
     // We will remove this when the game will be finished or for presentation
     this->resizeWindow(1920, 1080).center();
@@ -64,6 +64,16 @@ Screen::Display::Display(GameState state) : _gameState(state)
             static_cast<unsigned char>(GetRandomValue(50, 200))
         };
     }
+    GameEngine::Events::registerEvent(GameEngine::Events::Type::PLAYER_MISSILE,
+        [this]([[maybe_unused]] int id) {
+            this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
+        }
+    );
+    GameEngine::Events::registerEvent(GameEngine::Events::Type::PLAYER_WAVE_BEAM,
+        [this]([[maybe_unused]] int id) {
+            this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
+        }
+    );
 }
 
 Screen::Display::~Display()
@@ -115,11 +125,23 @@ int Screen::Display::getPort() const
     return std::stoi(_port);
 }
 
+void Screen::Display::updateAudio()
+{
+    if (_gameState == GameState::MENU || _gameState == GameState::WAITINGROOM) {
+        _sound.changeMusic(Assets::AssetsIndex::MENU_WAV, ".wav", true, 0.2);
+    } else if (_gameState == GameState::GAME) {
+        _sound.changeMusic(Assets::AssetsIndex::GAME_OGG, ".ogg", true, 0.2);
+    } if (_gameState == GameState::LOOSING || _gameState == GameState::WINNING) {
+        _sound.stopMusic();
+    }
+}
+
 void Screen::Display::beginUpdate()
 {
     _sound.updateMusicStream();
     this->detectActionMenu();
     this->update();
+    this->updateAudio();
     BeginDrawing();
     if (_errorConnection)
         ClearBackground(ORANGE);
@@ -388,11 +410,7 @@ void Screen::Display::detectActionMenu()
     int keyPressed = 0;
     int key = 0;
 
-    if (IsKeyPressed(KEY_SPACE) && getGameState() == GameState::GAME) {
-        this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
-    }
-
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && getGameState() == GameState::MENU) {
         mouseClickedMenu();
     }
     keyPressed = GetCharPressed();
@@ -435,21 +453,30 @@ void Screen::Display::mouseClickedMenu()
 
     if (CheckCollisionPointRec(mouse, _hostNameclickableZone)) {
         _state = InputState::HOSTNAME;
+        this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
     } else if (CheckCollisionPointRec(mouse, _portclickableZone)) {
         _state = InputState::PORT;
+        this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
     } else {
         _state = InputState::NONE;
     }
     if (CheckCollisionPointRec(mouse, _soloclickableZone)) {
         _multiState = Enums::MultiState::SOLO;
+        this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
     }
     if (CheckCollisionPointRec(mouse, _multiclickableZone)) {
         _multiState = Enums::MultiState::MULTI;
+        this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
     }
     if (CheckCollisionPointRec(mouse, _connectionclickableZone)) {
         if (_port != "" && _hostName != "") {
             std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
             _menuState = MenuState::CONNECTING;
+        }
+        if (getErrorConnection()) {
+            this->_sound.playSound(Assets::AssetsIndex::ERROR_OGG, ".ogg");
+        } else {
+            this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
         }
     }
 }
