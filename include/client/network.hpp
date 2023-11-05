@@ -39,6 +39,7 @@ namespace Network {
      * @return false
      */
     bool check401Error();
+    void backMenu();
     /**
      * @brief Update the TCP client.
      * Fetches the server information then answers from the server

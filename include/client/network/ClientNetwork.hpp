@@ -314,6 +314,11 @@ namespace Network {
          */
         void send201(Enums::ModeSelect mode);
         /**
+         * @brief send a 205 to the server on binary format with a header struct
+         *
+         */
+        void send205();
+        /**
          * @brief handle messages from the server and call the right function attributed to the header rfc code
          *
          * @param messageHeader

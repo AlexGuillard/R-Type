@@ -9,6 +9,7 @@
 
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
+#include "client/network.hpp"
 #include <cstring>
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
@@ -715,7 +716,7 @@ void Screen::Display::drawBackToMenu(GameEngine::GameEngine &engine)
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         Vector2 mousePos = GetMousePosition();
         if (CheckCollisionPointRec(mousePos, _backToMenuClickableZone)) {
-            std::cout << "Back to menu" << std::endl;
+            Network::backMenu();
         }
     }
 
@@ -730,6 +731,7 @@ void Screen::Display::drawLoose([[maybe_unused]] Screen::Display &window, GameEn
     float animationDuration = 2.0f;
     float elapsedTime = 0.0f;
     Color textColor = BLANK;
+    Network::updateClientNetworkTCP(false, window.getModeState());
 
     while (elapsedTime < animationDuration) {
         elapsedTime += GetFrameTime();
@@ -766,6 +768,7 @@ void Screen::Display::drawWin([[maybe_unused]] Screen::Display &window, GameEngi
     Color textColor = BLANK;
     const int maxParticles = 200;
     Particle fireworks[maxParticles];
+    Network::updateClientNetworkTCP(false, window.getModeState());
 
     for (int i = 0; i < maxParticles; i++) {
         fireworks[i].active = false;
@@ -817,6 +820,7 @@ void Screen::Display::drawLeftRightWin([[maybe_unused]] Screen::Display &window,
     Color textColor = BLANK;
     const int maxParticles = 200;
     Particle fireworks[maxParticles];
+    Network::updateClientNetworkTCP(false, window.getModeState());
 
     for (int i = 0; i < maxParticles; i++) {
         fireworks[i].active = false;

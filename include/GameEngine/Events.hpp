@@ -28,6 +28,7 @@ namespace GameEngine {
             BYDO_SHOOT_MISSILE,             // Something wants to shoot a bydo shot
             BYDO_SHOOT_WAVE_BEAM,           // Something wants to shoot a bydo wave beam
             GO_BACK_TO_MENU,                // The game is over, go back to the menu
+            POD_SHOOT,                      // Pod wants to shoot something
             COUNT
         };
 

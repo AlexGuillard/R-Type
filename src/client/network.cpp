@@ -52,6 +52,11 @@ namespace Network {
         clientNetwork.handleNetwork();
     }
 
+    void backMenu()
+    {
+        ClientNetwork::getInstance().send205();
+    }
+
     void setEngineToNetwork(GameEngine::GameEngine &engine)
     {
         ClientNetwork::getInstance().setEngine(engine);
