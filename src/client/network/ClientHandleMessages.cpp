@@ -469,12 +469,19 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
                 if (connect(_host, udpPort.number, false, Enums::MultiState::MULTI)) {
                     firstTime = true;
                     isConnectedUDP = true;
+                    std::string res = "";
+                    res = Network::Send::makeHeader(217, _indexPlayer);
+                    asyncReceive(_socket);
+                    asyncSend(_socket, res);
                     std::cout << "jme suis co en udp\n";
                 } else {
                     std::cout << "jme suis pas co en udp\n";
                 }
             } else {
                 isConnectedUDP = true;
+                std::string res = "";
+                res = Network::Send::makeHeader(217, _indexPlayer);
+                asyncSend(_socket, res);
                 asyncReceive(_socket);
             }
         } else {
@@ -497,8 +504,12 @@ void Network::ClientNetwork::handleNewPlayer(const header &messageHeader, std::s
 void Network::ClientNetwork::handleMenu(const header &messageHeader, std::string &str)
 {
     if (messageHeader.codeRfc == 205) {
+        std::cout << "receive 205" << std::endl;
         BodyNumber footer = getBody(str);
         if (footer.number == 205) {
+            // firstTime = false;
+            // isCoUDP = false;
+            // ClientNetwork::getInstance().isConnectedUDP = false;
             _engine.reset(GameEngine::registryTypeEntities);
             GameEngine::Events::push(GameEngine::Events::Type::GO_BACK_TO_MENU);
         }

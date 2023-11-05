@@ -130,11 +130,6 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
             _endpoint = serverEndpoint;
             _socket.open(_endpoint.protocol());
             std::cout << "Connected to server by udp" << std::endl;
-
-            std::string res = "";
-            res = Network::Send::makeHeader(217, _indexPlayer);
-            asyncReceive(_socket);
-            asyncSend(_socket, res);
         }
 
         catch (std::exception &e) {
