@@ -154,7 +154,13 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawLoose(GameEngine::GameEngine &engine);
+        static void drawLoose([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
+
+        /**
+         * @brief draw the back to menu button
+         *
+         */
+        void drawBackToMenu(GameEngine::GameEngine &engine);
 
         /**
          * @brief Particles struct used for the win/401 screen
@@ -173,7 +179,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawWin(GameEngine::GameEngine &engine);
+        static void drawWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
 
         /**
          * @brief Draw winnig screen for left or right in pvp mode
@@ -181,7 +187,7 @@ namespace Screen {
          * @param engine
          * @param left
          */
-        static void drawLeftRightWin(GameEngine::GameEngine &engine, bool left);
+        static void drawLeftRightWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, bool left);
 
         /**
          * @brief draw the waitingRoom
@@ -339,6 +345,8 @@ namespace Screen {
         Rectangle _pvpclickableZone;
         // Set the rectangle clickable for friendly Fire mode button
         Rectangle _friendlyFireclickableZone;
+        // Set the rectangle clickable for back to menu button
+        Rectangle _backToMenuClickableZone;
         Enums::ModeSelect _modeState = Enums::ModeSelect::REGULAR;
         GameState _gameState = GameState::MENU;
         MenuState _menuState = MenuState::WAITING_FOR_PLAYER_INPUT;
