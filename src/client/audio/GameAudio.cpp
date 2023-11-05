@@ -11,6 +11,7 @@
 void GameAudio::playSound(Assets::AssetsIndex index, const std::string &extension)
 {
     PlaySound(Assets::AssetLoader::loadSound(index, extension));
+    SetSoundVolume(Assets::AssetLoader::loadSound(index, extension), 0.5);
 }
 
 void GameAudio::playMusic(Assets::AssetsIndex index, const std::string &extension, bool loop, double volume)

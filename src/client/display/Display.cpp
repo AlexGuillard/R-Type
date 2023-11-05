@@ -98,9 +98,11 @@ void Screen::Display::updateAudio()
     if (_gameState == GameState::MENU) {
         _sound.changeMusic(Assets::AssetsIndex::MENU_WAV, ".wav", true, 0.2);
     } else if (_gameState == GameState::GAME) {
-        _sound.changeMusic(Assets::AssetsIndex::GAME_OGG, ".ogg", true, 0.3);
+        _sound.changeMusic(Assets::AssetsIndex::GAME_OGG, ".ogg", true, 0.2);
     } else if (_gameState == GameState::LOOSING) {
-        _sound.changeMusic(Assets::AssetsIndex::GAME_OVER_OGG, ".ogg", true, 0.5);
+        _sound.changeMusic(Assets::AssetsIndex::GAME_OVER_OGG, ".ogg", true, 0.2);
+    } else if (_gameState == GameState::WINNING) {
+        _sound.changeMusic(Assets::AssetsIndex::WIN_MUSIC_OGG, ".ogg", true, 0.2);
     }
 }
 
@@ -376,7 +378,6 @@ void Screen::Display::detectActionMenu()
     if (IsKeyReleased(KEY_SPACE) && getGameState() == GameState::GAME) {
         this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
     }
-
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && getGameState() == GameState::MENU) {
         mouseClickedMenu();
     }
@@ -440,7 +441,11 @@ void Screen::Display::mouseClickedMenu()
             std::cout << "\n Try Connexion\nwith:" << _hostName << " | " << _port << "\n\n";
             _menuState = MenuState::CONNECTING;
         }
-        this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
+        if (getErrorConnection()) {
+            this->_sound.playSound(Assets::AssetsIndex::ERROR_OGG, ".ogg");
+        } else {
+            this->_sound.playSound(Assets::AssetsIndex::MOUSE_CLICK_MP3, ".mp3");
+        }
     }
 }
 
