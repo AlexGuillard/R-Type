@@ -131,6 +131,8 @@ void Screen::Display::updateAudio()
         _sound.changeMusic(Assets::AssetsIndex::MENU_WAV, ".wav", true, 0.2);
     } else if (_gameState == GameState::GAME) {
         _sound.changeMusic(Assets::AssetsIndex::GAME_OGG, ".ogg", true, 0.2);
+    } if (_gameState == GameState::LOOSING || _gameState == GameState::WINNING) {
+        _sound.stopMusic();
     }
 }
 
