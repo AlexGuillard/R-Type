@@ -467,7 +467,7 @@ namespace Network {
          * @return false
          */
         bool getServerConnectionLost() const;
-
+        int _score = 0;
     private:
         //Port of the server
         int _port;

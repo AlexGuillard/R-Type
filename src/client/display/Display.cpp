@@ -10,6 +10,7 @@
 #include "GameEngine/Events.hpp"
 #include "client/display/Display.hpp"
 #include <cstring>
+#include <cstdlib>
 
 uint16_t Screen::Display::cameraWidth = Screen::Display::defaultCameraWidth;
 uint16_t Screen::Display::cameraHeight = Screen::Display::defaultCameraHeight;
@@ -739,7 +740,7 @@ Vector2 Screen::Display::getCameraSize()
 
 ///// End Game
 
-void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
+void Screen::Display::drawLoose(GameEngine::GameEngine &engine, int score)
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -763,6 +764,9 @@ void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
         const char* text = "GAME OVER";
         int letterSpacing = 30;
 
+        DrawText("Score: ", 600, 100, 30, textColor);
+        DrawText(std::to_string(score).c_str(), 710, 100, 30, textColor);
+
         for (int i = 0; i < strlen(text); i++) {
             char character[2] = {text[i], '\0'};
             DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
@@ -773,7 +777,7 @@ void Screen::Display::drawLoose(GameEngine::GameEngine &engine)
     }
 }
 
-void Screen::Display::drawWin(GameEngine::GameEngine &engine)
+void Screen::Display::drawWin(GameEngine::GameEngine &engine, int score)
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
@@ -814,6 +818,9 @@ void Screen::Display::drawWin(GameEngine::GameEngine &engine)
                 DrawCircleV(fireworks[i].position, fireworks[i].radius, fireworks[i].color);
             }
         }
+
+        DrawText("Score: ", 600, 100, 30, textColor);
+        DrawText(std::to_string(score).c_str(), 710, 100, 30, textColor);
 
         const char* text = "Y O U   W I N";
         Vector2 textPosition = {(float)((screenWidth - MeasureText(text, 20)) / 2.25), (float)(screenHeight / 2.5)};

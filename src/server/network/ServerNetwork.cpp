@@ -170,6 +170,7 @@ void Network::ServerNetwork::campaignEnd()
                     _tickCount = 0;
                     if (_script.openLVL(_stage) == -1) {
                         _dataToSend.append(Send::makeHeader(221, 0));
+                        _dataToSend.append(Send::makeBodyNum(_engine.getRegistry(GameEngine::registryTypeEntities)._score));
                         _dataToSend.append(Send::makeBodyNum(221));
                     } else {
                         _dataToSend.append(Send::makeHeader(231, _stage));
@@ -182,6 +183,7 @@ void Network::ServerNetwork::campaignEnd()
         }
     } else {
         _dataToSend.append(Send::makeHeader(222, 0));
+        _dataToSend.append(Send::makeBodyNum(_engine.getRegistry(GameEngine::registryTypeEntities)._score));
         _dataToSend.append(Send::makeBodyNum(222));
     }
 }
