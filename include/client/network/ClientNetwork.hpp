@@ -471,6 +471,11 @@ namespace Network {
          * @return false
          */
         bool getLooseCondition() const;
+        /**
+         * @brief reset boolens of endgame screens
+         *
+         */
+        void resetEndGame();
 
     private:
         //Port of the server

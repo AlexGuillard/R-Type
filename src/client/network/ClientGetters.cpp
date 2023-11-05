@@ -133,3 +133,11 @@ bool Network::ClientNetwork::getLooseCondition()const
 {
     return _looseCondition;
 }
+
+void Network::ClientNetwork::resetEndGame()
+{
+    _winCondition = false;
+    _winLeft = false;
+    _winRight = false;
+    _looseCondition = false;
+}

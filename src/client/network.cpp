@@ -57,6 +57,7 @@ namespace Network {
         firstTime = false;
         isCoUDP = false;
         ClientNetwork::getInstance().isConnectedUDP = false;
+        ClientNetwork::getInstance().resetEndGame();
         ClientNetwork::getInstance().send205();
     }
 
