@@ -53,33 +53,47 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
 static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    while (GameEngine::Events::poll(type));
+    int idx;
+    GameEngine::Events::Type eventType;
+
+    while (GameEngine::Events::poll(eventType, idx));
     Screen::Display::drawLoose(window, engine);
 }
 
 static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    while (GameEngine::Events::poll(type));
+    int idx;
+    GameEngine::Events::Type eventType;
+
+    while (GameEngine::Events::poll(eventType, idx));
     Screen::Display::drawWin(window, engine);
 }
 
 static void leftWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    while (GameEngine::Events::poll(type));
+    int idx;
+    GameEngine::Events::Type eventType;
+
+    while (GameEngine::Events::poll(eventType, idx));
     Screen::Display::drawLeftRightWin(window, engine, true);
 }
 
 static void rightWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    while (GameEngine::Events::poll(type));
+    int idx;
+    GameEngine::Events::Type eventType;
+
+    while (GameEngine::Events::poll(eventType, idx));
     Screen::Display::drawLeftRightWin(window, engine, false);
 }
 
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton(), window.getModeState());
+    int idx;
+    GameEngine::Events::Type eventType;
 
-    while (GameEngine::Events::poll(type));
+    while (GameEngine::Events::poll(eventType, idx));
     if (!Network::check401Error()) {
         window.drawWaitingRoom();
     } else {
