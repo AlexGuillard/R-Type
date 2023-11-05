@@ -38,6 +38,7 @@ namespace GameEngine {
         registry.registerComponent<Components::LevelComponent>();
         registry.registerComponent<Components::PositionComponent>();
         registry.registerComponent<Components::GroundComponent>();
+        registry.registerComponent<Components::ImmortalComponent>();
 
         registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::BackgroundComponent>(Systems::background);
         registry.addSystem<Components::PositionComponent, Components::LevelComponent, Components::GroundComponent>(Systems::ground);
