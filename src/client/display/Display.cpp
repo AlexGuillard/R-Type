@@ -41,6 +41,17 @@ Screen::Display::Display(GameState state) : _gameState(state)
     // this->toggleFullScreen();
     SetTargetFPS(Constants::frameRate);
     _errorConnection = false;
+    for (int i = 0; i < MAX_NEBULA_PARTICLES; i++) {
+        _nebulaParticles[i].position.x = GetRandomValue(20, GetScreenWidth() - 20);
+        _nebulaParticles[i].position.y = GetRandomValue(-20, 0);
+        _nebulaParticles[i].speed = static_cast<float>(GetRandomValue(5, 50));
+        _nebulaParticles[i].color = {
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(50, 200)),
+            static_cast<unsigned char>(GetRandomValue(150, 255)),
+            static_cast<unsigned char>(GetRandomValue(50, 200))
+        };
+    }
 }
 
 Screen::Display::~Display()
@@ -484,7 +495,7 @@ void Screen::Display::setSpaceBackground(bool menu)
             }
         }
 
-        DrawRectangleV(_dustParticles[i].position, {20, 40}, _dustParticles[i].color);
+        DrawRectangleV(_dustParticles[i].position, {40, 10}, _dustParticles[i].color);
     }
 
     for (int i = 0; i < MAX_NEBULA_PARTICLES; i++) {
@@ -514,7 +525,7 @@ void Screen::Display::setSpaceBackground(bool menu)
             }
         }
 
-        DrawRectangleV(_nebulaParticles[i].position, {20, 40}, _nebulaParticles[i].color);
+        DrawRectangleV(_nebulaParticles[i].position, {10, 40}, _nebulaParticles[i].color);
     }
 
     if (menu)

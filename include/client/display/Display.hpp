@@ -16,7 +16,7 @@
 #include "enums.hpp"
 
 #define MAX_DUST_PARTICLES 50
-#define MAX_NEBULA_PARTICLES 200
+#define MAX_NEBULA_PARTICLES 25
 
 namespace Screen {
     /**
