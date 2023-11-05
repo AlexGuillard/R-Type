@@ -63,29 +63,15 @@ namespace Assets {
         return AssetLoader::loadTexture(index, ".gif");
     }
 
-    Music AssetLoader::loadMusic(AssetsIndex index, const std::string &extension)
+    Music AssetLoader::loadMusic(AssetsIndex index, const std::string &extension, bool loop)
     {
         if (AssetLoader::musicCache.contains(index)) {
             return AssetLoader::musicCache[index];
         }
         auto &&[data, dataSize] = Assets::assets[static_cast<uint16_t>(index)];
         AssetLoader::musicCache[index] = LoadMusicStreamFromMemory(extension.c_str(),*data, dataSize);
+        AssetLoader::musicCache[index].looping = loop;
         return AssetLoader::musicCache[index];
-    }
-
-    Music AssetLoader::loadMusicWav(AssetsIndex index)
-    {
-        return AssetLoader::loadMusic(index, ".wav");
-    }
-
-    Music AssetLoader::loadMusicOgg(AssetsIndex index)
-    {
-        return AssetLoader::loadMusic(index, ".ogg");
-    }
-
-    Music AssetLoader::loadMusicMp3(AssetsIndex index)
-    {
-        return AssetLoader::loadMusic(index, ".mp3");
     }
 
     Sound AssetLoader::loadSound(AssetsIndex index, const std::string &extension)

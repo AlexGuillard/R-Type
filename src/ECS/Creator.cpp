@@ -259,6 +259,7 @@ namespace ECS {
         const Utils::Vector2 missileFramePos(2, 0);
         const uint8_t nbFrameInSpriteSheet = 2;
 
+        GameEngine::Events::push(GameEngine::Events::Type::PLAYER_WAVE_BEAM, id);
         ECS::Entity wavebeam = ECS::Creator::createCharacter(registry, team, 2 * strength, 0, 16 * strength + 1, 12, id);
         registry.getComponents<Components::PositionComponent>().at(wavebeam)->x = x;
         registry.getComponents<Components::PositionComponent>().at(wavebeam)->y = y;
