@@ -155,7 +155,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawLoose(GameEngine::GameEngine &engine);
+        static void drawLoose(GameEngine::GameEngine &engine, int score);
 
         /**
          * @brief Particles struct used for the win/401 screen
@@ -174,7 +174,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawWin(GameEngine::GameEngine &engine);
+        static void drawWin(GameEngine::GameEngine &engine, int score);
 
         /**
          * @brief Draw winnig screen for left or right in pvp mode

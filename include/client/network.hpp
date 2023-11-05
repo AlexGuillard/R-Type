@@ -55,6 +55,12 @@ namespace Network {
      */
     void setEngineToNetwork(GameEngine::GameEngine &engine);
     /**
+     * @brief Get Score
+     *
+     * @return Score
+     */
+    int getScore();
+    /**
      * @brief Get the Winning Condition object
      *
      * @return true won

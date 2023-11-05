@@ -55,12 +55,14 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
 
 static void looseLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    Screen::Display::drawLoose(engine);
+    int score = Network::getScore();
+    Screen::Display::drawLoose(engine, score);
 }
 
 static void winLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)
 {
-    Screen::Display::drawWin(engine);
+    int score = Network::getScore();
+    Screen::Display::drawWin(engine, score);
 }
 
 static void leftWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine)

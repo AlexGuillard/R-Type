@@ -25,6 +25,7 @@
 #include "ECS/Components/InRangeComponent.hpp"
 #include "ECS/Components/WalkingAIComponent.hpp"
 #include "ECS/Components/TargetComponent.hpp"
+#include "ECS/Components/ScoreComponent.hpp"
 #include "Assets/AssetLoader.hpp"
 #include "ECS/Components/GravityComponent.hpp"
 #include "ECS/Components/BydoShootingAIComponent.hpp"
@@ -94,6 +95,7 @@ namespace GameEngine {
         registry.registerComponent<Components::ShootingTimerComponent>();
         registry.registerComponent<Components::AdaptiveFlyingAIComponent>();
         registry.registerComponent<Components::MissileSpawnPointComponent>();
+        registry.registerComponent<Components::ScoreComponent>();
 
         // Systems (order matters)
         // timer systems
