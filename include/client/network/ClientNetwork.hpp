@@ -460,6 +460,13 @@ namespace Network {
          * @return false
          */
         bool getLooseCondition() const;
+        /**
+         * @brief Get the Server Connection Lost object
+         *
+         * @return true
+         * @return false
+         */
+        bool getServerConnectionLost() const;
 
     private:
         //Port of the server
@@ -502,6 +509,8 @@ namespace Network {
         bool _winRight = false;
         //If true they lost
         bool _looseCondition = false;
+        //If true the server is disconnected or connection lost
+        bool _serverDisconnected = false;
     };
 }
 

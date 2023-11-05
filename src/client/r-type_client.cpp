@@ -47,6 +47,9 @@ static void gameLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameE
     if (Network::getRightWinningCondition()) {
         window.setGameState(Screen::Display::GameState::RIGHT_WINNING);
     }
+    if (Network::getServerDisconnect()) {
+        window.displayServerDisconnect();
+    }
 
 }
 
@@ -82,6 +85,10 @@ static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
 
     if (Network::returnIsCoUDP()) {
         window.setGameState(Screen::Display::GameState::GAME);
+    }
+
+    if (Network::getServerDisconnect()) {
+        window.displayServerDisconnect();
     }
 
 }

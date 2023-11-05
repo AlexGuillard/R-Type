@@ -133,3 +133,8 @@ bool Network::ClientNetwork::getLooseCondition()const
 {
     return _looseCondition;
 }
+
+bool Network::ClientNetwork::getServerConnectionLost()const
+{
+    return _serverDisconnected;
+}

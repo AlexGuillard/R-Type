@@ -77,6 +77,11 @@ namespace Network {
         return ClientNetwork::getInstance().getLooseCondition();
     }
 
+    bool getServerDisconnect()
+    {
+        return ClientNetwork::getInstance().getServerConnectionLost();
+    }
+
     void updateClientNetworkUDP()
     {
         GameEngine::Events::Type type;

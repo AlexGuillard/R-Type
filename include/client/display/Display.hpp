@@ -274,6 +274,11 @@ namespace Screen {
          */
         void displayErrorConnection();
         /**
+         * @brief Write when the connection with server is lost
+         *
+         */
+        void displayServerDisconnect();
+        /**
          * @brief Make understand the user the room is full or already started
          *
          */

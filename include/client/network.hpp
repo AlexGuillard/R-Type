@@ -82,4 +82,11 @@ namespace Network {
      * @return false
      */
     bool getLoosingCondition();
+    /**
+     * @brief Get the Server Disconnect object
+     *
+     * @return true
+     * @return false
+     */
+    bool getServerDisconnect();
 } // namespace Network

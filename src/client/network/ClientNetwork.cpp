@@ -139,19 +139,20 @@ bool Network::ClientNetwork::connect(const std::string &host, int port, bool isT
 
 //-----------------------------HANDLE NETWORK--------------------------------------------//
 
-void Network::ClientNetwork::handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket)
-{
-    std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
-    _data.erase(0, recvd_bytes);
-    if (!error && recvd_bytes > HEADER_SIZE) {
+void Network::ClientNetwork::handleTCPData(const boost::system::error_code &error, std::size_t recvd_bytes, boost::asio::ip::tcp::socket &tcpsocket) {
+    if (error == boost::asio::error::eof) {
+        _serverDisconnected = true;
+    } else if (!error && recvd_bytes > HEADER_SIZE) {
+        std::string received = std::string(_data.begin(), _data.begin() + recvd_bytes);
+        _data.erase(0, recvd_bytes);
         while (received.size() > HEADER_SIZE) {
             header packet = getHeader(received);
             handleTCPMessageData(packet, received);
         }
+        received.clear();
     } else {
         std::cerr << "Error receiving data: " << error.message() << std::endl;
     }
-    received.clear();
     startAsyncReceiveTCP(tcpsocket);
 }
 
