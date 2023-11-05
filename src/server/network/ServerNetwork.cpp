@@ -266,6 +266,7 @@ void Network::ServerNetwork::updateTicks()
         if (_typeMod == 0) {
             _canPlay = false;
             _isGame = false;
+            _tickCount = 0;
             _listUdpEndpoints.clear();
         }
         if (_canPlay && _typeMod != 244) {

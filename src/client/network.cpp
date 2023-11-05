@@ -54,6 +54,9 @@ namespace Network {
 
     void backMenu()
     {
+        firstTime = false;
+        isCoUDP = false;
+        ClientNetwork::getInstance().isConnectedUDP = false;
         ClientNetwork::getInstance().send205();
     }
 
