@@ -102,12 +102,6 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
         registry.addSystem<Components::PickupComponent, Components::CollisionComponent>(Systems::pickup);
-        // Shooting systems
-        registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
-        registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
-        registry.addSystem<Components::ShootingTimerComponent, Components::PositionComponent>(Systems::shooting);
-        registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
-        registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
         // Movement systems (must be called after collision system)
         registry.addSystem<Components::SinMovementComponent, Components::VelocityComponent>(Systems::sinMovement);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
@@ -118,6 +112,12 @@ namespace GameEngine {
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::BossIntroComponent>(Systems::bossIntro);
         // Solid system (called after movement system to prevent entities from being stuck in walls)
         registry.addSystem<Components::SolidComponent, Components::HitBoxComponent, Components::CollisionComponent, Components::PositionComponent, Components::VelocityComponent, Components::TeamComponent>(Systems::solid);
+        // Shooting systems
+        registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
+        registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
+        registry.addSystem<Components::ShootingTimerComponent, Components::PositionComponent>(Systems::shooting);
+        registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
+        registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
     }
 
     static ECS::Entity createInvisibleWall(Containers::Registry &registry, float x, float y, float width, float height, Enums::TeamGroup team = Enums::TeamGroup::NEUTRAL)

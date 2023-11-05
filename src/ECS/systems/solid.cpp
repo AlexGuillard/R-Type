@@ -40,16 +40,16 @@ namespace ECS::Systems {
                 int overlapBottom = (position->y + hitBox->height) - entityPosition->y;
 
                 if (overlapLeft > 0 && overlapLeft < overlapBottom && overlapLeft < overlapTop && overlapLeft < overlapRight) {
-                    entityPosition->x = position->x - entityHitBox->width;
+                    entityPosition->x = position->x - entityHitBox->width - 1;
                     entityVelocity->x = 0;
                 } else if (overlapRight > 0 && overlapRight < overlapBottom && overlapRight < overlapTop && overlapRight < overlapLeft) {
-                    entityPosition->x = position->x + hitBox->width;
+                    entityPosition->x = position->x + hitBox->width + 1;
                     entityVelocity->x = 0;
                 } else if (overlapTop > 0 && overlapTop < overlapLeft && overlapTop < overlapRight && overlapTop < overlapBottom) {
-                    entityPosition->y = position->y - entityHitBox->height;
+                    entityPosition->y = position->y - entityHitBox->height - 1;
                     entityVelocity->y = 0;
                 } else if (overlapBottom > 0 && overlapBottom < overlapLeft && overlapBottom < overlapRight && overlapBottom < overlapTop) {
-                    entityPosition->y = position->y + hitBox->height;
+                    entityPosition->y = position->y + hitBox->height + 1;
                     entityVelocity->y = 0;
                 }
             }

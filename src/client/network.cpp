@@ -62,6 +62,16 @@ namespace Network {
         return ClientNetwork::getInstance().getWinCondition();
     }
 
+    bool getLeftWinningCondition()
+    {
+        return ClientNetwork::getInstance().getLeftWinCondition();
+    }
+
+    bool getRightWinningCondition()
+    {
+        return ClientNetwork::getInstance().getRightWinCondition();
+    }
+
     bool getLoosingCondition()
     {
         return ClientNetwork::getInstance().getLooseCondition();

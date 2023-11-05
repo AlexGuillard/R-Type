@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "GameEngine/GameEngine.hpp"
+#include "client/audio/GameAudio.hpp"
 #include "constants.hpp"
 #include "enums.hpp"
 
@@ -30,6 +31,8 @@ namespace Screen {
             WAITINGROOM,             // play button waiting room
             WINNING,
             LOOSING,
+            LEFT_WINNING,
+            RIGHT_WINNING,
         };
         enum class MenuState {
             WAITING_FOR_PLAYER_INPUT, // waiting for player input
@@ -171,6 +174,14 @@ namespace Screen {
          * @param engine
          */
         static void drawWin(GameEngine::GameEngine &engine);
+
+        /**
+         * @brief Draw winnig screen for left or right in pvp mode
+         *
+         * @param engine
+         * @param left
+         */
+        static void drawLeftRightWin(GameEngine::GameEngine &engine, bool left);
 
         /**
          * @brief draw the waitingRoom
@@ -362,5 +373,7 @@ namespace Screen {
             enum CameraShakeIntensity intensity = CameraShakeIntensity::EARTHQUAKE;
             double _startTime = 0;
         } _cameraShake;
+
+        GameAudio _sound;
     };
 }

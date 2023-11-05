@@ -384,6 +384,20 @@ namespace Network {
          */
         void handleLooseGame(const header &messageHeader, std::string &str);
         /**
+         * @brief handle the fact that the left team won
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleRightWon(const header &messageHeader, std::string &str);
+        /**
+         * @brief handle the fact that the left team won
+         *
+         * @param messageHeader
+         * @param str
+         */
+        void handleLeftWon(const header &messageHeader, std::string &str);
+        /**
          * @brief handle the fact of update the stages of the game
          *
          * @param messageHeader
@@ -425,6 +439,20 @@ namespace Network {
          * @return false
          */
         bool getWinCondition() const;
+        /**
+         * @brief Get the Left Win Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getLeftWinCondition() const;
+        /**
+         * @brief Get the Right Win Condition object
+         *
+         * @return true
+         * @return false
+         */
+        bool getRightWinCondition() const;
         /**
          * @brief Get the Loose Condition object
          *
@@ -470,6 +498,8 @@ namespace Network {
         bool _errorServer;
         //If true they won
         bool _winCondition = false;
+        bool _winLeft = false;
+        bool _winRight = false;
         //If true they lost
         bool _looseCondition = false;
     };

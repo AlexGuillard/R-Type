@@ -14,7 +14,7 @@ namespace Network {
     public std::enable_shared_from_this<ServerTcp> {
         public:
             ServerTcp(boost::asio::ip::tcp::socket socket, Network::Participants &list,
-                int udpPort, std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod);
+                int udpPort, std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> &_clients, bool &isGame, int &mod);
             ~ServerTcp();
             void start();
             void waitRequest();
@@ -35,7 +35,6 @@ namespace Network {
             void send202(std::shared_ptr<IServerTcp> participant);
             std::string code401();
             void send201();
-            std::string getActualClient();
             void addClient();
             void removeClient();
         protected:
@@ -44,7 +43,7 @@ namespace Network {
             int _udpPort;
             boost::asio::ip::tcp::socket _socket;
             Network::Participants &_list;
-            std::unordered_map<std::string, std::pair<int, std::vector<int>>> &_listClient;
+            std::unordered_map<std::shared_ptr<IServerTcp>, std::pair<int, std::vector<int>>> &_listClient;
             std::string _data;
             bool &_isGame;
         private:
