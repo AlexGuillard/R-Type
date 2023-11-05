@@ -34,6 +34,7 @@
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/ImmortalComponent.hpp"
 #include "ECS/Components/MissileSpawnPointComponent.hpp"
+#include "ECS/Components/ScoreComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
 #include "ECS/Systems/collision.hpp"
@@ -86,6 +87,7 @@ namespace GameEngine {
         registry.registerComponent<Components::BossIntroComponent>();
         registry.registerComponent<Components::ImmortalComponent>();
         registry.registerComponent<Components::MissileSpawnPointComponent>();
+        registry.registerComponent<Components::ScoreComponent>();
 
         // Systems (order matters)
         // timer systems

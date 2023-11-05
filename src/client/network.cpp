@@ -57,6 +57,11 @@ namespace Network {
         ClientNetwork::getInstance().setEngine(engine);
     }
 
+    int getScore()
+    {
+        return ClientNetwork::getInstance()._score;
+    }
+
     bool getWinningCondition()
     {
         return ClientNetwork::getInstance().getWinCondition();

@@ -32,6 +32,7 @@
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/InvincibleTimerComponent.hpp"
 #include "ECS/Components/MissileSpawnPointComponent.hpp"
+#include "ECS/Components/ScoreComponent.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "enums.hpp"
 #include "constants.hpp"
@@ -368,6 +369,7 @@ namespace ECS {
             true, // boomerang
             nbFrameInAnimation // fps
         );
+        registry.emplaceComponent<Components::ScoreComponent>(enemyBasic, 1);
         return enemyBasic;
     }
 
@@ -389,6 +391,7 @@ namespace ECS {
         );
         Creator::addWalkingAI(bink, registry, ECS::NullEntity(), std::make_pair(0.F, 500.F), 100, true, false);
         Creator::addBydoShootingAI(bink, registry, ECS::NullEntity(), 1, 100);
+        registry.emplaceComponent<Components::ScoreComponent>(bink, 1);
         return bink;
     }
 
@@ -410,6 +413,7 @@ namespace ECS {
         );
         addFlyingAI(scant, registry, ECS::NullEntity(), std::make_pair(-300.F, -750.F), std::make_pair(-10.F, 10.F), 100);
         addBydoShootingAI(scant, registry, ECS::NullEntity(), 1, 100, Enums::ShotType::WAVE_BEAM);
+        registry.emplaceComponent<Components::ScoreComponent>(scant, 5);
         return scant;
     }
 
@@ -432,6 +436,7 @@ namespace ECS {
         addSinMovementAI(bug, registry, x, y, Components::defaultSinFrequency * 2, Components::defaultSinXSpeed * 2, Components::defaultSinAmplitude * 2);
         addBydoShootingAI(bug, registry, ECS::NullEntity(), 1.5F, 100);
         registry.emplaceComponent<Components::InRangeComponent>(bug);
+        registry.emplaceComponent<Components::ScoreComponent>(bug, 1);
         return bug;
     }
 
@@ -452,6 +457,7 @@ namespace ECS {
             nbFrameInAnimation // fps
         );
         addFlyingAI(cancer, registry, ECS::NullEntity(), std::make_pair(-10.F, 10.F), std::make_pair(-10.F, 10.F), 100);
+        registry.emplaceComponent<Components::ScoreComponent>(cancer, 1);
         return cancer;
     }
 
@@ -474,6 +480,7 @@ namespace ECS {
         registry.emplaceComponent<Components::GravityComponent>(blaster, Creator::defaultGravity);
         addBydoShootingAI(blaster, registry, ECS::NullEntity(), 1, 100);
         registry.emplaceComponent<Components::InRangeComponent>(blaster);
+        registry.emplaceComponent<Components::ScoreComponent>(blaster, 1);
         return blaster;
     }
 
@@ -539,6 +546,7 @@ namespace ECS {
                 {{.1F, .3F}, Enums::ShotType::BYDO_SHOT, .25F * lengthAnimation, .0F}
             } }
         );
+        registry.emplaceComponent<Components::ScoreComponent>(dobkeratops, 10);
         return dobkeratops;
     }
 

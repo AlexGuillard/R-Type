@@ -132,11 +132,13 @@ void Network::ClientNetwork::handleRightWon(const header &messageHeader, std::st
 
 void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(BodyNumber)) {
+    if (str.size() >= (sizeof(BodyNumber) + sizeof(BodyNumber))) {
+        BodyNumber body = getBody(str);
         BodyNumber footer = getBody(str);
 
         if (footer.number == 222 && !_looseCondition) {
             _looseCondition = true;
+            _score = body.number;
         }
 
     } else {
@@ -146,11 +148,13 @@ void Network::ClientNetwork::handleLooseGame(const header &messageHeader, std::s
 
 void Network::ClientNetwork::handleWinGame(const header &messageHeader, std::string &str)
 {
-    if (str.size() >= sizeof(BodyNumber)) {
+    if (str.size() >= (sizeof(BodyNumber) + sizeof(BodyNumber))) {
+        BodyNumber body = getBody(str);
         BodyNumber footer = getBody(str);
 
         if (footer.number == 221 && !_winCondition) {
             _winCondition = true;
+            _score = body.number;
         }
 
     } else {

@@ -66,10 +66,10 @@ int Network::RecupInfo::openLVL(int level) {
     }
     if (level == 1) {
         openFile(Assets::AssetsIndex::SCRIPT_STAGE_1_TXT);
-    } else if (level == 2) {
-        openFile(Assets::AssetsIndex::SCRIPT_STAGE_2_TXT);
-    } else if (level == 3) {
-        openFile(Assets::AssetsIndex::SCRIPT_STAGE_3_TXT);
+    // } else if (level == 2) {
+    //     openFile(Assets::AssetsIndex::SCRIPT_STAGE_2_TXT);
+    // } else if (level == 3) {
+    //     openFile(Assets::AssetsIndex::SCRIPT_STAGE_3_TXT);
     } else {
         return -1;
     }

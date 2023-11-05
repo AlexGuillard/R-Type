@@ -154,7 +154,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawLoose([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
+        static void drawLoose([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, int score);
 
         /**
          * @brief draw the back to menu button
@@ -179,7 +179,7 @@ namespace Screen {
          *
          * @param engine
          */
-        static void drawWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine);
+        static void drawWin([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, int score);
 
         /**
          * @brief Draw winnig screen for left or right in pvp mode

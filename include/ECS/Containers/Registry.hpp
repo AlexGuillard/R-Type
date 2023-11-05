@@ -19,6 +19,7 @@
 #include "ECS/Entity.hpp"
 #include "Errors/ComponentNotRegisteredException.hpp"
 #include "ECS/Components/ImmortalComponent.hpp"
+#include "ECS/Components/ScoreComponent.hpp"
 
 namespace ECS::Containers {
     class Registry {
@@ -143,6 +144,9 @@ namespace ECS::Containers {
             if (this->getComponent<Components::ImmortalComponent>(entity)) {
                 return;
             }
+            if (this->getComponent<Components::ScoreComponent>(entity)) {
+                _score += this->getComponent<Components::ScoreComponent>(entity)->score;
+            }
             for (auto &[_, pair] : m_componentsArrays) {
                 auto &deleter = pair.second;
                 deleter(*this, entity);
@@ -199,7 +203,7 @@ namespace ECS::Containers {
                 system();
             }
         }
-
+        int _score = 0;
     private:
         // type_index.hash_code() -> Pair<SparseArray<Component>, deleteComponent>
         // where deleteComponent erase the component from the entity
