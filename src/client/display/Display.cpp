@@ -728,34 +728,34 @@ void Screen::Display::drawLoose([[maybe_unused]] Screen::Display &window, GameEn
 {
     const int screenWidth = GetScreenWidth();
     const int screenHeight = GetScreenHeight();
-    float animationDuration = 2.0f;
-    float elapsedTime = 0.0f;
-    Color textColor = BLANK;
+    static float animationDuration = 2.0f;
+    static float elapsedTime = 0.0f;
+    static Color textColor = BLANK;
     Network::updateClientNetworkTCP(false, window.getModeState());
 
-    while (elapsedTime < animationDuration) {
-        elapsedTime += GetFrameTime();
-        float alpha = (elapsedTime / animationDuration);
-        textColor = Color{static_cast<unsigned char>(RAYWHITE.r), static_cast<unsigned char>(RAYWHITE.g), static_cast<unsigned char>(RAYWHITE.b), static_cast<unsigned char>(alpha * 255)};
-        float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
-        float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
-        float rotation = 360.0f * (elapsedTime / animationDuration);
-        ClearBackground(BLACK);
-        window.drawBackToMenu(engine);
+    elapsedTime += GetFrameTime();
+    float yOffset = sin(2 * PI * (elapsedTime / animationDuration));
+    float alpha = yOffset < 0 ? -yOffset : yOffset;
+    textColor = Color{ static_cast<unsigned char>(RAYWHITE.r), static_cast<unsigned char>(RAYWHITE.g), static_cast<unsigned char>(RAYWHITE.b), static_cast<unsigned char>(alpha * 255) };
+    float scale = 1.0f + sin(2 * PI * (elapsedTime / animationDuration));
+    scale = scale < 0 ? -scale : scale;
+    float rotation = 360.0f * (elapsedTime / animationDuration);
+    ClearBackground(BLACK);
+    window.drawBackToMenu(engine);
 
-        Vector2 startPosition = {(float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset)};
-        Vector2 textPosition = startPosition;
+    Vector2 startPosition = { (float)((screenWidth - MeasureText("GAME OVER", 20)) / 2.4), (float)(screenHeight / 2.5 + 50 * yOffset) };
+    Vector2 textPosition = startPosition;
 
-        const char* text = "GAME OVER";
-        int letterSpacing = 30;
+    const char *text = "GAME OVER";
+    int letterSpacing = 30;
 
-        for (int i = 0; i < strlen(text); i++) {
-            char character[2] = {text[i], '\0'};
-            DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
-            textPosition.x += MeasureText(character, 30) + letterSpacing;
-        }
-
-        EndDrawing();
+    for (int i = 0; i < strlen(text); i++) {
+        char character[2] = { text[i], '\0' };
+        DrawTextEx(GetFontDefault(), character, textPosition, 30 * scale, rotation, textColor);
+        textPosition.x += MeasureText(character, 30) + letterSpacing;
+    }
+    if (elapsedTime >= animationDuration) {
+        elapsedTime -= animationDuration;
     }
 }
 
