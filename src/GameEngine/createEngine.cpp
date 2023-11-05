@@ -33,6 +33,9 @@
 #include "ECS/Components/FlyingAIComponent.hpp"
 #include "ECS/Components/BossIntroComponent.hpp"
 #include "ECS/Components/ImmortalComponent.hpp"
+#include "ECS/Components/PickupComponent.hpp"
+#include "ECS/Components/ShootingTimerComponent.hpp"
+#include "ECS/Components/AdaptiveFlyingAIComponent.hpp"
 #include "ECS/Components/MissileSpawnPointComponent.hpp"
 #include "ECS/Systems/movement.hpp"
 #include "ECS/Systems/shooting.hpp"
@@ -50,6 +53,8 @@
 #include "ECS/Systems/flyingAI.hpp"
 #include "ECS/Systems/bossIntro.hpp"
 #include "ECS/Systems/invincibleTimer.hpp"
+#include "ECS/Systems/pickup.hpp"
+#include "ECS/Systems/adaptiveFlyingAI.hpp"
 #include "Assets/generatedAssets.hpp"
 #include "client/display/Display.hpp"
 
@@ -85,6 +90,9 @@ namespace GameEngine {
         registry.registerComponent<Components::FlyingAIComponent>();
         registry.registerComponent<Components::BossIntroComponent>();
         registry.registerComponent<Components::ImmortalComponent>();
+        registry.registerComponent<Components::PickupComponent>();
+        registry.registerComponent<Components::ShootingTimerComponent>();
+        registry.registerComponent<Components::AdaptiveFlyingAIComponent>();
         registry.registerComponent<Components::MissileSpawnPointComponent>();
 
         // Systems (order matters)
@@ -93,11 +101,13 @@ namespace GameEngine {
         // Collision systems
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent, Components::HitBoxComponent, Components::CollidableComponent, Components::CollisionComponent>(Systems::collision);
         registry.addSystem<Components::CollisionComponent, Components::DamageComponent, Components::TeamComponent, Components::HPComponent, Components::InvincibleTimerComponent>(Systems::damage);
+        registry.addSystem<Components::PickupComponent, Components::CollisionComponent>(Systems::pickup);
         // Movement systems (must be called after collision system)
         registry.addSystem<Components::SinMovementComponent, Components::VelocityComponent>(Systems::sinMovement);
         registry.addSystem<Components::VelocityComponent, Components::GravityComponent>(Systems::gravity);
         registry.addSystem<Components::PositionComponent, Components::VelocityComponent>(static_cast<void (*)(Containers::Registry &, Containers::SparseArray<Components::PositionComponent> &, Containers::SparseArray<Components::VelocityComponent> &)>(&Systems::movement));
         registry.addSystem<Components::HorizontalScrollComponent, Components::PositionComponent>(Systems::horizontalScroll);
+        registry.addSystem<Components::AdaptiveFlyingAIComponent, Components::FlyingAIComponent, Components::TargetComponent>(Systems::adaptiveFlyingAI);
         registry.addSystem<Components::FlyingAIComponent, Components::TargetComponent, Components::PositionComponent, Components::VelocityComponent>(Systems::flyingAI);
         registry.addSystem<Components::PositionComponent, Components::HitBoxComponent, Components::BossIntroComponent>(Systems::bossIntro);
         // Solid system (called after movement system to prevent entities from being stuck in walls)
@@ -105,7 +115,7 @@ namespace GameEngine {
         // Shooting systems
         registry.addSystem<Components::TargetComponent, Components::HPComponent, Components::InvincibleTimerComponent, Components::TeamComponent>(Systems::findTarget);
         registry.addSystem<Components::TargetComponent, Components::PositionComponent>(Systems::target);
-        registry.addSystem<Components::MissileComponent, Components::WaveBeamComponent, Components::BydoShotComponent>(Systems::shooting);
+        registry.addSystem<Components::ShootingTimerComponent, Components::PositionComponent>(Systems::shooting);
         registry.addSystem<Components::WalkingAIComponent, Components::TargetComponent, Components::VelocityComponent, Components::CollisionComponent, Components::PositionComponent, Components::HitBoxComponent>(Systems::walkingAI);
         registry.addSystem<Components::BydoShootingAIComponent, Components::TargetComponent, Components::InRangeComponent, Components::TeamComponent, Components::PositionComponent>(Systems::bydoShootingAI);
     }
