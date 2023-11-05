@@ -127,14 +127,10 @@ int Screen::Display::getPort() const
 
 void Screen::Display::updateAudio()
 {
-    if (_gameState == GameState::MENU) {
+    if (_gameState == GameState::MENU || _gameState == GameState::WAITINGROOM) {
         _sound.changeMusic(Assets::AssetsIndex::MENU_WAV, ".wav", true, 0.2);
     } else if (_gameState == GameState::GAME) {
         _sound.changeMusic(Assets::AssetsIndex::GAME_OGG, ".ogg", true, 0.2);
-    } else if (_gameState == GameState::LOOSING) {
-        _sound.changeMusic(Assets::AssetsIndex::GAME_OVER_OGG, ".ogg", true, 0.2);
-    } else if (_gameState == GameState::WINNING) {
-        _sound.changeMusic(Assets::AssetsIndex::WIN_MUSIC_OGG, ".ogg", true, 0.2);
     }
 }
 
@@ -407,9 +403,6 @@ void Screen::Display::detectActionMenu()
     int keyPressed = 0;
     int key = 0;
 
-    if (IsKeyReleased(KEY_SPACE) && getGameState() == GameState::GAME) {
-        this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
-    }
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && getGameState() == GameState::MENU) {
         mouseClickedMenu();
     }
