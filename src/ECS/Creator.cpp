@@ -226,7 +226,7 @@ namespace ECS {
         const Utils::Vector2 missileFramePos(2, 0);
         const uint8_t nbFrameInSpriteSheet = 6;
 
-        ECS::Entity missile = ECS::Creator::createCharacter(registry, team, 1, 0, 16, 16, id);
+        ECS::Entity missile = ECS::Creator::createCharacter(registry, team, 1, 0, 16, 14, id);
         registry.getComponents<Components::PositionComponent>().at(missile)->x = x;
         registry.getComponents<Components::PositionComponent>().at(missile)->y = y;
         registry.getComponents<Components::VelocityComponent>().at(missile)->y = 0;
