@@ -690,6 +690,13 @@ void Screen::Display::drawBackToMenu(GameEngine::GameEngine &engine)
 {
     _backToMenuClickableZone = { 1660, 900, 230, 60 };
 
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        Vector2 mousePos = GetMousePosition();
+        if (CheckCollisionPointRec(mousePos, _backToMenuClickableZone)) {
+            std::cout << "Back to menu" << std::endl;
+        }
+    }
+
     DrawRectangleRec(_backToMenuClickableZone, _buttonFocusedOK);
     DrawText("Back to menu", _backToMenuClickableZone.x + 10, _backToMenuClickableZone.y + 15, 32, RAYWHITE);
 }
