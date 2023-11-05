@@ -90,6 +90,7 @@ static void rightWinLoop([[maybe_unused]] Screen::Display &window, GameEngine::G
 static void waitRoomLoop([[maybe_unused]] Screen::Display &window, GameEngine::GameEngine &engine, Network::ConnectionType type)
 {
     Network::updateClientNetworkTCP(Screen::Display::getPlayButton(), window.getModeState());
+    Screen::Display::setPlayButton(false);
     int idx;
     GameEngine::Events::Type eventType;
 

@@ -197,6 +197,11 @@ bool Screen::Display::getPlayButton()
     return _playButton;
 }
 
+void Screen::Display::setPlayButton(bool state)
+{
+    _playButton = state;
+}
+
 ///// Menu
 
 void Screen::Display::setErrorConnection(bool error)

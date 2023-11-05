@@ -473,6 +473,9 @@ void Network::ClientNetwork::handleLogin(const header &messageHeader, std::strin
                 } else {
                     std::cout << "jme suis pas co en udp\n";
                 }
+            } else {
+                isConnectedUDP = true;
+                asyncReceive(_socket);
             }
         } else {
             std::cout << "Only header found" << std::endl;

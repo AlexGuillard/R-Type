@@ -68,6 +68,8 @@ namespace Screen {
          */
         static bool isOpen();
 
+        static void setPlayButton(bool state);
+
         /**
          * @returns The current state of the game
          */

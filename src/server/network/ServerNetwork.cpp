@@ -268,6 +268,7 @@ void Network::ServerNetwork::updateTicks()
             _isGame = false;
             _tickCount = 0;
             _listUdpEndpoints.clear();
+            _typeMod = 1;
         }
         if (_canPlay && _typeMod != 244) {
             scriptInfo = _script.getTickScript(_tickCount);
