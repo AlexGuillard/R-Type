@@ -64,6 +64,16 @@ Screen::Display::Display(GameState state) : _gameState(state)
             static_cast<unsigned char>(GetRandomValue(50, 200))
         };
     }
+    GameEngine::Events::registerEvent(GameEngine::Events::Type::PLAYER_MISSILE,
+        [this]([[maybe_unused]] int id) {
+            this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
+        }
+    );
+    GameEngine::Events::registerEvent(GameEngine::Events::Type::PLAYER_WAVE_BEAM,
+        [this]([[maybe_unused]] int id) {
+            this->_sound.playSound(Assets::AssetsIndex::SPACESHIP_SHOTTING_OGG, ".ogg");
+        }
+    );
 }
 
 Screen::Display::~Display()
